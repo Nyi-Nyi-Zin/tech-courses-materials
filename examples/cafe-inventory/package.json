@@ -1,0 +1,36 @@
+{
+  "name": "frontend-lab-cafe-inventory",
+  "version": "1.0.0",
+  "private": true,
+  "engines": { "node": ">=24.15.0" },
+  "scripts": {
+    "build": "npm run build:api && vite build",
+    "build:api": "tsc -p tsconfig.json",
+    "dev:web": "vite",
+    "start": "node --env-file-if-exists=.env build/api/main.js",
+    "migrate": "node --env-file-if-exists=.env build/api/migrate.js",
+    "user:create": "node --env-file-if-exists=.env build/api/create-user.js",
+    "test": "npm run build:api && node --env-file-if-exists=.env --test test/integration.test.cjs"
+  },
+  "dependencies": {
+    "@nestjs/common": "12.6.0",
+    "@nestjs/core": "12.6.0",
+    "@nestjs/platform-express": "12.6.0",
+    "@nestjs/throttler": "6.8.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.3",
+    "express": "^5.1.0",
+    "pg": "^8.16.3",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.15.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "typescript": "7.0.2",
+    "vite": "^8.0.0"
+  }
+}
