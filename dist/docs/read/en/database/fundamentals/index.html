@@ -19,39 +19,30 @@
   <h1>What is a database?</h1>
   
   <p class="intro">A <strong>database</strong> is <strong>an organized collection of data stored electronically so it can be easily accessed, managed, and updated</strong>. Software called a <strong>database management system (DBMS)</strong> controls the database, handling security, backups, multi-user access, and queries.</p>
+<p class="intro">PostgreSQL, MySQL, SQLite, and MongoDB are examples of DBMS software.</p>
   <p class="reading-link"><a href="/docs/?lang=en#/database/fundamentals">Open interactive lesson</a></p>
 
   <section class="article-section">
     <h2>On this page</h2>
-    <ul><li><a href="#database-and-dbms">Database and DBMS</a></li>
-<li><a href="#sql-and-nosql">Types of Databases</a></li>
+    <ul><li><a href="#sql-and-nosql">Types of Databases</a></li>
 <li><a href="#references">Official references</a></li></ul>
   </section>
-  <section class="article-section" id="database-and-dbms">
-  <h2>Database and DBMS</h2>
-  <p>When an application needs to read, add, or update data, it sends a request to the DBMS. A single DBMS can manage multiple databases. For example, the PostgreSQL query below reports the name of the database you are connected to and the version of the software managing it.</p>
-
-<pre><code>SELECT current_database() AS connected_database,
-       version() AS database_server;</code></pre>
-
-
-</section>
-<section class="article-section" id="sql-and-nosql">
+  <section class="article-section" id="sql-and-nosql">
   <h2>Types of Databases</h2>
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/database/types-of-databases.jpg" data-image-preview><img src="/docs/media/database/types-of-databases.jpg" alt="Six database models illustrated as a relational table, a JSON-like document, key-value pairs, a wide-column row with column families, a graph with nodes and an edge, and vectors with numerical values." width="2048" height="1143" loading="lazy" decoding="async"></a>
   </figure>
-  <h3>1. Relational Database (SQL) 📊</h3>
+  <h3>1. Relational Database (SQL)</h3>
 <p>Stores data in structured tables with rows and columns. A defined schema and constraints help maintain data integrity. Relational databases work well for complex queries and transactions, such as recording a bank transfer. Examples include PostgreSQL and MySQL.</p>
-<h3>2. Document Store (NoSQL) 📄</h3>
+<h3>2. Document Store (NoSQL)</h3>
 <p>Stores data in flexible, JSON-like documents. Documents can have different fields, so you can add fields as your application grows. Some systems also let you validate document fields. Examples include MongoDB and Cloud Firestore from Firebase.</p>
-<h3>3. Key-Value Store (NoSQL) 🔑</h3>
+<h3>3. Key-Value Store (NoSQL)</h3>
 <p>Stores data as pairs of unique keys and their corresponding values, like a dictionary. Fast lookup by key makes this model useful for API response caching and user sessions. Redis is an example. Memcached uses the same model as an in-memory cache.</p>
-<h3>4. Wide-Column Store (NoSQL) 🗄️</h3>
+<h3>4. Wide-Column Store (NoSQL)</h3>
 <p>Stores data in rows identified by keys. A system such as HBase groups related columns into column families. Wide-column stores can distribute large volumes of data across servers and are used for applications such as high-volume logs, IoT telemetry, and large-scale analytics. Examples include Apache Cassandra and Apache HBase.</p>
-<h3>5. Graph Database (NoSQL) 🕸️</h3>
+<h3>5. Graph Database (NoSQL)</h3>
 <p>Stores entities as nodes and their relationships as edges. Graph databases make it efficient to follow multiple connections, such as finding mutual friends or generating recommendations. Neo4j is an example.</p>
-<h3>6. Vector Database (NoSQL / AI) 🤖</h3>
+<h3>6. Vector Database (NoSQL / AI)</h3>
 <p>Stores and indexes embeddings, which are high-dimensional vectors that represent data such as text or images. Vector databases use similarity search to find related content and can retrieve relevant documents for Retrieval-Augmented Generation (RAG). Examples include Pinecone and Milvus.</p>
 
 

@@ -19,39 +19,30 @@
   <h1>Database ဆိုတာ ဘာလဲ</h1>
   
   <p class="intro"><strong>Database</strong> ဆိုတာ အလွယ်တကူ ရှာဖတ်၊ စီမံ၊ ပြင်ဆင်နိုင်အောင် <strong>အီလက်ထရွန်နစ်စနစ်နဲ့ စနစ်တကျ စုစည်းသိမ်းထားတဲ့ အချက်အလက်တွေ</strong> ပါ။ Database ကို <strong>Database Management System (DBMS)</strong> လို့ခေါ်တဲ့ software က စီမံပေးပါတယ်။ လုံခြုံရေးနဲ့ backup ကို စီမံတာ၊ အသုံးပြုသူအများအပြား တစ်ပြိုင်နက် သုံးနိုင်အောင် ထိန်းပေးတာနဲ့ query တွေကို လုပ်ဆောင်ပေးတာတွေ ပါဝင်ပါတယ်။</p>
+<p class="intro">PostgreSQL၊ MySQL၊ SQLite နဲ့ MongoDB တို့က DBMS နမူနာတွေပါ။</p>
   <p class="reading-link"><a href="/docs/?lang=my#/database/fundamentals">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
 
   <section class="article-section">
     <h2>ဒီစာမျက်နှာမှာ</h2>
-    <ul><li><a href="#database-and-dbms">Database နဲ့ DBMS</a></li>
-<li><a href="#sql-and-nosql">Database အမျိုးအစားများ</a></li>
+    <ul><li><a href="#sql-and-nosql">Database အမျိုးအစားများ</a></li>
 <li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
   </section>
-  <section class="article-section" id="database-and-dbms">
-  <h2>Database နဲ့ DBMS</h2>
-  <p>Application က data ဖတ်ဖို့၊ ထည့်ဖို့ ဒါမှမဟုတ် ပြင်ဖို့ လိုတဲ့အခါ DBMS ဆီ request ပို့ပါတယ်။ DBMS တစ်ခုက database အများအပြားကို စီမံနိုင်ပါတယ်။ အောက်က PostgreSQL query က လက်ရှိ ချိတ်ထားတဲ့ database ရဲ့ အမည်နဲ့ အဲဒီ database ကို စီမံပေးနေတဲ့ software ရဲ့ version ကို ပြပေးပါတယ်။</p>
-
-<pre><code>SELECT current_database() AS connected_database,
-       version() AS database_server;</code></pre>
-
-
-</section>
-<section class="article-section" id="sql-and-nosql">
+  <section class="article-section" id="sql-and-nosql">
   <h2>Database အမျိုးအစားများ</h2>
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/database/types-of-databases.jpg" data-image-preview><img src="/docs/media/database/types-of-databases.jpg" alt="Database အမျိုးအစား ခြောက်မျိုးကို relational table၊ JSON ပုံစံ document၊ key-value အတွဲ၊ column family ပါတဲ့ row၊ node နဲ့ edge ပါတဲ့ graph၊ ဂဏန်းတန်ဖိုးတွေ ပါတဲ့ vector တို့နဲ့ ပြထားပါတယ်။" width="2048" height="1143" loading="lazy" decoding="async"></a>
   </figure>
-  <h3>1. Relational Database (SQL) 📊</h3>
+  <h3>1. Relational Database (SQL)</h3>
 <p>Data ကို row နဲ့ column ပါတဲ့ table တွေထဲမှာ သိမ်းပါတယ်။ Schema နဲ့ constraint တွေ သတ်မှတ်ပြီး မှတ်တမ်းတွေ စည်းကမ်းနဲ့ ကိုက်ညီအောင် ထိန်းထားနိုင်ပါတယ်။ ဆက်စပ်မှတ်တမ်းတွေကို query တစ်ခုနဲ့ ရှာဖတ်တာ၊ ဘဏ်ငွေလွှဲလို transaction တွေ မှတ်တမ်းတင်တာအတွက် သင့်တော်ပါတယ်။ PostgreSQL နဲ့ MySQL တို့က ဥပမာတွေပါ။</p>
-<h3>2. Document Store (NoSQL) 📄</h3>
+<h3>2. Document Store (NoSQL)</h3>
 <p>Data ကို JSON နဲ့ ဆင်တူတဲ့ document တွေအဖြစ် သိမ်းပါတယ်။ Document တစ်ခုနဲ့တစ်ခုမှာ field တွေ ကွာနိုင်တာကြောင့် app ကြီးလာတဲ့အခါ field အသစ်တွေ ထည့်နိုင်ပါတယ်။ တချို့စနစ်တွေမှာ field တွေကို သတ်မှတ်ချက်နဲ့ ကိုက်ညီလားဆိုတာလည်း စစ်နိုင်ပါတယ်။ MongoDB နဲ့ Firebase ရဲ့ Cloud Firestore တို့က ဥပမာတွေပါ။</p>
-<h3>3. Key-Value Store (NoSQL) 🔑</h3>
+<h3>3. Key-Value Store (NoSQL)</h3>
 <p>ထပ်မနေတဲ့ key တစ်ခုစီနဲ့ သက်ဆိုင်ရာ value ကို တွဲသိမ်းပါတယ်။ Key ကို သိရင် value ကို မြန်မြန် ပြန်ယူနိုင်တာကြောင့် API response တွေကို cache လုပ်ဖို့နဲ့ user session တွေ သိမ်းဖို့ သုံးလေ့ရှိပါတယ်။ Redis က ဥပမာတစ်ခုပါ။ Memcached ကလည်း ဒီပုံစံကို သုံးတဲ့ in-memory cache ပါ။</p>
-<h3>4. Wide-Column Store (NoSQL) 🗄️</h3>
+<h3>4. Wide-Column Store (NoSQL)</h3>
 <p>Data ကို key နဲ့ ခွဲခြားသတ်မှတ်ထားတဲ့ row တွေထဲမှာ သိမ်းပါတယ်။ HBase မှာ ဆက်စပ်တဲ့ column တွေကို column family အလိုက် စုထားပါတယ်။ Data အများအပြားကို server အများအပြားပေါ် ဖြန့်သိမ်းနိုင်တာကြောင့် ဝင်လာတဲ့ log အများအပြား၊ IoT စက်တွေဆီက ပို့တဲ့ တိုင်းတာချက်တွေနဲ့ data အများကြီး ခွဲခြမ်းစိတ်ဖြာတဲ့ အလုပ်တွေမှာ သုံးနိုင်ပါတယ်။ Apache Cassandra နဲ့ Apache HBase တို့က ဥပမာတွေပါ။</p>
-<h3>5. Graph Database (NoSQL) 🕸️</h3>
+<h3>5. Graph Database (NoSQL)</h3>
 <p>လူ၊ ပစ္စည်း စတဲ့ အရာတွေကို node အဖြစ် သိမ်းပြီး သူတို့ကြားက ဆက်စပ်မှုကို edge အဖြစ် သိမ်းပါတယ်။ နှစ်ယောက်လုံးနဲ့ သူငယ်ချင်းဖြစ်သူကို ရှာတာ၊ သုံးစွဲသူ စိတ်ဝင်စားနိုင်တဲ့ အရာတွေ အကြံပြုတာလို ဆက်စပ်မှုအဆင့်ဆင့်ကို လိုက်ရှာရာမှာ သုံးပါတယ်။ Neo4j က ဥပမာတစ်ခုပါ။</p>
-<h3>6. Vector Database (NoSQL / AI) 🤖</h3>
+<h3>6. Vector Database (NoSQL / AI)</h3>
 <p>စာသား၊ ပုံ စတဲ့ data ကို ကိုယ်စားပြုတဲ့ ဂဏန်းတန်ဖိုး အများအပြားပါဝင်သော vector တွေကို embedding လို့ ခေါ်ပါတယ်။ Vector database က embedding တွေကို သိမ်းပြီး index လုပ်ပေးပါတယ်။ ဆင်တူတဲ့ content ကို ရှာဖို့နဲ့ Retrieval-Augmented Generation (RAG) မှာ သက်ဆိုင်ရာ document တွေ ပြန်ရှာပေးဖို့ သုံးနိုင်ပါတယ်။ Pinecone နဲ့ Milvus တို့က ဥပမာတွေပါ။</p>
 
 
