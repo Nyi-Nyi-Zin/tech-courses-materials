@@ -1,5 +1,5 @@
 import { guide, p } from './content.js';
-import { dnsLesson } from './web-dns.js?v=85';
+import { dnsLesson } from './web-dns.js?v=90';
 import { serverBasics, webAppArchitecture } from './web-architecture.js?v=86';
 
 export const webFundamentals = guide('web-fundamentals', 'Web Fundamentals', '',

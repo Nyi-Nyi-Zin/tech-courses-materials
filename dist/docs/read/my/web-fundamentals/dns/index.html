@@ -29,7 +29,7 @@
     <h2>ဒီစာမျက်နှာမှာ</h2>
     <ul><li><a href="#ip-address">IP Address ဆိုတာ ဘာလဲ။</a></li>
 <li><a href="#domain-and-ip">Domain Name ကို ဘယ်လို ဖွဲ့ထားလဲ။</a></li>
-<li><a href="#web-hosting">Web Hosting က ဘာလုပ်ပေးလဲ။</a></li>
+<li><a href="#web-hosting">Hosting က ဘာလုပ်ပေးလဲ။</a></li>
 <li><a href="#dns-lookup">Browser က www.example.com ကို ဘယ်လို ရှာလဲ။</a></li>
 <li><a href="#dns-records">DNS Record တစ်ခုမှာ ဘာတွေ သတ်မှတ်ထားလဲ။</a></li>
 <li><a href="#try-dns">Windows မှာ nslookup နဲ့ စမ်းကြည့်မယ်</a></li>
@@ -66,17 +66,21 @@
 
 </section>
 <section class="article-section" id="web-hosting">
-  <h2>Web Hosting က ဘာလုပ်ပေးလဲ။</h2>
+  <h2>Hosting က ဘာလုပ်ပေးလဲ။</h2>
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/web-fundamentals/web-hosting-types.jpg" data-image-preview><img src="/docs/media/web-fundamentals/web-hosting-types.jpg" alt="Shared Hosting၊ VPS၊ Dedicated Server နဲ့ Managed Hosting ဆိုတဲ့ Hosting ပုံစံ လေးမျိုး။" width="2048" height="1143" loading="lazy" decoding="async"></a>
   </figure>
-  <p><strong>Web Hosting</strong> က Website ကို အင်တာနက်ကနေ ဝင်ကြည့်လို့ရအောင် တင်ထားပေးတဲ့ ဝန်ဆောင်မှုပါ။ ရိုးရိုး Website တစ်ခုမှာ HTML၊ CSS၊ JavaScript နဲ့ ပုံတွေကို တင်ထားနိုင်ပါတယ်။ Web App တစ်ခုဆိုရင် Request လက်ခံပြီး အဖြေထုတ်ပေးတဲ့ Backend ကိုပါ run ထားနိုင်ပါတယ်။ Database လိုအပ်ရင် သီးသန့် Database Service နဲ့လည်း ချိတ်သုံးနိုင်ပါတယ်။</p>
-<p>ဒီနေရာမှာ <strong>Web Server</strong> က Browser ရဲ့ HTTP Request ကို လက်ခံပြီး Response ပြန်ပေးတဲ့ Software ပါ။ အဲဒီ Software ကို Physical Server၊ Virtual Machine သို့မဟုတ် Hosting Provider စီမံပေးထားတဲ့ စနစ်ပေါ်မှာ run နိုင်ပါတယ်။</p>
+  <p><strong>Hosting</strong> က Website၊ Application ဒါမှမဟုတ် တခြား Service တွေကို သိမ်းထားဖို့၊ run ဖို့ လိုအပ်တဲ့ Server နဲ့ အခြေခံစနစ်တွေကို ပံ့ပိုးပေးပါတယ်။ လိုအပ်တဲ့ လူတွေ၊ Application တွေက အင်တာနက် ဒါမှမဟုတ် သီးသန့် Network ကနေ အဲဒီ Service ကို ချိတ်ဆက်သုံးနိုင်ပါတယ်။</p>
+<div class="lesson-table"><table>
+        <thead><tr><th scope="col">ဘာတွေကို Host လုပ်နိုင်လဲ။</th><th scope="col">Hosting က ဘာလုပ်ပေးလဲ။</th></tr></thead>
+        <tbody><tr><td>Website သို့မဟုတ် Frontend</td><td>HTML၊ CSS၊ JavaScript နဲ့ ပုံတွေကို Browser ဆီ ပို့ပေးပါတယ်။</td></tr><tr><td>Backend သို့မဟုတ် API</td><td>Application code ကို run ပြီး Frontend နဲ့ တခြား Client တွေဆီက Request တွေကို ကိုင်တွယ်ပေးပါတယ်။</td></tr><tr><td>Database</td><td>Application ရဲ့ မှတ်တမ်းတွေကို သိမ်းပေးပြီး Backend လို ခွင့်ပြုထားတဲ့ Client တွေကို ချိတ်ဆက်သုံးခွင့် ပေးပါတယ်။</td></tr><tr><td>ဖိုင်များ</td><td>Upload တင်ထားတဲ့ ပုံတွေ၊ စာရွက်စာတမ်းတွေကို Application က ပြန်ယူသုံးနိုင်အောင် သိမ်းပေးပါတယ်။</td></tr><tr><td>Email</td><td>စာပို့တာ၊ လက်ခံတာနဲ့ သိမ်းထားတာတွေကို ကိုင်တွယ်ပေးတဲ့ Mail Service ကို run ပေးပါတယ်။</td></tr></tbody>
+      </table></div>
+<p>ဥပမာ သင်တန်းစာရင်းသွင်းတဲ့ App တစ်ခုမှာ ကျောင်းသားတွေက Frontend ကို ဖွင့်ကြည့်ပါတယ်။ Backend က စာရင်းသွင်းတဲ့ Request ကို လက်ခံပြီး မှတ်တမ်းကို Database ထဲ သိမ်းပါတယ်။ ဒီအပိုင်းတွေကို Server တစ်လုံးတည်းပေါ်မှာ ထားနိုင်သလို Hosting Service သီးသန့်စီနဲ့လည်း သုံးနိုင်ပါတယ်။</p>
 <div class="lesson-table"><table>
         <thead><tr><th scope="col">Hosting ပုံစံ</th><th scope="col">ဘယ်လို သုံးလဲ။</th></tr></thead>
-        <tbody><tr><td>Shared Hosting</td><td>Website အများအပြားက Server ရဲ့ CPU၊ Memory လို အရင်းအမြစ်တွေကို မျှဝေသုံးပါတယ်။</td></tr><tr><td>VPS</td><td>ကိုယ့်အတွက် ခွဲပေးထားတဲ့ Virtual Machine မှာ လိုအပ်တဲ့ Software တွေကို ကိုယ်တိုင် ထည့်သွင်းပြီး စီမံနိုင်ပါတယ်။</td></tr><tr><td>Dedicated Server</td><td>Physical Server တစ်လုံးကို သီးသန့်သုံးပါတယ်။</td></tr><tr><td>Managed Hosting</td><td>Website ကို deploy တင်ပြီး Server လည်ပတ်ရေးကို Provider က စီမံပေးပါတယ်။ Vercel နဲ့ Firebase Hosting တို့က ဥပမာတွေပါ။</td></tr></tbody>
+        <tbody><tr><td>Shared Hosting</td><td>Website အများအပြားက Server ရဲ့ CPU၊ Memory လို အရင်းအမြစ်တွေကို မျှဝေသုံးပါတယ်။</td></tr><tr><td>VPS (Virtual Private Server)</td><td>ကိုယ့်အတွက် ခွဲပေးထားတဲ့ Virtual Server မှာ လိုအပ်တဲ့ Software တွေကို ထည့်သွင်းပြီး run နိုင်ပါတယ်။</td></tr><tr><td>Dedicated Server</td><td>ကိုယ့် Application တွေကို run ဖို့ Physical Server တစ်လုံးလုံးကို သီးသန့်သုံးပါတယ်။</td></tr><tr><td>Managed Hosting</td><td>Website၊ API ဒါမှမဟုတ် Database လို Service တစ်ခုအတွက် အခြေခံစနစ်တွေကို Provider က စီမံပေးပါတယ်။ Provider တာဝန်ယူပေးတဲ့ အပိုင်းတွေက ရွေးထားတဲ့ Plan ပေါ် မူတည်ပါတယ်။</td></tr></tbody>
       </table></div>
-<p>Website တင်ပြီးသွားရင် Hosting Provider က IP Address တစ်ခု ဒါမှမဟုတ် ချိတ်ပေးရမယ့် Hostname တစ်ခု ပေးနိုင်ပါတယ်။ <code>www.example.com</code> နဲ့ Website ကို ဖွင့်လို့ရအောင် DNS Record မှာ Provider ပေးထားတဲ့ တန်ဖိုးကို ထည့်ရပါတယ်။</p>
+<p>တင်ထားတဲ့ Website ကို <code>www.example.com</code> နဲ့ ဖွင့်လို့ရအောင် DNS Record မှာ Hosting Provider သတ်မှတ်ပေးတဲ့ IP Address ဒါမှမဟုတ် Hostname ကို ထည့်ပေးရပါတယ်။ Browser က DNS ကနေ ရလာတဲ့ လိပ်စာကို သုံးပြီး Website ဆီ ချိတ်ဆက်ပါတယ်။</p>
 
 
 
