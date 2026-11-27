@@ -20,7 +20,7 @@ export const htmlFoundations = [
     'Web Fundamentals မှာ Web Server က Browser ဆီ HTML ပြန်ပို့ပုံကို ကြည့်ခဲ့ပါတယ်။ အခု HTML ထဲမှာ ဘာတွေရေးထားလဲ၊ tag အနည်းငယ်နဲ့ စာသားတွေကို web page တစ်ခုအဖြစ် ဘယ်လိုဖွဲ့စည်းလဲဆိုတာ ကြည့်ရအောင်။',
   ), [
     example('what-is-html', p('What is HTML?', 'HTML ဆိုတာ ဘာလဲ?'), p(
-      'HTML stands for HyperText Markup Language. It describes the structure and meaning of a web page. Markup uses tags to label what a piece of content is. In this example, <h1> marks the main heading and <p> marks a paragraph.',
+      'HTML  is the standard markup language used to create and structure content on the web. Acting as the foundational skeleton of almost every website, it instructs web browsers on how to organize and display text, images, links, and multimedia.',
       'HTML ရဲ့ အရှည်ကောက်က HyperText Markup Language ပါ။ Web page တစ်ခုမှာ ဘာတွေပါလဲ၊ အဲဒီအကြောင်းအရာတွေက ဘာကို ဆိုလိုလဲဆိုတာ HTML နဲ့ ဖော်ပြပါတယ်။ Markup ဆိုတာ အကြောင်းအရာတစ်ခုစီကို tag နဲ့ မှတ်သားရေးတာပါ။ ဒီနမူနာမှာ <h1> က စာမျက်နှာရဲ့ အဓိကခေါင်းစဉ်၊ <p> က စာပိုဒ်ဖြစ်ကြောင်း Browser ကို ပြောပေးပါတယ်။',
     ), `<h1>Learning Center</h1>
 <p>Registration opens on Monday.</p>`, p(
