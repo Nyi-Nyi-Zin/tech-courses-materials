@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="780" viewBox="0 120 1600 780" role="img" aria-labelledby="title description">
   <title id="title">Web app request flow</title>
-  <desc id="description">The browser requests frontend files from the Web Server and runs them. The frontend inside the browser initiates an HTTPS request to the Backend on the Application Server, which returns JSON. The Backend can read or write PostgreSQL, read and write files on a Samba share over SMB, and use Redis as an optional cache.</desc>
+  <desc id="description">The browser requests frontend files from the Web Server and runs them. The frontend inside the browser initiates an HTTPS request to the Backend on the Application Server, which returns JSON. The Backend can read or write PostgreSQL, read and write objects in Amazon S3 over HTTPS, and use Redis as an optional cache.</desc>
   <defs>
     <marker id="request-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
       <path d="M0 0 12 6 0 12Z" fill="#3457c7"/>
@@ -57,7 +57,7 @@
     <g stroke="#137b6d">
       <ellipse cx="1290" cy="520" rx="26" ry="10"/>
       <path d="M1264 520v38a26 10 0 0 0 52 0v-38m-52 20a26 10 0 0 0 52 0"/>
-      <path d="M1271 750h14l7 8h17a7 7 0 0 1 7 7v24a7 7 0 0 1-7 7h-38a7 7 0 0 1-7-7v-32a7 7 0 0 1 7-7Z"/>
+      <path d="M1264 758l6 34h40l6-34m-52 0a26 8 0 1 0 52 0a26 8 0 1 0-52 0"/>
     </g>
   </g>
 
@@ -68,7 +68,7 @@
       <text x="830" y="476">Application Server</text>
       <text x="1380" y="191">Cache Server</text>
       <text x="1380" y="448">Database Server</text>
-      <text x="1380" y="683">File Server</text>
+      <text x="1380" y="683">Cloud Storage</text>
     </g>
     <g font-size="28" font-weight="700">
       <text x="830" y="355">Frontend Files</text>
@@ -76,7 +76,7 @@
       <text x="830" y="647">Backend</text>
       <text x="1418" y="277">Redis</text>
       <text x="1424" y="550" font-size="25">PostgreSQL</text>
-      <text x="1424" y="784" font-size="22">Samba (SMB)</text>
+      <text x="1424" y="784" font-size="22">AWS S3</text>
     </g>
     <g fill="#435978" font-size="20">
       <text x="257" y="354">On the user’s device</text>
@@ -93,7 +93,7 @@
       <text x="569" y="650" fill="#137166">JSON response</text>
       <text x="1160" y="260" fill="#805013">Look up</text>
       <text x="1160" y="520" fill="#137166">SQL</text>
-      <text x="1160" y="757" fill="#137166">SMB</text>
+      <text x="1160" y="757" fill="#137166">S3 API (HTTPS)</text>
     </g>
   </g>
 </svg>
