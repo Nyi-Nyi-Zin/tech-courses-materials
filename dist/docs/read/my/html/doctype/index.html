@@ -3,24 +3,113 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="index.html ဖိုင်တစ်ခုရေးပြီး browser မှာ ဖွင့်ပါ။ ကိုယ်ရေးထားတဲ့ HTML နဲ့ စာမျက်နှာပေါ်မှာ မြင်ရတဲ့ element တွေ ဘယ်လိုဆက်စပ်လဲ DevTools နဲ့ ကြည့်ပါမယ်။">
-  <title>Web အခြေခံနှင့် HTML အလုပ်လုပ်ပုံ · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/web-fundamentals/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/web-fundamentals/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/web-fundamentals/">
+  <meta name="description" content="Browser က HTML ဖိုင်ကို ဖတ်ပြီး စာသားနဲ့ အကွက်တွေကို ဘယ်လောက်ကျယ်မလဲ၊ ဘယ်နေရာမှာ ပေါ်မလဲ တွက်ပါတယ်။ တွက်တဲ့အခါ အသုံးပြုတဲ့ စည်းမျဉ်းအစုကို rendering mode လို့ခေါ်ပါတယ်။ ဖိုင်ရဲ့ ပထမလိုင်းက ဘယ် mode သုံးမလဲဆိုတာကို သက်ရောက်စေပါတယ်။">
+  <title>HTML Doctype နဲ့ Browser Modes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/doctype/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/doctype/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/doctype/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Web အခြေခံနှင့် HTML အလုပ်လုပ်ပုံ</h1>
-  <p><a href="/docs/read/my/html/web-fundamentals/#document">Web အခြေခံနှင့် HTML အလုပ်လုပ်ပုံ</a></p>
-  <ul><li id="browser-and-server"><a href="/docs/read/my/html/web-fundamentals/#browser-and-server">URL ကနေ စာမျက်နှာပေါ်လာပုံ</a></li>
-<li id="html-css-javascript"><a href="/docs/read/my/html/web-fundamentals/#html-css-javascript">HTML၊ CSS နှင့် JavaScript ရဲ့ တာဝန်များ</a></li>
-<li id="document"><a href="/docs/read/my/html/web-fundamentals/#document">HTML Document အပြည့်အစုံ ရေးခြင်း</a></li>
-<li id="attributes"><a href="/docs/read/my/html/web-fundamentals/#attributes">Elements၊ Tags၊ Attributes နှင့် အတွင်းထည့်ရေးပုံ</a></li>
-<li id="practice"><a href="/docs/read/my/html/web-fundamentals/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/doctype/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTML Doctype နဲ့ Browser Modes</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Browser က HTML ဖိုင်ကို ဖတ်ပြီး စာသားနဲ့ အကွက်တွေကို ဘယ်လောက်ကျယ်မလဲ၊ ဘယ်နေရာမှာ ပေါ်မလဲ တွက်ပါတယ်။ တွက်တဲ့အခါ အသုံးပြုတဲ့ စည်းမျဉ်းအစုကို rendering mode လို့ခေါ်ပါတယ်။ ဖိုင်ရဲ့ ပထမလိုင်းက ဘယ် mode သုံးမလဲဆိုတာကို သက်ရောက်စေပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/doctype">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#standards">Standards Mode ဆိုတာဘာလဲ။</a></li>
+<li><a href="#quirks">Quirks Mode ဘာကြောင့် ရှိတာလဲ။</a></li>
+<li><a href="#declaration">&lt;!doctype html&gt; က ဘာလုပ်ပေးလဲ။</a></li>
+<li><a href="#modes">Browser မှာ Mode နှစ်ခု စမ်းနှိုင်းခြင်း</a></li>
+<li><a href="#classroom-lab">ပထမဆုံး HTML document ရေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="standards">
+  <h2>Standards Mode ဆိုတာဘာလဲ။</h2>
+  <p>Standards Mode ဆိုတာ ယနေ့ခေတ် web page တွေအတွက် browser သုံးတဲ့ ပုံမှန် mode ပါ။ HTML စံသတ်မှတ်ချက်မှာ no-quirks mode လို့ တွေ့ရနိုင်ပါတယ်။ ဥပမာ CSS နဲ့ အကွက်အကျယ်ကို 120 သတ်မှတ်ချင်ရင် 120px လို့ ယူနစ်ပါ ထည့်ရပါတယ်။ px က CSS pixel ရဲ့ ယူနစ်ပါ။</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Standards Mode&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div style=&quot;width: 120px; background: lightblue&quot;&gt;120 px&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="quirks">
+  <h2>Quirks Mode ဘာကြောင့် ရှိတာလဲ။</h2>
+  <p>ဝဘ်ဆိုက် အဟောင်းတချို့က အရင် browser တွေ စာမျက်နှာစီပုံကို အားကိုးပြီး ရေးထားပါတယ်။ အဲဒီစာမျက်နှာတွေ ဆက်အလုပ်လုပ်ဖို့ Quirks Mode က စည်းမျဉ်းအဟောင်းတချို့ကို ဆက်သုံးပေးပါတယ်။ ဥပမာ ယူနစ်မပါတဲ့ အလျားတချို့ကို pixel အဖြစ် ယူပေးနိုင်ပါတယ်။ Doctype အဟောင်းတချို့ကြောင့် အဟောင်းစည်းမျဉ်း နည်းနည်းပဲ သုံးတဲ့ limited-quirks mode လည်း ဝင်နိုင်ပါတယ်။</p>
+
+<pre><code>&lt;!-- This legacy example omits the doctype. --&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Quirks Mode&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div style=&quot;width: 120; background: lightblue&quot;&gt;Sample&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="declaration">
+  <h2>&lt;!doctype html&gt; က ဘာလုပ်ပေးလဲ။</h2>
+  <p>ဒီစာကြောင်းကို &lt;html&gt; မတိုင်ခင် ရေးပါ။ Document ကို ဘယ်စည်းမျဉ်းနဲ့ ကိုင်တွယ်မလဲ browser ကို ပြောတာပါ။ &lt;!doctype html&gt; ဆိုရင် Standards Mode ဝင်ပါတယ်။ ရိုးရိုး HTML ဖိုင်မှာ doctype ကို ဖြုတ်လိုက်ရင် Quirks Mode ဝင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ရဲ့ ပထမလိုင်းမှာ အောက်က သတ်မှတ်ချက် ရှိလား စစ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ဒီလိုင်းက browser အတွက် ဖြစ်ပါတယ်။ စာမျက်နှာမှာ body ထဲရေးထားတဲ့ စာသားပဲ မြင်ရပါမယ်။</p>
+
+</section>
+<section class="article-section" id="modes">
+  <h2>Browser မှာ Mode နှစ်ခု စမ်းနှိုင်းခြင်း</h2>
+  <p>အပြာရောင်အကွက်အတွက် အကျယ်ရေးတဲ့အခါ ယူနစ်မထည့်ထားပါဘူး။ နမူနာထဲက script က လက်ရှိ mode ကို သိနိုင်တဲ့ document.compatMode နဲ့ အကျယ်တန်ဖိုးကို browser လက်ခံလားဆိုတာ ပြပေးပါတယ်။ CSS1Compat က Standards Mode နဲ့ limited-quirks နှစ်မျိုးလုံးအတွက်ဖြစ်ပြီး BackCompat က Quirks Mode အတွက် ဖြစ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Code အပြည့်အစုံကို standards.html နဲ့ သိမ်းပါ။ နောက်တစ်ပွားကို quirks.html နဲ့ သိမ်းပြီး အဲဒီဖိုင်ရဲ့ ပထမလိုင်းကို ဖျက်ပါ။ နှစ်ဖိုင်လုံးကို browser တစ်ခုတည်းနဲ့ ဖွင့်ကြည့်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;Compare rendering modes&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id=&quot;box&quot; style=&quot;width: 120; background: lightblue&quot;&gt;Sample&lt;/div&gt;
+  &lt;p id=&quot;result&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const box = document.querySelector(&quot;#box&quot;);
+    document.querySelector(&quot;#result&quot;).textContent =
+      document.compatMode + &quot; | width = &quot; + (box.style.width || &quot;ignored&quot;);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမဖိုင်မှာ CSS1Compat | width = ignored လို့ မြင်ရပါမယ်။ ဒီစည်းမျဉ်းအဟောင်းကို သုံးတဲ့ browser မှာ doctype မပါတဲ့ဖိုင်က BackCompat | width = 120px လို့ ပြပါမယ်။ 120 ကို 120px လို့ ပြောင်းရင် နှစ်ဖိုင်လုံး အကျယ်ကို လက်ခံတာ မြင်ရပါမယ်။</p>
+
+</section>
+<section class="article-section" id="classroom-lab">
+  <h2>ပထမဆုံး HTML document ရေးခြင်း</h2>
+  <p>Browser က server ဆီက HTML ကို ရယူပြီး tag တွေရဲ့ ဆက်နွှယ်ပုံကို DOM အဖြစ် တည်ဆောက်ပါတယ်။ about-me.html ထဲမှာ title နဲ့ h1 ကို စာသားမတူအောင် ရေးပါ။ Browser tab နဲ့ စာမျက်နှာပေါ်က ခေါင်းစဉ်ကို ယှဉ်ကြည့်ပါ။ DevTools မှာ h1 ကို ပြင်ပြီး reload လုပ်ပါ။ ဒီတစ်ခါ ဖိုင်ထဲမှာ ပြင်ပြီး reload လုပ်ရင် ဘယ်ပြင်ဆင်ချက် ကျန်နေသလဲ စစ်ပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/syntax.html#the-doctype">WHATWG · The DOCTYPE</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Quirks_mode_and_standards_mode">MDN · Quirks and standards modes</a></li>
+<li><a href="https://quirks.spec.whatwg.org/#the-unitless-length-quirk">WHATWG · The unitless length quirk</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/attributes/">အရင်သင်ခန်းစာ · HTML Attributes</a>
+<a href="/docs/read/my/html/headings/">နောက်သင်ခန်းစာ · ခေါင်းစဉ် &lt;h1&gt;–&lt;h6&gt;</a></nav></footer>
 </article>
 </main>
 </body>

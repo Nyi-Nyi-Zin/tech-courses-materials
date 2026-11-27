@@ -3,24 +3,98 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Build a form with labelled controls, decide how its values are submitted, and use the browser to check input before submission.">
-  <title>Interactive Forms &amp; Input Validation · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/interactive-forms/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/interactive-forms/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/interactive-forms/">
+  <meta name="description" content="A form collects data from controls. The browser can validate those controls, turn their selected values into name–value pairs, and send them to a URL.">
+  <title>HTML Forms, Labels, and Inputs · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/forms/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/forms/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/forms/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Interactive Forms &amp; Input Validation</h1>
-  <p><a href="/docs/read/en/html/interactive-forms/#forms">Interactive Forms &amp; Input Validation</a></p>
-  <ul><li id="forms"><a href="/docs/read/en/html/interactive-forms/#forms">Submit named values with GET or POST</a></li>
-<li id="input-types"><a href="/docs/read/en/html/interactive-forms/#input-types">Choose a control for each value</a></li>
-<li id="labels"><a href="/docs/read/en/html/interactive-forms/#labels">Label fields and group related controls</a></li>
-<li id="validation"><a href="/docs/read/en/html/interactive-forms/#validation">Check input before submission</a></li>
-<li id="practice"><a href="/docs/read/en/html/interactive-forms/#practice">Hands-on exercise</a></li></ul>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/forms/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>HTML Forms, Labels, and Inputs</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">A form collects data from controls. The browser can validate those controls, turn their selected values into name–value pairs, and send them to a URL.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/forms">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#form">What does &lt;form&gt; do?</a></li>
+<li><a href="#fields">Connect a label to a field</a></li>
+<li><a href="#input-types">Choose input types by data</a></li>
+<li><a href="#submission">Send form data with GET or POST</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="form">
+  <h2>What does &lt;form&gt; do?</h2>
+  <p>A form groups controls used for answering a question or sending information. An input is a control the reader can type into. A submit button asks the browser to send the form. The name on an input determines the name used in the submitted data.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;First form&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form method=&quot;get&quot;&gt;
+    &lt;label for=&quot;product&quot;&gt;Product&lt;/label&gt;
+    &lt;input id=&quot;product&quot; name=&quot;product&quot;&gt;
+    &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Type pen and submit. ?product=pen appears in the browser address. This sample reloads the page with that query in its URL.</p>
+
+</section>
+<section class="article-section" id="fields">
+  <h2>Connect a label to a field</h2>
+  <p>Match the label’s for to the input’s id. The id identifies the element in the document. The name is the key used when the form sends the field. A visible label gives readers a stable cue even after they start typing.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;label for=&quot;customer-email&quot;&gt;Email address&lt;/label&gt;
+&lt;input id=&quot;customer-email&quot; name=&quot;email&quot; type=&quot;email&quot; autocomplete=&quot;email&quot;&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Click the label to move focus to the input. An email typed into this control will use email as its submission key.</p>
+
+</section>
+<section class="article-section" id="input-types">
+  <h2>Choose input types by data</h2>
+  <p>The type can change the browser’s control, validation, or on-screen keyboard. Use email for email addresses, number for quantities, and date for calendar dates. An email field checks the syntax of a value. It cannot verify that the address belongs to the user.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;form&gt;
+  &lt;label for=&quot;email&quot;&gt;Email&lt;/label&gt;
+  &lt;input id=&quot;email&quot; name=&quot;email&quot; type=&quot;email&quot; required&gt;
+  &lt;label for=&quot;quantity&quot;&gt;Quantity&lt;/label&gt;
+  &lt;input id=&quot;quantity&quot; name=&quot;quantity&quot; type=&quot;number&quot; min=&quot;1&quot; value=&quot;1&quot;&gt;
+  &lt;label for=&quot;pickup&quot;&gt;Pickup date&lt;/label&gt;
+  &lt;input id=&quot;pickup&quot; name=&quot;pickup&quot; type=&quot;date&quot;&gt;
+  &lt;button type=&quot;submit&quot;&gt;Continue&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Try entering pen in Email and submitting. The browser asks for a valid email address. The date field can offer a calendar picker, and its submitted value uses YYYY-MM-DD.</p>
+
+</section>
+<section class="article-section" id="submission">
+  <h2>Send form data with GET or POST</h2>
+  <p>The action identifies the request destination. GET adds the submitted values to the URL query string and fits actions such as search. POST puts the submitted form data in the request body and is commonly used for changes such as placing an order. A form sends values from named, eligible controls. A server route handles the request.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;form action=&quot;/orders&quot; method=&quot;post&quot;&gt;
+  &lt;label for=&quot;order-email&quot;&gt;Email address&lt;/label&gt;
+  &lt;input id=&quot;order-email&quot; name=&quot;email&quot; type=&quot;email&quot; required&gt;
+  &lt;button type=&quot;submit&quot;&gt;Place order&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> On a server that handles POST /orders, the browser sends a request whose form body includes email. In a standalone HTML file you can still test whether the browser blocks invalid input.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/forms.html">WHATWG · Forms</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/input.html">WHATWG · The input element</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#form-submission-algorithm">WHATWG · Form submission</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/table-spans/">Previous lesson · Table Cell Spanning with colspan and rowspan</a>
+<a href="/docs/read/en/html/form-controls/">Next lesson · Checkboxes, Radio Buttons, and Select Menus</a></nav></footer>
 </article>
 </main>
 </body>

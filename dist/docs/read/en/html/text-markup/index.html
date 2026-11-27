@@ -3,24 +3,78 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Turn a plain text article into a document with meaningful headings, paragraphs, emphasis, quotations, and code.">
-  <title>Text Content &amp; Heading Hierarchy · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/text-hierarchy/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/text-hierarchy/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/text-hierarchy/">
+  <meta name="description" content="Leave notes in the HTML source with comments and identify quoted text with q or blockquote.">
+  <title>HTML Comments and Quotations · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/text-markup/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/text-markup/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/text-markup/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Text Content &amp; Heading Hierarchy</h1>
-  <p><a href="/docs/read/en/html/text-hierarchy/#entities">Text Content &amp; Heading Hierarchy</a></p>
-  <ul><li id="headings"><a href="/docs/read/en/html/text-hierarchy/#headings">Choose heading levels by structure</a></li>
-<li id="paragraphs"><a href="/docs/read/en/html/text-hierarchy/#paragraphs">Paragraphs, line breaks, and whitespace</a></li>
-<li id="inline-text"><a href="/docs/read/en/html/text-hierarchy/#inline-text">Give inline text meaning</a></li>
-<li id="entities"><a href="/docs/read/en/html/text-hierarchy/#entities">Quote material and show code</a></li>
-<li id="practice"><a href="/docs/read/en/html/text-hierarchy/#practice">Hands-on exercise</a></li></ul>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/text-markup/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>HTML Comments and Quotations</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Leave notes in the HTML source with comments and identify quoted text with q or blockquote.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/text-markup">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#comments">HTML Comments</a></li>
+<li><a href="#quotations">HTML Quotations with &lt;q&gt; and &lt;blockquote&gt;</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="comments">
+  <h2>HTML Comments</h2>
+  <p>The browser treats text between &lt;!-- and --&gt; as a comment. Readers can still inspect the page source and see it, so keep secrets out of comments.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;HTML Comments&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- Update the schedule every Monday. --&gt;
+&lt;p&gt;Today’s schedule&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The preview shows Today’s schedule. Remove the comment markers and run again to display the note too.</p>
+
+</section>
+<section class="article-section" id="quotations">
+  <h2>HTML Quotations with &lt;q&gt; and &lt;blockquote&gt;</h2>
+  <p>Use q for a short quotation within a sentence. Browsers typically add quotation marks for q. Use blockquote when the quoted passage stands on its own. The cite attribute can hold a source URL. For a visible source, also add a normal link or text.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;HTML Quotations with &amp;lt;q&amp;gt; and &amp;lt;blockquote&amp;gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;The sign says &lt;q&gt;Open daily&lt;/q&gt;.&lt;/p&gt;
+&lt;blockquote cite=&quot;https://example.com/reviews&quot;&gt;
+  &lt;p&gt;The service was quick and the staff was friendly.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Source: Example store review&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Open daily appears in quotation marks. The longer quote sits on a separate line as its own block.</p>
+
+</section><section class="article-section"><h2>Related lessons</h2><ul><li id="character-references"><a href="/docs/read/en/html/entities/#character-references">Named Character References</a></li></ul></section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Comments">MDN · Comments</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/q">MDN · &lt;q&gt;</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/blockquote">MDN · &lt;blockquote&gt;</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/inline-text/">Previous lesson · Inline Text Elements</a>
+<a href="/docs/read/en/html/entities/">Next lesson · HTML Entities (Character References)</a></nav></footer>
 </article>
 </main>
 </body>

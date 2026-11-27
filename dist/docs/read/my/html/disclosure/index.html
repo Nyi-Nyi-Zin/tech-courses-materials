@@ -3,24 +3,45 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="စာမျက်နှာတစ်ပိုင်းစီရဲ့ တာဝန်ကို ဖော်ပြတဲ့ element တွေ ရွေးပါမယ်။ ပြီးရင် browser ရဲ့ accessibility tree မှာ ဘယ်လို ပေါ်လဲ ကြည့်ပါမယ်။">
-  <title>Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/semantic-html5/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
+  <meta name="description" content="FAQ အဖြေလို လိုအပ်မှ ထပ်ဖွင့်ဖတ်ချင်တဲ့ အကြောင်းအရာကို details နဲ့ ထည့်နိုင်ပါတယ်။">
+  <title>ဖွင့်ပိတ်လို့ရတဲ့ အကြောင်းအရာ &lt;details&gt; · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/disclosure/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/disclosure/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/disclosure/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ</h1>
-  <p><a href="/docs/read/my/html/semantic-html5/#section-article-div">Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ</a></p>
-  <ul><li id="containers"><a href="/docs/read/my/html/semantic-html5/#containers">Semantic Element သို့မဟုတ် Generic Container ရွေးခြင်း</a></li>
-<li id="landmarks"><a href="/docs/read/my/html/semantic-html5/#landmarks">Semantic Elements ခုနစ်မျိုးနဲ့ စာမျက်နှာ ဖွဲ့စည်းခြင်း</a></li>
-<li id="section-article-div"><a href="/docs/read/my/html/semantic-html5/#section-article-div">section၊ article နှင့် div ရွေးနည်း</a></li>
-<li id="block-inline"><a href="/docs/read/my/html/semantic-html5/#block-inline">Block နှင့် Inline Layout ကြည့်ခြင်း</a></li>
-<li id="practice"><a href="/docs/read/my/html/semantic-html5/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/disclosure/" lang="en" hreflang="en">English</a></nav>
+  <h1>ဖွင့်ပိတ်လို့ရတဲ့ အကြောင်းအရာ &lt;details&gt;</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">FAQ အဖြေလို လိုအပ်မှ ထပ်ဖွင့်ဖတ်ချင်တဲ့ အကြောင်းအရာကို details နဲ့ ထည့်နိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/disclosure">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#disclosure">&lt;details&gt; နဲ့ &lt;summary&gt; အလုပ်လုပ်ပုံ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="disclosure">
+  <h2>&lt;details&gt; နဲ့ &lt;summary&gt; အလုပ်လုပ်ပုံ</h2>
+  <p>details ရဲ့ ပထမဆုံး child အဖြစ် summary ထည့်ပါ။ အဲဒါက ဖွင့်ပိတ်ဖို့ user နှိပ်မယ့် စာသားပါ။ ဖွင့်ထားရင် ကျန်တဲ့ content ကို browser က ပြပြီး ပိတ်ရင် ဖျောက်ပါတယ်။ အစကတည်းက ဖွင့်ပြချင်ရင် open attribute ထည့်နိုင်ပါတယ်။ open=&quot;false&quot; လို့ရေးလည်း attribute ပါနေသေးလို့ ဖွင့်ပါမယ်။ အစမှာ ပိတ်ထားချင်ရင် open attribute ကို အကုန်ဖယ်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;details&gt;
+  &lt;summary&gt;Can I change my order?&lt;/summary&gt;
+  &lt;p&gt;You can change it before payment.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အစမှာ မေးခွန်းကို မြင်ရပါမယ်။ Click နှိပ်တာ ဒါမှမဟုတ် focus ရောက်နေချိန် Enter၊ Space နှိပ်တာနဲ့ အဖြေ ပြလိုက် ဖျောက်လိုက် လုပ်ပေးပါတယ်။ ဒါကို browser က JavaScript မလိုဘဲ ကိုင်ပေးပါတယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/interactive-elements.html#the-details-element">WHATWG · The details element</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/accessibility/">အရင်သင်ခန်းစာ · Semantic HTML နဲ့ Keyboard Accessibility</a>
+<a href="/docs/read/my/html/dialogs-and-popovers/">နောက်သင်ခန်းစာ · Modal Dialogs &lt;dialog&gt;</a></nav></footer>
 </article>
 </main>
 </body>

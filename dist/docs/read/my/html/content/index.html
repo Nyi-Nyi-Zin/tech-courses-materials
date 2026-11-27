@@ -3,24 +3,65 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Item တွေကို စာရင်းအဖြစ် ဖွဲ့ပြီး လင့်ခ်စာသား၊ ဖိုင်လမ်းကြောင်းနဲ့ fragment identifier တွေကို သုံးကာ စာမျက်နှာတွေ ချိတ်ဆက်ပါမယ်။">
-  <title>စာရင်းများနှင့် လင့်ခ်များ · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/lists-navigation/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/lists-navigation/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/lists-navigation/">
+  <meta name="description" content="a element ထဲက href က သွားရမယ့်နေရာကို browser ကို ပြောပါတယ်။ နှိပ်လို့ရတဲ့စာသားကို ဖတ်ရုံနဲ့ ဘယ်ကိုရောက်မလဲ သိနိုင်အောင် ရေးပါ။">
+  <title>HTML Links &lt;a&gt; · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/content/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/content/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/content/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>စာရင်းများနှင့် လင့်ခ်များ</h1>
-  <p><a href="/docs/read/my/html/lists-navigation/#links">စာရင်းများနှင့် လင့်ခ်များ</a></p>
-  <ul><li id="lists"><a href="/docs/read/my/html/lists-navigation/#lists">စာရင်းအမျိုးအစား သုံးမျိုး ရွေးခြင်း</a></li>
-<li id="links"><a href="/docs/read/my/html/lists-navigation/#links">သွားမယ့်နေရာကို ဖော်ပြတဲ့ Link ရေးခြင်း</a></li>
-<li id="file-paths"><a href="/docs/read/my/html/lists-navigation/#file-paths">Relative နှင့် Absolute File Paths</a></li>
-<li id="fragments"><a href="/docs/read/my/html/lists-navigation/#fragments">အပိုင်းတစ်ခုဆီ ခုန်သွားခြင်းနှင့် Action Links</a></li>
-<li id="practice"><a href="/docs/read/my/html/lists-navigation/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/content/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTML Links &lt;a&gt;</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">a element ထဲက href က သွားရမယ့်နေရာကို browser ကို ပြောပါတယ်။ နှိပ်လို့ရတဲ့စာသားကို ဖတ်ရုံနဲ့ ဘယ်ကိုရောက်မလဲ သိနိုင်အောင် ရေးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/content">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#link-basics">Link ဆိုတာဘာလဲ။</a></li>
+<li><a href="#links">Link က URL ကို ဘယ်လိုဖွင့်လဲ</a></li>
+<li><a href="#anchors">#id သုံးပြီး သက်ဆိုင်ရာအပိုင်းဆီ သွားခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="link-basics">
+  <h2>Link ဆိုတာဘာလဲ။</h2>
+  <p>Link က ဖတ်သူကို တခြားနေရာတစ်ခုဆီ သွားလို့ရစေပါတယ်။ Anchor လို့လည်းခေါ်တဲ့ &lt;a&gt; element မှာ href နဲ့ သွားမယ့် လိပ်စာ ပေးရင် link ဖြစ်ပါတယ်။ Tag ကြားက စာသားက ဖတ်သူမြင်ပြီး နှိပ်မယ့် စာသားပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;a href=&quot;https://developer.mozilla.org/&quot;&gt;Read MDN Web Docs&lt;/a&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Link နှိပ်ရင် MDN ဆီ ရောက်ပါမယ်။ Browser ရဲ့ Back ခလုတ်နဲ့ ကိုယ့်ဖိုင်ဆီ ပြန်သွားပါ။</p>
+
+</section>
+<section class="article-section" id="links">
+  <h2>Link က URL ကို ဘယ်လိုဖွင့်လဲ</h2>
+  <p>Browser က လက်ရှိ page URL ကို ကြည့်ပြီး href ရဲ့ လိပ်စာကို တွက်ပါတယ်။ https:// နဲ့ host အပြည့်ပါတာက absolute URL ပါ။ catalog.html လို path က လက်ရှိဖိုင်ရှိတဲ့ folder ကို အခြေခံပြီး ရှာပါတယ်။ / နဲ့စတဲ့ path က website root ကနေ စပါတယ်။ href ပါတဲ့ link ကို ပုံမှန်အားဖြင့် Tab နဲ့ ရောက်နိုင်ပြီး Enter နဲ့ ဖွင့်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;a href=&quot;https://developer.mozilla.org/&quot;&gt;Read MDN Web Docs&lt;/a&gt;
+&lt;a href=&quot;catalog.html&quot;&gt;Open the product catalog&lt;/a&gt;
+&lt;a href=&quot;/resources&quot;&gt;Learning resources&lt;/a&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> လက်ရှိ page URL က https://example.com/shop/index.html ဆို catalog.html က /shop/catalog.html ဆီ သွားပြီး /resources က https://example.com/resources ဆီ သွားပါမယ်။</p>
+
+</section>
+<section class="article-section" id="anchors">
+  <h2>#id သုံးပြီး သက်ဆိုင်ရာအပိုင်းဆီ သွားခြင်း</h2>
+  <p>URL အဆုံးမှာ # နဲ့စတဲ့အပိုင်းကို fragment လို့ခေါ်ပါတယ်။ Browser က fragment နဲ့ တူတဲ့ id ရှိတဲ့ element ကို ရှာပြီး မြင်ရတဲ့နေရာဆီ ရွှေ့ပေးပါတယ်။ Document တစ်ခုထဲမှာ id တစ်ခုကို တစ်ခါပဲ သုံးပါ။ Link စာသားကို သီးသန့်ဖတ်ရင်တောင် ဘယ်ကိုသွားမလဲ သိအောင် ရေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;a href=&quot;#contact&quot;&gt;Jump to contact details&lt;/a&gt;
+&lt;h2 id=&quot;contact&quot;&gt;Contact&lt;/h2&gt;
+&lt;p&gt;Visit us on Market Street.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Link ကိုနှိပ်ရင် URL အဆုံးမှာ #contact ပေါ်ပါတယ်။ ခေါင်းစဉ်က လက်ရှိမြင်ကွင်းအပြင်မှာ ရှိရင် အဲဒီနေရာဆီ ရွှေ့ပေးပါတယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element">WHATWG · The a element</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/links.html">WHATWG · Links</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/lists-and-disclosure/">အရင်သင်ခန်းစာ · HTML စာရင်းများ</a>
+<a href="/docs/read/my/html/file-paths/">နောက်သင်ခန်းစာ · HTML File Paths</a></nav></footer>
 </article>
 </main>
 </body>

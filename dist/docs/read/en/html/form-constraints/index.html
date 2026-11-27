@@ -3,24 +3,137 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Build a form with labelled controls, decide how its values are submitted, and use the browser to check input before submission.">
-  <title>Interactive Forms &amp; Input Validation · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/interactive-forms/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/interactive-forms/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/interactive-forms/">
+  <meta name="description" content="Form validation checks whether a value follows the rules you set. A constraint is one of those rules. Choose attributes that express what the field accepts.">
+  <title>HTML Form Constraints · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/form-constraints/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/form-constraints/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/form-constraints/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Interactive Forms &amp; Input Validation</h1>
-  <p><a href="/docs/read/en/html/interactive-forms/#validation">Interactive Forms &amp; Input Validation</a></p>
-  <ul><li id="forms"><a href="/docs/read/en/html/interactive-forms/#forms">Submit named values with GET or POST</a></li>
-<li id="input-types"><a href="/docs/read/en/html/interactive-forms/#input-types">Choose a control for each value</a></li>
-<li id="labels"><a href="/docs/read/en/html/interactive-forms/#labels">Label fields and group related controls</a></li>
-<li id="validation"><a href="/docs/read/en/html/interactive-forms/#validation">Check input before submission</a></li>
-<li id="practice"><a href="/docs/read/en/html/interactive-forms/#practice">Hands-on exercise</a></li></ul>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/form-constraints/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>HTML Form Constraints</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Form validation checks whether a value follows the rules you set. A constraint is one of those rules. Choose attributes that express what the field accepts.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/form-constraints">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#required">Require a Value with required</a></li>
+<li><a href="#range-and-step">Set a Range and Step with min, max, and step</a></li>
+<li><a href="#text-length">Limit Text Length with minlength and maxlength</a></li>
+<li><a href="#pattern">Check a Format with pattern</a></li>
+<li><a href="#classroom-lab">Test a registration form</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="required">
+  <h2>Require a Value with required</h2>
+  <p>Use required when a field must have a value before the form is submitted. The visible label identifies what the user should enter.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Require a Value with required&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form&gt;
+    &lt;label for=&quot;guest&quot;&gt;Guest name (required)&lt;/label&gt;
+    &lt;input id=&quot;guest&quot; name=&quot;guest&quot; type=&quot;text&quot; required&gt;
+    &lt;button type=&quot;submit&quot;&gt;Continue&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Submit with the field empty to see the browser ask for a value. Enter May and submit again.</p>
+
+</section>
+<section class="article-section" id="range-and-step">
+  <h2>Set a Range and Step with min, max, and step</h2>
+  <p>min and max set the lowest and highest permitted values. With min=&quot;2&quot; and step=&quot;2&quot;, valid values go up in steps of two from 2. max=&quot;10&quot; places the upper limit at 10.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Set a Range and Step with min, max, and step&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form&gt;
+    &lt;label for=&quot;tickets&quot;&gt;Tickets (2 to 10, in pairs)&lt;/label&gt;
+    &lt;input id=&quot;tickets&quot; name=&quot;tickets&quot; type=&quot;number&quot; min=&quot;2&quot; max=&quot;10&quot; step=&quot;2&quot; required&gt;
+    &lt;button type=&quot;submit&quot;&gt;Reserve&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Try 5 for a step mismatch, 12 for a value above the limit, and 6 for an accepted value.</p>
+
+</section>
+<section class="article-section" id="text-length">
+  <h2>Limit Text Length with minlength and maxlength</h2>
+  <p>minlength gives an entered value a minimum length. maxlength sets the upper limit. A browser usually stops ordinary typing once that limit is reached. Add required if the field also needs to reject an empty value.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Limit Text Length with minlength and maxlength&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form&gt;
+    &lt;label for=&quot;reference&quot;&gt;Reference (3 to 8 characters)&lt;/label&gt;
+    &lt;input id=&quot;reference&quot; name=&quot;reference&quot; minlength=&quot;3&quot; maxlength=&quot;8&quot; required&gt;
+    &lt;button type=&quot;submit&quot;&gt;Continue&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Type AB and submit to see a message. Type ABCDEFGHI to see where typing stops. ABC123 passes the length check.</p>
+
+</section>
+<section class="article-section" id="pattern">
+  <h2>Check a Format with pattern</h2>
+  <p>pattern uses a regular expression to check the entire entered value. [A-Z]{2}[0-9]{4} expects two uppercase English letters followed by four digits. Put the expected format in visible text so the user can see it before submitting.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Check a Format with pattern&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form&gt;
+    &lt;label for=&quot;booking&quot;&gt;Booking code&lt;/label&gt;
+    &lt;p id=&quot;format&quot;&gt;Enter two uppercase letters and four digits, such as AB1234.&lt;/p&gt;
+    &lt;input id=&quot;booking&quot; name=&quot;booking&quot; pattern=&quot;[A-Z]{2}[0-9]{4}&quot;
+           aria-describedby=&quot;format&quot; required&gt;
+    &lt;button type=&quot;submit&quot;&gt;Look up booking&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Try ab1234 or AB123, then try AB1234. The browser accepts AB1234.</p>
+
+</section>
+<section class="article-section" id="classroom-lab">
+  <h2>Test a registration form</h2>
+  <p>Build a registration form with a name, email and course selector. Connect each label using for and id. Give each submitted field a name. Submit empty fields, a malformed email, and then valid values. Observe which field the browser focuses each time.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Constraint_validation">MDN · HTML constraint validation</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#constraint-validation">WHATWG · Constraint validation</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/form-validation/">Previous lesson · HTML Form Validation</a>
+<a href="/docs/read/en/html/containers/">Next lesson · Grouping Content with &lt;div&gt; and &lt;span&gt;</a></nav></footer>
 </article>
 </main>
 </body>

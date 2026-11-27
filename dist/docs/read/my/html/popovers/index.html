@@ -3,24 +3,52 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="စာမျက်နှာတစ်ပိုင်းစီရဲ့ တာဝန်ကို ဖော်ပြတဲ့ element တွေ ရွေးပါမယ်။ ပြီးရင် browser ရဲ့ accessibility tree မှာ ဘယ်လို ပေါ်လဲ ကြည့်ပါမယ်။">
-  <title>Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/semantic-html5/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
+  <meta name="description" content="စာမျက်နှာကို ဆက်သုံးရင်း လိုအပ်တဲ့အချိန်မှ ဖွင့်ကြည့်နိုင်မယ့် အပိုအချက်အလက်အတွက် popover သုံးနိုင်ပါတယ်။">
+  <title>HTML Popovers · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/popovers/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/popovers/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/popovers/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ</h1>
-  <p><a href="/docs/read/my/html/semantic-html5/">Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ</a></p>
-  <ul><li id="containers"><a href="/docs/read/my/html/semantic-html5/#containers">Semantic Element သို့မဟုတ် Generic Container ရွေးခြင်း</a></li>
-<li id="landmarks"><a href="/docs/read/my/html/semantic-html5/#landmarks">Semantic Elements ခုနစ်မျိုးနဲ့ စာမျက်နှာ ဖွဲ့စည်းခြင်း</a></li>
-<li id="section-article-div"><a href="/docs/read/my/html/semantic-html5/#section-article-div">section၊ article နှင့် div ရွေးနည်း</a></li>
-<li id="block-inline"><a href="/docs/read/my/html/semantic-html5/#block-inline">Block နှင့် Inline Layout ကြည့်ခြင်း</a></li>
-<li id="practice"><a href="/docs/read/my/html/semantic-html5/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/popovers/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTML Popovers</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">စာမျက်နှာကို ဆက်သုံးရင်း လိုအပ်တဲ့အချိန်မှ ဖွင့်ကြည့်နိုင်မယ့် အပိုအချက်အလက်အတွက် popover သုံးနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/popovers">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#popover">Auto Popover ဖွင့်ပိတ်ပုံ</a></li>
+<li><a href="#classroom-lab">သတင်းစာမျက်နှာကို ဖွဲ့စည်းခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="popover">
+  <h2>Auto Popover ဖွင့်ပိတ်ပုံ</h2>
+  <p>Page အပေါ်ထပ်မှာ ပြချင်တဲ့ element ကို popover attribute ထည့်ပါ။ Button ရဲ့ popovertarget ကို အဲဒီ element ရဲ့ id နဲ့ တူအောင် ရေးပါ။ Browser က အစမှာ popover ကို ဖျောက်ထားပြီး button နှိပ်ရင် ဖွင့်ပိတ်ပေးပါတယ်။ ပုံမှန် auto behavior မှာ အပြင်ဘက်ကို click နှိပ်တာ၊ Escape နှိပ်တာနဲ့လည်း ပိတ်ပါတယ်။ Page ရဲ့ ကျန်တဲ့အပိုင်းတွေကို ဆက်သုံးနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;button type=&quot;button&quot; popovertarget=&quot;sku-help&quot;&gt;What is a SKU?&lt;/button&gt;
+&lt;p id=&quot;sku-help&quot; popover&gt;A SKU is a code that identifies a product.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Button ကို နှိပ်ရင် ရှင်းလင်းချက် ပေါ်ပါတယ်။ အပြင်ဘက်ကို click နှိပ်တာ ဒါမှမဟုတ် Escape နှိပ်တာနဲ့ ပိတ်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="classroom-lab">
+  <h2>သတင်းစာမျက်နှာကို ဖွဲ့စည်းခြင်း</h2>
+  <p>သတင်းစာမျက်နှာမှာ header၊ nav နဲ့ main ထည့်ပါ။ သီးခြားထုတ်ဖတ်လို့ရတဲ့ သတင်းကို article၊ ဆက်စပ်ဖတ်ရန် link တွေကို aside နဲ့ စုပါ။ အကြောင်းအရာတူတဲ့ သတင်းတွေကို section တစ်ခုအောက်မှာ ခေါင်းစဉ်ပေးပါ။ DevTools ရဲ့ accessibility tree မှာ main ကို ရှာကြည့်ပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/popover">MDN · The popover attribute</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/dialogs-and-popovers/">အရင်သင်ခန်းစာ · Modal Dialogs &lt;dialog&gt;</a>
+<a href="/docs/read/my/html/metadata-and-search/">နောက်သင်ခန်းစာ · Search Engine Optimization (SEO)</a></nav></footer>
 </article>
 </main>
 </body>

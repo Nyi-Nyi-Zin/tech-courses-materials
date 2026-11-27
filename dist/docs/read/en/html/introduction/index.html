@@ -3,24 +3,73 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Create index.html, open it in your browser, and use DevTools to connect the source you wrote to the elements on the screen.">
-  <title>Web Fundamentals &amp; How HTML Works · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/web-fundamentals/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/web-fundamentals/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/web-fundamentals/">
+  <meta name="description" content="In Web Fundamentals, you saw how a browser receives HTML from a web server. Now look at what that HTML tells the browser and how a few tags turn text into a web page.">
+  <title>Introduction to HTML · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/introduction/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/introduction/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/introduction/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Web Fundamentals &amp; How HTML Works</h1>
-  <p><a href="/docs/read/en/html/web-fundamentals/">Web Fundamentals &amp; How HTML Works</a></p>
-  <ul><li id="browser-and-server"><a href="/docs/read/en/html/web-fundamentals/#browser-and-server">From a URL to a page</a></li>
-<li id="html-css-javascript"><a href="/docs/read/en/html/web-fundamentals/#html-css-javascript">What HTML, CSS, and JavaScript do</a></li>
-<li id="document"><a href="/docs/read/en/html/web-fundamentals/#document">Write a complete HTML document</a></li>
-<li id="attributes"><a href="/docs/read/en/html/web-fundamentals/#attributes">Elements, tags, attributes, and nesting</a></li>
-<li id="practice"><a href="/docs/read/en/html/web-fundamentals/#practice">Hands-on exercise</a></li></ul>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/introduction/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Introduction to HTML</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">In Web Fundamentals, you saw how a browser receives HTML from a web server. Now look at what that HTML tells the browser and how a few tags turn text into a web page.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/introduction">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#what-is-html">What is HTML?</a></li>
+<li><a href="#html-css-javascript">How HTML, CSS, and JavaScript work together</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="what-is-html">
+  <h2>What is HTML?</h2>
+  <p>HTML stands for HyperText Markup Language. It describes the structure and meaning of a web page. Markup uses tags to label what a piece of content is. In this example, &lt;h1&gt; marks the main heading and &lt;p&gt; marks a paragraph.</p>
+
+<pre><code>&lt;h1&gt;Learning Center&lt;/h1&gt;
+&lt;p&gt;Registration opens on Monday.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Run the example. The browser displays Learning Center as the main heading and the registration notice below it as a paragraph.</p>
+
+</section>
+<section class="article-section" id="html-css-javascript">
+  <h2>How HTML, CSS, and JavaScript work together</h2>
+  <p>On the Learning Center page, HTML supplies the heading, the button, and the notice text. CSS gives the heading its color. When you click the button, JavaScript reveals the notice. In the next lesson, you will save a page as index.html and open it in your browser.</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Learning Center&lt;/title&gt;
+  &lt;style&gt;
+    h1 { color: teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Learning Center&lt;/h1&gt;
+  &lt;button type=&quot;button&quot; id=&quot;show-notice&quot;&gt;Show notice&lt;/button&gt;
+  &lt;p id=&quot;notice&quot; hidden&gt;Registration opens on Monday.&lt;/p&gt;
+  &lt;script&gt;
+    document.querySelector(&quot;#show-notice&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+      document.querySelector(&quot;#notice&quot;).hidden = false;
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The heading is teal. Click Show notice and the registration notice appears below the button.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML">MDN · HTML overview</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax">MDN · Basic HTML syntax</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/introduction.html">WHATWG · HTML introduction</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/getting-started/">Next lesson · Create Your First HTML Page</a></nav></footer>
 </article>
 </main>
 </body>

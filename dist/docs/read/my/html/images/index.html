@@ -3,24 +3,109 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ပုံ၊ အသံနဲ့ ဗီဒီယို ထည့်ပါမယ်။ ပုံအတွက် စာသား၊ ဗီဒီယိုအတွက် captions နဲ့ မျက်နှာပြင်အရွယ်လိုက် ရွေးနိုင်တဲ့ image ဖိုင်တွေကိုလည်း သုံးပါမယ်။">
-  <title>ပုံ၊ အသံ၊ ဗီဒီယိုနှင့် Embed များ · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/images-media/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/images-media/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/images-media/">
+  <meta name="description" content="img က စာမျက်နှာထဲမှာ ပုံတစ်ပုံ ထည့်ပေးပါတယ်။ Image attributes နဲ့ ပုံအကြောင်း ဖော်ပြတာ၊ ပုံပေါ်လာဖို့ နေရာကြိုချန်တာ၊ သင့်တဲ့ပုံဖိုင် ရွေးဖို့ browser ကို ပြောတာတို့ လုပ်နိုင်ပါတယ်။">
+  <title>HTML မှာ ပုံထည့်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/images/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/images/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/images/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>ပုံ၊ အသံ၊ ဗီဒီယိုနှင့် Embed များ</h1>
-  <p><a href="/docs/read/my/html/images-media/#images">ပုံ၊ အသံ၊ ဗီဒီယိုနှင့် Embed များ</a></p>
-  <ul><li id="images"><a href="/docs/read/my/html/images-media/#images">ပုံဖိုင်၊ အရွယ်အစားနှင့် Alt Text</a></li>
-<li id="figure"><a href="/docs/read/my/html/images-media/#figure">ပုံနှင့် မြင်ရမယ့် ပုံစာကို ချိတ်ခြင်း</a></li>
-<li id="responsive-images"><a href="/docs/read/my/html/images-media/#responsive-images">နေရာအကျယ်အလိုက် ပုံဖိုင် ရွေးခြင်း</a></li>
-<li id="media"><a href="/docs/read/my/html/images-media/#media">အသံ၊ ဗီဒီယို ဖွင့်ခြင်းနှင့် Page Embed လုပ်ခြင်း</a></li>
-<li id="practice"><a href="/docs/read/my/html/images-media/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/images/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTML မှာ ပုံထည့်ခြင်း</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">img က စာမျက်နှာထဲမှာ ပုံတစ်ပုံ ထည့်ပေးပါတယ်။ Image attributes နဲ့ ပုံအကြောင်း ဖော်ပြတာ၊ ပုံပေါ်လာဖို့ နေရာကြိုချန်တာ၊ သင့်တဲ့ပုံဖိုင် ရွေးဖို့ browser ကို ပြောတာတို့ လုပ်နိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/images">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#img">&lt;img&gt; က ပုံ ဘယ်လိုပြလဲ။</a></li>
+<li><a href="#alt">ပုံဖိုင် src နဲ့ ပုံကို ဖော်ပြတဲ့ alt</a></li>
+<li><a href="#figure">&lt;figure&gt; နဲ့ မြင်ရတဲ့ Caption ထည့်ခြင်း</a></li>
+<li><a href="#srcset">srcset နဲ့ sizes သုံးပြီး ပုံဖိုင်အရွယ် ရွေးခြင်း</a></li>
+<li><a href="#images">&lt;picture&gt; နဲ့ ဖြတ်ပုံကွဲတဲ့ ပုံပြောင်းပြခြင်း</a></li>
+<li><a href="#fetchpriority">ပုံဖိုင်ယူရာမှာ ဦးစားပေးမှု သတ်မှတ်ခြင်း (Priority Hints)</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="img">
+  <h2>&lt;img&gt; က ပုံ ဘယ်လိုပြလဲ။</h2>
+  <p>&lt;img&gt; က စာမျက်နှာပေါ်မှာ ပုံပြမယ့်နေရာကို သတ်မှတ်ပါတယ်။ src နဲ့ ပုံဖိုင်လိပ်စာ ပေးပါတယ်။ Browser က အဲဒီဖိုင်ကို သီးသန့် ဖတ်ပြီး စာမျက်နှာပေါ် ပြပါတယ်။ img က void element ဖြစ်လို့ အပိတ် tag မပါပါဘူး။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;img src=&quot;https://javascript-training.cloudninemm.com/cloud-nine-logo.png&quot; width=&quot;64&quot; height=&quot;64&quot; alt=&quot;Cloud Nine Innovations logo&quot;&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Internet ရှိရင် site logo ပေါ်ပါမယ်။ URL ကို မရှိတဲ့ ပုံလိပ်စာနဲ့ အစားထိုးပြီး အစားထိုးစာသား ပြပုံ စမ်းပါ။</p>
+
+</section>
+<section class="article-section" id="alt">
+  <h2>ပုံဖိုင် src နဲ့ ပုံကို ဖော်ပြတဲ့ alt</h2>
+  <p>Browser က src ထဲက URL ကို သွားပြီး ပုံဖိုင်ယူပါတယ်။ alt မှာ ဒီနေရာက ပုံကြောင့် ဖတ်သူသိရမယ့် အချက်ကို ရေးပါ။ အလှအတွက်သက်သက် ပုံဆို assistive tools တွေ ကျော်သွားနိုင်ဖို့ alt=&quot;&quot; ရေးပါ။ ပုံရဲ့ အချိုးနဲ့ ကိုက်တဲ့ width၊ height ကို ထည့်ထားရင် ပုံမရောက်သေးခင် browser က နေရာကြိုချန်ပေးနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> mountains.jpg ပုံကို index.html ဘေးမှာ ထားပါ။ အလှဆင်ဖို့ flourish.svg နာမည်နဲ့ ကိုယ်ပိုင် SVG သုံးပါ။ ဒီပုံ မရှိရင် ဒုတိယ img ကို ဖယ်ထားနိုင်ပါတယ်။ Code ကို body ထဲ ထည့်ပါ။</p>
+<pre><code>&lt;img src=&quot;mountains.jpg&quot; width=&quot;640&quot; height=&quot;480&quot; alt=&quot;Mountain landscape&quot;&gt;
+&lt;img src=&quot;flourish.svg&quot; alt=&quot;&quot;&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> mountains.jpg ကို ဖိုင်နဲ့ folder တူတူ ထားရင် ပထမပုံ ပေါ်ပါတယ်။ src ကို မရှိတဲ့ဖိုင်နာမည် ပြောင်းစမ်းရင် browser က ပုံမတက်တာနဲ့ alt စာသားကို ဘယ်လို ပြလဲ မြင်နိုင်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="figure">
+  <h2>&lt;figure&gt; နဲ့ မြင်ရတဲ့ Caption ထည့်ခြင်း</h2>
+  <p>သီးသန့် တွဲဖတ်လို့ရတဲ့ ပုံကို figure နဲ့ စုထားနိုင်ပါတယ်။ ပုံအတွက် မြင်ရတဲ့ caption လိုရင် figure အစ ဒါမှမဟုတ် အဆုံးမှာ figcaption ထည့်ပါ။ Caption က ပုံနဲ့ ဆက်စပ်တဲ့ အကြောင်းအရာ ထည့်ပေးနိုင်ပြီး alt က ပုံကိုယ်တိုင်က ပေးတဲ့ အချက်ကို စာသားနဲ့ ဖော်ပြပေးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> အရင်နမူနာက mountains.jpg ကို ဆက်သုံးပါ။ figure ကို body ထဲ ထည့်ပါ။</p>
+<pre><code>&lt;figure&gt;
+  &lt;img src=&quot;mountains.jpg&quot; alt=&quot;Mountain landscape&quot;&gt;
+  &lt;figcaption&gt;A view of the mountains at sunrise.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပုံအောက်မှာ caption ပေါ်ပါတယ်။ ပုံကို မမြင်နိုင်တဲ့အခါ alt စာသားက ပုံထဲက အချက်ကို သယ်ပေးပါတယ်။</p>
+
+</section>
+<section class="article-section" id="srcset">
+  <h2>srcset နဲ့ sizes သုံးပြီး ပုံဖိုင်အရွယ် ရွေးခြင်း</h2>
+  <p>ပုံတူကို pixel အကျယ် ကွဲတဲ့ဖိုင်တွေနဲ့ ပေးချင်ရင် srcset သုံးပါ။ 480w လို တန်ဖိုးဟာ သက်ဆိုင်ရာဖိုင်ရဲ့ တကယ့် pixel အကျယ်ပါ။ sizes က layout ပေါ်မှာ ပုံကို ဘယ်လောက်အကျယ်နဲ့ ပြမလဲဆိုတာ browser ကို ပြောပါတယ်။ Browser က အဲဒီအကျယ်နဲ့ screen ရဲ့ pixel density ကိုကြည့်ပြီး ပုံဖိုင်ရွေးပါတယ်။ ပုံပေါ်မယ့် တကယ့်အကျယ်ကို CSS နဲ့ သတ်မှတ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ပုံတူ နှစ်ဖိုင်ကို index.html ဘေးမှာ သိမ်းပါ။ အကျယ် 480px ကို mountains-480.jpg၊ 960px ကို mountains-960.jpg ပေးပါ။ img ကို body ထဲ ထည့်ပါ။</p>
+<pre><code>&lt;img src=&quot;mountains-480.jpg&quot;
+     srcset=&quot;mountains-480.jpg 480w, mountains-960.jpg 960w&quot;
+     sizes=&quot;(max-width: 479px) 100vw, 480px&quot;
+     style=&quot;width: min(480px, 100vw); height: auto&quot;
+     alt=&quot;Mountain landscape&quot;&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပုံဖိုင်နှစ်ခုလုံးရှိရင် DevTools မှာ image ရဲ့ currentSrc ကို စစ်ပြီး ဘယ်ဖိုင်ရွေးထားလဲ ကြည့်ပါ။ Screen density နဲ့ browser ပေါ်မူတည်ပြီး ရွေးတဲ့ဖိုင် ကွာနိုင်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="images">
+  <h2>&lt;picture&gt; နဲ့ ဖြတ်ပုံကွဲတဲ့ ပုံပြောင်းပြခြင်း</h2>
+  <p>Screen အကျယ်တစ်ခုကစပြီး ပုံဖြတ်ပုံ ဒါမှမဟုတ် ပုံဖွဲ့ပုံ ပြောင်းချင်ရင် picture သုံးပါ။ Browser က source တွေကို အစဉ်လိုက် ကြည့်ပြီး ပထမဆုံး ကိုက်တာကို ရွေးပါတယ်။ အဆုံးက img က မကိုက်ရင် သုံးမယ့်ပုံ၊ ပုံပြမယ့် element နဲ့ alt စာသားကို ပေးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> landscape-wide.jpg နာမည်နဲ့ အကျယ်ပုံတစ်ခု၊ landscape-small.jpg နာမည်နဲ့ ချုံ့ဖြတ်ထားတဲ့ပုံတစ်ခုကို index.html ဘေးမှာ ထားပါ။ picture ကို body ထဲ ထည့်ပြီး browser အကျယ် ပြောင်းစမ်းပါ။</p>
+<pre><code>&lt;picture&gt;
+  &lt;source media=&quot;(min-width: 60rem)&quot; srcset=&quot;landscape-wide.jpg&quot;&gt;
+  &lt;img src=&quot;landscape-small.jpg&quot; alt=&quot;Mountain landscape near a lake&quot;&gt;
+&lt;/picture&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Viewport က 60rem နဲ့အထက်ဆို wide crop ကို ရွေးပါတယ်။ အဲဒီအောက်ဆို img ရဲ့ src ထဲကပုံ သုံးပါတယ်။ စမ်းဖို့ ပုံဖိုင်နှစ်ခုကို HTML နဲ့ folder တူတူ ထားပါ။</p>
+
+</section>
+<section class="article-section" id="fetchpriority">
+  <h2>ပုံဖိုင်ယူရာမှာ ဦးစားပေးမှု သတ်မှတ်ခြင်း (Priority Hints)</h2>
+  <p>Browser က သုံးမယ့်ပုံဖိုင်ကို သိပြီဆိုရင် ဘယ်ပုံကို ပိုဦးစားပေးပြီး download လုပ်သင့်လဲဆိုတာ fetchpriority နဲ့ အကြံပြုနိုင်ပါတယ်။ Page ဖွင့်တာနဲ့ မြင်ရတဲ့ အဓိက banner ပုံလို Largest Contentful Paint (LCP) ဖြစ်နိုင်တဲ့ပုံမှာ high သုံးနိုင်ပါတယ်။ ပုံမှန်အတိုင်း request လုပ်စေချင်ပေမဲ့ ဦးစားပေးမှု လျှော့ချင်တဲ့ ဒုတိယပုံမှာ low သုံးနိုင်ပါတယ်။ မရေးထားရင် default က auto ဖြစ်ပြီး browser က ဦးစားပေးမှုကို ရွေးပါတယ်။ ဒီတန်ဖိုးတွေက browser ကို အကြံပြုတာဖြစ်လို့ တကယ်အရေးကြီးတဲ့ပုံ အနည်းငယ်မှာပဲ high သုံးပါ။ ပုံကို ဘယ်အချိန်မှာ စတင် load လုပ်နိုင်မလဲဆိုတာကိုတော့ loading attribute က ထိန်းပါတယ်။ အောက်ကို scroll ဆင်းမှ မြင်ရမယ့်ပုံတွေမှာ loading=&quot;lazy&quot; သုံးနိုင်ပါတယ်။ အဓိက banner ပုံမှာတော့ lazy မထည့်ပါနဲ့။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Layout ကို Run example နဲ့ ကြည့်နိုင်ပါတယ်။ တကယ့် network request တွေကို စစ်ချင်ရင် index.html နဲ့ folder တူတူမှာ mountains.jpg နဲ့ landscape-small.jpg ထားပြီး local web server ကနေ ဖွင့်ပါ။ နမူနာ code ကို body ထဲ ထည့်ပါ။</p>
+<pre><code>&lt;h1&gt;Mountain Trail Guide&lt;/h1&gt;
+&lt;img src=&quot;mountains.jpg&quot; alt=&quot;Mountains along the hiking trail&quot;
+     width=&quot;640&quot; height=&quot;480&quot; style=&quot;max-width: 100%; height: auto&quot;
+     fetchpriority=&quot;high&quot;&gt;
+
+&lt;h2&gt;Photo Gallery&lt;/h2&gt;
+&lt;img src=&quot;landscape-small.jpg&quot; alt=&quot;Mountain landscape near a lake&quot;
+     width=&quot;160&quot; height=&quot;160&quot; fetchpriority=&quot;low&quot;&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပုံနှစ်ပုံလုံး ပေါ်ပါမယ်။ Chrome DevTools ရဲ့ Network မှာ Priority column ကို ဖွင့်ပြီး Disable cache ကို ရွေးပါ။ သိမ်းထားတဲ့ page ကို reload လုပ်ပြီး ပုံတစ်ပုံစီရဲ့ request ကို browser က ဘယ်လောက် ဦးစားပေးထားလဲ ကြည့်ပါ။ ဦးစားပေးအဆင့်နဲ့ download ကြာချိန်က ပြောင်းနိုင်ပါတယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html">WHATWG · Images and picture</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/images.html">WHATWG · Responsive images</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-figure-element">WHATWG · Figure and figcaption</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-fetchpriority">WHATWG · Image fetch priority</a></li>
+<li><a href="https://web.dev/articles/fetch-priority">web.dev · Optimize resource loading with Fetch Priority</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/file-paths/">အရင်သင်ခန်းစာ · HTML File Paths</a>
+<a href="/docs/read/my/html/media/">နောက်သင်ခန်းစာ · HTML မှာ အသံနဲ့ ဗီဒီယို ထည့်ခြင်း</a></nav></footer>
 </article>
 </main>
 </body>

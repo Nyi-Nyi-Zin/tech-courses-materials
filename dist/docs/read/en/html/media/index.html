@@ -3,24 +3,83 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Add images and playable media with text alternatives, captions, and files sized for the reader’s screen.">
-  <title>Images, Media &amp; External Embeds · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/images-media/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/images-media/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/images-media/">
+  <meta name="description" content="Browsers can play media directly. Add controls so viewers can start and stop playback, and provide text for spoken and important non-speech audio.">
+  <title>HTML Audio and Video · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/media/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/media/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/media/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Images, Media &amp; External Embeds</h1>
-  <p><a href="/docs/read/en/html/images-media/#media">Images, Media &amp; External Embeds</a></p>
-  <ul><li id="images"><a href="/docs/read/en/html/images-media/#images">Image files, dimensions, and alt text</a></li>
-<li id="figure"><a href="/docs/read/en/html/images-media/#figure">Connect a figure to its visible caption</a></li>
-<li id="responsive-images"><a href="/docs/read/en/html/images-media/#responsive-images">Choose a file based on the available space</a></li>
-<li id="media"><a href="/docs/read/en/html/images-media/#media">Play audio and video or embed a page</a></li>
-<li id="practice"><a href="/docs/read/en/html/images-media/#practice">Hands-on exercise</a></li></ul>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/media/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>HTML Audio and Video</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Browsers can play media directly. Add controls so viewers can start and stop playback, and provide text for spoken and important non-speech audio.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/media">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#audio">Play audio with &lt;audio&gt;</a></li>
+<li><a href="#playback">Play video with &lt;video&gt;</a></li>
+<li><a href="#captions">Timed captions with &lt;track&gt;</a></li>
+<li><a href="#webvtt">Write a WebVTT cue</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="audio">
+  <h2>Play audio with &lt;audio&gt;</h2>
+  <p>Add controls to show the browser’s audio player. With source elements, the browser tries available files in order. A type can let it skip formats it knows it cannot play. Keep a text transcript near the player so people can read the same information.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;audio controls&gt;
+  &lt;source src=&quot;https://javascript-training.cloudninemm.com/media/lesson.ogg&quot; type=&quot;audio/ogg&quot;&gt;
+  Your browser does not support this audio player.
+&lt;/audio&gt;
+&lt;p&gt;Sample audio: a short tone.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> With an internet connection, the player plays a short tone when you press Play.</p>
+
+</section>
+<section class="article-section" id="playback">
+  <h2>Play video with &lt;video&gt;</h2>
+  <p>A video element displays moving pictures and can play audio. controls shows the browser’s buttons and timeline. preload=&quot;metadata&quot; hints that the browser can read the duration first. If you have a separate cover image, add its URL in poster to display it before playback.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;video controls preload=&quot;metadata&quot; width=&quot;360&quot;&gt;
+  &lt;source src=&quot;https://javascript-training.cloudninemm.com/media/lesson.webm&quot; type=&quot;video/webm&quot;&gt;
+  Your browser does not support this video player.
+&lt;/video&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> With an internet connection, use Play to see a short video with moving color bars.</p>
+
+</section>
+<section class="article-section" id="captions">
+  <h2>Timed captions with &lt;track&gt;</h2>
+  <p>A track uses a WebVTT file containing timestamps and the text to display. A captions track includes speech and relevant sounds. srclang tells the browser the language, label names it in the player, and default requests that the track be enabled initially if the user’s preferences do not override it. Serve the HTML, video, and VTT from the same local web server when trying the sample.</p>
+<p class="example-setup"><strong>How to try it</strong> Download lesson.webm and lesson-en.vtt from https://javascript-training.cloudninemm.com/media/lesson.webm and https://javascript-training.cloudninemm.com/media/lesson-en.vtt. Put them beside index.html and place this HTML in body. Serve the folder using Live Server or python -m http.server 8000 and open http://localhost:8000.</p>
+<pre><code>&lt;video controls src=&quot;lesson.webm&quot;&gt;
+  &lt;track kind=&quot;captions&quot; src=&quot;lesson-en.vtt&quot; srclang=&quot;en&quot; label=&quot;English&quot; default&gt;
+&lt;/video&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Play the video or select English in the player’s caption menu. The browser loads lesson-en.vtt from the URL you provided.</p>
+
+</section>
+<section class="article-section" id="webvtt">
+  <h2>Write a WebVTT cue</h2>
+  <p>Save this example as lesson-en.vtt beside the video. WEBVTT identifies the format. A cue starts with a time range and is followed by the text that should appear. Separate successive cues with a blank line.</p>
+<p class="example-setup"><strong>How to try it</strong> Replace the contents of lesson-en.vtt with the code below, save it, and reload the page on the same local server.</p>
+<pre><code>WEBVTT
+
+00:00:00.000 --&gt; 00:00:03.000
+[Color bars move across the screen.]</code></pre>
+<p class="example-result"><strong>What to expect</strong> With captions enabled, the new cue displays from 0 to 3 seconds. It describes what happens in this sample clip.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/media.html">WHATWG · Media elements</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/media.html#the-track-element">WHATWG · The track element</a></li>
+<li><a href="https://www.w3.org/TR/webvtt1/">W3C · WebVTT</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/images/">Previous lesson · HTML Images</a>
+<a href="/docs/read/en/html/icons-and-frames/">Next lesson · Favicons and Iframes</a></nav></footer>
 </article>
 </main>
 </body>

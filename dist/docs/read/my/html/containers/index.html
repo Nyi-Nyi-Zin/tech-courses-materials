@@ -3,24 +3,82 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="စာမျက်နှာတစ်ပိုင်းစီရဲ့ တာဝန်ကို ဖော်ပြတဲ့ element တွေ ရွေးပါမယ်။ ပြီးရင် browser ရဲ့ accessibility tree မှာ ဘယ်လို ပေါ်လဲ ကြည့်ပါမယ်။">
-  <title>Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/semantic-html5/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
+  <meta name="description" content="အကြောင်းအရာကို စုပေးဖို့ သုံးနိုင်တဲ့ HTML element နှစ်ခုပါ။ အကြောင်းအရာရဲ့ တာဝန်ကို ဖော်ပြပေးနိုင်တဲ့ element ရှိရင် အဲဒီ element ကို ရွေးပါ။">
+  <title>အကြောင်းအရာ စုဖွဲ့ဖို့ &lt;div&gt; နဲ့ &lt;span&gt; · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/containers/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/containers/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/containers/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ</h1>
-  <p><a href="/docs/read/my/html/semantic-html5/#containers">Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ</a></p>
-  <ul><li id="containers"><a href="/docs/read/my/html/semantic-html5/#containers">Semantic Element သို့မဟုတ် Generic Container ရွေးခြင်း</a></li>
-<li id="landmarks"><a href="/docs/read/my/html/semantic-html5/#landmarks">Semantic Elements ခုနစ်မျိုးနဲ့ စာမျက်နှာ ဖွဲ့စည်းခြင်း</a></li>
-<li id="section-article-div"><a href="/docs/read/my/html/semantic-html5/#section-article-div">section၊ article နှင့် div ရွေးနည်း</a></li>
-<li id="block-inline"><a href="/docs/read/my/html/semantic-html5/#block-inline">Block နှင့် Inline Layout ကြည့်ခြင်း</a></li>
-<li id="practice"><a href="/docs/read/my/html/semantic-html5/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/containers/" lang="en" hreflang="en">English</a></nav>
+  <h1>အကြောင်းအရာ စုဖွဲ့ဖို့ &lt;div&gt; နဲ့ &lt;span&gt;</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">အကြောင်းအရာကို စုပေးဖို့ သုံးနိုင်တဲ့ HTML element နှစ်ခုပါ။ အကြောင်းအရာရဲ့ တာဝန်ကို ဖော်ပြပေးနိုင်တဲ့ element ရှိရင် အဲဒီ element ကို ရွေးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/containers">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#div">&lt;div&gt; နဲ့ Element တွေ စုခြင်း</a></li>
+<li><a href="#span">&lt;span&gt; နဲ့ စာကြောင်းထဲက အပိုင်းတစ်ခု ရွေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="div">
+  <h2>&lt;div&gt; နဲ့ Element တွေ စုခြင်း</h2>
+  <p>Element တွေကို CSS သို့မဟုတ် JavaScript နဲ့ တစ်စုတည်း ကိုင်တွယ်ဖို့ div ထဲ ထည့်နိုင်ပါတယ်။ မူလပုံစံအရ block ဖြစ်လို့ လိုင်းအသစ်မှာ စပါတယ်။ div က အစုရဲ့ အဓိပ္ပာယ်ကို သီးသန့် မဖော်ပြပါဘူး။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Group elements with &amp;lt;div&amp;gt;&lt;/title&gt;
+  &lt;style&gt;
+.card { border: 2px solid teal; padding: 12px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;card&quot;&gt;
+  &lt;h2&gt;Desk Lamp&lt;/h2&gt;
+  &lt;p&gt;2,500 MMK&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Orders close at 5 PM.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> နာမည်နဲ့ ဈေးနှုန်းက အနားသတ်ပါတဲ့ အကွက်တစ်ခုထဲ ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="span">
+  <h2>&lt;span&gt; နဲ့ စာကြောင်းထဲက အပိုင်းတစ်ခု ရွေးခြင်း</h2>
+  <p>စာကြောင်းထဲက အပိုင်းတစ်ခုကို လိုင်းမခွဲဘဲ span နဲ့ ပတ်နိုင်ပါတယ်။ အဲဒီနေရာကိုပဲ style ပြင်ဖို့ class ပေးပါ။ အရေးကြီးကြောင်း ဖော်ပြဖို့ဆို &lt;strong&gt; လို သင့်တော်တဲ့ element ကို သုံးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Mark part of a line with &amp;lt;span&amp;gt;&lt;/title&gt;
+  &lt;style&gt;
+.price { color: teal; font-weight: bold; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;Desk Lamp: &lt;span class=&quot;price&quot;&gt;2,500 MMK&lt;/span&gt; per item.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ဈေးနှုန်းပဲ စိမ်းပြာရောင်ပြောင်းပြီး လိုင်းတူမှာ ရှိနေပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/div">MDN · &lt;div&gt;</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/span">MDN · &lt;span&gt;</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/form-constraints/">အရင်သင်ခန်းစာ · HTML Form Constraints</a>
+<a href="/docs/read/my/html/accessibility/">နောက်သင်ခန်းစာ · Semantic HTML နဲ့ Keyboard Accessibility</a></nav></footer>
 </article>
 </main>
 </body>

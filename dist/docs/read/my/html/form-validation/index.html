@@ -3,24 +3,60 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Label ပါတဲ့ form controls တွေ ရေးပါမယ်။ ဖြည့်ထားတဲ့ တန်ဖိုးတွေ ဘယ်လိုပို့မလဲ ရွေးပြီး submit မလုပ်ခင် browser နဲ့ စစ်ဆေးပါမယ်။">
-  <title>Forms နှင့် ထည့်ထားတဲ့ တန်ဖိုးတွေ စစ်ဆေးပုံ · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/interactive-forms/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/interactive-forms/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/interactive-forms/">
+  <meta name="description" content="Constraint validation ဆိုတာ HTML မှာ သတ်မှတ်ထားတဲ့ စည်းမျဉ်းတွေနဲ့ user ဖြည့်ထားတာ ကိုက်မကိုက် browser က စစ်ပေးတာပါ။ ရိုးရိုး submit မလုပ်ခင်မှာ အခြေခံ input အမှားတွေ ပြပေးနိုင်ပါတယ်။">
+  <title>HTML Form Validation · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/form-validation/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/form-validation/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/form-validation/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Forms နှင့် ထည့်ထားတဲ့ တန်ဖိုးတွေ စစ်ဆေးပုံ</h1>
-  <p><a href="/docs/read/my/html/interactive-forms/#validation">Forms နှင့် ထည့်ထားတဲ့ တန်ဖိုးတွေ စစ်ဆေးပုံ</a></p>
-  <ul><li id="forms"><a href="/docs/read/my/html/interactive-forms/#forms">အမည်ပါတဲ့ တန်ဖိုးတွေကို GET သို့မဟုတ် POST နဲ့ ပို့ခြင်း</a></li>
-<li id="input-types"><a href="/docs/read/my/html/interactive-forms/#input-types">တန်ဖိုးအလိုက် Control ရွေးခြင်း</a></li>
-<li id="labels"><a href="/docs/read/my/html/interactive-forms/#labels">Field ကို Label ပေးပြီး ဆက်စပ်တာတွေ စုခြင်း</a></li>
-<li id="validation"><a href="/docs/read/my/html/interactive-forms/#validation">Submit မလုပ်ခင် ဖြည့်ထားတာကို စစ်ခြင်း</a></li>
-<li id="practice"><a href="/docs/read/my/html/interactive-forms/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/form-validation/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTML Form Validation</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Constraint validation ဆိုတာ HTML မှာ သတ်မှတ်ထားတဲ့ စည်းမျဉ်းတွေနဲ့ user ဖြည့်ထားတာ ကိုက်မကိုက် browser က စစ်ပေးတာပါ။ ရိုးရိုး submit မလုပ်ခင်မှာ အခြေခံ input အမှားတွေ ပြပေးနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/form-validation">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#constraints">မဖြစ်မနေ ဖြည့်ခိုင်းတာနဲ့ ဂဏန်းအကန့်အသတ် စစ်ခြင်း</a></li>
+<li><a href="#length">minlength နဲ့ စာသားအရှည် စစ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="constraints">
+  <h2>မဖြစ်မနေ ဖြည့်ခိုင်းတာနဲ့ ဂဏန်းအကန့်အသတ် စစ်ခြင်း</h2>
+  <p>ဒီ number input မှာ required ကြောင့် အကွက်လွတ်နေလို့ မရပါဘူး။ min နဲ့ max မှာ သတ်မှတ်တဲ့ အနိမ့်ဆုံး၊ အမြင့်ဆုံး တန်ဖိုးတွေကိုပါ လက်ခံပါတယ်။ Submit နှိပ်တဲ့အခါ input မမှန်ရင် browser က form မပို့ဘဲ အကွက်နားမှာ message ပြလေ့ရှိပါတယ်။ Message စာသားက browser နဲ့ ဘာသာစကားအလိုက် ကွာနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;form&gt;
+  &lt;label for=&quot;guests&quot;&gt;Guests&lt;/label&gt;
+  &lt;input type=&quot;number&quot; id=&quot;guests&quot; name=&quot;guests&quot; min=&quot;1&quot; max=&quot;6&quot; required&gt;
+  &lt;button type=&quot;submit&quot;&gt;Reserve&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အလွတ်၊ 0၊ 7 တို့ကို စမ်းပါ။ သုံးခုလုံးမှာ browser က form ပို့တာကို တားပါတယ်။ 1 ဒါမှမဟုတ် 6 ရိုက်ရင် ဒီစည်းမျဉ်းတွေကို ကျော်နိုင်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="length">
+  <h2>minlength နဲ့ စာသားအရှည် စစ်ခြင်း</h2>
+  <p>Text input မှာ user ရိုက်ထားတဲ့ စာသား အနည်းဆုံး ဘယ်လောက်ရှည်ရမလဲ minlength နဲ့ သတ်မှတ်ပါတယ်။ အကွက်လွတ်ကိုပါ တားချင်ရင် required တွဲထည့်ပါ။ ဒီစာမျက်နှာကို မဖြတ်ဘဲ server ဆီ request ပို့နိုင်တာကြောင့် server ကလည်း ရောက်လာတဲ့ တန်ဖိုးတွေကို ပြန်စစ်ရပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;form&gt;
+  &lt;label for=&quot;order-name&quot;&gt;Name on the order (at least 2 characters)&lt;/label&gt;
+  &lt;input id=&quot;order-name&quot; name=&quot;customer&quot; minlength=&quot;2&quot; required&gt;
+  &lt;button type=&quot;submit&quot;&gt;Continue&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> A တစ်လုံး ရိုက်ပြီး submit နှိပ်ပါ။ Browser က စာပိုရှည်အောင် ဖြည့်ခိုင်းပါမယ်။ May ရိုက်ရင် စာသားအရှည် စစ်ချက်ကို ကျော်ပါတယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#the-constraint-validation-api">WHATWG · Constraint validation</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation">MDN · Client-side form validation</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/buttons/">အရင်သင်ခန်းစာ · HTML Buttons &lt;button&gt;</a>
+<a href="/docs/read/my/html/form-constraints/">နောက်သင်ခန်းစာ · HTML Form Constraints</a></nav></footer>
 </article>
 </main>
 </body>

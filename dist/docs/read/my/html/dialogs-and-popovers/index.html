@@ -3,24 +3,67 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="စာမျက်နှာတစ်ပိုင်းစီရဲ့ တာဝန်ကို ဖော်ပြတဲ့ element တွေ ရွေးပါမယ်။ ပြီးရင် browser ရဲ့ accessibility tree မှာ ဘယ်လို ပေါ်လဲ ကြည့်ပါမယ်။">
-  <title>Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/semantic-html5/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
+  <meta name="description" content="စာမျက်နှာကို ဆက်မသုံးခင် user က အရင်ကြည့်ရမယ့် အချက်၊ ဆုံးဖြတ်ရမယ့် အလုပ်တိုအတွက် modal dialog သုံးနိုင်ပါတယ်။">
+  <title>Modal Dialogs &lt;dialog&gt; · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/dialogs-and-popovers/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/dialogs-and-popovers/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/dialogs-and-popovers/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ</h1>
-  <p><a href="/docs/read/my/html/semantic-html5/">Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ</a></p>
-  <ul><li id="containers"><a href="/docs/read/my/html/semantic-html5/#containers">Semantic Element သို့မဟုတ် Generic Container ရွေးခြင်း</a></li>
-<li id="landmarks"><a href="/docs/read/my/html/semantic-html5/#landmarks">Semantic Elements ခုနစ်မျိုးနဲ့ စာမျက်နှာ ဖွဲ့စည်းခြင်း</a></li>
-<li id="section-article-div"><a href="/docs/read/my/html/semantic-html5/#section-article-div">section၊ article နှင့် div ရွေးနည်း</a></li>
-<li id="block-inline"><a href="/docs/read/my/html/semantic-html5/#block-inline">Block နှင့် Inline Layout ကြည့်ခြင်း</a></li>
-<li id="practice"><a href="/docs/read/my/html/semantic-html5/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/dialogs-and-popovers/" lang="en" hreflang="en">English</a></nav>
+  <h1>Modal Dialogs &lt;dialog&gt;</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">စာမျက်နှာကို ဆက်မသုံးခင် user က အရင်ကြည့်ရမယ့် အချက်၊ ဆုံးဖြတ်ရမယ့် အလုပ်တိုအတွက် modal dialog သုံးနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/dialogs-and-popovers">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#modal">JavaScript နဲ့ Modal ဖွင့်ပိတ်ခြင်း</a></li>
+<li><a href="#commands">HTML Button Commands နဲ့ Modal ဖွင့်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="modal">
+  <h2>JavaScript နဲ့ Modal ဖွင့်ပိတ်ခြင်း</h2>
+  <p>showModal() ကို ခေါ်ရင် dialog ကို page အပေါ်မှာ ပြပြီး ကျန်တဲ့ page ကို ယာယီ အသုံးပြုလို့ မရအောင် browser က ထားပေးပါတယ်။ aria-labelledby က မြင်ရတဲ့ heading ကို ချိတ်ပေးလို့ assistive tools တွေက dialog နာမည်ကို သိနိုင်ပါတယ်။ method=&quot;dialog&quot; ပါတဲ့ form ကို submit လုပ်ရင် request မပို့ဘဲ dialog ပိတ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;button id=&quot;open-order&quot; type=&quot;button&quot;&gt;View order&lt;/button&gt;
+&lt;dialog id=&quot;order&quot; aria-labelledby=&quot;order-title&quot;&gt;
+  &lt;h2 id=&quot;order-title&quot;&gt;Order details&lt;/h2&gt;
+  &lt;p&gt;Your order is ready.&lt;/p&gt;
+  &lt;form method=&quot;dialog&quot;&gt;&lt;button autofocus&gt;Close&lt;/button&gt;&lt;/form&gt;
+&lt;/dialog&gt;
+&lt;script&gt;
+  const dialog = document.querySelector(&quot;#order&quot;);
+  document.querySelector(&quot;#open-order&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+    dialog.showModal();
+  });
+&lt;/script&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> View order နှိပ်ပြီး ဖွင့်ပါ။ Focus က Close ခလုတ်မှာ စပါတယ်။ Close ဒါမှမဟုတ် Escape နဲ့ ပိတ်ရင် ဒီနမူနာမှာ focus က ဖွင့်ခဲ့တဲ့ ခလုတ်ဆီ ပြန်ရောက်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="commands">
+  <h2>HTML Button Commands နဲ့ Modal ဖွင့်ခြင်း</h2>
+  <p>Invoker commands ကို ပံ့ပိုးတဲ့ browser မှာ commandfor ကို dialog id နဲ့ တူအောင် ရေးပါ။ command မှာ browser ဘာလုပ်ရမလဲ သတ်မှတ်ပါတယ်။ show-modal က modal အဖြစ် ဖွင့်ပြီး close က ပိတ်ပါတယ်။ Browser က JavaScript နမူနာထဲက modal အတိုင်း ကိုင်ပေးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;button type=&quot;button&quot; commandfor=&quot;order&quot; command=&quot;show-modal&quot;&gt;View order&lt;/button&gt;
+&lt;dialog id=&quot;order&quot; aria-label=&quot;Order details&quot;&gt;
+  &lt;p&gt;Your order is ready.&lt;/p&gt;
+  &lt;button type=&quot;button&quot; commandfor=&quot;order&quot; command=&quot;close&quot;&gt;Close&lt;/button&gt;
+&lt;/dialog&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပံ့ပိုးတဲ့ browser မှာ ဒီ buttons နှစ်ခုနဲ့ dialog ကို ဖွင့်ပိတ်နိုင်ပါတယ်။ Command နှစ်ခုလုံးက order ဆိုတဲ့ id တစ်ခုတည်းကို ချိတ်ထားပါတယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog">MDN · The dialog element</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#command">MDN · Button commands</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/disclosure/">အရင်သင်ခန်းစာ · ဖွင့်ပိတ်လို့ရတဲ့ အကြောင်းအရာ &lt;details&gt;</a>
+<a href="/docs/read/my/html/popovers/">နောက်သင်ခန်းစာ · HTML Popovers</a></nav></footer>
 </article>
 </main>
 </body>

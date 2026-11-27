@@ -3,24 +3,80 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Label ပါတဲ့ form controls တွေ ရေးပါမယ်။ ဖြည့်ထားတဲ့ တန်ဖိုးတွေ ဘယ်လိုပို့မလဲ ရွေးပြီး submit မလုပ်ခင် browser နဲ့ စစ်ဆေးပါမယ်။">
-  <title>Forms နှင့် ထည့်ထားတဲ့ တန်ဖိုးတွေ စစ်ဆေးပုံ · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/interactive-forms/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/interactive-forms/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/interactive-forms/">
+  <meta name="description" content="သီးသန့်ဖွင့်ပိတ် ရွေးတာ၊ အဖြေတစ်ခုပဲ ရွေးတာ၊ dropdown ကနေ ရွေးတာတို့အတွက် HTML မှာ control ကွဲတွေ ရှိပါတယ်။ ဘယ်တန်ဖိုး ပို့မလဲဆိုတာကို attributes နဲ့ သတ်မှတ်နိုင်ပါတယ်။">
+  <title>Checkbox၊ Radio Button နဲ့ Select Menu များ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/form-controls/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/form-controls/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/form-controls/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Forms နှင့် ထည့်ထားတဲ့ တန်ဖိုးတွေ စစ်ဆေးပုံ</h1>
-  <p><a href="/docs/read/my/html/interactive-forms/#labels">Forms နှင့် ထည့်ထားတဲ့ တန်ဖိုးတွေ စစ်ဆေးပုံ</a></p>
-  <ul><li id="forms"><a href="/docs/read/my/html/interactive-forms/#forms">အမည်ပါတဲ့ တန်ဖိုးတွေကို GET သို့မဟုတ် POST နဲ့ ပို့ခြင်း</a></li>
-<li id="input-types"><a href="/docs/read/my/html/interactive-forms/#input-types">တန်ဖိုးအလိုက် Control ရွေးခြင်း</a></li>
-<li id="labels"><a href="/docs/read/my/html/interactive-forms/#labels">Field ကို Label ပေးပြီး ဆက်စပ်တာတွေ စုခြင်း</a></li>
-<li id="validation"><a href="/docs/read/my/html/interactive-forms/#validation">Submit မလုပ်ခင် ဖြည့်ထားတာကို စစ်ခြင်း</a></li>
-<li id="practice"><a href="/docs/read/my/html/interactive-forms/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/form-controls/" lang="en" hreflang="en">English</a></nav>
+  <h1>Checkbox၊ Radio Button နဲ့ Select Menu များ</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">သီးသန့်ဖွင့်ပိတ် ရွေးတာ၊ အဖြေတစ်ခုပဲ ရွေးတာ၊ dropdown ကနေ ရွေးတာတို့အတွက် HTML မှာ control ကွဲတွေ ရှိပါတယ်။ ဘယ်တန်ဖိုး ပို့မလဲဆိုတာကို attributes နဲ့ သတ်မှတ်နိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/form-controls">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#choices">Checkbox နဲ့ ကြိုက်သလောက် ရွေးခြင်း</a></li>
+<li><a href="#radio">Radio Button နဲ့ အဖြေတစ်ခု ရွေးခြင်း</a></li>
+<li><a href="#values">&lt;select&gt; နဲ့ Dropdown ထဲက ရွေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="choices">
+  <h2>Checkbox နဲ့ ကြိုက်သလောက် ရွေးခြင်း</h2>
+  <p>Checkbox တစ်ခုစီကို သီးခြား အမှန်ခြစ်နိုင်ပါတယ်။ fieldset က ဆက်စပ် controls တွေကို စုပေးပြီး legend က အုပ်စုကို နာမည်ပေးပါတယ်။ name တူတဲ့ checkbox တွေ အများကြီး ခြစ်ထားရင် တန်ဖိုး အများကြီး ပို့နိုင်ပါတယ်။ မခြစ်ထားတဲ့ box က entry မပို့ပါဘူး။ JavaScript မှာ FormData.getAll(name) နဲ့ အကုန်ဖတ်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;form id=&quot;extras-form&quot;&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Extras&lt;/legend&gt;
+    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;extra&quot; value=&quot;gift-wrap&quot;&gt; Gift wrap&lt;/label&gt;
+    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;extra&quot; value=&quot;note&quot;&gt; Gift note&lt;/label&gt;
+  &lt;/fieldset&gt;
+&lt;/form&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> နှစ်ခုလုံး ခြစ်ပြီး Console မှာ new FormData(document.querySelector(&quot;#extras-form&quot;)).getAll(&quot;extra&quot;) ရိုက်ရင် [&quot;gift-wrap&quot;, &quot;note&quot;] ရပါတယ်။ နှစ်ခုလုံး ဖြုတ်ရင် [] ရပါမယ်။</p>
+
+</section>
+<section class="article-section" id="radio">
+  <h2>Radio Button နဲ့ အဖြေတစ်ခု ရွေးခြင်း</h2>
+  <p>Form တစ်ခုတည်းမှာ name တူတဲ့ radio buttons တွေက အုပ်စုတစ်စု ဖြစ်ပါတယ်။ တစ်ခု ရွေးလိုက်ရင် အရင်ရွေးထားတာကို browser က ဖြုတ်ပေးပါတယ်။ တစ်ခုစီမှာ မတူတဲ့ value ထည့်ပါ။ checked က အစမှာ ရွေးထားမယ့် option ကို သတ်မှတ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Paper size&lt;/legend&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;size&quot; value=&quot;small&quot; checked&gt; Small&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;size&quot; value=&quot;large&quot;&gt; Large&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အစမှာ Small ရွေးထားပါတယ်။ Large နှိပ်ရင် Small ပြန်ပြုတ်ပါတယ်။ Form နဲ့ ပို့လိုက်ရင် size=large ပါသွားပါမယ်။</p>
+
+</section>
+<section class="article-section" id="values">
+  <h2>&lt;select&gt; နဲ့ Dropdown ထဲက ရွေးခြင်း</h2>
+  <p>select ထဲမှာ ရွေးလို့ရတဲ့ options တွေ ထည့်ပါတယ်။ တစ်ခုစီမှာ user မြင်ရတဲ့စာသားနဲ့ form ပို့မယ့် value ရှိပါတယ်။ သေချာရွေးခိုင်းချင်ရင် အစ option ကို value အလွတ်နဲ့ ထားပြီး select မှာ required ထည့်ပါ။ အများကြီး ရွေးလို့ရဖို့ လိုမှ multiple ထည့်ပါ။ ဒါဆို ရွေးထားတဲ့ option တစ်ခုစီရဲ့ value ကို ပို့ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;form&gt;
+  &lt;label for=&quot;product&quot;&gt;Product&lt;/label&gt;
+  &lt;select id=&quot;product&quot; name=&quot;product&quot; required&gt;
+    &lt;option value=&quot;&quot;&gt;Choose a product&lt;/option&gt;
+    &lt;option value=&quot;pen&quot;&gt;Pen&lt;/option&gt;
+    &lt;option value=&quot;notebook&quot;&gt;Notebook&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;button type=&quot;submit&quot;&gt;Continue&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အစမှာ ရွေးဖို့ စာသား ပြထားပါတယ်။ Pen ဒါမှမဟုတ် Notebook မရွေးသေးရင် browser က မပို့ပါဘူး။ Pen ရွေးရင် pen ဆိုတဲ့ value ကို ပို့ပါတယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/input.html">WHATWG · Input controls</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/form-elements.html#the-select-element">WHATWG · The select element</a></li>
+<li><a href="https://xhr.spec.whatwg.org/#interface-formdata">WHATWG · FormData</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/forms/">အရင်သင်ခန်းစာ · HTML Form၊ Label နဲ့ Input များ</a>
+<a href="/docs/read/my/html/form-field-types/">နောက်သင်ခန်းစာ · Textarea၊ File Input နဲ့ Input Attributes</a></nav></footer>
 </article>
 </main>
 </body>

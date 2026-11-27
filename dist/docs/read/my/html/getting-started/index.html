@@ -3,24 +3,51 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="index.html ဖိုင်တစ်ခုရေးပြီး browser မှာ ဖွင့်ပါ။ ကိုယ်ရေးထားတဲ့ HTML နဲ့ စာမျက်နှာပေါ်မှာ မြင်ရတဲ့ element တွေ ဘယ်လိုဆက်စပ်လဲ DevTools နဲ့ ကြည့်ပါမယ်။">
-  <title>Web အခြေခံနှင့် HTML အလုပ်လုပ်ပုံ · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/web-fundamentals/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/web-fundamentals/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/web-fundamentals/">
+  <meta name="description" content="Web page ဆိုတာ Chrome၊ Firefox လို browser မှာ ဖွင့်ဖတ်လို့ရတဲ့ စာမျက်နှာပါ။ ကိုယ့်စက်ထဲက ဖိုင်တစ်ခုကိုလည်း browser နဲ့ ဖွင့်ကြည့်လို့ရပါတယ်။ HTML (HyperText Markup Language) က အဲဒီစာမျက်နှာမှာ ဘာအကြောင်းအရာတွေ ပါပြီး ဘယ်လိုဖွဲ့ထားလဲ ရေးဖော်ပြတဲ့ ဘာသာစကားပါ။">
+  <title>ပထမဆုံး HTML စာမျက်နှာ ဖန်တီးခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/getting-started/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/getting-started/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/getting-started/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Web အခြေခံနှင့် HTML အလုပ်လုပ်ပုံ</h1>
-  <p><a href="/docs/read/my/html/web-fundamentals/#document">Web အခြေခံနှင့် HTML အလုပ်လုပ်ပုံ</a></p>
-  <ul><li id="browser-and-server"><a href="/docs/read/my/html/web-fundamentals/#browser-and-server">URL ကနေ စာမျက်နှာပေါ်လာပုံ</a></li>
-<li id="html-css-javascript"><a href="/docs/read/my/html/web-fundamentals/#html-css-javascript">HTML၊ CSS နှင့် JavaScript ရဲ့ တာဝန်များ</a></li>
-<li id="document"><a href="/docs/read/my/html/web-fundamentals/#document">HTML Document အပြည့်အစုံ ရေးခြင်း</a></li>
-<li id="attributes"><a href="/docs/read/my/html/web-fundamentals/#attributes">Elements၊ Tags၊ Attributes နှင့် အတွင်းထည့်ရေးပုံ</a></li>
-<li id="practice"><a href="/docs/read/my/html/web-fundamentals/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/getting-started/" lang="en" hreflang="en">English</a></nav>
+  <h1>ပထမဆုံး HTML စာမျက်နှာ ဖန်တီးခြင်း</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Web page ဆိုတာ Chrome၊ Firefox လို browser မှာ ဖွင့်ဖတ်လို့ရတဲ့ စာမျက်နှာပါ။ ကိုယ့်စက်ထဲက ဖိုင်တစ်ခုကိုလည်း browser နဲ့ ဖွင့်ကြည့်လို့ရပါတယ်။ HTML (HyperText Markup Language) က အဲဒီစာမျက်နှာမှာ ဘာအကြောင်းအရာတွေ ပါပြီး ဘယ်လိုဖွဲ့ထားလဲ ရေးဖော်ပြတဲ့ ဘာသာစကားပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/getting-started">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#first-page">index.html ဖိုင်ကို သိမ်းပြီး ဖွင့်ခြင်း</a></li>
+<li><a href="#reload">ပြင်ခြင်း၊ သိမ်းခြင်းနဲ့ Reload လုပ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="first-page">
+  <h2>index.html ဖိုင်ကို သိမ်းပြီး ဖွင့်ခြင်း</h2>
+  <p>ဖိုင်နာမည်ရဲ့ နောက်ဆုံးအစက်နောက်က အပိုင်းကို file extension လို့ခေါ်ပါတယ်။ .html ဆိုရင် HTML ဖိုင်ဖြစ်ပါတယ်။ VS Code လို text editor နဲ့ ရေးပြီး browser နဲ့ ရလဒ်ကြည့်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> learning-center လို့ folder တစ်ခုလုပ်ပါ။ Editor မှာ ဖိုင်အသစ်ဖွင့်ပြီး အောက်က စာကြောင်းရေးပါ။ learning-center folder ထဲမှာ index.html နာမည်နဲ့ သိမ်းပါ။ သိမ်းထားတဲ့ဖိုင်ကို နှစ်ချက်နှိပ်ဖွင့်ပါ။ Browser ထဲကနေလည်း ဖိုင်ကို ရွေးဖွင့်နိုင်ပါတယ်။</p>
+<pre><code>Welcome to the learning center!</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Browser ထဲက စာမျက်နှာမှာ “Welcome to the learning center!” လို့ ပေါ်ပါမယ်။</p>
+<p class="example-check"><strong>ရလဒ်ကွာနေရင်</strong> File download ဖြစ်တာ ဒါမှမဟုတ် တခြား app နဲ့ ပွင့်တာဆိုရင် ဖိုင်နာမည်အပြည့်အစုံကို စစ်ပါ။ Editor တချို့က .txt ထပ်ထည့်တတ်ပါတယ်။ index.html ဖြစ်ရပါမယ်။</p>
+</section>
+<section class="article-section" id="reload">
+  <h2>ပြင်ခြင်း၊ သိမ်းခြင်းနဲ့ Reload လုပ်ခြင်း</h2>
+  <p>Editor ထဲမှာ “learning center” ကို “community center” လို့ ပြင်ပြီး သိမ်းပါ။ Browser မှာ Windows သို့မဟုတ် Linux ဆို Ctrl+R၊ Mac ဆို Command+R နှိပ်ပါ။ Reload လုပ်တာက browser ကို စာမျက်နှာ ပြန်ဖတ်ခိုင်းတာပါ။ “Welcome to the community center!” လို့ ပြောင်းသွားပါမယ်။</p>
+
+<pre><code>Welcome to the community center!</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Your_first_website">MDN · Creating your first website</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/introduction/">အရင်သင်ခန်းစာ · HTML မိတ်ဆက်</a>
+<a href="/docs/read/my/html/structure/">နောက်သင်ခန်းစာ · HTML Document ဖွဲ့စည်းပုံ</a></nav></footer>
 </article>
 </main>
 </body>

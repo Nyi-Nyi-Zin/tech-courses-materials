@@ -3,24 +3,214 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="index.html ဖိုင်တစ်ခုရေးပြီး browser မှာ ဖွင့်ပါ။ ကိုယ်ရေးထားတဲ့ HTML နဲ့ စာမျက်နှာပေါ်မှာ မြင်ရတဲ့ element တွေ ဘယ်လိုဆက်စပ်လဲ DevTools နဲ့ ကြည့်ပါမယ်။">
-  <title>Web အခြေခံနှင့် HTML အလုပ်လုပ်ပုံ · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/web-fundamentals/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/web-fundamentals/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/web-fundamentals/">
+  <meta name="description" content="HTML document ဆိုတာ စာမျက်နှာတစ်ခုအတွက် ရေးထားတဲ့ code ပါ။ ဖိုင်တစ်ခုလုံး မကြည့်ခင် အကြောင်းအရာတစ်ခုကို HTML နဲ့ ဘယ်လို မှတ်သားရေးလဲ၊ တစ်ခုထဲမှာ နောက်တစ်ခုကို ဘယ်လိုထည့်လဲဆိုတာ ကြည့်ပါမယ်။ ပြီးမှ ရှေ့သင်ခန်းစာမှာ ဖန်တီးထားတဲ့ index.html ဖိုင်ထဲမှာ အားလုံး တွဲစမ်းပါမယ်။">
+  <title>HTML Document ဖွဲ့စည်းပုံ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/structure/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/structure/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/structure/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Web အခြေခံနှင့် HTML အလုပ်လုပ်ပုံ</h1>
-  <p><a href="/docs/read/my/html/web-fundamentals/#document">Web အခြေခံနှင့် HTML အလုပ်လုပ်ပုံ</a></p>
-  <ul><li id="browser-and-server"><a href="/docs/read/my/html/web-fundamentals/#browser-and-server">URL ကနေ စာမျက်နှာပေါ်လာပုံ</a></li>
-<li id="html-css-javascript"><a href="/docs/read/my/html/web-fundamentals/#html-css-javascript">HTML၊ CSS နှင့် JavaScript ရဲ့ တာဝန်များ</a></li>
-<li id="document"><a href="/docs/read/my/html/web-fundamentals/#document">HTML Document အပြည့်အစုံ ရေးခြင်း</a></li>
-<li id="attributes"><a href="/docs/read/my/html/web-fundamentals/#attributes">Elements၊ Tags၊ Attributes နှင့် အတွင်းထည့်ရေးပုံ</a></li>
-<li id="practice"><a href="/docs/read/my/html/web-fundamentals/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/structure/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTML Document ဖွဲ့စည်းပုံ</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">HTML document ဆိုတာ စာမျက်နှာတစ်ခုအတွက် ရေးထားတဲ့ code ပါ။ ဖိုင်တစ်ခုလုံး မကြည့်ခင် အကြောင်းအရာတစ်ခုကို HTML နဲ့ ဘယ်လို မှတ်သားရေးလဲ၊ တစ်ခုထဲမှာ နောက်တစ်ခုကို ဘယ်လိုထည့်လဲဆိုတာ ကြည့်ပါမယ်။ ပြီးမှ ရှေ့သင်ခန်းစာမှာ ဖန်တီးထားတဲ့ index.html ဖိုင်ထဲမှာ အားလုံး တွဲစမ်းပါမယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/structure">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#tag">HTML Tag ဆိုတာ ဘာလဲ?</a></li>
+<li><a href="#elements">HTML Element ဆိုတာ ဘာလဲ?</a></li>
+<li><a href="#attribute">HTML Attribute ဆိုတာ ဘာလဲ?</a></li>
+<li><a href="#case-insensitivity">HTML မှာ Case Insensitivity</a></li>
+<li><a href="#nesting">HTML Element တစ်ခုထဲ နောက်တစ်ခု ထည့်ခြင်း (Nesting)</a></li>
+<li><a href="#doctype">HTML Doctype သတ်မှတ်ချက်</a></li>
+<li><a href="#html">&lt;html&gt; က ဘာလုပ်လဲ။</a></li>
+<li><a href="#head">&lt;head&gt; က ဘာလုပ်လဲ။</a></li>
+<li><a href="#title">စာမျက်နှာနာမည် &lt;title&gt;</a></li>
+<li><a href="#body">&lt;body&gt; က ဘာလုပ်လဲ။</a></li>
+<li><a href="#document">HTML Document အပြည့်အစုံ ရေးစမ်းခြင်း</a></li>
+<li><a href="#viewport">ဖုန်းပေါ်မှာ စာမျက်နှာအကျယ် သတ်မှတ်ခြင်း</a></li>
+<li><a href="#dom">DOM ကို ဘယ်လိုကြည့်မလဲ။</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="tag">
+  <h2>HTML Tag ဆိုတာ ဘာလဲ?</h2>
+  <p>Tag ဆိုတာ HTML code ထဲမှာ အကြောင်းအရာကို မှတ်သားဖို့ သုံးတဲ့ အမှတ်အသားပါ။ &lt; နဲ့ &gt; ကြားမှာ ရေးပါတယ်။ &lt;p&gt; မှာ p က tag နာမည်ပါ။ စာပိုဒ် စတယ်လို့ ပြောတာပါ။ &lt;/p&gt; မှာ / ပါလာရင် စာပိုဒ် ဆုံးတယ်လို့ ပြောတာပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ရှေ့မှာ index.html ထဲ ရေးထားတဲ့ စာကြောင်းအစား ဒီစာကြောင်းကို ထည့်ပါ။ သိမ်းပြီး reload လုပ်ပါ။</p>
+<pre><code>&lt;p&gt;Your page is ready.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စာမျက်နှာမှာ “Your page is ready.” ဆိုတဲ့ စာပိုဒ် ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="elements">
+  <h2>HTML Element ဆိုတာ ဘာလဲ?</h2>
+  <p>Element ဆိုတာ စာမျက်နှာထဲက အစိတ်အပိုင်းတစ်ခုပါ။ ဒီနမူနာမှာ အဖွင့် tag &lt;p&gt;၊ “Registration is open.” ဆိုတဲ့ စာသားနဲ့ အပိတ် tag &lt;/p&gt; ပေါင်းပြီး paragraph element တစ်ခု ဖြစ်ပါတယ်။ &lt;hr&gt; က အကြောင်းအရာနှစ်ပိုင်းကြား ခွဲပေးပါတယ်။ &lt;hr&gt; က void element ဖြစ်လို့ အထဲမှာ content မပါသလို အပိတ် tag လည်း မရေးရပါဘူး။</p>
+
+<pre><code>&lt;!-- Paragraph element: opening tag, text, and closing tag --&gt;
+&lt;p&gt;Registration is open.&lt;/p&gt;
+
+&lt;!-- Void element: a break between topics --&gt;
+&lt;hr&gt;
+&lt;p&gt;Classes start on Monday.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Browser မှာ ပုံမှန်အားဖြင့် စာပိုဒ်နှစ်ခုကြား အလျားလိုက် မျဉ်းတစ်ကြောင်း ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="attribute">
+  <h2>HTML Attribute ဆိုတာ ဘာလဲ?</h2>
+  <p>Attribute ဆိုတာ element အကြောင်း အချက်အလက် ထပ်ဖြည့်ပေးတာပါ။ အဖွင့် tag ထဲမှာ tag နာမည်နောက်ကနေ ရေးပါတယ်။ ဒီမှာ lang က attribute နာမည်ဖြစ်ပြီး &quot;en&quot; က တန်ဖိုးပါ။ ဒီစာပိုဒ်ကို English လို့ သတ်မှတ်ပေးတာပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက စာပိုဒ်ကို ဒီစာကြောင်းနဲ့ အစားထိုးပြီး save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;p lang=&quot;en&quot;&gt;Your page is ready.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> “Your page is ready.” လို့ ဆက်မြင်ရပါမယ်။ ဘာသာစကားအချက်အလက်က ဒီ element အတွက် သတ်မှတ်ထားတာပါ။</p>
+
+</section>
+<section class="article-section" id="case-insensitivity">
+  <h2>HTML မှာ Case Insensitivity</h2>
+  <p>HTML မှာ tag နာမည်နဲ့ attribute နာမည်တွေကို Browser က စာလုံးအကြီး၊ အသေး မခွဲဘဲ ဖတ်ပါတယ်။ &lt;P&gt; နဲ့ &lt;p&gt; ကို တူညီတဲ့ tag အဖြစ် ဖတ်သလို CLASS နဲ့ class ကိုလည်း တူညီတဲ့ attribute နာမည်အဖြစ် ဖတ်ပါတယ်။ Code ပုံစံညီအောင် နာမည်တွေကို စာလုံးအသေး (lowercase) နဲ့ ရေးလေ့ရှိပါတယ်။ Attribute တန်ဖိုးတွေမှာတော့ သက်ဆိုင်ရာ စည်းမျဉ်းတွေ ရှိပါတယ်။ ဒီနမူနာမှာ CSS selector .note က class တန်ဖိုး &quot;note&quot; ရှိတဲ့ စာပိုဒ်တွေကို ရွေးပါတယ်။ &quot;Note&quot; က CSS အတွက် သီးခြား class တန်ဖိုးတစ်ခုပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;HTML Case Insensitivity&lt;/title&gt;
+  &lt;style&gt;
+    .note { color: teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;P CLASS=&quot;note&quot;&gt;First paragraph&lt;/P&gt;
+  &lt;p class=&quot;note&quot;&gt;Second paragraph&lt;/p&gt;
+  &lt;p class=&quot;Note&quot;&gt;Third paragraph&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> သုံးကြောင်းလုံး စာပိုဒ်အဖြစ် ပေါ်ပါမယ်။ ပထမနှစ်ကြောင်းက စိမ်းပြာရောင်ဖြစ်ပြီး တတိယကြောင်းက ပုံမှန်စာသားအရောင်နဲ့ ပေါ်ပါမယ်။ တတိယကြောင်းမှာ &quot;Note&quot; ကို &quot;note&quot; လို့ ပြောင်းပြီး အရောင်ပြောင်းသွားတာကို ကြည့်ပါ။</p>
+
+</section>
+<section class="article-section" id="nesting">
+  <h2>HTML Element တစ်ခုထဲ နောက်တစ်ခု ထည့်ခြင်း (Nesting)</h2>
+  <p>Nesting ဆိုတာ element တစ်ခုထဲမှာ နောက် element တစ်ခု ထည့်ရေးတာပါ။ ဒီနမူနာမှာ &lt;main&gt; က parent ဖြစ်ပြီး &lt;h1&gt; နဲ့ &lt;p&gt; က တိုက်ရိုက် child တွေပါ။ Child နှစ်ခုလုံးကို &lt;/main&gt; မတိုင်ခင် အရင်ပိတ်ထားတာ သတိထားကြည့်ပါ။</p>
+
+<pre><code>&lt;main&gt;
+  &lt;h1&gt;Learning Center&lt;/h1&gt;
+  &lt;p&gt;Registration is open.&lt;/p&gt;
+&lt;/main&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Heading နဲ့ စာပိုဒ် နှစ်ခုလုံးက &lt;main&gt; အပိုင်းထဲမှာ ရှိပါတယ်။</p>
+
+</section>
+<section class="article-section" id="doctype">
+  <h2>HTML Doctype သတ်မှတ်ချက်</h2>
+  <p>HTML ဖိုင်ရဲ့ ပထမဆုံးလိုင်းမှာ &lt;html&gt; မတိုင်ခင် &lt;!doctype html&gt; ကို ရေးပါ။ ဒီသတ်မှတ်ချက်ကြောင့် Browser က ယနေ့ခေတ် စာမျက်နှာတွေအတွက် ပုံမှန် layout စည်းမျဉ်းတွေ သုံးတဲ့ Standards Mode နဲ့ စာမျက်နှာကို ပြပါတယ်။ Doctype အောက်မှာ &lt;html&gt; element ကို ဆက်ရေးပါ။</p>
+
+<pre><code>&lt;!doctype html&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="html">
+  <h2>&lt;html&gt; က ဘာလုပ်လဲ။</h2>
+  <p>&lt;html&gt; က &lt;head&gt; နဲ့ &lt;body&gt; နှစ်ခုလုံးကို အပြင်ကနေ ခြုံထားပါတယ်။ အပြင်ဆုံး element ဖြစ်လို့ root element လို့ ခေါ်ပါတယ်။ lang=&quot;en&quot; က စာမျက်နှာရဲ့ မူလဘာသာစကားကို English လို့ သတ်မှတ်ပေးပါတယ်။ Screen reader က ဒီသတ်မှတ်ချက်ကို သုံးပြီး စာသားကို သင့်တော်တဲ့ အသံထွက်နဲ့ ဖတ်နိုင်ပါတယ်။</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Learning Center&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Registration is open.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="head">
+  <h2>&lt;head&gt; က ဘာလုပ်လဲ။</h2>
+  <p>&lt;head&gt; က document အကြောင်း browser နဲ့ တခြား tool တွေ သိဖို့ အချက်အလက် ထည့်တဲ့အပိုင်းပါ။ အဲဒီအချက်အလက်ကို metadata လို့ခေါ်ပါတယ်။ ဥပမာ &lt;title&gt; က document နာမည်ဖြစ်ပြီး browser က tab မှာ ပြပါတယ်။ ကွန်ပျူတာက စာသားကို ကိန်းဂဏန်းတွေအဖြစ် သိမ်းပါတယ်။ &lt;meta charset&gt; က အဲဒါတွေကို စာလုံးအဖြစ် ဘယ်လိုပြန်ဖတ်ရမလဲ သတ်မှတ်ပေးပါတယ်။ ဖိုင်ကို UTF-8 နဲ့ သိမ်းပြီး head အစပိုင်းမှာ charset ကိုလည်း UTF-8 လို့ ရေးပါ။</p>
+
+<pre><code>&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;Learning Center&lt;/title&gt;
+&lt;/head&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="title">
+  <h2>စာမျက်နှာနာမည် &lt;title&gt;</h2>
+  <p>Document ရဲ့ နာမည်ကို &lt;head&gt; ထဲက &lt;title&gt; နဲ့ သတ်မှတ်ပါတယ်။ ဒီနာမည်ကို Browser tab မှာ မြင်ရသလို စာမျက်နှာကို bookmark လုပ်တဲ့အခါမှာလည်း တွေ့ရပါတယ်။ စာမျက်နှာပေါ်မှာ ဖတ်ရမယ့် အဓိကခေါင်းစဉ်ကိုတော့ &lt;body&gt; ထဲမှာ &lt;h1&gt; နဲ့ ရေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Opening Hours | Learning Center&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Opening Hours&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ဖိုင်ကို Browser နဲ့ ဖွင့်လိုက်ရင် tab မှာ “Opening Hours | Learning Center” လို့ ပေါ်ပြီး စာမျက်နှာပေါ်က ခေါင်းစဉ်မှာ “Opening Hours” လို့ ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="body">
+  <h2>&lt;body&gt; က ဘာလုပ်လဲ။</h2>
+  <p>&lt;body&gt; ထဲမှာ ဝင်ကြည့်သူ ဖတ်မယ့်၊ အသုံးပြုမယ့် အကြောင်းအရာတွေကို ထည့်ပါတယ်။ &lt;/head&gt; ပြီးရင် &lt;body&gt; ကို ဖွင့်ပြီး &lt;/html&gt; မတိုင်ခင် &lt;/body&gt; နဲ့ ပိတ်ပါ။ အောက်က စာပိုဒ်ထဲက နှုတ်ဆက်စာကို browser မှာ မြင်ရပါမယ်။</p>
+
+<pre><code>&lt;body&gt;
+  &lt;p&gt;Welcome to the Learning Center!&lt;/p&gt;
+&lt;/body&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="document">
+  <h2>HTML Document အပြည့်အစုံ ရေးစမ်းခြင်း</h2>
+  <p>ပထမလိုင်းက doctype ဆိုတဲ့ သတ်မှတ်ချက်ပါ။ Browser ကို ယနေ့ခေတ် စာမျက်နှာတွေအတွက် ပုံမှန်စည်းမျဉ်းတွေ သုံးစေပါတယ်။ နောက် lesson မှာ ကွာခြားချက်ကို စမ်းပါမယ်။ Doctype အောက်မှာ html က head နဲ့ body ကို ခြုံထားပါတယ်။ Tab မှာ ပြမယ့် နာမည်နဲ့ စာမျက်နှာထဲက စာသားကို သီးသန့် ရေးနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက code အားလုံးကို ဒီနမူနာနဲ့ အစားထိုးပါ။ Save လုပ်ပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Learning Center&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Welcome to the Learning Center!&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Browser tab မှာ “Learning Center” လို့ ပေါ်ပြီး စာမျက်နှာမှာ “Welcome to the Learning Center!” လို့ မြင်ရပါမယ်။ စာပိုဒ်ထဲက နှုတ်ဆက်စာကို ပြောင်း၊ ဖိုင်သိမ်းပြီး reload လုပ်ကြည့်ပါ။</p>
+<p class="example-check"><strong>ရလဒ်ကွာနေရင်</strong> Tag တွေကို စာသားအဖြစ် မြင်ရရင် ဖိုင်နာမည်က .html နဲ့ ဆုံးလား စစ်ပါ။</p>
+</section>
+<section class="article-section" id="viewport">
+  <h2>ဖုန်းပေါ်မှာ စာမျက်နှာအကျယ် သတ်မှတ်ခြင်း</h2>
+  <p>Viewport ဆိုတာ browser ထဲမှာ စာမျက်နှာပြတဲ့ မြင်ကွင်းပါ။ ဖုန်း browser က တစ်ခါတလေ ဖုန်းမျက်နှာပြင်ထက် ပိုကျယ်သလို တွက်ပြီး စာမျက်နှာကို စီတတ်ပါတယ်။ width=device-width က စာမျက်နှာစီတဲ့အခါ ဖုန်းမြင်ကွင်းအကျယ်ကို သုံးစေပြီး initial-scale=1 က စဖွင့်ချိန် zoom ကို သတ်မှတ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ရှိပြီးသား &lt;head&gt; အထဲက charset စာကြောင်းအောက်မှာ ဒီလိုင်းကို ထည့်ပါ။</p>
+<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> နှုတ်ဆက်စာက အတိုင်းပဲ မြင်ရပါမယ်။ ဖုန်းနဲ့ ဖွင့်ရင် browser က ဖုန်းအကျယ်ကို အခြေခံပြီး စာမျက်နှာကို စီနိုင်ပါတယ်။ Responsive Layout သင်ခန်းစာမှာ ထပ်စမ်းနိုင်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="dom">
+  <h2>DOM ကို ဘယ်လိုကြည့်မလဲ။</h2>
+  <p>Browser က HTML ဖိုင်ကို ဖတ်ပြီး DOM (Document Object Model) လို့ခေါ်တဲ့ သစ်ပင်ပုံစံ ဖွဲ့စည်းပုံကို တည်ဆောက်ပါတယ်။ ဒီနမူနာကို Run လုပ်ပါ၊ ဒါမှမဟုတ် index.html ရဲ့ &lt;body&gt; ထဲမှာ ထည့်ပြီး ဖိုင်ကို ဖွင့်ပါ။ “Registration is open.” ပေါ် right-click နှိပ်ပြီး Inspect ရွေးပါ။ Elements ဒါမှမဟုတ် Inspector မှာ &lt;main&gt; ထဲက &lt;p&gt; ကို ရှာကြည့်ပါ။ &lt;html&gt; ကို ဖြန့်ရင် &lt;head&gt; နဲ့ &lt;body&gt; ကိုလည်း မြင်ရပါမယ်။</p>
+
+<pre><code>&lt;main&gt;
+  &lt;p&gt;Registration is open.&lt;/p&gt;
+&lt;/main&gt;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax">MDN · Basic HTML syntax</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/syntax.html#syntax">WHATWG · HTML syntax</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/syntax.html#the-doctype">WHATWG · The DOCTYPE</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/semantics.html">WHATWG · Elements</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/semantics.html#the-title-element">WHATWG · The title element</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/sections.html#the-body-element">WHATWG · The body element</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">MDN · Introduction to the DOM</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/getting-started/">အရင်သင်ခန်းစာ · ပထမဆုံး HTML စာမျက်နှာ ဖန်တီးခြင်း</a>
+<a href="/docs/read/my/html/attributes/">နောက်သင်ခန်းစာ · HTML Attributes</a></nav></footer>
 </article>
 </main>
 </body>
