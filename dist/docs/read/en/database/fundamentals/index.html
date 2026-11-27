@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A database is an organized collection of data that you can search and retrieve when you need it.">
+  <meta name="description" content="A database is an organized collection of data stored electronically so it can be easily accessed, managed, and updated. Software called a database management system (DBMS) controls the database, handling security, backups, multi-user access, and queries.">
   <title>What is a database? · Cloud Nine Innovations</title>
   <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/fundamentals/">
   <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/fundamentals/">
@@ -18,33 +18,18 @@
   <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/fundamentals/" lang="my" hreflang="my">မြန်မာ</a></nav>
   <h1>What is a database?</h1>
   
-  <p class="intro">A database is an organized collection of data that you can search and retrieve when you need it.</p>
+  <p class="intro">A <strong>database</strong> is <strong>an organized collection of data stored electronically so it can be easily accessed, managed, and updated</strong>. Software called a <strong>database management system (DBMS)</strong> controls the database, handling security, backups, multi-user access, and queries.</p>
   <p class="reading-link"><a href="/docs/?lang=en#/database/fundamentals">Open interactive lesson</a></p>
 
   <section class="article-section">
     <h2>On this page</h2>
-    <ul><li><a href="#database-example">How an online store uses a database</a></li>
-<li><a href="#database-and-dbms">Database and DBMS</a></li>
-<li><a href="#sql-and-nosql">SQL and NoSQL databases</a></li>
+    <ul><li><a href="#database-and-dbms">Database and DBMS</a></li>
+<li><a href="#sql-and-nosql">Types of Databases</a></li>
 <li><a href="#references">Official references</a></li></ul>
   </section>
-  <section class="article-section" id="database-example">
-  <h2>How an online store uses a database</h2>
-  <p>An online store can use a database to keep product names, prices, stock quantities, and orders. When you open a product page, the store reads the saved price and shows it to you. When you place an order, it saves a new order record.</p>
-
-<pre><code>-- Read the saved price when a product page opens.
-SELECT name, price
-FROM products
-WHERE id = 1;
-
--- Record a new order at checkout.
-INSERT INTO orders (id) VALUES (101);</code></pre>
-
-
-</section>
-<section class="article-section" id="database-and-dbms">
+  <section class="article-section" id="database-and-dbms">
   <h2>Database and DBMS</h2>
-  <p>In the shop example, opening a product page reads a saved price and placing an order writes a new record. What handles those reads and writes? A database management system (DBMS) is the software that manages a database and handles operations such as reading, adding, and updating its data. PostgreSQL, MySQL, and MongoDB are examples.</p>
+  <p>When an application needs to read, add, or update data, it sends a request to the DBMS. A single DBMS can manage multiple databases. For example, the PostgreSQL query below reports the name of the database you are connected to and the version of the software managing it.</p>
 
 <pre><code>SELECT current_database() AS connected_database,
        version() AS database_server;</code></pre>
@@ -52,20 +37,24 @@ INSERT INTO orders (id) VALUES (101);</code></pre>
 
 </section>
 <section class="article-section" id="sql-and-nosql">
-  <h2>SQL and NoSQL databases</h2>
-  <p>A DBMS handles reads and writes, and different database systems organize the records in different ways. You will often hear two broad labels, SQL and NoSQL. SQL is a language, and “SQL databases” commonly refers to relational databases that use it to work with tables. NoSQL covers other data models, such as documents and graphs. In the shop example, order 101 contains two notebooks. The picture shows that same order item as a row in a relational table and as a MongoDB document.</p>
+  <h2>Types of Databases</h2>
+  <figure class="lesson-figure lesson-figure--banner">
+    <a href="/docs/media/database/types-of-databases.jpg" data-image-preview><img src="/docs/media/database/types-of-databases.jpg" alt="Six database models illustrated as a relational table, a JSON-like document, key-value pairs, a wide-column row with column families, a graph with nodes and an edge, and vectors with numerical values." width="2048" height="1143" loading="lazy" decoding="async"></a>
+  </figure>
+  <h3>1. Relational Database (SQL) 📊</h3>
+<p>Stores data in structured tables with rows and columns. A defined schema and constraints help maintain data integrity. Relational databases work well for complex queries and transactions, such as recording a bank transfer. Examples include PostgreSQL and MySQL.</p>
+<h3>2. Document Store (NoSQL) 📄</h3>
+<p>Stores data in flexible, JSON-like documents. Documents can have different fields, so you can add fields as your application grows. Some systems also let you validate document fields. Examples include MongoDB and Cloud Firestore from Firebase.</p>
+<h3>3. Key-Value Store (NoSQL) 🔑</h3>
+<p>Stores data as pairs of unique keys and their corresponding values, like a dictionary. Fast lookup by key makes this model useful for API response caching and user sessions. Redis is an example. Memcached uses the same model as an in-memory cache.</p>
+<h3>4. Wide-Column Store (NoSQL) 🗄️</h3>
+<p>Stores data in rows identified by keys. A system such as HBase groups related columns into column families. Wide-column stores can distribute large volumes of data across servers and are used for applications such as high-volume logs, IoT telemetry, and large-scale analytics. Examples include Apache Cassandra and Apache HBase.</p>
+<h3>5. Graph Database (NoSQL) 🕸️</h3>
+<p>Stores entities as nodes and their relationships as edges. Graph databases make it efficient to follow multiple connections, such as finding mutual friends or generating recommendations. Neo4j is an example.</p>
+<h3>6. Vector Database (NoSQL / AI) 🤖</h3>
+<p>Stores and indexes embeddings, which are high-dimensional vectors that represent data such as text or images. Vector databases use similarity search to find related content and can retrieve relevant documents for Retrieval-Augmented Generation (RAG). Examples include Pinecone and Milvus.</p>
 
-<pre><code>-- PostgreSQL: read the order item row
-SELECT order_id, item, quantity
-FROM order_items
-WHERE order_id = 101;
 
--- MongoDB shell: read the order item document
-db.order_items.findOne({ order_id: 101 });</code></pre>
-<figure class="lesson-figure">
-    <a href="/docs/media/database/sql-and-nosql-orders.jpg" data-image-preview><img src="/docs/media/database/sql-and-nosql-orders.jpg" alt="The same order item is shown in two forms. The table row and the MongoDB document both contain order_id 101, item Notebook, and quantity 2." width="1536" height="1024" loading="lazy" decoding="async"></a>
-    <figcaption>The SQL side shows column headers and a row. The MongoDB side shows field names and their values.</figcaption>
-  </figure><dl class="lesson-terms"><div><dt><code>SQL / Relational</code></dt><dd>PostgreSQL, MySQL, SQLite, and Microsoft SQL Server organize records into tables with rows and columns. SQL is the language used to create tables, query their data, and make changes.</dd></div><div><dt><code>NoSQL</code></dt><dd>NoSQL covers several data models. MongoDB stores documents, Redis is commonly used as a key-value store, Cassandra uses a wide-column model, and Neo4j stores nodes and relationships in a graph.</dd></div></dl>
 
 
 </section><section class="article-section"><h2>Related lessons</h2><ul><li id="relational-tables"><a href="/docs/read/en/database/relational-model/#relational-tables">PostgreSQL · Follow the foreign keys</a></li>
@@ -76,7 +65,9 @@ db.order_items.findOne({ order_id: 101 });</code></pre>
 <li id="web-app-flow"><a href="/docs/read/en/web-fundamentals/web-app-architecture/#web-app-flow">How a web app works</a></li></ul></section>
   <section class="references" id="references">
     <h2>Official references</h2>
-    <ul><li><a href="https://www.mongodb.com/docs/manual/core/document/">MongoDB · Documents</a></li></ul>
+    <ul><li><a href="https://www.mongodb.com/docs/manual/core/document/">MongoDB · Documents</a></li>
+<li><a href="https://hbase.apache.org/docs/datamodel/">Apache HBase · Data model</a></li>
+<li><a href="https://milvus.io/docs/overview.md">Milvus · What is Milvus?</a></li></ul>
   </section>
   <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/relational-model/">Next lesson · How databases connect related data</a></nav></footer>
 </article>
