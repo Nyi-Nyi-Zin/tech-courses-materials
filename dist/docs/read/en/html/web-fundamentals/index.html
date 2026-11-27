@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Create index.html, open it in your browser, and use DevTools to connect the source you wrote to the elements on the screen.">
+  <title>Web Fundamentals &amp; How HTML Works · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/web-fundamentals/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/web-fundamentals/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/web-fundamentals/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/web-fundamentals/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Web Fundamentals &amp; How HTML Works</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Create index.html, open it in your browser, and use DevTools to connect the source you wrote to the elements on the screen.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/web-fundamentals">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#browser-and-server">From a URL to a page</a></li>
+<li><a href="#html-css-javascript">What HTML, CSS, and JavaScript do</a></li>
+<li><a href="#document">Write a complete HTML document</a></li>
+<li><a href="#attributes">Elements, tags, attributes, and nesting</a></li>
+<li><a href="#practice">Hands-on exercise</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="browser-and-server">
+  <h2>From a URL to a page</h2>
+  <p>When you open an HTTPS URL, the browser requests a resource from a server. An HTML response is parsed into a tree called the DOM, which the browser uses to display the page. Opening a local .html file gives the browser the same kind of markup directly from disk. Inspect a heading in the Elements panel to find its place in the DOM.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;main&gt;
+  &lt;h1&gt;City Workshop&lt;/h1&gt;
+  &lt;p&gt;Doors open at 9 AM.&lt;/p&gt;
+&lt;/main&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> In the DOM, h1 and p are children of main.</p>
+
+</section>
+<section class="article-section" id="html-css-javascript">
+  <h2>What HTML, CSS, and JavaScript do</h2>
+  <p>HTML is a markup language. It identifies the content and its meaning. CSS sets how the content looks. JavaScript responds to events and can change the page. This button starts as a labelled HTML element. CSS colors it and an event listener updates the message.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Workshop check-in&lt;/title&gt;
+  &lt;style&gt;
+    button { color: white; background: #245672; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button type=&quot;button&quot; id=&quot;check-in&quot;&gt;Check in&lt;/button&gt;
+  &lt;p id=&quot;status&quot;&gt;Waiting for check-in.&lt;/p&gt;
+  &lt;script&gt;
+    document.querySelector(&quot;#check-in&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+      document.querySelector(&quot;#status&quot;).textContent = &quot;You are checked in.&quot;;
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Click Check in to update the status text.</p>
+
+</section>
+<section class="article-section" id="document">
+  <h2>Write a complete HTML document</h2>
+  <p>The doctype selects standards mode. Set the document language on html, put metadata in head, and put visible content in body. The UTF-8 declaration tells the browser how to decode the file. The title appears in the browser tab. The viewport setting lets mobile layouts use the device width.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;About City Workshop&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Welcome to City Workshop&lt;/h1&gt;
+  &lt;p&gt;We run weekend classes.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The tab title and the visible heading show different text.</p>
+
+</section>
+<section class="article-section" id="attributes">
+  <h2>Elements, tags, attributes, and nesting</h2>
+  <p>A paragraph element includes its opening tag, content, and closing tag. Put attributes in the opening tag. Global attributes such as id, class, and title work on all HTML elements. Element-specific attributes such as href have meaning on particular elements. Keep id values unique, close nested elements inside their parents, and omit end tags for void elements such as br and img.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;p id=&quot;hours&quot; class=&quot;notice&quot;&gt;
+  Doors open at &lt;strong&gt;9 AM&lt;/strong&gt;.&lt;br&gt;
+  &lt;a href=&quot;#hours&quot;&gt;Check opening time&lt;/a&gt;
+&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The time has strong importance. The link leads to the paragraph with id=&quot;hours&quot;.</p>
+
+</section>
+<section class="article-section" id="practice">
+  <h2>Hands-on exercise</h2>
+  <p>Save about-me.html. Set a tab title, a visible heading, and a paragraph about a hobby. Inspect the heading, edit it in DevTools, and reload. Then edit the file itself and see which change survives reload.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax">MDN · Basic HTML syntax</a></li>
+<li><a href="https://html.spec.whatwg.org/">WHATWG · HTML Living Standard</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/text-hierarchy/">Next lesson · Text Content &amp; Heading Hierarchy</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

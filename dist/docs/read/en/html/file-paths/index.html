@@ -3,99 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Imagine catalog.html is inside shop/pages, product.svg is inside shop/images and logo.svg is at the site root under assets. Each example shows the URL the browser resolves for that folder layout.">
-  <title>HTML File Paths · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/file-paths/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/file-paths/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/file-paths/">
+  <meta name="description" content="Turn items into lists and connect pages using readable links, file paths, and fragment identifiers.">
+  <title>Lists &amp; Navigation · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/lists-navigation/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/lists-navigation/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/lists-navigation/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/file-paths/" lang="my" hreflang="my">မြန်မာ</a></nav>
-  <h1>HTML File Paths</h1>
-  <p class="article-version">HTML Living Standard</p>
-  <p class="intro">Imagine catalog.html is inside shop/pages, product.svg is inside shop/images and logo.svg is at the site root under assets. Each example shows the URL the browser resolves for that folder layout.</p>
-  <p class="reading-link"><a href="/docs/?lang=en#/html/file-paths">Open interactive lesson</a></p>
-
-  <section class="article-section">
-    <h2>On this page</h2>
-    <ul><li><a href="#relative">Resolve ./ and ../ from the current file</a></li>
-<li><a href="#root-and-full">Read root-relative and full URLs</a></li>
-<li><a href="#classroom-lab">Connect three pages</a></li>
-<li><a href="#references">Official references</a></li></ul>
-  </section>
-  <section class="article-section" id="relative">
-  <h2>Resolve ./ and ../ from the current file</h2>
-  <p>./ starts in the current folder and ../ moves up one folder. HTML uses these paths in attributes such as href and src. When you move the HTML file, check any paths that start from its folder.</p>
-<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;Resolve ./ and ../ from the current file&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;p id=&quot;examples&quot;&gt;&lt;a href=&quot;./hours.html&quot;&gt;Hours&lt;/a&gt; · &lt;a href=&quot;../images/product.svg&quot;&gt;Product image&lt;/a&gt;&lt;/p&gt;
-&lt;p id=&quot;paths&quot; style=&quot;white-space: pre-wrap; overflow-wrap: anywhere&quot;&gt;&lt;/p&gt;
-  &lt;script&gt;
-const pageURL = &quot;https://example.com/shop/pages/catalog.html&quot;;
-const examples = [...document.querySelectorAll(&quot;#examples a&quot;)];
-document.querySelector(&quot;#paths&quot;).textContent = examples.map(link =&gt; {
-  const path = link.getAttribute(&quot;href&quot;);
-  return path + &quot; → &quot; + new URL(path, pageURL).href;
-}).join(&quot;\n&quot;);
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> ./hours.html resolves inside /shop/pages/. ../images/product.svg resolves inside /shop/images/.</p>
-
-</section>
-<section class="article-section" id="root-and-full">
-  <h2>Read root-relative and full URLs</h2>
-  <p>A slash at the beginning starts from the root of the current origin. A full URL includes the protocol and host and can point at another website.</p>
-<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;Read root-relative and full URLs&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;p id=&quot;examples&quot;&gt;&lt;a href=&quot;/assets/logo.svg&quot;&gt;Site logo&lt;/a&gt; · &lt;a href=&quot;https://static.example.org/logo.svg&quot;&gt;External logo&lt;/a&gt;&lt;/p&gt;
-&lt;p id=&quot;paths&quot; style=&quot;white-space: pre-wrap; overflow-wrap: anywhere&quot;&gt;&lt;/p&gt;
-  &lt;script&gt;
-const pageURL = &quot;https://example.com/shop/pages/catalog.html&quot;;
-const examples = [...document.querySelectorAll(&quot;#examples a&quot;)];
-document.querySelector(&quot;#paths&quot;).textContent = examples.map(link =&gt; {
-  const path = link.getAttribute(&quot;href&quot;);
-  return path + &quot; → &quot; + new URL(path, pageURL).href;
-}).join(&quot;\n&quot;);
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> /assets/logo.svg keeps example.com. The full URL uses static.example.org.</p>
-
-</section>
-<section class="article-section" id="classroom-lab">
-  <h2>Connect three pages</h2>
-  <p>Create index.html, projects.html and contact.html in one folder. Place the same list of descriptive links on each page. Move projects.html into a work folder, then fix both the link to it and its return link.</p>
-
-
-
-
-</section>
-  <section class="references" id="references">
-    <h2>Official references</h2>
-    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Creating_links">MDN · Relative links</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/URL_API/Resolving_relative_references">MDN · Resolve a URL</a></li></ul>
-  </section>
-  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/content/">Previous lesson · HTML Links &lt;a&gt;</a>
-<a href="/docs/read/en/html/images/">Next lesson · HTML Images</a></nav></footer>
+  <h1>Lists &amp; Navigation</h1>
+  <p><a href="/docs/read/en/html/lists-navigation/#file-paths">Lists &amp; Navigation</a></p>
+  <ul><li id="lists"><a href="/docs/read/en/html/lists-navigation/#lists">Choose among three list types</a></li>
+<li id="links"><a href="/docs/read/en/html/lists-navigation/#links">Write links that name their destination</a></li>
+<li id="file-paths"><a href="/docs/read/en/html/lists-navigation/#file-paths">Relative and absolute file paths</a></li>
+<li id="fragments"><a href="/docs/read/en/html/lists-navigation/#fragments">Jump to a section or start an action</a></li>
+<li id="practice"><a href="/docs/read/en/html/lists-navigation/#practice">Hands-on exercise</a></li></ul>
 </article>
 </main>
 </body>

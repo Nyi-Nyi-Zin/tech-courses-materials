@@ -3,124 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Semantic elements state what part of the page they represent. Assistive tools can expose important regions as landmarks users can jump between.">
-  <title>Semantic HTML and Keyboard Accessibility · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/accessibility/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/accessibility/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/accessibility/">
+  <meta name="description" content="Choose elements that describe the purpose of each region, then check how those regions appear in the browser’s accessibility tree.">
+  <title>Semantic HTML &amp; Page Architecture · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/semantic-html5/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/semantic-html5/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/accessibility/" lang="my" hreflang="my">မြန်မာ</a></nav>
-  <h1>Semantic HTML and Keyboard Accessibility</h1>
-  <p class="article-version">HTML Living Standard</p>
-  <p class="intro">Semantic elements state what part of the page they represent. Assistive tools can expose important regions as landmarks users can jump between.</p>
-  <p class="reading-link"><a href="/docs/?lang=en#/html/accessibility">Open interactive lesson</a></p>
-
-  <section class="article-section">
-    <h2>On this page</h2>
-    <ul><li><a href="#landmarks">The main content &lt;main&gt;</a></li>
-<li><a href="#navigation">Major navigation &lt;nav&gt;</a></li>
-<li><a href="#header-footer">Introduce the page with &lt;header&gt;</a></li>
-<li><a href="#footer">Place closing information with &lt;footer&gt;</a></li>
-<li><a href="#sections">Group related content with &lt;section&gt;</a></li>
-<li><a href="#article">Mark independently readable content with &lt;article&gt;</a></li>
-<li><a href="#keyboard">Keyboard focus and skip links</a></li>
-<li><a href="#references">Official references</a></li></ul>
-  </section>
-  <section class="article-section" id="landmarks">
-  <h2>The main content &lt;main&gt;</h2>
-  <p>Place the page’s primary content inside main. Repeated site navigation usually sits outside it. Use one visible main landmark per page so visitors can quickly find the content unique to that page.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;main id=&quot;main-content&quot;&gt;
-  &lt;h1&gt;Product catalog&lt;/h1&gt;
-  &lt;p&gt;See our available products and prices.&lt;/p&gt;
-&lt;/main&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The accessibility tree exposes a main landmark containing the heading and paragraph.</p>
-
-</section>
-<section class="article-section" id="navigation">
-  <h2>Major navigation &lt;nav&gt;</h2>
-  <p>Use nav for an important set of navigation links, such as the main menu or a table of contents. When several navigation landmarks have different purposes, give each a descriptive label.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;nav aria-label=&quot;Main navigation&quot;&gt;
-  &lt;a href=&quot;/catalog&quot;&gt;Catalog&lt;/a&gt;
-  &lt;a href=&quot;/contact&quot;&gt;Contact&lt;/a&gt;
-&lt;/nav&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The browser exposes a navigation landmark named Main navigation. Tab reaches the two links in source order.</p>
-
-</section>
-<section class="article-section" id="header-footer">
-  <h2>Introduce the page with &lt;header&gt;</h2>
-  <p>A header marks introductory material. A page header often contains the site name or navigation and typically acts as the banner landmark. A header inside an article introduces that article instead.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;header&gt;&lt;a href=&quot;./index.html&quot;&gt;Example Store&lt;/a&gt;&lt;/header&gt;
-&lt;main&gt;&lt;h1&gt;Product catalog&lt;/h1&gt;&lt;/main&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The site name appears before the main content. Find the banner landmark in the browser’s accessibility tree.</p>
-
-</section>
-<section class="article-section" id="footer">
-  <h2>Place closing information with &lt;footer&gt;</h2>
-  <p>A footer marks closing information, such as contact information, copyright, or details about the author. At page level it usually forms a contentinfo landmark. In an article, it describes the end of that article.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;main&gt;&lt;h1&gt;Product catalog&lt;/h1&gt;&lt;/main&gt;
-&lt;footer&gt;&lt;p&gt;© Example Store&lt;/p&gt;&lt;/footer&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The copyright line appears after the main content. Inspect the footer to see its contentinfo role.</p>
-
-</section>
-<section class="article-section" id="sections">
-  <h2>Group related content with &lt;section&gt;</h2>
-  <p>A section gives a distinct topic a place within the page. Give it a heading that describes the topic. For a region assistive tools can name, use aria-labelledby to point at the heading’s ID.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;main&gt;
-  &lt;h1&gt;Product catalog&lt;/h1&gt;
-  &lt;section aria-labelledby=&quot;stationery-heading&quot;&gt;
-    &lt;h2 id=&quot;stationery-heading&quot;&gt;Stationery&lt;/h2&gt;
-    &lt;p&gt;Blue and black pens are available.&lt;/p&gt;
-  &lt;/section&gt;
-&lt;/main&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> Stationery appears as a section title below Product catalog. The named region is available in the accessibility tree.</p>
-
-</section>
-<section class="article-section" id="article">
-  <h2>Mark independently readable content with &lt;article&gt;</h2>
-  <p>An article is a complete piece of content, such as a news update, blog post, or review. A section can contain several articles when each can be read on its own.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;section&gt;
-  &lt;h2&gt;Store news&lt;/h2&gt;
-  &lt;article&gt;
-    &lt;h3&gt;New products&lt;/h3&gt;
-    &lt;p&gt;Three new products arrive Friday.&lt;/p&gt;
-  &lt;/article&gt;
-&lt;/section&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> You can move the New products article to another page and its heading and message still make sense together.</p>
-
-</section>
-<section class="article-section" id="keyboard">
-  <h2>Keyboard focus and skip links</h2>
-  <p>Focus is the element that currently receives keyboard input. Tab moves through links and form controls in the document’s usual order. Keep a visible focus indicator. A skip link before the site menu lets keyboard users move directly to the main content. tabindex=&quot;-1&quot; allows main to receive focus as the target without placing main itself in the normal Tab sequence.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;a href=&quot;#main-content&quot;&gt;Skip to main content&lt;/a&gt;
-&lt;header&gt;&lt;nav aria-label=&quot;Main&quot;&gt;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/nav&gt;&lt;/header&gt;
-&lt;main id=&quot;main-content&quot; tabindex=&quot;-1&quot;&gt;
-  &lt;h1&gt;Events&lt;/h1&gt;
-  &lt;a href=&quot;/events&quot;&gt;View upcoming events&lt;/a&gt;
-&lt;/main&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> Press Tab to focus the skip link and Enter to reach main. Press Tab again to move to the events link.</p>
-
-</section>
-  <section class="references" id="references">
-    <h2>Official references</h2>
-    <ul><li><a href="https://html.spec.whatwg.org/multipage/sections.html">WHATWG · Page sections</a></li>
-<li><a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-main-element">WHATWG · The main element</a></li>
-<li><a href="https://html.spec.whatwg.org/multipage/interaction.html#focus">WHATWG · Focus</a></li>
-<li><a href="https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html">W3C WAI · Bypass blocks</a></li></ul>
-  </section>
-  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/containers/">Previous lesson · Grouping Content with &lt;div&gt; and &lt;span&gt;</a>
-<a href="/docs/read/en/html/disclosure/">Next lesson · Expandable Content &lt;details&gt;</a></nav></footer>
+  <h1>Semantic HTML &amp; Page Architecture</h1>
+  <p><a href="/docs/read/en/html/semantic-html5/#landmarks">Semantic HTML &amp; Page Architecture</a></p>
+  <ul><li id="containers"><a href="/docs/read/en/html/semantic-html5/#containers">Choose a semantic element or a generic container</a></li>
+<li id="landmarks"><a href="/docs/read/en/html/semantic-html5/#landmarks">Structure a page with seven semantic elements</a></li>
+<li id="section-article-div"><a href="/docs/read/en/html/semantic-html5/#section-article-div">Decide between section, article, and div</a></li>
+<li id="block-inline"><a href="/docs/read/en/html/semantic-html5/#block-inline">Recognize block and inline layout</a></li>
+<li id="practice"><a href="/docs/read/en/html/semantic-html5/#practice">Hands-on exercise</a></li></ul>
 </article>
 </main>
 </body>

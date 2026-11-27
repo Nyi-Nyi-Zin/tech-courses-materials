@@ -3,123 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A data table expresses relationships across rows and columns. HTML can label those relationships so readers can tell what each value means.">
-  <title>HTML Tables &lt;table&gt; · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/tables/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/tables/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/tables/">
+  <meta name="description" content="Represent information that readers compare by row and column, such as a workshop schedule or a price list.">
+  <title>Data Tables &amp; Structured Information · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/data-tables/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/data-tables/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/data-tables/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/tables/" lang="my" hreflang="my">မြန်မာ</a></nav>
-  <h1>HTML Tables &lt;table&gt;</h1>
-  <p class="article-version">HTML Living Standard</p>
-  <p class="intro">A data table expresses relationships across rows and columns. HTML can label those relationships so readers can tell what each value means.</p>
-  <p class="reading-link"><a href="/docs/?lang=en#/html/tables">Open interactive lesson</a></p>
-
-  <section class="article-section">
-    <h2>On this page</h2>
-    <ul><li><a href="#tables">Table rows, cells, and caption</a></li>
-<li><a href="#table-footer">Table Footer &lt;tfoot&gt;</a></li>
-<li><a href="#scope">Connect headers to cells with scope</a></li>
-<li><a href="#table-columns">Table Columns with &lt;colgroup&gt; and &lt;col&gt;</a></li>
-<li><a href="#references">Official references</a></li></ul>
-  </section>
-  <section class="article-section" id="tables">
-  <h2>Table rows, cells, and caption</h2>
-  <p>A table contains rows written with tr. Use td for a data cell and th for a header cell. Put the visible caption first inside the table. Thead groups header rows and tbody groups body rows. The browser aligns cells into columns even without added CSS.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;table&gt;
-  &lt;caption&gt;Product catalog&lt;/caption&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;&lt;th&gt;Item&lt;/th&gt;&lt;th&gt;Price (MMK)&lt;/th&gt;&lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;&lt;td&gt;Pen&lt;/td&gt;&lt;td&gt;1500&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;Notebook&lt;/td&gt;&lt;td&gt;2500&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> You see a caption and two columns. Each product’s price appears on the same row as its name.</p>
-
-</section>
-<section class="article-section" id="table-footer">
-  <h2>Table Footer &lt;tfoot&gt;</h2>
-  <p>After the data rows in &lt;tbody&gt;, put summary rows such as a total or average inside &lt;tfoot&gt;. Each footer row still uses &lt;tr&gt; with cells inside it. Enter the summary value yourself in this example. If a price changes, update the total too.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;table&gt;
-  &lt;caption&gt;Order summary&lt;/caption&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Item&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Price (MMK)&lt;/th&gt;&lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;&lt;td&gt;Pen&lt;/td&gt;&lt;td&gt;1500&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;Notebook&lt;/td&gt;&lt;td&gt;2500&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tfoot&gt;
-    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Total&lt;/th&gt;&lt;td&gt;4000&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tfoot&gt;
-&lt;/table&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The Total row appears below the product rows and shows 4000 MMK.</p>
-
-</section>
-<section class="article-section" id="scope">
-  <h2>Connect headers to cells with scope</h2>
-  <p>In a simple data table, scope=&quot;col&quot; marks a header for its column and scope=&quot;row&quot; marks a header for its row. Assistive technology can use the relationships to announce meaningful context as someone moves through the table.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;table&gt;
-  &lt;caption&gt;Product prices&lt;/caption&gt;
-  &lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Product&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Price (MMK)&lt;/th&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Pen&lt;/th&gt;&lt;td&gt;1500&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Notebook&lt;/th&gt;&lt;td&gt;2500&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The cell containing 1500 has Pen as its row header and Price (MMK) as its column header.</p>
-
-</section>
-<section class="article-section" id="table-columns">
-  <h2>Table Columns with &lt;colgroup&gt; and &lt;col&gt;</h2>
-  <p>Use &lt;colgroup&gt; to group columns. Place it after &lt;caption&gt; and before &lt;thead&gt;. Inside it, each &lt;col&gt; in this example represents one column, from left to right. A class on the second &lt;col&gt; lets CSS color the background of the price column. Keep the actual headings and values in &lt;th&gt; and &lt;td&gt; as usual.</p>
-<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;Product prices&lt;/title&gt;
-  &lt;style&gt;
-    .price-column { background-color: #dbeafe; }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;table&gt;
-  &lt;caption&gt;Product prices&lt;/caption&gt;
-  &lt;colgroup&gt;
-    &lt;col&gt;
-    &lt;col class=&quot;price-column&quot;&gt;
-  &lt;/colgroup&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Item&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Price (MMK)&lt;/th&gt;&lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;&lt;td&gt;Pen&lt;/td&gt;&lt;td&gt;1500&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;Notebook&lt;/td&gt;&lt;td&gt;2500&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The price column has a light blue background. Move the class to the first &lt;col&gt; to color the item column instead.</p>
-
-</section>
-  <section class="references" id="references">
-    <h2>Official references</h2>
-    <ul><li><a href="https://html.spec.whatwg.org/multipage/tables.html">WHATWG · Tables</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/col">MDN · The col element</a></li>
-<li><a href="https://www.w3.org/WAI/tutorials/tables/two-headers/">W3C WAI · Tables with two headers</a></li></ul>
-  </section>
-  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/icons-and-frames/">Previous lesson · Favicons and Iframes</a>
-<a href="/docs/read/en/html/table-spans/">Next lesson · Table Cell Spanning with colspan and rowspan</a></nav></footer>
+  <h1>Data Tables &amp; Structured Information</h1>
+  <p><a href="/docs/read/en/html/data-tables/#tables">Data Tables &amp; Structured Information</a></p>
+  <ul><li id="tables"><a href="/docs/read/en/html/data-tables/#tables">Build rows, headers, and data cells</a></li>
+<li id="table-sections"><a href="/docs/read/en/html/data-tables/#table-sections">Name the table and group related rows</a></li>
+<li id="table-spans"><a href="/docs/read/en/html/data-tables/#table-spans">Span cells and associate headers</a></li>
+<li id="layout"><a href="/docs/read/en/html/data-tables/#layout">Use CSS for page layout</a></li>
+<li id="practice"><a href="/docs/read/en/html/data-tables/#practice">Hands-on exercise</a></li></ul>
 </article>
 </main>
 </body>

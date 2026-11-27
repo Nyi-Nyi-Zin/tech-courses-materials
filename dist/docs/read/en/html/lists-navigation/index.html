@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Turn items into lists and connect pages using readable links, file paths, and fragment identifiers.">
+  <title>Lists &amp; Navigation · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/lists-navigation/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/lists-navigation/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/lists-navigation/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/lists-navigation/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Lists &amp; Navigation</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Turn items into lists and connect pages using readable links, file paths, and fragment identifiers.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/lists-navigation">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#lists">Choose among three list types</a></li>
+<li><a href="#links">Write links that name their destination</a></li>
+<li><a href="#file-paths">Relative and absolute file paths</a></li>
+<li><a href="#fragments">Jump to a section or start an action</a></li>
+<li><a href="#practice">Hands-on exercise</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="lists">
+  <h2>Choose among three list types</h2>
+  <p>Use ul when order is incidental, ol when sequence or ranking matters, and dl for terms with descriptions. A nested list belongs inside the li it expands. Set start on ol to continue numbering or type to choose a numbering style.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;Supplies&lt;ul&gt;&lt;li&gt;Notebook&lt;/li&gt;&lt;li&gt;Pencil&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&quot;3&quot; type=&quot;1&quot;&gt;&lt;li&gt;Open your file&lt;/li&gt;&lt;li&gt;Check the page&lt;/li&gt;&lt;/ol&gt;
+&lt;dl&gt;&lt;dt&gt;DOM&lt;/dt&gt;&lt;dd&gt;The page represented as a tree.&lt;/dd&gt;&lt;/dl&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The numbered steps start at 3. The supplies have a nested list.</p>
+
+</section>
+<section class="article-section" id="links">
+  <h2>Write links that name their destination</h2>
+  <p>The href holds the destination. The text inside a should help people predict what opens. For an intentional new tab, use target=&quot;_blank&quot; and rel=&quot;noopener&quot; and say that a new tab opens.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/&quot;
+   target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Read the HTML reference (new tab)&lt;/a&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The label identifies the destination before you select it.</p>
+
+</section>
+<section class="article-section" id="file-paths">
+  <h2>Relative and absolute file paths</h2>
+  <p>Relative paths start from the current document’s folder. From work/project.html, ./notes.html stays inside work and ../index.html goes up one folder. A leading slash starts from the website root. An absolute URL includes the scheme and host and can point to another site. Save the matching files first, then test each link.</p>
+
+<pre><code>&lt;a href=&quot;./notes.html&quot;&gt;Project notes&lt;/a&gt;
+&lt;a href=&quot;../index.html&quot;&gt;Home&lt;/a&gt;
+&lt;a href=&quot;https://example.com/&quot;&gt;Partner website&lt;/a&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="fragments">
+  <h2>Jump to a section or start an action</h2>
+  <p>Use # plus an id to target a section on the same page. mailto: and tel: hand off to a configured email or phone app. The download attribute requests downloading a linked file and works with same-origin URLs and blob or data URLs.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;p&gt;&lt;a href=&quot;#contact&quot;&gt;Jump to contact&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;contact&quot;&gt;Contact&lt;/h2&gt;
+&lt;a href=&quot;mailto:hello@example.com&quot;&gt;Email us&lt;/a&gt;
+&lt;a href=&quot;tel:+12025550140&quot;&gt;Call the office&lt;/a&gt;
+&lt;a href=&quot;data:text/plain,Workshop%20checklist&quot; download=&quot;checklist.txt&quot;&gt;Download checklist&lt;/a&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first link targets the Contact heading.</p>
+
+</section>
+<section class="article-section" id="practice">
+  <h2>Hands-on exercise</h2>
+  <p>Make index.html, projects.html, and contact.html. Give each page links to the other two. Move projects.html into a work folder and update the links both ways.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Lists">MDN · Lists</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Creating_links">MDN · Creating links</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/text-hierarchy/">Previous lesson · Text Content &amp; Heading Hierarchy</a>
+<a href="/docs/read/en/html/images-media/">Next lesson · Images, Media &amp; External Embeds</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,7 +1,7 @@
 import { previewDocument } from '../runner.js';
 import { loadReact, runWorker } from '../runtime.js';
 import { browserExampleDocument } from './browser-example.js';
-import { browserExample } from './browser-data.js';
+import { browserExample } from './browser-data.js?v=98';
 import { exampleMode, frameworkExample, nestRequests, sqlExample, typeExample } from './example-data.js';
 
 const workerURL = name => new URL('../' + name, import.meta.url);
@@ -18,7 +18,7 @@ export function exampleMarkup(guide, page, section, tr, esc) {
   const note = mode === 'browser' && /^js\/http\/(?:post|fetch)$/.test(topic) ? tr('sampleApi') :
     mode === 'browser' && topic === 'js/storage-and-errors/storage' ? tr('sampleStorage') :
     mode === 'nest' ? tr('sampleNest') : mode === 'sql' ? tr('sampleSql') : '';
-  const sizing = topic.startsWith('css/responsive/') || topic === 'html/images/srcset' || topic === 'html/images/images';
+  const sizing = topic.startsWith('css/responsive/') || topic === 'html/images-media/responsive-images';
   const sourceFormat = { sql: 'SQL', typescript: 'TypeScript', react: 'JSX', nest: 'TypeScript' }[mode] ?? (
     section.code.startsWith('WEBVTT') ? 'WebVTT' :
     section.code.trimStart().startsWith('<') ? (guide.id === 'css' ? 'HTML + CSS' : 'HTML') :

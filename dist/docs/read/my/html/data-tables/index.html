@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="သင်တန်းအချိန်ဇယား၊ ဈေးနှုန်းစာရင်းလို row နဲ့ column အလိုက် ယှဉ်ဖတ်ရတဲ့ အချက်အလက်ကို HTML ဇယားနဲ့ ရေးပါမယ်။">
+  <title>ဇယားများနှင့် အချက်အလက်ဖွဲ့စည်းပုံ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/data-tables/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/data-tables/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/data-tables/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/data-tables/" lang="en" hreflang="en">English</a></nav>
+  <h1>ဇယားများနှင့် အချက်အလက်ဖွဲ့စည်းပုံ</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">သင်တန်းအချိန်ဇယား၊ ဈေးနှုန်းစာရင်းလို row နဲ့ column အလိုက် ယှဉ်ဖတ်ရတဲ့ အချက်အလက်ကို HTML ဇယားနဲ့ ရေးပါမယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/data-tables">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#tables">Row၊ Header နှင့် Data Cell များ ရေးခြင်း</a></li>
+<li><a href="#table-sections">ဇယားအမည်ပေးပြီး Row များ စုဖွဲ့ခြင်း</a></li>
+<li><a href="#table-spans">Cell ပေါင်းခြင်းနှင့် Header ချိတ်ဆက်ခြင်း</a></li>
+<li><a href="#layout">စာမျက်နှာ Layout ကို CSS နဲ့ ရေးခြင်း</a></li>
+<li><a href="#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="tables">
+  <h2>Row၊ Header နှင့် Data Cell များ ရေးခြင်း</h2>
+  <p>ဇယားတစ်ခုလုံးကို table နဲ့ ပတ်ပြီး row တစ်ကြောင်းစီကို tr နဲ့ ရေးပါ။ အမည်တပ်တဲ့ cell အတွက် th၊ တန်ဖိုးအတွက် td သုံးပါ။ Cell တစ်ကွက်ကို ဖတ်တဲ့အခါ အပေါ်က header နဲ့ တွဲဖတ်မှ တန်ဖိုးရဲ့ အဓိပ္ပာယ် သိရပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;table&gt;
+  &lt;tr&gt;&lt;th&gt;Session&lt;/th&gt;&lt;th&gt;Seats&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;HTML Basics&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Web Forms&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အပေါ်က header row က အောက်မှာပါတဲ့ အချက်အလက် အမျိုးအစားကို ပြပါတယ်။</p>
+
+</section>
+<section class="article-section" id="table-sections">
+  <h2>ဇယားအမည်ပေးပြီး Row များ စုဖွဲ့ခြင်း</h2>
+  <p>ဇယားအကြောင်း ပြောတဲ့ caption ကို အစမှာ ထည့်ပါ။ Column ခေါင်းစဉ်တွေကို thead၊ data တွေကို tbody၊ စုစုပေါင်းတန်ဖိုးလို အနှစ်ချုပ် row ကို tfoot ထဲ ထည့်ပါ။ ဒီ element တွေက row တွေရဲ့ တာဝန်ကို ပြပါတယ်။ အနားသတ်၊ padding နဲ့ မြင်ရမယ့်ပုံစံကို CSS မှာ ရေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;Seats available this week&lt;/caption&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Session&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Seats&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;HTML Basics&lt;/th&gt;&lt;td&gt;12&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Web Forms&lt;/th&gt;&lt;td&gt;8&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;&lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Total&lt;/th&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ဇယားက အမည်နဲ့ စပြီး စုစုပေါင်းတန်ဖိုးနဲ့ ဆုံးပါတယ်။</p>
+
+</section>
+<section class="article-section" id="table-spans">
+  <h2>Cell ပေါင်းခြင်းနှင့် Header ချိတ်ဆက်ခြင်း</h2>
+  <p>Column တစ်ခုထက်ပို ဖုံးဖို့ colspan၊ row တစ်ကြောင်းထက်ပို ဖုံးဖို့ rowspan သုံးပါ။ ပေါင်းထားတဲ့ cell က ဖုံးပြီးသားနေရာမှာ td ထပ်ရေးစရာမလိုပါ။ th မှာ scope=&quot;col&quot; နဲ့ scope=&quot;row&quot; သုံးပြီး အောက်ဘက် column သို့မဟုတ် ဘေးဘက် row က data တွေနဲ့ ချိတ်ဆက်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;Monday and Tuesday schedule&lt;/caption&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Time&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Monday&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Tuesday&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;09:00&lt;/th&gt;&lt;td rowspan=&quot;2&quot;&gt;Group project&lt;/td&gt;&lt;td&gt;HTML&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;10:00&lt;/th&gt;&lt;td&gt;CSS&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;12:00&lt;/th&gt;&lt;td colspan=&quot;2&quot;&gt;Lunch break&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Group project က အချိန်နှစ်ခုကို ဖုံးပြီး Lunch break က နှစ်ရက်လုံးကို ဖုံးပါတယ်။</p>
+
+</section>
+<section class="article-section" id="layout">
+  <h2>စာမျက်နှာ Layout ကို CSS နဲ့ ရေးခြင်း</h2>
+  <p>Data table မှာ cell နဲ့ header ကြား ဆက်စပ်မှု ရှိပါတယ်။ Card တွေ ဘေးချင်းယှဉ်ဖို့လို မြင်ရမယ့် အစီအမံမျိုးအတွက် သင့်တော်တဲ့ HTML element တွေ ရွေးပြီး CSS Grid သို့မဟုတ် Flexbox နဲ့ စီပါ။ CSS မရတဲ့အခါမှာလည်း HTML ထဲက အကြောင်းအရာကို ဖတ်လို့ရနေပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;div style=&quot;display:grid;grid-template-columns:1fr 1fr;gap:1rem&quot;&gt;
+  &lt;article&gt;&lt;h2&gt;HTML Basics&lt;/h2&gt;&lt;p&gt;Plan your first page.&lt;/p&gt;&lt;/article&gt;
+  &lt;article&gt;&lt;h2&gt;Web Forms&lt;/h2&gt;&lt;p&gt;Collect input.&lt;/p&gt;&lt;/article&gt;
+&lt;/div&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Card နှစ်ခုကို CSS Grid နဲ့ ဘေးချင်းယှဉ် ပြထားပါတယ်။</p>
+
+</section>
+<section class="article-section" id="practice">
+  <h2>လက်တွေ့လေ့ကျင့်ခန်း</h2>
+  <p>ငါးရက်စာ အချိန်ဇယားကို caption နဲ့ scope ပါတဲ့ header တွေသုံးပြီး ရေးပါ။ နားချိန် row မှာ နေ့ငါးရက်လုံးကို ပေါင်းပြပါ။ Cell တစ်ကွက် ရွေးပြီး header တွေကို ကြည့်ကာ ဘယ်နေ့ ဘယ်အချိန်လဲ ပြောကြည့်ပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/HTML_table_basics">MDN · HTML table basics</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table">MDN · Table element</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/images-media/">အရင်သင်ခန်းစာ · ပုံ၊ အသံ၊ ဗီဒီယိုနှင့် Embed များ</a>
+<a href="/docs/read/my/html/interactive-forms/">နောက်သင်ခန်းစာ · Forms နှင့် ထည့်ထားတဲ့ တန်ဖိုးတွေ စစ်ဆေးပုံ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

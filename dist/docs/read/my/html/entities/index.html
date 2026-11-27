@@ -3,63 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="HTML code ထဲမှာ သီးသန့်အဓိပ္ပာယ်ရှိတဲ့ အက္ခရာတွေကို စာသားအဖြစ် ပြချင်ရင် Character Reference သုံးနိုင်ပါတယ်။ &amp;amp; နဲ့ &amp;lt; လို နာမည်နဲ့ ရေးတဲ့ Character Reference တွေကို HTML Entities လို့ ခေါ်လေ့ရှိပါတယ်။">
-  <title>HTML Entities (Character References) · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/entities/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/entities/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/entities/">
+  <meta name="description" content="ရိုးရိုးစာသားနဲ့ ရေးထားတဲ့ ဆောင်းပါးကို ခေါင်းစဉ်၊ စာပိုဒ်၊ အလေးပေးစာသား၊ ကိုးကားချက်နဲ့ code နမူနာတွေ ပါတဲ့ HTML document အဖြစ် ပြောင်းရေးပါမယ်။">
+  <title>စာသားနှင့် ခေါင်းစဉ်အဆင့်များ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/text-hierarchy/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/text-hierarchy/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/text-hierarchy/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/entities/" lang="en" hreflang="en">English</a></nav>
-  <h1>HTML Entities (Character References)</h1>
-  <p class="article-version">HTML Living Standard</p>
-  <p class="intro">HTML code ထဲမှာ သီးသန့်အဓိပ္ပာယ်ရှိတဲ့ အက္ခရာတွေကို စာသားအဖြစ် ပြချင်ရင် Character Reference သုံးနိုင်ပါတယ်။ &amp;amp; နဲ့ &amp;lt; လို နာမည်နဲ့ ရေးတဲ့ Character Reference တွေကို HTML Entities လို့ ခေါ်လေ့ရှိပါတယ်။</p>
-  <p class="reading-link"><a href="/docs/?lang=my#/html/entities">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
-
-  <section class="article-section">
-    <h2>ဒီစာမျက်နှာမှာ</h2>
-    <ul><li><a href="#character-references">နာမည်နဲ့ ရေးတဲ့ Character References</a></li>
-<li><a href="#classroom-lab">ဆောင်းပါးတစ်ပုဒ် ဖွဲ့စည်းခြင်း</a></li>
-<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
-  </section>
-  <section class="article-section" id="character-references">
-  <h2>နာမည်နဲ့ ရေးတဲ့ Character References</h2>
-  <p>HTML မှာ အက္ခရာတချို့က markup အဖြစ် အဓိပ္ပာယ်ရှိပါတယ်။ &amp; ကို ပြဖို့ &amp;amp;၊ &lt; ကို ပြဖို့ &amp;lt;၊ &gt; ကို ပြဖို့ &amp;gt; ရေးပါ။ Character reference ကို browser က စာသားအဖြစ် ပြောင်းဖတ်လို့ &amp;lt;strong&amp;gt; က tag နာမည်ကို စာသားအတိုင်း ပြပါတယ်။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;Named Character References&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;p&gt;Files &amp;amp; Folders&lt;/p&gt;
-&lt;p&gt;Use &amp;lt;strong&amp;gt; for important text.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Preview မှာ Files &amp; Folders နဲ့ &lt;strong&gt; ဆိုတဲ့ စာသားအတိုင်း ပေါ်ပါမယ်။</p>
-
-</section>
-<section class="article-section" id="classroom-lab">
-  <h2>ဆောင်းပါးတစ်ပုဒ် ဖွဲ့စည်းခြင်း</h2>
-  <p>blog-article.html မှာ ဆောင်းပါးခေါင်းစဉ်ကို h1၊ အပိုင်းနှစ်ခုရဲ့ ခေါင်းစဉ်တွေကို h2 နဲ့ ရေးပါ။ နောက်ဆုံးရက်ကို strong၊ ကိုးကားစာပိုဒ်ကို blockquote နဲ့ မှတ်သားပါ။ ခေါင်းစဉ်တွေချည်း ဖတ်ကြည့်တဲ့အခါ ဆောင်းပါးရဲ့ အကြောင်းအရာကို ခန့်မှန်းနိုင်သလား စစ်ပါ။</p>
-
-
-
-
-</section>
-  <section class="references" id="references">
-    <h2>တရားဝင် ကိုးကားချက်များ</h2>
-    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Character_reference">MDN · Character references</a></li>
-<li><a href="https://html.spec.whatwg.org/multipage/syntax.html#character-references">WHATWG · Character references</a></li></ul>
-  </section>
-  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/text-markup/">အရင်သင်ခန်းစာ · HTML Comments နဲ့ ကိုးကားချက်များ</a>
-<a href="/docs/read/my/html/lists-and-disclosure/">နောက်သင်ခန်းစာ · HTML စာရင်းများ</a></nav></footer>
+  <h1>စာသားနှင့် ခေါင်းစဉ်အဆင့်များ</h1>
+  <p><a href="/docs/read/my/html/text-hierarchy/#entities">စာသားနှင့် ခေါင်းစဉ်အဆင့်များ</a></p>
+  <ul><li id="headings"><a href="/docs/read/my/html/text-hierarchy/#headings">အကြောင်းအရာအလိုက် ခေါင်းစဉ်အဆင့် ရွေးခြင်း</a></li>
+<li id="paragraphs"><a href="/docs/read/my/html/text-hierarchy/#paragraphs">စာပိုဒ်၊ စာကြောင်းချိုးခြင်းနှင့် Whitespace</a></li>
+<li id="inline-text"><a href="/docs/read/my/html/text-hierarchy/#inline-text">စာကြောင်းအတွင်း စာသားကို အဓိပ္ပာယ်ပေးခြင်း</a></li>
+<li id="entities"><a href="/docs/read/my/html/text-hierarchy/#entities">ကိုးကားစာသားနှင့် Code ဖော်ပြခြင်း</a></li>
+<li id="practice"><a href="/docs/read/my/html/text-hierarchy/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
 </article>
 </main>
 </body>

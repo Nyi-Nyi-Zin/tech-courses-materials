@@ -3,129 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Look up common tags, run a short example, and check a frequent mistake.">
-  <title>HTML Tag Reference · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/reference/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/reference/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/reference/">
+  <meta name="description" content="Check keyboard navigation, describe each page with metadata, validate your markup, and assemble the pieces into a small website.">
+  <title>Accessibility, SEO &amp; Production Best Practices · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/accessibility-seo/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/accessibility-seo/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/accessibility-seo/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/reference/" lang="my" hreflang="my">မြန်မာ</a></nav>
-  <h1>HTML Tag Reference</h1>
-  <p class="article-version">HTML Living Standard</p>
-  <p class="intro">Look up common tags, run a short example, and check a frequent mistake.</p>
-  <p class="reading-link"><a href="/docs/?lang=en#/html/reference">Open interactive lesson</a></p>
-
-  <section class="article-section">
-    <h2>On this page</h2>
-    <ul><li><a href="#link">&lt;a href=&quot;…&quot;&gt;</a></li>
-<li><a href="#image">&lt;img src=&quot;…&quot; alt=&quot;…&quot;&gt;</a></li>
-<li><a href="#label-input">&lt;label&gt; and &lt;input&gt;</a></li>
-<li><a href="#button">&lt;button type=&quot;…&quot;&gt;</a></li>
-<li><a href="#classroom-lab">Final project: a three-page website</a></li>
-<li><a href="#references">Official references</a></li></ul>
-  </section>
-  <section class="article-section" id="link">
-  <h2>&lt;a href=&quot;…&quot;&gt;</h2>
-  <p>Wrap link text in &lt;a&gt; and put the destination in href. A fragment such as #hours jumps to a matching id in the same page.</p>
-<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;&amp;lt;a href=&quot;…&quot;&amp;gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;a href=&quot;#hours&quot;&gt;See opening hours&lt;/a&gt;
-&lt;h2 id=&quot;hours&quot;&gt;Opening hours&lt;/h2&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> Select See opening hours to move focus to its heading.</p>
-<p class="example-check"><strong>Common mistake</strong> The target id must match the part after # exactly.</p>
-</section>
-<section class="article-section" id="image">
-  <h2>&lt;img src=&quot;…&quot; alt=&quot;…&quot;&gt;</h2>
-  <p>Use src for the image and alt for a text replacement when the image conveys information. img has no closing tag.</p>
-<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;&amp;lt;img src=&quot;…&quot; alt=&quot;…&quot;&amp;gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;img width=&quot;120&quot; height=&quot;48&quot; alt=&quot;Store logo&quot;
-  src=&quot;data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%20120%2048%27%3E%3Crect%20width=%27120%27%20height=%2748%27%20fill=%27teal%27/%3E%3Ctext%20x=%2742%27%20y=%2730%27%20fill=%27white%27%3EShop%3C/text%3E%3C/svg%3E&quot;&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The embedded icon displays. Clear src to see how its alternative text is used.</p>
-<p class="example-check"><strong>Common mistake</strong> Use an empty alt=&quot;&quot; for a decorative image whose information is already available nearby.</p>
-</section>
-<section class="article-section" id="label-input">
-  <h2>&lt;label&gt; and &lt;input&gt;</h2>
-  <p>Match label for to input id so they work together. Use name to identify the value when the form is submitted.</p>
-<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;&amp;lt;label&amp;gt; and &amp;lt;input&amp;gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;label for=&quot;customer&quot;&gt;Customer name&lt;/label&gt;
-&lt;input id=&quot;customer&quot; name=&quot;customer&quot; type=&quot;text&quot;&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> Click Customer name to focus the input and type a name.</p>
-<p class="example-check"><strong>Common mistake</strong> Match for to id. The name attribute has a separate purpose.</p>
-</section>
-<section class="article-section" id="button">
-  <h2>&lt;button type=&quot;…&quot;&gt;</h2>
-  <p>Use a button for an action. A button in a form defaults to submitting. Set type=&quot;button&quot; for a separate action.</p>
-<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;&amp;lt;button type=&quot;…&quot;&amp;gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;form&gt;
-  &lt;label for=&quot;order-note&quot;&gt;Note&lt;/label&gt;
-  &lt;input id=&quot;order-note&quot; value=&quot;Less sugar&quot;&gt;
-  &lt;button type=&quot;button&quot; id=&quot;clear&quot;&gt;Clear&lt;/button&gt;
-&lt;/form&gt;
-  &lt;script&gt;
-document.querySelector(&quot;#clear&quot;).addEventListener(&quot;click&quot;, () =&gt; {
-  document.querySelector(&quot;#order-note&quot;).value = &quot;&quot;;
-});
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> Click Clear to empty the field and stay in the form.</p>
-<p class="example-check"><strong>Common mistake</strong> Give button an explicit type in a form to avoid an accidental submit.</p>
-</section>
-<section class="article-section" id="classroom-lab">
-  <h2>Final project: a three-page website</h2>
-  <p>Build Home, Services and Contact pages linked by shared navigation. Give each a unique title and description. Add an accessible pricing table and labelled contact form. Navigate using Tab and Enter, try the skip link, and validate each complete document at validator.w3.org. Fix errors and retest all three pages.</p>
-
-
-
-
-</section>
-  <section class="references" id="references">
-    <h2>Official references</h2>
-    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements">MDN · HTML elements</a></li></ul>
-  </section>
-  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/metadata-and-search/">Previous lesson · Search Engine Optimization (SEO)</a></nav></footer>
+  <h1>Accessibility, SEO &amp; Production Best Practices</h1>
+  <p><a href="/docs/read/en/html/accessibility-seo/#capstone">Accessibility, SEO &amp; Production Best Practices</a></p>
+  <ul><li id="keyboard-access"><a href="/docs/read/en/html/accessibility-seo/#keyboard-access">Test the page with a keyboard</a></li>
+<li id="metadata"><a href="/docs/read/en/html/accessibility-seo/#metadata">Describe the page for browsers, search, and sharing</a></li>
+<li id="validation"><a href="/docs/read/en/html/accessibility-seo/#validation">Read and validate your markup</a></li>
+<li id="capstone"><a href="/docs/read/en/html/accessibility-seo/#capstone">Final project: a three-page website</a></li>
+<li id="practice"><a href="/docs/read/en/html/accessibility-seo/#practice">Hands-on exercise</a></li></ul>
 </article>
 </main>
 </body>

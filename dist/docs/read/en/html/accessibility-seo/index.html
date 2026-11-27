@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Check keyboard navigation, describe each page with metadata, validate your markup, and assemble the pieces into a small website.">
+  <title>Accessibility, SEO &amp; Production Best Practices · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/accessibility-seo/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/accessibility-seo/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/accessibility-seo/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/accessibility-seo/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Accessibility, SEO &amp; Production Best Practices</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Check keyboard navigation, describe each page with metadata, validate your markup, and assemble the pieces into a small website.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/accessibility-seo">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#keyboard-access">Test the page with a keyboard</a></li>
+<li><a href="#metadata">Describe the page for browsers, search, and sharing</a></li>
+<li><a href="#validation">Read and validate your markup</a></li>
+<li><a href="#capstone">Final project: a three-page website</a></li>
+<li><a href="#practice">Hands-on exercise</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="keyboard-access">
+  <h2>Test the page with a keyboard</h2>
+  <p>Use Tab and Shift+Tab to move through links and form controls. Use Enter to follow a link and Enter or Space to operate a button. Check that focus is visible. Put a skip link before repeated navigation. Name navigation regions when more than one appears. Prefer a visible label on a control. Use aria-label when the control needs a name and has no suitable visible text, such as an icon-only button.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;a href=&quot;#main-content&quot;&gt;Skip to main content&lt;/a&gt;
+&lt;nav aria-label=&quot;Main&quot;&gt;&lt;a href=&quot;#sessions&quot;&gt;Sessions&lt;/a&gt;&lt;/nav&gt;
+&lt;main id=&quot;main-content&quot; tabindex=&quot;-1&quot;&gt;
+  &lt;h1 id=&quot;sessions&quot;&gt;Workshop sessions&lt;/h1&gt;
+  &lt;button type=&quot;button&quot; aria-label=&quot;Close information panel&quot;&gt;×&lt;/button&gt;
+&lt;/main&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Press Tab to reach the skip link, then Enter to move to main.</p>
+
+</section>
+<section class="article-section" id="metadata">
+  <h2>Describe the page for browsers, search, and sharing</h2>
+  <p>Give each page a unique title and a concise description in head. Search engines can use the description when creating a result snippet. The viewport describes mobile layout behavior. Open Graph metadata such as og:title is used by services that build link previews. Link a favicon file for the browser tab.</p>
+
+<pre><code>&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Services | City Workshop&lt;/title&gt;
+  &lt;meta name=&quot;description&quot; content=&quot;Browse workshop sessions and compare prices.&quot;&gt;
+  &lt;meta property=&quot;og:title&quot; content=&quot;City Workshop Services&quot;&gt;
+  &lt;link rel=&quot;icon&quot; href=&quot;favicon.svg&quot; type=&quot;image/svg+xml&quot;&gt;
+&lt;/head&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="validation">
+  <h2>Read and validate your markup</h2>
+  <p>Use lowercase tag names and consistent indentation so nesting is easy to scan. Paste the complete document in the Nu HTML Checker or upload the file. Fix the first markup error and recheck because incorrect nesting can cause later messages. Then test links, keyboard focus, and media in the browser.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Workshop updates&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main&gt;
+    &lt;h1&gt;Workshop updates&lt;/h1&gt;
+    &lt;p&gt;See the &lt;a href=&quot;#schedule&quot;&gt;schedule&lt;/a&gt;.&lt;/p&gt;
+    &lt;h2 id=&quot;schedule&quot;&gt;Schedule&lt;/h2&gt;
+    &lt;p&gt;Next session: Saturday at 9 AM.&lt;/p&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Validate the complete example. Then make a copy, remove the closing a tag, and check what the validator reports.</p>
+
+</section>
+<section class="article-section" id="capstone">
+  <h2>Final project: a three-page website</h2>
+  <p>Create index.html (Home), services.html (Services), and contact.html (Contact) in one folder. Start every page with the full document skeleton, its own title and description, the shared navigation, a skip link, and one main heading. On Home, add an introduction and a captioned image. On Services, add a captioned price table with scoped headers. On Contact, build a labelled form using a required email field and a message textarea. This is an HTML-only project. Test the form’s browser feedback with sample data. Follow every link, navigate with the keyboard, and validate all three documents.</p>
+
+<pre><code>&lt;a href=&quot;#main-content&quot;&gt;Skip to main content&lt;/a&gt;
+&lt;header&gt;
+  &lt;nav aria-label=&quot;Main&quot;&gt;
+    &lt;a href=&quot;index.html&quot; aria-current=&quot;page&quot;&gt;Home&lt;/a&gt;
+    &lt;a href=&quot;services.html&quot;&gt;Services&lt;/a&gt;
+    &lt;a href=&quot;contact.html&quot;&gt;Contact&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+&lt;main id=&quot;main-content&quot; tabindex=&quot;-1&quot;&gt;
+  &lt;h1&gt;City Workshop&lt;/h1&gt;
+  &lt;p&gt;Find a class and start building.&lt;/p&gt;
+&lt;/main&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="practice">
+  <h2>Hands-on exercise</h2>
+  <p>Review your final project in a browser. Check that the shared menu links work on each page, only the current link has aria-current=&quot;page&quot;, and the skip link moves to the main region. Try the Contact form with missing and malformed values. Record the validator results for all three files.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML">MDN · HTML accessibility</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata">MDN · Webpage metadata</a></li>
+<li><a href="https://validator.w3.org/nu/">Nu HTML Checker</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/semantic-html5/">Previous lesson · Semantic HTML &amp; Page Architecture</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

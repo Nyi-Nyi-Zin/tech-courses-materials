@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="စာမျက်နှာတစ်ပိုင်းစီရဲ့ တာဝန်ကို ဖော်ပြတဲ့ element တွေ ရွေးပါမယ်။ ပြီးရင် browser ရဲ့ accessibility tree မှာ ဘယ်လို ပေါ်လဲ ကြည့်ပါမယ်။">
+  <title>Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/semantic-html5/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/semantic-html5/" lang="en" hreflang="en">English</a></nav>
+  <h1>Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">စာမျက်နှာတစ်ပိုင်းစီရဲ့ တာဝန်ကို ဖော်ပြတဲ့ element တွေ ရွေးပါမယ်။ ပြီးရင် browser ရဲ့ accessibility tree မှာ ဘယ်လို ပေါ်လဲ ကြည့်ပါမယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/semantic-html5">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#containers">Semantic Element သို့မဟုတ် Generic Container ရွေးခြင်း</a></li>
+<li><a href="#landmarks">Semantic Elements ခုနစ်မျိုးနဲ့ စာမျက်နှာ ဖွဲ့စည်းခြင်း</a></li>
+<li><a href="#section-article-div">section၊ article နှင့် div ရွေးနည်း</a></li>
+<li><a href="#block-inline">Block နှင့် Inline Layout ကြည့်ခြင်း</a></li>
+<li><a href="#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="containers">
+  <h2>Semantic Element သို့မဟုတ် Generic Container ရွေးခြင်း</h2>
+  <p>အကြောင်းအရာတွေကို CSS နဲ့ အုပ်စုလိုက် ချိန်ဖို့ div၊ စာကြောင်းထဲက အပိုင်းတိုတစ်ခုကို ချိန်ဖို့ span သုံးနိုင်ပါတယ်။ အကြောင်းအရာရဲ့ တာဝန် ရှင်းရင် သင့်တော်တဲ့ semantic element သုံးပါ။ ဥပမာ အဓိက navigation အတွက် nav သုံးတာကြောင့် assistive technology က သွားလို့ရတဲ့ landmark အဖြစ် ပြနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;div class=&quot;site-bar&quot;&gt;
+  &lt;span class=&quot;brand&quot;&gt;City Workshop&lt;/span&gt;
+  &lt;nav aria-label=&quot;Main&quot;&gt;&lt;a href=&quot;#sessions&quot;&gt;Find sessions&lt;/a&gt;&lt;/nav&gt;
+&lt;/div&gt;
+&lt;h2 id=&quot;sessions&quot;&gt;Sessions&lt;/h2&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> nav က navigation role ရပြီး အပြင်က div က brand နဲ့ nav ကို တစ်စုတည်း ထားပေးပါတယ်။</p>
+
+</section>
+<section class="article-section" id="landmarks">
+  <h2>Semantic Elements ခုနစ်မျိုးနဲ့ စာမျက်နှာ ဖွဲ့စည်းခြင်း</h2>
+  <p>စာမျက်နှာအဆင့် header က site ကို မိတ်ဆက်ပြီး nav မှာ အဓိက link တွေ ထည့်ပါတယ်။ အဓိက content ကို main နဲ့ ပတ်ပါ။ အကြောင်းအရာတူတဲ့ အုပ်စုကို section၊ သီးခြားဖတ်လို့ရတဲ့ အပိုင်းကို article၊ ဆက်စပ်အကြောင်းအရာကို aside၊ အောက်ဆုံး အချက်အလက်ကို footer သုံးပါ။ Landmark role က element ရဲ့ နေရာပေါ် မူတည်ပါတယ်။ Article ထဲက header က article အတွက်ဖြစ်ပြီး စာမျက်နှာအဆင့် header က banner ဖြစ်ပါတယ်။ အမည်ပေးထားတဲ့ section က region ဖြစ်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;header&gt;
+  &lt;h1&gt;City Workshop News&lt;/h1&gt;
+  &lt;nav aria-label=&quot;Main&quot;&gt;&lt;a href=&quot;#updates&quot;&gt;Updates&lt;/a&gt;&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;section id=&quot;updates&quot; aria-labelledby=&quot;updates-title&quot;&gt;
+    &lt;h2 id=&quot;updates-title&quot;&gt;Latest updates&lt;/h2&gt;
+    &lt;article&gt;&lt;h3&gt;New weekend sessions&lt;/h3&gt;&lt;p&gt;Registration opens next week.&lt;/p&gt;&lt;/article&gt;
+  &lt;/section&gt;
+  &lt;aside&gt;&lt;h2&gt;Related information&lt;/h2&gt;&lt;p&gt;Bring a notebook.&lt;/p&gt;&lt;/aside&gt;
+&lt;/main&gt;
+&lt;footer&gt;&lt;p&gt;Contact the workshop team.&lt;/p&gt;&lt;/footer&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Accessibility tree မှာ main နဲ့ အမည်ပေးထားတဲ့ Updates region ကို ရှာပါ။</p>
+
+</section>
+<section class="article-section" id="section-article-div">
+  <h2>section၊ article နှင့် div ရွေးနည်း</h2>
+  <p>အပိုင်းက ဘာကို ကိုယ်စားပြုလဲ အရင်ကြည့်ပါ။ သီးသန့် ထုတ်ဖတ်လို့ နားလည်ရင် article သုံးနိုင်ပါတယ်။ စာမျက်နှာထဲက အကြောင်းအရာတစ်မျိုးကို စုပြချင်ရင် ခေါင်းစဉ်နဲ့ section သုံးပါ။ CSS နဲ့ အုပ်စုလိုက် ချိန်ဖို့သာဆို div သုံးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;section&gt;
+  &lt;h2&gt;Events this month&lt;/h2&gt;
+  &lt;div class=&quot;event-grid&quot;&gt;
+    &lt;article&gt;&lt;h3&gt;Build a Portfolio&lt;/h3&gt;&lt;p&gt;Starts June 12 at North Hall.&lt;/p&gt;&lt;/article&gt;
+    &lt;article&gt;&lt;h3&gt;Learn Web Forms&lt;/h3&gt;&lt;p&gt;Starts June 19 at North Hall.&lt;/p&gt;&lt;/article&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Event တစ်ခုစီကို သီးသန့် ဖတ်လို့ရပြီး နှစ်ခုလုံးက Events this month အောက်မှာ ပါပါတယ်။</p>
+
+</section>
+<section class="article-section" id="block-inline">
+  <h2>Block နှင့် Inline Layout ကြည့်ခြင်း</h2>
+  <p>ပုံမှန် layout ထဲမှာ block box က လိုင်းအသစ်ကနေ စပြီး အပြင် container အကျယ်အတိုင်း နေရာယူလေ့ရှိပါတယ်။ Inline box က ဘေးချင်းက စာသားနဲ့ တစ်ကြောင်းတည်း စီးသွားပါတယ်။ CSS display နဲ့ layout ပြောင်းတာကြောင့် HTML element ရဲ့ အဓိပ္ပာယ် မပြောင်းပါဘူး။ Block အဖြစ် ပြထားတဲ့ span က span ပဲ ဖြစ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;div style=&quot;background:#e9f1f7&quot;&gt;This div starts on its own line.&lt;/div&gt;
+&lt;p&gt;Read this &lt;span style=&quot;background:#ffe9a8&quot;&gt;highlighted phrase&lt;/span&gt; in the same line.&lt;/p&gt;
+&lt;p&gt;Now &lt;span style=&quot;display:block;background:#ffe9a8&quot;&gt;this span starts on a new line.&lt;/span&gt;&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Span နှစ်ခုကို ယှဉ်ပါ။ နောက်ဆုံး span ပဲ လိုင်းအသစ်ကနေ စပါတယ်။</p>
+
+</section>
+<section class="article-section" id="practice">
+  <h2>လက်တွေ့လေ့ကျင့်ခန်း</h2>
+  <p>div တွေနဲ့ပဲ ရေးထားတဲ့ သတင်းစာမျက်နှာတစ်ခုကို ပြန်ဖွဲ့ပါ။ header၊ nav၊ main၊ ခေါင်းစဉ်ပါတဲ့ section ထဲက article နှစ်ခု၊ ဆက်စပ် link အတွက် aside နဲ့ footer ထည့်ပါ။ DevTools မှာ page landmarks တွေ စစ်ပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents">MDN · Structuring documents</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML">MDN · HTML accessibility</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/interactive-forms/">အရင်သင်ခန်းစာ · Forms နှင့် ထည့်ထားတဲ့ တန်ဖိုးတွေ စစ်ဆေးပုံ</a>
+<a href="/docs/read/my/html/accessibility-seo/">နောက်သင်ခန်းစာ · Accessibility၊ SEO နှင့် HTML စစ်ဆေးခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

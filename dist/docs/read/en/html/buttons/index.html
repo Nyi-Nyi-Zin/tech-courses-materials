@@ -3,75 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A button starts an action such as revealing information or submitting a form. The browser supplies built-in keyboard behavior.">
-  <title>HTML Buttons &lt;button&gt; · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/buttons/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/buttons/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/buttons/">
+  <meta name="description" content="Build a form with labelled controls, decide how its values are submitted, and use the browser to check input before submission.">
+  <title>Interactive Forms &amp; Input Validation · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/interactive-forms/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/interactive-forms/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/interactive-forms/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/buttons/" lang="my" hreflang="my">မြန်မာ</a></nav>
-  <h1>HTML Buttons &lt;button&gt;</h1>
-  <p class="article-version">HTML Living Standard</p>
-  <p class="intro">A button starts an action such as revealing information or submitting a form. The browser supplies built-in keyboard behavior.</p>
-  <p class="reading-link"><a href="/docs/?lang=en#/html/buttons">Open interactive lesson</a></p>
-
-  <section class="article-section">
-    <h2>On this page</h2>
-    <ul><li><a href="#basics">What does a button provide?</a></li>
-<li><a href="#action">Trigger an action with type=&quot;button&quot;</a></li>
-<li><a href="#submit">Submit a form with type=&quot;submit&quot;</a></li>
-<li><a href="#references">Official references</a></li></ul>
-  </section>
-  <section class="article-section" id="basics">
-  <h2>What does a button provide?</h2>
-  <p>A button is a control the user can activate. The contents supply the label. A normal button can receive keyboard focus; the disabled attribute makes a button unavailable. A custom action needs an instruction such as JavaScript, which the next example adds.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;button type=&quot;button&quot;&gt;Add to cart&lt;/button&gt;
-&lt;button type=&quot;button&quot; disabled&gt;Out of stock&lt;/button&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> Press Tab to reach the first button. The disabled button is skipped. The first button is ready for a custom action.</p>
-
-</section>
-<section class="article-section" id="action">
-  <h2>Trigger an action with type=&quot;button&quot;</h2>
-  <p>Use type=&quot;button&quot; for a custom action that needs JavaScript, especially inside a form. The browser generates a click when a user activates the button with a mouse or with Enter or Space while it has focus. The example listens for that event and toggles an element’s hidden state.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;button type=&quot;button&quot; id=&quot;toggle&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;hours&quot;&gt;Show hours&lt;/button&gt;
-&lt;p id=&quot;hours&quot; hidden&gt;Open 9:00 AM to 6:00 PM.&lt;/p&gt;
-&lt;script&gt;
-  const button = document.querySelector(&quot;#toggle&quot;);
-  const hours = document.querySelector(&quot;#hours&quot;);
-  button.addEventListener(&quot;click&quot;, () =&gt; {
-    hours.hidden = !hours.hidden;
-    button.textContent = hours.hidden ? &quot;Show hours&quot; : &quot;Hide hours&quot;;
-    button.setAttribute(&quot;aria-expanded&quot;, String(!hours.hidden));
-  });
-&lt;/script&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The first click shows the hours and the second hides them. aria-expanded mirrors the state for assistive tools.</p>
-
-</section>
-<section class="article-section" id="submit">
-  <h2>Submit a form with type=&quot;submit&quot;</h2>
-  <p>A submit button asks the browser to validate and submit its form. For a regular button inside a form, leaving out type generally makes it a submit button. Write the type explicitly to make the intended behavior clear.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;form method=&quot;get&quot;&gt;
-  &lt;label for=&quot;query&quot;&gt;Search term&lt;/label&gt;
-  &lt;input id=&quot;query&quot; name=&quot;q&quot; required&gt;
-  &lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;
-&lt;/form&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The browser blocks an empty submission. Enter pen and submit in a standalone HTML file to see ?q=pen in the URL. A search service would still need to handle the query.</p>
-
-</section>
-  <section class="references" id="references">
-    <h2>Official references</h2>
-    <ul><li><a href="https://html.spec.whatwg.org/multipage/form-elements.html#the-button-element">WHATWG · The button element</a></li></ul>
-  </section>
-  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/file-uploads/">Previous lesson · File Uploads</a>
-<a href="/docs/read/en/html/form-validation/">Next lesson · HTML Form Validation</a></nav></footer>
+  <h1>Interactive Forms &amp; Input Validation</h1>
+  <p><a href="/docs/read/en/html/interactive-forms/#forms">Interactive Forms &amp; Input Validation</a></p>
+  <ul><li id="forms"><a href="/docs/read/en/html/interactive-forms/#forms">Submit named values with GET or POST</a></li>
+<li id="input-types"><a href="/docs/read/en/html/interactive-forms/#input-types">Choose a control for each value</a></li>
+<li id="labels"><a href="/docs/read/en/html/interactive-forms/#labels">Label fields and group related controls</a></li>
+<li id="validation"><a href="/docs/read/en/html/interactive-forms/#validation">Check input before submission</a></li>
+<li id="practice"><a href="/docs/read/en/html/interactive-forms/#practice">Hands-on exercise</a></li></ul>
 </article>
 </main>
 </body>

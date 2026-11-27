@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Turn a plain text article into a document with meaningful headings, paragraphs, emphasis, quotations, and code.">
+  <title>Text Content &amp; Heading Hierarchy · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/text-hierarchy/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/text-hierarchy/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/text-hierarchy/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/text-hierarchy/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Text Content &amp; Heading Hierarchy</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Turn a plain text article into a document with meaningful headings, paragraphs, emphasis, quotations, and code.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/text-hierarchy">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#headings">Choose heading levels by structure</a></li>
+<li><a href="#paragraphs">Paragraphs, line breaks, and whitespace</a></li>
+<li><a href="#inline-text">Give inline text meaning</a></li>
+<li><a href="#entities">Quote material and show code</a></li>
+<li><a href="#practice">Hands-on exercise</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="headings">
+  <h2>Choose heading levels by structure</h2>
+  <p>Use h1 for the main topic. Use h2 for sections and h3 for subdivisions of an h2. HTML offers levels through h6. Follow the content hierarchy and use CSS when you only want a different font size. Returning from h3 to h2 starts the next peer section.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;h1&gt;Workshop Guide&lt;/h1&gt;
+&lt;h2&gt;Before You Arrive&lt;/h2&gt;
+&lt;h3&gt;What to Bring&lt;/h3&gt;
+&lt;p&gt;Bring a notebook.&lt;/p&gt;
+&lt;h2&gt;After the Workshop&lt;/h2&gt;
+&lt;p&gt;Share your project with the group.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> What to Bring is part of Before You Arrive.</p>
+
+</section>
+<section class="article-section" id="paragraphs">
+  <h2>Paragraphs, line breaks, and whitespace</h2>
+  <p>Use p for a paragraph, br when the line break is part of the content, and hr for a shift in topic between paragraphs. With ordinary rendering, repeated spaces and source line breaks collapse. Use separate paragraphs and CSS margins to control spacing.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;p&gt;Find us here:&lt;/p&gt;
+&lt;p&gt;12 Market Street&lt;br&gt;North Entrance&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;The next      session
+starts in June.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The address uses two lines. The repeated spaces in the last paragraph collapse.</p>
+
+</section>
+<section class="article-section" id="inline-text">
+  <h2>Give inline text meaning</h2>
+  <p>Use strong for importance and em for stress. Use b to draw attention without extra importance, i for alternate voice or terms, and mark to highlight relevance. Use small for side comments, del for deleted text, and sub or sup for subscripts and superscripts.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;p&gt;&lt;strong&gt;Registration closes today.&lt;/strong&gt; Bring &lt;em&gt;your own&lt;/em&gt; laptop.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Materials&lt;/b&gt; include a note on &lt;i&gt;in situ&lt;/i&gt; measurement.&lt;/p&gt;
+&lt;p&gt;Search result: &lt;mark&gt;workshop&lt;/mark&gt; · Price: &lt;del&gt;$25&lt;/del&gt; $20&lt;/p&gt;
+&lt;p&gt;H&lt;sub&gt;2&lt;/sub&gt;O and 3&lt;sup&gt;2&lt;/sup&gt; &lt;small&gt;(examples)&lt;/small&gt;&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Each tag marks a different meaning within its paragraph.</p>
+
+</section>
+<section class="article-section" id="entities">
+  <h2>Quote material and show code</h2>
+  <p>Use blockquote for a quoted passage, q for a short inline quote, and cite for the title of a work. Use code for a code fragment and wrap multi-line code in pre to retain line breaks and indentation. Character references such as &amp;lt;, &amp;gt;, and &amp;amp; let you display reserved characters as text.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;blockquote&gt;&lt;p&gt;Start with a small example.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;cite&gt;Workshop Notes&lt;/cite&gt; says &lt;q&gt;Save often.&lt;/q&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;h1&amp;gt;News &amp;amp; Events&amp;lt;/h1&amp;gt;
+&amp;lt;p&amp;gt;Open from 9 AM.&amp;lt;/p&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;copy; City Workshop&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The code is printed as text over two lines.</p>
+
+</section>
+<section class="article-section" id="practice">
+  <h2>Hands-on exercise</h2>
+  <p>Write blog-article.html with a main title, two sections, one quotation, and a two-line code example. Read only the headings to check whether they describe the article.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Headings_and_paragraphs">MDN · Headings and paragraphs</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Character_references">MDN · Character references</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/web-fundamentals/">Previous lesson · Web Fundamentals &amp; How HTML Works</a>
+<a href="/docs/read/en/html/lists-navigation/">Next lesson · Lists &amp; Navigation</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

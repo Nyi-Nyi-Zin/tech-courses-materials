@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ပုံ၊ အသံနဲ့ ဗီဒီယို ထည့်ပါမယ်။ ပုံအတွက် စာသား၊ ဗီဒီယိုအတွက် captions နဲ့ မျက်နှာပြင်အရွယ်လိုက် ရွေးနိုင်တဲ့ image ဖိုင်တွေကိုလည်း သုံးပါမယ်။">
+  <title>ပုံ၊ အသံ၊ ဗီဒီယိုနှင့် Embed များ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/images-media/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/images-media/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/images-media/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/images-media/" lang="en" hreflang="en">English</a></nav>
+  <h1>ပုံ၊ အသံ၊ ဗီဒီယိုနှင့် Embed များ</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">ပုံ၊ အသံနဲ့ ဗီဒီယို ထည့်ပါမယ်။ ပုံအတွက် စာသား၊ ဗီဒီယိုအတွက် captions နဲ့ မျက်နှာပြင်အရွယ်လိုက် ရွေးနိုင်တဲ့ image ဖိုင်တွေကိုလည်း သုံးပါမယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/images-media">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#images">ပုံဖိုင်၊ အရွယ်အစားနှင့် Alt Text</a></li>
+<li><a href="#figure">ပုံနှင့် မြင်ရမယ့် ပုံစာကို ချိတ်ခြင်း</a></li>
+<li><a href="#responsive-images">နေရာအကျယ်အလိုက် ပုံဖိုင် ရွေးခြင်း</a></li>
+<li><a href="#media">အသံ၊ ဗီဒီယို ဖွင့်ခြင်းနှင့် Page Embed လုပ်ခြင်း</a></li>
+<li><a href="#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="images">
+  <h2>ပုံဖိုင်၊ အရွယ်အစားနှင့် Alt Text</h2>
+  <p>src မှာ ပုံဖိုင်လိပ်စာ ထည့်ပါတယ်။ ဓာတ်ပုံအတွက် JPEG၊ အသေးစိတ်အရည်အသွေး ထိန်းဖို့ သို့မဟုတ် နောက်ခံဖောက်ဖို့ PNG၊ ချဲ့ကြည့်လို့ရတဲ့ diagram အတွက် SVG သုံးနိုင်ပါတယ်။ သင့်တော်တဲ့ ပုံကို ဖိုင်အရွယ်ပိုသေးအောင် သိမ်းလို့ရရင် WebP သုံးနိုင်ပါတယ်။ ပုံမပေါ်ခင် နေရာချန်ထားဖို့ width နဲ့ height ရေးပါ။ ပုံထဲက ဖတ်သူသိဖို့လိုတဲ့အချက်ကို alt မှာ ရေးပါ။ အလှဆင်ပုံဆို alt=&quot;&quot; ထားပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;img src=&quot;https://javascript-training.cloudninemm.com/docs/media/html/workshop-480.webp&quot;
+     alt=&quot;Diagram illustrating a client communicating with a server&quot;
+     width=&quot;480&quot; height=&quot;270&quot;&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပုံအတွက် 480 × 270 နေရာ ချန်ထားပြီး ပုံပေါ်လာပါတယ်။</p>
+
+</section>
+<section class="article-section" id="figure">
+  <h2>ပုံနှင့် မြင်ရမယ့် ပုံစာကို ချိတ်ခြင်း</h2>
+  <p>ပုံနဲ့ ပုံစာကို တစ်စုတည်း ညွှန်းလိုတဲ့အခါ figure သုံးပါ။ figcaption က ဖတ်သူအားလုံး မြင်ရတဲ့ ပုံစာဖြစ်ပြီး alt က ပုံမမြင်နိုင်တဲ့သူအတွက် ပုံထဲက အရေးပါတဲ့အချက်ကို ပြောပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;figure&gt;
+  &lt;img src=&quot;https://javascript-training.cloudninemm.com/docs/media/html/workshop-480.webp&quot;
+       width=&quot;480&quot; height=&quot;270&quot;
+       alt=&quot;Client and server connected over a network&quot;&gt;
+  &lt;figcaption&gt;Figure 1. The two sides of a web request.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပုံရဲ့ အောက်မှာ ပုံစာ ပေါ်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="responsive-images">
+  <h2>နေရာအကျယ်အလိုက် ပုံဖိုင် ရွေးခြင်း</h2>
+  <p>srcset ထဲမှာ ပုံဖိုင်တစ်ခုစီရဲ့ pixel အကျယ် ထည့်ပြီး layout ထဲမှာ ပုံအတွက် သုံးမယ့်အကျယ်ကို sizes နဲ့ ပြောပါ။ Browser က layout အကျယ်နဲ့ screen density ကို ကြည့်ပြီး ဖိုင်ရွေးပါတယ်။ အကျယ်နည်းတဲ့ screen မှာ စတုရန်း crop သုံးတာလို ပုံဖွဲ့ပုံ ပြောင်းချင်ရင် picture သုံးပါ။ အောက်ပိုင်းက ပုံတွေကို loading=&quot;lazy&quot; ထားနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;picture&gt;
+  &lt;source media=&quot;(max-width: 500px)&quot; srcset=&quot;https://javascript-training.cloudninemm.com/docs/media/html/workshop-square.webp&quot;
+          width=&quot;480&quot; height=&quot;480&quot;&gt;
+  &lt;img src=&quot;https://javascript-training.cloudninemm.com/docs/media/html/workshop-480.webp&quot;
+       srcset=&quot;https://javascript-training.cloudninemm.com/docs/media/html/workshop-480.webp 480w, https://javascript-training.cloudninemm.com/docs/media/html/workshop-960.webp 960w&quot;
+       sizes=&quot;(max-width: 600px) 100vw, 480px&quot;
+       width=&quot;480&quot; height=&quot;270&quot; style=&quot;max-width:100%;height:auto&quot;
+       loading=&quot;lazy&quot; alt=&quot;A diagram of a client and a server&quot;&gt;
+&lt;/picture&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Preview ကို ကျဉ်းကြည့်ပြီး DevTools မှာ browser ဘယ်ဖိုင် တောင်းသွားလဲ စစ်ပါ။</p>
+
+</section>
+<section class="article-section" id="media">
+  <h2>အသံ၊ ဗီဒီယို ဖွင့်ခြင်းနှင့် Page Embed လုပ်ခြင်း</h2>
+  <p>controls ထည့်ရင် play၊ pause စတဲ့ ခလုတ်တွေ ပေါ်ပါတယ်။ ရနိုင်တဲ့ ဖိုင်တွေကို source နဲ့ သတ်မှတ်ပြီး video မဖွင့်ခင် ပြမယ့်ပုံအတွက် poster သုံးပါ။ WebVTT captions ဖိုင်ကို track နဲ့ ချိတ်ပါ။ iframe ဘာပြမလဲ သိနိုင်ဖို့ title မှာ ရေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;audio controls preload=&quot;none&quot;&gt;
+  &lt;source src=&quot;https://javascript-training.cloudninemm.com/media/lesson.ogg&quot; type=&quot;audio/ogg&quot;&gt;
+&lt;/audio&gt;
+&lt;video controls width=&quot;420&quot; style=&quot;max-width:100%&quot;
+       poster=&quot;https://javascript-training.cloudninemm.com/docs/media/html/workshop-480.webp&quot;&gt;
+  &lt;source src=&quot;https://javascript-training.cloudninemm.com/media/lesson.webm&quot; type=&quot;video/webm&quot;&gt;
+  &lt;track kind=&quot;captions&quot; src=&quot;https://javascript-training.cloudninemm.com/media/lesson-en.vtt&quot; srclang=&quot;en&quot; label=&quot;English&quot;&gt;
+&lt;/video&gt;
+&lt;iframe title=&quot;Workshop location note&quot;
+        srcdoc=&quot;&lt;p&gt;Location: North Hall, Room 2.&lt;/p&gt;&quot;&gt;&lt;/iframe&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အသံနဲ့ video player က ခလုတ်တွေ စမ်းပြီး video player မှာ English captions ဖွင့်ကြည့်ပါ။</p>
+
+</section>
+<section class="article-section" id="practice">
+  <h2>လက်တွေ့လေ့ကျင့်ခန်း</h2>
+  <p>ပုံသုံးပုံပါ gallery ရေးပါ။ Figure တိုင်းမှာ ပုံစာနဲ့ alt attribute ထည့်ပါ။ ပုံလမ်းကြောင်းတစ်ခု ခဏမှားအောင် ပြင်ပြီး ရလဒ်ကြည့်ပါ။ ပြီးရင် အမှန်ပြန်ထားပြီး controls နဲ့ captions ပါတဲ့ video ထည့်ပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Responsive_images">MDN · Responsive images</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/HTML_video_and_audio">MDN · Video and audio content</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/lists-navigation/">အရင်သင်ခန်းစာ · စာရင်းများနှင့် လင့်ခ်များ</a>
+<a href="/docs/read/my/html/data-tables/">နောက်သင်ခန်းစာ · ဇယားများနှင့် အချက်အလက်ဖွဲ့စည်းပုံ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

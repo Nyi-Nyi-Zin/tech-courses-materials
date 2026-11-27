@@ -3,124 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Semantic elements တွေက စာမျက်နှာထဲမှာ အပိုင်းတစ်ခုရဲ့ တာဝန်ကို ဖော်ပြပေးပါတယ်။ Screen reader လို tools တွေက အရေးပါတဲ့ အပိုင်းတွေကို landmark အဖြစ် ပြပြီး တစ်နေရာကနေ တစ်နေရာ သွားနိုင်စေပါတယ်။">
-  <title>Semantic HTML နဲ့ Keyboard Accessibility · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/accessibility/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/accessibility/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/accessibility/">
+  <meta name="description" content="စာမျက်နှာတစ်ပိုင်းစီရဲ့ တာဝန်ကို ဖော်ပြတဲ့ element တွေ ရွေးပါမယ်။ ပြီးရင် browser ရဲ့ accessibility tree မှာ ဘယ်လို ပေါ်လဲ ကြည့်ပါမယ်။">
+  <title>Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/semantic-html5/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/accessibility/" lang="en" hreflang="en">English</a></nav>
-  <h1>Semantic HTML နဲ့ Keyboard Accessibility</h1>
-  <p class="article-version">HTML Living Standard</p>
-  <p class="intro">Semantic elements တွေက စာမျက်နှာထဲမှာ အပိုင်းတစ်ခုရဲ့ တာဝန်ကို ဖော်ပြပေးပါတယ်။ Screen reader လို tools တွေက အရေးပါတဲ့ အပိုင်းတွေကို landmark အဖြစ် ပြပြီး တစ်နေရာကနေ တစ်နေရာ သွားနိုင်စေပါတယ်။</p>
-  <p class="reading-link"><a href="/docs/?lang=my#/html/accessibility">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
-
-  <section class="article-section">
-    <h2>ဒီစာမျက်နှာမှာ</h2>
-    <ul><li><a href="#landmarks">အဓိက အကြောင်းအရာ &lt;main&gt;</a></li>
-<li><a href="#navigation">အဓိက သွားလာစရာ Links &lt;nav&gt;</a></li>
-<li><a href="#header-footer">&lt;header&gt; နဲ့ စာမျက်နှာကို မိတ်ဆက်ခြင်း</a></li>
-<li><a href="#footer">&lt;footer&gt; နဲ့ အပိတ်အချက်အလက် ထည့်ခြင်း</a></li>
-<li><a href="#sections">&lt;section&gt; နဲ့ ဆက်စပ်တဲ့ အကြောင်းအရာ စုခြင်း</a></li>
-<li><a href="#article">&lt;article&gt; နဲ့ သီးခြားဖတ်လို့ရတဲ့ အကြောင်းအရာ ရေးခြင်း</a></li>
-<li><a href="#keyboard">Keyboard Focus နဲ့ Skip Link</a></li>
-<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
-  </section>
-  <section class="article-section" id="landmarks">
-  <h2>အဓိက အကြောင်းအရာ &lt;main&gt;</h2>
-  <p>ဒီစာမျက်နှာကို ဖွင့်လာတဲ့သူ အဓိကဖတ်ရမယ့် content ကို main ထဲမှာ ထည့်ပါ။ Page တိုင်းမှာ ထပ်ပါတဲ့ site menu ကို ပုံမှန်အားဖြင့် main အပြင်မှာ ထားပါတယ်။ အဓိက content ကို ရှာလွယ်ဖို့ စာမျက်နှာတစ်ခုမှာ မြင်ရတဲ့ main တစ်ခုထားပါ။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
-<pre><code>&lt;main id=&quot;main-content&quot;&gt;
-  &lt;h1&gt;Product catalog&lt;/h1&gt;
-  &lt;p&gt;See our available products and prices.&lt;/p&gt;
-&lt;/main&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Browser ရဲ့ accessibility tree ထဲမှာ ခေါင်းစဉ်နဲ့ စာပိုဒ် ပါတဲ့ main landmark ကို တွေ့နိုင်ပါတယ်။</p>
-
-</section>
-<section class="article-section" id="navigation">
-  <h2>အဓိက သွားလာစရာ Links &lt;nav&gt;</h2>
-  <p>အဓိက menu ဒါမှမဟုတ် မာတိကာလို အရေးပါတဲ့ navigation links အစုကို nav နဲ့ ဖော်ပြပါ။ ရည်ရွယ်ချက်ကွဲတဲ့ nav အများကြီး ရှိရင် ဘယ် nav က ဘာအတွက်လဲ သိအောင် label တစ်ခုစီ ပေးပါ။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
-<pre><code>&lt;nav aria-label=&quot;Main navigation&quot;&gt;
-  &lt;a href=&quot;/catalog&quot;&gt;Catalog&lt;/a&gt;
-  &lt;a href=&quot;/contact&quot;&gt;Contact&lt;/a&gt;
-&lt;/nav&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Main navigation နာမည်နဲ့ navigation landmark တစ်ခု ရှိလာပါတယ်။ Tab နှိပ်ရင် HTML မှာ ရေးထားတဲ့ အစဉ်အတိုင်း link နှစ်ခုဆီ ရောက်ပါတယ်။</p>
-
-</section>
-<section class="article-section" id="header-footer">
-  <h2>&lt;header&gt; နဲ့ စာမျက်နှာကို မိတ်ဆက်ခြင်း</h2>
-  <p>&lt;header&gt; က မိတ်ဆက်အပိုင်းကို သတ်မှတ်တာပါ။ Page ရဲ့ header မှာ site နာမည် ဒါမှမဟုတ် navigation ပါလေ့ရှိပြီး banner landmark အဖြစ် သတ်မှတ်ပေးပါတယ်။ Article ထဲက header ကတော့ အဲဒီ article အတွက် မိတ်ဆက်ပိုင်းပါ။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
-<pre><code>&lt;header&gt;&lt;a href=&quot;./index.html&quot;&gt;Example Store&lt;/a&gt;&lt;/header&gt;
-&lt;main&gt;&lt;h1&gt;Product catalog&lt;/h1&gt;&lt;/main&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Site နာမည်က အဓိကအကြောင်းအရာမတိုင်ခင် ပေါ်ပါမယ်။ Browser ရဲ့ accessibility tree ထဲမှာ banner landmark ကို ရှာကြည့်ပါ။</p>
-
-</section>
-<section class="article-section" id="footer">
-  <h2>&lt;footer&gt; နဲ့ အပိတ်အချက်အလက် ထည့်ခြင်း</h2>
-  <p>&lt;footer&gt; က ဆက်သွယ်ရန်၊ မူပိုင်ခွင့်၊ ရေးသားသူအကြောင်းလို အပိတ်အချက်အလက်တွေကို မှတ်ပေးပါတယ်။ Page အဆင့်မှာ contentinfo landmark ဖြစ်လေ့ရှိပါတယ်။ Article ထဲမှာ သုံးရင် အဲဒီ article ရဲ့ အပိတ်အချက်အလက် ဖြစ်ပါတယ်။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
-<pre><code>&lt;main&gt;&lt;h1&gt;Product catalog&lt;/h1&gt;&lt;/main&gt;
-&lt;footer&gt;&lt;p&gt;© Example Store&lt;/p&gt;&lt;/footer&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အဓိကအကြောင်းအရာပြီးရင် မူပိုင်ခွင့်စာသား ပေါ်ပါမယ်။ Footer ကို Inspect လုပ်ပြီး contentinfo role ကြည့်ပါ။</p>
-
-</section>
-<section class="article-section" id="sections">
-  <h2>&lt;section&gt; နဲ့ ဆက်စပ်တဲ့ အကြောင်းအရာ စုခြင်း</h2>
-  <p>&lt;section&gt; က သီးခြားအကြောင်းအရာတစ်ခုအတွက် စာမျက်နှာထဲမှာ အပိုင်းတစ်ပိုင်း သတ်မှတ်ပါတယ်။ အကြောင်းအရာ ရှင်းတဲ့ ခေါင်းစဉ် ထည့်ပါ။ Assistive tools တွေက အပိုင်းနာမည် သိစေချင်ရင် aria-labelledby မှာ ခေါင်းစဉ်ရဲ့ id ကို ထည့်နိုင်ပါတယ်။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
-<pre><code>&lt;main&gt;
-  &lt;h1&gt;Product catalog&lt;/h1&gt;
-  &lt;section aria-labelledby=&quot;stationery-heading&quot;&gt;
-    &lt;h2 id=&quot;stationery-heading&quot;&gt;Stationery&lt;/h2&gt;
-    &lt;p&gt;Blue and black pens are available.&lt;/p&gt;
-  &lt;/section&gt;
-&lt;/main&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Product catalog အောက်မှာ Stationery က အပိုင်းခေါင်းစဉ်အဖြစ် ပေါ်ပါမယ်။ Accessibility tree မှာလည်း နာမည်နဲ့ တွေ့နိုင်ပါတယ်။</p>
-
-</section>
-<section class="article-section" id="article">
-  <h2>&lt;article&gt; နဲ့ သီးခြားဖတ်လို့ရတဲ့ အကြောင်းအရာ ရေးခြင်း</h2>
-  <p>&lt;article&gt; က သတင်းတို၊ blog post၊ review လို တစ်ခုတည်း ထုတ်ဖတ်ရင်လည်း အဓိပ္ပာယ်ပြည့်တဲ့ အကြောင်းအရာပါ။ တစ်ခုချင်း သီးသန့်ဖတ်လို့ရတဲ့ article တွေကို section တစ်ခုထဲ စုထားနိုင်ပါတယ်။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
-<pre><code>&lt;section&gt;
-  &lt;h2&gt;Store news&lt;/h2&gt;
-  &lt;article&gt;
-    &lt;h3&gt;New products&lt;/h3&gt;
-    &lt;p&gt;Three new products arrive Friday.&lt;/p&gt;
-  &lt;/article&gt;
-&lt;/section&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> New products article တစ်ခုလုံးကို တခြား page ဆီ ရွှေ့လည်း အဲဒီ ခေါင်းစဉ်နဲ့ စာသားကို တွဲဖတ်ပြီး နားလည်နိုင်ပါတယ်။</p>
-
-</section>
-<section class="article-section" id="keyboard">
-  <h2>Keyboard Focus နဲ့ Skip Link</h2>
-  <p>Focus ဆိုတာ လက်ရှိ keyboard input လက်ခံနေတဲ့ element ပါ။ Tab နှိပ်ရင် ပုံမှန်အားဖြင့် document ထဲက links နဲ့ form controls တွေဆီ အစဉ်လိုက် သွားပါတယ်။ Focus ရောက်နေတဲ့နေရာကို မြင်ရအောင် ထားပါ။ Menu မတိုင်ခင် skip link ထည့်ရင် keyboard သုံးသူက main content ဆီ တန်းသွားနိုင်ပါတယ်။ tabindex=&quot;-1&quot; က main ကို ပုံမှန် Tab အစဉ်ထဲ မထည့်ဘဲ link ကနေ ရောက်တဲ့အခါ focus လက်ခံနိုင်စေပါတယ်။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
-<pre><code>&lt;a href=&quot;#main-content&quot;&gt;Skip to main content&lt;/a&gt;
-&lt;header&gt;&lt;nav aria-label=&quot;Main&quot;&gt;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/nav&gt;&lt;/header&gt;
-&lt;main id=&quot;main-content&quot; tabindex=&quot;-1&quot;&gt;
-  &lt;h1&gt;Events&lt;/h1&gt;
-  &lt;a href=&quot;/events&quot;&gt;View upcoming events&lt;/a&gt;
-&lt;/main&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Tab နဲ့ skip link ဆီ သွားပြီး Enter နှိပ်ရင် main ကို ရောက်ပါတယ်။ နောက်တစ်ခါ Tab နှိပ်ရင် Events link ဆီ ရောက်ပါတယ်။</p>
-
-</section>
-  <section class="references" id="references">
-    <h2>တရားဝင် ကိုးကားချက်များ</h2>
-    <ul><li><a href="https://html.spec.whatwg.org/multipage/sections.html">WHATWG · Page sections</a></li>
-<li><a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-main-element">WHATWG · The main element</a></li>
-<li><a href="https://html.spec.whatwg.org/multipage/interaction.html#focus">WHATWG · Focus</a></li>
-<li><a href="https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html">W3C WAI · Bypass blocks</a></li></ul>
-  </section>
-  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/containers/">အရင်သင်ခန်းစာ · အကြောင်းအရာ စုဖွဲ့ဖို့ &lt;div&gt; နဲ့ &lt;span&gt;</a>
-<a href="/docs/read/my/html/disclosure/">နောက်သင်ခန်းစာ · ဖွင့်ပိတ်လို့ရတဲ့ အကြောင်းအရာ &lt;details&gt;</a></nav></footer>
+  <h1>Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ</h1>
+  <p><a href="/docs/read/my/html/semantic-html5/#landmarks">Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ</a></p>
+  <ul><li id="containers"><a href="/docs/read/my/html/semantic-html5/#containers">Semantic Element သို့မဟုတ် Generic Container ရွေးခြင်း</a></li>
+<li id="landmarks"><a href="/docs/read/my/html/semantic-html5/#landmarks">Semantic Elements ခုနစ်မျိုးနဲ့ စာမျက်နှာ ဖွဲ့စည်းခြင်း</a></li>
+<li id="section-article-div"><a href="/docs/read/my/html/semantic-html5/#section-article-div">section၊ article နှင့် div ရွေးနည်း</a></li>
+<li id="block-inline"><a href="/docs/read/my/html/semantic-html5/#block-inline">Block နှင့် Inline Layout ကြည့်ခြင်း</a></li>
+<li id="practice"><a href="/docs/read/my/html/semantic-html5/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
 </article>
 </main>
 </body>

@@ -3,131 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Inline text elements mark a word or phrase inside a sentence. They can convey importance, stress, or code, and can also give CSS a span of text to style. These examples use the browser’s default styles unless CSS is shown.">
-  <title>Inline Text Elements · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/inline-text/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/inline-text/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/inline-text/">
+  <meta name="description" content="Turn a plain text article into a document with meaningful headings, paragraphs, emphasis, quotations, and code.">
+  <title>Text Content &amp; Heading Hierarchy · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/text-hierarchy/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/text-hierarchy/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/text-hierarchy/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/inline-text/" lang="my" hreflang="my">မြန်မာ</a></nav>
-  <h1>Inline Text Elements</h1>
-  <p class="article-version">HTML Living Standard</p>
-  <p class="intro">Inline text elements mark a word or phrase inside a sentence. They can convey importance, stress, or code, and can also give CSS a span of text to style. These examples use the browser’s default styles unless CSS is shown.</p>
-  <p class="reading-link"><a href="/docs/?lang=en#/html/inline-text">Open interactive lesson</a></p>
-
-  <section class="article-section">
-    <h2>On this page</h2>
-    <ul><li><a href="#strong">Important text &lt;strong&gt;</a></li>
-<li><a href="#emphasis">Stress emphasis &lt;em&gt;</a></li>
-<li><a href="#attention">Keywords and Labels &lt;b&gt;</a></li>
-<li><a href="#alternate-voice">Terms and Alternate Voice &lt;i&gt;</a></li>
-<li><a href="#highlight">Highlighted Text &lt;mark&gt;</a></li>
-<li><a href="#code">Code in a sentence &lt;code&gt;</a></li>
-<li><a href="#preformatted-code">Preformatted Code &lt;pre&gt;</a></li>
-<li><a href="#subscript-superscript">Subscript and Superscript &lt;sub&gt; and &lt;sup&gt;</a></li>
-<li><a href="#span">Generic inline grouping &lt;span&gt;</a></li>
-<li><a href="#references">Official references</a></li></ul>
-  </section>
-  <section class="article-section" id="strong">
-  <h2>Important text &lt;strong&gt;</h2>
-  <p>Use strong for a warning or a key part of a message. It tells the browser which part has strong importance. Browsers usually give it bold styling. Use CSS font-weight for purely visual bold styling.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;p&gt;&lt;strong&gt;Allergy alert:&lt;/strong&gt; This folder contains peanuts.&lt;/p&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> “Allergy alert:” usually appears bold and carries the importance of the warning.</p>
-
-</section>
-<section class="article-section" id="emphasis">
-  <h2>Stress emphasis &lt;em&gt;</h2>
-  <p>Use em on the part of a sentence you would stress when saying it aloud. Moving the emphasis can change what the sentence implies. Browsers usually display em in italics.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;p&gt;I borrowed &lt;em&gt;a book&lt;/em&gt; today.&lt;/p&gt;
-&lt;p&gt;I borrowed a book &lt;em&gt;today&lt;/em&gt;.&lt;/p&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The first sentence emphasizes what was borrowed. The second emphasizes when it was borrowed.</p>
-
-</section>
-<section class="article-section" id="attention">
-  <h2>Keywords and Labels &lt;b&gt;</h2>
-  <p>Use &lt;b&gt; to draw attention to a word or phrase, such as a keyword or a product name in a review. Browsers usually display &lt;b&gt; in bold. For a warning or other text with strong importance, use &lt;strong&gt;.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;p&gt;The &lt;b&gt;Trail 20&lt;/b&gt; backpack has an adjustable strap.&lt;/p&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> “Trail 20” usually appears in bold so the product name is easy to find.</p>
-
-</section>
-<section class="article-section" id="alternate-voice">
-  <h2>Terms and Alternate Voice &lt;i&gt;</h2>
-  <p>Use &lt;i&gt; to mark a phrase that reads differently from the surrounding text, such as a scientific name or a term from another language. Browsers usually display it in italics. Use &lt;em&gt; when a word needs to be stressed in the sentence.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;p&gt;The house cat is known as &lt;i&gt;Felis catus&lt;/i&gt;.&lt;/p&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The scientific name “Felis catus” usually appears in italics.</p>
-
-</section>
-<section class="article-section" id="highlight">
-  <h2>Highlighted Text &lt;mark&gt;</h2>
-  <p>Use &lt;mark&gt; to highlight a word that is relevant to what the reader is doing, such as a match for a search term. In this example, the reader searched for “library”.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;p&gt;Opening hours for the &lt;mark&gt;library&lt;/mark&gt; have changed.&lt;/p&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The word “library” appears highlighted, usually with a yellow background.</p>
-
-</section>
-<section class="article-section" id="code">
-  <h2>Code in a sentence &lt;code&gt;</h2>
-  <p>Use code for a short piece of computer code, such as a function call or an HTML tag written in a sentence. Browsers normally use a fixed-width font. Encode the less-than and greater-than signs as &amp;lt; and &amp;gt; when you want the reader to see a literal tag. Wrap code in pre for an example that should preserve line breaks and indentation.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;p&gt;Write &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt; to start a paragraph.&lt;/p&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> You see the literal text “&lt;p&gt;” inside the sentence.</p>
-
-</section>
-<section class="article-section" id="preformatted-code">
-  <h2>Preformatted Code &lt;pre&gt;</h2>
-  <p>Use &lt;pre&gt; when the line breaks and spaces are part of the example. Place &lt;code&gt; inside it for multiline code. The &lt;pre&gt; element belongs outside the paragraph.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;pre&gt;&lt;code&gt;if (isOpen) {
-  showHours();
-}&lt;/code&gt;&lt;/pre&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The example keeps its three lines and the spaces before showHours().</p>
-
-</section>
-<section class="article-section" id="subscript-superscript">
-  <h2>Subscript and Superscript &lt;sub&gt; and &lt;sup&gt;</h2>
-  <p>Use &lt;sub&gt; and &lt;sup&gt; when the position of a character is part of the notation, such as the 2 in the formula for water or the exponent in a mathematical expression.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;p&gt;Water: H&lt;sub&gt;2&lt;/sub&gt;O&lt;/p&gt;
-&lt;p&gt;Area: x&lt;sup&gt;2&lt;/sup&gt;&lt;/p&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The 2 in H₂O is below the text baseline. The 2 in x² is above it.</p>
-
-</section>
-<section class="article-section" id="span">
-  <h2>Generic inline grouping &lt;span&gt;</h2>
-  <p>A span groups a bit of phrasing content without assigning importance or other specific meaning. Use it when CSS or JavaScript needs to target a phrase. In the example, stock is a class name and .stock is the CSS selector matching it.</p>
-<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;Inline text style&lt;/title&gt;
-  &lt;style&gt;
-    .stock { color: #166534; }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;p&gt;Pen is &lt;span class=&quot;stock&quot;&gt;in stock&lt;/span&gt; today.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> Only “in stock” is green, and the sentence continues in the same line where space allows.</p>
-
-</section>
-  <section class="references" id="references">
-    <h2>Official references</h2>
-    <ul><li><a href="https://html.spec.whatwg.org/multipage/text-level-semantics.html">WHATWG · Text-level semantics</a></li></ul>
-  </section>
-  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/paragraphs/">Previous lesson · Paragraphs, Line Breaks, and Thematic Breaks</a>
-<a href="/docs/read/en/html/text-markup/">Next lesson · HTML Comments and Quotations</a></nav></footer>
+  <h1>Text Content &amp; Heading Hierarchy</h1>
+  <p><a href="/docs/read/en/html/text-hierarchy/#inline-text">Text Content &amp; Heading Hierarchy</a></p>
+  <ul><li id="headings"><a href="/docs/read/en/html/text-hierarchy/#headings">Choose heading levels by structure</a></li>
+<li id="paragraphs"><a href="/docs/read/en/html/text-hierarchy/#paragraphs">Paragraphs, line breaks, and whitespace</a></li>
+<li id="inline-text"><a href="/docs/read/en/html/text-hierarchy/#inline-text">Give inline text meaning</a></li>
+<li id="entities"><a href="/docs/read/en/html/text-hierarchy/#entities">Quote material and show code</a></li>
+<li id="practice"><a href="/docs/read/en/html/text-hierarchy/#practice">Hands-on exercise</a></li></ul>
 </article>
 </main>
 </body>

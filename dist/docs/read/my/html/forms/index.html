@@ -3,98 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Form က user ဖြည့်ထားတဲ့ အကွက်တွေကနေ data စုပါတယ်။ Browser က ဖြည့်ထားတာ မှန်မမှန် စစ်နိုင်သလို ရွေးထားတဲ့ တန်ဖိုးတွေကို name၊ value အတွဲအဖြစ် စုပြီး URL တစ်ခုဆီ ပို့နိုင်ပါတယ်။">
-  <title>HTML Form၊ Label နဲ့ Input များ · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/forms/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/forms/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/forms/">
+  <meta name="description" content="Label ပါတဲ့ form controls တွေ ရေးပါမယ်။ ဖြည့်ထားတဲ့ တန်ဖိုးတွေ ဘယ်လိုပို့မလဲ ရွေးပြီး submit မလုပ်ခင် browser နဲ့ စစ်ဆေးပါမယ်။">
+  <title>Forms နှင့် ထည့်ထားတဲ့ တန်ဖိုးတွေ စစ်ဆေးပုံ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/interactive-forms/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/interactive-forms/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/interactive-forms/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/forms/" lang="en" hreflang="en">English</a></nav>
-  <h1>HTML Form၊ Label နဲ့ Input များ</h1>
-  <p class="article-version">HTML Living Standard</p>
-  <p class="intro">Form က user ဖြည့်ထားတဲ့ အကွက်တွေကနေ data စုပါတယ်။ Browser က ဖြည့်ထားတာ မှန်မမှန် စစ်နိုင်သလို ရွေးထားတဲ့ တန်ဖိုးတွေကို name၊ value အတွဲအဖြစ် စုပြီး URL တစ်ခုဆီ ပို့နိုင်ပါတယ်။</p>
-  <p class="reading-link"><a href="/docs/?lang=my#/html/forms">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
-
-  <section class="article-section">
-    <h2>ဒီစာမျက်နှာမှာ</h2>
-    <ul><li><a href="#form">&lt;form&gt; က ဘာလုပ်လဲ။</a></li>
-<li><a href="#fields">Label နဲ့ ဖြည့်ရမယ့်အကွက် ချိတ်ခြင်း</a></li>
-<li><a href="#input-types">ဖြည့်မယ့် Data အလိုက် Input Type ရွေးခြင်း</a></li>
-<li><a href="#submission">GET၊ POST နဲ့ Form Data ပို့ခြင်း</a></li>
-<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
-  </section>
-  <section class="article-section" id="form">
-  <h2>&lt;form&gt; က ဘာလုပ်လဲ။</h2>
-  <p>&lt;form&gt; က မေးခွန်းဖြေဖို့၊ အချက်အလက် ပို့ဖို့ သုံးမယ့် အကွက်တွေကို စုထားပါတယ်။ Input က user စာရိုက်လို့ရတဲ့ အကွက်တစ်ခုပါ။ Submit ခလုတ်က form ပို့ဖို့ browser ကို ပြောပါတယ်။ Input ရဲ့ name က ပို့မယ့် data မှာ အဲဒီတန်ဖိုးရဲ့ နာမည် ဖြစ်ပါတယ်။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;First form&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;form method=&quot;get&quot;&gt;
-    &lt;label for=&quot;product&quot;&gt;Product&lt;/label&gt;
-    &lt;input id=&quot;product&quot; name=&quot;product&quot;&gt;
-    &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
-  &lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> pen ရိုက်ပြီး submit နှိပ်ပါ။ Browser လိပ်စာမှာ ?product=pen ပေါ်ပါမယ်။ ဒီနမူနာက အဲဒီ query ပါတဲ့ URL နဲ့ စာမျက်နှာ ပြန်ဖွင့်ပါတယ်။</p>
-
-</section>
-<section class="article-section" id="fields">
-  <h2>Label နဲ့ ဖြည့်ရမယ့်အကွက် ချိတ်ခြင်း</h2>
-  <p>label ရဲ့ for နဲ့ input ရဲ့ id ကို တူအောင် ရေးပါ။ id က document ထဲမှာ element ကို ရှာဖို့ သုံးပြီး name က form ပို့တဲ့အခါ value ကို ဘယ် key အောက်မှာ ထည့်မလဲ သတ်မှတ်ပါတယ်။ မြင်ရတဲ့ label ထားရင် user စာရိုက်ပြီးနောက်လည်း ဒီအကွက်မှာ ဘာဖြည့်ရမယ်ဆိုတာ သိနိုင်ပါတယ်။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
-<pre><code>&lt;label for=&quot;customer-email&quot;&gt;Email address&lt;/label&gt;
-&lt;input id=&quot;customer-email&quot; name=&quot;email&quot; type=&quot;email&quot; autocomplete=&quot;email&quot;&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Label ကို click နှိပ်ရင် input ဆီ focus ရောက်ပါတယ်။ ဒီ input ကို form နဲ့ ပို့တဲ့အခါ ရိုက်ထားတဲ့ email ကို email ဆိုတဲ့ key နဲ့ ပို့ပါမယ်။</p>
-
-</section>
-<section class="article-section" id="input-types">
-  <h2>ဖြည့်မယ့် Data အလိုက် Input Type ရွေးခြင်း</h2>
-  <p>type အလိုက် browser က ပြတဲ့ control၊ data စစ်ပုံ ဒါမှမဟုတ် ဖုန်းပေါ်က keyboard ကွာနိုင်ပါတယ်။ Email လိပ်စာအတွက် email၊ အရေအတွက်အတွက် number၊ နေ့စွဲအတွက် date သုံးပါ။ email input က ရိုက်ထားတဲ့ပုံစံ မှန်မမှန် စစ်နိုင်ပါတယ်။ လိပ်စာကို ဒီ user တကယ်ပိုင်လားဆိုတာ စစ်ဖို့ သီးသန့်နည်းလမ်း လိုပါတယ်။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
-<pre><code>&lt;form&gt;
-  &lt;label for=&quot;email&quot;&gt;Email&lt;/label&gt;
-  &lt;input id=&quot;email&quot; name=&quot;email&quot; type=&quot;email&quot; required&gt;
-  &lt;label for=&quot;quantity&quot;&gt;Quantity&lt;/label&gt;
-  &lt;input id=&quot;quantity&quot; name=&quot;quantity&quot; type=&quot;number&quot; min=&quot;1&quot; value=&quot;1&quot;&gt;
-  &lt;label for=&quot;pickup&quot;&gt;Pickup date&lt;/label&gt;
-  &lt;input id=&quot;pickup&quot; name=&quot;pickup&quot; type=&quot;date&quot;&gt;
-  &lt;button type=&quot;submit&quot;&gt;Continue&lt;/button&gt;
-&lt;/form&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Email မှာ pen လို့ရိုက်ပြီး submit စမ်းပါ။ Browser က email ပုံစံမှန်အောင် ပြန်ဖြည့်ခိုင်းပါတယ်။ Date အကွက်မှာ ရက်စွဲရွေးဖို့ calendar ပေါ်နိုင်ပြီး form ပို့တဲ့ date တန်ဖိုးက YYYY-MM-DD ပုံစံပါ။</p>
-
-</section>
-<section class="article-section" id="submission">
-  <h2>GET၊ POST နဲ့ Form Data ပို့ခြင်း</h2>
-  <p>action က request ပို့မယ့်လိပ်စာကို ပြောပါတယ်။ GET က ဖြည့်ထားတဲ့ တန်ဖိုးတွေကို URL ရဲ့ query string ထဲ ထည့်ပြီး ရှာဖွေမှုလို အလုပ်အတွက် သုံးနိုင်ပါတယ်။ POST က data ကို request body ထဲ ထည့်ပို့ပြီး order တင်တာလို အခြေအနေ ပြောင်းစေတဲ့အလုပ်တွေမှာ သုံးလေ့ရှိပါတယ်။ name ပါပြီး ပို့လို့ရတဲ့ controls တွေဆီက တန်ဖိုးတွေကို form က စုပေးပါတယ်။ Request ကို server route က လက်ခံ ကိုင်တွယ်ပါတယ်။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
-<pre><code>&lt;form action=&quot;/orders&quot; method=&quot;post&quot;&gt;
-  &lt;label for=&quot;order-email&quot;&gt;Email address&lt;/label&gt;
-  &lt;input id=&quot;order-email&quot; name=&quot;email&quot; type=&quot;email&quot; required&gt;
-  &lt;button type=&quot;submit&quot;&gt;Place order&lt;/button&gt;
-&lt;/form&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> POST /orders လက်ခံတဲ့ server ရှိရင် browser က email ပါတဲ့ form body ကို request နဲ့ ပို့ပါတယ်။ HTML ဖိုင်သီးသန့် ဖွင့်စမ်းရင်တော့ input မမှန်တဲ့အခါ browser က မပို့အောင် တားတာကို စမ်းနိုင်ပါတယ်။</p>
-
-</section>
-  <section class="references" id="references">
-    <h2>တရားဝင် ကိုးကားချက်များ</h2>
-    <ul><li><a href="https://html.spec.whatwg.org/multipage/forms.html">WHATWG · Forms</a></li>
-<li><a href="https://html.spec.whatwg.org/multipage/input.html">WHATWG · The input element</a></li>
-<li><a href="https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#form-submission-algorithm">WHATWG · Form submission</a></li></ul>
-  </section>
-  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/table-spans/">အရင်သင်ခန်းစာ · colspan နဲ့ rowspan သုံးပြီး Table Cell တွေ ပေါင်းခြင်း</a>
-<a href="/docs/read/my/html/form-controls/">နောက်သင်ခန်းစာ · Checkbox၊ Radio Button နဲ့ Select Menu များ</a></nav></footer>
+  <h1>Forms နှင့် ထည့်ထားတဲ့ တန်ဖိုးတွေ စစ်ဆေးပုံ</h1>
+  <p><a href="/docs/read/my/html/interactive-forms/#forms">Forms နှင့် ထည့်ထားတဲ့ တန်ဖိုးတွေ စစ်ဆေးပုံ</a></p>
+  <ul><li id="forms"><a href="/docs/read/my/html/interactive-forms/#forms">အမည်ပါတဲ့ တန်ဖိုးတွေကို GET သို့မဟုတ် POST နဲ့ ပို့ခြင်း</a></li>
+<li id="input-types"><a href="/docs/read/my/html/interactive-forms/#input-types">တန်ဖိုးအလိုက် Control ရွေးခြင်း</a></li>
+<li id="labels"><a href="/docs/read/my/html/interactive-forms/#labels">Field ကို Label ပေးပြီး ဆက်စပ်တာတွေ စုခြင်း</a></li>
+<li id="validation"><a href="/docs/read/my/html/interactive-forms/#validation">Submit မလုပ်ခင် ဖြည့်ထားတာကို စစ်ခြင်း</a></li>
+<li id="practice"><a href="/docs/read/my/html/interactive-forms/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
 </article>
 </main>
 </body>

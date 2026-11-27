@@ -3,96 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A cell can occupy multiple columns or rows. Count the grid positions the browser has already filled before adding another cell.">
-  <title>Table Cell Spanning with colspan and rowspan · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/table-spans/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/table-spans/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/table-spans/">
+  <meta name="description" content="Represent information that readers compare by row and column, such as a workshop schedule or a price list.">
+  <title>Data Tables &amp; Structured Information · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/data-tables/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/data-tables/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/data-tables/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/table-spans/" lang="my" hreflang="my">မြန်မာ</a></nav>
-  <h1>Table Cell Spanning with colspan and rowspan</h1>
-  <p class="article-version">HTML Living Standard</p>
-  <p class="intro">A cell can occupy multiple columns or rows. Count the grid positions the browser has already filled before adding another cell.</p>
-  <p class="reading-link"><a href="/docs/?lang=en#/html/table-spans">Open interactive lesson</a></p>
-
-  <section class="article-section">
-    <h2>On this page</h2>
-    <ul><li><a href="#colspan">Span columns with colspan</a></li>
-<li><a href="#rowspan">Span rows with rowspan</a></li>
-<li><a href="#classroom-lab">Design a timetable</a></li>
-<li><a href="#references">Official references</a></li></ul>
-  </section>
-  <section class="article-section" id="colspan">
-  <h2>Span columns with colspan</h2>
-  <p>colspan=&quot;2&quot; makes a cell occupy two adjacent columns in the same row. In that row, write a single cell for those two positions.</p>
-<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;Span columns with colspan&lt;/title&gt;
-  &lt;style&gt;
-th, td { border: 1px solid teal; padding: 8px; }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;table&gt;
-  &lt;caption&gt;Product availability&lt;/caption&gt;
-  &lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Folder&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Stapler&lt;/th&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt;Sold out&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> Sold out stretches across the two columns below their headings.</p>
-
-</section>
-<section class="article-section" id="rowspan">
-  <h2>Span rows with rowspan</h2>
-  <p>rowspan=&quot;2&quot; makes a cell occupy the current row and the one below in the same column. In the second row, add cells only for the open positions.</p>
-<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;Span rows with rowspan&lt;/title&gt;
-  &lt;style&gt;
-th, td { border: 1px solid teal; padding: 8px; }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;table&gt;
-  &lt;caption&gt;Product catalog&lt;/caption&gt;
-  &lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Category&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Item&lt;/th&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td rowspan=&quot;2&quot;&gt;Stationery&lt;/td&gt;&lt;td&gt;Pen&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td&gt;Notebook&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> Stationery appears in a tall cell next to both Pen and Notebook.</p>
-
-</section>
-<section class="article-section" id="classroom-lab">
-  <h2>Design a timetable</h2>
-  <p>Make columns for weekdays and rows for time slots. Use caption to name the schedule and th with scope to identify each axis. Merge the five lunch cells with colspan. Pick one lesson and identify its day and time from its headers.</p>
-
-
-
-
-</section>
-  <section class="references" id="references">
-    <h2>Official references</h2>
-    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table">MDN · &lt;table&gt;</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/td">MDN · &lt;td&gt;</a></li></ul>
-  </section>
-  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/tables/">Previous lesson · HTML Tables &lt;table&gt;</a>
-<a href="/docs/read/en/html/forms/">Next lesson · HTML Forms, Labels, and Inputs</a></nav></footer>
+  <h1>Data Tables &amp; Structured Information</h1>
+  <p><a href="/docs/read/en/html/data-tables/#table-spans">Data Tables &amp; Structured Information</a></p>
+  <ul><li id="tables"><a href="/docs/read/en/html/data-tables/#tables">Build rows, headers, and data cells</a></li>
+<li id="table-sections"><a href="/docs/read/en/html/data-tables/#table-sections">Name the table and group related rows</a></li>
+<li id="table-spans"><a href="/docs/read/en/html/data-tables/#table-spans">Span cells and associate headers</a></li>
+<li id="layout"><a href="/docs/read/en/html/data-tables/#layout">Use CSS for page layout</a></li>
+<li id="practice"><a href="/docs/read/en/html/data-tables/#practice">Hands-on exercise</a></li></ul>
 </article>
 </main>
 </body>

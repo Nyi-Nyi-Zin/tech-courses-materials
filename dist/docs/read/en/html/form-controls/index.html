@@ -3,80 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="HTML offers different controls for independent options, mutually exclusive choices, and dropdowns. Each uses attributes to decide which values are submitted.">
-  <title>Checkboxes, Radio Buttons, and Select Menus · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/form-controls/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/form-controls/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/form-controls/">
+  <meta name="description" content="Build a form with labelled controls, decide how its values are submitted, and use the browser to check input before submission.">
+  <title>Interactive Forms &amp; Input Validation · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/interactive-forms/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/interactive-forms/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/interactive-forms/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/form-controls/" lang="my" hreflang="my">မြန်မာ</a></nav>
-  <h1>Checkboxes, Radio Buttons, and Select Menus</h1>
-  <p class="article-version">HTML Living Standard</p>
-  <p class="intro">HTML offers different controls for independent options, mutually exclusive choices, and dropdowns. Each uses attributes to decide which values are submitted.</p>
-  <p class="reading-link"><a href="/docs/?lang=en#/html/form-controls">Open interactive lesson</a></p>
-
-  <section class="article-section">
-    <h2>On this page</h2>
-    <ul><li><a href="#choices">Check any number of options with checkboxes</a></li>
-<li><a href="#radio">Choose one option with radio buttons</a></li>
-<li><a href="#values">Choose from a dropdown with &lt;select&gt;</a></li>
-<li><a href="#references">Official references</a></li></ul>
-  </section>
-  <section class="article-section" id="choices">
-  <h2>Check any number of options with checkboxes</h2>
-  <p>Each checkbox has its own checked state. The fieldset groups related controls and its legend names the group. Checked boxes with the same name can contribute multiple values. An unchecked box contributes no entry. In JavaScript read them with FormData.getAll(name).</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;form id=&quot;extras-form&quot;&gt;
-  &lt;fieldset&gt;
-    &lt;legend&gt;Extras&lt;/legend&gt;
-    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;extra&quot; value=&quot;gift-wrap&quot;&gt; Gift wrap&lt;/label&gt;
-    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;extra&quot; value=&quot;note&quot;&gt; Gift note&lt;/label&gt;
-  &lt;/fieldset&gt;
-&lt;/form&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> Select both. In the console, new FormData(document.querySelector(&quot;#extras-form&quot;)).getAll(&quot;extra&quot;) produces [&quot;gift-wrap&quot;, &quot;note&quot;]. Uncheck both and it produces [].</p>
-
-</section>
-<section class="article-section" id="radio">
-  <h2>Choose one option with radio buttons</h2>
-  <p>Radio buttons with the same name in the same form form a group. Selecting one clears the previous choice. Give each option a distinct value. The checked attribute sets the initial selection.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;fieldset&gt;
-  &lt;legend&gt;Paper size&lt;/legend&gt;
-  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;size&quot; value=&quot;small&quot; checked&gt; Small&lt;/label&gt;
-  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;size&quot; value=&quot;large&quot;&gt; Large&lt;/label&gt;
-&lt;/fieldset&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> Small starts selected. Click Large and Small becomes unselected. In a form, the submission would include size=large.</p>
-
-</section>
-<section class="article-section" id="values">
-  <h2>Choose from a dropdown with &lt;select&gt;</h2>
-  <p>The select holds options. Each option has text the reader sees and a value the form sends. Use a first option with an empty value alongside required for a prompt that needs a real choice. Add multiple only when several selections are appropriate. Each selected option then contributes its own value.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;form&gt;
-  &lt;label for=&quot;product&quot;&gt;Product&lt;/label&gt;
-  &lt;select id=&quot;product&quot; name=&quot;product&quot; required&gt;
-    &lt;option value=&quot;&quot;&gt;Choose a product&lt;/option&gt;
-    &lt;option value=&quot;pen&quot;&gt;Pen&lt;/option&gt;
-    &lt;option value=&quot;notebook&quot;&gt;Notebook&lt;/option&gt;
-  &lt;/select&gt;
-  &lt;button type=&quot;submit&quot;&gt;Continue&lt;/button&gt;
-&lt;/form&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> The prompt is initially visible, and the browser blocks submission until you choose Pen or Notebook. Choosing Pen sends the value pen.</p>
-
-</section>
-  <section class="references" id="references">
-    <h2>Official references</h2>
-    <ul><li><a href="https://html.spec.whatwg.org/multipage/input.html">WHATWG · Input controls</a></li>
-<li><a href="https://html.spec.whatwg.org/multipage/form-elements.html#the-select-element">WHATWG · The select element</a></li>
-<li><a href="https://xhr.spec.whatwg.org/#interface-formdata">WHATWG · FormData</a></li></ul>
-  </section>
-  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/forms/">Previous lesson · HTML Forms, Labels, and Inputs</a>
-<a href="/docs/read/en/html/form-field-types/">Next lesson · Textarea, File Inputs, and Input Attributes</a></nav></footer>
+  <h1>Interactive Forms &amp; Input Validation</h1>
+  <p><a href="/docs/read/en/html/interactive-forms/#labels">Interactive Forms &amp; Input Validation</a></p>
+  <ul><li id="forms"><a href="/docs/read/en/html/interactive-forms/#forms">Submit named values with GET or POST</a></li>
+<li id="input-types"><a href="/docs/read/en/html/interactive-forms/#input-types">Choose a control for each value</a></li>
+<li id="labels"><a href="/docs/read/en/html/interactive-forms/#labels">Label fields and group related controls</a></li>
+<li id="validation"><a href="/docs/read/en/html/interactive-forms/#validation">Check input before submission</a></li>
+<li id="practice"><a href="/docs/read/en/html/interactive-forms/#practice">Hands-on exercise</a></li></ul>
 </article>
 </main>
 </body>

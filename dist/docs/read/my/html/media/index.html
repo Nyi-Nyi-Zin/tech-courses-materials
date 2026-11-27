@@ -3,83 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Browser က media ဖိုင်ကို တိုက်ရိုက် ဖွင့်နိုင်ပါတယ်။ ဖွင့်တာ၊ ရပ်တာကို user က ထိန်းနိုင်ဖို့ controls ပေးပါ။ စကားသံနဲ့ အရေးပါတဲ့ တခြားအသံတွေကို စာသားနဲ့လည်း ပံ့ပိုးပါ။">
-  <title>HTML မှာ အသံနဲ့ ဗီဒီယို ထည့်ခြင်း · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/media/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/media/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/media/">
+  <meta name="description" content="ပုံ၊ အသံနဲ့ ဗီဒီယို ထည့်ပါမယ်။ ပုံအတွက် စာသား၊ ဗီဒီယိုအတွက် captions နဲ့ မျက်နှာပြင်အရွယ်လိုက် ရွေးနိုင်တဲ့ image ဖိုင်တွေကိုလည်း သုံးပါမယ်။">
+  <title>ပုံ၊ အသံ၊ ဗီဒီယိုနှင့် Embed များ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/images-media/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/images-media/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/images-media/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/media/" lang="en" hreflang="en">English</a></nav>
-  <h1>HTML မှာ အသံနဲ့ ဗီဒီယို ထည့်ခြင်း</h1>
-  <p class="article-version">HTML Living Standard</p>
-  <p class="intro">Browser က media ဖိုင်ကို တိုက်ရိုက် ဖွင့်နိုင်ပါတယ်။ ဖွင့်တာ၊ ရပ်တာကို user က ထိန်းနိုင်ဖို့ controls ပေးပါ။ စကားသံနဲ့ အရေးပါတဲ့ တခြားအသံတွေကို စာသားနဲ့လည်း ပံ့ပိုးပါ။</p>
-  <p class="reading-link"><a href="/docs/?lang=my#/html/media">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
-
-  <section class="article-section">
-    <h2>ဒီစာမျက်နှာမှာ</h2>
-    <ul><li><a href="#audio">&lt;audio&gt; နဲ့ အသံဖွင့်ခြင်း</a></li>
-<li><a href="#playback">&lt;video&gt; နဲ့ ဗီဒီယိုဖွင့်ခြင်း</a></li>
-<li><a href="#captions">&lt;track&gt; နဲ့ အချိန်ကိုက် စာတန်းထိုးခြင်း</a></li>
-<li><a href="#webvtt">WebVTT စာတန်းတစ်ခု ရေးခြင်း</a></li>
-<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
-  </section>
-  <section class="article-section" id="audio">
-  <h2>&lt;audio&gt; နဲ့ အသံဖွင့်ခြင်း</h2>
-  <p>Browser ရဲ့ audio player ကို မြင်ရဖို့ controls ထည့်ပါ။ source တစ်ခုထက်ပိုရင် browser က အစဉ်လိုက် စမ်းပါတယ်။ type ထည့်ထားရင် မဖွင့်နိုင်မှန်း သိတဲ့ format ကို ကျော်နိုင်ပါတယ်။ အသံထဲက အချက်အလက် အတူတူ ဖတ်လို့ရဖို့ player အနားမှာ စာသားအပြည့်အစုံဖြစ်တဲ့ transcript ထည့်ပါ။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
-<pre><code>&lt;audio controls&gt;
-  &lt;source src=&quot;https://javascript-training.cloudninemm.com/media/lesson.ogg&quot; type=&quot;audio/ogg&quot;&gt;
-  Your browser does not support this audio player.
-&lt;/audio&gt;
-&lt;p&gt;Sample audio: a short tone.&lt;/p&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Internet ချိတ်ထားပြီး Play နှိပ်ရင် အသံတိုတစ်ခု ကြားရပါမယ်။</p>
-
-</section>
-<section class="article-section" id="playback">
-  <h2>&lt;video&gt; နဲ့ ဗီဒီယိုဖွင့်ခြင်း</h2>
-  <p>Video element က လှုပ်ရှားနေတဲ့ ပုံတွေ ပြပြီး အသံပါ ဖွင့်နိုင်ပါတယ်။ controls က browser ရဲ့ ခလုတ်တွေနဲ့ အချိန်တန်းကို ပြပါတယ်။ preload=&quot;metadata&quot; က ကြာချိန်လို အချက်အလက်တွေ အရင်ဖတ်နိုင်တယ်လို့ browser ကို ပြောပါတယ်။ မဖွင့်ခင် ပြမယ့် ကာဗာပုံ သီးသန့်ရှိရင် poster မှာ အဲဒီပုံလိပ်စာ ထည့်နိုင်ပါတယ်။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
-<pre><code>&lt;video controls preload=&quot;metadata&quot; width=&quot;360&quot;&gt;
-  &lt;source src=&quot;https://javascript-training.cloudninemm.com/media/lesson.webm&quot; type=&quot;video/webm&quot;&gt;
-  Your browser does not support this video player.
-&lt;/video&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Internet ချိတ်ထားပြီး Play နှိပ်ရင် အရောင်တန်းတွေ ရွေ့နေတဲ့ video အတိုကို မြင်ရပါမယ်။</p>
-
-</section>
-<section class="article-section" id="captions">
-  <h2>&lt;track&gt; နဲ့ အချိန်ကိုက် စာတန်းထိုးခြင်း</h2>
-  <p>track က ဘယ်အချိန်မှာ ဘာစာသားပြမလဲ ရေးထားတဲ့ WebVTT ဖိုင်ကို သုံးပါတယ်။ Captions မှာ စကားသံနဲ့ အရေးပါတဲ့ အသံတွေ ပါပါတယ်။ srclang က ဘာသာစကား၊ label က player ထဲမှာ ရွေးမယ့်နာမည်၊ default က user setting နဲ့ မငြိရင် အစကတည်းက ဖွင့်ပြဖို့ browser ကို ပြောပါတယ်။ နမူနာ စမ်းတဲ့အခါ HTML၊ video နဲ့ VTT ကို local web server တစ်ခုတည်းကနေ ဖွင့်ပါ။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> https://javascript-training.cloudninemm.com/media/lesson.webm နဲ့ https://javascript-training.cloudninemm.com/media/lesson-en.vtt ကနေ sample ဖိုင်နှစ်ခုကို ယူပြီး index.html ဘေးမှာ ထားပါ။ ဒီ code ကို body ထဲ ထည့်ပါ။ Live Server သုံးပါ။ ဒါမှမဟုတ် folder ထဲ python -m http.server 8000 run ပြီး http://localhost:8000 က ဖွင့်ပါ။</p>
-<pre><code>&lt;video controls src=&quot;lesson.webm&quot;&gt;
-  &lt;track kind=&quot;captions&quot; src=&quot;lesson-en.vtt&quot; srclang=&quot;en&quot; label=&quot;English&quot; default&gt;
-&lt;/video&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Video ဖွင့်ပါ။ လိုရင် player ရဲ့ caption menu မှာ English ရွေးပါ။ Browser က ပေးထားတဲ့ URL ကနေ lesson-en.vtt ကို ယူသုံးပါတယ်။</p>
-
-</section>
-<section class="article-section" id="webvtt">
-  <h2>WebVTT စာတန်းတစ်ခု ရေးခြင်း</h2>
-  <p>ဒီနမူနာကို video နဲ့ folder တူတူမှာ lesson-en.vtt ဆိုပြီး သိမ်းပါ။ WEBVTT က ဖိုင် format ကို ဖော်ပြပါတယ်။ စာတန်းတစ်ခုကို ဘယ်အချိန်ကနေ ဘယ်အချိန်အထိ ပြမလဲ အရင်ရေးပြီး အောက်မှာ ပြမယ့်စာသား ထည့်ပါတယ်။ နောက်စာတန်း မစခင် တစ်လိုင်းခြားပါ။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> lesson-en.vtt ထဲက စာသားကို ဒီ code နဲ့ အစားထိုးပါ။ သိမ်းပြီး အရင် local server က page ကို reload လုပ်ပါ။</p>
-<pre><code>WEBVTT
-
-00:00:00.000 --&gt; 00:00:03.000
-[Color bars move across the screen.]</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Caption ဖွင့်ထားရင် 0 ကနေ 3 စက္ကန့်အထိ စာတန်းပေါ်ပါမယ်။ နမူနာ video ထဲမှာ ဘာဖြစ်နေလဲ ဖော်ပြပါတယ်။</p>
-
-</section>
-  <section class="references" id="references">
-    <h2>တရားဝင် ကိုးကားချက်များ</h2>
-    <ul><li><a href="https://html.spec.whatwg.org/multipage/media.html">WHATWG · Media elements</a></li>
-<li><a href="https://html.spec.whatwg.org/multipage/media.html#the-track-element">WHATWG · The track element</a></li>
-<li><a href="https://www.w3.org/TR/webvtt1/">W3C · WebVTT</a></li></ul>
-  </section>
-  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/images/">အရင်သင်ခန်းစာ · HTML မှာ ပုံထည့်ခြင်း</a>
-<a href="/docs/read/my/html/icons-and-frames/">နောက်သင်ခန်းစာ · Favicons နဲ့ Iframes</a></nav></footer>
+  <h1>ပုံ၊ အသံ၊ ဗီဒီယိုနှင့် Embed များ</h1>
+  <p><a href="/docs/read/my/html/images-media/#media">ပုံ၊ အသံ၊ ဗီဒီယိုနှင့် Embed များ</a></p>
+  <ul><li id="images"><a href="/docs/read/my/html/images-media/#images">ပုံဖိုင်၊ အရွယ်အစားနှင့် Alt Text</a></li>
+<li id="figure"><a href="/docs/read/my/html/images-media/#figure">ပုံနှင့် မြင်ရမယ့် ပုံစာကို ချိတ်ခြင်း</a></li>
+<li id="responsive-images"><a href="/docs/read/my/html/images-media/#responsive-images">နေရာအကျယ်အလိုက် ပုံဖိုင် ရွေးခြင်း</a></li>
+<li id="media"><a href="/docs/read/my/html/images-media/#media">အသံ၊ ဗီဒီယို ဖွင့်ခြင်းနှင့် Page Embed လုပ်ခြင်း</a></li>
+<li id="practice"><a href="/docs/read/my/html/images-media/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
 </article>
 </main>
 </body>
