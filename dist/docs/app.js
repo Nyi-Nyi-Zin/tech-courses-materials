@@ -1,7 +1,7 @@
-import { guides as webGuides, developerGuides } from './guides.js?v=96';
+import { guides as webGuides, developerGuides } from './guides.js?v=97';
 import { curricula } from '../locales.js';
 import { articleForExercise } from '../learning-paths.js';
-import { lessonDestination } from './section-redirects.js?v=91';
+import { lessonDestination } from './section-redirects.js?v=95';
 import { attachSidebar, sidebarBackdrop, sidebarEdgeToggle, sidebarToggle } from '../sidebar.js';
 import { bindExamples, exampleMarkup } from './run-examples.js?v=61';
 import { savedLanguage, saveLanguage, siteHeader } from '../site-header.js?v=2';

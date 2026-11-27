@@ -19,6 +19,10 @@ export const movedSections = {
 };
 
 export const movedArticles = {
+  html: {
+    'standard-attributes': { page: 'attributes' },
+    'global-attributes': { page: 'attributes' },
+  },
   database: {
     'client-server': { guide: 'web-fundamentals' },
     'web-app-architecture': { guide: 'web-fundamentals' },

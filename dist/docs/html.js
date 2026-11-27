@@ -1,5 +1,5 @@
 import { p, page, guide } from './content.js';
-import { htmlAttributes } from './html-attributes.js';
+import { htmlAttributes } from './html-attributes.js?v=95';
 import { extraFormLessons } from './html-forms-extra.js';
 import { htmlFoundations } from './html-foundations.js';
 import { demoPage, example, htmlSpec, standalone } from './examples.js';
@@ -556,4 +556,4 @@ const seo = page('metadata-and-search', p('Search Engine Optimization (SEO)', 'S
 export const htmlGuide = guide('html', 'HTML', 'HTML Living Standard', p(
   'Start with a document and its text, then work through links, images, semantic regions, forms, and interactive elements. Each topic explains how the browser handles it and includes code you can try.',
   'Document ဖွဲ့စည်းပုံနဲ့ စာသားက စပြီး links၊ ပုံတွေ၊ semantic regions၊ forms နဲ့ interactive elements တွေကို ဆက်လေ့လာပါ။ ခေါင်းစဉ်တစ်ခုစီမှာ browser က ဘယ်လို ကိုင်တွယ်လဲဆိုတာနဲ့ စမ်းလို့ရတဲ့ code ပါပါတယ်။',
-), [...htmlFoundations, ...htmlAttributes, ...extraFormLessons, links, buttons, lists, disclosure, images, media, tables, accessibility, forms, controls, validation, dialogs, popovers, seo]);
+), [...htmlFoundations, htmlAttributes, ...extraFormLessons, links, buttons, lists, disclosure, images, media, tables, accessibility, forms, controls, validation, dialogs, popovers, seo]);
