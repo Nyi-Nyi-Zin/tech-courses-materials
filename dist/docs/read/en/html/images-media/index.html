@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Add images and playable media with text alternatives, captions, and files sized for the reader’s screen.">
+  <title>Images, Media &amp; External Embeds · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/images-media/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/images-media/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/images-media/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/images-media/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Images, Media &amp; External Embeds</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Add images and playable media with text alternatives, captions, and files sized for the reader’s screen.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/images-media">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#images">Image files, dimensions, and alt text</a></li>
+<li><a href="#figure">Connect a figure to its visible caption</a></li>
+<li><a href="#responsive-images">Choose a file based on the available space</a></li>
+<li><a href="#media">Play audio and video or embed a page</a></li>
+<li><a href="#practice">Hands-on exercise</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="images">
+  <h2>Image files, dimensions, and alt text</h2>
+  <p>The src points to a file. Use JPEG for photos, PNG for lossless graphics or transparency, SVG for scalable diagrams, and WebP when it gives a smaller suitable file. Set width and height to reserve space at the correct aspect ratio. Describe what matters in alt. Use alt=&quot;&quot; for decoration.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;img src=&quot;https://javascript-training.cloudninemm.com/docs/media/html/workshop-480.webp&quot;
+     alt=&quot;Diagram illustrating a client communicating with a server&quot;
+     width=&quot;480&quot; height=&quot;270&quot;&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The diagram loads into a reserved 480-by-270 area.</p>
+
+</section>
+<section class="article-section" id="figure">
+  <h2>Connect a figure to its visible caption</h2>
+  <p>Use figure for self-contained material worth referring to as a unit. A figcaption gives readers visible context. The alt text still explains meaningful visual information to readers who cannot see the image.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;figure&gt;
+  &lt;img src=&quot;https://javascript-training.cloudninemm.com/docs/media/html/workshop-480.webp&quot;
+       width=&quot;480&quot; height=&quot;270&quot;
+       alt=&quot;Client and server connected over a network&quot;&gt;
+  &lt;figcaption&gt;Figure 1. The two sides of a web request.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The caption appears directly below the diagram.</p>
+
+</section>
+<section class="article-section" id="responsive-images">
+  <h2>Choose a file based on the available space</h2>
+  <p>Use width descriptors in srcset and tell the browser the intended layout width with sizes. It can pick a candidate using the layout width and display density. Use picture for a different crop, for example a square image on a narrow screen. Use loading=&quot;lazy&quot; on images farther down the page.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;picture&gt;
+  &lt;source media=&quot;(max-width: 500px)&quot; srcset=&quot;https://javascript-training.cloudninemm.com/docs/media/html/workshop-square.webp&quot;
+          width=&quot;480&quot; height=&quot;480&quot;&gt;
+  &lt;img src=&quot;https://javascript-training.cloudninemm.com/docs/media/html/workshop-480.webp&quot;
+       srcset=&quot;https://javascript-training.cloudninemm.com/docs/media/html/workshop-480.webp 480w, https://javascript-training.cloudninemm.com/docs/media/html/workshop-960.webp 960w&quot;
+       sizes=&quot;(max-width: 600px) 100vw, 480px&quot;
+       width=&quot;480&quot; height=&quot;270&quot; style=&quot;max-width:100%;height:auto&quot;
+       loading=&quot;lazy&quot; alt=&quot;A diagram of a client and a server&quot;&gt;
+&lt;/picture&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Resize the preview and look at the requested file in DevTools.</p>
+
+</section>
+<section class="article-section" id="media">
+  <h2>Play audio and video or embed a page</h2>
+  <p>The controls attribute adds a player. List available files with source and supply a video poster to show before playback. A track links to a WebVTT captions file. Give an iframe a descriptive title so its purpose is clear when a reader reaches it.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;audio controls preload=&quot;none&quot;&gt;
+  &lt;source src=&quot;https://javascript-training.cloudninemm.com/media/lesson.ogg&quot; type=&quot;audio/ogg&quot;&gt;
+&lt;/audio&gt;
+&lt;video controls width=&quot;420&quot; style=&quot;max-width:100%&quot;
+       poster=&quot;https://javascript-training.cloudninemm.com/docs/media/html/workshop-480.webp&quot;&gt;
+  &lt;source src=&quot;https://javascript-training.cloudninemm.com/media/lesson.webm&quot; type=&quot;video/webm&quot;&gt;
+  &lt;track kind=&quot;captions&quot; src=&quot;https://javascript-training.cloudninemm.com/media/lesson-en.vtt&quot; srclang=&quot;en&quot; label=&quot;English&quot;&gt;
+&lt;/video&gt;
+&lt;iframe title=&quot;Workshop location note&quot;
+        srcdoc=&quot;&lt;p&gt;Location: North Hall, Room 2.&lt;/p&gt;&quot;&gt;&lt;/iframe&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Try the audio and the video controls. Turn on English captions in the video player.</p>
+
+</section>
+<section class="article-section" id="practice">
+  <h2>Hands-on exercise</h2>
+  <p>Create a three-image gallery. Give each figure a caption and an alt attribute. Test one broken image path, then restore it. Add a video with controls and captions.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Responsive_images">MDN · Responsive images</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/HTML_video_and_audio">MDN · Video and audio content</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/lists-navigation/">Previous lesson · Lists &amp; Navigation</a>
+<a href="/docs/read/en/html/data-tables/">Next lesson · Data Tables &amp; Structured Information</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -3,73 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ခေါင်းစဉ်တွေက စာမျက်နှာကို အပိုင်းလိုက် ဖတ်ရလွယ်အောင် စီပေးပါတယ်။ Heading level တစ်ခုစီက အဲဒီအပိုင်းဟာ ဘယ်အဓိကခေါင်းစဉ်၊ ဘယ်အပိုင်းအောက်မှာ ရှိလဲဆိုတာ ပြောပေးပါတယ်။">
-  <title>ခေါင်းစဉ် &lt;h1&gt;–&lt;h6&gt; · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/headings/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/headings/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/headings/">
+  <meta name="description" content="ရိုးရိုးစာသားနဲ့ ရေးထားတဲ့ ဆောင်းပါးကို ခေါင်းစဉ်၊ စာပိုဒ်၊ အလေးပေးစာသား၊ ကိုးကားချက်နဲ့ code နမူနာတွေ ပါတဲ့ HTML document အဖြစ် ပြောင်းရေးပါမယ်။">
+  <title>စာသားနှင့် ခေါင်းစဉ်အဆင့်များ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/text-hierarchy/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/text-hierarchy/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/text-hierarchy/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/headings/" lang="en" hreflang="en">English</a></nav>
-  <h1>ခေါင်းစဉ် &lt;h1&gt;–&lt;h6&gt;</h1>
-  <p class="article-version">HTML Living Standard</p>
-  <p class="intro">ခေါင်းစဉ်တွေက စာမျက်နှာကို အပိုင်းလိုက် ဖတ်ရလွယ်အောင် စီပေးပါတယ်။ Heading level တစ်ခုစီက အဲဒီအပိုင်းဟာ ဘယ်အဓိကခေါင်းစဉ်၊ ဘယ်အပိုင်းအောက်မှာ ရှိလဲဆိုတာ ပြောပေးပါတယ်။</p>
-  <p class="reading-link"><a href="/docs/?lang=my#/html/headings">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
-
-  <section class="article-section">
-    <h2>ဒီစာမျက်နှာမှာ</h2>
-    <ul><li><a href="#headings">Heading အဆင့်တွေ စီပုံ</a></li>
-<li><a href="#appearance">Heading ပုံစံကို CSS နဲ့ ပြောင်းခြင်း</a></li>
-<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
-  </section>
-  <section class="article-section" id="headings">
-  <h2>Heading အဆင့်တွေ စီပုံ</h2>
-  <p>စာမျက်နှာရဲ့ အဓိကခေါင်းစဉ်ကို h1 နဲ့ ရေးပါ။ အဓိကအပိုင်း တစ်ခုစီကို h2၊ h2 အောက်က အပိုင်းခွဲကို h3 နဲ့ ရေးပါ။ ဒီထက်ပိုပြီး ဆင့်ဖို့ လိုရင် h4 ကနေ h6 အထိ သုံးနိုင်ပါတယ်။ အပိုင်းခွဲ စတဲ့အခါ level တစ်ဆင့်ချင်း ဆင်းပါ။ အပိုင်းခွဲပြီးရင် အပေါ် level ကို ပြန်တက်နိုင်ပါတယ်။ Screen reader သုံးသူကလည်း heading အဆင့်တွေကို လိုက်ပြီး လိုတဲ့အပိုင်းဆီ သွားနိုင်ပါတယ်။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
-<pre><code>&lt;h1&gt;Community library&lt;/h1&gt;
-&lt;h2&gt;Books&lt;/h2&gt;
-&lt;h3&gt;Fiction&lt;/h3&gt;
-&lt;p&gt;Novels and short stories.&lt;/p&gt;
-&lt;h3&gt;Nonfiction&lt;/h3&gt;
-&lt;p&gt;History and science books.&lt;/p&gt;
-&lt;h2&gt;Events&lt;/h2&gt;
-&lt;p&gt;Reading groups and workshops.&lt;/p&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Books နဲ့ Events နှစ်ခုလုံး level 2 ပါ။ Fiction နဲ့ Nonfiction က Books အောက်က level 3 တွေပါ။ Browser က ပုံမှန်အားဖြင့် စာလုံးအရွယ် ကွဲပြီး ပြသလို heading element က အကြောင်းအရာအဆင့်ကိုပါ သတ်မှတ်ထားပါတယ်။</p>
-
-</section>
-<section class="article-section" id="appearance">
-  <h2>Heading ပုံစံကို CSS နဲ့ ပြောင်းခြင်း</h2>
-  <p>စာမျက်နှာထဲက အကြောင်းအရာအဆင့်အလိုက် heading level ရွေးပါ။ မြင်ရတဲ့ အရွယ်အစားနဲ့ အကွာအဝေးကို CSS font-size နဲ့ margin တို့ သုံးပြီး ပြင်ပါ။ Card အပိုင်းတစ်ခုရဲ့ ခေါင်းစဉ်ကို စာလုံးအသေးနဲ့ ပြချင်လည်း အဓိကအပိုင်းဆို h2 သုံးလို့ရပါတယ်။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;Heading style&lt;/title&gt;
-  &lt;style&gt;
-    .compact-heading { font-size: 1rem; }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h1&gt;Community library&lt;/h1&gt;
-&lt;h2 class=&quot;compact-heading&quot;&gt;Today’s specials&lt;/h2&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> “Today’s specials” က စာလုံးအသေးနဲ့ ပေါ်ပြီး heading level 2 အဖြစ် ရှိနေပါတယ်။ Browser DevTools ရဲ့ Accessibility အပိုင်းမှာ စစ်နိုင်ပါတယ်။</p>
-
-</section>
-  <section class="references" id="references">
-    <h2>တရားဝင် ကိုးကားချက်များ</h2>
-    <ul><li><a href="https://html.spec.whatwg.org/multipage/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements">WHATWG · The h1–h6 elements</a></li>
-<li><a href="https://www.w3.org/WAI/tutorials/page-structure/headings/">W3C WAI · Headings</a></li></ul>
-  </section>
-  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/doctype/">အရင်သင်ခန်းစာ · HTML Doctype နဲ့ Browser Modes</a>
-<a href="/docs/read/my/html/paragraphs/">နောက်သင်ခန်းစာ · စာပိုဒ်၊ လိုင်းချိုးခြင်းနဲ့ အကြောင်းအရာ ခွဲခြင်း</a></nav></footer>
+  <h1>စာသားနှင့် ခေါင်းစဉ်အဆင့်များ</h1>
+  <p><a href="/docs/read/my/html/text-hierarchy/#headings">စာသားနှင့် ခေါင်းစဉ်အဆင့်များ</a></p>
+  <ul><li id="headings"><a href="/docs/read/my/html/text-hierarchy/#headings">အကြောင်းအရာအလိုက် ခေါင်းစဉ်အဆင့် ရွေးခြင်း</a></li>
+<li id="paragraphs"><a href="/docs/read/my/html/text-hierarchy/#paragraphs">စာပိုဒ်၊ စာကြောင်းချိုးခြင်းနှင့် Whitespace</a></li>
+<li id="inline-text"><a href="/docs/read/my/html/text-hierarchy/#inline-text">စာကြောင်းအတွင်း စာသားကို အဓိပ္ပာယ်ပေးခြင်း</a></li>
+<li id="entities"><a href="/docs/read/my/html/text-hierarchy/#entities">ကိုးကားစာသားနှင့် Code ဖော်ပြခြင်း</a></li>
+<li id="practice"><a href="/docs/read/my/html/text-hierarchy/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
 </article>
 </main>
 </body>

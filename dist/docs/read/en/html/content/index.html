@@ -3,65 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="An anchor with href gives the browser a destination. The visible label tells people where following the link takes them.">
-  <title>HTML Links &lt;a&gt; · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/content/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/content/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/content/">
+  <meta name="description" content="Turn items into lists and connect pages using readable links, file paths, and fragment identifiers.">
+  <title>Lists &amp; Navigation · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/lists-navigation/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/lists-navigation/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/lists-navigation/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/content/" lang="my" hreflang="my">မြန်မာ</a></nav>
-  <h1>HTML Links &lt;a&gt;</h1>
-  <p class="article-version">HTML Living Standard</p>
-  <p class="intro">An anchor with href gives the browser a destination. The visible label tells people where following the link takes them.</p>
-  <p class="reading-link"><a href="/docs/?lang=en#/html/content">Open interactive lesson</a></p>
-
-  <section class="article-section">
-    <h2>On this page</h2>
-    <ul><li><a href="#link-basics">What is a link?</a></li>
-<li><a href="#links">How a link opens a URL</a></li>
-<li><a href="#anchors">Jump to a section with #id</a></li>
-<li><a href="#references">Official references</a></li></ul>
-  </section>
-  <section class="article-section" id="link-basics">
-  <h2>What is a link?</h2>
-  <p>A link gives the reader a way to open a destination. The a element, also called an anchor, creates a link when href supplies its destination address. The words between the tags are what the reader sees and activates.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;a href=&quot;https://developer.mozilla.org/&quot;&gt;Read MDN Web Docs&lt;/a&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> Click the link to open MDN. Use the browser’s Back button to return to your file.</p>
-
-</section>
-<section class="article-section" id="links">
-  <h2>How a link opens a URL</h2>
-  <p>The browser resolves href against the current page URL. An absolute URL includes the protocol and host. A path such as catalog.html is relative to the current directory. A path beginning with / starts at the website root. A link with href is normally reachable with Tab and activated with Enter.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;a href=&quot;https://developer.mozilla.org/&quot;&gt;Read MDN Web Docs&lt;/a&gt;
-&lt;a href=&quot;catalog.html&quot;&gt;Open the product catalog&lt;/a&gt;
-&lt;a href=&quot;/resources&quot;&gt;Learning resources&lt;/a&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> If the page URL is https://example.com/shop/index.html, catalog.html resolves to /shop/catalog.html and /resources resolves to https://example.com/resources.</p>
-
-</section>
-<section class="article-section" id="anchors">
-  <h2>Jump to a section with #id</h2>
-  <p>A fragment starts with #. The browser finds the element whose id matches the fragment and brings it into view. Each id in one document should be unique. Give the link a label that names the destination so it makes sense even when read by itself.</p>
-<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
-<pre><code>&lt;a href=&quot;#contact&quot;&gt;Jump to contact details&lt;/a&gt;
-&lt;h2 id=&quot;contact&quot;&gt;Contact&lt;/h2&gt;
-&lt;p&gt;Visit us on Market Street.&lt;/p&gt;</code></pre>
-<p class="example-result"><strong>What to expect</strong> Activate the link. The address ends with #contact and the browser scrolls to the heading if needed.</p>
-
-</section>
-  <section class="references" id="references">
-    <h2>Official references</h2>
-    <ul><li><a href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element">WHATWG · The a element</a></li>
-<li><a href="https://html.spec.whatwg.org/multipage/links.html">WHATWG · Links</a></li></ul>
-  </section>
-  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/lists-and-disclosure/">Previous lesson · HTML lists</a>
-<a href="/docs/read/en/html/file-paths/">Next lesson · HTML File Paths</a></nav></footer>
+  <h1>Lists &amp; Navigation</h1>
+  <p><a href="/docs/read/en/html/lists-navigation/#links">Lists &amp; Navigation</a></p>
+  <ul><li id="lists"><a href="/docs/read/en/html/lists-navigation/#lists">Choose among three list types</a></li>
+<li id="links"><a href="/docs/read/en/html/lists-navigation/#links">Write links that name their destination</a></li>
+<li id="file-paths"><a href="/docs/read/en/html/lists-navigation/#file-paths">Relative and absolute file paths</a></li>
+<li id="fragments"><a href="/docs/read/en/html/lists-navigation/#fragments">Jump to a section or start an action</a></li>
+<li id="practice"><a href="/docs/read/en/html/lists-navigation/#practice">Hands-on exercise</a></li></ul>
 </article>
 </main>
 </body>

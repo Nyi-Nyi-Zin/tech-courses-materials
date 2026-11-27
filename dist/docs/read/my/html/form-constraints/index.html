@@ -3,137 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Form validation က ဖြည့်ထားတဲ့တန်ဖိုးတွေ ကိုယ်သတ်မှတ်ထားတဲ့ စည်းမျဉ်းတွေနဲ့ ကိုက်မကိုက် စစ်ပါတယ်။ Constraint ဆိုတာ အဲဒီစည်းမျဉ်းတစ်ခုစီကို ခေါ်တာပါ။ Field တစ်ခုမှာ ဘယ်လိုတန်ဖိုးကို လက်ခံမလဲဆိုတာ attribute နဲ့ သတ်မှတ်နိုင်ပါတယ်။">
-  <title>HTML Form Constraints · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/form-constraints/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/form-constraints/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/form-constraints/">
+  <meta name="description" content="Label ပါတဲ့ form controls တွေ ရေးပါမယ်။ ဖြည့်ထားတဲ့ တန်ဖိုးတွေ ဘယ်လိုပို့မလဲ ရွေးပြီး submit မလုပ်ခင် browser နဲ့ စစ်ဆေးပါမယ်။">
+  <title>Forms နှင့် ထည့်ထားတဲ့ တန်ဖိုးတွေ စစ်ဆေးပုံ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/interactive-forms/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/interactive-forms/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/interactive-forms/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/form-constraints/" lang="en" hreflang="en">English</a></nav>
-  <h1>HTML Form Constraints</h1>
-  <p class="article-version">HTML Living Standard</p>
-  <p class="intro">Form validation က ဖြည့်ထားတဲ့တန်ဖိုးတွေ ကိုယ်သတ်မှတ်ထားတဲ့ စည်းမျဉ်းတွေနဲ့ ကိုက်မကိုက် စစ်ပါတယ်။ Constraint ဆိုတာ အဲဒီစည်းမျဉ်းတစ်ခုစီကို ခေါ်တာပါ။ Field တစ်ခုမှာ ဘယ်လိုတန်ဖိုးကို လက်ခံမလဲဆိုတာ attribute နဲ့ သတ်မှတ်နိုင်ပါတယ်။</p>
-  <p class="reading-link"><a href="/docs/?lang=my#/html/form-constraints">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
-
-  <section class="article-section">
-    <h2>ဒီစာမျက်နှာမှာ</h2>
-    <ul><li><a href="#required">required နဲ့ မဖြစ်မနေ ဖြည့်ခိုင်းခြင်း</a></li>
-<li><a href="#range-and-step">min၊ max နဲ့ step သုံးပြီး ဂဏန်းအကန့်အသတ် သတ်မှတ်ခြင်း</a></li>
-<li><a href="#text-length">minlength နဲ့ maxlength သုံးပြီး စာသားအရှည် သတ်မှတ်ခြင်း</a></li>
-<li><a href="#pattern">pattern နဲ့ ဖြည့်ရမယ့် ပုံစံ စစ်ခြင်း</a></li>
-<li><a href="#classroom-lab">စာရင်းသွင်း form စမ်းသပ်ခြင်း</a></li>
-<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
-  </section>
-  <section class="article-section" id="required">
-  <h2>required နဲ့ မဖြစ်မနေ ဖြည့်ခိုင်းခြင်း</h2>
-  <p>Form မပို့ခင် မဖြစ်မနေ ဖြည့်ရမယ့် field မှာ required ထည့်ပါ။ မြင်ရတဲ့ label က ဘာဖြည့်ရမလဲဆိုတာ ပြပေးပါတယ်။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;Require a Value with required&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;form&gt;
-    &lt;label for=&quot;guest&quot;&gt;Guest name (required)&lt;/label&gt;
-    &lt;input id=&quot;guest&quot; name=&quot;guest&quot; type=&quot;text&quot; required&gt;
-    &lt;button type=&quot;submit&quot;&gt;Continue&lt;/button&gt;
-  &lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အကွက်လွတ်နဲ့ submit လုပ်ရင် Browser က ဖြည့်ခိုင်းပါမယ်။ May လို့ ရိုက်ပြီး ထပ် submit လုပ်ကြည့်ပါ။</p>
-
-</section>
-<section class="article-section" id="range-and-step">
-  <h2>min၊ max နဲ့ step သုံးပြီး ဂဏန်းအကန့်အသတ် သတ်မှတ်ခြင်း</h2>
-  <p>min နဲ့ max က အနိမ့်ဆုံးနဲ့ အမြင့်ဆုံး လက်ခံမယ့် တန်ဖိုးကို သတ်မှတ်ပါတယ်။ min=&quot;2&quot; နဲ့ step=&quot;2&quot; ဆိုရင် 2 ကနေစပြီး နှစ်ခုစီ တိုးသွားတဲ့ တန်ဖိုးတွေကို လက်ခံပါတယ်။ max=&quot;10&quot; ကြောင့် 10 အထိပဲ ရပါတယ်။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;Set a Range and Step with min, max, and step&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;form&gt;
-    &lt;label for=&quot;tickets&quot;&gt;Tickets (2 to 10, in pairs)&lt;/label&gt;
-    &lt;input id=&quot;tickets&quot; name=&quot;tickets&quot; type=&quot;number&quot; min=&quot;2&quot; max=&quot;10&quot; step=&quot;2&quot; required&gt;
-    &lt;button type=&quot;submit&quot;&gt;Reserve&lt;/button&gt;
-  &lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> 5 ထည့်ရင် step နဲ့ မကိုက်ပါဘူး။ 12 ထည့်ရင် သတ်မှတ်ထားတဲ့ အမြင့်ဆုံးတန်ဖိုးကို ကျော်ပါတယ်။ 6 ထည့်ရင် လက်ခံပါတယ်။</p>
-
-</section>
-<section class="article-section" id="text-length">
-  <h2>minlength နဲ့ maxlength သုံးပြီး စာသားအရှည် သတ်မှတ်ခြင်း</h2>
-  <p>minlength က ဖြည့်ထားတဲ့ စာသားအတွက် အနည်းဆုံးအရှည် သတ်မှတ်ပါတယ်။ maxlength က အများဆုံးအရှည် သတ်မှတ်ပါတယ်။ ပုံမှန်အားဖြင့် အဲဒီအရှည် ပြည့်သွားရင် Browser က စာထပ်ရိုက်လို့ မရအောင် တားပေးပါတယ်။ အလွတ်ထားလို့ မရစေချင်ရင် required ပါ ထည့်ပါ။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;Limit Text Length with minlength and maxlength&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;form&gt;
-    &lt;label for=&quot;reference&quot;&gt;Reference (3 to 8 characters)&lt;/label&gt;
-    &lt;input id=&quot;reference&quot; name=&quot;reference&quot; minlength=&quot;3&quot; maxlength=&quot;8&quot; required&gt;
-    &lt;button type=&quot;submit&quot;&gt;Continue&lt;/button&gt;
-  &lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> AB ရိုက်ပြီး submit လုပ်ရင် စာပိုရေးခိုင်းပါမယ်။ ABCDEFGHI ကို ရိုက်ကြည့်ရင် ဘယ်နေရာမှာ ရပ်သွားလဲ မြင်ရပါမယ်။ ABC123 ဆိုရင် အရှည်စစ်ချက်ကို ကျော်ပါတယ်။</p>
-
-</section>
-<section class="article-section" id="pattern">
-  <h2>pattern နဲ့ ဖြည့်ရမယ့် ပုံစံ စစ်ခြင်း</h2>
-  <p>pattern က ဖြည့်ထားတဲ့ တန်ဖိုးတစ်ခုလုံးကို regular expression နဲ့ စစ်ပါတယ်။ [A-Z]{2}[0-9]{4} ဆိုရင် English စာလုံးအကြီး နှစ်လုံးနောက်မှာ ဂဏန်း လေးလုံး လိုက်ရပါမယ်။ Submit မလုပ်ခင် user သိနိုင်အောင် လိုအပ်တဲ့ပုံစံကို မြင်ရတဲ့စာသားနဲ့ ရေးပြပါ။</p>
-<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-  &lt;title&gt;Check a Format with pattern&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;form&gt;
-    &lt;label for=&quot;booking&quot;&gt;Booking code&lt;/label&gt;
-    &lt;p id=&quot;format&quot;&gt;Enter two uppercase letters and four digits, such as AB1234.&lt;/p&gt;
-    &lt;input id=&quot;booking&quot; name=&quot;booking&quot; pattern=&quot;[A-Z]{2}[0-9]{4}&quot;
-           aria-describedby=&quot;format&quot; required&gt;
-    &lt;button type=&quot;submit&quot;&gt;Look up booking&lt;/button&gt;
-  &lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ab1234 နဲ့ AB123 ကို အရင်စမ်းပြီး AB1234 ကို ထပ်စမ်းပါ။ Browser က AB1234 ကို လက်ခံပါတယ်။</p>
-
-</section>
-<section class="article-section" id="classroom-lab">
-  <h2>စာရင်းသွင်း form စမ်းသပ်ခြင်း</h2>
-  <p>အမည်၊ email နဲ့ သင်တန်းရွေးဖို့ select ပါတဲ့ form ရေးပါ။ Label ရဲ့ for ကို သက်ဆိုင်ရာ field ရဲ့ id နဲ့ တူအောင်ထားပါ။ ပေးပို့မယ့် field တိုင်းမှာ name ထည့်ပါ။ required ထားပြီး အလွတ်တစ်ကြိမ်၊ email ပုံစံမှားနဲ့ တစ်ကြိမ်၊ တန်ဖိုးမှန်နဲ့ တစ်ကြိမ် submit လုပ်ပါ။ Browser က ဘယ် field ဆီ ပြန်ခေါ်သွားလဲ ကြည့်ပါ။</p>
-
-
-
-
-</section>
-  <section class="references" id="references">
-    <h2>တရားဝင် ကိုးကားချက်များ</h2>
-    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Constraint_validation">MDN · HTML constraint validation</a></li>
-<li><a href="https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#constraint-validation">WHATWG · Constraint validation</a></li></ul>
-  </section>
-  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/form-validation/">အရင်သင်ခန်းစာ · HTML Form Validation</a>
-<a href="/docs/read/my/html/containers/">နောက်သင်ခန်းစာ · အကြောင်းအရာ စုဖွဲ့ဖို့ &lt;div&gt; နဲ့ &lt;span&gt;</a></nav></footer>
+  <h1>Forms နှင့် ထည့်ထားတဲ့ တန်ဖိုးတွေ စစ်ဆေးပုံ</h1>
+  <p><a href="/docs/read/my/html/interactive-forms/#validation">Forms နှင့် ထည့်ထားတဲ့ တန်ဖိုးတွေ စစ်ဆေးပုံ</a></p>
+  <ul><li id="forms"><a href="/docs/read/my/html/interactive-forms/#forms">အမည်ပါတဲ့ တန်ဖိုးတွေကို GET သို့မဟုတ် POST နဲ့ ပို့ခြင်း</a></li>
+<li id="input-types"><a href="/docs/read/my/html/interactive-forms/#input-types">တန်ဖိုးအလိုက် Control ရွေးခြင်း</a></li>
+<li id="labels"><a href="/docs/read/my/html/interactive-forms/#labels">Field ကို Label ပေးပြီး ဆက်စပ်တာတွေ စုခြင်း</a></li>
+<li id="validation"><a href="/docs/read/my/html/interactive-forms/#validation">Submit မလုပ်ခင် ဖြည့်ထားတာကို စစ်ခြင်း</a></li>
+<li id="practice"><a href="/docs/read/my/html/interactive-forms/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
 </article>
 </main>
 </body>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Represent information that readers compare by row and column, such as a workshop schedule or a price list.">
+  <title>Data Tables &amp; Structured Information · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/data-tables/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/data-tables/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/data-tables/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/data-tables/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Data Tables &amp; Structured Information</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Represent information that readers compare by row and column, such as a workshop schedule or a price list.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/data-tables">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#tables">Build rows, headers, and data cells</a></li>
+<li><a href="#table-sections">Name the table and group related rows</a></li>
+<li><a href="#table-spans">Span cells and associate headers</a></li>
+<li><a href="#layout">Use CSS for page layout</a></li>
+<li><a href="#practice">Hands-on exercise</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="tables">
+  <h2>Build rows, headers, and data cells</h2>
+  <p>Wrap the grid in table and put each row in tr. Use th for a header and td for a value. Read each value together with the header that explains what it means.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;table&gt;
+  &lt;tr&gt;&lt;th&gt;Session&lt;/th&gt;&lt;th&gt;Seats&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;HTML Basics&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Web Forms&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The header row identifies what the cells below it represent.</p>
+
+</section>
+<section class="article-section" id="table-sections">
+  <h2>Name the table and group related rows</h2>
+  <p>Place caption first to describe the table’s topic. Put column headings in thead, data in tbody, and totals or summary rows in tfoot. These elements describe the role of the rows. Border, padding, and other appearance settings belong in CSS.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;Seats available this week&lt;/caption&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Session&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Seats&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;HTML Basics&lt;/th&gt;&lt;td&gt;12&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Web Forms&lt;/th&gt;&lt;td&gt;8&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;&lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Total&lt;/th&gt;&lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The table starts with its name and ends with the total.</p>
+
+</section>
+<section class="article-section" id="table-spans">
+  <h2>Span cells and associate headers</h2>
+  <p>Use colspan to cover more than one column and rowspan to cover more than one row. Leave out the cells already covered by a span. Scope col and row on th identify the corresponding data. Keep table structure simple so the headers are easy to follow.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;Monday and Tuesday schedule&lt;/caption&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Time&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Monday&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Tuesday&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;09:00&lt;/th&gt;&lt;td rowspan=&quot;2&quot;&gt;Group project&lt;/td&gt;&lt;td&gt;HTML&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;10:00&lt;/th&gt;&lt;td&gt;CSS&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;12:00&lt;/th&gt;&lt;td colspan=&quot;2&quot;&gt;Lunch break&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Group project spans two time slots and Lunch break spans both days.</p>
+
+</section>
+<section class="article-section" id="layout">
+  <h2>Use CSS for page layout</h2>
+  <p>A data table communicates relationships between cells and their headers. For visual arrangements such as a row of cards, use ordinary content elements and CSS Grid or Flexbox. Then the HTML still describes the content when styles are unavailable.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;div style=&quot;display:grid;grid-template-columns:1fr 1fr;gap:1rem&quot;&gt;
+  &lt;article&gt;&lt;h2&gt;HTML Basics&lt;/h2&gt;&lt;p&gt;Plan your first page.&lt;/p&gt;&lt;/article&gt;
+  &lt;article&gt;&lt;h2&gt;Web Forms&lt;/h2&gt;&lt;p&gt;Collect input.&lt;/p&gt;&lt;/article&gt;
+&lt;/div&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The two cards display side by side without table markup.</p>
+
+</section>
+<section class="article-section" id="practice">
+  <h2>Hands-on exercise</h2>
+  <p>Make a five-day timetable with a caption and scoped headers. Add a lunch row spanning all five day columns. Choose a cell and explain which day and time its headers identify.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/HTML_table_basics">MDN · HTML table basics</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table">MDN · Table element</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/images-media/">Previous lesson · Images, Media &amp; External Embeds</a>
+<a href="/docs/read/en/html/interactive-forms/">Next lesson · Interactive Forms &amp; Input Validation</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

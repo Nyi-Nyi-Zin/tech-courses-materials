@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="index.html ဖိုင်တစ်ခုရေးပြီး browser မှာ ဖွင့်ပါ။ ကိုယ်ရေးထားတဲ့ HTML နဲ့ စာမျက်နှာပေါ်မှာ မြင်ရတဲ့ element တွေ ဘယ်လိုဆက်စပ်လဲ DevTools နဲ့ ကြည့်ပါမယ်။">
+  <title>Web အခြေခံနှင့် HTML အလုပ်လုပ်ပုံ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/web-fundamentals/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/web-fundamentals/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/web-fundamentals/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/web-fundamentals/" lang="en" hreflang="en">English</a></nav>
+  <h1>Web အခြေခံနှင့် HTML အလုပ်လုပ်ပုံ</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">index.html ဖိုင်တစ်ခုရေးပြီး browser မှာ ဖွင့်ပါ။ ကိုယ်ရေးထားတဲ့ HTML နဲ့ စာမျက်နှာပေါ်မှာ မြင်ရတဲ့ element တွေ ဘယ်လိုဆက်စပ်လဲ DevTools နဲ့ ကြည့်ပါမယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/web-fundamentals">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#browser-and-server">URL ကနေ စာမျက်နှာပေါ်လာပုံ</a></li>
+<li><a href="#html-css-javascript">HTML၊ CSS နှင့် JavaScript ရဲ့ တာဝန်များ</a></li>
+<li><a href="#document">HTML Document အပြည့်အစုံ ရေးခြင်း</a></li>
+<li><a href="#attributes">Elements၊ Tags၊ Attributes နှင့် အတွင်းထည့်ရေးပုံ</a></li>
+<li><a href="#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="browser-and-server">
+  <h2>URL ကနေ စာမျက်နှာပေါ်လာပုံ</h2>
+  <p>HTTPS URL ဖွင့်လိုက်ရင် browser က server ဆီ resource တောင်းပါတယ်။ HTML ပြန်ရလာတဲ့အခါ browser က ဖတ်ပြီး element တွေကို DOM လို့ခေါ်တဲ့ သစ်ပင်ပုံစံနဲ့ ဖွဲ့ပါတယ်။ ကိုယ့်စက်ထဲက .html ဖိုင်ဖွင့်ရင်တော့ browser က ဖိုင်ထဲက HTML ကို တိုက်ရိုက်ဖတ်ပါတယ်။ DevTools ရဲ့ Elements panel မှာ ခေါင်းစဉ်ကို Inspect လုပ်ပြီး DOM ထဲက နေရာကို ရှာကြည့်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;main&gt;
+  &lt;h1&gt;City Workshop&lt;/h1&gt;
+  &lt;p&gt;Doors open at 9 AM.&lt;/p&gt;
+&lt;/main&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> DOM ထဲမှာ h1 နဲ့ p က main ရဲ့ အတွင်းက children တွေ ဖြစ်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="html-css-javascript">
+  <h2>HTML၊ CSS နှင့် JavaScript ရဲ့ တာဝန်များ</h2>
+  <p>HTML က markup language ပါ။ စာသားတစ်ခုက ခေါင်းစဉ်လား၊ ခလုတ်လားဆိုတဲ့ အဓိပ္ပာယ်ကို သတ်မှတ်ပါတယ်။ CSS က မြင်ရမယ့်ပုံစံ သတ်မှတ်ပြီး JavaScript က နှိပ်တာလို event တွေကို တုံ့ပြန်ပေးပါတယ်။ နမူနာမှာ HTML နဲ့ ခလုတ်ရေးထားပြီး CSS နဲ့ အရောင်ပေးကာ နှိပ်လိုက်တဲ့အခါ JavaScript နဲ့ စာသားပြောင်းပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Workshop check-in&lt;/title&gt;
+  &lt;style&gt;
+    button { color: white; background: #245672; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button type=&quot;button&quot; id=&quot;check-in&quot;&gt;Check in&lt;/button&gt;
+  &lt;p id=&quot;status&quot;&gt;Waiting for check-in.&lt;/p&gt;
+  &lt;script&gt;
+    document.querySelector(&quot;#check-in&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+      document.querySelector(&quot;#status&quot;).textContent = &quot;You are checked in.&quot;;
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Check in ခလုတ်နှိပ်လိုက်ရင် အောက်က status စာသား ပြောင်းပါမယ်။</p>
+
+</section>
+<section class="article-section" id="document">
+  <h2>HTML Document အပြည့်အစုံ ရေးခြင်း</h2>
+  <p>Doctype ကြောင့် browser က standards mode သုံးပါတယ်။ စာမျက်နှာရဲ့ ဘာသာစကားကို html မှာ သတ်မှတ်ပါ။ head မှာ metadata၊ body မှာ စာမျက်နှာပေါ် မြင်ရမယ့် content ထည့်ပါ။ UTF-8 က ဖိုင်ထဲက စာသားကို ဘယ် encoding နဲ့ ဖတ်ရမလဲ ပြောပေးပါတယ်။ title က browser tab မှာ ပေါ်ပြီး viewport က ဖုန်းမျက်နှာပြင်အကျယ်နဲ့ layout ကိုက်အောင် ကူညီပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;About City Workshop&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Welcome to City Workshop&lt;/h1&gt;
+  &lt;p&gt;We run weekend classes.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Tab ပေါ်က title နဲ့ စာမျက်နှာထဲက ခေါင်းစဉ်က သီးခြားစီ ပေါ်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="attributes">
+  <h2>Elements၊ Tags၊ Attributes နှင့် အတွင်းထည့်ရေးပုံ</h2>
+  <p>Paragraph element တစ်ခုမှာ အဖွင့် tag၊ အတွင်းကစာသားနဲ့ အပိတ် tag ပါပါတယ်။ Attribute ကို အဖွင့် tag မှာ ရေးပါ။ id၊ class၊ title တို့က HTML element အားလုံးမှာ သုံးနိုင်တဲ့ global attributes ပါ။ href လို attribute က သက်ဆိုင်ရာ element မှာ သုံးမှ အဓိပ္ပာယ်ရှိပါတယ်။ id တန်ဖိုးကို တစ်မျက်နှာအတွင်း ထပ်မသုံးပါနဲ့။ အတွင်းက element ကို အပြင်က element မပိတ်ခင် ပိတ်ပါ။ br နဲ့ img လို void element တွေမှာ အပိတ် tag မပါပါဘူး။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;p id=&quot;hours&quot; class=&quot;notice&quot;&gt;
+  Doors open at &lt;strong&gt;9 AM&lt;/strong&gt;.&lt;br&gt;
+  &lt;a href=&quot;#hours&quot;&gt;Check opening time&lt;/a&gt;
+&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အချိန်ကို strong နဲ့ အရေးကြီးကြောင်း ဖော်ပြထားပါတယ်။ Link က id=&quot;hours&quot; ပါတဲ့ စာပိုဒ်ကို ညွှန်းပါတယ်။</p>
+
+</section>
+<section class="article-section" id="practice">
+  <h2>လက်တွေ့လေ့ကျင့်ခန်း</h2>
+  <p>about-me.html ကို သိမ်းပါ။ Tab title၊ စာမျက်နှာခေါင်းစဉ်နဲ့ ဝါသနာအကြောင်း စာပိုဒ်တစ်ခု ထည့်ပါ။ DevTools မှာ ခေါင်းစဉ်ကို ပြင်ပြီး reload လုပ်ကြည့်ပါ။ ဖိုင်ထဲက ခေါင်းစဉ်ကိုပါ ပြင်ပြီး reload လုပ်တဲ့အခါ ဘယ်ပြောင်းလဲမှု ကျန်လဲ စစ်ပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax">MDN · Basic HTML syntax</a></li>
+<li><a href="https://html.spec.whatwg.org/">WHATWG · HTML Living Standard</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/text-hierarchy/">နောက်သင်ခန်းစာ · စာသားနှင့် ခေါင်းစဉ်အဆင့်များ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

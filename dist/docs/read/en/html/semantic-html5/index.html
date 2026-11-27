@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Choose elements that describe the purpose of each region, then check how those regions appear in the browser’s accessibility tree.">
+  <title>Semantic HTML &amp; Page Architecture · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/semantic-html5/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/semantic-html5/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/semantic-html5/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Semantic HTML &amp; Page Architecture</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Choose elements that describe the purpose of each region, then check how those regions appear in the browser’s accessibility tree.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/semantic-html5">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#containers">Choose a semantic element or a generic container</a></li>
+<li><a href="#landmarks">Structure a page with seven semantic elements</a></li>
+<li><a href="#section-article-div">Decide between section, article, and div</a></li>
+<li><a href="#block-inline">Recognize block and inline layout</a></li>
+<li><a href="#practice">Hands-on exercise</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="containers">
+  <h2>Choose a semantic element or a generic container</h2>
+  <p>Use div to group content for styling and span to mark an inline phrase for styling when no specific element fits. Use a semantic element when the content has a clear purpose. For example, nav identifies major navigation and helps assistive technology expose it as a landmark.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;div class=&quot;site-bar&quot;&gt;
+  &lt;span class=&quot;brand&quot;&gt;City Workshop&lt;/span&gt;
+  &lt;nav aria-label=&quot;Main&quot;&gt;&lt;a href=&quot;#sessions&quot;&gt;Find sessions&lt;/a&gt;&lt;/nav&gt;
+&lt;/div&gt;
+&lt;h2 id=&quot;sessions&quot;&gt;Sessions&lt;/h2&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The nav has a navigation role. The outer div groups it with the brand.</p>
+
+</section>
+<section class="article-section" id="landmarks">
+  <h2>Structure a page with seven semantic elements</h2>
+  <p>A page-level header introduces the site, nav holds major links, and main wraps the dominant content. Use section for a thematic group, article for a self-contained item, aside for related material, and footer for closing details. Landmark roles depend on context. For example, a header inside an article is the article’s header, whereas a page-level header is the banner. A named section can be exposed as a region.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;header&gt;
+  &lt;h1&gt;City Workshop News&lt;/h1&gt;
+  &lt;nav aria-label=&quot;Main&quot;&gt;&lt;a href=&quot;#updates&quot;&gt;Updates&lt;/a&gt;&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;section id=&quot;updates&quot; aria-labelledby=&quot;updates-title&quot;&gt;
+    &lt;h2 id=&quot;updates-title&quot;&gt;Latest updates&lt;/h2&gt;
+    &lt;article&gt;&lt;h3&gt;New weekend sessions&lt;/h3&gt;&lt;p&gt;Registration opens next week.&lt;/p&gt;&lt;/article&gt;
+  &lt;/section&gt;
+  &lt;aside&gt;&lt;h2&gt;Related information&lt;/h2&gt;&lt;p&gt;Bring a notebook.&lt;/p&gt;&lt;/aside&gt;
+&lt;/main&gt;
+&lt;footer&gt;&lt;p&gt;Contact the workshop team.&lt;/p&gt;&lt;/footer&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Inspect main and the named Updates region in the accessibility tree.</p>
+
+</section>
+<section class="article-section" id="section-article-div">
+  <h2>Decide between section, article, and div</h2>
+  <p>Ask what the block represents. If the block would make sense when published on its own, it can be an article. If it groups one topic within the page, use a section with a heading. If it only creates a styling wrapper, use a div.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;section&gt;
+  &lt;h2&gt;Events this month&lt;/h2&gt;
+  &lt;div class=&quot;event-grid&quot;&gt;
+    &lt;article&gt;&lt;h3&gt;Build a Portfolio&lt;/h3&gt;&lt;p&gt;Starts June 12 at North Hall.&lt;/p&gt;&lt;/article&gt;
+    &lt;article&gt;&lt;h3&gt;Learn Web Forms&lt;/h3&gt;&lt;p&gt;Starts June 19 at North Hall.&lt;/p&gt;&lt;/article&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Each event can be read independently. Both belong to Events this month.</p>
+
+</section>
+<section class="article-section" id="block-inline">
+  <h2>Recognize block and inline layout</h2>
+  <p>In normal flow, a block box starts on a new line and generally stretches across its container. An inline box flows with surrounding text. CSS display changes layout while the HTML element retains its meaning. A span styled as a block is still a span.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;div style=&quot;background:#e9f1f7&quot;&gt;This div starts on its own line.&lt;/div&gt;
+&lt;p&gt;Read this &lt;span style=&quot;background:#ffe9a8&quot;&gt;highlighted phrase&lt;/span&gt; in the same line.&lt;/p&gt;
+&lt;p&gt;Now &lt;span style=&quot;display:block;background:#ffe9a8&quot;&gt;this span starts on a new line.&lt;/span&gt;&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Compare the two spans. Only the last one starts a new line.</p>
+
+</section>
+<section class="article-section" id="practice">
+  <h2>Hands-on exercise</h2>
+  <p>Refactor a div-only news page. Give it a header, nav, main, two articles in a titled section, a related-links aside, and a footer. Inspect the page landmarks in DevTools.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents">MDN · Structuring documents</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML">MDN · HTML accessibility</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/interactive-forms/">Previous lesson · Interactive Forms &amp; Input Validation</a>
+<a href="/docs/read/en/html/accessibility-seo/">Next lesson · Accessibility, SEO &amp; Production Best Practices</a></nav></footer>
+</article>
+</main>
+</body>
+</html>
