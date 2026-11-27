@@ -1,5 +1,5 @@
 import { webGuides } from './web.js?v=90';
-import { platformGuides } from './platform.js?v=91';
+import { platformGuides } from './platform.js?v=92';
 import { frameworkGuides } from './frameworks.js';
 
 import { platformArticles } from './platform-more.js';

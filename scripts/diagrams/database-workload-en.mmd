@@ -1,0 +1,14 @@
+flowchart LR
+    Root["Primary project workload"]
+
+    Root --> W1["Transactions and structured records"]
+    Root --> W2["Records with evolving fields"]
+    Root --> W3["Key lookups or high write throughput"]
+    Root --> W4["Multi-hop relationships"]
+    Root --> W5["Time-series, search, AI, or analytics"]
+
+    W1 --> D1["Relational (SQL) · PostgreSQL, MySQL, SQL Server"]
+    W2 --> D2["Document · MongoDB, Firestore, Couchbase"]
+    W3 --> D3["Key-Value / Wide-Column · Redis, DynamoDB, Cassandra"]
+    W4 --> D4["Graph · Neo4j, Amazon Neptune"]
+    W5 --> D5["Specialized · TimescaleDB, Qdrant, Elasticsearch, ClickHouse"]

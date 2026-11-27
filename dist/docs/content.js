@@ -11,11 +11,13 @@ export function lessonBlocks(blocks, language, escape, paragraphClass = '') {
     if (part.startsWith('**')) return `<strong>${inline(part.slice(2, -2))}</strong>`;
     return `<em>${inline(part.slice(1, -1))}</em>`;
   }).join('');
-  return (blocks?.[language] ?? []).map(([type, value]) => {
+  return (blocks?.[language] ?? []).map(([type, value, label]) => {
     if (type === 'figure') return sectionFigure(value, language, escape);
     if (type === 'table') {
       const [head, ...rows] = value;
-      return `<div class="lesson-table"><table>
+      const scroll = label ? ` role="region" aria-label="${escape(label)}" tabindex="0" style="overflow-x:auto"` : '';
+      const tableWidth = label ? ` style="min-width:${head.length * 8}rem"` : '';
+      return `<div class="lesson-table"${scroll}><table${tableWidth}>
         <thead><tr>${head.map(cell => `<th scope="col">${inline(cell)}</th>`).join('')}</tr></thead>
         <tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${inline(cell)}</td>`).join('')}</tr>`).join('')}</tbody>
       </table></div>`;
@@ -29,8 +31,9 @@ export function lessonBlocks(blocks, language, escape, paragraphClass = '') {
 }
 
 export function sectionFigure(figure, language, escape) {
+  const src = typeof figure.src === 'string' ? figure.src : figure.src[language];
   return `<figure class="lesson-figure${figure.banner ? ' lesson-figure--banner' : ''}">
-    <a href="${escape(figure.src)}" data-image-preview><img src="${escape(figure.src)}" alt="${escape(figure.alt[language])}" width="${figure.width}" height="${figure.height}" loading="lazy" decoding="async"></a>${figure.caption ? `\n    <figcaption>${escape(figure.caption[language])}</figcaption>` : ''}
+    <a href="${escape(src)}" data-image-preview><img src="${escape(src)}" alt="${escape(figure.alt[language])}" width="${figure.width}" height="${figure.height}" loading="lazy" decoding="async"></a>${figure.caption ? `\n    <figcaption>${escape(figure.caption[language])}</figcaption>` : ''}
   </figure>`;
 }
 

@@ -1,0 +1,14 @@
+flowchart LR
+    Root["Project ရဲ့ အဓိက အလုပ်"]
+
+    Root --> W1["Transaction နဲ့ ဆက်စပ် Data"]
+    Root --> W2["Field ပြောင်းနိုင်တဲ့ Data"]
+    Root --> W3["Key နဲ့ ရှာခြင်း၊ ရေးတာများခြင်း"]
+    Root --> W4["ဆက်စပ်မှု အဆင့်ဆင့်"]
+    Root --> W5["Time-Series၊ Search၊ AI၊ Analytics"]
+
+    W1 --> D1["Relational (SQL) · PostgreSQL, MySQL, SQL Server"]
+    W2 --> D2["Document · MongoDB, Firestore, Couchbase"]
+    W3 --> D3["Key-Value / Wide-Column · Redis, DynamoDB, Cassandra"]
+    W4 --> D4["Graph · Neo4j, Amazon Neptune"]
+    W5 --> D5["အထူးပြု Engine · TimescaleDB, Qdrant, Elasticsearch, ClickHouse"]
