@@ -11,11 +11,8 @@ export const movedSections = {
   js: { values: { functions: 'functions' }, async: { fetch: 'http' } },
   database: {
     fundamentals: {
-      'relational-tables': 'relational-model',
-      'order-item-relationships': 'relational-model',
       'client-server': 'client-server',
       'server-types': 'client-server',
-      hosting: 'database-deployment',
       'web-app-flow': 'web-app-architecture',
     },
   },

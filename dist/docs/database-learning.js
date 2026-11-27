@@ -2,57 +2,6 @@ import { p, page, part, snippet } from './content.js';
 
 const pg = 'https://www.postgresql.org/docs/19/';
 
-export const documentModel = {
-  ...page('document-model', p('Document design: embedding and references', 'Document Design မှာ Embed နဲ့ Reference သုံးပုံ'),
-    p('The order example introduced embedding and referencing. A receipt needs the price at checkout, while a catalog page needs the current price. Those two screens give us a reason to use both patterns in the same order design. Design a MongoDB order around the data the application reads and updates together.', 'ပြေစာမှာ ဝယ်ယူစဉ်က ဈေးနှုန်းကို လိုအပ်ပြီး ပစ္စည်းစာမျက်နှာမှာ လက်ရှိဈေးနှုန်းကို လိုအပ်ပါတယ်။ MongoDB မှာ အော်ဒါထဲက ဈေးနှုန်းကို Embedding နဲ့ သိမ်းပြီး လက်ရှိပစ္စည်းမှတ်တမ်းကို ID နဲ့ ညွှန်းနိုင်ပါတယ်။'),
-    [
-      {
-        ...snippet('embed', p('Embed order items in the order', 'Order Item တွေကို Order Document ထဲ ထည့်သိမ်းခြင်း'),
-          p(
-            'When the application usually opens an order with its items and the list stays reasonably small, keep the item details in an array inside the order. Order 101 can include items such as the following.',
-            'App က order ဖွင့်တိုင်း item တွေကို အတူပြရပြီး item စာရင်းလည်း အကန့်အသတ်ရှိရင် items array ကို order document ထဲမှာပဲ ထည့်ထားလို့ရတယ်။ Order 101 ကို အောက်ပါအတိုင်း သိမ်းနိုင်တယ်။'
-          ), `{
-  "_id": 101,
-  "items": [
-    { "productId": 1, "quantity": 2, "unitPriceAtOrder": 4500 }
-  ]
-}`),
-        terms: [
-          ['orders', p(
-            '{ "_id": 101, "items": [{ "productId": 1, "quantity": 2, "unitPriceAtOrder": 4500 }] }',
-            '{ "_id": 101, "items": [{ "productId": 1, "quantity": 2, "unitPriceAtOrder": 4500 }] }'
-          )],
-          ['unitPriceAtOrder', p('Store the price agreed at checkout so the historical receipt keeps the same price when the catalog changes.', 'Catalog ဈေးနှုန်း နောက်ပိုင်း ပြောင်းသွားရင်တောင် ပြေစာဟောင်းမှာ ဝယ်တုန်းက ဈေးအတိုင်း ပြနိုင်ဖို့ အဲ့ဒီဈေးကို order item ထဲမှာ သိမ်းပါ။')],
-        ],
-      },
-      {
-        ...snippet('reference', p('Reference the current product record', 'လက်ရှိ Product Record ကို ID နဲ့ ချိတ်ခြင်း'),
-          p(
-            'The embedded order item already keeps the checkout price. What if the shop also needs the current product name or catalog price? Keep independently updated catalog data in products. productId 1 points to product 1 in that collection. Fetch the product separately or use a lookup when the application needs its current details. References also help when the related list could grow without a clear bound.',
-            'အော်ဒါထဲမှာ ဝယ်ယူစဉ်က ဈေးကို သိမ်းထားပေမယ့် လက်ရှိဈေးကိုတော့ ဆိုင်ရဲ့ ပစ္စည်းစာရင်းကနေ ဖတ်ရပါတယ်။ သီးသန့် update လုပ်ရတဲ့ catalog data ကို products collection ထဲမှာ ထားပါ။ Order item ထဲက productId 1 က အဲဒီ collection ထဲက product 1 ကို ညွှန်းတယ်။ လက်ရှိ product အချက်အလက် လိုလာမှ သီးသန့် query သို့မဟုတ် lookup နဲ့ ဖတ်ပါ။ ဆက်စပ်စာရင်းက အကန့်အသတ်မရှိ ကြီးလာနိုင်ရင်လည်း reference ချိတ်ထားတာ အသုံးဝင်တယ်။'
-          ), `const order = db.orders.findOne({ _id: 101 });
-const item = order.items[0];
-const product = db.products.findOne({ _id: item.productId });
-
-printjson({
-  name: product.name,
-  unitPriceAtOrder: item.unitPriceAtOrder,
-  currentPrice: product.currentPrice
-});`),
-        terms: [
-          ['products', p(
-            '{ "_id": 1, "name": "Notebook", "currentPrice": 5000 }',
-            '{ "_id": 1, "name": "Notebook", "currentPrice": 5000 }'
-          )],
-          ['Read and update together', p('Embed details needed together. Reference shared records that change independently. This example combines both in one order design.', 'အတူဖတ်ရတဲ့ order items ကို ထည့်သိမ်းပြီး သီးသန့်ပြောင်းလဲတဲ့ catalog record ကို ID နဲ့ ချိတ်ထားတယ်။ Order တစ်ခုမှာ embed နဲ့ reference ကို တွဲသုံးနိုင်တယ်။')],
-        ],
-      },
-    ],
-    [['MongoDB · Map schema relationships', 'https://www.mongodb.com/docs/manual/data-modeling/schema-design-process/map-relationships/'],
-     ['MongoDB · Embedded data', 'https://www.mongodb.com/docs/manual/data-modeling/embedding/']]),
-  version: '',
-};
-
 export const databaseSelection = {
   ...page('choosing-a-database', p('Choose a database for your application', 'Software တစ်ခုအတွက် Database ရွေးချယ်ပုံ'),
     p('Use an inventory app to see how query patterns, transaction needs, and reporting shape the database choice.', 'Inventory app တစ်ခုကို နမူနာယူပြီး data ဖတ်ရေးပုံ၊ transaction နဲ့ report လိုအပ်ချက်တွေက database ရွေးချယ်မှုအပေါ် ဘယ်လို သက်ရောက်လဲ ကြည့်ပါ။'),
