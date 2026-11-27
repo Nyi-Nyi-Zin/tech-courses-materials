@@ -29,7 +29,7 @@
     <h2>On this page</h2>
     <ul><li><a href="#ip-address">What Is an IP Address?</a></li>
 <li><a href="#domain-and-ip">How Is a Domain Name Structured?</a></li>
-<li><a href="#web-hosting">What Does Web Hosting Do?</a></li>
+<li><a href="#web-hosting">What Does Hosting Do?</a></li>
 <li><a href="#dns-lookup">How Does the Browser Look Up www.example.com?</a></li>
 <li><a href="#dns-records">What Does a DNS Record Specify?</a></li>
 <li><a href="#try-dns">Try nslookup on Windows</a></li>
@@ -66,17 +66,21 @@
 
 </section>
 <section class="article-section" id="web-hosting">
-  <h2>What Does Web Hosting Do?</h2>
+  <h2>What Does Hosting Do?</h2>
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/web-fundamentals/web-hosting-types.jpg" data-image-preview><img src="/docs/media/web-fundamentals/web-hosting-types.jpg" alt="Four hosting options: shared hosting, VPS, dedicated server, and managed hosting." width="2048" height="1143" loading="lazy" decoding="async"></a>
   </figure>
-  <p><strong>Web hosting</strong> makes a website available over the internet. A basic site can include HTML, CSS, JavaScript, and images. A web app can also run a backend that receives requests and generates responses. If the app needs a database, it can connect to a separate database service.</p>
-<p>A <strong>web server</strong> is software that accepts HTTP requests from the browser and sends responses. It can run on a physical server, a virtual machine, or infrastructure managed by a hosting provider.</p>
+  <p><strong>Hosting</strong> provides the server or infrastructure where a website, application, or other service is stored or run. It makes that resource available to the people or applications that need it, over the public internet or a private network.</p>
 <div class="lesson-table"><table>
-        <thead><tr><th scope="col">Hosting type</th><th scope="col">How it works</th></tr></thead>
-        <tbody><tr><td>Shared hosting</td><td>Several websites share resources such as CPU and memory on a server.</td></tr><tr><td>VPS</td><td>You can install and manage software on a virtual machine allocated to you.</td></tr><tr><td>Dedicated server</td><td>You get a physical server for your own use.</td></tr><tr><td>Managed hosting</td><td>You deploy the website and the provider manages the infrastructure. Vercel and Firebase Hosting are examples.</td></tr></tbody>
+        <thead><tr><th scope="col">What can be hosted?</th><th scope="col">What the hosting provides</th></tr></thead>
+        <tbody><tr><td>Website or frontend</td><td>Serves HTML, CSS, JavaScript, and images to the browser.</td></tr><tr><td>Backend or API</td><td>Runs application code and handles requests from the frontend or other clients.</td></tr><tr><td>Database</td><td>Stores application records and makes them available to authorized clients such as the backend.</td></tr><tr><td>Files</td><td>Stores uploads such as images and documents so the application can retrieve them later.</td></tr><tr><td>Email</td><td>Runs the mail service that sends, receives, and stores messages.</td></tr></tbody>
       </table></div>
-<p>After deployment, the hosting provider may give you an IP address or a hostname. Add the value supplied by the provider to the DNS record so visitors can open the site at <code>www.example.com</code>.</p>
+<p>For example, a course registration app can serve its frontend to students, run a backend to handle registrations, and save the registrations in a database. These parts can share one server or run on separate hosting services.</p>
+<div class="lesson-table"><table>
+        <thead><tr><th scope="col">Hosting option</th><th scope="col">How it works</th></tr></thead>
+        <tbody><tr><td>Shared hosting</td><td>Several websites share resources such as CPU and memory on a server.</td></tr><tr><td>VPS (Virtual Private Server)</td><td>You get a virtual server where you can install and run your own software.</td></tr><tr><td>Dedicated server</td><td>You use an entire physical server for your workloads.</td></tr><tr><td>Managed hosting</td><td>The provider operates the infrastructure for a service such as a website, API, or database. What the provider handles depends on the plan.</td></tr></tbody>
+      </table></div>
+<p>To make a hosted website available at <code>www.example.com</code>, use DNS records to point that name to the IP address or hostname specified by your hosting provider. The browser uses that result to reach the hosted site.</p>
 
 
 
