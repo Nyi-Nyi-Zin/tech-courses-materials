@@ -1,6 +1,6 @@
 import { p, part, page, guide } from './content.js';
-import { databaseFundamentals, postgresIntroduction } from './database-fundamentals.js?v=89';
-import { databaseScaling, storageAndRecovery } from './database-learning.js';
+import { databaseFundamentals, postgresIntroduction } from './database-fundamentals.js?v=91';
+import { databaseScaling, storageAndRecovery } from './database-learning.js?v=91';
 import { postgresCommands, postgresConnection, postgresCrud, postgresInstall } from './postgresql-basics.js';
 import { postgresRoles } from './postgresql-roles.js';
 import { schoolQueries, schoolSchemaSection, schoolTableChanges } from './postgresql-school.js';

@@ -1,10 +1,5 @@
 import { p, page, part, snippet } from './content.js';
-import { databaseSelection, documentModel } from './database-learning.js';
-
-const illustrated = (id, title, text, file, height, alt, caption, code) => ({
-  ...snippet(id, title, text, code),
-  figure: { src: '/docs/media/database/' + file + '.jpg', width: 1536, height, alt, caption },
-});
+import { databaseSelection } from './database-learning.js?v=91';
 
 const databaseDefinition = p(
   'A **database** is **an organized collection of data stored electronically so it can be easily accessed, managed, and updated**. Software called a **database management system (DBMS)** controls the database, handling security, backups, multi-user access, and queries.',
@@ -75,82 +70,6 @@ export const databaseFundamentals = [
         ['paragraph', 'PostgreSQL၊ MySQL၊ SQLite နဲ့ MongoDB တို့က DBMS နမူနာတွေပါ။'],
       ],
     ),
-    version: '',
-  },
-  {
-    ...page('relational-model', p('How databases connect related data', 'Database တွေမှာ ဆက်စပ်နေတဲ့ Data ကို သိမ်းပုံ'),
-      p(
-        'The previous lesson introduced several ways to organize data. Now compare how three databases connect related records. When you open an order, how does the shop know which product you bought and how many you ordered? Follow the same order through PostgreSQL, MongoDB, and Neo4j.',
-        'အော်ဒါတစ်ခုမှာ ဘာပစ္စည်းကို ဘယ်နှခု မှာထားလဲဆိုတာ ပြဖို့ အော်ဒါနဲ့ ပစ္စည်းမှတ်တမ်းတွေကို ချိတ်ဆက်ထားရပါတယ်။ PostgreSQL၊ MongoDB နဲ့ Neo4j မှာ ဒီဆက်စပ်မှုကို သိမ်းပုံ ကွာပါတယ်။'
-      ),
-      [
-        {
-          ...snippet('order-item-relationships', p('One order in three databases', 'အော်ဒါနဲ့ ပစ္စည်းအကြား ဆက်စပ်မှု'),
-            p('The four panels show three databases. MongoDB appears twice because an order can hold item details directly or point to a separate product document.',
-              'ပုံမှာ အော်ဒါ 101 အတွက် Notebook ၂ အုပ် မှာထားတဲ့ မှတ်တမ်းကို ပြထားပါတယ်။ MongoDB အတွက် အကွက်နှစ်ခု ပါတာက ပစ္စည်းအချက်အလက်ကို အော်ဒါထဲမှာ တွဲသိမ်းနိုင်သလို သီးခြားပစ္စည်းမှတ်တမ်းကို ID နဲ့လည်း ညွှန်းနိုင်လို့ပါ။'), `{
-  "orderId": 101,
-  "items": [
-    { "productId": 1, "name": "Notebook", "quantity": 2 }
-  ]
-}`),
-          figure: {
-            src: '/docs/media/database/database-relationships-en.png', width: 1480, height: 1050,
-            alt: p('PostgreSQL links an order line to order and product rows. MongoDB embeds item details or references a product ID. Neo4j connects order and product nodes with a CONTAINS relationship.',
-              'အော်ဒါ 101 မှာ Notebook ၂ အုပ် ပါဝင်ပုံ။ PostgreSQL မှာ order_items က အော်ဒါနဲ့ ပစ္စည်းကို ချိတ်ပေးတယ်။ MongoDB မှာ ပစ္စည်းအမည်ကို အော်ဒါထဲမှာ သိမ်းနိုင်သလို ပစ္စည်းမှတ်တမ်းကို ID နဲ့လည်း ညွှန်းနိုင်တယ်။ Neo4j မှာ အရေအတွက်ကို CONTAINS ဆက်စပ်မှုပေါ်မှာ သိမ်းတယ်။'),
-          },
-        },
-        snippet('relational-tables', p('PostgreSQL · Follow the foreign keys', 'PostgreSQL မှာ Foreign Key သုံးပုံ'),
-          p('Start with the middle table, order_items. In this row, order_id points to order 101 and product_id points to product 1, the Notebook. These two columns are foreign keys. The quantity of 2 belongs to this order line. A JOIN matches the IDs so the shop can display the product name and quantity together.',
-            'PostgreSQL မှာ orders နဲ့ products ကို order_items table က ချိတ်ပေးပါတယ်။ ပုံထဲက row မှာ order_id က orders ထဲက အော်ဒါ 101 ကို ညွှန်းပြီး product_id က products ထဲက ပစ္စည်း 1 ကို ညွှန်းပါတယ်။ ဒီ column နှစ်ခုက Foreign Key တွေပါ။ JOIN သုံးပြီး သက်ဆိုင်ရာ row တွေကို တွဲဖတ်ရင် products ထဲက ပစ္စည်းအမည် Notebook နဲ့ order_items ထဲက အရေအတွက် 2 ကို အတူပြနိုင်ပါတယ်။'), `SELECT products.name, order_items.quantity
-FROM order_items
-JOIN products ON products.id = order_items.product_id
-WHERE order_items.order_id = 101;`),
-        snippet('mongodb-embedding', p('MongoDB · Store details inside the order', 'MongoDB မှာ Embedding သုံးပုံ'),
-          p('PostgreSQL matched IDs across tables to get the name and quantity. With MongoDB, one option is to keep both values inside the order. In the upper-right panel, the order document contains an items list. One entry holds both the name Notebook and the quantity 2. This is embedding. Reading the order also retrieves those details. It works well for a receipt that should keep the item name as it was at checkout.',
-            'MongoDB မှာ အော်ဒါတစ်ခုကို document တစ်ခုအဖြစ် သိမ်းနိုင်ပါတယ်။ ညာဘက်အပေါ်ပုံမှာ ပစ္စည်းအမည် Notebook နဲ့ အရေအတွက် 2 ကို အော်ဒါရဲ့ items စာရင်းထဲမှာ ထည့်ထားပါတယ်။ ဒီလို တွဲသိမ်းတာကို Embedding လို့ ခေါ်ပါတယ်။ ပြေစာထုတ်တဲ့အခါ အော်ဒါကို ဖတ်ရုံနဲ့ ဝယ်ယူစဉ်က မှတ်ထားတဲ့ ပစ္စည်းအမည်နဲ့ အရေအတွက်ကို ရပါတယ်။'), `db.orders.findOne({ _id: 101 }, { items: 1 });
-
-// Example result:
-// { _id: 101, items: [{ name: "Notebook", quantity: 2 }] }`),
-        snippet('mongodb-referencing', p('MongoDB · Link to a product by ID', 'MongoDB မှာ Referencing သုံးပုံ'),
-          p('In the lower-left panel, the order item stores product_id and quantity. To find the name, use product_id 1 to look up the product document whose _id is 1. This is referencing. Many orders can refer to the same product, so its current catalog details can be updated in one place.',
-            'ပစ္စည်းအချက်အလက်ကို သီးခြားစီမံဖို့ လိုရင် အော်ဒါထဲမှာ product_id ကို သိမ်းပြီး products collection ထဲက မှတ်တမ်းကို ညွှန်းနိုင်ပါတယ်။ ဒီနည်းကို Referencing လို့ ခေါ်ပါတယ်။ ဘယ်ဘက်အောက်ပုံမှာ product_id က 1 ဖြစ်လို့ ပစ္စည်းအမည်ကို _id တန်ဖိုး 1 ရှိတဲ့ document ကနေ ဖတ်ရပါတယ်။ ဆိုင်က အမည်ကို A5 Notebook လို့ ပြင်လိုက်ရင် အဲဒီ ID နဲ့ ပြန်ရှာတဲ့အခါ အမည်အသစ်ကို ရပါတယ်။ အော်ဒါထဲမှာ ကူးသိမ်းထားတဲ့ အမည်ကတော့ အလိုအလျောက် ပြောင်းသွားမှာ မဟုတ်ပါဘူး။'), `const order = db.orders.findOne({ _id: 101 });
-const item = order.items[0];
-const product = db.products.findOne({ _id: item.product_id });
-printjson({ name: product.name, quantity: item.quantity });`),
-        snippet('neo4j-graph', p('Neo4j · Connect the order and product directly', 'Neo4j မှာ Node နဲ့ Relationship သုံးပုံ'),
-          p('A MongoDB reference points to the product by ID. In a graph database the connection itself is stored as a relationship. In the lower-right panel, Order and Product are nodes. Follow the arrow from Order to Product. Its label, CONTAINS, tells you the product is part of the order. The quantity of 2 is stored on that relationship because it describes how many notebooks this particular order contains.',
-            'Neo4j မှာ အော်ဒါနဲ့ ပစ္စည်းကို node တစ်ခုစီအဖြစ် သိမ်းပြီး node နှစ်ခုကြားက ဆက်စပ်မှုကို relationship အဖြစ် မှတ်ထားပါတယ်။ ပုံထဲက CONTAINS ဆိုတဲ့ မြားက အော်ဒါ 101 ထဲမှာ Notebook ပါဝင်ကြောင်း ဖော်ပြပါတယ်။ အရေအတွက်က အော်ဒါတစ်ခုနဲ့တစ်ခု ကွာနိုင်လို့ quantity တန်ဖိုး 2 ကို ဒီအော်ဒါနဲ့ ပစ္စည်းကြားက relationship ပေါ်မှာ သိမ်းထားပါတယ်။'), `MATCH (:Order {id: 101})-[line:CONTAINS]->(product:Product)
-RETURN product.name AS product, line.quantity AS quantity;`),
-      ],
-      [
-        ['PostgreSQL · Foreign keys', 'https://www.postgresql.org/docs/19/ddl-constraints.html'],
-        ['PostgreSQL · Joins', 'https://www.postgresql.org/docs/19/tutorial-join.html'],
-        ['MongoDB · Map schema relationships', 'https://www.mongodb.com/docs/manual/data-modeling/schema-design-process/map-relationships/'],
-        ['Neo4j · Graph database concepts', 'https://neo4j.com/docs/getting-started/appendix/graphdb-concepts/'],
-      ]),
-    version: '',
-  },
-  documentModel,
-  {
-    ...page('database-deployment', p('Where a database server runs', 'Database Server ဘယ်မှာ Run လဲ'),
-      p(
-        'A database server is one of the servers an application can talk to. Once you know its job, the next question is where to run it. Run a database server on your computer while learning. For a deployed application, compare company-managed equipment with cloud hosting.',
-        'Database server ကို လေ့ကျင့်ဖို့ ကိုယ့်ကွန်ပျူတာပေါ်မှာ run နိုင်ပါတယ်။ လုပ်ငန်းသုံး software အတွက်တော့ ကိုယ်ပိုင်စက်ပေါ်မှာ ထားနိုင်သလို Cloud provider ဆီမှာလည်း ထားနိုင်ပါတယ်။'
-      ),
-      [
-        illustrated('hosting', p('Database Deployment: On-premises and Cloud', 'Database Deployment (On-premises နဲ့ Cloud)'),
-          p(
-            'With on-premises deployment, a company runs the database server on equipment it manages at its office, shop, or data center. In the cloud, a provider maintains the underlying hardware and charges for the plan or usage. Who updates the database software and manages backups depends on whether you rent a virtual machine or use a managed database service.',
-            'On-premises မှာ ကုမ္ပဏီက ရုံး၊ ဆိုင် ဒါမှမဟုတ် data center ထဲမှာ ကိုယ်တိုင်စီမံတဲ့ စက်ပေါ် database server ကို run တယ်။ Cloud မှာ provider က အခြေခံ hardware ကို ထိန်းပေးပြီး plan သို့မဟုတ် သုံးစွဲမှုပေါ်မူတည်ပြီး ကောက်ခံတယ်။ Database software update နဲ့ backup ကို ဘယ်သူကိုင်မလဲဆိုတာ virtual machine ငှားတာလား၊ managed database service သုံးတာလားပေါ် မူတည်တယ်။'
-          ), 'on-premises-and-cloud', 864,
-          p('On-premises and cloud compared by location, hardware maintenance, scaling, and cost.', 'တည်နေရာ၊ hardware ထိန်းသိမ်းမှု၊ စက်စွမ်းရည်တိုးချဲ့မှုနဲ့ ကုန်ကျစရိတ်အလိုက် on-premises နဲ့ cloud ကို နှိုင်းယှဉ်ထားတယ်။'),
-          p('For a software application, you can run PostgreSQL on a server your company manages or host it with a cloud provider.', 'Software တစ်ခုအတွက် PostgreSQL ကို ကုမ္ပဏီက စီမံတဲ့ server ပေါ်မှာ run လို့ရသလို cloud ပေါ်မှာလည်း တင်ထားလို့ရပါတယ်။'), `# Company-managed PostgreSQL
-psql -h db.office.example.com -U school_app -d learning_db
-
-# Cloud PostgreSQL, with the provider CA trusted by the client
-psql "host=db.cloud.example.com dbname=learning_db user=school_app sslmode=verify-full"`),
-      ],
-      [['PostgreSQL · Client/server architecture', 'https://www.postgresql.org/docs/19/tutorial-arch.html']]),
     version: '',
   },
   databaseSelection,
