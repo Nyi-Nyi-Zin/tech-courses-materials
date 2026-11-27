@@ -16,12 +16,6 @@ export const databaseFundamentals = [
     ...page('fundamentals', p('What is a database?', 'Database ဆိုတာ ဘာလဲ'),
       p(databaseDefinition.en.replaceAll('**', ''), databaseDefinition.my.replaceAll('**', '')),
       [
-        part('database-and-dbms', p('Database and DBMS', 'Database နဲ့ DBMS'),
-          p(
-            'When an application needs to read, add, or update data, it sends a request to the DBMS. A single DBMS can manage multiple databases. For example, the PostgreSQL query below reports the name of the database you are connected to and the version of the software managing it.',
-            'Application က data ဖတ်ဖို့၊ ထည့်ဖို့ ဒါမှမဟုတ် ပြင်ဖို့ လိုတဲ့အခါ DBMS ဆီ request ပို့ပါတယ်။ DBMS တစ်ခုက database အများအပြားကို စီမံနိုင်ပါတယ်။ အောက်က PostgreSQL query က လက်ရှိ ချိတ်ထားတဲ့ database ရဲ့ အမည်နဲ့ အဲဒီ database ကို စီမံပေးနေတဲ့ software ရဲ့ version ကို ပြပေးပါတယ်။'
-          ), `SELECT current_database() AS connected_database,
-       version() AS database_server;`),
         {
           ...snippet('sql-and-nosql', p('Types of Databases', 'Database အမျိုးအစားများ')),
           figure: {
@@ -36,31 +30,31 @@ export const databaseFundamentals = [
           },
           blocks: p(
             [
-              ['heading', '1. Relational Database (SQL) 📊'],
+              ['heading', '1. Relational Database (SQL)'],
               ['paragraph', 'Stores data in structured tables with rows and columns. A defined schema and constraints help maintain data integrity. Relational databases work well for complex queries and transactions, such as recording a bank transfer. Examples include PostgreSQL and MySQL.'],
-              ['heading', '2. Document Store (NoSQL) 📄'],
+              ['heading', '2. Document Store (NoSQL)'],
               ['paragraph', 'Stores data in flexible, JSON-like documents. Documents can have different fields, so you can add fields as your application grows. Some systems also let you validate document fields. Examples include MongoDB and Cloud Firestore from Firebase.'],
-              ['heading', '3. Key-Value Store (NoSQL) 🔑'],
+              ['heading', '3. Key-Value Store (NoSQL)'],
               ['paragraph', 'Stores data as pairs of unique keys and their corresponding values, like a dictionary. Fast lookup by key makes this model useful for API response caching and user sessions. Redis is an example. Memcached uses the same model as an in-memory cache.'],
-              ['heading', '4. Wide-Column Store (NoSQL) 🗄️'],
+              ['heading', '4. Wide-Column Store (NoSQL)'],
               ['paragraph', 'Stores data in rows identified by keys. A system such as HBase groups related columns into column families. Wide-column stores can distribute large volumes of data across servers and are used for applications such as high-volume logs, IoT telemetry, and large-scale analytics. Examples include Apache Cassandra and Apache HBase.'],
-              ['heading', '5. Graph Database (NoSQL) 🕸️'],
+              ['heading', '5. Graph Database (NoSQL)'],
               ['paragraph', 'Stores entities as nodes and their relationships as edges. Graph databases make it efficient to follow multiple connections, such as finding mutual friends or generating recommendations. Neo4j is an example.'],
-              ['heading', '6. Vector Database (NoSQL / AI) 🤖'],
+              ['heading', '6. Vector Database (NoSQL / AI)'],
               ['paragraph', 'Stores and indexes embeddings, which are high-dimensional vectors that represent data such as text or images. Vector databases use similarity search to find related content and can retrieve relevant documents for Retrieval-Augmented Generation (RAG). Examples include Pinecone and Milvus.'],
             ],
             [
-              ['heading', '1. Relational Database (SQL) 📊'],
+              ['heading', '1. Relational Database (SQL)'],
               ['paragraph', 'Data ကို row နဲ့ column ပါတဲ့ table တွေထဲမှာ သိမ်းပါတယ်။ Schema နဲ့ constraint တွေ သတ်မှတ်ပြီး မှတ်တမ်းတွေ စည်းကမ်းနဲ့ ကိုက်ညီအောင် ထိန်းထားနိုင်ပါတယ်။ ဆက်စပ်မှတ်တမ်းတွေကို query တစ်ခုနဲ့ ရှာဖတ်တာ၊ ဘဏ်ငွေလွှဲလို transaction တွေ မှတ်တမ်းတင်တာအတွက် သင့်တော်ပါတယ်။ PostgreSQL နဲ့ MySQL တို့က ဥပမာတွေပါ။'],
-              ['heading', '2. Document Store (NoSQL) 📄'],
+              ['heading', '2. Document Store (NoSQL)'],
               ['paragraph', 'Data ကို JSON နဲ့ ဆင်တူတဲ့ document တွေအဖြစ် သိမ်းပါတယ်။ Document တစ်ခုနဲ့တစ်ခုမှာ field တွေ ကွာနိုင်တာကြောင့် app ကြီးလာတဲ့အခါ field အသစ်တွေ ထည့်နိုင်ပါတယ်။ တချို့စနစ်တွေမှာ field တွေကို သတ်မှတ်ချက်နဲ့ ကိုက်ညီလားဆိုတာလည်း စစ်နိုင်ပါတယ်။ MongoDB နဲ့ Firebase ရဲ့ Cloud Firestore တို့က ဥပမာတွေပါ။'],
-              ['heading', '3. Key-Value Store (NoSQL) 🔑'],
+              ['heading', '3. Key-Value Store (NoSQL)'],
               ['paragraph', 'ထပ်မနေတဲ့ key တစ်ခုစီနဲ့ သက်ဆိုင်ရာ value ကို တွဲသိမ်းပါတယ်။ Key ကို သိရင် value ကို မြန်မြန် ပြန်ယူနိုင်တာကြောင့် API response တွေကို cache လုပ်ဖို့နဲ့ user session တွေ သိမ်းဖို့ သုံးလေ့ရှိပါတယ်။ Redis က ဥပမာတစ်ခုပါ။ Memcached ကလည်း ဒီပုံစံကို သုံးတဲ့ in-memory cache ပါ။'],
-              ['heading', '4. Wide-Column Store (NoSQL) 🗄️'],
+              ['heading', '4. Wide-Column Store (NoSQL)'],
               ['paragraph', 'Data ကို key နဲ့ ခွဲခြားသတ်မှတ်ထားတဲ့ row တွေထဲမှာ သိမ်းပါတယ်။ HBase မှာ ဆက်စပ်တဲ့ column တွေကို column family အလိုက် စုထားပါတယ်။ Data အများအပြားကို server အများအပြားပေါ် ဖြန့်သိမ်းနိုင်တာကြောင့် ဝင်လာတဲ့ log အများအပြား၊ IoT စက်တွေဆီက ပို့တဲ့ တိုင်းတာချက်တွေနဲ့ data အများကြီး ခွဲခြမ်းစိတ်ဖြာတဲ့ အလုပ်တွေမှာ သုံးနိုင်ပါတယ်။ Apache Cassandra နဲ့ Apache HBase တို့က ဥပမာတွေပါ။'],
-              ['heading', '5. Graph Database (NoSQL) 🕸️'],
+              ['heading', '5. Graph Database (NoSQL)'],
               ['paragraph', 'လူ၊ ပစ္စည်း စတဲ့ အရာတွေကို node အဖြစ် သိမ်းပြီး သူတို့ကြားက ဆက်စပ်မှုကို edge အဖြစ် သိမ်းပါတယ်။ နှစ်ယောက်လုံးနဲ့ သူငယ်ချင်းဖြစ်သူကို ရှာတာ၊ သုံးစွဲသူ စိတ်ဝင်စားနိုင်တဲ့ အရာတွေ အကြံပြုတာလို ဆက်စပ်မှုအဆင့်ဆင့်ကို လိုက်ရှာရာမှာ သုံးပါတယ်။ Neo4j က ဥပမာတစ်ခုပါ။'],
-              ['heading', '6. Vector Database (NoSQL / AI) 🤖'],
+              ['heading', '6. Vector Database (NoSQL / AI)'],
               ['paragraph', 'စာသား၊ ပုံ စတဲ့ data ကို ကိုယ်စားပြုတဲ့ ဂဏန်းတန်ဖိုး အများအပြားပါဝင်သော vector တွေကို embedding လို့ ခေါ်ပါတယ်။ Vector database က embedding တွေကို သိမ်းပြီး index လုပ်ပေးပါတယ်။ ဆင်တူတဲ့ content ကို ရှာဖို့နဲ့ Retrieval-Augmented Generation (RAG) မှာ သက်ဆိုင်ရာ document တွေ ပြန်ရှာပေးဖို့ သုံးနိုင်ပါတယ်။ Pinecone နဲ့ Milvus တို့က ဥပမာတွေပါ။'],
             ],
           ),
@@ -71,7 +65,16 @@ export const databaseFundamentals = [
         ['Apache HBase · Data model', 'https://hbase.apache.org/docs/datamodel/'],
         ['Milvus · What is Milvus?', 'https://milvus.io/docs/overview.md'],
       ]),
-    introBlocks: p([['paragraph', databaseDefinition.en]], [['paragraph', databaseDefinition.my]]),
+    introBlocks: p(
+      [
+        ['paragraph', databaseDefinition.en],
+        ['paragraph', 'PostgreSQL, MySQL, SQLite, and MongoDB are examples of DBMS software.'],
+      ],
+      [
+        ['paragraph', databaseDefinition.my],
+        ['paragraph', 'PostgreSQL၊ MySQL၊ SQLite နဲ့ MongoDB တို့က DBMS နမူနာတွေပါ။'],
+      ],
+    ),
     version: '',
   },
   {
