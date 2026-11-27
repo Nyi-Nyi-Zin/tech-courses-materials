@@ -1,4 +1,5 @@
 import { p, page, part, snippet } from './content.js';
+import { databaseAcid } from './database-acid.js';
 import { databaseSelection } from './database-learning.js?v=92';
 
 const databaseDefinition = p(
@@ -72,6 +73,7 @@ export const databaseFundamentals = [
     ),
     version: '',
   },
+  databaseAcid,
   databaseSelection,
 ];
 

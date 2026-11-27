@@ -1,4 +1,4 @@
-import { guides as webGuides, developerGuides } from './guides.js?v=92';
+import { guides as webGuides, developerGuides } from './guides.js?v=93';
 import { curricula } from '../locales.js';
 import { articleForExercise } from '../learning-paths.js';
 import { lessonDestination } from './section-redirects.js?v=91';
