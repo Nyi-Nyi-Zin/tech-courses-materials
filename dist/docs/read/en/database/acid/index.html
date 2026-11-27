@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A database transaction groups one or more read or write operations into a single unit of work. A bank transfer, for example, groups the debit from one account and the credit to another. ACID describes four properties that keep those operations reliable when a step fails, several transactions run at once, or a server crashes.">
+  <title>ACID Database Properties · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/acid/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/acid/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/acid/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=87">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/acid/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>ACID Database Properties</h1>
+  
+  <figure class="lesson-figure lesson-figure--banner">
+    <a href="/docs/media/database/acid-properties.jpg" data-image-preview><img src="/docs/media/database/acid-properties.jpg" alt="ACID overview showing complete transactions, valid data, isolation between concurrent operations, and committed changes that survive a crash." width="2048" height="1143" loading="lazy" decoding="async"></a>
+  </figure>
+  <p class="intro"><em>Core guarantees for reliable database transactions</em></p>
+<p class="intro">A database transaction groups one or more read or write operations into a single unit of work. A bank transfer, for example, groups the debit from one account and the credit to another. ACID describes four properties that keep those operations reliable when a step fails, several transactions run at once, or a server crashes.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/acid">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#atomicity">Atomicity — All or Nothing</a></li>
+<li><a href="#consistency">Consistency — Valid State Transitions</a></li>
+<li><a href="#isolation">Isolation — Independent Execution</a></li>
+<li><a href="#durability">Durability — Permanent Storage</a></li>
+<li><a href="#summary">Summary of Guarantees</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="atomicity">
+  <h2>Atomicity — All or Nothing</h2>
+  <p>Atomicity treats a transaction as an indivisible unit. The database commits all its transactional changes together or discards them together.</p>
+<ul class="lesson-list"><li><strong>Core guarantee.</strong> A failed transfer cannot leave the sender’s balance reduced with no corresponding credit to the recipient.</li><li><strong>Mechanism.</strong> If the transaction cannot complete or is explicitly cancelled with <code>ROLLBACK</code>, the database discards its uncommitted changes. How rollback works internally depends on the engine.</li></ul>
+
+
+
+
+</section>
+<section class="article-section" id="consistency">
+  <h2>Consistency — Valid State Transitions</h2>
+  <p>A successful transaction takes the database from one valid state to another. The committed data must satisfy the rules defined for it.</p>
+<ul class="lesson-list"><li><strong>Core guarantee.</strong> For example, a <code>CHECK</code> constraint can require each account balance to stay at or above zero.</li><li><strong>Mechanism.</strong> The database enforces rules such as column types, uniqueness, foreign keys, and check constraints. Some rules are checked at the end of each statement, and deferrable constraints can be checked at commit. The transaction also needs to implement business rules, such as debiting and crediting the same amount.</li></ul>
+
+
+
+
+</section>
+<section class="article-section" id="isolation">
+  <h2>Isolation — Independent Execution</h2>
+  <p>Isolation controls what transactions can see and how they can affect one another when they run concurrently. In PostgreSQL, another transaction cannot read an uncommitted debit during the transfer.</p>
+<ul class="lesson-list"><li><strong>Core guarantee.</strong> At the <code>SERIALIZABLE</code> level, successfully committed transactions produce the same result as running them one at a time in some order.</li><li><strong>Mechanism.</strong> Database engines coordinate concurrent work with techniques such as two-phase locking or multi-version concurrency control (MVCC). MVCC lets queries read a snapshot of the data.</li><li><strong>Performance trade-off.</strong> Isolation levels differ in the anomalies they prevent, such as dirty reads, non-repeatable reads, phantom reads, and serialization anomalies. Stricter levels can require additional coordination or cause transactions to retry.</li></ul>
+
+
+
+
+</section>
+<section class="article-section" id="durability">
+  <h2>Durability — Permanent Storage</h2>
+  <p>Once the database confirms a durable commit, the changes survive a crash, restart, or power loss.</p>
+<ul class="lesson-list"><li><strong>Core guarantee.</strong> If the server crashes after confirming a durable commit, the completed transfer stays recorded even though the data in memory is lost.</li><li><strong>Mechanism.</strong> With PostgreSQL’s default durability settings, it writes the required write-ahead log (WAL) records to durable storage before confirming the commit. After a crash, PostgreSQL can replay the WAL to recover changes that had yet to reach the data files.</li></ul>
+
+
+
+
+</section>
+<section class="article-section" id="summary">
+  <h2>Summary of Guarantees</h2>
+  <div class="lesson-table" role="region" aria-label="Summary of ACID guarantees" tabindex="0" style="overflow-x:auto"><table style="min-width:24rem">
+        <thead><tr><th scope="col">Property</th><th scope="col">Focus</th><th scope="col">Primary protection</th></tr></thead>
+        <tbody><tr><td><strong>Atomicity</strong></td><td>Completeness</td><td>Prevents a partial transaction from being committed</td></tr><tr><td><strong>Consistency</strong></td><td>Validity</td><td>Keeps committed data within defined rules</td></tr><tr><td><strong>Isolation</strong></td><td>Concurrency</td><td>Controls interactions between concurrent transactions</td></tr><tr><td><strong>Durability</strong></td><td>Persistence</td><td>Preserves committed changes across crashes</td></tr></tbody>
+      </table></div>
+<p>Relational systems such as PostgreSQL support ACID transactions. In distributed systems, check which operations can share a transaction, which isolation levels are available, and how quickly replicas reflect committed writes. These guarantees vary by engine and configuration.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/current/tutorial-transactions.html">PostgreSQL · Transactions</a></li>
+<li><a href="https://www.postgresql.org/docs/current/ddl-constraints.html">PostgreSQL · Constraints</a></li>
+<li><a href="https://www.postgresql.org/docs/current/transaction-iso.html">PostgreSQL · Transaction isolation</a></li>
+<li><a href="https://www.postgresql.org/docs/current/wal-intro.html">PostgreSQL · Write-ahead logging</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/core/transactions/">MongoDB · Distributed transactions</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/fundamentals/">Previous lesson · What is a database?</a>
+<a href="/docs/read/en/database/choosing-a-database/">Next lesson · How to Choose a Database for Your Application</a></nav></footer>
+</article>
+</main>
+</body>
+</html>
