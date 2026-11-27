@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plot lower and upper error distances and label what uncertainty represents.">
+  <title>Show uncertainty with error bars and bands · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/uncertainty-charts/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/uncertainty-charts/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/uncertainty-charts/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#matplotlib">All documentation · Matplotlib</a> <a href="/docs/read/my/matplotlib/uncertainty-charts/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Show uncertainty with error bars and bands</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">Plot lower and upper error distances and label what uncertainty represents.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/matplotlib/uncertainty-charts">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#error-bars">Use nonnegative distances from the estimate</a></li>
+<li><a href="#bands">Show a continuous interval</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="error-bars">
+  <h2>Use nonnegative distances from the estimate</h2>
+  <p>Pass yerr as error distances, measured from each estimate. With asymmetric intervals, pass lower distances first and upper distances second. Label whether the bars show confidence intervals, standard error, or another quantity.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.errorbar([&quot;A&quot;, &quot;B&quot;], [8, 10], yerr=[[1, 2], [2, 1]], fmt=&quot;o&quot;, capsize=5)
+ax.set(ylabel=&quot;Estimated units&quot;, title=&quot;Estimates with illustrative intervals&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/uncertainty-charts-error-bars.png" data-image-preview><img src="/docs/media/data/uncertainty-charts-error-bars.png" alt="Store A’s estimate is 8, with bounds 7 and 10. Store B’s is 10, with bounds 8 and 11." width="584" height="443" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="bands">
+  <h2>Show a continuous interval</h2>
+  <p>fill_between draws a band between lower and upper values along x. Use it for an interval that varies over time, and align each lower and upper value with the matching x position.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.errorbar.html">Axes.errorbar</a></li>
+<li><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.fill_between.html">Axes.fill_between</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/matplotlib/export-chart/">Previous lesson · Export charts to files</a>
+<a href="/docs/read/en/matplotlib/heatmaps-and-colorbars/">Next lesson · Heatmaps and colorbars</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="အရေးပါတဲ့ point ကို ထင်ရှားအောင် ပြပြီး chart data ကို မပြောင်းဘဲ label ပုံစံချပါ။">
+  <title>Point များ မှတ်သား၍ Tick ပုံစံချခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/annotations-and-ticks/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/annotations-and-ticks/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/annotations-and-ticks/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#matplotlib">သင်ခန်းစာအားလုံး · Matplotlib</a> <a href="/docs/read/en/matplotlib/annotations-and-ticks/" lang="en" hreflang="en">English</a></nav>
+  <h1>Point များ မှတ်သား၍ Tick ပုံစံချခြင်း</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">အရေးပါတဲ့ point ကို ထင်ရှားအောင် ပြပြီး chart data ကို မပြောင်းဘဲ label ပုံစံချပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/matplotlib/annotations-and-ticks">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#annotate">အရေးပါတဲ့ Observation ကို ညွှန်းခြင်း</a></li>
+<li><a href="#ticks">Tick နေရာနဲ့ ပုံစံ သီးခြား ထားခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="annotate">
+  <h2>အရေးပါတဲ့ Observation ကို ညွှန်းခြင်း</h2>
+  <p>annotate မှာ data point xy နဲ့ စာသားနေရာ xytext သီးခြား သတ်မှတ်နိုင်ပါတယ်။ Axis limit ပြောင်းရင်လည်း point နားမှာ label တိုတို ထားဖို့ offset points သုံးပါ။</p>
+
+<pre><code>import matplotlib.pyplot as plt
+from matplotlib.ticker import PercentFormatter
+
+fig, ax = plt.subplots()
+ax.plot([1, 2, 3], [0.18, 0.22, 0.20], marker=&quot;o&quot;)
+ax.annotate(&quot;Peak&quot;, xy=(2, 0.22), xytext=(10, -14), textcoords=&quot;offset points&quot;)
+ax.yaxis.set_major_formatter(PercentFormatter(xmax=1))
+ax.set(xlabel=&quot;Week&quot;, ylabel=&quot;Conversion&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/annotations-and-ticks-annotate.png" data-image-preview><img src="/docs/media/data/annotations-and-ticks-annotate.png" alt="ဒုတိယပတ်မှာ conversion 22 ရာခိုင်နှုန်းနဲ့ အများဆုံးပါ။ ဒုတိယ point ကို Peak လို့ label ပေးထားပါတယ်။" width="606" height="440" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="ticks">
+  <h2>Tick နေရာနဲ့ ပုံစံ သီးခြား ထားခြင်း</h2>
+  <p>Tick locator က နေရာ ရွေးပြီး formatter က တန်ဖိုးကို ပြမယ့်စာသား ပြောင်းပေးပါတယ်။ သုညကနေ တစ်အတွင်း proportion အတွက် PercentFormatter(xmax=1) က 0.22 ကို 22 ရာခိုင်နှုန်းအဖြစ် ပြပါတယ်။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://matplotlib.org/stable/users/explain/text/annotations.html">Annotations</a></li>
+<li><a href="https://matplotlib.org/stable/users/explain/axes/axes_ticks.html">Axis ticks and tick formatters</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/matplotlib/heatmaps-and-colorbars/">အရင်သင်ခန်းစာ · Heatmaps နှင့် Colorbars</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

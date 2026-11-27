@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="နာမည်နှစ်ခုက object တစ်ခုတည်းကို ဘယ်အချိန်မှာ ညွှန်းလဲ၊ အဆင့်ဆင့် ထည့်ထားတဲ့ collection ကို ဘယ်လို copy ကူးမလဲ လေ့လာပါ။">
+  <title>Names၊ Mutable Objects နှင့် Copies · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/python/names-and-objects/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/names-and-objects/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/names-and-objects/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#python">သင်ခန်းစာအားလုံး · Python</a> <a href="/docs/read/en/python/names-and-objects/" lang="en" hreflang="en">English</a></nav>
+  <h1>Names၊ Mutable Objects နှင့် Copies</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">နာမည်နှစ်ခုက object တစ်ခုတည်းကို ဘယ်အချိန်မှာ ညွှန်းလဲ၊ အဆင့်ဆင့် ထည့်ထားတဲ့ collection ကို ဘယ်လို copy ကူးမလဲ လေ့လာပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/python/names-and-objects">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#assignment">Assignment နှင့် Mutation</a></li>
+<li><a href="#nested-copies">Shallow Copy နှင့် Deep Copy</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="assignment">
+  <h2>Assignment နှင့် Mutation</h2>
+  <p>Assignment က နာမည်တစ်ခုကို object တစ်ခုနဲ့ ချိတ်ပေးပါတယ်။ alias = original လို့ ရေးလိုက်ရင် နာမည်နှစ်ခုလုံးက list တစ်ခုတည်းကို ညွှန်းပါတယ်။ ဘယ်နာမည်ကတစ်ဆင့် list ထဲကို ပြင်ပြင် နှစ်ခုလုံးက အပြောင်းအလဲကို မြင်ရပါတယ်။ နောက်မှ alias ကို တခြား list နဲ့ ချိတ်လိုက်ရင် alias ရဲ့ ချိတ်ဆက်မှုသာ ပြောင်းပါတယ်။</p>
+
+<pre><code>original = [10, 20]
+alias = original
+alias.append(30)
+print(original)
+alias = [5]
+print(original, alias)</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/names-and-objects-assignment.png" data-image-preview><img src="/docs/media/data/names-and-objects-assignment.png" alt="append လုပ်ပြီးရင် နာမည်နှစ်ခုလုံးက [10, 20, 30] ကို ညွှန်းပါတယ်။ ပြန် assign လုပ်ပြီးမှ alias က [5] ကို ညွှန်းပါတယ်။" width="720" height="370" loading="lazy" decoding="async"></a>
+    <figcaption>List ထဲက တန်ဖိုးပြင်တာနဲ့ နာမည်က ညွှန်းတဲ့ object ပြောင်းတာမှာ သက်ရောက်မှု မတူပါ။</figcaption>
+  </figure>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[10, 20, 30]
+[10, 20, 30] [5]</pre></div>
+
+
+</section>
+<section class="article-section" id="nested-copies">
+  <h2>Shallow Copy နှင့် Deep Copy</h2>
+  <p>Shallow copy က အပြင်ဘက် list အသစ် ဆောက်ပေးပြီး အတွင်းက element တွေရဲ့ reference ကို ပြန်သုံးပါတယ်။ အတွင်းမှာ ပြင်လို့ရတဲ့ list ရှိရင် အဲဒီ list ကို မျှသုံးနေဆဲပါ။ ဒီဥပမာမှာ deepcopy သုံးရင် အတွင်း list တွေပါ သီးခြား ကူးပေးပါတယ်။</p>
+
+<pre><code>from copy import deepcopy
+
+original = [[10], [20]]
+shallow = original.copy()
+deep = deepcopy(original)
+
+original[0].append(15)
+print(shallow)
+print(deep)</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/names-and-objects-nested-copies.png" data-image-preview><img src="/docs/media/data/names-and-objects-nested-copies.png" alt="အပြင် list သုံးခု သီးခြားစီပါ။ ပထမ အတွင်း list မှာ original နဲ့ shallow က [10, 15] မြင်ရပြီး deep က [10] အတိုင်း ရှိပါတယ်။" width="720" height="335" loading="lazy" decoding="async"></a>
+    <figcaption>အတွင်း list ကို မျှသုံးထားလို့ ပြောင်းလဲမှုကို shallow copy မှာပါ မြင်ရပါတယ်။</figcaption>
+  </figure>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[[10, 15], [20]]
+[[10], [20]]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.python.org/3/tutorial/classes.html#python-scopes-and-namespaces">Python scopes and namespaces</a></li>
+<li><a href="https://docs.python.org/3/library/copy.html">Python shallow and deep copy operations</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/python/classes/">အရင်သင်ခန်းစာ · Classes၊ Instances နှင့် Python 3.15</a>
+<a href="/docs/read/my/python/iterators-and-generators/">နောက်သင်ခန်းစာ · Iterators နှင့် Generators</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

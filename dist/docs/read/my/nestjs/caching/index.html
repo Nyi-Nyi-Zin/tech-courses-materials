@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ထပ်တွက်ရတာ သက်သာဖို့ result ကို ခဏသိမ်းပါ။ ဘယ်အချိန် database ကနေ အသစ်ပြန်ဖတ်မလဲ စည်းမျဉ်း သတ်မှတ်ပါ။">
+  <title>မကြာခဏ ဖတ်တဲ့ Result ကို Cache ထားပါ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/caching/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/caching/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/caching/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#nestjs">သင်ခန်းစာအားလုံး · NestJS</a> <a href="/docs/read/en/nestjs/caching/" lang="en" hreflang="en">English</a></nav>
+  <h1>မကြာခဏ ဖတ်တဲ့ Result ကို Cache ထားပါ</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">ထပ်တွက်ရတာ သက်သာဖို့ result ကို ခဏသိမ်းပါ။ ဘယ်အချိန် database ကနေ အသစ်ပြန်ဖတ်မလဲ စည်းမျဉ်း သတ်မှတ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/nestjs/caching">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#read">Cache အရင်ဖတ်ပြီး Database ဖတ်ပါ</a></li>
+<li><a href="#refresh">Write ပြီးရင် Entry အဟောင်း ဖယ်ပါ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="read">
+  <h2>Cache အရင်ဖတ်ပြီး Database ဖတ်ပါ</h2>
+  <p>@nestjs/cache-manager နဲ့ cache-manager install လုပ်ပြီး CacheModule register လုပ်ပါ။ Service ထဲမှာ CACHE_MANAGER inject လုပ်ပါ။ Default store က memory ထဲမှာပါ။ ဒီနမူနာမှာ key က shop ကို ခွဲပြီး result ကို 30,000 milliseconds သိမ်းပါတယ်။</p>
+
+<pre><code>// Inside the service with CACHE_MANAGER and a product repository injected
+async list(shopId: number) {
+  const key = &quot;products:shop:&quot; + shopId;
+  const cached = await this.cache.get&lt;Product[]&gt;(key);
+  if (cached != null) return cached;
+
+  const products = await this.repository.list(shopId);
+  await this.cache.set(key, products, 30_000);
+  return products;
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="refresh">
+  <h2>Write ပြီးရင် Entry အဟောင်း ဖယ်ပါ</h2>
+  <p>Database commit ပြီးရင် သက်ဆိုင်ရာ key ဖျက်ပါ။ ဒါဆို နောက်တစ်ခါဖတ်တဲ့အခါ data အသစ်ယူနိုင်ပါတယ်။ လုပ်နေဆဲ read က data အဟောင်း ပြန်သိမ်းနိုင်သေးလို့ TTL တိုတိုထားပါ။ ချက်ချင်းမှန်ဖို့လိုတဲ့ data အတွက် ပိုသေချာတဲ့ design သုံးပါ။ Nest process အများကြီးက တူညီတဲ့ cache values သုံးဖို့လိုရင် shared store ရွေးပါ။</p>
+
+<pre><code>await this.repository.updateQuantity(shopId, productId, quantity);
+await this.cache.del(&quot;products:shop:&quot; + shopId);</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.nestjs.com/techniques/caching">NestJS · Caching</a></li>
+<li><a href="https://keyv.org/docs/storage-adapters/redis/">Keyv · Redis store</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/nestjs/websocket-gateways/">အရင်သင်ခန်းစာ · WebSockets နဲ့ Live Updates ပို့ပါ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

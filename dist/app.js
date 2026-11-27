@@ -1,7 +1,9 @@
-import { curricula, languageOptions, messages } from './locales.js';
+import { curricula, messages } from './locales.js';
 import { previewDocument } from './runner.js';
+import { savedLanguage, saveLanguage, siteHeader } from './site-header.js';
+import { loadReact, readMedia, runWorker } from './runtime.js';
 import { articleForExercise, learningPaths } from './learning-paths.js';
-import { attachSidebar, sidebarToggle } from './sidebar.js';
+import { attachSidebar, narrowScreenQuery, sidebarBackdrop } from './sidebar.js';
 
 const icons = {
   home: '<path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 21v-7h6v7"/>',
@@ -31,18 +33,14 @@ const languages = {
   TypeScript: 'lesson.ts', JSX: 'App.jsx', NestJS: 'app.ts', SQL: 'query.sql',
 };
 const app = document.querySelector('#app');
-const updateSidebar = attachSidebar(app, '(max-width: 780px)', t);
+const narrowScreen = window.matchMedia(narrowScreenQuery);
+const defaultPreviewSize = () => narrowScreen.matches ? 'narrow' : 'wide';
+const updateSidebar = attachSidebar(app, t);
 const storageKey = 'frontend-lab-v1';
 
-const languageKey = 'frontend-lab-language';
 let language = savedLanguage();
 let tracks;
 let allExercises;
-
-function savedLanguage() {
-  try { return localStorage.getItem(languageKey) === 'my' ? 'my' : 'en'; }
-  catch { return 'en'; }
-}
 
 function t(key, values = {}) {
   return messages[language][key].replace(/\{(\w+)\}/g, (_, name) => values[name]);
@@ -65,7 +63,7 @@ function changeLanguage(code) {
     view = {
       file: workspace.querySelector('[data-file][aria-selected="true"]').dataset.file,
       mobile: workspace.dataset.mobile,
-      size: workspace.querySelector('[data-size][aria-pressed="true"]').dataset.size,
+      size: workspace.querySelector('#preview-host').dataset.previewSize,
       hintOpen: hint.open,
       solutionOpen: solution.open,
       consoleOpen: workspace.querySelector('.console').open,
@@ -73,7 +71,7 @@ function changeLanguage(code) {
   }
   const scroll = window.scrollY;
   language = code;
-  try { localStorage.setItem(languageKey, language); } catch {}
+  saveLanguage(language);
   applyLanguage();
   render(false, view);
   window.scrollTo(0, scroll);
@@ -125,24 +123,13 @@ function sidebar(active) {
 
 function layout(active, content, extraClass = '', docsHref = learningPaths[active] ? './docs/#/' + active : './docs/') {
   const count = totalDone();
-  const languageButtons = languageOptions.map(({ code, label }) => `
-    <button class="language-button" type="button" lang="${code}" data-language="${code}" aria-pressed="${language === code}">${label}</button>
-  `).join('');
-  return `<header class="topbar">
-    <div class="top-left">
-      ${sidebarToggle}
-      <a class="brand" href="#/" aria-label="Cloud Nine Innovations"><img src="./icon.svg" alt=""><span>Cloud Nine Innovations</span></a>
-    </div>
-    <div class="top-actions">
-      <a class="docs-link" href="${docsHref}">${t('docs')}</a>
-      <div class="language-switch" role="group" aria-label="${t('language')}">${languageButtons}</div>
-      <div class="top-progress">
-        <span class="progress-word">${t('progress')}</span><strong id="total-progress">${count} / ${allExercises.length}</strong>
-        ${progress(count, allExercises.length, t('overallProgress'))}
-      </div>
-    </div>
-  </header>
-  <div class="frame">${sidebar(active)}<main id="main" tabindex="-1"><div class="wrap ${extraClass}">${content}</div></main></div>`;
+  const action = `<div class="top-progress">
+    <span class="progress-word">${t('progress')}</span><strong id="total-progress">${count} / ${allExercises.length}</strong>
+    ${progress(count, allExercises.length, t('overallProgress'))}
+  </div>`;
+  const header = siteHeader({ active: 'practice', language, root: './', practice: '#/', docs: docsHref, action });
+  return `${header}
+  <div class="frame">${sidebar(active)}${sidebarBackdrop}<main id="main" tabindex="-1"><div class="wrap ${extraClass}">${content}</div></main></div>`;
 }
 
 function overview() {
@@ -236,7 +223,7 @@ function exercisePage(track, exercise, view) {
   const sqlLab = track.runtime === 'sql';
   const activeFile = view?.file ?? exerciseFiles.at(-1);
   const mobileView = view?.mobile ?? 'task';
-  const previewSize = view?.size ?? 'wide';
+  const previewSize = view?.size || defaultPreviewSize();
   const files = exerciseFiles.map(file => {
     const selected = file === activeFile;
     return `<button id="tab-${file}" class="file-tab" type="button" role="tab" data-file="${file}"
@@ -287,7 +274,7 @@ function exercisePage(track, exercise, view) {
                 <button class="view-tab" type="button" data-size="narrow" aria-pressed="${previewSize === 'narrow'}">${icon('mobile', 15)} ${t('mobile')}</button>
               </div>
             </div>
-            <div id="preview-host"${previewSize === 'narrow' ? ' class="narrow"' : ''}>${track.runtime ? `<p class="lab-placeholder">${t('runLab')}</p>` : ''}</div>
+            <div id="preview-host" data-preview-size="${view?.size ?? ''}"${previewSize === 'narrow' ? ' class="narrow"' : ''}>${track.runtime ? `<p class="lab-placeholder">${t('runLab')}</p>` : ''}</div>
             <details class="console"${(view?.consoleOpen ?? (track.id === 'js' || track.runtime === 'typescript')) ? ' open' : ''}><summary>${t('console')}</summary>
               <pre id="console-output">${t('noOutput')}</pre>
             </details>
@@ -315,51 +302,6 @@ function updateProgress(track) {
   document.querySelector('#total-progress').textContent = total + ' / ' + allExercises.length;
   document.querySelector('.top-progress progress').value = total;
   document.querySelector('[data-track-count="' + track.id + '"]').textContent = countDone(track) + '/' + track.exercises.length;
-}
-
-function readMedia() {
-  return Promise.all(['lesson.ogg', 'lesson.webm', 'lesson-en.vtt'].map(async name => {
-    const response = await fetch('./media/' + name);
-    if (!response.ok) return [name, ''];
-    const blob = await response.blob();
-    return new Promise(resolve => {
-      const reader = new FileReader();
-      reader.onload = () => resolve([name, reader.result]);
-      reader.onerror = () => resolve([name, '']);
-      reader.readAsDataURL(blob);
-    });
-  })).then(Object.fromEntries).catch(() => ({}));
-}
-
-let reactBundle;
-function loadReact() {
-  reactBundle ??= fetch('./vendor/react.js').then(response => {
-    if (!response.ok) throw new Error('Could not load the React runtime.');
-    return response.text();
-  }).catch(error => {
-    reactBundle = undefined;
-    throw error;
-  });
-  return reactBundle;
-}
-
-function runWorker(file, options, data, signal) {
-  return new Promise((resolve, reject) => {
-    if (signal.aborted) { reject(signal.reason); return; }
-    const worker = new Worker(new URL(file, import.meta.url), options);
-    const timeout = setTimeout(() => finish(reject, new Error('The practice runtime took too long.')), 25000);
-    const cancel = () => finish(reject, signal.reason);
-    function finish(callback, value) {
-      clearTimeout(timeout);
-      signal.removeEventListener('abort', cancel);
-      worker.terminate();
-      callback(value);
-    }
-    signal.addEventListener('abort', cancel, { once: true });
-    worker.onmessage = ({ data: result }) => finish(resolve, result);
-    worker.onerror = () => finish(reject, new Error('The practice runtime could not start.'));
-    worker.postMessage(data);
-  });
 }
 
 let stopWorkspace = () => {};
@@ -444,14 +386,22 @@ function bindWorkspace(track, exercise) {
   for (const button of document.querySelectorAll('[data-mobile-view]')) {
     button.addEventListener('click', () => setMobileView(button.dataset.mobileView));
   }
-  for (const button of document.querySelectorAll('[data-size]')) {
+  const previewSizes = workspace.querySelectorAll('[data-size]');
+  function setPreviewSize(size) {
+    host.classList.toggle('narrow', size === 'narrow');
+    for (const option of previewSizes) {
+      option.setAttribute('aria-pressed', String(option.dataset.size === size));
+    }
+  }
+  for (const button of previewSizes) {
     button.addEventListener('click', () => {
-      host.classList.toggle('narrow', button.dataset.size === 'narrow');
-      for (const option of document.querySelectorAll('[data-size]')) {
-        option.setAttribute('aria-pressed', String(option === button));
-      }
+      host.dataset.previewSize = button.dataset.size;
+      setPreviewSize(button.dataset.size);
     });
   }
+  narrowScreen.addEventListener('change', () => {
+    if (!host.dataset.previewSize) setPreviewSize(defaultPreviewSize());
+  }, { signal: runtimeController.signal });
 
   function stopCheckers() {
     for (const job of pending.values()) {
@@ -533,7 +483,7 @@ function bindWorkspace(track, exercise) {
       currentToken = undefined;
       host.innerHTML = '<p class="lab-placeholder">' + t('previewRunning') + '</p>';
     }
-    if (switchView && matchMedia('(max-width: 780px)').matches) {
+    if (switchView && narrowScreen.matches) {
       setMobileView('preview');
       document.querySelector('[data-mobile-view="preview"]').focus();
     }

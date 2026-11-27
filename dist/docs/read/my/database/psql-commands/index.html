@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ချိတ်ဆက်ပြီးရင် ဒီ command တွေကို psql ထဲမှာ ရိုက်ပါ။ Backslash နဲ့ စတဲ့ command တွေကို psql client က ကိုင်တွယ်ပြီး Enter နှိပ်ရုံနဲ့ run တယ်။ SELECT လို SQL statement တွေကိုတော့ server ဆီပို့ပြီး အဆုံးမှာ semicolon ထည့်ပါတယ်။">
+  <title>psql နဲ့ Databases၊ Roles၊ Schemas နဲ့ Tables စစ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/psql-commands/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/psql-commands/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/psql-commands/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/psql-commands/" lang="en" hreflang="en">English</a></nav>
+  <h1>psql နဲ့ Databases၊ Roles၊ Schemas နဲ့ Tables စစ်ခြင်း</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">ချိတ်ဆက်ပြီးရင် ဒီ command တွေကို psql ထဲမှာ ရိုက်ပါ။ Backslash နဲ့ စတဲ့ command တွေကို psql client က ကိုင်တွယ်ပြီး Enter နှိပ်ရုံနဲ့ run တယ်။ SELECT လို SQL statement တွေကိုတော့ server ဆီပို့ပြီး အဆုံးမှာ semicolon ထည့်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/psql-commands">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#connection">ဘယ် Server၊ ဘယ် Database ကို ချိတ်ထားလဲ</a></li>
+<li><a href="#databases">Database စာရင်းကြည့်ခြင်း</a></li>
+<li><a href="#database-count">Database အရေအတွက် ရေတွက်ခြင်း</a></li>
+<li><a href="#roles">Role စာရင်းကြည့်ခြင်း</a></li>
+<li><a href="#schemas">Schema စာရင်းကြည့်ခြင်း</a></li>
+<li><a href="#tables">Tables စာရင်းကြည့်ခြင်း</a></li>
+<li><a href="#describe">Table ရဲ့ Columns နဲ့ Constraints စစ်ခြင်း</a></li>
+<li><a href="#version">ချိတ်ထားတဲ့ Server Version စစ်ခြင်း</a></li>
+<li><a href="#help">Help ကြည့်ခြင်းနဲ့ psql ကနေ ထွက်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="connection">
+  <h2>ဘယ် Server၊ ဘယ် Database ကို ချိတ်ထားလဲ</h2>
+  <p>လက်ရှိ database၊ role နဲ့ ချိတ်ထားတဲ့ address သို့မဟုတ် socket ကို ပြပေးတယ်။</p>
+
+<pre><code>\conninfo</code></pre>
+
+
+</section>
+<section class="article-section" id="databases">
+  <h2>Database စာရင်းကြည့်ခြင်း</h2>
+  <p>ဒီ server ပေါ်က database စာရင်းကို ပြတယ်။ learning_db ဆောက်ပြီးရင် စာရင်းမှာ ပါမပါ ကြည့်ပါ။ ကိုယ့် psql နဲ့ server version၊ locale settings အလိုက် column နဲ့ တန်ဖိုးတွေ ကွာနိုင်တယ်။</p>
+
+<pre><code>\l</code></pre>
+<dl class="lesson-terms"><div><dt><code>Name</code></dt><dd>learning_db လို database နာမည်ပါ။</dd></div><div><dt><code>Owner</code></dt><dd>Database ကို ပိုင်ဆိုင်တဲ့ role ပါ။</dd></div><div><dt><code>Encoding</code></dt><dd>စာလုံးတွေ သိမ်းတဲ့ encoding ပါ။ UTF8 နဲ့ မြန်မာစာ သိမ်းလို့ရတယ်။</dd></div><div><dt><code>Locale Provider</code></dt><dd>စာသားဆိုင်ရာ locale စည်းမျဉ်းတွေကို ဘယ်ကယူလဲ ပြတယ်။ libc က OS၊ icu က ICU library၊ builtin က PostgreSQL ရဲ့ ကိုယ်ပိုင်စနစ်ပါ။</dd></div><div><dt><code>Collate</code></dt><dd>စာသားတွေကို ယှဉ်တာနဲ့ အစဉ်လိုက်စီတာအတွက် locale setting ပါ။</dd></div><div><dt><code>Ctype</code></dt><dd>စာလုံးအမျိုးအစား ခွဲတာနဲ့ အကြီးအသေး ပြောင်းတာအတွက် locale setting ပါ။</dd></div><div><dt><code>Locale</code></dt><dd>ICU လို ဒီ field သုံးတဲ့ provider ရဲ့ locale identifier ပါ။ libc သုံးရင် လွတ်နေနိုင်တယ်။</dd></div><div><dt><code>ICU Rules</code></dt><dd>သီးသန့်သတ်မှတ်ထားရင် ICU စာစီစည်းမျဉ်းတွေကို ပြတယ်။</dd></div><div><dt><code>Access privileges</code></dt><dd>Role တွေအတွက် CONNECT၊ CREATE လို database ခွင့်ပြုချက်တွေကို ပြတယ်။ ကွက်လပ်ဆိုရင် မူလ default ခွင့်ပြုချက်တွေ သက်ရောက်နေနိုင်တယ်။</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="database-count">
+  <h2>Database အရေအတွက် ရေတွက်ခြင်း</h2>
+  <p>ဒီ SQL query က ချိတ်ထားတဲ့ server ပေါ်မှာ template databases တွေပါ အပါအဝင် database စာရင်းကို ရေတွက်တယ်။</p>
+
+<pre><code>SELECT count(*) AS database_count FROM pg_database;</code></pre>
+
+
+</section>
+<section class="article-section" id="roles">
+  <h2>Role စာရင်းကြည့်ခြင်း</h2>
+  <p>Role name column မှာ role နာမည်တွေ ပါတယ်။ Attributes column က role တစ်ခုချင်းရဲ့ အထူးလုပ်ပိုင်ခွင့်တွေကို အကျဉ်းပြတယ်။ ပုံမှန် local setup မှာ postgres administrator အတွက် အောက်က attributes တွေ မြင်ရနိုင်တယ်။ ဒီ role တစ်ခုတည်း စစ်ဖို့ \du postgres ကို သုံးပါ။</p>
+
+<pre><code>\du</code></pre>
+<dl class="lesson-terms"><div><dt><code>Superuser</code></dt><dd>Login လုပ်ခွင့်စစ်တာကလွဲပြီး database permission စစ်ဆေးမှုတွေကို ကျော်နိုင်တယ်။</dd></div><div><dt><code>Create role</code></dt><dd>Role အသစ် ဆောက်နိုင်ပြီး ကိုယ်စီမံခွင့်ရှိတဲ့ roles တွေကို စီမံနိုင်တယ်။</dd></div><div><dt><code>Create DB</code></dt><dd>Database အသစ် ဆောက်နိုင်တယ်။</dd></div><div><dt><code>Replication</code></dt><dd>Login နဲ့ connection rules က ခွင့်ပြုရင် streaming replication စတင်နိုင်တယ်။</dd></div><div><dt><code>Bypass RLS</code></dt><dd>Row တစ်ကြောင်းချင်းအလိုက် access ကန့်သတ်နိုင်တဲ့ Row-Level Security policies တွေကို ကျော်နိုင်တယ်။</dd></div><div><dt><code>LOGIN / Cannot login</code></dt><dd>Connection rules က ခွင့်ပြုရင် LOGIN ပါတဲ့ role နဲ့ ဝင်လို့ရတယ်။ LOGIN မပါတဲ့ role ကို ခွင့်ပြုချက်တွေ အုပ်စုဖွဲ့ဖို့ သုံးလို့ရတယ်။</dd></div></dl>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> နမူနာ row — postgres | Superuser, Create role, Create DB, Replication, Bypass RLS</p>
+
+</section>
+<section class="article-section" id="schemas">
+  <h2>Schema စာရင်းကြည့်ခြင်း</h2>
+  <p>လက်ရှိ database ထဲက schema တွေကို ပြတယ်။ Schema က table လို database objects တွေကို နာမည်ခွဲပြီး စီပေးတဲ့နေရာပါ။ ဥပမာတွေမှာ ပုံမှန် public schema ကို သုံးမယ်။</p>
+
+<pre><code>\dn</code></pre>
+
+
+</section>
+<section class="article-section" id="tables">
+  <h2>Tables စာရင်းကြည့်ခြင်း</h2>
+  <p>လက်ရှိ schema search path ကနေ မြင်ရတဲ့ tables ကို ပြတယ်။ public ထဲက table တွေကို သီးသန့်ကြည့်ဖို့ \dt public.* လို့ ရိုက်ပါ။ Database အသစ်ဆို ပြစရာ table မရှိသေးတာ ဖြစ်နိုင်တယ်။</p>
+
+<pre><code>\dt</code></pre>
+
+
+</section>
+<section class="article-section" id="describe">
+  <h2>Table ရဲ့ Columns နဲ့ Constraints စစ်ခြင်း</h2>
+  <p>Setup မှာ courses ဆောက်ပြီးရင် ဒီ command က columns၊ data types၊ defaults နဲ့ constraints တွေကို ပြတယ်။ တခြား table ကြည့်ချင်ရင် courses နေရာမှာ အဲဒီနာမည်ကို ထည့်ပါ။</p>
+
+<pre><code>\d courses</code></pre>
+
+
+</section>
+<section class="article-section" id="version">
+  <h2>ချိတ်ထားတဲ့ Server Version စစ်ခြင်း</h2>
+  <p>SQL function version() က server version ကို ပြတယ်။ OS terminal မှာ ရိုက်တဲ့ psql --version က client version ကို ပြတာပါ။</p>
+
+<pre><code>SELECT version();</code></pre>
+
+
+</section>
+<section class="article-section" id="help">
+  <h2>Help ကြည့်ခြင်းနဲ့ psql ကနေ ထွက်ခြင်း</h2>
+  <p>တစ်ကြောင်းချင်း run ကြည့်ပါ။ \q က OS terminal ကို ပြန်ပို့လို့ နောက်ဆုံးမှ သုံးပါ။ Output ကို pager နဲ့ ပြနေတယ်ဆို q တစ်လုံးတည်း နှိပ်ရင် pager ပိတ်ပြီး psql ထဲမှာ ဆက်ရှိနေမယ်။</p>
+
+<pre><code>\?
+\h SELECT
+\q</code></pre>
+<dl class="lesson-terms"><div><dt><code>\?</code></dt><dd>psql ရဲ့ Backslash commands စာရင်းကို ပြတယ်။</dd></div><div><dt><code>\h SELECT</code></dt><dd>SQL SELECT ရဲ့ ရေးပုံရေးနည်းကို ပြတယ်။</dd></div><div><dt><code>\q</code></dt><dd>psql ကို ပိတ်ပြီး terminal ဆီ ပြန်သွားတယ်။</dd></div></dl>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/app-psql.html">PostgreSQL · psql</a></li>
+<li><a href="https://www.postgresql.org/docs/19/catalog-pg-database.html">PostgreSQL · Database catalog</a></li>
+<li><a href="https://www.postgresql.org/docs/19/role-attributes.html">PostgreSQL · Role attributes</a></li>
+<li><a href="https://www.postgresql.org/docs/19/functions-info.html">PostgreSQL · Server information functions</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/setup/">အရင်သင်ခန်းစာ · psql နဲ့ ချိတ်ပြီး Tables တည်ဆောက်ခြင်း</a>
+<a href="/docs/read/my/database/crud/">နောက်သင်ခန်းစာ · SQL အခြေခံနဲ့ Table တစ်ခုမှာ CRUD စမ်းခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

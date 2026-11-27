@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NumPy binary format သို့မဟုတ် text file ရွေးပြီး format နဲ့ dtype ကို တိတိကျကျ ထိန်းပါ။">
+  <title>Array များ ဖတ်ခြင်း၊ သိမ်းခြင်းနှင့် မျှဝေခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/array-io/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/array-io/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/array-io/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#numpy">သင်ခန်းစာအားလုံး · NumPy</a> <a href="/docs/read/en/numpy/array-io/" lang="en" hreflang="en">English</a></nav>
+  <h1>Array များ ဖတ်ခြင်း၊ သိမ်းခြင်းနှင့် မျှဝေခြင်း</h1>
+  <p class="article-version">2.5.5</p>
+  <p class="intro">NumPy binary format သို့မဟုတ် text file ရွေးပြီး format နဲ့ dtype ကို တိတိကျကျ ထိန်းပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/numpy/array-io">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#binary">Shape နှင့် dtype ပါအောင် Array သိမ်းခြင်း</a></li>
+<li><a href="#text">ရိုးရှင်းတဲ့ Numeric Text ဖတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="binary">
+  <h2>Shape နှင့် dtype ပါအောင် Array သိမ်းခြင်း</h2>
+  <p>Array တစ်ခုအတွက် .npy၊ နာမည်ပေးထားတဲ့ array အများကြီးအတွက် .npz သုံးပါ။ Numeric ဖိုင်ဖတ်ရင် allow_pickle=False ထားပြီး မျှဝေမယ့်ဖိုင်မှာ object array ရှောင်ပါ။ .npz archive ဖွင့်ရင် context manager သုံးပါ။</p>
+
+<pre><code>from io import BytesIO
+import numpy as np
+
+buffer = BytesIO()
+np.save(buffer, np.array([[2, 3]], dtype=np.int16))
+buffer.seek(0)
+a = np.load(buffer, allow_pickle=False)
+print(a.shape, a.dtype.name)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">(1, 2) int16</pre></div>
+
+
+</section>
+<section class="article-section" id="text">
+  <h2>ရိုးရှင်းတဲ့ Numeric Text ဖတ်ခြင်း</h2>
+  <p>ပုံစံညီတဲ့ numeric text အတွက် loadtxt သုံးနိုင်ပါတယ်။ Delimiter နဲ့ header row ကျော်မယ့် အရေအတွက် သတ်မှတ်ပါ။ Missing value ကိုင်တွယ်ဖို့ genfromtxt၊ နာမည်နဲ့ type မျိုးစုံပါရင် pandas သုံးပါ။</p>
+
+<pre><code>from io import StringIO
+import numpy as np
+
+data = StringIO(&quot;units,price\n2,3.5\n4,2.0\n&quot;)
+a = np.loadtxt(data, delimiter=&quot;,&quot;, skiprows=1)
+print(a.tolist())</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[[2.0, 3.5], [4.0, 2.0]]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://numpy.org/doc/stable/reference/routines.io.html">Input and output</a></li>
+<li><a href="https://numpy.org/doc/stable/reference/generated/numpy.load.html">numpy.load</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/numpy/numerical-accuracy/">အရင်သင်ခန်းစာ · Floating-point တိကျမှုနှင့် Missing Values</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

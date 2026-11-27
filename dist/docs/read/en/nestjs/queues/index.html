@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Send slow work such as an export to a worker through a queue so the HTTP request can finish sooner.">
+  <title>Run background jobs with a queue · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/queues/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/queues/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/queues/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#nestjs">All documentation · NestJS</a> <a href="/docs/read/my/nestjs/queues/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Run background jobs with a queue</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">Send slow work such as an export to a worker through a queue so the HTTP request can finish sooner.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/nestjs/queues">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#producer">Register a queue and add a job</a></li>
+<li><a href="#worker">Process a job safely when it retries</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="producer">
+  <h2>Register a queue and add a job</h2>
+  <p>Install @nestjs/bullmq and bullmq. Configure the Redis connection with BullModule.forRoot and register the named queue once in the module. Inject Queue into the service that adds work. An endpoint accepting work can return 202 and a job ID after enqueue succeeds.</p>
+
+<pre><code>// Inside the module&#39;s imports
+BullModule.forRoot({ connection: { host: &quot;127.0.0.1&quot;, port: 6379 } }),
+BullModule.registerQueue({ name: &quot;exports&quot; }),
+
+// Inside an injectable service
+constructor(@InjectQueue(&quot;exports&quot;) private readonly queue: Queue) {}
+
+enqueue(orderId: number) {
+  return this.queue.add(&quot;order-csv&quot;, { orderId }, {
+    attempts: 3,
+    backoff: { type: &quot;exponential&quot;, delay: 1000 },
+  });
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="worker">
+  <h2>Process a job safely when it retries</h2>
+  <p>Register the consumer in the providers list. WorkerHost uses one process method to handle jobs on that queue. A job can run again after a failure. Use the order ID or job ID as part of a stable output key and design the export service so another run has the same effect. Track failed jobs and queue wait time.</p>
+
+<pre><code>import { Processor, WorkerHost } from &quot;@nestjs/bullmq&quot;;
+import type { Job } from &quot;bullmq&quot;;
+import { ExportService } from &quot;./export.service&quot;;
+
+@Processor(&quot;exports&quot;)
+export class ExportWorker extends WorkerHost {
+  constructor(private readonly exports: ExportService) {
+    super();
+  }
+
+  async process(job: Job&lt;{ orderId: number }&gt;) {
+    if (job.name !== &quot;order-csv&quot;) throw new Error(&quot;Unknown export job&quot;);
+    return this.exports.writeOrderCsv(job.data.orderId);
+  }
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.nestjs.com/techniques/queues">NestJS · Queues</a></li>
+<li><a href="https://docs.bullmq.io/guide/retrying-failing-jobs">BullMQ · Retrying failing jobs</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/nestjs/openapi-and-errors/">Previous lesson · Document routes and HTTP errors</a>
+<a href="/docs/read/en/nestjs/websocket-gateways/">Next lesson · Send live updates with WebSockets</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

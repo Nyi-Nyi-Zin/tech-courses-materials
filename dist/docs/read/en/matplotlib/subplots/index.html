@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Arrange several plotting areas and share scales when the measurements are comparable.">
+  <title>Subplots and constrained layout · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/subplots/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/subplots/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/subplots/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#matplotlib">All documentation · Matplotlib</a> <a href="/docs/read/my/matplotlib/subplots/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Subplots and constrained layout</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">Arrange several plotting areas and share scales when the measurements are comparable.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/matplotlib/subplots">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#grid">Organize plots in a grid</a></li>
+<li><a href="#shared-axes">Share axes when useful</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="grid">
+  <h2>Organize plots in a grid</h2>
+  <p>subplots creates a Figure plus Axes. For a 1×2 grid, unpack the two Axes or use squeeze=False to always receive a 2D array. Use layout=&quot;constrained&quot; to help fit axes labels and titles.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, (left, right) = plt.subplots(1, 2, layout=&quot;constrained&quot;)
+left.plot([2, 4, 3])
+left.set_title(&quot;Daily volume&quot;)
+right.bar([&quot;Tea&quot;, &quot;Cake&quot;], [6, 4])
+right.set_title(&quot;Item volume&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/subplots-grid.png" data-image-preview><img src="/docs/media/data/subplots-grid.png" alt="A line chart of daily volume and a bar chart of item volume sit side by side." width="659" height="499" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="shared-axes">
+  <h2>Share axes when useful</h2>
+  <p>sharex and sharey link axes. Share a scale when units and ranges should be directly comparable. For charts with different units, label each Axes clearly.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://matplotlib.org/stable/users/explain/axes/constrainedlayout_guide.html">Constrained layout guide</a></li>
+<li><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html">pyplot.subplots API</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/matplotlib/chart-design/">Previous lesson · Labels, scales, legends, and color</a>
+<a href="/docs/read/en/matplotlib/export-chart/">Next lesson · Export charts to files</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

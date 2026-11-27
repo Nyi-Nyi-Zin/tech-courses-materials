@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use a callback to decide which item qualifies or how two items should be ordered.">
+  <title>Find, test, and sort arrays · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/array-methods/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/array-methods/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/array-methods/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/array-methods/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Find, test, and sort arrays</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Use a callback to decide which item qualifies or how two items should be ordered.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/array-methods">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#find">find() returns the first match</a></li>
+<li><a href="#some">some() tests whether at least one item passes</a></li>
+<li><a href="#every">every() tests whether all items pass</a></li>
+<li><a href="#sort">sort() orders items in place</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="find">
+  <h2>find() returns the first match</h2>
+  <p>find() passes each item to a callback and returns the first one that passes. If none passes, it returns undefined. Use optional chaining before reading properties from a possibly missing match.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const catalog = [
+  { name: &quot;Pen&quot;, price: 1500 },
+  { name: &quot;Notebook&quot;, price: 2500 },
+  { name: &quot;Folder&quot;, price: 3000 }
+];
+const match = catalog.find(item =&gt; item.price &gt; 2000);
+console.log(match?.name);</code></pre>
+<p class="example-result"><strong>What to expect</strong> Notebook matches first. Change the threshold to 4000 to see undefined.</p>
+
+</section>
+<section class="article-section" id="some">
+  <h2>some() tests whether at least one item passes</h2>
+  <p>some() returns true as soon as an item passes the callback’s test. With zero matching items, it returns false.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const catalog = [
+  { name: &quot;Pen&quot;, price: 1500 },
+  { name: &quot;Notebook&quot;, price: 2500 },
+  { name: &quot;Folder&quot;, price: 3000 }
+];
+console.log(catalog.some(item =&gt; item.price &lt; 2000));
+console.log(catalog.some(item =&gt; item.price &lt; 1000));</code></pre>
+<p class="example-result"><strong>What to expect</strong> True for a price below 2000, false for a price below 1000.</p>
+
+</section>
+<section class="article-section" id="every">
+  <h2>every() tests whether all items pass</h2>
+  <p>every() returns false the first time something fails. It returns true if no item fails, including for an empty array.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const catalog = [
+  { name: &quot;Pen&quot;, price: 1500 },
+  { name: &quot;Notebook&quot;, price: 2500 },
+  { name: &quot;Folder&quot;, price: 3000 }
+];
+console.log(catalog.every(item =&gt; item.price &gt; 0));
+console.log(catalog.every(item =&gt; item.price &lt; 2000));</code></pre>
+<p class="example-result"><strong>What to expect</strong> All prices are positive, but at least one is 2000 or above.</p>
+
+</section>
+<section class="article-section" id="sort">
+  <h2>sort() orders items in place</h2>
+  <p>Without a comparator, sort() compares string representations. For numbers, a - b sorts low to high. sort() edits the array itself. Use toSorted() to produce a sorted copy.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const prices = [10, 2, 30];
+console.log([...prices].sort((a, b) =&gt; a - b));
+console.log(prices);
+prices.sort((a, b) =&gt; a - b);
+console.log(prices);</code></pre>
+<p class="example-result"><strong>What to expect</strong> The sorted copy is [2, 10, 30]. The original stays [10, 2, 30] until sort() runs.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">MDN · Array/find</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some">MDN · Array/some</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every">MDN · Array/every</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">MDN · Array/sort</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted">MDN · Array/toSorted</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/arrays-and-objects/">Previous lesson · Strings, arrays, and objects</a>
+<a href="/docs/read/en/js/date-and-math/">Next lesson · Date and Math</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

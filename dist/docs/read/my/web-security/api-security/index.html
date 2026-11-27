@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Client က document ရဲ့ ခေါင်းစဉ်နဲ့ ပြင်ထားတဲ့အချိန်ပဲ လိုနိုင်ပါတယ်။ API က လက်ခံမယ့် field၊ ပြန်ပေးမယ့် field၊ ခေါ်ခွင့်ရှိသူနဲ့ request တစ်ခုအတွက် အများဆုံး အလုပ်လုပ်ပေးမယ့် ပမာဏကို သတ်မှတ်ရပါတယ်။">
+  <title>API Security နဲ့ Resource ကန့်သတ်ချက်များ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/api-security/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/api-security/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/api-security/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-security">သင်ခန်းစာအားလုံး · Web Security</a> <a href="/docs/read/en/web-security/api-security/" lang="en" hreflang="en">English</a></nav>
+  <h1>API Security နဲ့ Resource ကန့်သတ်ချက်များ</h1>
+  
+  <p class="intro">Client က document ရဲ့ ခေါင်းစဉ်နဲ့ ပြင်ထားတဲ့အချိန်ပဲ လိုနိုင်ပါတယ်။ API က လက်ခံမယ့် field၊ ပြန်ပေးမယ့် field၊ ခေါ်ခွင့်ရှိသူနဲ့ request တစ်ခုအတွက် အများဆုံး အလုပ်လုပ်ပေးမယ့် ပမာဏကို သတ်မှတ်ရပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-security/api-security">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#field-access">အဝင်နဲ့ အထွက် field နှစ်မျိုးလုံးကို ရွေးချယ်ခြင်း</a></li>
+<li><a href="#resource-limits">အလုပ်များတဲ့ request တွေကို ကြိုတင် ကန့်သတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="field-access">
+  <h2>အဝင်နဲ့ အထွက် field နှစ်မျိုးလုံးကို ရွေးချယ်ခြင်း</h2>
+  <p>Membership စစ်ပြီးချိန်မှာ ပြင်ခွင့်ရှိတဲ့ field ကိုပဲ ရွေးယူပါ။ ပိုင်ရှင်ပြောင်းတာ၊ ငွေပေးချေမှုအခြေအနေ ပြောင်းတာတွေက သီးခြား လုပ်ပိုင်ခွင့် လိုပါတယ်။ Response မှာလည်း ပြန်ပေးမယ့် field တွေကို ရွေးပါ။ API version တွေကို မှတ်တမ်းထားပြီး အဟောင်းတွေ ပိတ်သိမ်းတဲ့အခါ private data ကို ဆက်ရယူလို့ မရတော့ကြောင်း စစ်ပါ။</p>
+
+<pre><code>// Run after authorization and title validation.
+const changes = { title: validatedTitle };
+const publicFields = { id: document.id, title: document.title };</code></pre>
+
+
+</section>
+<section class="article-section" id="resource-limits">
+  <h2>အလုပ်များတဲ့ request တွေကို ကြိုတင် ကန့်သတ်ခြင်း</h2>
+  <p>Request body အရွယ်အစား၊ တစ်မျက်နှာမှာ ပြမယ့် row အရေအတွက်၊ အလုပ်လုပ်ချိန်နဲ့ တစ်ပြိုင်နက် run နိုင်တဲ့ job အရေအတွက်ကို ကန့်သတ်ပါ။ Rate limit ကို သက်ဆိုင်ရာ account သို့မဟုတ် tenant အလိုက်ပါ သတ်မှတ်ပါ။ ခဏစောင့်ဖို့ လိုရင် 429 နဲ့ Retry-After ပြန်ပေးပါ။ ငွေကောက်ခံရတဲ့ export တစ်ခုကို ထပ်ပို့မိလို့ နှစ်ကြိမ်ငွေမဖြတ်အောင် caller နဲ့ တွဲထားတဲ့ idempotency key ကို ငွေစာရင်းသွင်းတာနဲ့အတူ တစ်ခါတည်း မှတ်ပါ။ အောက်က ကိန်းဂဏန်းတွေက နမူနာ သတ်မှတ်ချက်ပါ။</p>
+
+<pre><code>List documents    50 rows per page maximum
+Export queue      2 active exports per account
+Quota response    429 Too Many Requests
+Retry-After: 60</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html">OWASP · REST security</a></li>
+<li><a href="https://owasp.org/API-Security/editions/2023/en/0x11-t10/">OWASP · API Security Top 10</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-security/input-and-injection/">အရင်သင်ခန်းစာ · Input Validation နဲ့ Injection ကာကွယ်ခြင်း</a>
+<a href="/docs/read/my/web-security/files-and-outbound-requests/">နောက်သင်ခန်းစာ · File Upload နဲ့ Server က ပြင်ပကို ပို့တဲ့ Request များ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Stack pandas objects along rows or place them side by side. Use axis=1 for columns and ignore_index=True to renumber the combined axis.">
+  <title>pandas.concat · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/concat/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/concat/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/concat">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>General functions</span><a href="/docs/read/my/pandas/api/concat/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>concat</code></h1>
+    <p class="article-version">pandas 3.1.1 · General functions · <span lang="en">function</span></p>
+    <p class="intro">Stack pandas objects along rows or place them side by side. Use axis=1 for columns and ignore_index=True to renumber the combined axis.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">pd.concat(…)</code> <span>Full signature</span></summary><pre><code lang="en">pd.concat(
+    objs,
+    *,
+    axis=0,
+    join=&#39;outer&#39;,
+    ignore_index=False,
+    keys=None,
+    levels=None,
+    names=None,
+    verify_integrity=False,
+    sort=…,
+    copy=…,
+    union_categories=False,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="7" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+orders = pd.DataFrame({
+    &quot;team&quot;: [&quot;North&quot;, &quot;North&quot;, &quot;South&quot;],
+    &quot;day&quot;: pd.to_datetime([&quot;2025-01-01&quot;, &quot;2025-01-02&quot;, &quot;2025-01-03&quot;]),
+    &quot;units&quot;: [4, None, 7],
+})
+print(pd.concat([orders.iloc[:2], orders.iloc[2:]], ignore_index=True))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>objs</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>an iterable or mapping of Series or DataFrame objects</span><p>Pass a sequence or a mapping of Series and DataFrames to combine.</p></td></tr>
+<tr><th scope="row"><code>axis</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>0</code></td>
+      <td><span>{0/&#39;index&#39;, 1/&#39;columns&#39;}</span><p>Use 0 to stack rows and 1 to put columns next to each other.</p></td></tr>
+<tr><th scope="row"><code>join</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;outer&#39;</code></td>
+      <td><span>{&#39;inner&#39;, &#39;outer&#39;}</span><p>Choose &quot;outer&quot; to retain all labels on the other axis or &quot;inner&quot; to retain only shared labels.</p></td></tr>
+<tr><th scope="row"><code>ignore_index</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Give the resulting axis new integer labels where supported.</p></td></tr>
+<tr><th scope="row"><code>keys</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>sequence</span><p>Provide grouping, dictionary, index, or concatenation keys for this operation.</p></td></tr>
+<tr><th scope="row"><code>levels</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>list of sequences</span><p>Supply level definitions for a hierarchical index.</p></td></tr>
+<tr><th scope="row"><code>names</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>list</span><p>Supply explicit names for labels, fields, or levels.</p></td></tr>
+<tr><th scope="row"><code>verify_integrity</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Check that the result satisfies the API&#39;s integrity requirements, such as unique labels.</p></td></tr>
+<tr><th scope="row"><code>sort</code></th>
+      <td>Optional<br><small>Keyword only</small></td>
+      <td><span>bool</span><p>Choose whether the resulting labels or groups are sorted where supported.</p></td></tr>
+<tr><th scope="row"><code>copy</code></th>
+      <td>Optional<br><small>Keyword only</small></td>
+      <td><span>bool</span><p>Control whether data is copied where the API supports that choice.</p></td></tr>
+<tr><th scope="row"><code>union_categories</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>False</code></td>
+      <td><span>bool</span></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>object, type of objs</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.concat.html#pandas.concat">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/col/"><span>Previous in this category</span><strong>pandas.col</strong></a><a href="/docs/read/en/pandas/api/crosstab/"><span>Next in this category</span><strong>pandas.crosstab</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

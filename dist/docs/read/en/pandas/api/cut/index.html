@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Assign numeric values to specified intervals or to a fixed number of equal-width bins.">
+  <title>pandas.cut · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/cut/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/cut/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/cut">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>General functions</span><a href="/docs/read/my/pandas/api/cut/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>cut</code></h1>
+    <p class="article-version">pandas 3.1.1 · General functions · <span lang="en">function</span></p>
+    <p class="intro">Assign numeric values to specified intervals or to a fixed number of equal-width bins.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">pd.cut(…)</code> <span>Full signature</span></summary><pre><code lang="en">pd.cut(
+    x,
+    bins,
+    right=True,
+    labels=None,
+    retbins=False,
+    precision=3,
+    include_lowest=False,
+    duplicates=&#39;raise&#39;,
+    ordered=True,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="7" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+orders = pd.DataFrame({
+    &quot;team&quot;: [&quot;North&quot;, &quot;North&quot;, &quot;South&quot;],
+    &quot;day&quot;: pd.to_datetime([&quot;2025-01-01&quot;, &quot;2025-01-02&quot;, &quot;2025-01-03&quot;]),
+    &quot;units&quot;: [4, None, 7],
+})
+print(pd.cut(orders[&quot;units&quot;], bins=[0, 5, 10], labels=[&quot;Small&quot;, &quot;Large&quot;]))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>1d ndarray or Series</span><p>Choose the column or positional input mapped to the horizontal axis.</p></td></tr>
+<tr><th scope="row"><code>bins</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>int, sequence of scalars, or IntervalIndex</span><p>Set a number of bins or provide bin boundaries.</p></td></tr>
+<tr><th scope="row"><code>right</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>Supply the right-hand input or the right endpoint of the interval.</p></td></tr>
+<tr><th scope="row"><code>labels</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>array or False</span><p>Provide the labels used for selecting rows, renaming entries, or naming bins.</p></td></tr>
+<tr><th scope="row"><code>retbins</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Return the computed bin boundaries along with the binned result.</p></td></tr>
+<tr><th scope="row"><code>precision</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>3</code></td>
+      <td><span>int</span><p>Choose the requested number of decimal places or displayed digits.</p></td></tr>
+<tr><th scope="row"><code>include_lowest</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span></td></tr>
+<tr><th scope="row"><code>duplicates</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>&#39;raise&#39;</code></td>
+      <td><span>{&#39;raise&#39;, &#39;drop&#39;}</span><p>Choose what happens when duplicate bin boundaries occur.</p></td></tr>
+<tr><th scope="row"><code>ordered</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>Choose whether the category sequence defines an ordering.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>out · Categorical, Series, or ndarray; bins · numpy.ndarray or IntervalIndex.</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.cut.html#pandas.cut">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/crosstab/"><span>Previous in this category</span><strong>pandas.crosstab</strong></a><a href="/docs/read/en/pandas/api/date_range/"><span>Next in this category</span><strong>pandas.date_range</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ဆက်စပ်မှတ်တမ်းတွေကို table တွေနဲ့ စီမံဖို့ ရွေးချယ်နိုင်တဲ့ DBMS တစ်ခုက PostgreSQL ပါ။ Postgres လို့လည်း ခေါ်တဲ့ PostgreSQL က အခမဲ့သုံးလို့ရတဲ့ open-source object-relational database management system တစ်ခုပါ။ Data ကို row နဲ့ column ပါတဲ့ table တွေထဲမှာ စီပြီးသိမ်းတယ်။ Table ဆောက်တာ၊ data ရှာဖတ်တာနဲ့ ပြင်ဆင်တာတို့အတွက် SQL သုံးပါတယ်။">
+  <title>PostgreSQL မိတ်ဆက် · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/postgresql-introduction/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/postgresql-introduction/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/postgresql-introduction/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/postgresql-introduction/" lang="en" hreflang="en">English</a></nav>
+  <h1>PostgreSQL မိတ်ဆက်</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">ဆက်စပ်မှတ်တမ်းတွေကို table တွေနဲ့ စီမံဖို့ ရွေးချယ်နိုင်တဲ့ DBMS တစ်ခုက PostgreSQL ပါ။ Postgres လို့လည်း ခေါ်တဲ့ PostgreSQL က အခမဲ့သုံးလို့ရတဲ့ open-source object-relational database management system တစ်ခုပါ။ Data ကို row နဲ့ column ပါတဲ့ table တွေထဲမှာ စီပြီးသိမ်းတယ်။ Table ဆောက်တာ၊ data ရှာဖတ်တာနဲ့ ပြင်ဆင်တာတို့အတွက် SQL သုံးပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/postgresql-introduction">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#what-is-postgresql">PostgreSQL၊ SQL နဲ့ psql က ဘာကွာလဲ</a></li>
+<li><a href="#project-history">သမိုင်းကြောင်းနဲ့ SQL စံနှုန်း</a></li>
+<li><a href="#acid-transactions">ACID Transactions</a></li>
+<li><a href="#mvcc">MVCC နဲ့ Data တစ်ပြိုင်နက် ဖတ်ခြင်း၊ ပြင်ခြင်း</a></li>
+<li><a href="#types-and-extensions">Data Types၊ Text Search နဲ့ Extensions</a></li>
+<li><a href="#strengths">Data စည်းကမ်းနဲ့ တိုးလာတဲ့ Workload ကို ကိုင်တွယ်ခြင်း</a></li>
+<li><a href="#compare-databases">PostgreSQL နဲ့ တခြား Database တွေ ဘာကွာလဲ</a></li>
+<li><a href="#fullstack-use">အသုံးပြုပုံနဲ့ Cloud Hosting</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="what-is-postgresql">
+  <h2>PostgreSQL၊ SQL နဲ့ psql က ဘာကွာလဲ</h2>
+  <p>သင်တန်းတစ်ခုမှာ စာရင်းသွင်းထားတဲ့ ကျောင်းသားစာရင်းကို ကြည့်ချင်ရင် psql ထဲမှာ SQL query ရိုက်လို့ရတယ်။ psql က query ကို PostgreSQL server ဆီ ပို့တယ်။ Server က database ထဲက data ကို ဖတ်ပြီး ရလဒ်ပြန်ပို့တယ်။</p>
+
+<pre><code>SELECT students.name
+FROM enrollments
+JOIN students ON students.id = enrollments.student_id
+WHERE enrollments.course_id = 1
+ORDER BY students.name;</code></pre>
+<dl class="lesson-terms"><div><dt><code>PostgreSQL</code></dt><dd>Data ကို စီမံပြီး query တွေ run ပေးတဲ့ database software ပါ။ Object-relational system ဖြစ်လို့ extension တွေ၊ ကိုယ်ပိုင် data type တွေလည်း ထည့်သုံးနိုင်တယ်။</dd></div><div><dt><code>SQL</code></dt><dd>Table ဆောက်ဖို့၊ data ဖတ်ဖို့နဲ့ ပြင်ဖို့ သုံးတဲ့ language ပါ။</dd></div><div><dt><code>psql</code></dt><dd>PostgreSQL server ကို ချိတ်ပြီး SQL run ဖို့ သုံးမယ့် terminal client ပါ။</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="project-history">
+  <h2>သမိုင်းကြောင်းနဲ့ SQL စံနှုန်း</h2>
+  <p>PostgreSQL ရဲ့ အစက University of California, Berkeley မှာ 1986 ခုနှစ်က စခဲ့တဲ့ POSTGRES သုတေသန project ပါ။ ဖွံ့ဖြိုးလာတာ နှစ် ၄၀ ကျော်ရှိပြီး ယုံကြည်စိတ်ချရမှု၊ data စည်းကမ်းတွေကို ထိန်းပေးနိုင်မှုနဲ့ feature ထပ်ဖြည့်နိုင်မှုတို့ကြောင့် လူသိများပါတယ်။ PostgreSQL က SQL စံနှုန်းမှာပါတဲ့ feature အများအပြားကို ပံ့ပိုးပါတယ်။ Database engine တစ်ခုနဲ့တစ်ခုမှာတော့ SQL ရေးပုံနဲ့ အလုပ်လုပ်ပုံ ကွာနိုင်ပါတယ်။</p>
+
+<pre><code>-- Standard SQL that PostgreSQL supports
+SELECT CURRENT_DATE AS today;
+
+-- PostgreSQL&#39;s shorthand cast syntax
+SELECT &#39;42&#39;::integer AS number;</code></pre>
+
+
+</section>
+<section class="article-section" id="acid-transactions">
+  <h2>ACID Transactions</h2>
+  <p>App မှာ အသုံးပြုသူတစ်ယောက် လုပ်လိုက်တဲ့ အလုပ်တစ်ခုက Database ထဲက မှတ်တမ်းအများအပြားကို ပြောင်းလဲစေနိုင်ပါတယ်။ သင်တန်းစာရင်းသွင်းတဲ့အခါ စာရင်းသွင်းမှတ်တမ်း သိမ်းတာနဲ့ လက်ကျန်နေရာ တစ်နေရာလျှော့တာကို transaction တစ်ခုထဲမှာ လုပ်လို့ရပါတယ်။ COMMIT က အပြောင်းအလဲတွေကို သိမ်းတယ်။ ROLLBACK က commit မလုပ်ရသေးတဲ့ အပြောင်းအလဲတွေကို ပယ်ဖျက်တယ်။ ACID ဆိုတာ transaction ရဲ့ အောက်ပါ လက္ခဏာလေးခုကို ဆိုလိုပါတယ်။</p>
+
+<pre><code>-- The course_seats_demo table tracks seats for course 1.
+BEGIN;
+
+WITH reserved_seat AS (
+  UPDATE course_seats_demo
+  SET seats_open = seats_open - 1
+  WHERE course_id = 1 AND seats_open &gt; 0
+  RETURNING course_id
+)
+INSERT INTO enrollments (student_id, course_id, enrolled_on)
+SELECT 3, course_id, CURRENT_DATE
+FROM reserved_seat
+RETURNING student_id, course_id;
+
+-- When no seat is available, the insert returns zero rows.
+COMMIT;</code></pre>
+<dl class="lesson-terms"><div><dt><code>Atomicity</code></dt><dd>အပြောင်းအလဲနှစ်ခုလုံး အတူတူ အောင်မြင်ရပါတယ်။ လက်ကျန်နေရာလျှော့တဲ့အဆင့်မှာ အမှားဖြစ်ပြီး transaction ပျက်သွားရင် စာရင်းသွင်းမှတ်တမ်းကိုပါ ပယ်ဖျက်ပါတယ်။</dd></div><div><dt><code>Consistency</code></dt><dd>သိမ်းပြီးတဲ့ data က သတ်မှတ်ထားတဲ့ database စည်းကမ်းတွေကို လိုက်နာရပါတယ်။ Foreign key နဲ့ သင်တန်းတကယ်ရှိကြောင်း စစ်နိုင်ပြီး CHECK constraint နဲ့ လက်ကျန်နေရာ 0 ထက် မနည်းအောင် သတ်မှတ်နိုင်ပါတယ်။</dd></div><div><dt><code>Isolation</code></dt><dd>မပြီးသေးတဲ့ အပြောင်းအလဲတွေကို တခြား transaction တွေက မမြင်ရပါဘူး။ Transaction တွေ တစ်ပြိုင်နက် run နေချိန်မှာ တစ်ခုက တခြားတစ်ခုရဲ့ data ကို ဘယ်အခြေအနေမှာ မြင်နိုင်လဲဆိုတာ isolation level က သတ်မှတ်ပါတယ်။</dd></div><div><dt><code>Durability</code></dt><dd>ပုံမှန် durability setting တွေနဲ့ဆိုရင် COMMIT အောင်မြင်ပြီးနောက် PostgreSQL ရုတ်တရက် ရပ်သွားရင်တောင် သိမ်းပြီးသား data က ဆက်ရှိပါတယ်။</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="mvcc">
+  <h2>MVCC နဲ့ Data တစ်ပြိုင်နက် ဖတ်ခြင်း၊ ပြင်ခြင်း</h2>
+  <p>Transaction တစ်ခုက data ပြင်နေချိန်မှာ တခြား transaction က အဲဒီ data ကို ဖတ်ဖို့ လိုနိုင်ပါတယ်။ Multi-Version Concurrency Control (MVCC) ကြောင့် query တစ်ခုက သက်ဆိုင်ရာ အချိန်က data အခြေအနေ (snapshot) ကို ဖတ်နိုင်ပါတယ်။ Admin က သင်တန်းကြေး ပြင်နေတုန်း ရိုးရိုး SELECT က အရင် commit လုပ်ထားတဲ့ သင်တန်းကြေးကို ဖတ်လို့ရတယ်။ ဒီလိုနဲ့ ဖတ်တာနဲ့ ပြင်တာ တစ်ပြိုင်နက် လုပ်နိုင်ပါတယ်။ Transaction နှစ်ခုက row တစ်ကြောင်းတည်းကို ပြင်ရင်တော့ lock လွတ်တဲ့အထိ တစ်ခုက စောင့်ရနိုင်ပါတယ်။</p>
+
+<pre><code>-- Session A: run these two statements and leave the transaction open.
+BEGIN;
+UPDATE courses SET fee = 45.00 WHERE id = 1;
+
+-- Session B: run this query while Session A is open.
+SELECT fee FROM courses WHERE id = 1;
+-- The query sees the previously committed fee.
+
+-- Session A: finish the demonstration and restore the original fee.
+ROLLBACK;</code></pre>
+
+
+</section>
+<section class="article-section" id="types-and-extensions">
+  <h2>Data Types၊ Text Search နဲ့ Extensions</h2>
+  <p>PostgreSQL မှာ ပုံစံသတ်မှတ်ထားတဲ့ data နဲ့ ပုံစံပြောင်းနိုင်တဲ့ data တွေအတွက် column type တွေ ပါပါတယ်။ သီးသန့် ရှာဖွေမှုတွေ လုပ်ဖို့ feature ထပ်ဖြည့်လို့လည်း ရပါတယ်။</p>
+
+<pre><code>SELECT CAST(19.95 AS numeric(10, 2)) AS price,
+       ARRAY[&#39;html&#39;, &#39;css&#39;] AS tags,
+       &#39;{&quot;level&quot;:&quot;beginner&quot;}&#39;::jsonb -&gt;&gt; &#39;level&#39; AS course_level,
+       to_tsvector(&#39;english&#39;, &#39;Learning HTML&#39;) @@
+         plainto_tsquery(&#39;english&#39;, &#39;learn&#39;) AS text_matches;</code></pre>
+<dl class="lesson-terms"><div><dt><code>Built-in types</code></dt><dd>တိကျတဲ့ ငွေပမာဏအတွက် numeric၊ tag တွေလို တန်ဖိုးစာရင်းအတွက် array၊ ID အတွက် UUID သုံးလို့ရပါတယ်။ JSON က မူရင်း JSON စာသားကို သိမ်းပါတယ်။ JSONB က ဖတ်ခွဲပြီးသားပုံစံနဲ့ သိမ်းပြီး JSON query အများအပြားအတွက် index သုံးလို့ရပါတယ်။</dd></div><div><dt><code>Full-text search</code></dt><dd>သင်တန်းဖော်ပြချက်ထဲက စကားလုံးတွေ ရှာနိုင်ပါတယ်။ သတ်မှတ်ထားတဲ့ ဘာသာစကားအလိုက် စကားလုံးပုံစံကွဲတွေကို တွဲရှာနိုင်ပြီး ရလဒ်တွေကို ဆက်စပ်မှုအလိုက် စီနိုင်ပါတယ်။</dd></div><div><dt><code>Extensions and custom code</code></dt><dd>ကိုယ်ပိုင် data type နဲ့ function တွေ သတ်မှတ်နိုင်ပါတယ်။ Server မှာ extension သုံးလို့ရရင် PostGIS နဲ့ အနီးဆုံးဆိုင်ခွဲ ရှာတာလို နေရာဒေသ query တွေ လုပ်နိုင်ပါတယ်။ pgvector နဲ့ embedding တွေ သိမ်းပြီး ဆင်တူတာတွေ ရှာနိုင်ပါတယ်။</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="strengths">
+  <h2>Data စည်းကမ်းနဲ့ တိုးလာတဲ့ Workload ကို ကိုင်တွယ်ခြင်း</h2>
+  <p>Constraints က data စည်းကမ်းတွေကို ထိန်းပေးပါတယ်။ Database ကြီးလာတဲ့အခါ index၊ partitioning နဲ့ replication တို့က မတူတဲ့ လိုအပ်ချက်တွေကို ဖြေရှင်းပေးပါတယ်။</p>
+
+<pre><code>-- The enrollment&#39;s course_id must reference an existing course.
+CREATE TEMP TABLE enrollment_example (
+  student_id integer NOT NULL REFERENCES students(id),
+  course_id integer NOT NULL REFERENCES courses(id),
+  PRIMARY KEY (student_id, course_id)
+);
+
+-- Support lookups that filter on course_id.
+CREATE INDEX ON enrollment_example (course_id);</code></pre>
+<dl class="lesson-terms"><div><dt><code>Constraints</code></dt><dd>UNIQUE က student email ထပ်တာကို တားနိုင်ပါတယ်။ Foreign key က မရှိတဲ့ course ကို enrollment က ညွှန်းတာကို တားပေးပါတယ်။</dd></div><div><dt><code>Indexes</code></dt><dd>သင့်တော်တဲ့ index က course ID နဲ့ စာရင်းသွင်းထားသူတွေ ရှာတာလို မကြာခဏလုပ်တဲ့ query ကို ပိုမြန်စေနိုင်ပါတယ်။ Index အတွက် storage လိုသလို data ပြင်တဲ့အခါ index ကိုပါ ပြင်ပေးရပါတယ်။</dd></div><div><dt><code>Partitioning</code></dt><dd>Table တစ်ခုကို သင်တန်းစာရင်းသွင်းတဲ့ နှစ်အလိုက်လိုမျိုး အပိုင်းခွဲ သိမ်းလို့ရပါတယ်။ Partition key နဲ့ filter လုပ်တဲ့ query က မလိုတဲ့အပိုင်းတွေကို ကျော်သွားနိုင်ပါတယ်။</dd></div><div><dt><code>Replication</code></dt><dd>Data အပြောင်းအလဲတွေကို တခြား PostgreSQL server ဆီ ကူးပေးပါတယ်။ Read အတွက် ပြင်ဆင်ထားတဲ့ standby က query တွေကို ဖြေကြားနိုင်ပါတယ်။ Primary ပျက်ရင် standby ကို primary အဖြစ် ပြောင်းနိုင်ပါတယ်။ ပုံမှန် primary–standby ပုံစံမှာ app က data ရေးဖို့ primary ဆီ ပို့ပါတယ်။</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="compare-databases">
+  <h2>PostgreSQL နဲ့ တခြား Database တွေ ဘာကွာလဲ</h2>
+  <p>Database တစ်ခုနဲ့တစ်ခုက data စီထားပုံ၊ ပံ့ပိုးတဲ့ feature တွေနဲ့ app က ချိတ်ဆက်သုံးပုံ ကွာပါတယ်။</p>
+
+<pre><code>-- PostgreSQL: read a field from a JSONB document.
+SELECT &#39;{&quot;name&quot;:&quot;Notebook&quot;,&quot;stock&quot;:12}&#39;::jsonb -&gt;&gt; &#39;name&#39; AS product;
+
+-- MongoDB shell: read that field from a stored BSON document.
+db.products.findOne({ _id: 1 }, { name: 1, _id: 0 });</code></pre>
+<dl class="lesson-terms"><div><dt><code>MySQL and MariaDB</code></dt><dd>နှစ်ခုလုံးက open-source edition ရှိတဲ့ relational database server တွေပါ။ သုံးလို့ရတဲ့ SQL feature နဲ့ ရေးပုံက database engine နဲ့ version အလိုက် ကွာပါတယ်။ ဥပမာ PostGIS ကို အခြေခံတဲ့ project ဆိုရင် PostGIS သုံးလို့ရတဲ့ PostgreSQL လိုပါတယ်။</dd></div><div><dt><code>MongoDB</code></dt><dd>MongoDB က BSON document တွေကို collection ထဲမှာ သိမ်းပါတယ်။ PostgreSQL မှာ ပုံစံပြောင်းနိုင်တဲ့ document တွေကို JSONB column မှာ သိမ်းပြီး query လုပ်နိုင်ပါတယ်။ ကျန်တဲ့ ဆက်စပ် data တွေအတွက် table၊ JOIN နဲ့ foreign key တွေကို တွဲသုံးလို့ရပါတယ်။</dd></div><div><dt><code>SQLite</code></dt><dd>SQLite က app ထဲမှာပဲ အလုပ်လုပ်ပြီး ပုံမှန်အားဖြင့် စက်ထဲက database file ကို တိုက်ရိုက် ဖတ်၊ ရေးပါတယ်။ PostgreSQL က သီးခြား server အဖြစ် run ပြီး client အများကြီးက network ကတစ်ဆင့် ချိတ်သုံးနိုင်ပါတယ်။</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="fullstack-use">
+  <h2>အသုံးပြုပုံနဲ့ Cloud Hosting</h2>
+  <p>သင်တန်းစာရင်းသွင်းတဲ့ app မှာ Frontend က သင်တန်းစာရင်းကို Backend API ဆီ တောင်းပါတယ်။ API က ကြည့်ခွင့်ရှိမရှိ စစ်ပြီး database client library ကတစ်ဆင့် PostgreSQL ဆီ SQL ပို့တယ်။ ရလဒ်ကို Frontend ဆီ ပြန်ပေးပါတယ်။ နောက်သင်ခန်းစာမှာ PostgreSQL ထည့်သွင်းပြီး psql နဲ့ ကိုယ်တိုင်ချိတ်ကြည့်ပါမယ်။</p>
+
+<pre><code>// Backend: a database pool configured for your PostgreSQL server.
+app.get(&quot;/api/courses&quot;, requireSignIn, async (_request, response) =&gt; {
+  const { rows } = await pool.query(&quot;SELECT id, title FROM courses ORDER BY id&quot;);
+  response.json(rows);
+});</code></pre>
+<dl class="lesson-terms"><div><dt><code>Web and mobile backends</code></dt><dd>App ရဲ့ API ကတစ်ဆင့် account၊ order နဲ့ သင်တန်းစာရင်းသွင်းမှတ်တမ်းတွေ သိမ်းနိုင်ပါတယ်။</dd></div><div><dt><code>Analytics and reporting</code></dt><dd>SQL သုံးပြီး သင်တန်းအလိုက် စာရင်းသွင်းသူအရေအတွက် တွက်နိုင်သလို လအလိုက်လည်း နှိုင်းယှဉ်နိုင်ပါတယ်။</dd></div><div><dt><code>Geospatial and AI applications</code></dt><dd>PostGIS နဲ့ အနီးအနားက နေရာတွေ ရှာနိုင်ပါတယ်။ သင်တန်းဖော်ပြချက်တွေကို embedding အဖြစ် သိမ်းထားရင် pgvector နဲ့ အဓိပ္ပာယ်ဆင်တူတာတွေ ပြန်ရှာနိုင်ပါတယ်။</dd></div><div><dt><code>Managed PostgreSQL</code></dt><dd>Managed service ဥပမာတွေက Amazon RDS for PostgreSQL၊ Google Cloud SQL for PostgreSQL၊ Azure Database for PostgreSQL၊ Supabase နဲ့ Neon တို့ပါ။ ပံ့ပိုးတဲ့ version နဲ့ extension တွေက service အလိုက် ကွာနိုင်ပါတယ်။</dd></div></dl>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/about/">PostgreSQL · About and features</a></li>
+<li><a href="https://www.postgresql.org/docs/19/tutorial-concepts.html">PostgreSQL · Tables</a></li>
+<li><a href="https://www.postgresql.org/docs/19/ddl-constraints.html">PostgreSQL · Primary and foreign keys</a></li>
+<li><a href="https://www.postgresql.org/docs/19/tutorial-transactions.html">PostgreSQL · Transactions</a></li>
+<li><a href="https://www.postgresql.org/docs/19/mvcc-intro.html">PostgreSQL · MVCC</a></li>
+<li><a href="https://www.postgresql.org/docs/19/explicit-locking.html">PostgreSQL · Locking</a></li>
+<li><a href="https://www.postgresql.org/docs/19/datatype.html">PostgreSQL · Data types</a></li>
+<li><a href="https://www.postgresql.org/docs/19/textsearch.html">PostgreSQL · Full-text search</a></li>
+<li><a href="https://www.postgresql.org/docs/19/indexes-intro.html">PostgreSQL · Indexes</a></li>
+<li><a href="https://www.postgresql.org/docs/19/ddl-partitioning.html">PostgreSQL · Partitioning</a></li>
+<li><a href="https://www.postgresql.org/docs/19/high-availability.html">PostgreSQL · Replication and standby servers</a></li>
+<li><a href="https://postgis.net/documentation/">PostGIS · Documentation</a></li>
+<li><a href="https://github.com/pgvector/pgvector">pgvector · Documentation</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/8.4/en/what-is-mysql.html">MySQL · About</a></li>
+<li><a href="https://mariadb.org/documentation/">MariaDB · Documentation</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/core/document/">MongoDB · Documents</a></li>
+<li><a href="https://www.sqlite.org/serverless.html">SQLite · Embedded architecture</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html">AWS · Amazon RDS for PostgreSQL</a></li>
+<li><a href="https://docs.cloud.google.com/sql/docs/postgres">Google Cloud · Cloud SQL for PostgreSQL</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/postgresql/overview">Microsoft Azure · Azure Database for PostgreSQL</a></li>
+<li><a href="https://supabase.com/docs/guides/database/overview">Supabase · PostgreSQL database</a></li>
+<li><a href="https://neon.com/docs">Neon · Documentation</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/choosing-a-database/">အရင်သင်ခန်းစာ · Software တစ်ခုအတွက် Database ရွေးချယ်ပုံ</a>
+<a href="/docs/read/my/database/install/">နောက်သင်ခန်းစာ · PostgreSQL နဲ့ psql ထည့်သွင်းခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

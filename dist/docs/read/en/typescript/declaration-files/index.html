@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use a .d.ts file to describe the types of JavaScript that already exists.">
+  <title>Declaration files for JavaScript · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/declaration-files/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/declaration-files/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/declaration-files/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#typescript">All documentation · TypeScript</a> <a href="/docs/read/my/typescript/declaration-files/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Declaration files for JavaScript</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">Use a .d.ts file to describe the types of JavaScript that already exists.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/typescript/declaration-files">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#pair">Match the JavaScript exports</a></li>
+<li><a href="#publish">Point consumers to the types</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="pair">
+  <h2>Match the JavaScript exports</h2>
+  <p>Keep declarations next to the JavaScript they describe. The example package has a named JavaScript export, so its declaration has the same named export. Declarations describe an implementation. The JavaScript still does the work at runtime.</p>
+
+<pre><code>// index.js in an ESM package
+export function formatSku(id) {
+  return &quot;SKU-&quot; + String(id).padStart(3, &quot;0&quot;);
+}
+
+// index.d.ts
+export function formatSku(id: number): string;</code></pre>
+
+
+</section>
+<section class="article-section" id="publish">
+  <h2>Point consumers to the types</h2>
+  <p>For a simple ESM package, point main at the JavaScript entry and types at its declaration. Include both when publishing. If a package uses an exports map, give the appropriate entry a types condition. Check a small consumer project with strict checking.</p>
+
+<pre><code>{
+  &quot;type&quot;: &quot;module&quot;,
+  &quot;main&quot;: &quot;./index.js&quot;,
+  &quot;types&quot;: &quot;./index.d.ts&quot;,
+  &quot;files&quot;: [&quot;index.js&quot;, &quot;index.d.ts&quot;]
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/type-declarations.html">TypeScript Handbook · Type declarations</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html">TypeScript Handbook · Publishing declarations</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/modules/reference.html">TypeScript Handbook · Modules reference</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/typescript/conditional-types/">Previous lesson · Conditional types and infer</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

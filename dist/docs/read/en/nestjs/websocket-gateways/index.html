@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Keep a connection open when the server needs to send live changes to the browser.">
+  <title>Send live updates with WebSockets · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/websocket-gateways/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/websocket-gateways/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/websocket-gateways/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#nestjs">All documentation · NestJS</a> <a href="/docs/read/my/nestjs/websocket-gateways/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Send live updates with WebSockets</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">Keep a connection open when the server needs to send live changes to the browser.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/nestjs/websocket-gateways">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#gateway">Create a Socket.IO gateway</a></li>
+<li><a href="#inventory">Send stock changes after they are saved</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="gateway">
+  <h2>Create a Socket.IO gateway</h2>
+  <p>Install @nestjs/websockets and @nestjs/platform-socket.io. Add the gateway to module providers. The example handles a ping and returns an acknowledgement. A browser using the Socket.IO adapter also needs its matching client package, socket.io-client.</p>
+
+<pre><code>import { SubscribeMessage, WebSocketGateway } from &quot;@nestjs/websockets&quot;;
+
+@WebSocketGateway()
+export class InventoryGateway {
+  @SubscribeMessage(&quot;inventory:ping&quot;)
+  ping() {
+    return { status: &quot;ok&quot; };
+  }
+}
+
+// Browser client, served from the same origin
+// import { io } from &quot;socket.io-client&quot;;
+// const socket = io();
+// socket.timeout(3000).emit(&quot;inventory:ping&quot;, (error, reply) =&gt; {
+//   if (error) console.error(&quot;No reply&quot;);
+//   else console.log(reply.status);
+// });</code></pre>
+
+
+</section>
+<section class="article-section" id="inventory">
+  <h2>Send stock changes after they are saved</h2>
+  <p>For live inventory, authenticate each connection and check access before joining a shop room. After a database commit, send an event to that room. When a client reconnects, reload the list from the API so it can catch up on changes it may have missed.</p>
+
+<pre><code>// In an authorized update handler. The shop ID comes from the session.
+const change = await this.dataSource.transaction(async manager =&gt; {
+  const products = manager.getRepository(Product);
+  const product = await products.findOneByOrFail({ id: productId, shopId });
+  product.quantity = quantity;
+  const saved = await products.save(product);
+  return { id: saved.id, quantity: saved.quantity };
+});
+
+this.server.to(&quot;shop:&quot; + shopId).emit(&quot;inventory:updated&quot;, change);
+
+// Browser: &quot;connect&quot; also fires after reconnecting.
+socket.on(&quot;connect&quot;, reloadInventory);</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.nestjs.com/websockets/gateways">NestJS · Gateways</a></li>
+<li><a href="https://socket.io/docs/v4/emitting-events/#acknowledgements">Socket.IO · Acknowledgements</a></li>
+<li><a href="https://socket.io/docs/v4/rooms/">Socket.IO · Rooms</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/nestjs/queues/">Previous lesson · Run background jobs with a queue</a>
+<a href="/docs/read/en/nestjs/caching/">Next lesson · Cache frequently read results</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

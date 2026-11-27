@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Read only needed data and compute summaries in batches with explicit aggregation.">
+  <title>Read and summarize larger datasets · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/larger-datasets/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/larger-datasets/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/larger-datasets/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#pandas">All documentation · pandas</a> <a href="/docs/read/my/pandas/larger-datasets/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Read and summarize larger datasets</h1>
+  <p class="article-version">3.1.1</p>
+  <p class="intro">Read only needed data and compute summaries in batches with explicit aggregation.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/pandas/larger-datasets">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#memory">Limit columns and inspect memory use</a></li>
+<li><a href="#chunks">Accumulate partial sums and counts</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="memory">
+  <h2>Limit columns and inspect memory use</h2>
+  <p>Read only needed columns with usecols for CSV or columns for Parquet. Choose appropriate dtypes and inspect memory_usage(deep=True) on the resulting frame. Measure before deciding whether an optimization helps.</p>
+
+
+
+
+</section>
+<section class="article-section" id="chunks">
+  <h2>Accumulate partial sums and counts</h2>
+  <p>read_csv(chunksize=...) returns an iterator over chunks. For a global mean, add all valid values and divide by their total count. Chunk means can differ in sample size, so averaging them directly can skew the result.</p>
+
+<pre><code>from io import StringIO
+import pandas as pd
+
+source = StringIO(&quot;amount\n4\n2\n8\n&quot;)
+total = count = 0
+for chunk in pd.read_csv(source, chunksize=2):
+    total += chunk[&quot;amount&quot;].sum()
+    count += chunk[&quot;amount&quot;].count()
+print(total, count, round(float(total / count), 2))</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">14 3 4.67</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://pandas.pydata.org/docs/user_guide/scale.html">Scaling to large datasets</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/io.html#csv-text-files">CSV and text files</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/pandas/data-formats/">Previous lesson · Work with CSV, Excel, Parquet, and SQL</a>
+<a href="/docs/read/en/pandas/api-reference/">Next lesson · pandas API reference</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

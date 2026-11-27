@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Function က အလုပ်တစ်ခုကို နာမည်ပေးထားပြီး လိုတဲ့အခါ input ပြောင်းပြီး ထပ်ခေါ်လို့ရစေပါတယ်။ Module က သတ်မှတ်ထားတဲ့ အစိတ်အပိုင်းတွေကို တခြားဖိုင်တွေထဲ ခေါ်သုံးလို့ရတဲ့ ဖိုင်တစ်ခုပါ။">
+  <title>Function နဲ့ Module · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/functions/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/functions/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/functions/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/functions/" lang="en" hreflang="en">English</a></nav>
+  <h1>Function နဲ့ Module</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Function က အလုပ်တစ်ခုကို နာမည်ပေးထားပြီး လိုတဲ့အခါ input ပြောင်းပြီး ထပ်ခေါ်လို့ရစေပါတယ်။ Module က သတ်မှတ်ထားတဲ့ အစိတ်အပိုင်းတွေကို တခြားဖိုင်တွေထဲ ခေါ်သုံးလို့ရတဲ့ ဖိုင်တစ်ခုပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/functions">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#functions">Function ရေးပြီး ခေါ်သုံးခြင်း</a></li>
+<li><a href="#parameters">Input ပေးပြီး ရလဒ် ပြန်ယူခြင်း</a></li>
+<li><a href="#export">export နဲ့ Function ကို ဖိုင်တခြားမှာ သုံးနိုင်အောင် လုပ်ခြင်း</a></li>
+<li><a href="#modules">Browser Module ကို import လုပ်ပြီး Run ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="functions">
+  <h2>Function ရေးပြီး ခေါ်သုံးခြင်း</h2>
+  <p>function keyword နဲ့ ပြန်သုံးမယ့် code ကို စရေးပါတယ်။ နာမည်နောက်မှာ ( ) နဲ့ code block လိုက်ပါတယ်။ Function ရေးထားတာက ခေါ်လို့ရအောင် သတ်မှတ်တာပါ။ နာမည်နောက်မှာ () ထည့်ရေးပြီး ခေါ်တဲ့အခါ block ကို run ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>function sayReady() {
+  console.log(&quot;Your order is ready.&quot;);
+}
+sayReady();
+sayReady();</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Function နှစ်ခါခေါ်ထားလို့ စာသားတူ နှစ်ကြောင်း ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="parameters">
+  <h2>Input ပေးပြီး ရလဒ် ပြန်ယူခြင်း</h2>
+  <p>Parameter က function အတွင်းမှာ input ကို ခေါ်မယ့် နာမည်ပါ။ Argument က function ခေါ်တဲ့အခါ ပေးလိုက်တဲ့ တန်ဖိုးပါ။ Argument မပေးရင် သို့မဟုတ် undefined ပေးရင် default parameter တန်ဖိုးကို သုံးပါတယ်။ return က function call ကို အဆုံးသတ်ပြီး ရလဒ်ကို ခေါ်တဲ့နေရာဆီ ပြန်ပေးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>function total(price, quantity = 1) {
+  return price * quantity;
+}
+console.log(total(2500), total(2500, 2));</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမ function call က 2500၊ ဒုတိယက 5000 ပြန်ပေးပါမယ်။</p>
+
+</section>
+<section class="article-section" id="export">
+  <h2>export နဲ့ Function ကို ဖိုင်တခြားမှာ သုံးနိုင်အောင် လုပ်ခြင်း</h2>
+  <p>export က module ရဲ့ ဘယ်အရာကို တခြား module မှာ ခေါ်သုံးလို့ရမလဲ မှတ်ပေးပါတယ်။ ဒီမှာ total က နာမည်နဲ့ export လုပ်ထားတာပါ။ သုံးမယ့်ဖိုင်မှာ အဲဒီနာမည်နဲ့ import လုပ်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Folder အလွတ်တစ်ခုလုပ်ပြီး ဒီ code ကို total.js နဲ့ အဲဒီထဲ သိမ်းပါ။</p>
+<pre><code>export function total(price, quantity = 1) {
+  return price * quantity;
+}</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ဒီဖိုင်က total ကို import လုပ်လို့ရပါပြီ။ နောက်နမူနာကို run ပြီးမှ ရလဒ် ထွက်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="modules">
+  <h2>Browser Module ကို import လုပ်ပြီး Run ခြင်း</h2>
+  <p>import မှာ သုံးမယ့်နာမည်နဲ့ module ဖိုင်ရှိတဲ့ လိပ်စာကို ရေးပါတယ်။ ./ က folder တူတူလို့ ဆိုလိုပါတယ်။ script မှာ type=&quot;module&quot; ထည့်မှ ဒီမှာ import ရေးလို့ရပါတယ်။ နှစ်ဖိုင်လုံး လိပ်စာတစ်ခုတည်းကနေ ဖွင့်နိုင်ဖို့ page ကို HTTP နဲ့ ဖွင့်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> total.js ဘေးမှာ index.html နဲ့ သိမ်းပါ။ VS Code မှာ အဲဒီ folder ဖွင့်ပြီး Live Server လို local server သုံးပါ။ Python ရှိရင် အဲဒီ folder ရဲ့ terminal ထဲ python -m http.server 8000 run ပြီး browser မှာ http://localhost:8000 ဖွင့်နိုင်ပါတယ်။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Module demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Open the Console to see the total.&lt;/p&gt;
+  &lt;script type=&quot;module&quot;&gt;
+    import { total } from &quot;./total.js&quot;;
+    console.log(total(2500, 2));
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Browser က module ကို ဖတ်ပြီး Console မှာ 5000 ထုတ်ပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions">MDN · Functions</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">MDN · JavaScript modules</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/conditions-and-loops/">အရင်သင်ခန်းစာ · Condition နဲ့ Loop</a>
+<a href="/docs/read/my/js/declarations-and-this/">နောက်သင်ခန်းစာ · Declarations၊ Hoisting နဲ့ this</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

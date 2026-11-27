@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="သိမ်းထားတဲ့ pandas object တွေကို အခြား HDF5 ဖိုင်တစ်ခုထဲ ကူးပေးပါတယ်။ ကူးမယ့် key တွေကို သီးခြား ရွေးနိုင်ပါတယ်။">
+  <title>pandas.HDFStore.copy · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/HDFStore.copy/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/HDFStore.copy/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/HDFStore.copy">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API Reference">
+    <a href="/docs/read/my/pandas/api-reference/#find-an-api">pandas API Reference</a><span aria-hidden="true">/</span><span>Data ဖတ်ခြင်းနှင့် ထုတ်ယူခြင်း</span><a href="/docs/read/en/pandas/api/HDFStore.copy/" lang="en" hreflang="en">English</a>
+  </nav>
+    <h1><code>pandas.<wbr>HDFStore.<wbr>copy</code></h1>
+    <p class="article-version">pandas 3.1.1 · Data ဖတ်ခြင်းနှင့် ထုတ်ယူခြင်း · <span lang="en">method</span></p>
+    <p class="intro">သိမ်းထားတဲ့ pandas object တွေကို အခြား HDF5 ဖိုင်တစ်ခုထဲ ကူးပေးပါတယ်။ ကူးမယ့် key တွေကို သီးခြား ရွေးနိုင်ပါတယ်။</p>
+
+    <nav class="api-breadcrumbs" aria-label="ဒီစာမျက်နှာမှာ"><ul><li><a href="#syntax">ခေါ်သုံးပုံ</a></li><li><a href="#example">ခေါ်သုံးပုံကို စစ်ကြည့်ရန်</a></li><li><a href="#parameters">ထည့်သွင်းနိုင်တဲ့ Arguments</a></li><li><a href="#returns">ပြန်ပေးတဲ့ ရလဒ်</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>ခေါ်သုံးပုံ</h2><details class="api-full-signature"><summary><code lang="en">HDFStore.copy(…)</code> <span>ခေါ်သုံးပုံ အပြည့်အစုံ</span></summary><pre><code lang="en">HDFStore.copy(
+    file,
+    mode=&#39;w&#39;,
+    propindexes=True,
+    keys=None,
+    complib=None,
+    complevel=None,
+    fletcher32=False,
+    overwrite=True,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>ခေါ်သုံးပုံကို စစ်ကြည့်ရန်</h2>
+      <p>လက်ခံတဲ့ parameter တွေကို ဒီကုဒ်နဲ့ စစ်ကြည့်နိုင်ပါတယ်။ လုပ်ဆောင်ချက်ကို စမ်းဖို့ လိုတဲ့ ဖိုင်၊ package သို့မဟုတ် Python ပတ်ဝန်းကျင်ကို ကိုယ့်စက်မှာ ပြင်ဆင်ပါ။</p>
+      <label><span>Python ကုဒ်</span><textarea rows="16" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import importlib
+from inspect import signature
+
+path = &#39;pandas.HDFStore.copy&#39;
+parts = path.split(&quot;.&quot;)
+for end in range(len(parts), 0, -1):
+    try:
+        operation = importlib.import_module(&quot;.&quot;.join(parts[:end]))
+        break
+    except ImportError:
+        continue
+
+for name in parts[end:]:
+    operation = getattr(operation, name)
+
+print(path)
+print(signature(operation))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>ရပ်ရန်</button>
+        <button type="button" data-reset disabled>မူလကုဒ် ပြန်ထားရန်</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="ရလဒ်"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>ထည့်သွင်းနိုင်တဲ့ Arguments</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">ထည့်သွင်းပုံ</th><th scope="col">လက်ခံတဲ့ တန်ဖိုးနဲ့ သုံးပုံ</th></tr></thead><tbody><tr><th scope="row"><code>file</code></th>
+      <td>ထည့်ပေးရမယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small></td>
+      <td><span>စာသား (str) သို့မဟုတ် path-like</span></td></tr>
+<tr><th scope="row"><code>mode</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>&#39;w&#39;</code></td>
+      <td><span>စာသား (str)</span><p>ဖိုင် သို့မဟုတ် ဒေတာသိုလှောင်ရာကို ဖွင့်မယ့် mode ရွေးပါ။</p></td></tr>
+<tr><th scope="row"><code>propindexes</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>keys</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>list</span><p>အုပ်စုခွဲရာမှာ၊ dictionary ဒါမှမဟုတ် index ထဲက entry တစ်ခုကို ရွေးရာမှာ၊ ဒေတာတွဲဆက်ရာမှာ သုံးမယ့် key တွေကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>complib</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span></td></tr>
+<tr><th scope="row"><code>complevel</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>ကိန်းပြည့် (int)</span></td></tr>
+<tr><th scope="row"><code>fletcher32</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>overwrite</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool)</span><p>ရှိပြီးသား entry ကို အစားထိုးခွင့်ရှိမရှိ သတ်မှတ်ပါတယ်။</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>ပြန်ပေးတဲ့ ရလဒ်</h2><p>ပြန်ပေးတဲ့ အမျိုးအစားက HDFStore ဖြစ်ပါတယ်။</p></section>
+    <section class="article-section"><h2>ကိုယ့်စက်မှာ စမ်းကြည့်ရန်</h2><pre><code lang="en">import pandas as pd
+from pathlib import Path
+from tempfile import TemporaryDirectory
+import tables
+
+frame = pd.DataFrame({&quot;units&quot;: [2, 5], &quot;price&quot;: [4, 3]})
+with TemporaryDirectory() as folder:
+    path = Path(folder) / &quot;demo.h5&quot;
+    with pd.HDFStore(path, mode=&quot;w&quot;) as store:
+        store.put(&quot;orders&quot;, frame, format=&quot;table&quot;, data_columns=[&quot;units&quot;])
+        with store.copy(Path(folder) / &quot;copy.h5&quot;) as copy:
+            print(copy.keys())</code></pre></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.HDFStore.copy.html#pandas.HDFStore.copy">pandas တရားဝင် ကိုးကားချက်</a>
+      <nav class="pagination" aria-label="pandas API Reference"><a href="/docs/read/my/pandas/api/HDFStore.append_to_multiple/"><span>အရင် API</span><strong>pandas.HDFStore.append_to_multiple</strong></a><a href="/docs/read/my/pandas/api/HDFStore.create_table_index/"><span>နောက် API</span><strong>pandas.HDFStore.create_table_index</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

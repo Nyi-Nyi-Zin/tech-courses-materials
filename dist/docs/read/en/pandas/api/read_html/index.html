@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Extract matching HTML tables and return a list of DataFrames.">
+  <title>pandas.read_html · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/read_html/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/read_html/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/read_html">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Input and output</span><a href="/docs/read/my/pandas/api/read_html/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>read_html</code></h1>
+    <p class="article-version">pandas 3.1.1 · Input and output · <span lang="en">function</span></p>
+    <p class="intro">Extract matching HTML tables and return a list of DataFrames.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Inspect the call</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">pd.read_html(…)</code> <span>Full signature</span></summary><pre><code lang="en">pd.read_html(
+    io,
+    *,
+    match=&#39;.+&#39;,
+    flavor=None,
+    header=None,
+    index_col=None,
+    skiprows=None,
+    attrs=None,
+    parse_dates=False,
+    thousands=&#39;,&#39;,
+    encoding=None,
+    decimal=&#39;.&#39;,
+    converters=None,
+    na_values=None,
+    keep_default_na=True,
+    displayed_only=True,
+    extract_links=None,
+    dtype_backend=…,
+    storage_options=None,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Inspect the call</h2>
+      <p>Run this code to inspect the callable and its parameters. Its data, backend, or environment is needed to execute the operation itself.</p>
+      <label><span>Python code</span><textarea rows="16" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import importlib
+from inspect import signature
+
+path = &#39;pandas.read_html&#39;
+parts = path.split(&quot;.&quot;)
+for end in range(len(parts), 0, -1):
+    try:
+        operation = importlib.import_module(&quot;.&quot;.join(parts[:end]))
+        break
+    except ImportError:
+        continue
+
+for name in parts[end:]:
+    operation = getattr(operation, name)
+
+print(path)
+print(signature(operation))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>io</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>str, path object, or file-like object</span></td></tr>
+<tr><th scope="row"><code>match</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;.+&#39;</code></td>
+      <td><span>str or compiled regular expression</span></td></tr>
+<tr><th scope="row"><code>flavor</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>{&quot;lxml&quot;, &quot;html5lib&quot;, &quot;bs4&quot;} or list-like</span></td></tr>
+<tr><th scope="row"><code>header</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>int or list-like</span><p>Define which row or rows provide column names, or control whether to write them.</p></td></tr>
+<tr><th scope="row"><code>index_col</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>int or list-like</span><p>Identify the column or columns whose values should become the row index.</p></td></tr>
+<tr><th scope="row"><code>skiprows</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>int, list-like or slice</span><p>Skip selected input rows before creating the DataFrame.</p></td></tr>
+<tr><th scope="row"><code>attrs</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict</span></td></tr>
+<tr><th scope="row"><code>parse_dates</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Choose whether to interpret selected fields as dates during a read.</p></td></tr>
+<tr><th scope="row"><code>thousands</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;,&#39;</code></td>
+      <td><span>str</span><p>Identify the character separating groups of digits.</p></td></tr>
+<tr><th scope="row"><code>encoding</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>str</span><p>Name a text encoding such as &quot;utf-8&quot;.</p></td></tr>
+<tr><th scope="row"><code>decimal</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;.&#39;</code></td>
+      <td><span>str</span><p>Identify the character used as the decimal mark.</p></td></tr>
+<tr><th scope="row"><code>converters</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict</span><p>Map column labels or positions to conversion functions.</p></td></tr>
+<tr><th scope="row"><code>na_values</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>iterable</span><p>Add input markers that should be interpreted as missing.</p></td></tr>
+<tr><th scope="row"><code>keep_default_na</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>Choose whether pandas&#39; built-in missing strings are recognized along with custom markers.</p></td></tr>
+<tr><th scope="row"><code>displayed_only</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>True</code></td>
+      <td><span>bool</span></td></tr>
+<tr><th scope="row"><code>extract_links</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>{None, &quot;all&quot;, &quot;header&quot;, &quot;body&quot;, &quot;footer&quot;}</span></td></tr>
+<tr><th scope="row"><code>dtype_backend</code></th>
+      <td>Optional<br><small>Keyword only</small></td>
+      <td><span>{&#39;numpy_nullable&#39;, &#39;pyarrow&#39;}</span><p>Choose nullable NumPy-backed dtypes or Arrow-backed dtypes.</p></td></tr>
+<tr><th scope="row"><code>storage_options</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict</span><p>Pass storage-backend options such as connection settings or HTTP headers.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>dfs</p></section>
+    <section class="article-section"><h2>Example for a local Python session</h2><pre><code lang="en">import pandas as pd
+from io import StringIO
+import lxml
+print(pd.read_html(StringIO(&quot;&lt;table&gt;&lt;tr&gt;&lt;th&gt;units&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&quot;))[0])</code></pre></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_html.html#pandas.read_html">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/read_hdf/"><span>Previous in this category</span><strong>pandas.read_hdf</strong></a><a href="/docs/read/en/pandas/api/read_iceberg/"><span>Next in this category</span><strong>pandas.read_iceberg</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

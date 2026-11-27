@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="String က စာသားသိမ်းပါတယ်။ Array က တန်ဖိုးတွေကို အစဉ်လိုက် သိမ်းပါတယ်။ Object က ဆက်စပ်တဲ့ တန်ဖိုးတွေကို နာမည်ပေးပြီး စုထားပါတယ်။ အမျိုးအစားတစ်ခုစီကနေ တန်ဖိုးတစ်ခု ဖတ်တာက စပါမယ်။">
+  <title>String၊ Array နဲ့ Object · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/arrays-and-objects/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/arrays-and-objects/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/arrays-and-objects/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/arrays-and-objects/" lang="en" hreflang="en">English</a></nav>
+  <h1>String၊ Array နဲ့ Object</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">String က စာသားသိမ်းပါတယ်။ Array က တန်ဖိုးတွေကို အစဉ်လိုက် သိမ်းပါတယ်။ Object က ဆက်စပ်တဲ့ တန်ဖိုးတွေကို နာမည်ပေးပြီး စုထားပါတယ်။ အမျိုးအစားတစ်ခုစီကနေ တန်ဖိုးတစ်ခု ဖတ်တာက စပါမယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/arrays-and-objects">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#strings">String ဖတ်ခြင်းနဲ့ စာသား သန့်စင်ခြင်း</a></li>
+<li><a href="#replace">String ထဲက အလွတ်နေရာတွေ အစားထိုးခြင်း</a></li>
+<li><a href="#arrays">Array ထဲက Item ဖတ်ခြင်းနဲ့ ထည့်ခြင်း</a></li>
+<li><a href="#objects">Object ထဲက Property တွေ ဖတ်ခြင်း</a></li>
+<li><a href="#destructuring">Destructuring နဲ့ နာမည်တူ Property ထုတ်ယူခြင်း</a></li>
+<li><a href="#aggregate">Array ကို Filter၊ Map နဲ့ Reduce သုံးခြင်း</a></li>
+<li><a href="#copy">Spread နဲ့ ကူးတဲ့အခါ ဘာတွေ ပါလဲ။</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="strings">
+  <h2>String ဖတ်ခြင်းနဲ့ စာသား သန့်စင်ခြင်း</h2>
+  <p>String မှာ အရှည်ရှိပြီး method လို့ခေါ်တဲ့ လုပ်ဆောင်ချက်တွေကို ခေါ်သုံးလို့ရပါတယ်။ trim() က ရှေ့နောက်က အလွတ်နေရာ ဖြုတ်ထားတဲ့ string အသစ် ပြန်ပေးပါတယ်။ toLowerCase() က စာလုံးအသေး ပြန်ပေးပါတယ်။ မူလ စာသားက အတိုင်းပဲ ကျန်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const raw = &quot;  Pen  &quot;;
+console.log(raw.trim().toLowerCase());
+console.log(raw.length);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> pen ဆိုပြီး ပေါ်ပါမယ်။ ပြီးရင် မူလ string အရှည် 7 ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="replace">
+  <h2>String ထဲက အလွတ်နေရာတွေ အစားထိုးခြင်း</h2>
+  <p>replace() က ကိုက်တဲ့စာသားကို အစားထိုးထားတဲ့ string အသစ် ပြန်ပေးပါတယ်။ /\s+/g က အလွတ်နေရာ တစ်ခု သို့မဟုတ် အများကြီး ဆက်နေတဲ့ အစုတိုင်းကို ရွေးပါတယ်။ Pattern ရေးပုံအသေးစိတ်ကို Regular Expression lesson မှာ ကြည့်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const title = &quot;  Blue   Pen  &quot;;
+const slug = title.trim().toLowerCase().replace(/\s+/g, &quot;-&quot;);
+console.log(slug);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စကားလုံးနှစ်ခုကြား hyphen တစ်ခုနဲ့ blue-pen လို့ ထွက်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="arrays">
+  <h2>Array ထဲက Item ဖတ်ခြင်းနဲ့ ထည့်ခြင်း</h2>
+  <p>Array မှာ [ ] ကြား တန်ဖိုးတွေ ရေးပါတယ်။ Index က 0 ကနေ စရေတွက်တဲ့ နေရာအမှတ်ပါ။ array[0] က ပထမ item ကို ဖတ်ပါတယ်။ push() က အဆုံးမှာ ထည့်ပြီး length က item အရေအတွက်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const products = [&quot;Pen&quot;, &quot;Notebook&quot;];
+console.log(products[0]);
+products.push(&quot;Pencil&quot;);
+console.log(products.length);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen နဲ့ 3 ပေါ်ပါမယ်။ push ပြီး index 2 ကို ဖတ်ကြည့်ရင် Pencil ရပါမယ်။</p>
+
+</section>
+<section class="article-section" id="objects">
+  <h2>Object ထဲက Property တွေ ဖတ်ခြင်း</h2>
+  <p>Object ကို { } နဲ့ ရေးနိုင်ပါတယ်။ Property တစ်ခုမှာ နာမည်နဲ့ တန်ဖိုးကို : နဲ့ ခွဲပါတယ်။ နာမည်သိရင် . နဲ့ ဖတ်နိုင်ပြီး နာမည်ကို variable ထဲ သိမ်းထားရင် [ ] နဲ့ ဖတ်နိုင်ပါတယ်။ const သုံးထားလည်း object ရဲ့ property ပြင်လို့ရပါတယ်။ Variable က အဲဒီ object တစ်ခုတည်းကိုပဲ ဆက်ရည်ညွှန်းရပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const product = { name: &quot;Pen&quot;, price: 2500 };
+const key = &quot;price&quot;;
+console.log(product.name, product[key]);
+product.price = 3000;
+console.log(product.price);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen နဲ့ 2500 ပြပြီး နောက်ဆုံး ဈေးအသစ် 3000 ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="destructuring">
+  <h2>Destructuring နဲ့ နာမည်တူ Property ထုတ်ယူခြင်း</h2>
+  <p>Object destructuring နဲ့ ရွေးထားတဲ့ property တန်ဖိုးတွေကို variable တွေထဲ ထုတ်ယူနိုင်ပါတယ်။ const { name, price } = product မှာ variable နာမည်နှစ်ခုက product ရဲ့ property နာမည်နဲ့ တူပါတယ်။ Variable နာမည်အသစ် ပေးချင်ရင် pattern ထဲမှာ : နဲ့ ထပ်သတ်မှတ်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const product = { name: &quot;Pen&quot;, price: 2500 };
+const { name, price: unitPrice } = product;
+console.log(name, unitPrice);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen နဲ့ 2500 ရပါမယ်။ မူလ object မှာ property နာမည်က price ပဲ ဆက်ရှိပါတယ်။</p>
+
+</section>
+<section class="article-section" id="aggregate">
+  <h2>Array ကို Filter၊ Map နဲ့ Reduce သုံးခြင်း</h2>
+  <p>filter က စစ်ချက်မှန်တဲ့ item တွေကိုပဲ ယူပါတယ်။ map က item တစ်ခုစီကို ပြောင်းပြီး array အသစ် ထုတ်ပါတယ်။ reduce က တန်ဖိုးတွေကို တစ်ခုဖြစ်အောင် စုပေးပြီး ဒီမှာ 0 ကနေ စပါတယ်။ =&gt; က item တစ်ခုစီအတွက် ခေါ်မယ့် function အတိုရေးပုံပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const orders = [{ price: 2500, paid: true }, { price: 3000, paid: false }];
+const paidPrices = orders.filter(order =&gt; order.paid).map(order =&gt; order.price);
+console.log(paidPrices);
+console.log(paidPrices.reduce((sum, price) =&gt; sum + price, 0));</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> 2500 ပါတဲ့ array တစ်ခုနဲ့ စုစုပေါင်း 2500 ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="copy">
+  <h2>Spread နဲ့ ကူးတဲ့အခါ ဘာတွေ ပါလဲ။</h2>
+  <p>Spread syntax က ... နဲ့ array ထဲက item တွေ၊ object ထဲက property တွေကို ကူးပါတယ်။ အပြင်တစ်ဆင့်ပဲ ကူးလို့ အတွင်းက object တွေက အတူတူကိုပဲ ဆက်ရည်ညွှန်းနေပါတယ်။ အတွင်းအဆင့်ကို သီးသန့်ပြင်ချင်ရင် အဲဒီအဆင့်ကိုပါ ကူးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const original = { product: { price: 2500 } };
+const copy = { ...original, product: { ...original.product } };
+copy.product.price = 3000;
+console.log(original.product.price, copy.product.price);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> 2500 နဲ့ 3000 ပေါ်ပါမယ်။ product ကို သီးသန့်မကူးဘဲ စမ်းရင် မူလ price ပါ ပြောင်းပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN · Array</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects">MDN · Working with objects</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">MDN · Spread syntax</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/declarations-and-this/">အရင်သင်ခန်းစာ · Declarations၊ Hoisting နဲ့ this</a>
+<a href="/docs/read/my/js/array-methods/">နောက်သင်ခန်းစာ · Array ထဲ ရှာခြင်း၊ စစ်ခြင်းနဲ့ အစဉ်စီခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

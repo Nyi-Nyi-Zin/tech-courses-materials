@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ကိုယ့် operating system အတွက် အောက်က အဆင့်တွေကို လိုက်လုပ်ပါ။ Local PostgreSQL server နဲ့ command-line tools လိုပါတယ်။ သင်ခန်းစာတွေ လိုက်လုပ်ဖို့ Windows မှာ PowerShell၊ macOS နဲ့ Ubuntu မှာ Terminal သုံးလို့ရပါတယ်။">
+  <title>PostgreSQL နဲ့ psql ထည့်သွင်းခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/install/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/install/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/install/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/install/" lang="en" hreflang="en">English</a></nav>
+  <h1>PostgreSQL နဲ့ psql ထည့်သွင်းခြင်း</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">ကိုယ့် operating system အတွက် အောက်က အဆင့်တွေကို လိုက်လုပ်ပါ။ Local PostgreSQL server နဲ့ command-line tools လိုပါတယ်။ သင်ခန်းစာတွေ လိုက်လုပ်ဖို့ Windows မှာ PowerShell၊ macOS နဲ့ Ubuntu မှာ Terminal သုံးလို့ရပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/install">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#tools">ဘယ် Tools တွေ လိုလဲ</a></li>
+<li><a href="#windows">Windows · EDB Installer နဲ့ PowerShell</a></li>
+<li><a href="#macos">macOS · Postgres.app နဲ့ Terminal</a></li>
+<li><a href="#ubuntu">Ubuntu · apt နဲ့ ထည့်သွင်းခြင်း</a></li>
+<li><a href="#ready">Server က Connection လက်ခံလား စစ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="tools">
+  <h2>ဘယ် Tools တွေ လိုလဲ</h2>
+  <p>Server နဲ့ psql ကို အဓိကသုံးမယ်။ Server က connection လက်ခံဖို့ အသင့်ဖြစ်ပြီလားဆိုတာ pg_isready နဲ့ စစ်မယ်။</p>
+
+<pre><code>psql --version
+pg_isready -h localhost -p 5432</code></pre>
+<dl class="lesson-terms"><div><dt><code>PostgreSQL Server</code></dt><dd>Background မှာ run ပြီး database တွေကို စီမံတယ်။ SQL query တွေလည်း execute လုပ်ပေးတယ်။</dd></div><div><dt><code>psql</code></dt><dd>Server ကို ချိတ်ဖို့၊ SQL ပို့ဖို့နဲ့ ရလဒ်ကြည့်ဖို့ သုံးတဲ့ terminal client ပါ။</dd></div><div><dt><code>pg_isready</code></dt><dd>Host နဲ့ port တစ်ခုမှာ PostgreSQL server က connection လက်ခံလား စစ်တယ်။ Password မှန်မမှန် စစ်တဲ့ tool မဟုတ်ပါဘူး။</dd></div><div><dt><code>pgAdmin / Stack Builder</code></dt><dd>ထည့်ချင်မှ ထည့်ပါ။ pgAdmin က graphical client ဖြစ်ပြီး Stack Builder က အပို tool တွေ ထည့်ပေးပါတယ်။</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="windows">
+  <h2>Windows · EDB Installer နဲ့ PowerShell</h2>
+  <p>အောက်က Official references မှာ Windows download link ကိုဖွင့်ပြီး support ရှိတဲ့ version အတွက် EDB Installer ကို ရွေးပါ။ Select Components မှာ PostgreSQL Server နဲ့ Command Line Tools ရွေးပါ။ သင်ခန်းစာအတွက် default data directory ကို သုံးပါ။ postgres database role အတွက် password သတ်မှတ်ပြီး မှတ်ထားပါ။ Port 5432 လွတ်ရင် အဲဒီ port ကို ဆက်သုံးပါ။ အဆုံးမှာ Stack Builder ကို ကျော်လို့ရပါတယ်။ ပြီးရင် PowerShell အသစ်ဖွင့်ပြီး အောက်က command တွေ run ပါ။</p>
+
+<pre><code>Get-Service -Name &quot;postgresql*&quot;
+psql --version</code></pre>
+<dl class="lesson-terms"><div><dt><code>Get-Service -Name &quot;postgresql*&quot;</code></dt><dd>postgresql နဲ့ စတဲ့ Windows service တွေကို ပြတယ်။ Status မှာ Running ဖြစ်နေလား စစ်ပါ။</dd></div><div><dt><code>psql --version</code></dt><dd>စက်မှာ ထည့်ထားတဲ့ psql client version ကိုပြပြီး PowerShell ကို ပြန်ရောက်တယ်။</dd></div></dl>
+
+<p class="example-check"><strong>ရလဒ်ကွာနေရင်</strong> psql ကို ရှာမတွေ့ရင် Windows Search မှာ Edit environment variables for your account ကို ရှာဖွင့်ပါ။ Path → Edit → New ကို နှိပ်ပြီး PostgreSQL ထည့်ထားတဲ့ bin folder လမ်းကြောင်းကို ထည့်ပါ။ Version 19 ကို မူလနေရာမှာ ထည့်ထားရင် C:\Program Files\PostgreSQL\19\bin ဖြစ်ပါတယ်။ PowerShell အသစ်ဖွင့်ပြီး ပြန်စမ်းပါ။ Service က Stopped ဖြစ်နေရင် Windows Services ထဲကနေ Start လုပ်ပြီး ပြန်စစ်ပါ။</p>
+</section>
+<section class="article-section" id="macos">
+  <h2>macOS · Postgres.app နဲ့ Terminal</h2>
+  <p>အောက်က link ကနေ Postgres.app ကို download လုပ်ပါ။ Applications folder ထဲ ရွှေ့ပြီး ဖွင့်ပါ။ Initialize နှိပ်ပါ။ ပြီးရင် လက်ရှိ Terminal session ရဲ့ PATH ထဲကို command-line tools လမ်းကြောင်း ထည့်ပါ။ လိုက်စမ်းနေချိန်မှာ Postgres.app ကို run ထားပါ။</p>
+
+<pre><code>export PATH=&quot;/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH&quot;
+psql --version</code></pre>
+<dl class="lesson-terms"><div><dt><code>export PATH=&quot;…:$PATH&quot;</code></dt><dd>လက်ရှိ Terminal session အတွက် Postgres.app ရဲ့ bin folder ကို ရှိပြီးသား PATH ရဲ့ အစမှာ ထည့်ပေးတယ်။ Terminal အသစ်တိုင်းမှာ သုံးချင်ရင် အောက်က Postgres.app CLI guide ကို ကြည့်ပါ။</dd></div></dl>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> psql --version က client version ကိုပြတယ်။ ကနဦး PostgreSQL role က ပုံမှန်အားဖြင့် macOS username ပါ။</p>
+
+</section>
+<section class="article-section" id="ubuntu">
+  <h2>Ubuntu · apt နဲ့ ထည့်သွင်းခြင်း</h2>
+  <p>Ubuntu Terminal မှာ အောက်က command တွေ run ပါ။ Ubuntu repository က ကိုယ့် Ubuntu release နဲ့ကိုက်တဲ့ PostgreSQL version ကို ထည့်ပေးပါတယ်။</p>
+
+<pre><code>sudo apt update
+sudo apt install postgresql
+sudo systemctl status postgresql --no-pager
+psql --version</code></pre>
+<dl class="lesson-terms"><div><dt><code>sudo apt update</code></dt><dd>Package စာရင်းကို အပ်ဒိတ်လုပ်တယ်။ sudo က command ကို administrator အခွင့်အရေးနဲ့ run ပေးတယ်။</dd></div><div><dt><code>sudo apt install postgresql</code></dt><dd>PostgreSQL နဲ့ လိုအပ်တဲ့ package တွေ၊ client tools တွေကို ထည့်ပေးတယ်။</dd></div><div><dt><code>sudo systemctl status postgresql --no-pager</code></dt><dd>PostgreSQL service status ကို pager မဖွင့်ဘဲ ပြတယ်။ Connection ကို တကယ်လက်ခံလားဆိုတာ အောက်က pg_isready နဲ့ စစ်ပါ။</dd></div></dl>
+
+<p class="example-check"><strong>ရလဒ်ကွာနေရင်</strong> systemd သုံးတဲ့ Ubuntu မှာ service ရပ်နေရင် sudo systemctl start postgresql နဲ့ စတင်ပါ။ WSL ထဲက Ubuntu သုံးရင် psql run မယ့် distribution ထဲမှာပဲ PostgreSQL service run နေလား စစ်ပါ။</p>
+</section>
+<section class="article-section" id="ready">
+  <h2>Server က Connection လက်ခံလား စစ်ခြင်း</h2>
+  <p>ကိုယ့် OS terminal မှာ ဒီ command ကို run ပါ။ PostgreSQL ထည့်တုန်းက တခြား port သတ်မှတ်ခဲ့ရင် အဲဒီ port နဲ့ အစားထိုးပါ။</p>
+
+<pre><code>pg_isready -h localhost -p 5432</code></pre>
+<dl class="lesson-terms"><div><dt><code>-h localhost</code></dt><dd>ကိုယ့်စက်ပေါ်က server ကို စစ်တယ်။</dd></div><div><dt><code>-p 5432</code></dt><dd>ပုံမှန် PostgreSQL port ဖြစ်တဲ့ 5432 ကို စစ်တယ်။</dd></div></dl>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> localhost:5432 - accepting connections</p>
+<p class="example-check"><strong>ရလဒ်ကွာနေရင်</strong> no response ပြရင် server run နေလား၊ host နဲ့ port မှန်လား စစ်ပါ။ pg_isready ကို ရှာမတွေ့ရင် command-line tools နဲ့ PATH ကို အရင်စစ်ပါ။</p>
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/download/windows/">PostgreSQL · Windows installer</a></li>
+<li><a href="https://www.enterprisedb.com/docs/supported-open-source/postgresql/installing/windows/">EDB · Windows installation steps</a></li>
+<li><a href="https://www.postgresql.org/download/macosx/">PostgreSQL · macOS downloads</a></li>
+<li><a href="https://postgresapp.com/">Postgres.app · Download and setup</a></li>
+<li><a href="https://postgresapp.com/documentation/cli-tools.html">Postgres.app · Command-line tools</a></li>
+<li><a href="https://www.postgresql.org/download/linux/ubuntu/">PostgreSQL · Ubuntu packages</a></li>
+<li><a href="https://www.postgresql.org/docs/19/app-pg-isready.html">PostgreSQL · pg_isready</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/postgresql-introduction/">အရင်သင်ခန်းစာ · PostgreSQL မိတ်ဆက်</a>
+<a href="/docs/read/my/database/setup/">နောက်သင်ခန်းစာ · psql နဲ့ ချိတ်ပြီး Tables တည်ဆောက်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

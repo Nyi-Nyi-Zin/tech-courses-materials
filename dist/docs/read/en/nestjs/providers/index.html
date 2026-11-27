@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Put reusable behavior in a provider. A module registers the providers and controllers that belong to a feature.">
+  <title>Providers, modules, and dependency injection · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/providers/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/providers/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/providers/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#nestjs">All documentation · NestJS</a> <a href="/docs/read/my/nestjs/providers/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Providers, modules, and dependency injection</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">Put reusable behavior in a provider. A module registers the providers and controllers that belong to a feature.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/nestjs/providers">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#service">Inject a service into a controller</a></li>
+<li><a href="#visibility">Share providers between modules</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="service">
+  <h2>Inject a service into a controller</h2>
+  <p>Mark the service with Injectable and register it under providers. A controller can ask for that service in its constructor. Nest resolves the dependency when it creates the controller.</p>
+
+<pre><code>import { Controller, Get, Injectable, Module } from &quot;@nestjs/common&quot;;
+
+@Injectable()
+class CatalogService {
+  list() {
+    return [&quot;Pen&quot;, &quot;Notebook&quot;];
+  }
+}
+
+@Controller(&quot;catalog&quot;)
+class CatalogController {
+  constructor(private readonly catalog: CatalogService) {}
+
+  @Get()
+  list() {
+    return this.catalog.list();
+  }
+}
+
+@Module({ controllers: [CatalogController], providers: [CatalogService] })
+export class CatalogModule {}</code></pre>
+
+
+</section>
+<section class="article-section" id="visibility">
+  <h2>Share providers between modules</h2>
+  <p>By default, a provider belongs to its module. Export a provider from its module and import that module where the provider is needed. Register a feature module in the root module’s imports to include it in the app.</p>
+
+<pre><code>import { Module } from &quot;@nestjs/common&quot;;
+import { CatalogService } from &quot;./catalog.service&quot;;
+import { OrdersController } from &quot;./orders.controller&quot;;
+
+@Module({ providers: [CatalogService], exports: [CatalogService] })
+class CatalogModule {}
+
+@Module({ imports: [CatalogModule], controllers: [OrdersController] })
+class OrdersModule {}
+
+@Module({ imports: [OrdersModule] })
+export class AppModule {}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.nestjs.com/providers">Providers</a></li>
+<li><a href="https://docs.nestjs.com/modules">Modules</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/nestjs/setup/">Previous lesson · Set up an app and serve a route</a>
+<a href="/docs/read/en/nestjs/validation/">Next lesson · Validate requests and test routes</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

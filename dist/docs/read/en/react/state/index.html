@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="State holds values that affect the component’s output. Set state from event handlers to update the UI.">
+  <title>State, events, and forms · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/react/state/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/state/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/state/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#react">All documentation · React</a> <a href="/docs/read/my/react/state/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>State, events, and forms</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">State holds values that affect the component’s output. Set state from event handlers to update the UI.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/react/state">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#updater">Update from previous state</a></li>
+<li><a href="#input">Keep an input in sync</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="updater">
+  <h2>Update from previous state</h2>
+  <p>Call Hooks at the top level of a component or custom Hook. When the next value depends on the previous value, pass an updater function. For objects and arrays, build a new value and pass it to the setter.</p>
+
+<pre><code>import { useState } from &quot;react&quot;;
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+  return &lt;button onClick={() =&gt; setCount(value =&gt; value + 1)}&gt;{count}&lt;/button&gt;;
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="input">
+  <h2>Keep an input in sync</h2>
+  <p>A controlled text input gets its value from state and updates it in onChange. Start with an empty string if there is no value. In a form handler, call preventDefault when you intend to handle submission in JavaScript.</p>
+
+<pre><code>import { useState } from &quot;react&quot;;
+
+export default function SearchBox() {
+  const [query, setQuery] = useState(&quot;&quot;);
+
+  return (
+    &lt;form onSubmit={event =&gt; event.preventDefault()}&gt;
+      &lt;label&gt;
+        Find a product
+        &lt;input value={query} onChange={event =&gt; setQuery(event.target.value)} /&gt;
+      &lt;/label&gt;
+      &lt;p&gt;Search term: {query}&lt;/p&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://react.dev/reference/react/useState">useState</a></li>
+<li><a href="https://react.dev/reference/rules/rules-of-hooks">Rules of Hooks</a></li>
+<li><a href="https://react.dev/reference/react-dom/components/input">Input reference</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/react/components/">Previous lesson · Components, JSX, and props</a>
+<a href="/docs/read/en/react/effects/">Next lesson · Effects and synchronization</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

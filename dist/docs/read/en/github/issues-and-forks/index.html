@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use Issues to describe work and forks to contribute through your own GitHub repository when you cannot push to the original.">
+  <title>Issues and Forking Repositories · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/github/issues-and-forks/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/github/issues-and-forks/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/github/issues-and-forks/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#github">All documentation · GitHub</a> <a href="/docs/read/my/github/issues-and-forks/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Issues and Forking Repositories</h1>
+  
+  <p class="intro">Use Issues to describe work and forks to contribute through your own GitHub repository when you cannot push to the original.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/github/issues-and-forks">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#issues">Write an issue someone can act on</a></li>
+<li><a href="#forks">Fork on GitHub and clone to your computer</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="issues">
+  <h2>Write an issue someone can act on</h2>
+  <p>Give the issue a short title. For a bug, include steps to reproduce, the actual result, and the expected result. In a pull request description, Closes #12 can link and close issue 12 in the same repository when the pull request merges into the default branch.</p>
+
+<pre><code>Title: Add installation steps to the README
+Steps: Open README.md and look for instructions to set up the project.
+Actual: The README only describes what the project does.
+Expected: The README includes commands to start the project.</code></pre>
+
+
+</section>
+<section class="article-section" id="forks">
+  <h2>Fork on GitHub and clone to your computer</h2>
+  <p>Choose Fork on a repository that allows it. A fork lives under your GitHub account. Clone your fork in a workspace that does not already contain a project-notes folder. Replace YOUR-ACCOUNT and ORIGINAL-OWNER with actual values. origin points to your fork, and upstream is a common name for the original. Push a feature branch to your fork, then open the pull request against the original repository.</p>
+
+<pre><code>git clone https://github.com/YOUR-ACCOUNT/project-notes.git
+cd project-notes
+git remote add upstream https://github.com/ORIGINAL-OWNER/project-notes.git
+git fetch upstream
+git remote -v</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues">GitHub Docs · About issues</a></li>
+<li><a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue">GitHub Docs · Link a pull request to an issue</a></li>
+<li><a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo">GitHub Docs · Fork a repository</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/github/pull-requests/">Previous lesson · Pull Requests and Code Review</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

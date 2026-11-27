@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Numeric feature တွေကို component ပိုနည်းတဲ့ ပုံစံပြောင်းပြီး နောက်ဆက်တွဲ model ပေါ် သက်ရောက်မှု စစ်ပါ။">
+  <title>PCA ဖြင့် Dimension လျှော့ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/pca-and-dimensionality/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/pca-and-dimensionality/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/pca-and-dimensionality/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#machine-learning">သင်ခန်းစာအားလုံး · Machine Learning</a> <a href="/docs/read/en/machine-learning/pca-and-dimensionality/" lang="en" hreflang="en">English</a></nav>
+  <h1>PCA ဖြင့် Dimension လျှော့ခြင်း</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Numeric feature တွေကို component ပိုနည်းတဲ့ ပုံစံပြောင်းပြီး နောက်ဆက်တွဲ model ပေါ် သက်ရောက်မှု စစ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/machine-learning/pca-and-dimensionality">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#components">Components နှင့် Explained Variance ဖတ်ခြင်း</a></li>
+<li><a href="#tradeoffs">Dimension လျှော့ထားတဲ့ Model ကို Baseline နဲ့ ယှဉ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="components">
+  <h2>Components နှင့် Explained Variance ဖတ်ခြင်း</h2>
+  <p>Principal component analysis က ပြောင်းလဲမှုကို ဖမ်းယူတဲ့ ထောင့်မှန်ကျ direction တွေ ဖန်တီးပါတယ်။ scikit-learn PCA က input ကို mean ဗဟိုညှိပါတယ်။ Feature unit နဲ့ scale ကွာလွန်းရင် အရင် scale လုပ်ပါ။ Explained variance က ရွေးထားတဲ့ component တွေ ဒေတာပြောင်းလဲမှု ဘယ်လောက် ထိန်းထားနိုင်လဲ ပြပါတယ်။</p>
+
+<pre><code>from sklearn.datasets import load_iris
+from sklearn.decomposition import PCA
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+
+X, _ = load_iris(return_X_y=True)
+reducer = make_pipeline(StandardScaler(), PCA(n_components=2))
+coordinates = reducer.fit_transform(X)
+print(X.shape, coordinates.shape)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">(150, 4) (150, 2)</pre></div>
+
+
+</section>
+<section class="article-section" id="tradeoffs">
+  <h2>Dimension လျှော့ထားတဲ့ Model ကို Baseline နဲ့ ယှဉ်ခြင်း</h2>
+  <p>Prediction pipeline မှာ PCA ကို training fold တစ်ခုစီမှာ fit လုပ်ပြီး validation fold ကို transform လုပ်ပါ။ PCA မပါဘဲ estimator တူတူနဲ့ ယှဉ်ပါ။ Variance နည်းတဲ့ component ကလည်း ခန့်မှန်းဖို့ အသုံးဝင်နိုင်လို့ component အရေအတွက် ရွေးရာမှာ ကိုက်ညီတဲ့ validation metric သုံးပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/decomposition.html">Decomposing signals into components</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/cross_validation.html">Cross-validation</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/machine-learning/trees-and-ensembles/">အရင်သင်ခန်းစာ · Decision Trees၊ Random Forests နှင့် Boosting</a>
+<a href="/docs/read/my/machine-learning/time-aware-validation/">နောက်သင်ခန်းစာ · အချိန်အစဉ် သို့မဟုတ် Group အလိုက် Model စစ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

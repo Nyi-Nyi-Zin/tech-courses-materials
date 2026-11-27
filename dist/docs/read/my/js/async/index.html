@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browser အလုပ်တချို့မှာ အချိန်ကြာနိုင်ပါတယ်။ Synchronous code က လက်ရှိ ညွှန်ကြားချက်တွေကို အစဉ်လိုက် လုပ်ပါတယ်။ Asynchronous operation က timer၊ network response ဒါမှမဟုတ် ရလဒ်တစ်ခုကို စောင့်နေချိန် တခြားအလုပ်တွေကို ဆက်လုပ်လို့ရစေပါတယ်။">
+  <title>Async JavaScript၊ Promise နဲ့ Event Loop · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/async/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/async/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/async/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/async/" lang="en" hreflang="en">English</a></nav>
+  <h1>Async JavaScript၊ Promise နဲ့ Event Loop</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Browser အလုပ်တချို့မှာ အချိန်ကြာနိုင်ပါတယ်။ Synchronous code က လက်ရှိ ညွှန်ကြားချက်တွေကို အစဉ်လိုက် လုပ်ပါတယ်။ Asynchronous operation က timer၊ network response ဒါမှမဟုတ် ရလဒ်တစ်ခုကို စောင့်နေချိန် တခြားအလုပ်တွေကို ဆက်လုပ်လို့ရစေပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/async">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#timer">Timer စောင့်နေတုန်း ဘာက ဆက် Run လဲ။</a></li>
+<li><a href="#promises">Promise က ဘာကို ကိုယ်စားပြုလဲ။</a></li>
+<li><a href="#chain">then() ကနေ ပြောင်းပြီးသား ရလဒ် ပြန်ပေးခြင်း</a></li>
+<li><a href="#await">async နဲ့ await သုံးပြီး Promise ရလဒ် ဖတ်ခြင်း</a></li>
+<li><a href="#loop">Browser က Callback တွေကို ဘယ်အစဉ်နဲ့ Run လဲ။</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="timer">
+  <h2>Timer စောင့်နေတုန်း ဘာက ဆက် Run လဲ။</h2>
+  <p>setTimeout က browser API ပါ။ Millisecond နဲ့ သတ်မှတ်တဲ့ အချိန် အနည်းဆုံးကုန်ပြီးနောက် function တစ်ခု run လို့ရအောင် စာရင်းသွင်းပေးပါတယ်။ နောက်မှ ခေါ်ဖို့ ပေးထားတဲ့ function ကို callback လို့ ခေါ်ပါတယ်။ Timer စောင့်နေချိန် ကျန်တဲ့ synchronous ညွှန်ကြားချက်တွေ ဆက် run ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>console.log(&quot;Start&quot;);
+setTimeout(() =&gt; console.log(&quot;Timer&quot;), 100);
+console.log(&quot;End&quot;);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Start နဲ့ End အရင်ပေါ်ပြီး Timer က နောက်မှ ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="promises">
+  <h2>Promise က ဘာကို ကိုယ်စားပြုလဲ။</h2>
+  <p>Promise က အလုပ်တစ်ခုရဲ့ နောက်ဆုံးရလဒ်ကို ကိုယ်စားပြုပါတယ်။ Pending က ရလဒ် မရသေးတာ၊ fulfilled က တန်ဖိုး ရလာတာ၊ rejected က မအောင်မြင်တဲ့ အကြောင်းရင်း ရလာတာပါ။ အောင်မြင်ရင် run မယ့် function ကို then() နဲ့၊ မအောင်မြင်ရင် run မယ့် function ကို catch() နဲ့ ထည့်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const result = new Promise(resolve =&gt; {
+  setTimeout(() =&gt; resolve(&quot;Your order is ready.&quot;), 100);
+});
+result.then(message =&gt; console.log(message)).catch(error =&gt; console.error(error));
+console.log(&quot;Waiting&quot;);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Waiting အရင်ပေါ်ပါတယ်။ Promise က ရလဒ်ရလာတဲ့အခါ handler က “Your order is ready.” ထုတ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="chain">
+  <h2>then() ကနေ ပြောင်းပြီးသား ရလဒ် ပြန်ပေးခြင်း</h2>
+  <p>then() က promise အသစ် ပြန်ပေးပါတယ်။ Handler က တန်ဖိုးတစ်ခု return ပြန်ရင် အသစ်ရတဲ့ promise ရဲ့ အောင်မြင်ရလဒ် ဖြစ်လာပါတယ်။ ဒုတိယ handler က ပြောင်းပြီးသား ရလဒ်ကို ဖတ်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const product = Promise.resolve(&quot;Pen&quot;);
+const message = product.then(value =&gt; &quot;Ready: &quot; + value);
+message.then(value =&gt; console.log(value));</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ဒုတိယ handler က “Ready: Pen” လို့ ထုတ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="await">
+  <h2>async နဲ့ await သုံးပြီး Promise ရလဒ် ဖတ်ခြင်း</h2>
+  <p>async function က promise တစ်ခု အမြဲ ပြန်ပေးပါတယ်။ await က အဲဒီ function အတွင်းမှာပဲ ရလဒ်ကို စောင့်ပါတယ်။ Function အပြင်က code က ဆက် run နိုင်ပါတယ်။ စောင့်ထားတဲ့ promise က reject ဖြစ်ရင် try/catch နဲ့ ကိုင်တွယ်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>async function readOrder() {
+  try {
+    const product = await Promise.resolve(&quot;Pen&quot;);
+    console.log(product);
+  } catch (error) {
+    console.error(error);
+  }
+}
+readOrder();
+console.log(&quot;Order requested&quot;);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စောင့်မယ့် promise က ရလဒ်ရှိပြီးသားဖြစ်ပေမယ့် Order requested က Pen မတိုင်ခင် ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="loop">
+  <h2>Browser က Callback တွေကို ဘယ်အစဉ်နဲ့ Run လဲ။</h2>
+  <p>Event loop က run ဖို့ စောင့်နေတဲ့ အလုပ်တွေကို စီပေးပါတယ်။ Timer callback အဆင်သင့် ဖြစ်လာရင် task အနေနဲ့ run ပါတယ်။ Promise ရလဒ်ကို တုံ့ပြန်တဲ့ အလုပ်က microtask ပါ။ လက်ရှိ synchronous အလုပ်ပြီးရင် နောက် task မရွေးခင် microtask တွေကို အရင်လုပ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>console.log(&quot;A&quot;);
+setTimeout(() =&gt; console.log(&quot;Timer task&quot;), 0);
+Promise.resolve().then(() =&gt; console.log(&quot;Promise microtask&quot;));
+console.log(&quot;B&quot;);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> A၊ B၊ Promise microtask၊ Timer task ဆိုပြီး အစဉ်လိုက် ပေါ်ပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loops">WHATWG · Event loops</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">MDN · Using promises</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">MDN · async function</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/dom-selectors-and-events/">အရင်သင်ခန်းစာ · DOM Selectors နဲ့ Input Events</a>
+<a href="/docs/read/my/js/http/">နောက်သင်ခန်းစာ · HTTP Request နဲ့ Fetch</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

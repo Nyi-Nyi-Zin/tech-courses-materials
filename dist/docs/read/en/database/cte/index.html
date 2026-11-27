@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A common table expression names a query result within one statement. Use it to separate steps that are easier to understand on their own.">
+  <title>Break down queries with CTEs · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/cte/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/cte/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/cte/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/cte/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Break down queries with CTEs</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">A common table expression names a query result within one statement. Use it to separate steps that are easier to understand on their own.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/cte">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#reuse">Summarize before joining</a></li>
+<li><a href="#planner">Look at the actual query plan</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="reuse">
+  <h2>Summarize before joining</h2>
+  <p>First count the enrollments by course. Then join the named result to courses. This example uses the tables from Setup.</p>
+
+<pre><code>WITH totals AS (
+  SELECT course_id, COUNT(*) AS student_count
+  FROM enrollments
+  GROUP BY course_id
+)
+SELECT c.title, COALESCE(t.student_count, 0) AS student_count
+FROM courses AS c
+LEFT JOIN totals AS t ON t.course_id = c.id
+ORDER BY student_count DESC, c.id;</code></pre>
+
+
+</section>
+<section class="article-section" id="planner">
+  <h2>Look at the actual query plan</h2>
+  <p>A CTE can improve readability. PostgreSQL may fold a nonrecursive, side-effect-free CTE into its parent query when it is referenced once. Use EXPLAIN to see whether restructuring changed the plan.</p>
+
+<pre><code>EXPLAIN
+WITH course_roster AS (
+  SELECT course_id, student_id FROM enrollments
+)
+SELECT student_id
+FROM course_roster
+WHERE course_id = 1;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/queries-with.html">PostgreSQL WITH queries</a></li>
+<li><a href="https://www.postgresql.org/docs/19/using-explain.html">Using EXPLAIN</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/transaction-isolation/">Previous lesson · Transaction isolation and concurrent updates</a>
+<a href="/docs/read/en/database/window-functions/">Next lesson · Rank and total rows with window functions</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

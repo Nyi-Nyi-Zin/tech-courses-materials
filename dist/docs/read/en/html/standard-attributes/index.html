@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="In HTML Document Structure, you saw how lang=&quot;en&quot; describes a paragraph’s language. The HTML Standard defines attributes like lang and href, including which elements accept them and what their values mean.">
+  <title>Standard HTML Attributes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/standard-attributes/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/standard-attributes/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/standard-attributes/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/standard-attributes/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Standard HTML Attributes</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">In HTML Document Structure, you saw how lang=&quot;en&quot; describes a paragraph’s language. The HTML Standard defines attributes like lang and href, including which elements accept them and what their values mean.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/standard-attributes">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#attribute-scope">Global and Element-Specific Attributes</a></li>
+<li><a href="#image-attributes">Image Source and Alternative Text</a></li>
+<li><a href="#boolean-attributes">Boolean Attributes</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="attribute-scope">
+  <h2>Global and Element-Specific Attributes</h2>
+  <p>Standard attribute is a general label for an attribute defined by the HTML Standard. It includes global attributes such as id and element-specific attributes such as href. Here id identifies an element, while href on the link supplies its destination. href also has defined uses on other elements such as &lt;link&gt;.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Global and Element-Specific Attributes&lt;/title&gt;
+  &lt;style&gt;
+    h2:target, h2:focus { outline: 2px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;a id=&quot;contact-link&quot; href=&quot;#contact&quot;&gt;Contact details&lt;/a&gt;
+  &lt;h2 id=&quot;contact&quot;&gt;Contact&lt;/h2&gt;
+  &lt;p&gt;Email us for more information.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Click Contact details. The browser moves to the section whose id is contact.</p>
+
+</section>
+<section class="article-section" id="image-attributes">
+  <h2>Image Source and Alternative Text</h2>
+  <p>The &lt;img&gt; element uses src for the image address and alt for a text alternative. These attributes have defined purposes on &lt;img&gt;. Check the attribute reference when you want to know which attributes an element supports.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Image Source and Alternative Text&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;img src=&quot;https://javascript-training.cloudninemm.com/docs/media/database/what-is-a-server.webp&quot;
+       alt=&quot;Rows of server racks&quot; width=&quot;320&quot; height=&quot;180&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The image shows rows of server racks. Change one character in the source address and run again to see the alternative text when the image fails to load.</p>
+
+</section>
+<section class="article-section" id="boolean-attributes">
+  <h2>Boolean Attributes</h2>
+  <p>Some attributes turn a setting on when they are present. When disabled is present on a button, the browser disables it. Remove the attribute to enable the button.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Boolean Attributes&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button type=&quot;button&quot; disabled&gt;Register&lt;/button&gt;
+  &lt;button type=&quot;button&quot;&gt;Check schedule&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first button is disabled. Remove disabled and run the example again to enable it.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes">MDN · HTML attribute reference</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/indices.html#attributes-3">WHATWG · HTML attributes index</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/structure/">Previous lesson · HTML Document Structure</a>
+<a href="/docs/read/en/html/global-attributes/">Next lesson · Global Attributes</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

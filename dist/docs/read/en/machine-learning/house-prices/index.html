@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fit a median baseline and a linear regression on the same data and compare test errors.">
+  <title>House price prediction walkthrough · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/house-prices/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/house-prices/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/house-prices/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#machine-learning">All documentation · Machine Learning</a> <a href="/docs/read/my/machine-learning/house-prices/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>House price prediction walkthrough</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Fit a median baseline and a linear regression on the same data and compare test errors.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/machine-learning/house-prices">Open interactive docs</a></p>
+  <p class="reading-link"><a href="/docs/media/data/house_prices.csv" download>Download sample CSV</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#data-and-target">Define the prediction problem</a></li>
+<li><a href="#fit-and-evaluate">Compare predictions on the same test rows</a></li>
+<li><a href="#interpret">Interpret the result</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="data-and-target">
+  <h2>Define the prediction problem</h2>
+  <p>Use area, bedroom count, and property age to estimate price_k, a price in thousands of the synthetic dataset’s units. The small example demonstrates a workflow from data to evaluation.</p>
+
+
+
+
+</section>
+<section class="article-section" id="fit-and-evaluate">
+  <h2>Compare predictions on the same test rows</h2>
+  <p>Save the CSV next to your script. Split once, train both estimators only on the training data, and calculate MAE for their predictions on the same test rows.</p>
+
+<pre><code>import pandas as pd
+from sklearn.dummy import DummyRegressor
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error
+from sklearn.model_selection import train_test_split
+
+homes = pd.read_csv(&quot;house_prices.csv&quot;)
+X = homes[[&quot;area_m2&quot;, &quot;bedrooms&quot;, &quot;age_years&quot;]]
+y = homes[&quot;price_k&quot;]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+
+models = {&quot;Median baseline&quot;: DummyRegressor(strategy=&quot;median&quot;), &quot;Linear regression&quot;: LinearRegression()}
+for name, model in models.items():
+    predictions = model.fit(X_train, y_train).predict(X_test)
+    print(f&quot;{name}: {mean_absolute_error(y_test, predictions):.2f}&quot;)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">Median baseline: 115.60
+Linear regression: 4.91</pre></div>
+
+
+</section>
+<section class="article-section" id="interpret">
+  <h2>Interpret the result</h2>
+  <p>The trained model has lower test MAE on these five synthetic houses. Different splits can give different scores. Real-world performance needs representative data and validation that accounts for the market, time, or location of future predictions.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/linear_model.html">Linear models</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html">Model evaluation and scoring</a></li>
+<li><a href="https://scikit-learn.org/stable/common_pitfalls.html">Common pitfalls and recommended practices</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/machine-learning/validation-and-clustering/">Previous lesson · Cross-validation, overfitting, and clustering</a>
+<a href="/docs/read/en/machine-learning/learning-curves/">Next lesson · Diagnose models with learning curves</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

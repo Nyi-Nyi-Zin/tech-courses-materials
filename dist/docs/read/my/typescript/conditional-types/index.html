@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ပေးထားတဲ့ type ပေါ်မူတည်ပြီး result type ရွေးပါ။ ကိုက်ညီတဲ့ structure ထဲက type ကို နာမည်ပေးဖို့ infer သုံးပါ။">
+  <title>Conditional Types နဲ့ infer · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/conditional-types/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/conditional-types/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/conditional-types/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#typescript">သင်ခန်းစာအားလုံး · TypeScript</a> <a href="/docs/read/en/typescript/conditional-types/" lang="en" hreflang="en">English</a></nav>
+  <h1>Conditional Types နဲ့ infer</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">ပေးထားတဲ့ type ပေါ်မူတည်ပြီး result type ရွေးပါ။ ကိုက်ညီတဲ့ structure ထဲက type ကို နာမည်ပေးဖို့ infer သုံးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/typescript/conditional-types">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#infer">Array ထဲက Item Type ယူပါ</a></li>
+<li><a href="#unions">Union ကို ဘယ်လို ကိုင်တွယ်မလဲ ရွေးပါ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="infer">
+  <h2>Array ထဲက Item Type ယူပါ</h2>
+  <p>Conditional type ကို type အတွက် if statement လို ဖတ်နိုင်ပါတယ်။ T က readonly array နဲ့ ကိုက်ရင် infer Item က element တွေရဲ့ type ကို နာမည်ပေးပါတယ်။ မကိုက်ရင် T ကိုပဲ result အဖြစ် ပြန်ပေးပါတယ်။</p>
+
+<pre><code>type ItemOf&lt;T&gt; = T extends readonly (infer Item)[] ? Item : T;
+
+type Name = ItemOf&lt;readonly string[]&gt;; // string
+type Existing = ItemOf&lt;number&gt;; // number</code></pre>
+
+
+</section>
+<section class="article-section" id="unions">
+  <h2>Union ကို ဘယ်လို ကိုင်တွယ်မလဲ ရွေးပါ</h2>
+  <p>စစ်မယ့်ဘက်က type parameter သက်သက် ဖြစ်ရင် union ထဲက member တစ်ခုချင်းစီကို စစ်ပါတယ်။ Union တစ်ခုလုံးကို တစ်ခါတည်း စစ်ချင်ရင် နှစ်ဘက်လုံးကို square brackets နဲ့ ခတ်ပါ။</p>
+
+<pre><code>type ToArrays&lt;T&gt; = T extends unknown ? T[] : never;
+type ToArray&lt;T&gt; = [T] extends [unknown] ? T[] : never;
+
+type Separate = ToArrays&lt;string | number&gt;; // string[] | number[]
+type Mixed = ToArray&lt;string | number&gt;; // (string | number)[]</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/conditional-types.html">TypeScript Handbook · Conditional types</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/typescript/mapped-types/">အရင်သင်ခန်းစာ · Mapped Types</a>
+<a href="/docs/read/my/typescript/declaration-files/">နောက်သင်ခန်းစာ · JavaScript အတွက် Declaration Files</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

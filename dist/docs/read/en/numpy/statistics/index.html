@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Measure center and spread, handle NaN deliberately, and use a reproducible random generator.">
+  <title>Descriptive statistics and random sampling · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/statistics/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/statistics/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/statistics/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#numpy">All documentation · NumPy</a> <a href="/docs/read/my/numpy/statistics/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Descriptive statistics and random sampling</h1>
+  <p class="article-version">2.5.5</p>
+  <p class="intro">Measure center and spread, handle NaN deliberately, and use a reproducible random generator.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/numpy/statistics">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#center-and-spread">Mean, variance, and standard deviation</a></li>
+<li><a href="#nan-and-random">NaN and reproducible randomness</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="center-and-spread">
+  <h2>Mean, variance, and standard deviation</h2>
+  <p>Mean gives the arithmetic average. Variance measures squared deviations, and standard deviation is its square root. NumPy uses N − ddof in the denominator. Use ddof=1 for the usual sample variance estimate. The standard deviation itself is still a biased estimate of the population standard deviation.</p>
+
+<pre><code>import numpy as np
+
+marks = np.array([60, 70, 80])
+print(float(marks.mean()))
+print(float(marks.var(ddof=1)), float(marks.std(ddof=1)))</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">70.0
+100.0 10.0</pre></div>
+
+
+</section>
+<section class="article-section" id="nan-and-random">
+  <h2>NaN and reproducible randomness</h2>
+  <p>np.nanmean ignores NaN while calculating a mean. Track how many values you exclude. For simulation, default_rng creates a Generator. A fixed seed lets you repeat a run within the same environment and call sequence.</p>
+
+<pre><code>import numpy as np
+
+rng = np.random.default_rng(42)
+sample = rng.integers(1, 7, size=4)
+print(sample.shape)
+print(float(np.nanmean([1.0, np.nan, 3.0])))</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">(4,)
+2.0</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://numpy.org/doc/stable/reference/generated/numpy.std.html">numpy.std and ddof</a></li>
+<li><a href="https://numpy.org/doc/stable/reference/random/generator.html">Random Generator</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/numpy/broadcasting/">Previous lesson · Broadcasting, vectorization, and reductions</a>
+<a href="/docs/read/en/numpy/linear-algebra/">Next lesson · Matrix operations and linear systems</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

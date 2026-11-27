@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A pull request proposes merging one branch into another. It gives the team a place to read the diff, run checks, and discuss the change before merging it.">
+  <title>Pull Requests and Code Review · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/github/pull-requests/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/github/pull-requests/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/github/pull-requests/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#github">All documentation · GitHub</a> <a href="/docs/read/my/github/pull-requests/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Pull Requests and Code Review</h1>
+  
+  <p class="intro">A pull request proposes merging one branch into another. It gives the team a place to read the diff, run checks, and discuss the change before merging it.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/github/pull-requests">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#feature">Commit and push a feature branch</a></li>
+<li><a href="#open">Choose the base and compare branches</a></li>
+<li><a href="#review">Respond to review and sync after merging</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="feature">
+  <h2>Commit and push a feature branch</h2>
+  <p>In project-notes, start with a clean working tree and main tracking origin/main. Create a branch for one change, add a project checklist, and push the branch to GitHub. Run the example in Git Bash, macOS, or Linux. You can also create CHECKLIST.md with an editor.</p>
+
+<pre><code>git switch main
+git pull --ff-only
+git switch -c add-checklist
+printf &#39;# Project Checklist\n- [ ] Review the README\n&#39; &gt; CHECKLIST.md
+git add CHECKLIST.md
+git commit -m &quot;Add project checklist&quot;
+git push -u origin add-checklist</code></pre>
+
+
+</section>
+<section class="article-section" id="open">
+  <h2>Choose the base and compare branches</h2>
+  <p>On GitHub, open Pull requests and choose New pull request. Base is the branch that should receive the change. Compare is the branch that contains the change. Check the diff, then enter a title and a short description of what changed and how you verified it.</p>
+
+<pre><code>Base: main
+Compare: add-checklist
+Title: Add project checklist
+Description: Adds CHECKLIST.md. Verified the Markdown preview.</code></pre>
+
+
+</section>
+<section class="article-section" id="review">
+  <h2>Respond to review and sync after merging</h2>
+  <p>Check Files changed and any required reviews or automated checks. To address feedback, commit and push to add-checklist again. The open pull request updates automatically. After it is approved and merged on GitHub, update your local main.</p>
+
+<pre><code>git switch main
+git pull --ff-only
+git log --oneline -5</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.github.com/en/get-started/using-github/github-flow">GitHub Docs · GitHub flow</a></li>
+<li><a href="https://docs.github.com/en/pull-requests/get-started/pull-request-quickstart">GitHub Docs · Quickstart for pull requests</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/github/push-a-repository/">Previous lesson · Connecting and Pushing a Local Repository</a>
+<a href="/docs/read/en/github/issues-and-forks/">Next lesson · Issues and Forking Repositories</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

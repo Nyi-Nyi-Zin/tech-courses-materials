@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A component is a reusable piece of UI. A function component returns JSX and receives one props object.">
+  <title>Components, JSX, and props · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/react/components/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/components/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/components/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#react">All documentation · React</a> <a href="/docs/read/my/react/components/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Components, JSX, and props</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">A component is a reusable piece of UI. A function component returns JSX and receives one props object.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/react/components">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#jsx">Compose components</a></li>
+<li><a href="#root">Mount a client-side app</a></li>
+<li><a href="#lists">Use stable keys in lists</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="jsx">
+  <h2>Compose components</h2>
+  <p>Start a component name with a capital letter. JSX lets you write elements close to their display logic. Use braces for JavaScript expressions and close every tag. Parents pass props to children.</p>
+
+<pre><code>function ProductCard({ name, available }) {
+  return (
+    &lt;article&gt;
+      &lt;h2&gt;{name}&lt;/h2&gt;
+      &lt;p&gt;{available ? &quot;Available&quot; : &quot;Sold out&quot;}&lt;/p&gt;
+    &lt;/article&gt;
+  );
+}
+
+export default function Catalog() {
+  return &lt;ProductCard name=&quot;Pen&quot; available={true} /&gt;;
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="root">
+  <h2>Mount a client-side app</h2>
+  <p>In a project with JSX support, install matching react and react-dom versions. Put a div with id=&quot;root&quot; in your HTML. In your entry file, use createRoot once to render the exported Catalog component.</p>
+
+<pre><code>import { createRoot } from &quot;react-dom/client&quot;;
+import Catalog from &quot;./Catalog.jsx&quot;;
+
+const container = document.getElementById(&quot;root&quot;);
+createRoot(container).render(&lt;Catalog /&gt;);</code></pre>
+
+
+</section>
+<section class="article-section" id="lists">
+  <h2>Use stable keys in lists</h2>
+  <p>Use map to turn data into elements. Give each sibling a stable key from the data, such as an ID. Keys help React match items when rows move, appear, or disappear.</p>
+
+<pre><code>const products = [
+  { id: 101, name: &quot;Notebook&quot; },
+  { id: 102, name: &quot;Pencil&quot; },
+];
+
+export default function ProductList() {
+  return (
+    &lt;ul&gt;
+      {products.map(product =&gt; &lt;li key={product.id}&gt;{product.name}&lt;/li&gt;)}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://react.dev/versions">React version and releases</a></li>
+<li><a href="https://react.dev/learn">React quick start</a></li>
+<li><a href="https://react.dev/learn/rendering-lists">Rendering lists</a></li>
+<li><a href="https://react.dev/reference/react-dom/client/createRoot">createRoot</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/react/state/">Next lesson · State, events, and forms</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

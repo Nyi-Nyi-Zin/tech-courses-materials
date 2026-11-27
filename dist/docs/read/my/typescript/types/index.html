@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fields တွေ ဖော်ပြဖို့ object types၊ လက်ခံနိုင်တဲ့ ပုံစံတစ်ခုထက်ပိုရင် unions သုံးပါ။">
+  <title>Object Types၊ Unions နှင့် Narrowing · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/types/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/types/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/types/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#typescript">သင်ခန်းစာအားလုံး · TypeScript</a> <a href="/docs/read/en/typescript/types/" lang="en" hreflang="en">English</a></nav>
+  <h1>Object Types၊ Unions နှင့် Narrowing</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">Fields တွေ ဖော်ပြဖို့ object types၊ လက်ခံနိုင်တဲ့ ပုံစံတစ်ခုထက်ပိုရင် unions သုံးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/typescript/types">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#objects">မဖြစ်မနေ ပါရမယ့် Fields နှင့် Optional Fields</a></li>
+<li><a href="#narrow">စစ်ဆေးပြီး Type ခွဲခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="objects">
+  <h2>မဖြစ်မနေ ပါရမယ့် Fields နှင့် Optional Fields</h2>
+  <p>Interface သို့ type alias နဲ့ object fields သတ်မှတ်နိုင်ပါတယ်။ Field နောက်က ? က optional ဖြစ်ပါတယ်။ Strict null checks နဲ့ဆို မရှိနိုင်တဲ့ value ကို string လို မသုံးခင် စစ်ပါ။</p>
+
+<pre><code>interface Product {
+  name: string;
+  price: number;
+  label?: string;
+}
+
+function displayName(product: Product) {
+  return product.label ?? product.name;
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="narrow">
+  <h2>စစ်ဆေးပြီး Type ခွဲခြင်း</h2>
+  <p>Union ကို typeof၊ equality သို့ literal value ပါတဲ့ shared field နဲ့ ခွဲနိုင်ပါတယ်။ ဥပမာမှာ ok စစ်တာနဲ့ branch တစ်ခုစီမှာ ဘယ် fields ရှိလဲ compiler က သိနိုင်ပါတယ်။</p>
+
+<pre><code>type Result =
+  | { ok: true; total: number }
+  | { ok: false; message: string };
+
+function describe(result: Result) {
+  if (result.ok) return &quot;Total: &quot; + result.total;
+  return result.message;
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html">Object types</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">Narrowing</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/typescript/setup/">အရင်သင်ခန်းစာ · TypeScript ထည့်သွင်းခြင်း</a>
+<a href="/docs/read/my/typescript/generics/">နောက်သင်ခန်းစာ · Generics နှင့် Async Types</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

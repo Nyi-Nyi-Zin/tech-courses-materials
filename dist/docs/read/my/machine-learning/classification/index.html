@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Category label ခန့်မှန်းပါ။ Classifier က ဘယ် class မှာ လွဲတတ်လဲ စစ်ပါ။">
+  <title>Classification နှင့် Confusion Matrices · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/classification/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/classification/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/classification/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#machine-learning">သင်ခန်းစာအားလုံး · Machine Learning</a> <a href="/docs/read/en/machine-learning/classification/" lang="en" hreflang="en">English</a></nav>
+  <h1>Classification နှင့် Confusion Matrices</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Category label ခန့်မှန်းပါ။ Classifier က ဘယ် class မှာ လွဲတတ်လဲ စစ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/machine-learning/classification">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#classifier">Decision Tree Train လုပ်ခြင်း</a></li>
+<li><a href="#confusion">Class အလိုက် Error ဖတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="classifier">
+  <h2>Decision Tree Train လုပ်ခြင်း</h2>
+  <p>Decision tree က category တွေကို ခွဲပေးနိုင်တဲ့ feature split တွေ သင်ယူပါတယ်။ Tree နက်လွန်းရင် training data အသေးစိတ်တွေကို မှတ်မိသွားနိုင်ပါတယ်။ Held-out set ဒါမှမဟုတ် cross-validation သုံးပြီး tree setting ကို training data ပေါ်မှာ ရွေးပါ။</p>
+
+<pre><code>from sklearn.tree import DecisionTreeClassifier
+
+X = [[40], [55], [95], [130]]
+y = [&quot;small&quot;, &quot;small&quot;, &quot;large&quot;, &quot;large&quot;]
+model = DecisionTreeClassifier(max_depth=2, random_state=42).fit(X, y)
+print(model.predict([[45], [120]]).tolist())</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[&#39;small&#39;, &#39;large&#39;]</pre></div>
+
+
+</section>
+<section class="article-section" id="confusion">
+  <h2>Class အလိုက် Error ဖတ်ခြင်း</h2>
+  <p>scikit-learn confusion matrix မှာ row က label အမှန်၊ column က ခန့်မှန်း label ပါ။ Precision က positive လို့ ခန့်မှန်းတာထဲ ဘယ်လောက်မှန်လဲ စစ်ပါတယ်။ Recall က တကယ် positive ဖြစ်တာထဲ ဘယ်လောက် ရှာတွေ့လဲ စစ်ပါတယ်။ ရှားတဲ့ class ရှိရင် class တစ်ခုစီရဲ့ score ကြည့်ပါ။</p>
+
+<pre><code>from sklearn.metrics import confusion_matrix
+
+print(confusion_matrix([0, 0, 1, 1], [0, 1, 1, 1], labels=[0, 1]).tolist())</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/classification-confusion.png" data-image-preview><img src="/docs/media/data/classification-confusion.png" alt="Actual class 0 ကို 0 လို့ တစ်ကြိမ်၊ 1 လို့ တစ်ကြိမ် ခန့်မှန်းထားပါတယ်။ Actual class 1 ကို 0 လို့ မခန့်မှန်းခဲ့ဘဲ 1 လို့ နှစ်ကြိမ် ခန့်မှန်းထားပါတယ်။" width="720" height="345" loading="lazy" decoding="async"></a>
+    <figcaption>Class 1 ကို positive လို့ယူရင် false positive တစ်ခုရှိပြီး false negative သုညပါ။</figcaption>
+  </figure>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[[1, 1], [0, 2]]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/tree.html">Decision trees</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html">Model evaluation and scoring</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/machine-learning/linear-regression/">အရင်သင်ခန်းစာ · Linear Regression နှင့် Regression Metrics</a>
+<a href="/docs/read/my/machine-learning/pipeline-and-leakage/">နောက်သင်ခန်းစာ · Preprocessing Pipelines နှင့် Data Leakage</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

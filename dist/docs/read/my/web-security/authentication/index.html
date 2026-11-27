@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Authentication ဆိုတာ ဝင်လာသူဟာ ဘယ် account ပိုင်ရှင်လဲဆိုတာ အတည်ပြုခြင်းပါ။ Password၊ passkey ဒါမှမဟုတ် account recovery ကနေ account တစ်ခုတည်းကို ဝင်နိုင်လို့ လမ်းကြောင်းတစ်ခုချင်းစီကို ကာကွယ်ရပါတယ်။">
+  <title>Authentication၊ Password နဲ့ Account ပြန်ရယူခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/authentication/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/authentication/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/authentication/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-security">သင်ခန်းစာအားလုံး · Web Security</a> <a href="/docs/read/en/web-security/authentication/" lang="en" hreflang="en">English</a></nav>
+  <h1>Authentication၊ Password နဲ့ Account ပြန်ရယူခြင်း</h1>
+  
+  <p class="intro">Authentication ဆိုတာ ဝင်လာသူဟာ ဘယ် account ပိုင်ရှင်လဲဆိုတာ အတည်ပြုခြင်းပါ။ Password၊ passkey ဒါမှမဟုတ် account recovery ကနေ account တစ်ခုတည်းကို ဝင်နိုင်လို့ လမ်းကြောင်းတစ်ခုချင်းစီကို ကာကွယ်ရပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-security/authentication">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#passwords">Password ကို စစ်ဆေးနိုင်မယ့် hash သိမ်းခြင်း</a></li>
+<li><a href="#factors">MFA မှာ သီးခြားအထောက်အထားတွေ သုံးခြင်း</a></li>
+<li><a href="#mfa-recovery">Login နဲ့ recovery နှစ်ခုစလုံးကို ကာကွယ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="passwords">
+  <h2>Password ကို စစ်ဆေးနိုင်မယ့် hash သိမ်းခြင်း</h2>
+  <p>Argon2id လို password hash ကို ပံ့ပိုးတဲ့ library သုံးပါ။ Password တစ်ခုစီအတွက် salt အသစ်ကို library က ထုတ်ပေးပြီး သုံးထားတဲ့ setting တွေနဲ့အတူ hash ကို သိမ်းပါ။ Login ဝင်ချိန်မှာ library ရဲ့ verify နဲ့ တိုက်စစ်ပါ။ Server ခံနိုင်တဲ့ တွက်ချက်မှုကုန်ကျစရိတ်ကို တိုင်းပြီး သတ်မှတ်ပါ။ အောက်မှာ library သုံးပုံကို pseudocode နဲ့ ပြထားပါတယ်။</p>
+
+<pre><code>registration: encoded = passwordLibrary.hash(password, algorithm=&quot;argon2id&quot;)
+login:        valid = passwordLibrary.verify(encoded, submittedPassword)</code></pre>
+
+
+</section>
+<section class="article-section" id="factors">
+  <h2>MFA မှာ သီးခြားအထောက်အထားတွေ သုံးခြင်း</h2>
+  <p>Multifactor authentication (MFA) မှာ ကိုယ်သိတဲ့ password နဲ့ ကိုယ့်လက်ဝယ်ရှိတဲ့ authenticator လို သီးခြားအထောက်အထားတွေကို တွဲစစ်ပါတယ်။ Password နှစ်ခု တောင်းတာက သိထားတဲ့အရာ တစ်မျိုးတည်းကိုပဲ စစ်တာပါ။ အရေးကြီးတဲ့ account တွေအတွက် user verification ပါတဲ့ passkey သုံးနိုင်ပါတယ်။ Authenticator အသစ်ထည့်တာ၊ အဟောင်းလဲတာတွေမှာ ထပ်မံအတည်ပြုခိုင်းပြီး ပိုင်ရှင်ကို အကြောင်းကြားပါ။</p>
+
+<pre><code>Knowledge    Account password
+Possession   Registered security key or authenticator
+Recovery     Single-use backup codes stored securely by the owner</code></pre>
+
+
+</section>
+<section class="article-section" id="mfa-recovery">
+  <h2>Login နဲ့ recovery နှစ်ခုစလုံးကို ကာကွယ်ခြင်း</h2>
+  <p>အကြိမ်များစွာ login ဝင်ဖို့ ကြိုးစားတာကို ကန့်သတ်ပြီး WebAuthn passkey လို phishing ကို ခံနိုင်တဲ့ နည်းလမ်း ထည့်ပါ။ Password ပြန်တောင်းတဲ့ email ကို စာရင်းထဲမှာ တွေ့သည်ဖြစ်စေ၊ မတွေ့သည်ဖြစ်စေ တူညီတဲ့ message ကို အချိန်အလားတူနဲ့ ပြန်ပေးပါ။ အတည်ပြုပြီးသား လမ်းကြောင်းကနေ သက်တမ်းတိုပြီး တစ်ကြိမ်ပဲ သုံးနိုင်တဲ့ random token ပို့ပါ။ ပြောင်းပြီးရင် ပိုင်ရှင်ကို အကြောင်းကြားပြီး session အဟောင်းတွေကို သတ်မှတ်ချက်အတိုင်း ပိတ်ပါ။</p>
+
+<pre><code>Public response    If the account exists, recovery instructions will follow.
+Recovery token     Random, short-lived, single use
+Sensitive change   Reauthenticate before changing the recovery address</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html">OWASP · Authentication</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html">OWASP · Password storage</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html">OWASP · Account recovery</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html">OWASP · MFA</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-security/origins-and-cors/">အရင်သင်ခန်းစာ · Same-Origin Policy နဲ့ CORS</a>
+<a href="/docs/read/my/web-security/sessions-and-tokens/">နောက်သင်ခန်းစာ · Session၊ Cookie၊ OAuth နဲ့ OpenID Connect</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

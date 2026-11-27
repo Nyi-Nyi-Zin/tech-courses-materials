@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Record provenance and identify what a single row represents before comparing or joining datasets.">
+  <title>Collect data and record its context · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/data-collection/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/data-collection/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/data-collection/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#data-analysis">All documentation · Data Analysis</a> <a href="/docs/read/my/data-analysis/data-collection/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Collect data and record its context</h1>
+  
+  <p class="intro">Record provenance and identify what a single row represents before comparing or joining datasets.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/data-analysis/data-collection">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#source">Record provenance and coverage</a></li>
+<li><a href="#row-grain">Identify the row grain</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="source">
+  <h2>Record provenance and coverage</h2>
+  <p>Record the source and extraction date, the calendar period, filters, and column definitions. The extraction date tells you when you obtained the file. The covered period describes the events included. Keep the original file so you can repeat the checks.</p>
+
+
+
+
+</section>
+<section class="article-section" id="row-grain">
+  <h2>Identify the row grain</h2>
+  <p>Grain means what one row represents. A transaction table can have one row per sale. A line-item table can repeat the same transaction ID for several products. This distinction changes how you check duplicates and count sales.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.itl.nist.gov/div898/handbook/eda/section1/eda11.htm">NIST Engineering Statistics Handbook — exploratory data analysis</a></li>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">pandas.read_csv</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/data-analysis/questions-and-kpis/">Previous lesson · Define a business question and KPI</a>
+<a href="/docs/read/en/data-analysis/initial-eda/">Next lesson · Initial EDA and data-quality checks</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

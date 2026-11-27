@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CSS positioning က အကွက်တစ်ခု ဘယ်နေရာမှာ ပေါ်မလဲ ပြောင်းပေးပါတယ်။ အကွက်တွေ ထပ်နေတဲ့အခါ ဘယ်အကွက် အပေါ်မှာ ပေါ်မလဲဆိုတာ stacking order က ဆုံးဖြတ်ပါတယ်။">
+  <title>နေရာချခြင်းနဲ့ အလွှာအစဉ် · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/positioning/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/positioning/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/positioning/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/positioning/" lang="en" hreflang="en">English</a></nav>
+  <h1>နေရာချခြင်းနဲ့ အလွှာအစဉ်</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">CSS positioning က အကွက်တစ်ခု ဘယ်နေရာမှာ ပေါ်မလဲ ပြောင်းပေးပါတယ်။ အကွက်တွေ ထပ်နေတဲ့အခါ ဘယ်အကွက် အပေါ်မှာ ပေါ်မလဲဆိုတာ stacking order က ဆုံးဖြတ်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/positioning">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#position">Card ထဲမှာ တံဆိပ်ကို နေရာသတ်မှတ်ခြင်း</a></li>
+<li><a href="#sticky">Fixed နဲ့ Sticky နေရာယူပုံ</a></li>
+<li><a href="#layers">z-index က ဘာကို နှိုင်းလဲ။</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="position">
+  <h2>Card ထဲမှာ တံဆိပ်ကို နေရာသတ်မှတ်ခြင်း</h2>
+  <p>Normal flow မှာ position: static က မူလတန်ဖိုးပါ။ Card ကို position: relative လုပ်ရင် မူလနေရာယူထားပြီး အတွင်းက အကွက်တွေအတွက် တိုင်းလို့ရတဲ့ အခြေခံအကွက် ဖြစ်လာပါတယ်။ တံဆိပ်မှာ position: absolute ပါလို့ normal flow က ထွက်ပါတယ်။ ဒီမှာ top နဲ့ right က အနီးဆုံး position သတ်မှတ်ထားတဲ့ ancestor ဆီကနေ တိုင်းပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Place a badge inside its card&lt;/title&gt;
+  &lt;style&gt;
+    .card { position: relative; width: 220px; padding: 24px; border: 2px solid teal; }
+    .badge { position: absolute; top: 4px; right: 4px; background: gold; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;card&quot;&gt;Pen &lt;span class=&quot;badge&quot;&gt;Sale&lt;/span&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Sale က card ညာဘက်အပေါ်ထောင့်နားမှာ ပေါ်ပါမယ်။ position: relative ဖြုတ်ပြီး တိုင်းတဲ့နေရာ ပြောင်းပုံကို ကြည့်ပါ။</p>
+
+</section>
+<section class="article-section" id="sticky">
+  <h2>Fixed နဲ့ Sticky နေရာယူပုံ</h2>
+  <p>Fixed က များသောအားဖြင့် browser မြင်ကွင်းကို အခြေခံပြီး scroll လုပ်လည်း နေရာမြဲပါတယ်။ Sticky က ပုံမှန်နေရာက စတယ်။ Scroll လုပ်ရင်း သတ်မှတ်တဲ့ အကွာအဝေးရောက်ရင် scroll container အနားမှာ ကပ်ပြီး မိဘအကွက် သတ်မှတ်နယ်နိမိတ်အထိပဲ ကပ်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;How do fixed and sticky positions work?&lt;/title&gt;
+  &lt;style&gt;
+    body { min-height: 150vh; }
+    header { position: sticky; top: 0; background: #d6efea; padding: 8px; }
+    aside { position: fixed; right: 12px; bottom: 12px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Example Store&lt;/h1&gt;&lt;header&gt;Catalog&lt;/header&gt;&lt;p&gt;Pens and notebooks&lt;/p&gt;&lt;aside&gt;Help&lt;/aside&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Scroll လုပ်ကြည့်ပါ။ Catalog ခေါင်းစဉ်က အပေါ်မှာ ကပ်ပြီး “Help” က ညာဘက်အောက်ခြေမှာ နေရာမြဲပါမယ်။</p>
+
+</section>
+<section class="article-section" id="layers">
+  <h2>z-index က ဘာကို နှိုင်းလဲ။</h2>
+  <p>Stacking context ဆိုတာ အလွှာအစဉ်ကို အုပ်စုလိုက် တွက်တဲ့ နယ်ပယ်ပါ။ z-index သက်ရောက်တဲ့ element တွေကို အဲဒီနယ်ပယ်အတွင်း အပေါ်အောက်စီပါတယ်။ Child ရဲ့ z-index တစ်ခုတည်း တိုးတာနဲ့ တခြား အပေါ်မှာရှိတဲ့ context အုပ်စုကို မကျော်နိုင်ပါဘူး။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;What does z-index compare?&lt;/title&gt;
+  &lt;style&gt;
+    .board { position: relative; height: 100px; }
+    .card { position: absolute; width: 100px; padding: 12px; }
+    .pen { z-index: 2; background: gold; }
+    .notebook { z-index: 1; top: 20px; left: 24px; background: lightblue; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;board&quot;&gt;&lt;div class=&quot;card pen&quot;&gt;Pen&lt;/div&gt;&lt;div class=&quot;card notebook&quot;&gt;Notebook&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen က Notebook အကွက်တစ်ပိုင်းကို ဖုံးပါမယ်။ Notebook ကို z-index: 3 ပြောင်းပြီး reload လုပ်ရင် အလွှာအစဉ် ပြောင်းပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/position">MDN · Position</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Positioned_layout/Stacking_context">MDN · Stacking context</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/flex-and-grid-sizing/">အရင်သင်ခန်းစာ · Flex အရွယ်တွက်ပုံနဲ့ Grid နေရာချခြင်း</a>
+<a href="/docs/read/my/css/responsive/">နောက်သင်ခန်းစာ · Responsive Styles နဲ့ Focus</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

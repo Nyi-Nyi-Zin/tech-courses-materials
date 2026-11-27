@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A release includes code from your team, dependencies from other maintainers, and the configuration of the build and hosting systems. Each can change what reaches users.">
+  <title>Deployment and Software Supply Chain Security · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/secure-deployment/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/secure-deployment/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/secure-deployment/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/secure-deployment/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Deployment and Software Supply Chain Security</h1>
+  
+  <p class="intro">A release includes code from your team, dependencies from other maintainers, and the configuration of the build and hosting systems. Each can change what reaches users.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/secure-deployment">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#dependencies">Review what enters the build</a></li>
+<li><a href="#release-integrity">Promote the reviewed artifact</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="dependencies">
+  <h2>Review what enters the build</h2>
+  <p>Commit the lockfile and review its changes alongside the dependency manifest. In an npm project, npm ci installs from the lockfile and fails if the manifest and lockfile disagree. Review advisories and test upgrades. Inventory direct and transitive packages so you can identify affected releases. A clean advisory report alone cannot establish package integrity.</p>
+
+<pre><code># Run in the reviewed project checkout with its committed package-lock.json.
+npm ci
+npm audit</code></pre>
+
+
+</section>
+<section class="article-section" id="release-integrity">
+  <h2>Promote the reviewed artifact</h2>
+  <p>Restrict CI credentials, protect release branches, and keep untrusted changes away from deployment secrets. Build once and verify trusted provenance or signatures before promoting the same artifact. Disable debug output, remove sample accounts, and grant the runtime only its required permissions. For pinned third-party browser assets, Subresource Integrity can verify expected bytes.</p>
+
+<pre><code>Pull request   Review code and lockfile; run checks without deploy credentials
+Build          Produce the artifact and trusted provenance
+Production     Verify provenance, then deploy the approved artifact</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Software_Supply_Chain_Security_Cheat_Sheet.html">OWASP · Software supply chain security</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity">MDN · Subresource Integrity</a></li>
+<li><a href="https://docs.npmjs.com/cli/commands/npm-ci/">npm · npm ci</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/data-and-secrets/">Previous lesson · Private Data, Encryption, and Secrets</a>
+<a href="/docs/read/en/web-security/monitoring-and-incidents/">Next lesson · Errors, Security Logging, and Incident Response</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

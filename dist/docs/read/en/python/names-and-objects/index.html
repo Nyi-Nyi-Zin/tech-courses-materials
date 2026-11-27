@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="See when two names share an object and choose how to copy a nested collection.">
+  <title>Names, mutable objects, and copies · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/python/names-and-objects/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/names-and-objects/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/names-and-objects/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#python">All documentation · Python</a> <a href="/docs/read/my/python/names-and-objects/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Names, mutable objects, and copies</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">See when two names share an object and choose how to copy a nested collection.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/python/names-and-objects">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#assignment">Assignment and mutation</a></li>
+<li><a href="#nested-copies">Shallow and deep copies</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="assignment">
+  <h2>Assignment and mutation</h2>
+  <p>Assignment binds a name to an object. After alias = original, both names refer to the same list. Mutating the list through either name changes what both can see. Assigning alias to a different list later changes only that binding.</p>
+
+<pre><code>original = [10, 20]
+alias = original
+alias.append(30)
+print(original)
+alias = [5]
+print(original, alias)</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/names-and-objects-assignment.png" data-image-preview><img src="/docs/media/data/names-and-objects-assignment.png" alt="Both names point to [10, 20, 30] after the append. Reassignment then makes alias point to [5]." width="720" height="370" loading="lazy" decoding="async"></a>
+    <figcaption>Changing the list and changing what a name points to have different effects.</figcaption>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[10, 20, 30]
+[10, 20, 30] [5]</pre></div>
+
+
+</section>
+<section class="article-section" id="nested-copies">
+  <h2>Shallow and deep copies</h2>
+  <p>A shallow copy makes a new outer list and reuses references to its elements. A nested mutable list is therefore still shared. deepcopy creates independent copies of nested lists in this example. Copy only as much as the code needs.</p>
+
+<pre><code>from copy import deepcopy
+
+original = [[10], [20]]
+shallow = original.copy()
+deep = deepcopy(original)
+
+original[0].append(15)
+print(shallow)
+print(deep)</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/names-and-objects-nested-copies.png" data-image-preview><img src="/docs/media/data/names-and-objects-nested-copies.png" alt="Three separate outer lists. Original and shallow show [10, 15] for the first inner list, while deep shows [10]." width="720" height="335" loading="lazy" decoding="async"></a>
+    <figcaption>The mutation reaches the shallow copy through the shared inner list.</figcaption>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[[10, 15], [20]]
+[[10], [20]]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.python.org/3/tutorial/classes.html#python-scopes-and-namespaces">Python scopes and namespaces</a></li>
+<li><a href="https://docs.python.org/3/library/copy.html">Python shallow and deep copy operations</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/python/classes/">Previous lesson · Classes, instances, and Python 3.15</a>
+<a href="/docs/read/en/python/iterators-and-generators/">Next lesson · Iterators and generators</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

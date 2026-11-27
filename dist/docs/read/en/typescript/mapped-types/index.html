@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Build a new object type from the fields of an existing type. Use this for related shapes that should stay in sync.">
+  <title>Mapped types · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/mapped-types/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/mapped-types/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/mapped-types/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#typescript">All documentation · TypeScript</a> <a href="/docs/read/my/typescript/mapped-types/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Mapped types</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">Build a new object type from the fields of an existing type. Use this for related shapes that should stay in sync.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/typescript/mapped-types">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#keys">Visit each key in a type</a></li>
+<li><a href="#remap">Change keys and modifiers</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="keys">
+  <h2>Visit each key in a type</h2>
+  <p>keyof T gives the property names of T. The mapped type visits each key. T[Key] gives that property’s value type. Here every field becomes optional for a product update.</p>
+
+<pre><code>type Product = { name: string; quantity: number };
+
+type Patch&lt;T&gt; = {
+  [Key in keyof T]?: T[Key];
+};
+
+const update: Patch&lt;Product&gt; = { quantity: 8 };</code></pre>
+
+
+</section>
+<section class="article-section" id="remap">
+  <h2>Change keys and modifiers</h2>
+  <p>Use the as clause to rename keys. Use -? to remove optional and -readonly to make a field writable. These changes affect the type checked by the compiler.</p>
+
+<pre><code>type Getters&lt;T&gt; = {
+  [Key in Extract&lt;keyof T, string&gt; as `get${Capitalize&lt;Key&gt;}`]: () =&gt; T[Key];
+};
+
+type ProductGetters = Getters&lt;Product&gt;;
+// { getName: () =&gt; string; getQuantity: () =&gt; number }</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/mapped-types.html">TypeScript Handbook · Mapped types</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html">TypeScript Handbook · Indexed access types</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/typescript/modules/">Previous lesson · Modules and type-only imports</a>
+<a href="/docs/read/en/typescript/conditional-types/">Next lesson · Conditional types and infer</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

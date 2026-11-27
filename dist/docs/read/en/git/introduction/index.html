@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="When a project changes, version control lets you see what changed, who recorded it, and when. Git is a version control tool that can keep that history on your own computer.">
+  <title>Introduction to Git · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/git/introduction/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/git/introduction/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/git/introduction/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#git">All documentation · Git</a> <a href="/docs/read/my/git/introduction/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Introduction to Git</h1>
+  
+  <p class="intro">When a project changes, version control lets you see what changed, who recorded it, and when. Git is a version control tool that can keep that history on your own computer.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/git/introduction">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#install">Install Git and check the version</a></li>
+<li><a href="#identity">Set the name and email for commits</a></li>
+<li><a href="#init">Create a local repository</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="install">
+  <h2>Install Git and check the version</h2>
+  <p>Use the official Git installation guide linked below for Windows, macOS, or Linux. On Windows, Git Bash is a convenient way to follow these examples. Reopen your terminal after installation and check the version.</p>
+
+<pre><code>git --version</code></pre>
+
+
+</section>
+<section class="article-section" id="identity">
+  <h2>Set the name and email for commits</h2>
+  <p>Git records this identity in new commits. Replace the examples with your details. If you plan to publish the repository on GitHub and want to keep your email private, use the noreply address from your GitHub email settings.</p>
+
+<pre><code>git config --global user.name &quot;Alex Rivera&quot;
+git config --global user.email &quot;alex@example.com&quot;
+git config --get user.name
+git config --get user.email</code></pre>
+
+
+</section>
+<section class="article-section" id="init">
+  <h2>Create a local repository</h2>
+  <p>A repository stores the project history. Create a separate practice folder, initialize it with a branch named main, and check the current state. Keep this project for the following lessons.</p>
+
+<pre><code>mkdir project-notes
+cd project-notes
+git init -b main
+git status</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://git-scm.com/install/">Git · Install Git</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">Git · First-time Git setup</a></li>
+<li><a href="https://git-scm.com/docs/git-init">Git · git init</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/git/commits/">Next lesson · Staging Changes and Making Commits</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

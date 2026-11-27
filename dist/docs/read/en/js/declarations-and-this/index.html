@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="See what happens when code reads a name before its declaration, then compare how two kinds of functions get this.">
+  <title>Declarations, hoisting, and this · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/declarations-and-this/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/declarations-and-this/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/declarations-and-this/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/declarations-and-this/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Declarations, hoisting, and this</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">See what happens when code reads a name before its declaration, then compare how two kinds of functions get this.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/declarations-and-this">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#var">var is available before its initializer</a></li>
+<li><a href="#let">let and the temporal dead zone</a></li>
+<li><a href="#const">const fixes the binding</a></li>
+<li><a href="#arrow-this">Arrow functions and this</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="var">
+  <h2>var is available before its initializer</h2>
+  <p>A var declaration belongs to its enclosing function. JavaScript creates its binding and initializes it to undefined before running the function body. The assignment still happens where the line runs.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>function order() {
+  console.log(quantity);
+  var quantity = 2;
+  console.log(quantity);
+}
+order();</code></pre>
+<p class="example-result"><strong>What to expect</strong> The console prints undefined, then 2.</p>
+
+</section>
+<section class="article-section" id="let">
+  <h2>let and the temporal dead zone</h2>
+  <p>let belongs to its block. The name exists from the start of the block, but reading it before its declaration executes throws a ReferenceError. That interval is called the temporal dead zone.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>{
+  try {
+    console.log(quantity);
+  } catch (error) {
+    console.log(error.name);
+  }
+  let quantity = 2;
+  console.log(quantity);
+}</code></pre>
+<p class="example-result"><strong>What to expect</strong> The caught error prints ReferenceError, then the initialized value prints 2.</p>
+
+</section>
+<section class="article-section" id="const">
+  <h2>const fixes the binding</h2>
+  <p>const is block-scoped and has the same temporal dead zone rule as let. It needs an initial value. It prevents reassigning the variable, while properties of its object can still change.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const order = { quantity: 2 };
+order.quantity += 1;
+console.log(order.quantity);</code></pre>
+<p class="example-result"><strong>What to expect</strong> The object’s count becomes 3.</p>
+
+</section>
+<section class="article-section" id="arrow-this">
+  <h2>Arrow functions and this</h2>
+  <p>In a regular method called as shop.receipt(), this is shop. An arrow function has no this of its own. The arrow inside receipt inherits this from the surrounding method and can read shop.name.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const shop = {
+  name: &quot;Example Store&quot;,
+  receipt() {
+    const print = () =&gt; console.log(this.name);
+    print();
+  }
+};
+shop.receipt();</code></pre>
+<p class="example-result"><strong>What to expect</strong> The console prints Example Store. Change the shop name and rerun.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var">MDN · var</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let">MDN · let</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const">MDN · const</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">MDN · Arrow functions</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/functions/">Previous lesson · Functions and modules</a>
+<a href="/docs/read/en/js/arrays-and-objects/">Next lesson · Strings, arrays, and objects</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Make chart units, series, and numeric ranges easy to interpret.">
+  <title>Labels, scales, legends, and color · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/chart-design/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/chart-design/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/chart-design/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#matplotlib">All documentation · Matplotlib</a> <a href="/docs/read/my/matplotlib/chart-design/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Labels, scales, legends, and color</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">Make chart units, series, and numeric ranges easy to interpret.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/matplotlib/chart-design">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#labels">Identify each series</a></li>
+<li><a href="#scales">Choose scales and color maps</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="labels">
+  <h2>Identify each series</h2>
+  <p>Use a title to state the comparison and axis labels to name each measure and unit. Give series readable labels and call legend after drawing them. Add markers or line styles when color alone may be hard to distinguish.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.plot([3, 5, 4], marker=&quot;o&quot;, label=&quot;Coffee&quot;)
+ax.plot([2, 2, 4], marker=&quot;s&quot;, linestyle=&quot;--&quot;, label=&quot;Tea&quot;)
+ax.set(title=&quot;Daily orders&quot;, xlabel=&quot;Day index&quot;, ylabel=&quot;Orders&quot;)
+ax.legend()
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/chart-design-labels.png" data-image-preview><img src="/docs/media/data/chart-design-labels.png" alt="Coffee and tea trend lines use different markers and line styles and appear in a legend." width="575" height="463" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="scales">
+  <h2>Choose scales and color maps</h2>
+  <p>Use log scales for positive magnitudes when ratios matter. Values at zero or below do not belong on a standard log axis. Use sequential colors for ordered intensity and a diverging color map when values differ around a meaningful midpoint.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://matplotlib.org/stable/users/explain/quick_start.html">Matplotlib quick start</a></li>
+<li><a href="https://matplotlib.org/stable/users/explain/colors/colormaps.html">Choosing colormaps</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/matplotlib/scatter-and-distributions/">Previous lesson · Scatter plots, histograms, and box plots</a>
+<a href="/docs/read/en/matplotlib/subplots/">Next lesson · Subplots and constrained layout</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

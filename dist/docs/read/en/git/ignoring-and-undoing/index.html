@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Keep temporary and private files out of commits. When you make a mistake, choose the command based on whether the change is staged or already committed.">
+  <title>Ignoring Files and Undoing Changes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/git/ignoring-and-undoing/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/git/ignoring-and-undoing/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/git/ignoring-and-undoing/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#git">All documentation · Git</a> <a href="/docs/read/my/git/ignoring-and-undoing/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Ignoring Files and Undoing Changes</h1>
+  
+  <p class="intro">Keep temporary and private files out of commits. When you make a mistake, choose the command based on whether the change is staged or already committed.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/git/ignoring-and-undoing">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#gitignore">Write a .gitignore file</a></li>
+<li><a href="#unstage">Unstage a change and keep the file</a></li>
+<li><a href="#revert">Undo a recorded change with a new commit</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="gitignore">
+  <h2>Write a .gitignore file</h2>
+  <p>Save these patterns in .gitignore at the root of project-notes. Run git add .gitignore and commit it so the whole team can use the same rules. The rules apply to untracked files. If a file is already tracked, adding a pattern does not remove it from an existing commit. Keep passwords and API keys out of the repository.</p>
+
+<pre><code>.env
+*.log
+node_modules/
+.venv/</code></pre>
+
+
+</section>
+<section class="article-section" id="unstage">
+  <h2>Unstage a change and keep the file</h2>
+  <p>In the practice repository, make a small edit to README.md and stage it. git restore --staged removes that change from the next commit while preserving the edit in your working tree. git diff then shows the unstaged edit. Stage the file again when the edit is ready.</p>
+
+<pre><code>git add README.md
+git restore --staged README.md
+git diff -- README.md</code></pre>
+
+
+</section>
+<section class="article-section" id="revert">
+  <h2>Undo a recorded change with a new commit</h2>
+  <p>For a commit already shared with others, git revert records a new commit that reverses its changes. With a clean working tree, choose an ordinary, non-merge commit from git log and replace abc1234 with its actual ID. If later changes overlap, Git may ask you to resolve a conflict.</p>
+
+<pre><code>git log --oneline
+git revert abc1234</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://git-scm.com/docs/gitignore">Git · gitignore</a></li>
+<li><a href="https://git-scm.com/docs/git-restore">Git · git restore</a></li>
+<li><a href="https://git-scm.com/docs/git-revert">Git · git revert</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/git/merge-conflicts/">Previous lesson · Resolving Merge Conflicts</a>
+<a href="/docs/read/en/git/remotes/">Next lesson · Remote Repositories, Fetch, Pull, and Push</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Save a result for a short time to reduce repeated work. Set a clear rule for when to read fresh data.">
+  <title>Cache frequently read results · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/caching/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/caching/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/caching/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#nestjs">All documentation · NestJS</a> <a href="/docs/read/my/nestjs/caching/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Cache frequently read results</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">Save a result for a short time to reduce repeated work. Set a clear rule for when to read fresh data.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/nestjs/caching">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#read">Read the cache first, then the database</a></li>
+<li><a href="#refresh">Remove old entries after a write</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="read">
+  <h2>Read the cache first, then the database</h2>
+  <p>Install @nestjs/cache-manager and cache-manager, then register CacheModule. Inject CACHE_MANAGER in the service. The default store is in memory. Here the key identifies the shop and the result stays cached for 30,000 milliseconds.</p>
+
+<pre><code>// Inside the service with CACHE_MANAGER and a product repository injected
+async list(shopId: number) {
+  const key = &quot;products:shop:&quot; + shopId;
+  const cached = await this.cache.get&lt;Product[]&gt;(key);
+  if (cached != null) return cached;
+
+  const products = await this.repository.list(shopId);
+  await this.cache.set(key, products, 30_000);
+  return products;
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="refresh">
+  <h2>Remove old entries after a write</h2>
+  <p>Delete the matching key after the database commit so the next read can load fresh data. An in-flight read can still refill a stale entry, so use a short TTL and choose a stronger design for data that needs immediate consistency. For several Nest processes, choose a shared store if they need to share cached values.</p>
+
+<pre><code>await this.repository.updateQuantity(shopId, productId, quantity);
+await this.cache.del(&quot;products:shop:&quot; + shopId);</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.nestjs.com/techniques/caching">NestJS · Caching</a></li>
+<li><a href="https://keyv.org/docs/storage-adapters/redis/">Keyv · Redis store</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/nestjs/websocket-gateways/">Previous lesson · Send live updates with WebSockets</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Group အလိုက်နဲ့ ယူဆချက် အမျိုးမျိုးအောက်မှာ ဆန်းစစ်ချက်ရလဒ် ပြောင်းမပြောင်း စစ်ပါ။">
+  <title>ဒေတာပါဝင်မှုနှင့် Missing Data ယူဆချက်များ စစ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/metric-coverage/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/metric-coverage/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/metric-coverage/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#data-analysis">သင်ခန်းစာအားလုံး · Data Analysis</a> <a href="/docs/read/en/data-analysis/metric-coverage/" lang="en" hreflang="en">English</a></nav>
+  <h1>ဒေတာပါဝင်မှုနှင့် Missing Data ယူဆချက်များ စစ်ခြင်း</h1>
+  
+  <p class="intro">Group အလိုက်နဲ့ ယူဆချက် အမျိုးမျိုးအောက်မှာ ဆန်းစစ်ချက်ရလဒ် ပြောင်းမပြောင်း စစ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/data-analysis/metric-coverage">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#coverage-by-group">Group အလိုက် ပါဝင်မှုကို ယှဉ်ခြင်း</a></li>
+<li><a href="#sensitivity">Score ပျောက်နေရင် ဖြစ်နိုင်တဲ့ အနိမ့်ဆုံးနှင့် အမြင့်ဆုံး တွက်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="coverage-by-group">
+  <h2>Group အလိုက် ပါဝင်မှုကို ယှဉ်ခြင်း</h2>
+  <p>Coverage က KPI တစ်ခုအတွက် ပါသင့်တဲ့ row တွေထဲ အသုံးပြုလို့ရတဲ့ value ပါတဲ့ အချိုးပါ။ ဒီဥပမာမှာ feedback တောင်းထားတဲ့ request အားလုံး ပါသင့်ပါတယ်။ count က score ရှိတာတွေကို ရေတွက်ပြီး size က ပါသင့်တဲ့ request အားလုံးကို ရေတွက်ပါတယ်။ ပျမ်းမျှ score တွေ ယှဉ်တဲ့အခါ score ရှိတဲ့ အရေအတွက်ကိုပါ တွဲဖော်ပြပါ။</p>
+
+<pre><code>import pandas as pd
+
+feedback = pd.DataFrame({
+    &quot;channel&quot;: [&quot;Web&quot;, &quot;Web&quot;, &quot;App&quot;, &quot;App&quot;],
+    &quot;score&quot;: [4, None, 3, 5],
+})
+summary = feedback.groupby(&quot;channel&quot;)[&quot;score&quot;].agg(usable=&quot;count&quot;, eligible=&quot;size&quot;)
+summary[&quot;coverage&quot;] = summary[&quot;usable&quot;] / summary[&quot;eligible&quot;]
+for row in summary.itertuples():
+    print(row.Index, f&quot;{row.usable}/{row.eligible}&quot;, f&quot;{row.coverage:.0%}&quot;)</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/metric-coverage-coverage-by-group.png" data-image-preview><img src="/docs/media/data/metric-coverage-coverage-by-group.png" alt="App request နှစ်ခုလုံးမှာ score ရှိပြီး Web request နှစ်ခုထဲက တစ်ခုမှာပဲ score ရှိပါတယ်။" width="720" height="315" loading="lazy" decoding="async"></a>
+    <figcaption>App ပျမ်းမျှမှာ record နှစ်ခုလုံးပါပြီး Web ပျမ်းမျှမှာ ပါသင့်တဲ့ record ရဲ့ တစ်ဝက်ပဲ ပါပါတယ်။</figcaption>
+  </figure>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">App 2/2 100%
+Web 1/2 50%</pre></div>
+
+
+</section>
+<section class="article-section" id="sensitivity">
+  <h2>Score ပျောက်နေရင် ဖြစ်နိုင်တဲ့ အနိမ့်ဆုံးနှင့် အမြင့်ဆုံး တွက်ခြင်း</h2>
+  <p>Web score က 1 ကနေ 5 အထိ ဖြစ်ပြီး ပျောက်နေတဲ့ value က အဲဒီ range ထဲက ဘယ်တန်ဖိုးမဆို ဖြစ်နိုင်တယ်လို့ ယူဆကြည့်ပါ။ Web request နှစ်ခုလုံးရဲ့ ပျမ်းမျှက 2.5 ကနေ 4.5 ကြား ဖြစ်နိုင်ပါတယ်။ App ပျမ်းမျှက 4.0 ပါ။ ဒါကြောင့် ပျောက်နေတဲ့ score ပေါ်မူတည်ပြီး ဘယ်ဘက်က ပျမ်းမျှ ပိုမြင့်လဲဆိုတာ ပြောင်းနိုင်ပါတယ်။</p>
+
+<pre><code>from statistics import mean
+
+web_observed = 4
+print(mean([web_observed, 1]), mean([web_observed, 5]))
+print(mean([3, 5]))</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/metric-coverage-sensitivity.png" data-image-preview><img src="/docs/media/data/metric-coverage-sensitivity.png" alt="Web ပျမ်းမျှ ဖြစ်နိုင်တဲ့ 2.5 ကနေ 4.5 အတွင်းမှာ App ပျမ်းမျှ 4.0 ပါဝင်နေပါတယ်။" width="720" height="360" loading="lazy" decoding="async"></a>
+    <figcaption>ပျောက်နေတဲ့ score ပေါ်မူတည်ပြီး Web ပျမ်းမျှက App ပျမ်းမျှထက် နိမ့်နိုင်၊ တူနိုင်၊ မြင့်နိုင်ပါတယ်။</figcaption>
+  </figure>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">2.5 4.5
+4</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.itl.nist.gov/div898/handbook/eda/section1/eda11.htm">NIST handbook on exploratory data analysis</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/missing_data.html">pandas working with missing data</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/groupby.html">pandas GroupBy guide</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/data-analysis/store-sales/">အရင်သင်ခန်းစာ · Store Sales Analysis အစအဆုံး ရှင်းလင်းချက်</a>
+<a href="/docs/read/my/data-analysis/sampling-and-bias/">နောက်သင်ခန်းစာ · Sampling၊ Bias နှင့် ကိုယ်စားပြုနိုင်သော ဒေတာ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

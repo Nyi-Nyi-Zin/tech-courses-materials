@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="စိမ်းပြာရောင် တစ်မျိုးတည်းကို နည်းသုံးမျိုးနဲ့ ရေးကြည့်ပါ။">
+  <title>CSS အရောင်များ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/colors/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/colors/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/colors/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/colors/" lang="en" hreflang="en">English</a></nav>
+  <h1>CSS အရောင်များ</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">စိမ်းပြာရောင် တစ်မျိုးတည်းကို နည်းသုံးမျိုးနဲ့ ရေးကြည့်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/colors">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#hex">HEX အရောင်ရေးနည်း</a></li>
+<li><a href="#rgb">RGB တန်ဖိုးတွေနဲ့ ဖောက်ထွင်းမြင်ရမှု</a></li>
+<li><a href="#hsl">HSL ရဲ့ Hue၊ Saturation နဲ့ Lightness</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="hex">
+  <h2>HEX အရောင်ရေးနည်း</h2>
+  <p>ဂဏန်းခြောက်လုံးပါတဲ့ HEX အရောင်က # နဲ့ စပါတယ်။ နောက်က စာလုံးတွေကို နှစ်လုံးတစ်တွဲစီ ခွဲဖတ်ပါ။ အနီ၊ အစိမ်း၊ အပြာ အစဉ်အတိုင်းဖြစ်ပြီး တစ်တွဲစီ 00 ကနေ ff အထိ ရေးနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Hex colors&lt;/title&gt;
+  &lt;style&gt;
+.card { color: #008080; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;card&quot;&gt;Desk Lamp&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စာက စိမ်းပြာရောင်ပါ။ ပထမအတွဲကို ff ပြောင်းပြီး နှိုင်းကြည့်ပါ။</p>
+
+</section>
+<section class="article-section" id="rgb">
+  <h2>RGB တန်ဖိုးတွေနဲ့ ဖောက်ထွင်းမြင်ရမှု</h2>
+  <p>rgb() ထဲမှာ အနီ၊ အစိမ်း၊ အပြာ တန်ဖိုးတွေကို 0 ကနေ 255 အထိ ပေးနိုင်ပါတယ်။ / နောက်မှာ alpha တန်ဖိုးပေးပြီး အောက်ခံ ဘယ်လောက်မြင်ရမလဲ သတ်မှတ်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;RGB channels and opacity&lt;/title&gt;
+  &lt;style&gt;
+.card { color: rgb(0 128 128); background: rgb(0 128 128 / 20%); padding: 8px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;card&quot;&gt;Desk Lamp&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စိမ်းပြာရောင် စာသားနဲ့ နောက်ခံဖျော့ ပေါ်ပါမယ်။ 20% ကို 10% ပြောင်းကြည့်ပါ။</p>
+
+</section>
+<section class="article-section" id="hsl">
+  <h2>HSL ရဲ့ Hue၊ Saturation နဲ့ Lightness</h2>
+  <p>Hue က အရောင်စက်ဝိုင်းပေါ်က ဒီဂရီပါ။ Saturation က အရောင် ဘယ်လောက်စိုလဲဆိုတာ၊ lightness က ဘယ်လောက်လင်းလဲဆိုတာ သတ်မှတ်ပါတယ်။ Lightness 0% က အနက်၊ 100% က အဖြူပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Hue, saturation, and lightness&lt;/title&gt;
+  &lt;style&gt;
+.card { color: hsl(180deg 100% 25%); }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;card&quot;&gt;Desk Lamp&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စာက စိမ်းပြာရောင်ပါ။ Hue ကို 300deg ပြောင်းပြီး ခရမ်းရောင် ပေါ်လာပုံ ကြည့်ပါ။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value">MDN · CSS color values</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/typography/">အရင်သင်ခန်းစာ · စာသားအရွယ်၊ ယူနစ်နဲ့ Font</a>
+<a href="/docs/read/my/css/backgrounds-and-borders/">နောက်သင်ခန်းစာ · နောက်ခံ၊ အနားသတ်နဲ့ အရိပ်</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

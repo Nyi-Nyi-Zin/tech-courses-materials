@@ -16,18 +16,33 @@ function Choice({ label, selected, onChoose }) {
   return <button aria-pressed={selected} onClick={onChoose}>{label}</button>;
 }
 
-export default function DrinkPicker() {
-  const [drink, setDrink] = useState("tea");
+export default function ProductPicker() {
+  const [product, setProduct] = useState("pen");
   return (
     <>
-      <Choice label="Tea" selected={drink === "tea"} onChoose={() => setDrink("tea")} />
-      <Choice label="Coffee" selected={drink === "coffee"} onChoose={() => setDrink("coffee")} />
-      <p>Selected: {drink}</p>
+      <Choice label="Pen" selected={product === "pen"} onChoose={() => setProduct("pen")} />
+      <Choice label="Notebook" selected={product === "notebook"} onChoose={() => setProduct("notebook")} />
+      <p>Selected: {product}</p>
     </>
   );
 }`),
         part('controlled', p('Keep children reusable', 'Child Components ပြန်သုံးလို့ရအောင် ထားခြင်း'),
-          p('A controlled child gets its current value from props and asks the parent to change it through a callback. Local state is still useful for things only one child cares about.', 'Controlled child က လက်ရှိ value ကို props ကနေ ယူပြီး ပြောင်းစေချင်ရင် callback နဲ့ parent ကို အသိပေးပါတယ်။ Child တစ်ခုတည်း လိုအပ်တဲ့ အချက်တွေ အတွက် local state သုံးနိုင်ပါတယ်။')),
+          p('A controlled child gets its current value from props and asks the parent to change it through a callback. Local state is still useful for things only one child cares about.', 'Controlled child က လက်ရှိ value ကို props ကနေ ယူပြီး ပြောင်းစေချင်ရင် callback နဲ့ parent ကို အသိပေးပါတယ်။ Child တစ်ခုတည်း လိုအပ်တဲ့ အချက်တွေ အတွက် local state သုံးနိုင်ပါတယ်။'), `import { useState } from "react";
+
+function QuantityInput({ value, onChange }) {
+  return (
+    <label>
+      Quantity
+      <input type="number" min="1" value={value}
+        onChange={event => onChange(event.target.value)} />
+    </label>
+  );
+}
+
+export default function OrderForm() {
+  const [quantity, setQuantity] = useState("1");
+  return <QuantityInput value={quantity} onChange={setQuantity} />;
+}`),
       ],
       [['Sharing state between components', react + 'sharing-state-between-components'], ['Choosing the state structure', react + 'choosing-the-state-structure']]),
     page('context-and-reducers', p('Context and reducers', 'Context နှင့် Reducers'),
@@ -80,7 +95,24 @@ export function useOnlineStatus() {
   return useSyncExternalStore(subscribe, () => navigator.onLine);
 }`),
         part('rules', p('Follow the Rules of Hooks', 'Rules of Hooks လိုက်နာခြင်း'),
-          p('Name a custom Hook with a use prefix followed by a capital letter. Call Hooks at the top level of a component or custom Hook. A reusable function that calls no Hooks can remain a normal function.', 'Custom Hook နာမည်ကို use နဲ့ စပြီး နောက်မှာ စာလုံးအကြီး လိုက်ပါ။ Hooks တွေကို component သို့ custom Hook ရဲ့ top level မှာ ခေါ်ပါ။ Hook မခေါ်တဲ့ function က ပုံမှန် function အဖြစ် ထားနိုင်ပါတယ်။')),
+          p('Name a custom Hook with a use prefix followed by a capital letter. Call Hooks at the top level of a component or custom Hook. A reusable function that calls no Hooks can remain a normal function.', 'Custom Hook နာမည်ကို use နဲ့ စပြီး နောက်မှာ စာလုံးအကြီး လိုက်ပါ။ Hooks တွေကို component သို့ custom Hook ရဲ့ top level မှာ ခေါ်ပါ။ Hook မခေါ်တဲ့ function က ပုံမှန် function အဖြစ် ထားနိုင်ပါတယ်။'), `import { useState } from "react";
+
+function useSearchQuery() {
+  const [query, setQuery] = useState("");
+  return { query, setQuery };
+}
+
+export default function SearchPanel({ visible = true }) {
+  const { query, setQuery } = useSearchQuery();
+  if (!visible) return null;
+
+  return (
+    <label>
+      Search
+      <input value={query} onChange={event => setQuery(event.target.value)} />
+    </label>
+  );
+}`),
       ],
       [['Reusing logic with custom Hooks', react + 'reusing-logic-with-custom-hooks'], ['useSyncExternalStore', 'https://react.dev/reference/react/useSyncExternalStore'], ['Rules of Hooks', 'https://react.dev/reference/rules/rules-of-hooks']]),
   ],
@@ -89,7 +121,23 @@ export function useOnlineStatus() {
       p('Nest runs different types of handlers before and after a controller. Put each job at the stage that fits it.', 'Nest က controller မတိုင်ခင်နဲ့ ပြီးတဲ့နောက် handler အမျိုးမျိုး run ပါတယ်။ အလုပ်တစ်ခုစီကို သင့်တော်တဲ့အဆင့်မှာ ထားပါ။'),
       [
         part('flow', p('Follow a request to the controller', 'Request က Controller ဆီ ရောက်ပုံ'),
-          p('A typical request goes through middleware, guards, the incoming side of interceptors, and then pipes before the handler. The response returns through interceptors. An uncaught exception can be handled by exception filters.', 'ပုံမှန် request က middleware၊ guards၊ interceptors ရဲ့ အဝင်ဘက်၊ pipes အစဉ်အတိုင်း ဖြတ်ပြီး handler ဆီ ရောက်ပါတယ်။ Response က interceptors ကနေ ပြန်ထွက်ပါတယ်။ မဖမ်းထားတဲ့ exception ကို filters က ကိုင်တွယ်နိုင်ပါတယ်။')),
+          p('A typical request goes through middleware, guards, the incoming side of interceptors, and then pipes before the handler. The response returns through interceptors. An uncaught exception can be handled by exception filters.', 'ပုံမှန် request က middleware၊ guards၊ interceptors ရဲ့ အဝင်ဘက်၊ pipes အစဉ်အတိုင်း ဖြတ်ပြီး handler ဆီ ရောက်ပါတယ်။ Response က interceptors ကနေ ပြန်ထွက်ပါတယ်။ မဖမ်းထားတဲ့ exception ကို filters က ကိုင်တွယ်နိုင်ပါတယ်။'), `import {
+  Controller, Get, Param, ParseIntPipe, UseGuards, UseInterceptors
+} from "@nestjs/common";
+import { SessionGuard } from "./session.guard";
+import { TimingInterceptor } from "./timing.interceptor";
+
+// Request: middleware -> guard -> interceptor -> pipe -> handler
+// Response: handler -> interceptor -> client
+@UseGuards(SessionGuard)
+@UseInterceptors(TimingInterceptor)
+@Controller("products")
+export class ProductsController {
+  @Get(":id")
+  findOne(@Param("id", ParseIntPipe) id: number) {
+    return { id };
+  }
+}`),
         part('pipe', p('Parse a route parameter at the boundary', 'Route Parameter ကို ဝင်ပေါက်မှာ Parse လုပ်ခြင်း'),
           p('Use ParseIntPipe to turn a route parameter into an integer and reject invalid input. A guard decides whether a handler can run. Use an interceptor for logic that wraps the handler, such as timing or response mapping.', 'Route parameter ကို ကိန်းပြည့် ပြောင်းပြီး မမှန်တဲ့ input ငြင်းဖို့ ParseIntPipe သုံးပါ။ Guard က handler run လို့ရမရ ဆုံးဖြတ်ပါတယ်။ ကြာချိန်တိုင်းတာတာ၊ response ပုံစံပြောင်းတာလို handler မတိုင်ခင်နဲ့ ပြီးတဲ့နောက် လုပ်ရမယ့်အလုပ်အတွက် interceptor သုံးပါ။'),
           `import { Controller, Get, Param, ParseIntPipe } from "@nestjs/common";
@@ -123,7 +171,24 @@ import { ConfigModule } from "@nestjs/config";
 })
 export class AppModule {}`),
         part('provider', p('Separate HTTP from persistence', 'HTTP နှင့် Data သိမ်းဆည်းမှု ခွဲထားခြင်း'),
-          p('Controllers read inputs and give responses. A service runs business rules and calls a repository or database client. Nest can work with a driver or ORM through providers. Keep schema changes in migrations so environments can apply the same changes.', 'Controller က input ဖတ်ပြီး response ပြန်ပါတယ်။ Service က business rules ကိုင်ပြီး repository သို့ database client ကို ခေါ်ပါတယ်။ Nest က providers နဲ့ driver သို့ ORM သုံးနိုင်ပါတယ်။ Environments အားလုံး schema ပြောင်းလဲမှု တူတူလုပ်နိုင်ဖို့ migrations မှာ ထားပါ။')),
+          p('Controllers read inputs and give responses. A service runs business rules and calls a repository or database client. Nest can work with a driver or ORM through providers. Keep schema changes in migrations so environments can apply the same changes.', 'Controller က input ဖတ်ပြီး response ပြန်ပါတယ်။ Service က business rules ကိုင်ပြီး repository သို့ database client ကို ခေါ်ပါတယ်။ Nest က providers နဲ့ driver သို့ ORM သုံးနိုင်ပါတယ်။ Environments အားလုံး schema ပြောင်းလဲမှု တူတူလုပ်နိုင်ဖို့ migrations မှာ ထားပါ။'), `@Injectable()
+export class InventoryService {
+  constructor(private readonly products: ProductRepository) {}
+
+  availableProducts() {
+    return this.products.findWithStock();
+  }
+}
+
+@Controller("inventory")
+export class InventoryController {
+  constructor(private readonly inventory: InventoryService) {}
+
+  @Get()
+  list() {
+    return this.inventory.availableProducts();
+  }
+}`),
       ],
       [['Configuration and validation', nest + 'techniques/configuration'], ['Database integration', nest + 'techniques/database'], ['Providers', nest + 'providers']]),
     page('openapi-and-errors', p('Document routes and HTTP errors', 'Routes နှင့် HTTP Errors မှတ်တမ်းတင်ခြင်း'),
@@ -136,14 +201,27 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
 // Inside bootstrap, after NestFactory.create(...)
 const config = new DocumentBuilder()
-  .setTitle("Café API")
+  .setTitle("Catalog API")
   .setVersion("1.0")
   .build();
 
 const documentFactory = () => SwaggerModule.createDocument(app, config);
 SwaggerModule.setup("docs", app, documentFactory);`),
         part('errors', p('Return a status that matches the failure', 'အမှားနဲ့ ကိုက်ညီတဲ့ Status ပြန်ခြင်း'),
-          p('BadRequestException suits invalid input. NotFoundException suits a missing resource. Add an exception filter when you need a defined error shape. Test the status and body of both successful responses and known errors.', 'Input မမှန်ရင် BadRequestException၊ resource မရှိရင် NotFoundException သုံးနိုင်ပါတယ်။ Error ပုံစံ တိကျသတ်မှတ်ချင်ရင် exception filter ထည့်ပါ။ အောင်မြင်တဲ့ response နဲ့ သိထားတဲ့ errors နှစ်မျိုးလုံးရဲ့ status နဲ့ body စမ်းပါ။')),
+          p('BadRequestException suits invalid input. NotFoundException suits a missing resource. Add an exception filter when you need a defined error shape. Test the status and body of both successful responses and known errors.', 'Input မမှန်ရင် BadRequestException၊ resource မရှိရင် NotFoundException သုံးနိုင်ပါတယ်။ Error ပုံစံ တိကျသတ်မှတ်ချင်ရင် exception filter ထည့်ပါ။ အောင်မြင်တဲ့ response နဲ့ သိထားတဲ့ errors နှစ်မျိုးလုံးရဲ့ status နဲ့ body စမ်းပါ။'), `import { BadRequestException, NotFoundException } from "@nestjs/common";
+
+function findProduct(id: number, products: Map<number, string>) {
+  if (!Number.isInteger(id) || id < 1) {
+    throw new BadRequestException("Use a positive integer product ID.");
+  }
+
+  const name = products.get(id);
+  if (name === undefined) {
+    throw new NotFoundException("Product not found.");
+  }
+
+  return { id, name };
+}`),
       ],
       [['NestJS OpenAPI introduction', nest + 'openapi/introduction'], ['Exception filters', nest + 'exception-filters'], ['Testing', nest + 'fundamentals/testing']]),
   ],

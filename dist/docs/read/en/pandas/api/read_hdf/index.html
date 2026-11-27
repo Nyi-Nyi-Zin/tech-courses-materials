@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Load an object by key from HDF5, with row filtering available for table-format data.">
+  <title>pandas.read_hdf · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/read_hdf/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/read_hdf/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/read_hdf">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Input and output</span><a href="/docs/read/my/pandas/api/read_hdf/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>read_hdf</code></h1>
+    <p class="article-version">pandas 3.1.1 · Input and output · <span lang="en">function</span></p>
+    <p class="intro">Load an object by key from HDF5, with row filtering available for table-format data.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Inspect the call</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">pd.read_hdf(…)</code> <span>Full signature</span></summary><pre><code lang="en">pd.read_hdf(
+    path_or_buf,
+    key=None,
+    mode=&#39;r&#39;,
+    errors=&#39;strict&#39;,
+    where=None,
+    start=None,
+    stop=None,
+    columns=None,
+    iterator=False,
+    chunksize=None,
+    **kwargs,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Inspect the call</h2>
+      <p>Run this code to inspect the callable and its parameters. Its data, backend, or environment is needed to execute the operation itself.</p>
+      <label><span>Python code</span><textarea rows="16" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import importlib
+from inspect import signature
+
+path = &#39;pandas.read_hdf&#39;
+parts = path.split(&quot;.&quot;)
+for end in range(len(parts), 0, -1):
+    try:
+        operation = importlib.import_module(&quot;.&quot;.join(parts[:end]))
+        break
+    except ImportError:
+        continue
+
+for name in parts[end:]:
+    operation = getattr(operation, name)
+
+print(path)
+print(signature(operation))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>path_or_buf</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>str, path object, pandas.HDFStore</span><p>Supply a file path or writable/readable stream. Some writers return the result directly when this is omitted.</p></td></tr>
+<tr><th scope="row"><code>key</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>object</span><p>Provide the lookup key, or a transformation callable for a sorting method.</p></td></tr>
+<tr><th scope="row"><code>mode</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>&#39;r&#39;</code></td>
+      <td><span>{&#39;r&#39;, &#39;r+&#39;, &#39;a&#39;}</span><p>Choose a file or storage access mode.</p></td></tr>
+<tr><th scope="row"><code>errors</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>&#39;strict&#39;</code></td>
+      <td><span>str</span><p>Choose how to handle invalid input or failed operations. The available options depend on the API.</p></td></tr>
+<tr><th scope="row"><code>where</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>list</span><p>Select data using a criterion or specify the label at which to look up a value.</p></td></tr>
+<tr><th scope="row"><code>start</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>int</span><p>Supply the start point of a range, slice, or calculation.</p></td></tr>
+<tr><th scope="row"><code>stop</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>int</span><p>Provide the endpoint where a slice or generated range stops.</p></td></tr>
+<tr><th scope="row"><code>columns</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>list</span><p>Supply column labels or control how columns are handled.</p></td></tr>
+<tr><th scope="row"><code>iterator</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Request an iterable reader so data can be consumed in pieces.</p></td></tr>
+<tr><th scope="row"><code>chunksize</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>int</span><p>Set how many rows to read or write in each batch.</p></td></tr>
+<tr><th scope="row"><code>**kwargs</code></th>
+      <td>Optional<br><small>Additional keyword arguments</small></td>
+      <td></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>object</p></section>
+    <section class="article-section"><h2>Example for a local Python session</h2><pre><code lang="en">import pandas as pd
+from pathlib import Path
+from tempfile import TemporaryDirectory
+import tables
+
+frame = pd.DataFrame({&quot;units&quot;: [2, 5], &quot;price&quot;: [4, 3]})
+with TemporaryDirectory() as folder:
+    path = Path(folder) / &quot;demo.h5&quot;
+    with pd.HDFStore(path, mode=&quot;w&quot;) as store:
+        store.put(&quot;orders&quot;, frame, format=&quot;table&quot;, data_columns=[&quot;units&quot;])
+    print(pd.read_hdf(path, key=&quot;orders&quot;, where=&quot;units &gt; 2&quot;))</code></pre></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_hdf.html#pandas.read_hdf">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/read_fwf/"><span>Previous in this category</span><strong>pandas.read_fwf</strong></a><a href="/docs/read/en/pandas/api/read_html/"><span>Next in this category</span><strong>pandas.read_html</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

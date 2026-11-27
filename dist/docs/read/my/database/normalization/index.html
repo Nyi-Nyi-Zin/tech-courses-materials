@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="အချက်အလက် အမျိုးအစားတစ်ခုစီကို သက်ဆိုင်ရာ table မှာ သိမ်းပါ။ Record အပြည့်လိုရင် ဆက်စပ်နေတဲ့ tables တွေကို join ပါ။">
+  <title>Normalization နဲ့ Tables ဆောက်ပါ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/normalization/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/normalization/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/normalization/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/normalization/" lang="en" hreflang="en">English</a></nav>
+  <h1>Normalization နဲ့ Tables ဆောက်ပါ</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">အချက်အလက် အမျိုးအစားတစ်ခုစီကို သက်ဆိုင်ရာ table မှာ သိမ်းပါ။ Record အပြည့်လိုရင် ဆက်စပ်နေတဲ့ tables တွေကို join ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/normalization">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#separate">Normalization လုပ်ထားတဲ့ Enrollment စာရင်း ဖတ်ခြင်း</a></li>
+<li><a href="#dependencies">Field တစ်ခုချင်းက ဘာပေါ် မှီလဲ စစ်ပါ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="separate">
+  <h2>Normalization လုပ်ထားတဲ့ Enrollment စာရင်း ဖတ်ခြင်း</h2>
+  <p>Setup ပြီးရင် learning_db ထဲမှာ run ပါ။ Enrollment တစ်ကြောင်းမှာ student ID တစ်ခုနဲ့ course ID တစ်ခုပဲ သိမ်းတယ်။ နာမည်နဲ့ သင်တန်းခေါင်းစဉ်ကို ကြည့်ဖို့ students နဲ့ courses ကို JOIN လုပ်တယ်။ အစီရင်ခံစာထဲမှာ Aye နှစ်ကြောင်းပေါ်နိုင်ပြီး students ထဲမှာတော့ နာမည်ကို တစ်ကြောင်းပဲ သိမ်းတယ်။</p>
+
+<pre><code>SELECT s.name AS student, c.title AS course, e.enrolled_on
+FROM enrollments AS e
+JOIN students AS s ON s.id = e.student_id
+JOIN courses AS c ON c.id = e.course_id
+ORDER BY s.id, c.id;</code></pre>
+
+
+</section>
+<section class="article-section" id="dependencies">
+  <h2>Field တစ်ခုချင်းက ဘာပေါ် မှီလဲ စစ်ပါ</h2>
+  <p>First normal form မှာ student record ထဲ course_1၊ course_2 လို column တွေ ထပ်ထည့်မယ့်အစား enrollment တစ်ခုစီကို row တစ်ကြောင်းစီ သိမ်းပါ။ Second normal form မှာ enrolled_on က student_id နဲ့ course_id နှစ်ခုလုံးကို မှီတယ်။ Course title က course_id တစ်ခုတည်းကို မှီလို့ courses ထဲမှာ သိမ်းတယ်။ Third normal form မှာ courses ထဲ department_id ပါလာရင် department နာမည်ကို departments ထဲမှာ သိမ်းပါ။ Department နာမည်ကို department_id က ဆုံးဖြတ်လို့ပါ။</p>
+
+<pre><code>CREATE TABLE departments (
+  id integer PRIMARY KEY,
+  name text NOT NULL
+);
+
+CREATE TABLE courses (
+  id integer PRIMARY KEY,
+  title text NOT NULL,
+  department_id integer REFERENCES departments(id)
+);
+
+CREATE TABLE enrollments (
+  student_id integer REFERENCES students(id),
+  course_id integer REFERENCES courses(id),
+  enrolled_on date NOT NULL,
+  PRIMARY KEY (student_id, course_id)
+);</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/ddl-constraints.html">PostgreSQL 19 · Constraints</a></li>
+<li><a href="https://learn.microsoft.com/en-us/office/troubleshoot/access/database-normalization-description">Microsoft Learn · Database normalization</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/queries/">အရင်သင်ခန်းစာ · Queries၊ Joins နဲ့ Groups</a>
+<a href="/docs/read/my/database/transactions/">နောက်သင်ခန်းစာ · Data ပြောင်းခြင်း၊ Transactions နှင့် Indexes</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

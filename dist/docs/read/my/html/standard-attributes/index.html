@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HTML Document Structure မှာ lang=&quot;en&quot; နဲ့ စာပိုဒ်ရဲ့ ဘာသာစကား သတ်မှတ်ပုံကို တွေ့ခဲ့ပါတယ်။ HTML Standard က lang၊ href လို attribute တွေကို ဘယ် element တွေမှာ သုံးလို့ရလဲ၊ တန်ဖိုးတွေက ဘာကိုဆိုလိုလဲဆိုတာ သတ်မှတ်ပေးပါတယ်။">
+  <title>Standard HTML Attributes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/standard-attributes/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/standard-attributes/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/standard-attributes/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/standard-attributes/" lang="en" hreflang="en">English</a></nav>
+  <h1>Standard HTML Attributes</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">HTML Document Structure မှာ lang=&quot;en&quot; နဲ့ စာပိုဒ်ရဲ့ ဘာသာစကား သတ်မှတ်ပုံကို တွေ့ခဲ့ပါတယ်။ HTML Standard က lang၊ href လို attribute တွေကို ဘယ် element တွေမှာ သုံးလို့ရလဲ၊ တန်ဖိုးတွေက ဘာကိုဆိုလိုလဲဆိုတာ သတ်မှတ်ပေးပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/standard-attributes">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#attribute-scope">Global Attributes နဲ့ Element-Specific Attributes</a></li>
+<li><a href="#image-attributes">ပုံရဲ့ src နဲ့ alt Attributes</a></li>
+<li><a href="#boolean-attributes">Boolean Attributes</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="attribute-scope">
+  <h2>Global Attributes နဲ့ Element-Specific Attributes</h2>
+  <p>Standard attribute ဆိုတာ HTML Standard မှာ သတ်မှတ်ထားတဲ့ attribute တွေကို ခေါ်တဲ့ ယေဘုယျအသုံးအနှုန်းပါ။ id လို Global Attributes နဲ့ href လို သက်ဆိုင်ရာ element တွေမှာ သုံးရတဲ့ Element-Specific Attributes နှစ်မျိုးလုံး ပါဝင်ပါတယ်။ ဒီနမူနာမှာ id က element တစ်ခုကို သတ်မှတ်ပေးပြီး &lt;a&gt; ထဲက href က link ရဲ့ သွားမယ့်နေရာကို သတ်မှတ်ပေးပါတယ်။ href ကို &lt;link&gt; လို တခြား element တွေမှာလည်း သတ်မှတ်ထားတဲ့အတိုင်း သုံးနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Global and Element-Specific Attributes&lt;/title&gt;
+  &lt;style&gt;
+    h2:target, h2:focus { outline: 2px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;a id=&quot;contact-link&quot; href=&quot;#contact&quot;&gt;Contact details&lt;/a&gt;
+  &lt;h2 id=&quot;contact&quot;&gt;Contact&lt;/h2&gt;
+  &lt;p&gt;Email us for more information.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Contact details link ကို နှိပ်ရင် id က contact ဖြစ်တဲ့ အပိုင်းဆီကို Browser က ရွှေ့ပေးပါမယ်။</p>
+
+</section>
+<section class="article-section" id="image-attributes">
+  <h2>ပုံရဲ့ src နဲ့ alt Attributes</h2>
+  <p>&lt;img&gt; မှာ src က ပုံရဲ့ လိပ်စာဖြစ်ပြီး alt က ပုံအစား အသုံးပြုနိုင်တဲ့ စာသားပါ။ &lt;img&gt; အတွက် attribute တစ်ခုစီမှာ သတ်မှတ်ထားတဲ့ တာဝန်ရှိပါတယ်။ Element တစ်ခုမှာ ဘယ် attributes တွေ သုံးလို့ရလဲ သိချင်ရင် HTML attribute reference မှာ ရှာကြည့်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Image Source and Alternative Text&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;img src=&quot;https://javascript-training.cloudninemm.com/docs/media/database/what-is-a-server.webp&quot;
+       alt=&quot;Rows of server racks&quot; width=&quot;320&quot; height=&quot;180&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပုံမှာ server rack တွေကို အတန်းလိုက် မြင်ရပါမယ်။ src လိပ်စာထဲက စာလုံးတစ်လုံး ပြောင်းပြီး ထပ် Run ကြည့်ပါ။ ပုံဖွင့်မရတဲ့အခါ alt စာသား ပေါ်လာပါမယ်။</p>
+
+</section>
+<section class="article-section" id="boolean-attributes">
+  <h2>Boolean Attributes</h2>
+  <p>Attribute တချို့က tag ထဲမှာ ပါတာနဲ့ သက်ဆိုင်ရာ setting ကို ဖွင့်ပေးပါတယ်။ Button မှာ disabled ပါရင် Browser က အဲဒီခလုတ်ကို နှိပ်မရအောင် လုပ်ပေးပါတယ်။ ပြန်နှိပ်လို့ရစေချင်ရင် disabled ကို ဖယ်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Boolean Attributes&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button type=&quot;button&quot; disabled&gt;Register&lt;/button&gt;
+  &lt;button type=&quot;button&quot;&gt;Check schedule&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမခလုတ်က နှိပ်လို့မရပါဘူး။ disabled ကို ဖယ်ပြီး ထပ် Run ကြည့်ရင် ပြန်နှိပ်လို့ရပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes">MDN · HTML attribute reference</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/indices.html#attributes-3">WHATWG · HTML attributes index</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/structure/">အရင်သင်ခန်းစာ · HTML Document ဖွဲ့စည်းပုံ</a>
+<a href="/docs/read/my/html/global-attributes/">နောက်သင်ခန်းစာ · Global Attributes</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

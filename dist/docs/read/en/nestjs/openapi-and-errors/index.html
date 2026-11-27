@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An OpenAPI document describes how to call an API. Document status codes and payload shapes that clients can depend on.">
+  <title>Document routes and HTTP errors · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/openapi-and-errors/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/openapi-and-errors/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/openapi-and-errors/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#nestjs">All documentation · NestJS</a> <a href="/docs/read/my/nestjs/openapi-and-errors/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Document routes and HTTP errors</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">An OpenAPI document describes how to call an API. Document status codes and payload shapes that clients can depend on.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/nestjs/openapi-and-errors">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#openapi">Expose the OpenAPI document</a></li>
+<li><a href="#errors">Return a status that matches the failure</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="openapi">
+  <h2>Expose the OpenAPI document</h2>
+  <p>Install @nestjs/swagger and build an OpenAPI configuration during bootstrap. SwaggerModule can generate the document and serve Swagger UI. Describe request and response DTO fields with decorators or the CLI plugin where appropriate.</p>
+
+<pre><code>// At the top of main.ts
+import { DocumentBuilder, SwaggerModule } from &quot;@nestjs/swagger&quot;;
+
+// Inside bootstrap, after NestFactory.create(...)
+const config = new DocumentBuilder()
+  .setTitle(&quot;Catalog API&quot;)
+  .setVersion(&quot;1.0&quot;)
+  .build();
+
+const documentFactory = () =&gt; SwaggerModule.createDocument(app, config);
+SwaggerModule.setup(&quot;docs&quot;, app, documentFactory);</code></pre>
+
+
+</section>
+<section class="article-section" id="errors">
+  <h2>Return a status that matches the failure</h2>
+  <p>BadRequestException suits invalid input. NotFoundException suits a missing resource. Add an exception filter when you need a defined error shape. Test the status and body of both successful responses and known errors.</p>
+
+<pre><code>import { BadRequestException, NotFoundException } from &quot;@nestjs/common&quot;;
+
+function findProduct(id: number, products: Map&lt;number, string&gt;) {
+  if (!Number.isInteger(id) || id &lt; 1) {
+    throw new BadRequestException(&quot;Use a positive integer product ID.&quot;);
+  }
+
+  const name = products.get(id);
+  if (name === undefined) {
+    throw new NotFoundException(&quot;Product not found.&quot;);
+  }
+
+  return { id, name };
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.nestjs.com/openapi/introduction">NestJS OpenAPI introduction</a></li>
+<li><a href="https://docs.nestjs.com/exception-filters">Exception filters</a></li>
+<li><a href="https://docs.nestjs.com/fundamentals/testing">Testing</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/nestjs/configuration-and-data/">Previous lesson · Configuration and the database layer</a>
+<a href="/docs/read/en/nestjs/queues/">Next lesson · Run background jobs with a queue</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

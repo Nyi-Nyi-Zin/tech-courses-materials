@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browser က HTML ဖတ်ပြီး မှတ်ဉာဏ်ထဲမှာ Document Object Model (DOM) လို့ခေါ်တဲ့ သစ်ပင်ပုံစံ တည်ဆောက်ပါတယ်။ Browser API ဆိုတာ JavaScript သုံးဖို့ browser က ပေးထားတဲ့ လုပ်ဆောင်ချက်တွေပါ။ အဲဒါတွေနဲ့ element ရှာ၊ ပြင်၊ click ကို တုံ့ပြန်နိုင်ပါတယ်။">
+  <title>DOM နဲ့ Event · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/dom/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/dom/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/dom/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/dom/" lang="en" hreflang="en">English</a></nav>
+  <h1>DOM နဲ့ Event</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Browser က HTML ဖတ်ပြီး မှတ်ဉာဏ်ထဲမှာ Document Object Model (DOM) လို့ခေါ်တဲ့ သစ်ပင်ပုံစံ တည်ဆောက်ပါတယ်။ Browser API ဆိုတာ JavaScript သုံးဖို့ browser က ပေးထားတဲ့ လုပ်ဆောင်ချက်တွေပါ။ အဲဒါတွေနဲ့ element ရှာ၊ ပြင်၊ click ကို တုံ့ပြန်နိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/dom">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#nodes">querySelector နဲ့ Element ရှာခြင်း</a></li>
+<li><a href="#create-list-items">List Item ဖန်တီးပြီး ထည့်ခြင်း</a></li>
+<li><a href="#update-remove-items">ရှိပြီးသား List Item ကို ပြင်ခြင်း၊ ဖယ်ခြင်း</a></li>
+<li><a href="#toggle-class">Element မှာ Class ထည့်လိုက်၊ ဖယ်လိုက် လုပ်ခြင်း</a></li>
+<li><a href="#events">Click Event ကို စောင့်ခြင်း</a></li>
+<li><a href="#bubbling">Click Event Bubble ဖြစ်ပုံ</a></li>
+<li><a href="#delegation">Button အစုအတွက် Listener တစ်ခု သုံးခြင်း</a></li>
+<li><a href="#forms">Form Submit မှာ Value ဖတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="nodes">
+  <h2>querySelector နဲ့ Element ရှာခြင်း</h2>
+  <p>document က စာမျက်နှာကို ကိုယ်စားပြုပါတယ်။ querySelector ကို CSS selector ပေးရင် ပထမဆုံးကိုက်တဲ့ element ပြန်ရပါတယ်။ မတွေ့ရင် null ပါ။ textContent နဲ့ ရှာတွေ့တဲ့ element ရဲ့ စာသားကို ပြောင်းနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Find an element with querySelector&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p id=&quot;message&quot;&gt;Preparing your order…&lt;/p&gt;
+  &lt;script&gt;
+    const message = document.querySelector(&quot;#message&quot;);
+    message.textContent = &quot;Your order is ready.&quot;;
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စာမျက်နှာမှာ ပြောင်းပြီးသား “Your order is ready.” ကို မြင်ရပါမယ်။</p>
+<p class="example-check"><strong>ရလဒ်ကွာနေရင်</strong> စာသားမပြောင်းဘဲ Console မှာ null ပါတဲ့ error မြင်ရင် selector နဲ့ id ကိုက်လား၊ script က စာပိုဒ်ကို ဖတ်ပြီးမှ run လား စစ်ပါ။</p>
+</section>
+<section class="article-section" id="create-list-items">
+  <h2>List Item ဖန်တီးပြီး ထည့်ခြင်း</h2>
+  <p>createElement(&quot;li&quot;) က မှတ်ဉာဏ်ထဲမှာ element အသစ် ဆောက်ပါတယ်။ စာထည့်ပြီး parent မှာ append ခေါ်ရင် စာမျက်နှာထဲ ရောက်ပါတယ်။ ရိုးရိုးစာသား သတ်မှတ်ဖို့ textContent သုံးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Create a list item and append it&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;ul id=&quot;catalog&quot;&gt;&lt;li&gt;Pen&lt;/li&gt;&lt;/ul&gt;
+  &lt;script&gt;
+    const item = document.createElement(&quot;li&quot;);
+    item.textContent = &quot;Notebook&quot;;
+    document.querySelector(&quot;#catalog&quot;).append(item);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> List မှာ Pen နဲ့ နောက်တစ်ကြောင်းမှာ Notebook ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="update-remove-items">
+  <h2>ရှိပြီးသား List Item ကို ပြင်ခြင်း၊ ဖယ်ခြင်း</h2>
+  <p>List item ကို ရွေးပြီး textContent နဲ့ စာသားပြောင်းနိုင်ပါတယ်။ remove() က element ကို parent ထဲက ဖယ်ပေးပါတယ်။ Browser က ပြောင်းပြီးသား tree နဲ့ စာမျက်နှာ ပြန်ပြပါမယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Update and remove existing list items&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;ul&gt;&lt;li id=&quot;pen&quot;&gt;Pen&lt;/li&gt;&lt;li id=&quot;folder&quot;&gt;Folder&lt;/li&gt;&lt;/ul&gt;
+  &lt;script&gt;
+    document.querySelector(&quot;#pen&quot;).textContent = &quot;Blue pen&quot;;
+    document.querySelector(&quot;#folder&quot;).remove();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> List မှာ Blue pen တစ်ခုပဲ ကျန်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="toggle-class">
+  <h2>Element မှာ Class ထည့်လိုက်၊ ဖယ်လိုက် လုပ်ခြင်း</h2>
+  <p>classList က element မှာ ပါတဲ့ class စာရင်းပါ။ toggle() က class မရှိရင် ထည့်ပါတယ်။ ရှိပြီးသားဆို ပြန်ဖယ်ပါတယ်။ ID နဲ့ ရှာပြီး ပြောင်းမယ်ဆို element ရှိလား၊ သတ်မှတ်ထားတဲ့ list အတွင်းမှာ ပါလား အရင်စစ်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Toggle a class on an element&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;ul id=&quot;catalog&quot;&gt;&lt;li id=&quot;pen&quot;&gt;Pen&lt;/li&gt;&lt;/ul&gt;
+  &lt;script&gt;
+    const catalog = document.querySelector(&quot;#catalog&quot;);
+    const item = document.getElementById(&quot;pen&quot;);
+    if (item &amp;&amp; item.matches(&quot;li&quot;) &amp;&amp; catalog.contains(item)) {
+      item.classList.toggle(&quot;featured&quot;);
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen item ကို Inspect လုပ်ပြီး class=&quot;featured&quot; ရှိတာ ကြည့်ပါ။ မရှိတဲ့ ID နဲ့ စမ်းရင်လည်း page က error မတက်ဘဲ ဖွင့်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="events">
+  <h2>Click Event ကို စောင့်ခြင်း</h2>
+  <p>Event ဆိုတာ အဖြစ်အပျက်တစ်ခု ဖြစ်လာပြီလို့ browser က အကြောင်းကြားတာပါ။ addEventListener ကို event နာမည်နဲ့ အဲဒီအခါ run မယ့် function ပေးရပါတယ်။ အဲဒီ function ကို event listener လို့ ခေါ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Listen for a button click&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id=&quot;ready&quot; type=&quot;button&quot;&gt;Mark ready&lt;/button&gt;
+  &lt;p id=&quot;status&quot;&gt;Waiting&lt;/p&gt;
+  &lt;script&gt;
+    const button = document.querySelector(&quot;#ready&quot;);
+    const status = document.querySelector(&quot;#status&quot;);
+    button.addEventListener(&quot;click&quot;, () =&gt; {
+      status.textContent = &quot;Your order is ready.&quot;;
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အစမှာ Waiting ပေါ်ပါတယ်။ ခလုတ်နှိပ်ရင် “Your order is ready.” ပြောင်းပါမယ်။</p>
+
+</section>
+<section class="article-section" id="bubbling">
+  <h2>Click Event Bubble ဖြစ်ပုံ</h2>
+  <p>click လို event တွေက ဖြစ်တဲ့ element ကနေ အပြင်ဘက် ancestor တွေဆီ ဆက်သွားပါတယ်။ ဒါကို bubbling လို့ခေါ်ပါတယ်။ ဒီနမူနာမှာ event.target က click စတဲ့ element၊ event.currentTarget က လက်ရှိ listener ချိတ်ထားတဲ့ element ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Follow a click as it bubbles&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id=&quot;catalog&quot;&gt;&lt;button type=&quot;button&quot; id=&quot;pen&quot;&gt;Pen&lt;/button&gt;&lt;/div&gt;
+  &lt;p id=&quot;result&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+    document.querySelector(&quot;#catalog&quot;).addEventListener(&quot;click&quot;, event =&gt; {
+      document.querySelector(&quot;#result&quot;).textContent =
+        event.target.id + &quot; → &quot; + event.currentTarget.id;
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen နှိပ်ရင် စာမျက်နှာမှာ pen → catalog ပေါ်ပါတယ်။ Button က click ကို catalog ရဲ့ listener က လက်ခံတာပါ။</p>
+
+</section>
+<section class="article-section" id="delegation">
+  <h2>Button အစုအတွက် Listener တစ်ခု သုံးခြင်း</h2>
+  <p>Event delegation ဆိုတာ အစုရဲ့ parent မှာ listener တစ်ခုထားတာပါ။ closest() က click စတဲ့ element ကနေ စပြီး selector ကိုက်တဲ့ အနီးဆုံး element ရှာပါတယ်။ dataset နဲ့ data-* attribute ဖတ်ပါတယ်။ သတ်မှတ်ထားတဲ့ button ဆီက မဟုတ်တဲ့ click ကို ကျော်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Use one listener for a group of buttons&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id=&quot;catalog&quot;&gt;
+    &lt;button type=&quot;button&quot; data-product=&quot;Pen&quot;&gt;&lt;strong&gt;Pen&lt;/strong&gt;&lt;/button&gt;
+    &lt;button type=&quot;button&quot; data-product=&quot;Notebook&quot;&gt;Notebook&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;p id=&quot;result&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const catalog = document.querySelector(&quot;#catalog&quot;);
+    catalog.addEventListener(&quot;click&quot;, event =&gt; {
+      const button = event.target.closest(&quot;button[data-product]&quot;);
+      if (!button || !catalog.contains(button)) return;
+      document.querySelector(&quot;#result&quot;).textContent = button.dataset.product;
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Button နှစ်ခုထဲက တစ်ခုကို နှိပ်ပါ။ Pen ထဲက စာလုံးထူပေါ် နှိပ်လည်း ပစ္စည်းအမည် ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="forms">
+  <h2>Form Submit မှာ Value ဖတ်ခြင်း</h2>
+  <p>Browser က မဖြစ်မနေ ဖြည့်ရမယ့် အကွက်တွေ စစ်ပြီးနောက် form မှာ submit event ဖြစ်ပါတယ်။ preventDefault() ခေါ်လို့ ဒီစာမျက်နှာပေါ်မှာပဲ ဆက်ရှိပါတယ်။ FormData က name attribute အလိုက် တန်ဖိုးတွေ စုယူနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Read form values on submit&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form id=&quot;order&quot;&gt;
+    &lt;label for=&quot;product&quot;&gt;Product&lt;/label&gt;
+    &lt;input id=&quot;product&quot; name=&quot;product&quot; required&gt;
+    &lt;button type=&quot;submit&quot;&gt;Confirm&lt;/button&gt;
+  &lt;/form&gt;
+  &lt;p id=&quot;result&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const order = document.querySelector(&quot;#order&quot;);
+    order.addEventListener(&quot;submit&quot;, event =&gt; {
+      event.preventDefault();
+      const values = new FormData(order);
+      document.querySelector(&quot;#result&quot;).textContent = values.get(&quot;product&quot;);
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အကွက်လွတ်နဲ့ submit စမ်းပြီး browser စစ်ပုံ ကြည့်ပါ။ Pen ရိုက်ပြီး ပြန်ပို့ရင် form အောက်မှာ Pen ပေါ်ပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://dom.spec.whatwg.org/">WHATWG · DOM Standard</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Events">MDN · Introduction to events</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">MDN · FormData</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/scope-and-classes/">အရင်သင်ခန်းစာ · Scope၊ Closure နဲ့ Class</a>
+<a href="/docs/read/my/js/dom-selectors-and-events/">နောက်သင်ခန်းစာ · DOM Selectors နဲ့ Input Events</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

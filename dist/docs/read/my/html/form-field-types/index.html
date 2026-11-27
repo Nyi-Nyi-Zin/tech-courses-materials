@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="သုံးထားတဲ့ element၊ input type နဲ့ attribute တွေပေါ် မူတည်ပြီး browser က စာရိုက်ပုံ၊ ဖိုင်ရွေးပုံနဲ့ တန်ဖိုးစစ်ဆေးပုံကို ပြောင်းပေးပါတယ်။">
+  <title>Textarea၊ File Input နဲ့ Input Attributes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/form-field-types/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/form-field-types/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/form-field-types/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/form-field-types/" lang="en" hreflang="en">English</a></nav>
+  <h1>Textarea၊ File Input နဲ့ Input Attributes</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">သုံးထားတဲ့ element၊ input type နဲ့ attribute တွေပေါ် မူတည်ပြီး browser က စာရိုက်ပုံ၊ ဖိုင်ရွေးပုံနဲ့ တန်ဖိုးစစ်ဆေးပုံကို ပြောင်းပေးပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/form-field-types">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#textarea">&lt;textarea&gt; နဲ့ စာကြောင်းအများကြီး ရယူခြင်း</a></li>
+<li><a href="#file-input">type=&quot;file&quot; နဲ့ ဖိုင်ရွေးခြင်း</a></li>
+<li><a href="#input-attributes">Input Attributes နဲ့ Validation ကို ဖတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="textarea">
+  <h2>&lt;textarea&gt; နဲ့ စာကြောင်းအများကြီး ရယူခြင်း</h2>
+  <p>Textarea မှာ စာကြောင်းဆင်းပြီး ရေးလို့ရပါတယ်။ rows က စစချင်း ဘယ်နှကြောင်းစာ အမြင့်ရှိမလဲ သတ်မှတ်ပါတယ်။ မူလစာသားကို tag နှစ်ခုကြားမှာ ထည့်ပါ။ လက်ရှိ ရိုက်ထားတဲ့စာကို JavaScript က .value နဲ့ ဖတ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Collect several lines with &amp;lt;textarea&amp;gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;label for=&quot;note&quot;&gt;Order note&lt;/label&gt;&lt;br&gt;
+&lt;textarea id=&quot;note&quot; name=&quot;note&quot; rows=&quot;3&quot;&gt;Less sugar&lt;/textarea&gt;
+&lt;pre id=&quot;result&quot;&gt;&lt;/pre&gt;
+  &lt;script&gt;
+const note = document.querySelector(&quot;#note&quot;);
+const preview = () =&gt; document.querySelector(&quot;#result&quot;).textContent = note.value;
+note.addEventListener(&quot;input&quot;, preview);
+preview();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> မှတ်ချက်ပြင်ပြီး လိုင်းဆင်းရေးကြည့်ပါ။ အောက်ကစာ ချက်ချင်းလိုက်ပြောင်းပါမယ်။</p>
+
+</section>
+<section class="article-section" id="file-input">
+  <h2>type=&quot;file&quot; နဲ့ ဖိုင်ရွေးခြင်း</h2>
+  <p>File input ကို နှိပ်ပြီး user က ဖိုင်ရွေးနိုင်ပါတယ်။ accept က ဖိုင်ရွေးတဲ့ dialog မှာ သင့်တော်တဲ့ ဖိုင်အမျိုးအစားကို ဦးစားပေးပြပါတယ်။ Upload ထည့်တဲ့အခါ server မှာ ဖိုင်အမျိုးအစားနဲ့ ဖိုင်အရွယ်အစားကို စစ်ပါ။ ဒီနမူနာမှာ Files ထဲက ရွေးထားတဲ့ ဖိုင်နာမည်ကို preview မှာပဲ ပြပါမယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Choose a file with type=&quot;file&quot;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;label for=&quot;photo&quot;&gt;Product photo&lt;/label&gt;&lt;br&gt;
+&lt;input id=&quot;photo&quot; type=&quot;file&quot; accept=&quot;image/*&quot;&gt;
+&lt;p id=&quot;result&quot; aria-live=&quot;polite&quot;&gt;Choose an image.&lt;/p&gt;
+  &lt;script&gt;
+const photo = document.querySelector(&quot;#photo&quot;);
+photo.addEventListener(&quot;change&quot;, () =&gt; {
+  document.querySelector(&quot;#result&quot;).textContent = photo.files[0]?.name ?? &quot;Choose an image.&quot;;
+});
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပုံတစ်ပုံရွေးရင် ဖိုင်နာမည် ပေါ်လာပါမယ်။ ဖိုင်ကို server ဆီ မပို့ပါဘူး။</p>
+
+</section>
+<section class="article-section" id="input-attributes">
+  <h2>Input Attributes နဲ့ Validation ကို ဖတ်ခြင်း</h2>
+  <p>id က input ကို label နဲ့ ချိတ်ပေးပြီး name က form data မှာ သုံးမယ့် key ပါ။ required ဆိုရင် တန်ဖိုးထည့်ရပါမယ်။ Number input မှာ min နဲ့ max က လက်ခံမယ့် အပိုင်းအခြား၊ step က တစ်ဆင့်ချင်းခြားမယ့် တန်ဖိုးကို သတ်မှတ်ပါတယ်။ placeholder က အကြံပြုစာတို ပြပေးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Read input attributes and validation&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form id=&quot;order&quot;&gt;
+  &lt;label for=&quot;quantity&quot;&gt;Quantity (1–5)&lt;/label&gt;
+  &lt;input id=&quot;quantity&quot; name=&quot;quantity&quot; type=&quot;number&quot; min=&quot;1&quot; max=&quot;5&quot; step=&quot;1&quot; placeholder=&quot;2&quot; required&gt;
+  &lt;button type=&quot;button&quot; id=&quot;check&quot;&gt;Check&lt;/button&gt;
+&lt;/form&gt;
+&lt;p id=&quot;result&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+const form = document.querySelector(&quot;#order&quot;);
+const result = document.querySelector(&quot;#result&quot;);
+document.querySelector(&quot;#check&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+  result.textContent = &quot;&quot;;
+  if (!form.reportValidity()) return;
+  const quantity = new FormData(form).get(&quot;quantity&quot;);
+  result.textContent = &quot;quantity = &quot; + quantity;
+});
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> 0 သို့မဟုတ် 6 ထည့်ပြီး Check နှိပ်ရင် validation စာ ပေါ်ပါမယ်။ 2 ထည့်ရင် quantity = 2 လို့ မြင်ရပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea">MDN · &lt;textarea&gt;</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/file">MDN · File input</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input">MDN · &lt;input&gt;</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/form-controls/">အရင်သင်ခန်းစာ · Checkbox၊ Radio Button နဲ့ Select Menu များ</a>
+<a href="/docs/read/my/html/file-uploads/">နောက်သင်ခန်းစာ · File Uploads</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

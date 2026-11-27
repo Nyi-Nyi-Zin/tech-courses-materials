@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A remote is a named repository connection. Once you know how to get and share commits through that connection, you can use GitHub to collaborate on the same project.">
+  <title>Remote Repositories, Fetch, Pull, and Push · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/git/remotes/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/git/remotes/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/git/remotes/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#git">All documentation · Git</a> <a href="/docs/read/my/git/remotes/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Remote Repositories, Fetch, Pull, and Push</h1>
+  
+  <p class="intro">A remote is a named repository connection. Once you know how to get and share commits through that connection, you can use GitHub to collaborate on the same project.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/git/remotes">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#clone">Clone an existing repository</a></li>
+<li><a href="#sync">Read remote changes before integrating them</a></li>
+<li><a href="#push">Share commits on a feature branch</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="clone">
+  <h2>Clone an existing repository</h2>
+  <p>Clone from the parent directory or another workspace if you want a new local copy. Git copies the repository history and usually names the remote origin. Replace OWNER with the account or organization name and use the actual repository URL.</p>
+
+<pre><code>git clone https://github.com/OWNER/project-notes.git
+cd project-notes
+git remote -v</code></pre>
+
+
+</section>
+<section class="article-section" id="sync">
+  <h2>Read remote changes before integrating them</h2>
+  <p>In a repository that tracks origin/main, git fetch origin updates your local view of the remote branches without merging them into your current branch. Compare main with origin/main. On main with a clean working tree, git pull --ff-only fetches and advances main if it can do so without a merge commit. If the branches diverged, inspect the history before choosing how to integrate them.</p>
+
+<pre><code>git switch main
+git fetch origin
+git log --oneline main..origin/main
+git pull --ff-only</code></pre>
+
+
+</section>
+<section class="article-section" id="push">
+  <h2>Share commits on a feature branch</h2>
+  <p>If you have write access, switch to or create a feature branch and push it to origin. The -u option records the upstream association so later pushes can use git push by itself. Continue with GitHub to learn how to open a pull request for the branch.</p>
+
+<pre><code>git switch -c update-notes
+git push -u origin update-notes</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes">Git · Working with remotes</a></li>
+<li><a href="https://git-scm.com/docs/git-pull">Git · git pull</a></li>
+<li><a href="https://git-scm.com/docs/git-push">Git · git push</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/git/ignoring-and-undoing/">Previous lesson · Ignoring Files and Undoing Changes</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Write types for functions you pass as values and be clear about which arguments callers must provide.">
+  <title>Callbacks and function signatures · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/function-contracts/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/function-contracts/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/function-contracts/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#typescript">All documentation · TypeScript</a> <a href="/docs/read/my/typescript/function-contracts/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Callbacks and function signatures</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">Write types for functions you pass as values and be clear about which arguments callers must provide.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/typescript/function-contracts">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#callback">Type a callback</a></li>
+<li><a href="#parameters">Choose optional or default parameters</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="callback">
+  <h2>Type a callback</h2>
+  <p>Use a function type to describe the parameters and return value of a callback. Callers can then use the same function contract with different implementations.</p>
+
+<pre><code>type PriceRule = (price: number) =&gt; number;
+
+function applyRule(price: number, rule: PriceRule): number {
+  return rule(price);
+}
+
+const salePrice = applyRule(5, amount =&gt; amount * 0.8);</code></pre>
+
+
+</section>
+<section class="article-section" id="parameters">
+  <h2>Choose optional or default parameters</h2>
+  <p>A parameter marked with ? may be omitted, so handle undefined in the body. A default is used when the caller omits the argument or passes undefined. Use an overload only where a union parameter cannot express the relationship clearly.</p>
+
+<pre><code>function greet(name: string, title?: string): string {
+  return title ? `Hello, ${title} ${name}!` : `Hello, ${name}!`;
+}
+
+function formatPrice(amount: number, currency = &quot;USD&quot;): string {
+  return `${amount} ${currency}`;
+}
+
+console.log(greet(&quot;Taylor&quot;));             // Hello, Taylor!
+console.log(greet(&quot;Taylor&quot;, &quot;Dr.&quot;));      // Hello, Dr. Taylor!
+console.log(formatPrice(12));            // 12 USD
+console.log(formatPrice(12, &quot;EUR&quot;));     // 12 EUR</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">TypeScript function types</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">Everyday types</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/typescript/generics/">Previous lesson · Generics and async types</a>
+<a href="/docs/read/en/typescript/type-tools/">Next lesson · keyof and utility types</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

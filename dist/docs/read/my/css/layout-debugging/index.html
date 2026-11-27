@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ပုံစံလွဲနေတဲ့ element ကနေ စပါ။ Browser ရဲ့ Developer Tools မှာ ကိုက်နေတဲ့ rule တွေနဲ့ browser တွက်ထားတဲ့ နောက်ဆုံးတန်ဖိုးကို ကြည့်နိုင်ပါတယ်။">
+  <title>Layout ပြဿနာ ရှာပြီး ပြင်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/layout-debugging/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/layout-debugging/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/layout-debugging/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/layout-debugging/" lang="en" hreflang="en">English</a></nav>
+  <h1>Layout ပြဿနာ ရှာပြီး ပြင်ခြင်း</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">ပုံစံလွဲနေတဲ့ element ကနေ စပါ။ Browser ရဲ့ Developer Tools မှာ ကိုက်နေတဲ့ rule တွေနဲ့ browser တွက်ထားတဲ့ နောက်ဆုံးတန်ဖိုးကို ကြည့်နိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/layout-debugging">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#inspect">Styles နဲ့ Computed ကို ဖတ်ခြင်း</a></li>
+<li><a href="#overflow">Parent ထက် ပိုကျယ်တဲ့ အကွက် ရှာခြင်း</a></li>
+<li><a href="#long-text">Flex Item ထဲက စာလုံးရှည်ကို လိုင်းဆင်းစေခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="inspect">
+  <h2>Styles နဲ့ Computed ကို ဖတ်ခြင်း</h2>
+  <p>စိမ်းပြာရောင် စာကြောင်းကို right-click နှိပ်ပြီး Inspect လုပ်ပါ။ Styles မှာ ကိုက်တဲ့ rule တွေကို ပြပြီး တခြားသတ်မှတ်ချက် အနိုင်ရတဲ့အခါ မသုံးတဲ့ စာကြောင်းကို ဖြတ်မျဉ်းနဲ့ ပြပါတယ်။ Computed မှာ browser နောက်ဆုံးတွက်ထားတဲ့ တန်ဖိုးကို ကြည့်နိုင်ပါတယ်။ ဖိုင်မပြင်ခင် DevTools မှာ rule တစ်ခု ပိတ်စမ်းနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Read Styles and Computed&lt;/title&gt;
+  &lt;style&gt;
+    .notice { color: purple; }
+    .notice { color: teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမစာပိုဒ်က စိမ်းပြာရောင်ပါ။ Styles ထဲက နောက်ဆုံး color ကို ပိတ်ရင် ခရမ်းရောင် ဖြစ်ပါမယ်။ Reload လုပ်ရင် ဖိုင်ထဲက style ပြန်သုံးပါမယ်။</p>
+
+</section>
+<section class="article-section" id="overflow">
+  <h2>Parent ထက် ပိုကျယ်တဲ့ အကွက် ရှာခြင်း</h2>
+  <p>ရထားတဲ့နေရာထက် အကြောင်းအရာ ပိုကြီးလာတာကို overflow လို့ခေါ်ပါတယ်။ Parent နဲ့ child အကျယ်တွေကို Inspect နဲ့ အရင်တိုင်းပါ။ ကျဉ်းသွားလို့ရတဲ့ အကွက်ကို max-width: 100% ပေးရင် အပြင်အကွက်ရဲ့ ရနိုင်တဲ့ အကျယ်ထက် မပိုအောင် ကန့်သတ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Find a box that is wider than its parent&lt;/title&gt;
+  &lt;style&gt;
+    .panel { width: 180px; outline: 2px solid purple; }
+    .wide { width: 280px; background: #d6efea; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;panel&quot;&gt;&lt;div class=&quot;wide&quot;&gt;Product list&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စိမ်းပြာရောင်အကွက်က ခရမ်းရောင်နယ်နိမိတ်ကို ကျော်ပါမယ်။ .wide မှာ max-width: 100% ထည့်ရင် အတွင်း ဝင်ဆံ့ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="long-text">
+  <h2>Flex Item ထဲက စာလုံးရှည်ကို လိုင်းဆင်းစေခြင်း</h2>
+  <p>Space မပါတဲ့ စာလုံးတွဲရှည်ကြောင့် flex item က အတန်းထက် ပိုကျယ်နေတတ်ပါတယ်။ စာသားအကွက် ကျဉ်းလို့ရအောင် min-width: 0 ပေးပြီး browser က စာကြောင်း ခွဲလို့ရအောင် overflow-wrap: anywhere ပေးပါ။ သီးသန့်ခလုတ် ကျုံ့မသွားဖို့ flex-shrink: 0 သုံးနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Let long text wrap inside a flex item&lt;/title&gt;
+  &lt;style&gt;
+    .toolbar { display: flex; gap: 8px; width: 240px; outline: 1px solid teal; }
+    .reference { min-width: 0; overflow-wrap: anywhere; }
+    button { flex-shrink: 0; align-self: start; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;toolbar&quot;&gt;&lt;span class=&quot;reference&quot;&gt;ITEM-2026-YANGON-0044-1C31B3B8097AE57E&lt;/span&gt;&lt;button type=&quot;button&quot;&gt;Save&lt;/button&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Reference စာသား အပြည့်အစုံ လိုင်းဆင်းပြီး Save ခလုတ် ဘေးမှာ ဆံ့ပါမယ်။ စာသား rule နှစ်ခု ဖြုတ်ပြီး overflow ဖြစ်ပုံ ပြန်စမ်းပါ။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/overflow">MDN · Overflow</a></li>
+<li><a href="https://developer.chrome.com/docs/devtools/css/">Chrome DevTools · View and change CSS</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/responsive/">အရင်သင်ခန်းစာ · Responsive Styles နဲ့ Focus</a>
+<a href="/docs/read/my/css/pseudo-elements/">နောက်သင်ခန်းစာ · Pseudo-element နဲ့ အစိတ်အပိုင်း ပြင်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

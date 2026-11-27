@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Load table data through an Apache Iceberg catalog.">
+  <title>pandas.read_iceberg · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/read_iceberg/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/read_iceberg/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/read_iceberg">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Input and output</span><a href="/docs/read/my/pandas/api/read_iceberg/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>read_iceberg</code></h1>
+    <p class="article-version">pandas 3.1.1 · Input and output · <span lang="en">function</span></p>
+    <p class="intro">Load table data through an Apache Iceberg catalog.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Inspect the call</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">pd.read_iceberg(…)</code> <span>Full signature</span></summary><pre><code lang="en">pd.read_iceberg(
+    table_identifier,
+    catalog_name=None,
+    *,
+    catalog_properties=None,
+    columns=None,
+    row_filter=None,
+    case_sensitive=True,
+    snapshot_id=None,
+    limit=None,
+    scan_properties=None,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Inspect the call</h2>
+      <p>Run this code to inspect the callable and its parameters. Its data, backend, or environment is needed to execute the operation itself.</p>
+      <label><span>Python code</span><textarea rows="16" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import importlib
+from inspect import signature
+
+path = &#39;pandas.read_iceberg&#39;
+parts = path.split(&quot;.&quot;)
+for end in range(len(parts), 0, -1):
+    try:
+        operation = importlib.import_module(&quot;.&quot;.join(parts[:end]))
+        break
+    except ImportError:
+        continue
+
+for name in parts[end:]:
+    operation = getattr(operation, name)
+
+print(path)
+print(signature(operation))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>table_identifier</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>str</span></td></tr>
+<tr><th scope="row"><code>catalog_name</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str</span></td></tr>
+<tr><th scope="row"><code>catalog_properties</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict of {str: str}</span></td></tr>
+<tr><th scope="row"><code>columns</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>list of str</span><p>Supply column labels or control how columns are handled.</p></td></tr>
+<tr><th scope="row"><code>row_filter</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>str</span></td></tr>
+<tr><th scope="row"><code>case_sensitive</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>True</code></td>
+      <td><span>bool</span></td></tr>
+<tr><th scope="row"><code>snapshot_id</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>int</span></td></tr>
+<tr><th scope="row"><code>limit</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>int</span><p>Set a maximum number of items affected by the operation.</p></td></tr>
+<tr><th scope="row"><code>scan_properties</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict of {str: obj}</span></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>DataFrame</p></section>
+    <section class="article-section"><h2>Example for a local Python session</h2><pre><code lang="en">import pandas as pd
+# Use an Iceberg catalog configured for your Python environment.
+orders = pd.read_iceberg(&quot;sales.orders&quot;, catalog_name=&quot;warehouse&quot;, columns=[&quot;units&quot;], limit=5)
+print(orders)</code></pre></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_iceberg.html#pandas.read_iceberg">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/read_html/"><span>Previous in this category</span><strong>pandas.read_html</strong></a><a href="/docs/read/en/pandas/api/read_json/"><span>Next in this category</span><strong>pandas.read_json</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

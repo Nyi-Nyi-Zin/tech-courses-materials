@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Condition နဲ့ အခြေအနေအလိုက် ဘာလုပ်မလဲ ရွေးနိုင်ပါတယ်။ Loop နဲ့ အလုပ်တစ်ခုကို ထပ်လုပ်နိုင်ပါတယ်။ နှစ်ခုစလုံးကို ရိုးရိုး စည်းကမ်းတစ်ခုစီနဲ့ အရင်စမ်းပါ။">
+  <title>Condition နဲ့ Loop · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/conditions-and-loops/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/conditions-and-loops/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/conditions-and-loops/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/conditions-and-loops/" lang="en" hreflang="en">English</a></nav>
+  <h1>Condition နဲ့ Loop</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Condition နဲ့ အခြေအနေအလိုက် ဘာလုပ်မလဲ ရွေးနိုင်ပါတယ်။ Loop နဲ့ အလုပ်တစ်ခုကို ထပ်လုပ်နိုင်ပါတယ်။ နှစ်ခုစလုံးကို ရိုးရိုး စည်းကမ်းတစ်ခုစီနဲ့ အရင်စမ်းပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/conditions-and-loops">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#if-else">if၊ else if၊ else နဲ့ လုပ်မယ့် အပိုင်းရွေးခြင်း</a></li>
+<li><a href="#switch">switch နဲ့ တန်ဖိုးအတိအကျ တိုက်စစ်ခြင်း</a></li>
+<li><a href="#loops">for နဲ့ အကြိမ်ရေတွက်ပြီး ထပ်လုပ်ခြင်း</a></li>
+<li><a href="#while">while နဲ့ စစ်ချက်မှန်နေသရွေ့ ထပ်လုပ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="if-else">
+  <h2>if၊ else if၊ else နဲ့ လုပ်မယ့် အပိုင်းရွေးခြင်း</h2>
+  <p>Condition ဆိုတာ ဆုံးဖြတ်ချက်ချဖို့ JavaScript က စစ်မယ့် အချက်ပါ။ { } ကြားက code အစုကို block လို့ ခေါ်ပါတယ်။ ပထမ condition မှန်ရင် ပထမ block run တယ်။ မမှန်ရင် else if ကို ထပ်စစ်တယ်။ ကျန်တဲ့ အခြေအနေမှာ else block ကို run ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const quantity = 3;
+if (quantity &gt;= 5) {
+  console.log(&quot;Group order&quot;);
+} else if (quantity &gt;= 1) {
+  console.log(&quot;Regular order&quot;);
+} else {
+  console.log(&quot;Choose at least one item&quot;);
+}</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> “Regular order” လို့ ထွက်ပါမယ်။ 5 နဲ့ 0 ထည့်ပြီး နယ်စည်းနှစ်ခု စစ်ပါ။</p>
+
+</section>
+<section class="article-section" id="switch">
+  <h2>switch နဲ့ တန်ဖိုးအတိအကျ တိုက်စစ်ခြင်း</h2>
+  <p>switch က တန်ဖိုးတစ်ခုကို case တန်ဖိုးတွေနဲ့ တိုက်စစ်ပါတယ်။ ကိုက်တဲ့ case လုပ်ပြီး switch ကနေ ထွက်ဖို့ break သုံးပါတယ်။ break မပါရင် နောက် case အထဲ ဆက် run နိုင်ပါတယ်။ ဘာနဲ့မှ မကိုက်ရင် default အပိုင်းကို သုံးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const productCode = &quot;P&quot;;
+switch (productCode) {
+  case &quot;P&quot;:
+    console.log(&quot;Pen&quot;);
+    break;
+  case &quot;N&quot;:
+    console.log(&quot;Notebook&quot;);
+    break;
+  default:
+    console.log(&quot;Unknown product&quot;);
+}</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen လို့ ပေါ်ပါမယ်။ N နဲ့ X ပြောင်းပြီး ကျန်တဲ့ case တွေ စမ်းပါ။</p>
+
+</section>
+<section class="article-section" id="loops">
+  <h2>for နဲ့ အကြိမ်ရေတွက်ပြီး ထပ်လုပ်ခြင်း</h2>
+  <p>for loop မှာ စတင်တန်ဖိုး၊ စစ်ချက်နဲ့ ပြောင်းမယ့် အပိုင်း ရှိပါတယ်။ စတင်တာကို တစ်ခါပဲ run ပါတယ်။ တစ်ပတ်မစခင် စစ်ချက်ကို စစ်ပြီး ပြီးတိုင်း တန်ဖိုး ပြောင်းတဲ့အပိုင်းကို run ပါတယ်။ itemNumber += 1 ဆို itemNumber ကို တစ်တိုးပေးတာပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>for (let itemNumber = 1; itemNumber &lt;= 3; itemNumber += 1) {
+  console.log(&quot;Item&quot;, itemNumber);
+}</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Item 1၊ Item 2၊ Item 3 သုံးကြောင်း ပေါ်ပါမယ်။ itemNumber 4 ရောက်ရင် စစ်ချက် မမှန်တော့လို့ ရပ်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="while">
+  <h2>while နဲ့ စစ်ချက်မှန်နေသရွေ့ ထပ်လုပ်ခြင်း</h2>
+  <p>while က တစ်ပတ်မစခင် အကြိမ်တိုင်း စစ်ပါတယ်။ နောက်ဆုံး စစ်ချက် false ဖြစ်နိုင်အောင် စစ်မယ့် variable ကို ပြောင်းပါ။ break က loop ရပ်ပြီး continue က ကျန်တဲ့ code ကို ကျော်ကာ နောက်တစ်ပတ် စစ်စေပါတယ်။ continue ကြောင့် တန်ဖိုးပြောင်းမယ့် code မကျော်သွားအောင် နေရာချပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>let remaining = 3;
+while (remaining &gt; 0) {
+  remaining -= 1;
+  if (remaining === 1) continue;
+  console.log(remaining);
+}</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Console မှာ 2 နဲ့ 0 ပေါ်ပါမယ်။ 1 ကို မထုတ်ဘဲ ကျော်ပြီး စစ်ချက် false ဖြစ်တဲ့အခါ loop ရပ်ပါတယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling">MDN · Control flow</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration">MDN · Loops and iteration</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/missing-values-and-templates/">အရင်သင်ခန်းစာ · Missing Values နဲ့ Template Literals</a>
+<a href="/docs/read/my/js/functions/">နောက်သင်ခန်းစာ · Function နဲ့ Module</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

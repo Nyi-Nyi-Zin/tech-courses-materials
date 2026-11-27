@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ယာယီဖိုင်နဲ့ ကိုယ်ပိုင်အချက်အလက်ပါတဲ့ ဖိုင်တွေ commit ထဲ မပါအောင်ထားပါ။ မှားပြီး ပြင်လိုက်တဲ့အခါ stage လုပ်ပြီးသားလား၊ commit သိမ်းပြီးသားလားပေါ်မူတည်ပြီး ပြန်ပြင်မယ့် command ရွေးပါ။">
+  <title>ဖိုင်တွေ Ignore လုပ်ခြင်းနဲ့ Changes ပြန်ဖျက်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/git/ignoring-and-undoing/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/git/ignoring-and-undoing/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/git/ignoring-and-undoing/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#git">သင်ခန်းစာအားလုံး · Git</a> <a href="/docs/read/en/git/ignoring-and-undoing/" lang="en" hreflang="en">English</a></nav>
+  <h1>ဖိုင်တွေ Ignore လုပ်ခြင်းနဲ့ Changes ပြန်ဖျက်ခြင်း</h1>
+  
+  <p class="intro">ယာယီဖိုင်နဲ့ ကိုယ်ပိုင်အချက်အလက်ပါတဲ့ ဖိုင်တွေ commit ထဲ မပါအောင်ထားပါ။ မှားပြီး ပြင်လိုက်တဲ့အခါ stage လုပ်ပြီးသားလား၊ commit သိမ်းပြီးသားလားပေါ်မူတည်ပြီး ပြန်ပြင်မယ့် command ရွေးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/git/ignoring-and-undoing">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#gitignore">.gitignore ဖိုင် ရေးခြင်း</a></li>
+<li><a href="#unstage">ဖိုင်ထဲက Changes ကို ထိန်းထားပြီး Unstage လုပ်ခြင်း</a></li>
+<li><a href="#revert">Commit အသစ်နဲ့ သိမ်းထားပြီးသား Change ကို ပြန်ပြင်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="gitignore">
+  <h2>.gitignore ဖိုင် ရေးခြင်း</h2>
+  <p>ဒီ pattern တွေကို project-notes ရဲ့ root ထဲမှာ .gitignore ဆိုတဲ့ဖိုင်နဲ့ သိမ်းပါ။ Team တစ်ခုလုံး ဒီ rule တွေ သုံးလို့ရအောင် git add .gitignore လုပ်ပြီး commit သိမ်းပါ။ Rule တွေက untracked ဖိုင်တွေမှာ အလုပ်လုပ်ပါတယ်။ Track လုပ်ထားပြီးသားဖိုင်ကို pattern ထည့်လိုက်ရုံနဲ့ ရှိပြီးသား commit ထဲက မပျောက်ပါဘူး။ Password နဲ့ API key တွေကို repository ထဲ မထည့်ပါနဲ့။</p>
+
+<pre><code>.env
+*.log
+node_modules/
+.venv/</code></pre>
+
+
+</section>
+<section class="article-section" id="unstage">
+  <h2>ဖိုင်ထဲက Changes ကို ထိန်းထားပြီး Unstage လုပ်ခြင်း</h2>
+  <p>နမူနာ repository ထဲက README.md ကို နည်းနည်းပြင်ပြီး stage လုပ်ကြည့်ပါ။ git restore --staged က အဲဒီ change ကို နောက် commit ထဲကနေ ဖယ်ပေးပြီး ဖိုင်ထဲက ပြင်ထားတာကို ထိန်းထားပေးပါတယ်။ git diff နဲ့ ပြင်ထားတာကို ကြည့်ပါ။ အဆင်သင့်ဖြစ်ရင် ဖိုင်ကို ထပ် stage လုပ်နိုင်ပါတယ်။</p>
+
+<pre><code>git add README.md
+git restore --staged README.md
+git diff -- README.md</code></pre>
+
+
+</section>
+<section class="article-section" id="revert">
+  <h2>Commit အသစ်နဲ့ သိမ်းထားပြီးသား Change ကို ပြန်ပြင်ခြင်း</h2>
+  <p>တခြားသူတွေနဲ့ မျှဝေပြီးသား commit ကို ပြန်ပြင်ဖို့ git revert သုံးရင် အဲဒီ changes ကို ပြန်ဖယ်တဲ့ commit အသစ်တစ်ခု ရပါတယ်။ Working tree မှာ ပြင်စရာ မကျန်တော့ရင် git log ထဲက ရိုးရိုး commit တစ်ခုရွေးပြီး abc1234 နေရာမှာ သူ့ ID အစစ် ထည့်ပါ။ နောက်ပိုင်း ပြင်ထားတာတွေနဲ့ ထပ်နေရင် conflict ဖြေရှင်းရနိုင်ပါတယ်။</p>
+
+<pre><code>git log --oneline
+git revert abc1234</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://git-scm.com/docs/gitignore">Git · gitignore</a></li>
+<li><a href="https://git-scm.com/docs/git-restore">Git · git restore</a></li>
+<li><a href="https://git-scm.com/docs/git-revert">Git · git revert</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/git/merge-conflicts/">အရင်သင်ခန်းစာ · Merge Conflict ဖြေရှင်းခြင်း</a>
+<a href="/docs/read/my/git/remotes/">နောက်သင်ခန်းစာ · Remote Repository၊ Fetch၊ Pull နဲ့ Push</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

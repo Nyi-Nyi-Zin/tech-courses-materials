@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="စာခေါင်းစဉ်ထဲမှာ ထောင့်ကွင်းတွေ ပါနေရင်လည်း ရိုက်ထည့်ထားတဲ့ စာသားအတိုင်းပဲ ပြသင့်ပါတယ်။ ပြင်ပက ရလာတဲ့ content ကို browser က page ရဲ့ code အဖြစ် အလုပ်လုပ်လိုက်တဲ့အခါ Cross-Site Scripting (XSS) ဖြစ်နိုင်ပါတယ်။">
+  <title>Cross-Site Scripting၊ CSP နဲ့ Clickjacking · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/xss-and-browser-headers/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/xss-and-browser-headers/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/xss-and-browser-headers/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-security">သင်ခန်းစာအားလုံး · Web Security</a> <a href="/docs/read/en/web-security/xss-and-browser-headers/" lang="en" hreflang="en">English</a></nav>
+  <h1>Cross-Site Scripting၊ CSP နဲ့ Clickjacking</h1>
+  
+  <p class="intro">စာခေါင်းစဉ်ထဲမှာ ထောင့်ကွင်းတွေ ပါနေရင်လည်း ရိုက်ထည့်ထားတဲ့ စာသားအတိုင်းပဲ ပြသင့်ပါတယ်။ ပြင်ပက ရလာတဲ့ content ကို browser က page ရဲ့ code အဖြစ် အလုပ်လုပ်လိုက်တဲ့အခါ Cross-Site Scripting (XSS) ဖြစ်နိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-security/xss-and-browser-headers">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#output-context">စာသားကို သက်ဆိုင်ရာနေရာနဲ့ ကိုက်အောင် ပြသခြင်း</a></li>
+<li><a href="#headers">Script နဲ့ frame အသုံးပြုခွင့်ကို ကန့်သတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="output-context">
+  <h2>စာသားကို သက်ဆိုင်ရာနေရာနဲ့ ကိုက်အောင် ပြသခြင်း</h2>
+  <p>ရိုးရိုးစာသား ပြဖို့ DOM မှာ textContent သုံးပါ။ Framework သုံးရင် စာသားကို အလိုအလျောက် escape လုပ်ပေးတဲ့ နည်း သုံးပါ။ Stored XSS က သိမ်းထားတဲ့ data ကနေ၊ reflected XSS က request ထဲက data ကို response ထဲ ပြန်ထည့်ရာကနေ ဖြစ်နိုင်ပါတယ်။ DOM-based XSS က browser ထဲမှာ data ကို ကိုင်တွယ်ပုံနဲ့ ဆိုင်ပါတယ်။ Rich HTML လက်ခံမယ်ဆိုရင် ထိန်းသိမ်းမွမ်းမံနေတဲ့ HTML sanitizer သုံးပါ။ Link အတွက်တော့ URL ရဲ့ scheme နဲ့ သွားမယ့်နေရာကိုပါ စစ်ရပါတယ်။</p>
+
+<pre><code>const heading = document.createElement(&quot;h2&quot;);
+heading.textContent = &quot;Draft &lt;April&gt;&quot;;
+document.body.append(heading);
+// The page displays the literal text: Draft &lt;April&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="headers">
+  <h2>Script နဲ့ frame အသုံးပြုခွင့်ကို ကန့်သတ်ခြင်း</h2>
+  <p>အောက်က policy က script ဖိုင်တွေကို ကိုယ့် origin ကပဲ ယူပြီး တခြား page ထဲမှာ frame အဖြစ် ထည့်ပြစရာမလိုတဲ့ page အတွက်ပါ။ frame-ancestors က တခြား page ထဲမှာ ကိုယ့် page ကို ဖုံးအုပ်ပြပြီး ခလုတ်မှားနှိပ်အောင် လုပ်နိုင်တဲ့ clickjacking ကို ကာကွယ်ပေးပါတယ်။ ပထမဆုံး Content-Security-Policy-Report-Only နဲ့ စမ်းပြီး လိုတဲ့ resource တွေကို စစ်ပါ။ Inline script လိုရင် nonce ဒါမှမဟုတ် hash အခြေခံ policy သုံးပါ။ Header တွေကို HTML response မှာ ပို့ရပါတယ်။</p>
+
+<pre><code>Content-Security-Policy: default-src &#39;self&#39;; script-src &#39;self&#39;; object-src &#39;none&#39;; base-uri &#39;none&#39;; frame-ancestors &#39;none&#39;
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html">OWASP · XSS prevention</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP">MDN · Content Security Policy</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html">OWASP · Clickjacking defense</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-security/csrf/">အရင်သင်ခန်းစာ · Cross-Site Request Forgery (CSRF) ကာကွယ်ခြင်း</a>
+<a href="/docs/read/my/web-security/input-and-injection/">နောက်သင်ခန်းစာ · Input Validation နဲ့ Injection ကာကွယ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

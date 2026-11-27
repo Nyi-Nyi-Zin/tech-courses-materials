@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Scope က နာမည်တစ်ခုကို ဘယ်နေရာမှာ သုံးလို့ရလဲ သတ်မှတ်ပါတယ်။ Closure က function ကို အပြင်ဘက်က နာမည်တွေ ဆက်သုံးလို့ရစေပါတယ်။ Class နဲ့ ဖွဲ့စည်းပုံနဲ့ လုပ်ဆောင်ချက် တူတဲ့ object တွေ ပြန်ဖန်တီးနိုင်ပါတယ်။">
+  <title>Scope၊ Closure နဲ့ Class · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/scope-and-classes/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/scope-and-classes/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/scope-and-classes/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/scope-and-classes/" lang="en" hreflang="en">English</a></nav>
+  <h1>Scope၊ Closure နဲ့ Class</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Scope က နာမည်တစ်ခုကို ဘယ်နေရာမှာ သုံးလို့ရလဲ သတ်မှတ်ပါတယ်။ Closure က function ကို အပြင်ဘက်က နာမည်တွေ ဆက်သုံးလို့ရစေပါတယ်။ Class နဲ့ ဖွဲ့စည်းပုံနဲ့ လုပ်ဆောင်ချက် တူတဲ့ object တွေ ပြန်ဖန်တီးနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/scope-and-classes">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#scope">Scope ဆိုတာဘာလဲ။</a></li>
+<li><a href="#closures">Closure နဲ့ အပြင်က တန်ဖိုးကို ဆက်သုံးခြင်း</a></li>
+<li><a href="#classes">Class ကနေ Object ဖန်တီးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="scope">
+  <h2>Scope ဆိုတာဘာလဲ။</h2>
+  <p>Block ထဲမှာ let သို့မဟုတ် const နဲ့ ကြေညာတဲ့ နာမည်ကို အဲဒီ block နဲ့ အတွင်းထဲ ထပ်ဝင်ထားတဲ့ block တွေမှာ သုံးလို့ရပါတယ်။ အတွင်း block မှာ နာမည်တူ variable သီးသန့် ထပ်ရေးနိုင်ပါတယ်။ ဒါကို shadowing လို့ခေါ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const product = &quot;Pen&quot;;
+{
+  const product = &quot;Notebook&quot;;
+  console.log(product);
+}
+console.log(product);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Block ထဲမှာ Notebook၊ အပြင်မှာ Pen ထွက်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="closures">
+  <h2>Closure နဲ့ အပြင်က တန်ဖိုးကို ဆက်သုံးခြင်း</h2>
+  <p>Closure ဆိုတာ function တစ်ခုနဲ့ အဲဒီ function ကို ဖန်တီးခဲ့တဲ့ scope ကို ဆက်သုံးနိုင်မှုပါ။ makeCounter ပြီးသွားလည်း return ပြန်တဲ့ function က count ကို ဆက်ဖတ်၊ ဆက်ပြင်နိုင်ပါတယ်။ makeCounter ခေါ်တိုင်း သီးသန့် count တစ်ခုစီ ရပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>function makeCounter() {
+  let count = 0;
+  return function addOne() {
+    count += 1;
+    return count;
+  };
+}
+const next = makeCounter();
+console.log(next(), next());</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> 1 နဲ့ 2 ပေါ်ပါမယ်။ Counter အသစ်လုပ်ရင် ပထမဆုံးခေါ်တဲ့အခါ 1 ကနေ ပြန်စပါမယ်။</p>
+
+</section>
+<section class="article-section" id="classes">
+  <h2>Class ကနေ Object ဖန်တီးခြင်း</h2>
+  <p>Class က ပုံစံတူ object တွေကို ဘယ်လို ဖန်တီးမလဲ ရေးထားတာပါ။ new နဲ့ instance တစ်ခု ဆောက်ရင် ပေးထားတဲ့ argument တွေနဲ့ constructor run ပါတယ်။ Constructor ထဲမှာနဲ့ instance ကနေ method ခေါ်တဲ့အခါ this က အဲဒီ instance ကို ရည်ညွှန်းပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>class Product {
+  constructor(name, price) {
+    this.name = name;
+    this.price = price;
+  }
+  total(quantity) {
+    return this.price * quantity;
+  }
+}
+const pen = new Product(&quot;Pen&quot;, 2500);
+console.log(pen.name, pen.total(2));</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Console မှာ Pen နဲ့ 5000 ပေါ်ပါမယ်။ ဈေးမတူတဲ့ instance အသစ်လုပ်ပြီး ကိုယ်ပိုင်တန်ဖိုး သီးသန့် ရှိတာကို စမ်းပါ။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures">MDN · Closures</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes">MDN · Classes</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/map-and-set/">အရင်သင်ခန်းစာ · Map နဲ့ Set</a>
+<a href="/docs/read/my/js/dom/">နောက်သင်ခန်းစာ · DOM နဲ့ Event</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Value အဖြစ် ပေးလိုက်တဲ့ function တွေအတွက် type ရေးပါ။ ခေါ်တဲ့ဘက်က ဘယ် arguments တွေ ပေးရမလဲ ပြတ်ပြတ်သားသား သတ်မှတ်ပါ။">
+  <title>Callbacks နှင့် Function Signatures · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/function-contracts/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/function-contracts/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/function-contracts/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#typescript">သင်ခန်းစာအားလုံး · TypeScript</a> <a href="/docs/read/en/typescript/function-contracts/" lang="en" hreflang="en">English</a></nav>
+  <h1>Callbacks နှင့် Function Signatures</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">Value အဖြစ် ပေးလိုက်တဲ့ function တွေအတွက် type ရေးပါ။ ခေါ်တဲ့ဘက်က ဘယ် arguments တွေ ပေးရမလဲ ပြတ်ပြတ်သားသား သတ်မှတ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/typescript/function-contracts">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#callback">Callback Type သတ်မှတ်ခြင်း</a></li>
+<li><a href="#parameters">Optional သို့ Default Parameter ရွေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="callback">
+  <h2>Callback Type သတ်မှတ်ခြင်း</h2>
+  <p>Callback ရဲ့ parameters နဲ့ return value ကို function type နဲ့ ဖော်ပြပါ။ ခေါ်တဲ့ဘက်က implement ပုံ မတူပေမယ့် contract တစ်မျိုးတည်း သုံးနိုင်ပါတယ်။</p>
+
+<pre><code>type PriceRule = (price: number) =&gt; number;
+
+function applyRule(price: number, rule: PriceRule): number {
+  return rule(price);
+}
+
+const salePrice = applyRule(5, amount =&gt; amount * 0.8);</code></pre>
+
+
+</section>
+<section class="article-section" id="parameters">
+  <h2>Optional သို့ Default Parameter ရွေးခြင်း</h2>
+  <p>Parameter မှာ ? ပါရင် ခေါ်တဲ့အခါ ချန်ထားနိုင်လို့ function ထဲမှာ undefined ကို ကိုင်တွယ်ပါ။ Argument ချန်ထားရင် သို့ undefined ပေးရင် default သုံးပါတယ်။ Union parameter နဲ့ ဆက်စပ်မှု ရှင်းရှင်း မဖော်ပြနိုင်တဲ့အခါ overload သုံးပါ။</p>
+
+<pre><code>function greet(name: string, title?: string): string {
+  return title ? `Hello, ${title} ${name}!` : `Hello, ${name}!`;
+}
+
+function formatPrice(amount: number, currency = &quot;USD&quot;): string {
+  return `${amount} ${currency}`;
+}
+
+console.log(greet(&quot;Taylor&quot;));             // Hello, Taylor!
+console.log(greet(&quot;Taylor&quot;, &quot;Dr.&quot;));      // Hello, Dr. Taylor!
+console.log(formatPrice(12));            // 12 USD
+console.log(formatPrice(12, &quot;EUR&quot;));     // 12 EUR</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">TypeScript function types</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">Everyday types</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/typescript/generics/">အရင်သင်ခန်းစာ · Generics နှင့် Async Types</a>
+<a href="/docs/read/my/typescript/type-tools/">နောက်သင်ခန်းစာ · keyof နှင့် Utility Types</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

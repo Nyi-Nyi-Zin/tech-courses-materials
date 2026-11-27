@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Login ပြီးရင် နောက်ထပ် request တွေက ဘယ်သူ့ဆီက လာလဲဆိုတာ app က မှတ်မိဖို့ လိုပါတယ်။ ကိုယ့် app မှာ server-side session သုံးနိုင်ပါတယ်။ ပြင်ပ identity provider နဲ့ ချိတ်ရင်လည်း ဝင်လာသူရဲ့ အထောက်အထားနဲ့ API ခေါ်ခွင့်တွေကို ရယူနိုင်ပါတယ်။">
+  <title>Session၊ Cookie၊ OAuth နဲ့ OpenID Connect · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/sessions-and-tokens/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/sessions-and-tokens/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/sessions-and-tokens/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-security">သင်ခန်းစာအားလုံး · Web Security</a> <a href="/docs/read/en/web-security/sessions-and-tokens/" lang="en" hreflang="en">English</a></nav>
+  <h1>Session၊ Cookie၊ OAuth နဲ့ OpenID Connect</h1>
+  
+  <p class="intro">Login ပြီးရင် နောက်ထပ် request တွေက ဘယ်သူ့ဆီက လာလဲဆိုတာ app က မှတ်မိဖို့ လိုပါတယ်။ ကိုယ့် app မှာ server-side session သုံးနိုင်ပါတယ်။ ပြင်ပ identity provider နဲ့ ချိတ်ရင်လည်း ဝင်လာသူရဲ့ အထောက်အထားနဲ့ API ခေါ်ခွင့်တွေကို ရယူနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-security/sessions-and-tokens">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#cookie">Session ထုတ်ပေးခြင်းနဲ့ ပိတ်သိမ်းခြင်း</a></li>
+<li><a href="#oidc">Token ကို လက်ခံမယ့်သူနဲ့ ကိုက်ညီအောင် သုံးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="cookie">
+  <h2>Session ထုတ်ပေးခြင်းနဲ့ ပိတ်သိမ်းခြင်း</h2>
+  <p>Framework က ထုတ်ပေးတဲ့ ခန့်မှန်းလို့မရတဲ့ session ID ကို ဒီ host အတွက်ပဲ cookie ထဲမှာ ထားပါ။ Secure က HTTPS ကနေပဲ ပို့စေပြီး HttpOnly က JavaScript နဲ့ cookie ဖတ်တာကို ပိတ်ပါတယ်။ SameSite က တခြား site ကနေ request ပို့ရင် cookie လိုက်မလိုက် ကန့်သတ်ပါတယ်။ __Host- သုံးရင် Secure နဲ့ Path=/ လိုပြီး Domain မထည့်ရပါ။ Login ဝင်ချိန်နဲ့ လုပ်ပိုင်ခွင့် ပြောင်းချိန်မှာ ID အသစ်ထုတ်ပါ။ Server မှာ session သက်တမ်းနဲ့ အသုံးမပြုဘဲ ထားနိုင်တဲ့အချိန် သတ်မှတ်ပြီး logout လုပ်ရင် session ကို ပိတ်ပါ။</p>
+
+<pre><code>Set-Cookie: __Host-session=&lt;opaque-random-id&gt;; Path=/; Secure; HttpOnly; SameSite=Lax</code></pre>
+
+
+</section>
+<section class="article-section" id="oidc">
+  <h2>Token ကို လက်ခံမယ့်သူနဲ့ ကိုက်ညီအောင် သုံးခြင်း</h2>
+  <p>OAuth နဲ့ API သုံးခွင့် လွှဲပေးနိုင်ပါတယ်။ OpenID Connect က login အတွက် ID token ကို client ဆီ ပြန်ပေးပါတယ်။ Authorization code flow ကို PKCE၊ အတိအကျ သတ်မှတ်ထားတဲ့ redirect URI နဲ့အတူ library သုံးပြီး ချိတ်ပါ။ JWT access token ရလာရင် API က လက်ခံထားတဲ့ algorithm၊ signature၊ ထုတ်ပေးသူ၊ လက်ခံမယ့် API၊ သက်တမ်းနဲ့ လုပ်ပိုင်ခွင့်ကို စစ်ရပါတယ်။ Signed token ထဲက data ကို ဖတ်လို့ရတဲ့အတွက် secret တွေ မထည့်ပါနဲ့။</p>
+
+<pre><code>ID token       Client verifies sign-in for this client
+Access token   Resource server verifies access for this API
+Refresh token  Client uses the token endpoint to renew access</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html">OWASP · Session management</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie">MDN · Set-Cookie</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/OAuth2_Cheat_Sheet.html">OWASP · OAuth 2.0</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html">OWASP · Token validation</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-security/authentication/">အရင်သင်ခန်းစာ · Authentication၊ Password နဲ့ Account ပြန်ရယူခြင်း</a>
+<a href="/docs/read/my/web-security/authorization/">နောက်သင်ခန်းစာ · Authorization နဲ့ Document တစ်စောင်ချင်းစီရဲ့ လုပ်ပိုင်ခွင့်</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

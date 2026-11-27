@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Combine preprocessing and prediction so that each learned step sees only training data.">
+  <title>Preprocessing pipelines and data leakage · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/pipeline-and-leakage/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/pipeline-and-leakage/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/pipeline-and-leakage/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#machine-learning">All documentation · Machine Learning</a> <a href="/docs/read/my/machine-learning/pipeline-and-leakage/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Preprocessing pipelines and data leakage</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Combine preprocessing and prediction so that each learned step sees only training data.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/machine-learning/pipeline-and-leakage">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#leakage">Keep the test set out of fitting</a></li>
+<li><a href="#mixed-columns">Handle mixed data types</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="leakage">
+  <h2>Keep the test set out of fitting</h2>
+  <p>Leakage means information unavailable at prediction time affects training or evaluation. Split before fitting scalers, imputers, or feature selectors. A Pipeline fits transforms on training data and reuses those fitted transforms on test rows.</p>
+
+<pre><code>from sklearn.linear_model import LinearRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+
+model = make_pipeline(StandardScaler(), LinearRegression())
+model.fit([[2], [4], [6]], [5, 9, 13])
+print(round(float(model.predict([[8]])[0]), 2))</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/pipeline-and-leakage-leakage.png" data-image-preview><img src="/docs/media/data/pipeline-and-leakage-leakage.png" alt="Training data flows to fit preprocessing and the model. Validation data flows through the fitted steps for predictions." width="720" height="355" loading="lazy" decoding="async"></a>
+    <figcaption>Each cross-validation fold fits its own pipeline on that fold’s training portion.</figcaption>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">17.0</pre></div>
+
+
+</section>
+<section class="article-section" id="mixed-columns">
+  <h2>Handle mixed data types</h2>
+  <p>Use ColumnTransformer when different columns need different transformations. For example, impute or scale numeric values and one-hot encode category values. Put the ColumnTransformer inside the pipeline so its fitted parameters stay within each training fold.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/compose.html">Pipelines and composite estimators</a></li>
+<li><a href="https://scikit-learn.org/stable/common_pitfalls.html">Common pitfalls and recommended practices</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/machine-learning/classification/">Previous lesson · Classification and confusion matrices</a>
+<a href="/docs/read/en/machine-learning/validation-and-clustering/">Next lesson · Cross-validation, overfitting, and clustering</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

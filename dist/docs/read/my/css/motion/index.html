@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CSS နဲ့ ပုံစံပြောင်းတဲ့အခါ ဖြည်းဖြည်းချင်း ပြောင်းစေနိုင်ပါတယ်။ Transition က တန်ဖိုးတစ်ခု ပြောင်းတာကို တဖြည်းဖြည်း ဖြစ်စေပါတယ်။ Animation က နာမည်ပေးထားတဲ့ အဆင့်အစဉ်အတိုင်း လှုပ်ရှားစေပါတယ်။">
+  <title>Transition နဲ့ Animation · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/motion/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/motion/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/motion/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/motion/" lang="en" hreflang="en">English</a></nav>
+  <h1>Transition နဲ့ Animation</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">CSS နဲ့ ပုံစံပြောင်းတဲ့အခါ ဖြည်းဖြည်းချင်း ပြောင်းစေနိုင်ပါတယ်။ Transition က တန်ဖိုးတစ်ခု ပြောင်းတာကို တဖြည်းဖြည်း ဖြစ်စေပါတယ်။ Animation က နာမည်ပေးထားတဲ့ အဆင့်အစဉ်အတိုင်း လှုပ်ရှားစေပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/motion">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#transition">ပြောင်းတဲ့တန်ဖိုးကို Transition နဲ့ ပြခြင်း</a></li>
+<li><a href="#keyframes">@keyframes နဲ့ Animation အဆင့် သတ်မှတ်ခြင်း</a></li>
+<li><a href="#reduced-motion">Reduced Motion ရွေးထားမှုကို လိုက်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="transition">
+  <h2>ပြောင်းတဲ့တန်ဖိုးကို Transition နဲ့ ပြခြင်း</h2>
+  <p>အခြေအနေ စဝင်တာနဲ့ ပြန်ထွက်တာ နှစ်ဖက်လုံး သက်ရောက်ဖို့ transition ကို မူလ rule မှာ ထည့်ပါ။ ပထမတန်ဖိုးက ပြောင်းမယ့် property၊ ဒုတိယတန်ဖိုးက ကြာချိန်ပါ။ Hover သို့မဟုတ် focus rule မှာ တန်ဖိုးအသစ် ပေးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Transition a changed value&lt;/title&gt;
+  &lt;style&gt;
+    button { background: lightblue; transition: background-color 250ms; }
+    button:hover, button:focus-visible { background: gold; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;button type=&quot;button&quot;&gt;View product&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Mouse တင်ပါ၊ ဒါမှမဟုတ် Tab နဲ့ ခလုတ်ဆီ သွားပါ။ နောက်ခံအရောင် စက္ကန့်တစ်စိတ်မှာ ဖြည်းဖြည်း ပြောင်းပါမယ်။</p>
+
+</section>
+<section class="article-section" id="keyframes">
+  <h2>@keyframes နဲ့ Animation အဆင့် သတ်မှတ်ခြင်း</h2>
+  <p>@keyframes က အဆင့်အစဉ်ကို နာမည်ပေးပြီး အချိန်တစ်ခုချင်းမှာ သုံးမယ့်တန်ဖိုး သတ်မှတ်ပါတယ်။ from က အစ၊ to က အဆုံးပါ။ animation နဲ့ အဲဒီအဆင့်အစဉ်ကို element နဲ့ ချိတ်ပြီး ကြာချိန် သတ်မှတ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Define animation steps with @keyframes&lt;/title&gt;
+  &lt;style&gt;
+    .notice { animation: appear 800ms; }
+    @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Reload လုပ်ရင် ပထမစာပိုဒ် တစ်ခါ ဖြည်းဖြည်းပေါ်လာပါမယ်။ နောက်စာပိုဒ်က ချက်ချင်း မြင်ရပါမယ်။</p>
+
+</section>
+<section class="article-section" id="reduced-motion">
+  <h2>Reduced Motion ရွေးထားမှုကို လိုက်ခြင်း</h2>
+  <p>User တချို့က system မှာ လှုပ်ရှားမှု လျှော့ထားတတ်ပါတယ်။ prefers-reduced-motion media feature နဲ့ အဲဒါကို သိနိုင်ပါတယ်။ အလှအတွက် effect ကို ဖယ်ပေးပြီး မူလအကြောင်းအရာကို ဆက်ဖတ်လို့ရစေပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Respect a reduced-motion preference&lt;/title&gt;
+  &lt;style&gt;
+    .notice { animation: appear 1s; }
+    @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { .notice { animation: none; } }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> System သို့မဟုတ် DevTools မှာ reduced motion ဖွင့်ပြီး reload လုပ်ပါ။ Notice စာသား ချက်ချင်း မြင်ရပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Transitions/Using">MDN · Using CSS transitions</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Animations/Using">MDN · Using CSS animations</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion">MDN · Prefers reduced motion</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/dark-mode/">အရင်သင်ခန်းစာ · Light Theme နဲ့ Dark Theme</a>
+<a href="/docs/read/my/css/reference/">နောက်သင်ခန်းစာ · CSS Properties အမြန်ရှာရန်</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

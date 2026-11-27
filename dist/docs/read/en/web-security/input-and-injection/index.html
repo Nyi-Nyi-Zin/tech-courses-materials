@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A rename request contains a proposed title. First decide which values the application accepts. Then pass the accepted value to the database as data, keeping it separate from query instructions.">
+  <title>Input Validation and Injection Prevention · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/input-and-injection/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/input-and-injection/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/input-and-injection/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/input-and-injection/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Input Validation and Injection Prevention</h1>
+  
+  <p class="intro">A rename request contains a proposed title. First decide which values the application accepts. Then pass the accepted value to the database as data, keeping it separate from query instructions.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/input-and-injection">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#validation">Validate type, length, and business rules on the server</a></li>
+<li><a href="#parameterized-queries">Bind SQL values and allowlist structural choices</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="validation">
+  <h2>Validate type, length, and business rules on the server</h2>
+  <p>The browser can give quick feedback, but the server validates all inputs before saving. A title may contain an apostrophe. Trim surrounding whitespace and apply the product length rule. Also validate relationships, such as an end date following a start date. Accept only fields the operation can change.</p>
+
+<pre><code>function readTitle(value) {
+  if (typeof value !== &quot;string&quot;) return null;
+  const title = value.trim();
+  const length = Array.from(title).length;
+  return length &gt;= 1 &amp;&amp; length &lt;= 120 ? title : null;
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="parameterized-queries">
+  <h2>Bind SQL values and allowlist structural choices</h2>
+  <p>With a PostgreSQL client, placeholders keep the query structure fixed even when the title contains punctuation. Column names and sort directions must come from trusted choices in your code. For other interpreters, choose APIs that accept structured arguments. Prefer a filesystem API to constructing shell commands for file operations.</p>
+
+<pre><code>const result = await pool.query(
+  &quot;SELECT id, title FROM documents WHERE owner_id = $1 AND title = $2&quot;,
+  [session.userId, &quot;Editor&#39;s notes&quot;]
+);</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html">OWASP · Input validation</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">OWASP · SQL injection prevention</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/xss-and-browser-headers/">Previous lesson · Cross-Site Scripting, CSP, and Clickjacking</a>
+<a href="/docs/read/en/web-security/api-security/">Next lesson · API Security and Resource Limits</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A browser can attach a session cookie automatically. For actions such as changing a recovery email, the server needs evidence that the request came through the intended application flow.">
+  <title>Cross-Site Request Forgery (CSRF) · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/csrf/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/csrf/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/csrf/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/csrf/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Cross-Site Request Forgery (CSRF)</h1>
+  
+  <p class="intro">A browser can attach a session cookie automatically. For actions such as changing a recovery email, the server needs evidence that the request came through the intended application flow.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/csrf">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#csrf-token">Bind a form submission to its session</a></li>
+<li><a href="#safe-methods">Keep reads and changes separate</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="csrf-token">
+  <h2>Bind a form submission to its session</h2>
+  <p>CSRF occurs when another site causes a signed-in browser to send an unwanted action. Use the framework’s CSRF middleware for cookie-authenticated changes. In this template the server inserts a session-bound token. The middleware verifies it before the handler saves a change. Keep the token out of URLs and logs.</p>
+
+<pre><code>&lt;form action=&quot;/settings/email&quot; method=&quot;post&quot;&gt;
+  &lt;input type=&quot;hidden&quot; name=&quot;csrf_token&quot; value=&quot;{{ csrf_token }}&quot;&gt;
+  &lt;label&gt;New email &lt;input type=&quot;email&quot; name=&quot;email&quot; required&gt;&lt;/label&gt;
+  &lt;button&gt;Save email&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="safe-methods">
+  <h2>Keep reads and changes separate</h2>
+  <p>Keep GET read-only. Verify the CSRF token on state-changing requests and apply relevant Origin checks. SameSite cookies add protection. A request that fails verification must leave the stored record untouched.</p>
+
+<pre><code>GET  /settings/email    Show the form
+POST /settings/email    Verify session and CSRF token, then validate the change
+Missing token           Reject the request and preserve the current email</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html">OWASP · CSRF prevention</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie">MDN · SameSite cookies</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/authorization/">Previous lesson · Authorization and Object-Level Access Control</a>
+<a href="/docs/read/en/web-security/xss-and-browser-headers/">Next lesson · Cross-Site Scripting, CSP, and Clickjacking</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

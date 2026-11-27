@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Draw histograms to show how numeric observations are distributed across bins.">
+  <title>pandas.DataFrame.hist · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/DataFrame.hist/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/DataFrame.hist/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/DataFrame.hist">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>DataFrame</span><a href="/docs/read/my/pandas/api/DataFrame.hist/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>DataFrame.<wbr>hist</code></h1>
+    <p class="article-version">pandas 3.1.1 · DataFrame · <span lang="en">method</span></p>
+    <p class="intro">Draw histograms to show how numeric observations are distributed across bins.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Inspect the call</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">DataFrame.hist(…)</code> <span>Full signature</span></summary><pre><code lang="en">DataFrame.hist(
+    data,
+    column=None,
+    by=None,
+    grid=True,
+    xlabelsize=None,
+    xrot=None,
+    ylabelsize=None,
+    yrot=None,
+    ax=None,
+    sharex=False,
+    sharey=False,
+    figsize=None,
+    layout=None,
+    bins=10,
+    backend=None,
+    legend=False,
+    **kwargs,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Inspect the call</h2>
+      <p>Run this code to inspect the callable and its parameters. Its data, backend, or environment is needed to execute the operation itself.</p>
+      <label><span>Python code</span><textarea rows="16" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import importlib
+from inspect import signature
+
+path = &#39;pandas.DataFrame.hist&#39;
+parts = path.split(&quot;.&quot;)
+for end in range(len(parts), 0, -1):
+    try:
+        operation = importlib.import_module(&quot;.&quot;.join(parts[:end]))
+        break
+    except ImportError:
+        continue
+
+for name in parts[end:]:
+    operation = getattr(operation, name)
+
+print(path)
+print(signature(operation))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>data</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>DataFrame</span><p>Provide the input data read, transformed, or stored by this call.</p></td></tr>
+<tr><th scope="row"><code>column</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str or sequence</span><p>Identify the column or columns to use.</p></td></tr>
+<tr><th scope="row"><code>by</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>object</span><p>Specify the labels, mapping, or values that determine the sort or grouping.</p></td></tr>
+<tr><th scope="row"><code>grid</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>Choose whether the plot displays grid lines.</p></td></tr>
+<tr><th scope="row"><code>xlabelsize</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>int</span><p>Set the size of horizontal-axis tick labels.</p></td></tr>
+<tr><th scope="row"><code>xrot</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>float</span></td></tr>
+<tr><th scope="row"><code>ylabelsize</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>int</span><p>Set the size of vertical-axis tick labels.</p></td></tr>
+<tr><th scope="row"><code>yrot</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>float</span></td></tr>
+<tr><th scope="row"><code>ax</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>Matplotlib axes object</span><p>Provide the existing Matplotlib axes on which to draw.</p></td></tr>
+<tr><th scope="row"><code>sharex</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Choose whether subplots share their horizontal axis.</p></td></tr>
+<tr><th scope="row"><code>sharey</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Choose whether subplots share their vertical axis.</p></td></tr>
+<tr><th scope="row"><code>figsize</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>tuple</span><p>Set the figure width and height as a pair, in inches.</p></td></tr>
+<tr><th scope="row"><code>layout</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>tuple</span><p>Set the subplot grid shape as a pair of dimensions.</p></td></tr>
+<tr><th scope="row"><code>bins</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>10</code></td>
+      <td><span>int or sequence</span><p>Set a number of bins or provide bin boundaries.</p></td></tr>
+<tr><th scope="row"><code>backend</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str</span></td></tr>
+<tr><th scope="row"><code>legend</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Choose whether to display a legend.</p></td></tr>
+<tr><th scope="row"><code>**kwargs</code></th>
+      <td>Optional<br><small>Additional keyword arguments</small></td>
+      <td></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>np.ndarray</p></section>
+    <section class="article-section"><h2>Example for a local Python session</h2><pre><code lang="en">import pandas as pd
+import matplotlib
+frame = pd.DataFrame({&quot;units&quot;: [2., 5., 7.], &quot;price&quot;: [4., 3., 2.]})
+print(frame.hist(column=&quot;units&quot;))</code></pre></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.hist.html#pandas.DataFrame.hist">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/DataFrame.head/"><span>Previous in this category</span><strong>pandas.DataFrame.head</strong></a><a href="/docs/read/en/pandas/api/DataFrame.idxmax/"><span>Next in this category</span><strong>pandas.DataFrame.idxmax</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

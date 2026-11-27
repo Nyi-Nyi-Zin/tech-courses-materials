@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Draw pairwise scatter plots and univariate plots for numeric DataFrame columns.">
+  <title>pandas.plotting.scatter_matrix · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/plotting.scatter_matrix/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/plotting.scatter_matrix/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/plotting.scatter_matrix">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Plotting</span><a href="/docs/read/my/pandas/api/plotting.scatter_matrix/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>plotting.<wbr>scatter_matrix</code></h1>
+    <p class="article-version">pandas 3.1.1 · Plotting · <span lang="en">function</span></p>
+    <p class="intro">Draw pairwise scatter plots and univariate plots for numeric DataFrame columns.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Inspect the call</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">pd.plotting.scatter_matrix(…)</code> <span>Full signature</span></summary><pre><code lang="en">pd.plotting.scatter_matrix(
+    frame,
+    alpha=0.5,
+    figsize=None,
+    ax=None,
+    grid=False,
+    diagonal=&#39;hist&#39;,
+    marker=&#39;.&#39;,
+    density_kwds=None,
+    hist_kwds=None,
+    range_padding=0.05,
+    **kwargs,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Inspect the call</h2>
+      <p>Run this code to inspect the callable and its parameters. Its data, backend, or environment is needed to execute the operation itself.</p>
+      <label><span>Python code</span><textarea rows="16" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import importlib
+from inspect import signature
+
+path = &#39;pandas.plotting.scatter_matrix&#39;
+parts = path.split(&quot;.&quot;)
+for end in range(len(parts), 0, -1):
+    try:
+        operation = importlib.import_module(&quot;.&quot;.join(parts[:end]))
+        break
+    except ImportError:
+        continue
+
+for name in parts[end:]:
+    operation = getattr(operation, name)
+
+print(path)
+print(signature(operation))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>frame</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>DataFrame</span><p>Supply the DataFrame the function processes.</p></td></tr>
+<tr><th scope="row"><code>alpha</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>0.5</code></td>
+      <td><span>float</span><p>Supply the factor controlling the rate of weight decay, or a transparency for a plot.</p></td></tr>
+<tr><th scope="row"><code>figsize</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>(float,float)</span><p>Set the figure width and height as a pair, in inches.</p></td></tr>
+<tr><th scope="row"><code>ax</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>Matplotlib axis object</span><p>Provide the existing Matplotlib axes on which to draw.</p></td></tr>
+<tr><th scope="row"><code>grid</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Choose whether the plot displays grid lines.</p></td></tr>
+<tr><th scope="row"><code>diagonal</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>&#39;hist&#39;</code></td>
+      <td><span>{&#39;hist&#39;, &#39;kde&#39;}</span></td></tr>
+<tr><th scope="row"><code>marker</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>&#39;.&#39;</code></td>
+      <td><span>str</span></td></tr>
+<tr><th scope="row"><code>density_kwds</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>keywords</span></td></tr>
+<tr><th scope="row"><code>hist_kwds</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>keywords</span></td></tr>
+<tr><th scope="row"><code>range_padding</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>0.05</code></td>
+      <td><span>float</span></td></tr>
+<tr><th scope="row"><code>**kwargs</code></th>
+      <td>Optional<br><small>Additional keyword arguments</small></td>
+      <td></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>numpy.ndarray</p></section>
+    <section class="article-section"><h2>Example for a local Python session</h2><pre><code lang="en">import pandas as pd
+import matplotlib
+frame = pd.DataFrame({&quot;team&quot;: [&quot;A&quot;, &quot;A&quot;, &quot;B&quot;], &quot;units&quot;: [2., 5., 7.], &quot;price&quot;: [4., 3., 2.]})
+print(pd.plotting.scatter_matrix(frame))</code></pre></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.plotting.scatter_matrix.html#pandas.plotting.scatter_matrix">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/plotting.register_matplotlib_converters/"><span>Previous in this category</span><strong>pandas.plotting.register_matplotlib_converters</strong></a><a href="/docs/read/en/pandas/api/plotting.table/"><span>Next in this category</span><strong>pandas.plotting.table</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

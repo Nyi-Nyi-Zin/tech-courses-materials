@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ပြန်သုံးမယ့် logic ကို provider ထဲ ထားပါ။ Module က feature နဲ့ဆိုင်တဲ့ providers နဲ့ controllers ကို register လုပ်ပေးပါတယ်။">
+  <title>Providers၊ Modules နှင့် Dependency Injection · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/providers/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/providers/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/providers/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#nestjs">သင်ခန်းစာအားလုံး · NestJS</a> <a href="/docs/read/en/nestjs/providers/" lang="en" hreflang="en">English</a></nav>
+  <h1>Providers၊ Modules နှင့် Dependency Injection</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">ပြန်သုံးမယ့် logic ကို provider ထဲ ထားပါ။ Module က feature နဲ့ဆိုင်တဲ့ providers နဲ့ controllers ကို register လုပ်ပေးပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/nestjs/providers">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#service">Controller ထဲ Service Inject လုပ်ခြင်း</a></li>
+<li><a href="#visibility">Modules ကြား Providers မျှဝေခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="service">
+  <h2>Controller ထဲ Service Inject လုပ်ခြင်း</h2>
+  <p>Service မှာ Injectable ထည့်ပြီး providers ထဲ register လုပ်ပါ။ Controller က constructor မှာ အဲဒီ service ကို တောင်းနိုင်ပါတယ်။ Nest က controller ဆောက်တဲ့အခါ dependency ကို ထည့်ပေးပါတယ်။</p>
+
+<pre><code>import { Controller, Get, Injectable, Module } from &quot;@nestjs/common&quot;;
+
+@Injectable()
+class CatalogService {
+  list() {
+    return [&quot;Pen&quot;, &quot;Notebook&quot;];
+  }
+}
+
+@Controller(&quot;catalog&quot;)
+class CatalogController {
+  constructor(private readonly catalog: CatalogService) {}
+
+  @Get()
+  list() {
+    return this.catalog.list();
+  }
+}
+
+@Module({ controllers: [CatalogController], providers: [CatalogService] })
+export class CatalogModule {}</code></pre>
+
+
+</section>
+<section class="article-section" id="visibility">
+  <h2>Modules ကြား Providers မျှဝေခြင်း</h2>
+  <p>ပုံမှန်အားဖြင့် provider က သူ့ module ထဲမှာ သုံးပါတယ်။ တခြား module ကနေ သုံးဖို့ provider ကို export လုပ်ပြီး လိုတဲ့ module မှာ အဲဒီ module ကို import လုပ်ပါ။ App ထဲ ပါစေချင်တဲ့ feature module ကို root module ရဲ့ imports မှာ ထည့်ပါ။</p>
+
+<pre><code>import { Module } from &quot;@nestjs/common&quot;;
+import { CatalogService } from &quot;./catalog.service&quot;;
+import { OrdersController } from &quot;./orders.controller&quot;;
+
+@Module({ providers: [CatalogService], exports: [CatalogService] })
+class CatalogModule {}
+
+@Module({ imports: [CatalogModule], controllers: [OrdersController] })
+class OrdersModule {}
+
+@Module({ imports: [OrdersModule] })
+export class AppModule {}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.nestjs.com/providers">Providers</a></li>
+<li><a href="https://docs.nestjs.com/modules">Modules</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/nestjs/setup/">အရင်သင်ခန်းစာ · App စပြီး Route တစ်ခု ရေးခြင်း</a>
+<a href="/docs/read/my/nestjs/validation/">နောက်သင်ခန်းစာ · Requests Validate လုပ်ပြီး Routes စမ်းခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

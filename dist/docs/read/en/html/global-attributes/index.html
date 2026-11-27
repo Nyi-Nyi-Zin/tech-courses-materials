@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The previous lesson used id on a link and on a heading. That works because id is a global attribute. Global attributes can be written on any HTML element. The result depends on what the attribute does and where it is used.">
+  <title>Global Attributes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/global-attributes/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/global-attributes/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/global-attributes/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/global-attributes/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Global Attributes</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">The previous lesson used id on a link and on a heading. That works because id is a global attribute. Global attributes can be written on any HTML element. The result depends on what the attribute does and where it is used.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/global-attributes">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#id">Identify One Element with id</a></li>
+<li><a href="#class">Share a Class Across Elements</a></li>
+<li><a href="#style">Apply CSS Directly with style</a></li>
+<li><a href="#title">Add Supplementary Information with title</a></li>
+<li><a href="#lang">Declare the Language with lang</a></li>
+<li><a href="#hidden">Hide Content with hidden</a></li>
+<li><a href="#data-attributes">Store Page Data with data-*</a></li>
+<li><a href="#tabindex">Include an Element in Tab Navigation with tabindex</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="id">
+  <h2>Identify One Element with id</h2>
+  <p>Give each id a unique value on the page. In this example, the link uses #schedule to find the heading with id=&quot;schedule&quot;.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Identify One Element with id&lt;/title&gt;
+  &lt;style&gt;
+    h2:target, h2:focus { outline: 2px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;a href=&quot;#schedule&quot;&gt;Jump to schedule&lt;/a&gt;
+  &lt;h1&gt;Learning Center&lt;/h1&gt;
+  &lt;p&gt;Registration opens on Monday.&lt;/p&gt;
+  &lt;h2 id=&quot;schedule&quot;&gt;Class Schedule&lt;/h2&gt;
+  &lt;p&gt;Classes begin at 10:00 AM.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Click Jump to schedule to move to the Class Schedule heading.</p>
+
+</section>
+<section class="article-section" id="class">
+  <h2>Share a Class Across Elements</h2>
+  <p>Several elements can use the same class. A CSS selector such as .notice can style every element that has the notice class.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Share a Class Across Elements&lt;/title&gt;
+  &lt;style&gt;
+    .notice { color: teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p class=&quot;notice&quot;&gt;Registration opens on Monday.&lt;/p&gt;
+  &lt;p class=&quot;notice&quot;&gt;Bring a notebook.&lt;/p&gt;
+  &lt;p&gt;Room 2 is on the first floor.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The two notices are teal. Add class=&quot;notice&quot; to the last paragraph to give it the same color.</p>
+
+</section>
+<section class="article-section" id="style">
+  <h2>Apply CSS Directly with style</h2>
+  <p>The style attribute applies CSS directly to the element it is written on. To reuse a style across several elements, use a class like the one in the previous example.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Apply CSS Directly with style&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p style=&quot;color: teal;&quot;&gt;Registration is open.&lt;/p&gt;
+  &lt;p&gt;Classes begin at 10:00 AM.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first paragraph is teal. Change teal to navy and run again.</p>
+
+</section>
+<section class="article-section" id="title">
+  <h2>Add Supplementary Information with title</h2>
+  <p>The title attribute adds supplementary information about an element. A desktop browser may show it as a tooltip when you point at the element. Put essential information in the visible text so people using touchscreens and keyboards can read it too.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Add Supplementary Information with title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p title=&quot;Last reviewed on Monday&quot;&gt;The class begins at 10:00 AM.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> On a desktop browser, point at the text to see the supplementary note.</p>
+
+</section>
+<section class="article-section" id="lang">
+  <h2>Declare the Language with lang</h2>
+  <p>Set lang on &lt;html&gt; to declare the default language. If part of the page uses a different language or regional variant, set lang on that element. In this example, the document uses en and the notice is marked en-GB for British English. Assistive tools can use this information when reading text aloud.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Declare the Language with lang&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p lang=&quot;en-GB&quot;&gt;The centre opens at 9:00 AM.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The notice is visible. Look at the opening &lt;html&gt; and &lt;p&gt; tags in the code to see the two language settings.</p>
+
+</section>
+<section class="article-section" id="hidden">
+  <h2>Hide Content with hidden</h2>
+  <p>Use hidden when a piece of content should be hidden from the current page view. Remove the attribute to display it again.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Hide Content with hidden&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Registration is open.&lt;/p&gt;
+  &lt;p hidden&gt;Seat assignments will appear here.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Only the first paragraph appears. Delete hidden from the second paragraph and run again to show it.</p>
+
+</section>
+<section class="article-section" id="data-attributes">
+  <h2>Store Page Data with data-*</h2>
+  <p>Use a data-* attribute to attach a value for your page’s code to read. Here the attribute data-course-id holds HTML101. JavaScript reads that value with dataset.courseId.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Store Page Data with data-*&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button type=&quot;button&quot; id=&quot;course&quot; data-course-id=&quot;HTML101&quot;&gt;Show course ID&lt;/button&gt;
+  &lt;p id=&quot;result&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const course = document.querySelector(&quot;#course&quot;);
+    const result = document.querySelector(&quot;#result&quot;);
+
+    course.addEventListener(&quot;click&quot;, () =&gt; {
+      result.textContent = &quot;Course ID: &quot; + course.dataset.courseId;
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Click Show course ID to display Course ID: HTML101. Change the value in data-course-id and try again.</p>
+
+</section>
+<section class="article-section" id="tabindex">
+  <h2>Include an Element in Tab Navigation with tabindex</h2>
+  <p>tabindex=&quot;0&quot; allows an element to receive keyboard focus in the page’s natural tab order. Buttons and links with href already receive keyboard focus by default.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Include an Element in Tab Navigation with tabindex&lt;/title&gt;
+  &lt;style&gt;
+    :focus-visible { outline: 2px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button type=&quot;button&quot;&gt;Start&lt;/button&gt;
+  &lt;p tabindex=&quot;0&quot;&gt;Read the class schedule.&lt;/p&gt;
+  &lt;button type=&quot;button&quot;&gt;Continue&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Tab to the Start button, then press Tab again. Focus moves to the paragraph, and the next Tab moves to Continue.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">MDN · Global attributes</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/dom.html#global-attributes">WHATWG · Global attributes</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/standard-attributes/">Previous lesson · Standard HTML Attributes</a>
+<a href="/docs/read/en/html/doctype/">Next lesson · HTML Doctype and Browser Modes</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

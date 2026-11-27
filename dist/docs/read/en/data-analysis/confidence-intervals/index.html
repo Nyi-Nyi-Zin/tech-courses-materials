@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interpret a confidence interval and bootstrap a statistic when resampling matches the data design.">
+  <title>Estimate uncertainty with confidence intervals · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/confidence-intervals/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/confidence-intervals/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/confidence-intervals/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#data-analysis">All documentation · Data Analysis</a> <a href="/docs/read/my/data-analysis/confidence-intervals/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Estimate uncertainty with confidence intervals</h1>
+  
+  <p class="intro">Interpret a confidence interval and bootstrap a statistic when resampling matches the data design.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/data-analysis/confidence-intervals">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#interpret">Read a 95 percent confidence interval</a></li>
+<li><a href="#bootstrap">Bootstrap the mean of independent observations</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="interpret">
+  <h2>Read a 95 percent confidence interval</h2>
+  <p>Under its assumptions, a 95 percent confidence-interval procedure captures the fixed population parameter in about 95 percent of repeated samples. A confidence interval for a mean describes uncertainty about the mean. Predicting individual future values needs a different interval.</p>
+
+
+
+
+</section>
+<section class="article-section" id="bootstrap">
+  <h2>Bootstrap the mean of independent observations</h2>
+  <p>A bootstrap draws samples with replacement and recalculates the statistic. This example uses a percentile interval and a fixed random seed. Match the resampling unit to the design, especially with repeated orders, clustered users, or time series.</p>
+
+<pre><code>import numpy as np
+from scipy.stats import bootstrap
+
+units = np.array([8, 10, 12, 14, 16, 18])
+result = bootstrap((units,), np.mean, confidence_level=0.95, method=&quot;percentile&quot;,
+                   n_resamples=4_999, rng=np.random.default_rng(42))
+low, high = result.confidence_interval
+print(f&quot;Mean: {units.mean():.1f}&quot;)
+print(f&quot;95% CI: {low:.2f} to {high:.2f}&quot;)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">Mean: 13.0
+95% CI: 10.33 to 15.67</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST confidence limits for the mean</a></li>
+<li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html">scipy.stats.bootstrap</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/data-analysis/distributions-and-outliers/">Previous lesson · Summarize distributions and investigate outliers</a>
+<a href="/docs/read/en/data-analysis/hypothesis-testing/">Next lesson · Hypothesis testing and experiment results</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

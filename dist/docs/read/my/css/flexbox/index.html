@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Flexbox က အကွက်အစုကို တစ်ကြိမ်မှာ ဦးတည်ချက်တစ်ခုအတိုင်း စီပေးပါတယ်။ display: flex ပါတဲ့ အပြင်အကွက်က flex container ပါ။ အဲဒါရဲ့ တိုက်ရိုက် children တွေကို flex items လို့ ခေါ်ပါတယ်။">
+  <title>Flexbox နဲ့ အတန်းလိုက် စီခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/flexbox/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/flexbox/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/flexbox/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/flexbox/" lang="en" hreflang="en">English</a></nav>
+  <h1>Flexbox နဲ့ အတန်းလိုက် စီခြင်း</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Flexbox က အကွက်အစုကို တစ်ကြိမ်မှာ ဦးတည်ချက်တစ်ခုအတိုင်း စီပေးပါတယ်။ display: flex ပါတဲ့ အပြင်အကွက်က flex container ပါ။ အဲဒါရဲ့ တိုက်ရိုက် children တွေကို flex items လို့ ခေါ်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/flexbox">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#axis">Main Axis ရဲ့ ဦးတည်ချက် ရွေးခြင်း</a></li>
+<li><a href="#alignment">Axis တစ်ခုစီမှာ Items ညှိခြင်း</a></li>
+<li><a href="#wrap">နေရာမလောက်ရင် Flex Item တွေ လိုင်းဆင်းခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="axis">
+  <h2>Main Axis ရဲ့ ဦးတည်ချက် ရွေးခြင်း</h2>
+  <p>Main axis ဆိုတာ items တွေ တန်းစီမယ့် ဦးတည်ချက်ပါ။ ဒီမှာ flex-direction: row က အလျားလိုက် စာရေးတဲ့အတိုင်း စီပါတယ်။ column ဆိုရင် ဒေါင်လိုက် စီပါတယ်။ Cross axis က main axis ကို ကန့်လန့်ဖြတ်တဲ့ ဦးတည်ချက်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Choose the direction of the main axis&lt;/title&gt;
+  &lt;style&gt;
+    .cards { display: flex; flex-direction: row; gap: 12px; }
+    .cards &gt; div { background: #d6efea; padding: 8px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;cards&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အကွက်သုံးခု အတန်းတစ်တန်းပေါ် ပါလာပါမယ်။ row ကို column ပြောင်းရင် အောက်ဆင်းပြီး စီပါမယ်။</p>
+
+</section>
+<section class="article-section" id="alignment">
+  <h2>Axis တစ်ခုစီမှာ Items ညှိခြင်း</h2>
+  <p>justify-content က main axis ပေါ်က ပိုနေတဲ့နေရာကို ခွဲပေးပါတယ်။ align-items က ဖြတ်နေတဲ့ axis ပေါ်မှာ items တွေကို ညှိပါတယ်။ ဒီ row နမူနာမှာ ပထမတစ်ခုက အလျားလိုက်၊ ဒုတိယတစ်ခုက ဒေါင်လိုက် ဖြစ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Align items on each axis&lt;/title&gt;
+  &lt;style&gt;
+    .cards { display: flex; min-height: 100px; justify-content: space-between; align-items: center; border: 2px solid; }
+    .cards &gt; div { background: #d6efea; padding: 8px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;cards&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အကွက်တွေက အတန်းအကျယ်တစ်လျှောက် ခွဲစီပြီး အမြင့်အလယ်မှာ ရှိပါမယ်။</p>
+
+</section>
+<section class="article-section" id="wrap">
+  <h2>နေရာမလောက်ရင် Flex Item တွေ လိုင်းဆင်းခြင်း</h2>
+  <p>Flexbox မှာ မူလအားဖြင့် လိုင်းတစ်ကြောင်းပဲ သုံးပါတယ်။ flex-wrap: wrap ဆို လိုင်းထပ်ဆင်းနိုင်ပါတယ်။ Item တစ်ခုရဲ့ စတင်အရွယ်ကို flex-basis နဲ့ ပေးနိုင်ပါတယ်။ ဒီမှာ 100px စီယူပါတယ်။ gap က item တွေကြားနဲ့ လိုင်းတွေကြား အကွာအဝေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Wrap items when a row runs out of room&lt;/title&gt;
+  &lt;style&gt;
+    .cards { display: flex; flex-wrap: wrap; width: 240px; gap: 10px; }
+    .cards &gt; div { flex-basis: 100px; background: #d6efea; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;cards&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen နဲ့ Notebook က ပထမလိုင်းမှာ ဆံ့ပြီး Folder က ဒုတိယလိုင်း ဆင်းပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.w3.org/TR/css-flexbox-1/">W3C · Flexbox</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Flexible_box_layout/Basic_concepts">MDN · Basic concepts of flexbox</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/spacing-and-visibility/">အရင်သင်ခန်းစာ · Margin၊ Overflow နဲ့ Visibility</a>
+<a href="/docs/read/my/css/grid/">နောက်သင်ခန်းစာ · Grid နဲ့ Row၊ Column စီခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

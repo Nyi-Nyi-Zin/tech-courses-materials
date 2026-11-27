@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CSS (Cascading Style Sheets) describes how HTML looks. HTML gives a paragraph its role on the page; CSS can change its color, spacing, and position. This lesson uses the HTML document structure you already built.">
+  <title>Your first CSS rule · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/getting-started/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/getting-started/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/getting-started/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/getting-started/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Your first CSS rule</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">CSS (Cascading Style Sheets) describes how HTML looks. HTML gives a paragraph its role on the page; CSS can change its color, spacing, and position. This lesson uses the HTML document structure you already built.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/getting-started">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#rule">Read one CSS rule</a></li>
+<li><a href="#style">Where does &lt;style&gt; go?</a></li>
+<li><a href="#stylesheet">Link a separate CSS file</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="rule">
+  <h2>Read one CSS rule</h2>
+  <p>A rule selects HTML elements and lists what to change. Here p is the selector, so the rule applies to paragraph elements. The braces hold declarations. In color: teal, color is the property you change, and teal is the value you give it. A semicolon ends the declaration.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Read one CSS rule&lt;/title&gt;
+  &lt;style&gt;
+    p { color: teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Both paragraphs are teal. Change teal to purple and reload to see both change.</p>
+
+</section>
+<section class="article-section" id="style">
+  <h2>Where does &lt;style&gt; go?</h2>
+  <p>The previous example puts a &lt;style&gt; element in &lt;head&gt;. The browser reads its CSS when it opens that HTML file. This is convenient for a small example you can copy into one file.</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;CSS in the head&lt;/title&gt;
+    &lt;style&gt;
+      p { color: teal; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Registration is open.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="stylesheet">
+  <h2>Link a separate CSS file</h2>
+  <p>A stylesheet can live in its own .css file. In head, rel=&quot;stylesheet&quot; tells the browser what the link is for, and href gives the file location. With both files in the same folder, the file name is enough.</p>
+<p class="example-setup"><strong>How to try it</strong> Save the rule below in style.css beside the previous .html file. Remove its &lt;style&gt; block. In its place, inside &lt;head&gt;, write &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;. Save both files and reload.</p>
+<pre><code>p { color: purple; }</code></pre>
+<p class="example-result"><strong>What to expect</strong> The browser reads style.css and makes the paragraphs purple.</p>
+<p class="example-check"><strong>If the result differs</strong> If the text stays unchanged, check that the link and file use exactly the same name and that both files are saved in the same folder.</p>
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Getting_started">MDN · Getting started with CSS</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/cascade/">Next lesson · Selectors, cascade, and inheritance</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

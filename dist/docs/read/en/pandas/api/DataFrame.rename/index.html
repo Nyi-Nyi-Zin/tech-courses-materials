@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Change labels using a mapping or callable. A Series can also receive a new name.">
+  <title>pandas.DataFrame.rename · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/DataFrame.rename/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/DataFrame.rename/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/DataFrame.rename">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>DataFrame</span><a href="/docs/read/my/pandas/api/DataFrame.rename/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>DataFrame.<wbr>rename</code></h1>
+    <p class="article-version">pandas 3.1.1 · DataFrame · <span lang="en">method</span></p>
+    <p class="intro">Change labels using a mapping or callable. A Series can also receive a new name.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">DataFrame.rename(…)</code> <span>Full signature</span></summary><pre><code lang="en">DataFrame.rename(
+    mapper=None,
+    *,
+    index=None,
+    columns=None,
+    axis=None,
+    copy=…,
+    inplace=…,
+    level=None,
+    errors=&#39;ignore&#39;,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="7" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+orders = pd.DataFrame({
+    &quot;team&quot;: [&quot;North&quot;, &quot;North&quot;, &quot;South&quot;],
+    &quot;day&quot;: pd.to_datetime([&quot;2025-01-01&quot;, &quot;2025-01-02&quot;, &quot;2025-01-03&quot;]),
+    &quot;units&quot;: [4, None, 7],
+})
+print(orders.rename(columns={&quot;units&quot;: &quot;quantity&quot;}))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>mapper</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>dict-like or function</span><p>Provide a dictionary or callable that maps input values or labels.</p></td></tr>
+<tr><th scope="row"><code>index</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict-like or function</span><p>Supply row labels or control how existing row labels are used.</p></td></tr>
+<tr><th scope="row"><code>columns</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict-like or function</span><p>Supply column labels or control how columns are handled.</p></td></tr>
+<tr><th scope="row"><code>axis</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>{0 or &#39;index&#39;, 1 or &#39;columns&#39;}</span><p>Choose which axis the operation acts on. The accepted axis labels depend on the receiver.</p></td></tr>
+<tr><th scope="row"><code>copy</code></th>
+      <td>Optional<br><small>Keyword only</small></td>
+      <td><span>bool</span><p>Control whether data is copied where the API supports that choice.</p></td></tr>
+<tr><th scope="row"><code>inplace</code></th>
+      <td>Optional<br><small>Keyword only</small></td>
+      <td><span>bool</span><p>Choose whether to change the existing object. Where supported, an in-place call typically returns None.</p></td></tr>
+<tr><th scope="row"><code>level</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>int or level name</span><p>Choose an index level by name or integer position.</p></td></tr>
+<tr><th scope="row"><code>errors</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;ignore&#39;</code></td>
+      <td><span>{&#39;ignore&#39;, &#39;raise&#39;}</span><p>Choose how to handle invalid input or failed operations. The available options depend on the API.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>DataFrame or None</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.rename.html#pandas.DataFrame.rename">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/DataFrame.reindex_like/"><span>Previous in this category</span><strong>pandas.DataFrame.reindex_like</strong></a><a href="/docs/read/en/pandas/api/DataFrame.rename_axis/"><span>Next in this category</span><strong>pandas.DataFrame.rename_axis</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

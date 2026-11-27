@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="တူညီတဲ့ key ပါတဲ့ data ကို ထပ်ရေးတဲ့အခါ record တစ်ခုတည်းကိုပဲ ရည်ညွှန်းချင်ရင် upsert သုံးပါ။">
+  <title>ON CONFLICT နဲ့ Insert သို့ Update လုပ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/upserts/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/upserts/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/upserts/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/upserts/" lang="en" hreflang="en">English</a></nav>
+  <h1>ON CONFLICT နဲ့ Insert သို့ Update လုပ်ခြင်း</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">တူညီတဲ့ key ပါတဲ့ data ကို ထပ်ရေးတဲ့အခါ record တစ်ခုတည်းကိုပဲ ရည်ညွှန်းချင်ရင် upsert သုံးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/upserts">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#constraint">Conflict Key သတ်မှတ်ခြင်း</a></li>
+<li><a href="#skip">Conflict ဖြစ်ရင် ကျော်မကျော် ရွေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="constraint">
+  <h2>Conflict Key သတ်မှတ်ခြင်း</h2>
+  <p>Student 1 နဲ့ course 1 ရဲ့ enrollment မှာ column နှစ်ခုပေါင်းထားတဲ့ primary key ရှိတယ်။ ON CONFLICT က အဲဒီ row ကို ရှာပေးတယ်။ EXCLUDED.enrolled_on က INSERT မှာ ပေးထားတဲ့ ရက်စွဲအသစ်ပါ။ ROLLBACK က မူလရက်စွဲကို ပြန်ထားပေးတယ်။</p>
+
+<pre><code>BEGIN;
+INSERT INTO enrollments (student_id, course_id, enrolled_on)
+VALUES (1, 1, DATE &#39;2026-01-08&#39;)
+ON CONFLICT (student_id, course_id) DO UPDATE
+SET enrolled_on = EXCLUDED.enrolled_on
+RETURNING student_id, course_id, enrolled_on;
+ROLLBACK;</code></pre>
+
+
+</section>
+<section class="article-section" id="skip">
+  <h2>Conflict ဖြစ်ရင် ကျော်မကျော် ရွေးခြင်း</h2>
+  <p>ရှိပြီးသား record ကို ဒီအတိုင်းထားမယ်ဆို DO NOTHING သုံးပါ။ ကျော်သွားတဲ့ row ကို RETURNING က ပြန်မပေးပါဘူး။ ရှိပြီးသား record ကို ဘယ်လိုပြင်မလဲ သတ်မှတ်ထားရင် DO UPDATE သုံးပါ။</p>
+
+<pre><code>INSERT INTO enrollments (student_id, course_id, enrolled_on)
+VALUES (1, 1, DATE &#39;2026-01-10&#39;)
+ON CONFLICT (student_id, course_id) DO NOTHING
+RETURNING student_id, course_id, enrolled_on;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/sql-insert.html">PostgreSQL INSERT</a></li>
+<li><a href="https://www.postgresql.org/docs/19/ddl-constraints.html">Unique constraints</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/window-functions/">အရင်သင်ခန်းစာ · Window Functions နဲ့ Rank နှင့် Total တွက်ခြင်း</a>
+<a href="/docs/read/my/database/roles-and-ownership/">နောက်သင်ခန်းစာ · PostgreSQL User၊ Role နဲ့ Ownership</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

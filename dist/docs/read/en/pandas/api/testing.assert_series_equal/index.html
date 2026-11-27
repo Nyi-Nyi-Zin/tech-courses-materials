@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare two Series in a test, including their values, labels and configured metadata checks.">
+  <title>pandas.testing.assert_series_equal · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/testing.assert_series_equal/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/testing.assert_series_equal/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/testing.assert_series_equal">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Testing, errors, and warnings</span><a href="/docs/read/my/pandas/api/testing.assert_series_equal/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>testing.<wbr>assert_series_equal</code></h1>
+    <p class="article-version">pandas 3.1.1 · Testing, errors, and warnings · <span lang="en">function</span></p>
+    <p class="intro">Compare two Series in a test, including their values, labels and configured metadata checks.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">pd.testing.assert_series_equal(…)</code> <span>Full signature</span></summary><pre><code lang="en">pd.testing.assert_series_equal(
+    left,
+    right,
+    check_dtype=True,
+    check_index_type=&#39;equiv&#39;,
+    check_series_type=True,
+    check_names=True,
+    check_exact=…,
+    check_datetimelike_compat=False,
+    check_categorical=True,
+    check_category_order=True,
+    check_freq=…,
+    check_flags=True,
+    rtol=…,
+    atol=…,
+    obj=&#39;Series&#39;,
+    *,
+    check_index=True,
+    check_like=False,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="7" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+orders = pd.DataFrame({
+    &quot;team&quot;: [&quot;North&quot;, &quot;North&quot;, &quot;South&quot;],
+    &quot;day&quot;: pd.to_datetime([&quot;2025-01-01&quot;, &quot;2025-01-02&quot;, &quot;2025-01-03&quot;]),
+    &quot;units&quot;: [4, None, 7],
+})
+print(pd.testing.assert_series_equal(orders[&quot;units&quot;], orders[&quot;units&quot;].copy()))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>left</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>Series</span><p>Supply the left-hand input or the left endpoint of the interval.</p></td></tr>
+<tr><th scope="row"><code>right</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>Series</span><p>Supply the right-hand input or the right endpoint of the interval.</p></td></tr>
+<tr><th scope="row"><code>check_dtype</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>Choose whether a test requires the two dtypes to match.</p></td></tr>
+<tr><th scope="row"><code>check_index_type</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>&#39;equiv&#39;</code></td>
+      <td><span>bool or {&#39;equiv&#39;}</span></td></tr>
+<tr><th scope="row"><code>check_series_type</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>True</code></td>
+      <td><span>bool</span></td></tr>
+<tr><th scope="row"><code>check_names</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>Choose whether a test compares index, column, or Series names.</p></td></tr>
+<tr><th scope="row"><code>check_exact</code></th>
+      <td>Optional<br><small>Positional or keyword</small></td>
+      <td><span>bool</span><p>Choose whether numeric equality tests require exact values.</p></td></tr>
+<tr><th scope="row"><code>check_datetimelike_compat</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span></td></tr>
+<tr><th scope="row"><code>check_categorical</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>Choose whether a test compares categorical internals.</p></td></tr>
+<tr><th scope="row"><code>check_category_order</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>True</code></td>
+      <td><span>bool</span></td></tr>
+<tr><th scope="row"><code>check_freq</code></th>
+      <td>Optional<br><small>Positional or keyword</small></td>
+      <td><span>bool</span><p>Choose whether a test compares frequency metadata.</p></td></tr>
+<tr><th scope="row"><code>check_flags</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>True</code></td>
+      <td><span>bool</span></td></tr>
+<tr><th scope="row"><code>rtol</code></th>
+      <td>Optional<br><small>Positional or keyword</small></td>
+      <td><span>float</span><p>Set the acceptable relative difference in a numeric equality check.</p></td></tr>
+<tr><th scope="row"><code>atol</code></th>
+      <td>Optional<br><small>Positional or keyword</small></td>
+      <td><span>float</span><p>Set the acceptable absolute difference in a numeric equality check.</p></td></tr>
+<tr><th scope="row"><code>obj</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>&#39;Series&#39;</code></td>
+      <td><span>str</span><p>Provide the pandas object, scalar, or array-like input described in the accepted values.</p></td></tr>
+<tr><th scope="row"><code>check_index</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>True</code></td>
+      <td><span>bool</span></td></tr>
+<tr><th scope="row"><code>check_like</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>False</code></td>
+      <td><span>bool</span></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>None when the checks pass. Raises AssertionError when they fail.</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.testing.assert_series_equal.html#pandas.testing.assert_series_equal">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/testing.assert_index_equal/"><span>Previous in this category</span><strong>pandas.testing.assert_index_equal</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

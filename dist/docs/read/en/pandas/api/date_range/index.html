@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Generate timestamps on a regular schedule and return a DatetimeIndex.">
+  <title>pandas.date_range · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/date_range/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/date_range/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/date_range">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>General functions</span><a href="/docs/read/my/pandas/api/date_range/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>date_range</code></h1>
+    <p class="article-version">pandas 3.1.1 · General functions · <span lang="en">function</span></p>
+    <p class="intro">Generate timestamps on a regular schedule and return a DatetimeIndex.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">pd.date_range(…)</code> <span>Full signature</span></summary><pre><code lang="en">pd.date_range(
+    start=None,
+    end=None,
+    periods=None,
+    freq=None,
+    tz=None,
+    normalize=False,
+    name=None,
+    inclusive=&#39;both&#39;,
+    *,
+    unit=None,
+    ambiguous=&#39;raise&#39;,
+    nonexistent=&#39;raise&#39;,
+    **kwargs,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+print(pd.date_range(&quot;2025-01-01&quot;, periods=3, freq=&quot;D&quot;))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>start</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str or datetime-like</span><p>Supply the start point of a range, slice, or calculation.</p></td></tr>
+<tr><th scope="row"><code>end</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str or datetime-like</span><p>Supply the endpoint of the range or calculation.</p></td></tr>
+<tr><th scope="row"><code>periods</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>int</span><p>Set a count of generated observations or the number of steps to shift or compare.</p></td></tr>
+<tr><th scope="row"><code>freq</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str, Timedelta, datetime.timedelta, or DateOffset</span><p>Specify the frequency or offset, such as &quot;D&quot; for a day or &quot;MS&quot; for a calendar month start.</p></td></tr>
+<tr><th scope="row"><code>tz</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str or tzinfo</span><p>Supply a timezone name or timezone object.</p></td></tr>
+<tr><th scope="row"><code>normalize</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Request normalized output, such as proportions for counts or midnight for datetimes.</p></td></tr>
+<tr><th scope="row"><code>name</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>Hashable</span><p>Set a name or identify the named object used by the operation.</p></td></tr>
+<tr><th scope="row"><code>inclusive</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>&#39;both&#39;</code></td>
+      <td><span>{&quot;both&quot;, &quot;neither&quot;, &quot;left&quot;, &quot;right&quot;}</span><p>Choose whether the start, end, both, or neither boundary is included.</p></td></tr>
+<tr><th scope="row"><code>unit</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>{&#39;s&#39;, &#39;ms&#39;, &#39;us&#39;, &#39;ns&#39;, None}</span><p>Specify the time unit represented by each number or required by the result.</p></td></tr>
+<tr><th scope="row"><code>ambiguous</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;raise&#39;</code></td>
+      <td><span>&#39;infer&#39;, bool-ndarray, &#39;NaT&#39;</span><p>Resolve local times that occur twice when clocks move backward.</p></td></tr>
+<tr><th scope="row"><code>nonexistent</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;raise&#39;</code></td>
+      <td><span>&#39;shift_forward&#39;, &#39;shift_backward&#39;, &#39;NaT&#39;, timedelta</span><p>Resolve local times skipped when clocks move forward.</p></td></tr>
+<tr><th scope="row"><code>**kwargs</code></th>
+      <td>Optional<br><small>Additional keyword arguments</small></td>
+      <td></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>DatetimeIndex</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.date_range.html#pandas.date_range">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/cut/"><span>Previous in this category</span><strong>pandas.cut</strong></a><a href="/docs/read/en/pandas/api/eval/"><span>Next in this category</span><strong>pandas.eval</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

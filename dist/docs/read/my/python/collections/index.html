@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Value တွေကို ဘယ်လိုယူမလဲ၊ ပြင်မလဲ၊ ထပ်နေတာ ဖယ်မလဲဆိုတာနဲ့ ကိုက်တဲ့ collection ရွေးပါ။">
+  <title>Lists၊ Tuples၊ Sets နှင့် Dictionaries · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/python/collections/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/collections/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/collections/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#python">သင်ခန်းစာအားလုံး · Python</a> <a href="/docs/read/en/python/collections/" lang="en" hreflang="en">English</a></nav>
+  <h1>Lists၊ Tuples၊ Sets နှင့် Dictionaries</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">Value တွေကို ဘယ်လိုယူမလဲ၊ ပြင်မလဲ၊ ထပ်နေတာ ဖယ်မလဲဆိုတာနဲ့ ကိုက်တဲ့ collection ရွေးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/python/collections">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#sequence">အစဉ်ရှိတဲ့ Sequences</a></li>
+<li><a href="#unique-and-keyed">ထပ်မနေတဲ့ Value နှင့် Key ဖြင့် ရှာခြင်း</a></li>
+<li><a href="#comprehensions">Comprehension ဖြင့် Collection ဆောက်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="sequence">
+  <h2>အစဉ်ရှိတဲ့ Sequences</h2>
+  <p>List ကို ပြင်နိုင်ပါတယ်။ Tuple ရဲ့ နေရာတွေကို ပြန်အစားထိုးလို့မရပေမယ့် ထဲက object က ပြင်လို့ရတဲ့ အမျိုးအစား ဖြစ်နိုင်ပါတယ်။ Slice မှာ start ပါပြီး stop မပါပါ။ List slice က shallow copy ရပါတယ်။</p>
+
+<pre><code>items = [&quot;Coffee&quot;, &quot;Tea&quot;, &quot;Cake&quot;, &quot;Juice&quot;]
+print(items[1:3])
+print(items[-2:])</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[&#39;Tea&#39;, &#39;Cake&#39;]
+[&#39;Cake&#39;, &#39;Juice&#39;]</pre></div>
+
+
+</section>
+<section class="article-section" id="unique-and-keyed">
+  <h2>ထပ်မနေတဲ့ Value နှင့် Key ဖြင့် ရှာခြင်း</h2>
+  <p>Set မှာ hash လုပ်လို့ရတဲ့ တန်ဖိုးတူတွေကို တစ်ခုပဲ သိမ်းပြီး loop ပတ်တဲ့ အစဉ်ကို အာမမခံပါ။ Dictionary က hash လုပ်လို့ရတဲ့ key အလိုက် value သိမ်းပြီး ထည့်ထားတဲ့အစဉ်ကို ထိန်းထားပါတယ်။ Key မရှိရင် get() နဲ့ default ယူနိုင်ပါတယ်။</p>
+
+<pre><code>orders = [&quot;Tea&quot;, &quot;Coffee&quot;, &quot;Tea&quot;]
+counts = {}
+for item in orders:
+    counts[item] = counts.get(item, 0) + 1
+print(sorted(set(orders)))
+print(counts)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[&#39;Coffee&#39;, &#39;Tea&#39;]
+{&#39;Tea&#39;: 2, &#39;Coffee&#39;: 1}</pre></div>
+
+
+</section>
+<section class="article-section" id="comprehensions">
+  <h2>Comprehension ဖြင့် Collection ဆောက်ခြင်း</h2>
+  <p>List comprehension က condition ကိုက်တဲ့ input တစ်ခုစီအတွက် expression ရလဒ်ကို list ထဲ ထည့်ပါတယ်။ Dict နဲ့ set comprehension မှာ braces သုံးပါတယ်။ Generator expression က လိုအပ်တဲ့အချိန်မှ value ထုတ်ပါတယ်။</p>
+
+<pre><code>quantities = [1, 4, 2, 5]
+print([n * 2 for n in quantities if n &gt; 2])</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[8, 10]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.python.org/3.15/tutorial/datastructures.html">Python data structures</a></li>
+<li><a href="https://docs.python.org/3.15/library/stdtypes.html">Built-in types</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/python/control-flow/">အရင်သင်ခန်းစာ · Conditions၊ Loops နှင့် Pattern Matching</a>
+<a href="/docs/read/my/python/functions/">နောက်သင်ခန်းစာ · Functions၊ Modules နှင့် Type Hints</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A failed permission check and a failed database connection need different responses. Users need a clear outcome. Operators need enough evidence to determine whether access was denied, a dependency failed, or data changed.">
+  <title>Errors, Security Logging, and Incident Response · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/monitoring-and-incidents/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/monitoring-and-incidents/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/monitoring-and-incidents/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/monitoring-and-incidents/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Errors, Security Logging, and Incident Response</h1>
+  
+  <p class="intro">A failed permission check and a failed database connection need different responses. Users need a clear outcome. Operators need enough evidence to determine whether access was denied, a dependency failed, or data changed.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/monitoring-and-incidents">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#fail-closed">Fail safely and preserve consistency</a></li>
+<li><a href="#alert-and-recover">Turn a security event into a response</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="fail-closed">
+  <h2>Fail safely and preserve consistency</h2>
+  <p>If authorization is unavailable, stop the operation. Use a transaction for related writes so a partial change rolls back. Give the user a neutral error and a request ID. Keep stack traces and database details in protected diagnostics. Retry only operations designed to be safe to repeat.</p>
+
+<pre><code>HTTP/1.1 503 Service Unavailable
+Content-Type: application/json
+
+{&quot;message&quot;:&quot;Could not save your changes. Try again later.&quot;,&quot;requestId&quot;:&quot;req-57&quot;}</code></pre>
+
+
+</section>
+<section class="article-section" id="alert-and-recover">
+  <h2>Turn a security event into a response</h2>
+  <p>Record structured events for significant authorization denials, permission changes, and credential rotation. Exclude passwords, tokens, and document contents. Restrict log access and retention. Give important alerts an owner. During an incident, preserve evidence, contain the affected access, recover from a known-good state, and verify the original control before closing.</p>
+
+<pre><code>{&quot;event&quot;:&quot;document.edit.denied&quot;,&quot;actorId&quot;:&quot;user-7&quot;,&quot;requestId&quot;:&quot;req-57&quot;}
+Alert owner     On-call application team
+Recovery check  Revoked sessions are denied; authorized readers can reopen files</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html">OWASP · Logging</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html">OWASP · Error handling</a></li>
+<li><a href="https://owasp.org/Top10/2025/">OWASP Top 10 (2025)</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/secure-deployment/">Previous lesson · Deployment and Software Supply Chain Security</a>
+<a href="/docs/read/en/web-security/owasp-and-release-review/">Next lesson · OWASP Top 10 and Release Verification</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

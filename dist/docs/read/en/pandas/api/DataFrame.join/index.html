@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Combine tables using index labels or a specified key in the calling table.">
+  <title>pandas.DataFrame.join · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/DataFrame.join/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/DataFrame.join/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/DataFrame.join">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>DataFrame</span><a href="/docs/read/my/pandas/api/DataFrame.join/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>DataFrame.<wbr>join</code></h1>
+    <p class="article-version">pandas 3.1.1 · DataFrame · <span lang="en">method</span></p>
+    <p class="intro">Combine tables using index labels or a specified key in the calling table.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">DataFrame.join(…)</code> <span>Full signature</span></summary><pre><code lang="en">DataFrame.join(
+    other,
+    on=None,
+    how=&#39;left&#39;,
+    lsuffix=…,
+    rsuffix=…,
+    sort=False,
+    validate=None,
+    *,
+    suffixes=…,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+frame = pd.DataFrame({&quot;team&quot;: [&quot;A&quot;, &quot;A&quot;, &quot;B&quot;], &quot;units&quot;: [2., 5., 7.], &quot;price&quot;: [4., 3., 2.]})
+print(frame.join(pd.DataFrame({&quot;note&quot;: [&quot;first&quot;, &quot;second&quot;, &quot;third&quot;]})))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>other</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>DataFrame, Series, or a list containing any combination of them</span><p>Supply the second object or value used in the operation.</p></td></tr>
+<tr><th scope="row"><code>on</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str, list of str, or array-like</span><p>Choose the shared key columns or name the axis column used by the operation.</p></td></tr>
+<tr><th scope="row"><code>how</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>&#39;left&#39;</code></td>
+      <td><span>{&#39;left&#39;, &#39;right&#39;, &#39;outer&#39;, &#39;inner&#39;, &#39;cross&#39;, &#39;left_anti&#39;, &#39;right_anti&#39;}</span><p>Choose a policy such as a join type or a missing-value removal rule.</p></td></tr>
+<tr><th scope="row"><code>lsuffix</code></th>
+      <td>Optional<br><small>Positional or keyword</small></td>
+      <td><span>str</span><p>When omitted, the documented default is &#39;&#39;.</p></td></tr>
+<tr><th scope="row"><code>rsuffix</code></th>
+      <td>Optional<br><small>Positional or keyword</small></td>
+      <td><span>str</span><p>When omitted, the documented default is &#39;&#39;.</p></td></tr>
+<tr><th scope="row"><code>sort</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Choose whether the resulting labels or groups are sorted where supported.</p></td></tr>
+<tr><th scope="row"><code>validate</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str</span><p>Check that key multiplicity matches the required relationship, such as &quot;one_to_one&quot; or &quot;many_to_one&quot;.</p></td></tr>
+<tr><th scope="row"><code>suffixes</code></th>
+      <td>Optional<br><small>Keyword only</small></td>
+      <td><span>tuple of (str, str)</span><p>Supply a pair for resolving duplicate column names in joined tables.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>DataFrame</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.join.html#pandas.DataFrame.join">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/DataFrame.itertuples/"><span>Previous in this category</span><strong>pandas.DataFrame.itertuples</strong></a><a href="/docs/read/en/pandas/api/DataFrame.keys/"><span>Next in this category</span><strong>pandas.DataFrame.keys</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

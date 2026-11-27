@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Choose an input format and control types, worksheets, or columns explicitly.">
+  <title>Work with CSV, Excel, Parquet, and SQL · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/data-formats/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/data-formats/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/data-formats/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#pandas">All documentation · pandas</a> <a href="/docs/read/my/pandas/data-formats/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Work with CSV, Excel, Parquet, and SQL</h1>
+  <p class="article-version">3.1.1</p>
+  <p class="intro">Choose an input format and control types, worksheets, or columns explicitly.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/pandas/data-formats">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#formats">Pick a format for the handoff</a></li>
+<li><a href="#sql">Read query results into pandas</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="formats">
+  <h2>Pick a format for the handoff</h2>
+  <p>CSV exchanges plain text but requires explicit dtype and missing-value rules. Excel is useful when people need worksheets. Parquet stores typed columns and can read only selected columns. Install a compatible optional engine such as openpyxl for .xlsx or pyarrow for Parquet.</p>
+
+<pre><code>import pandas as pd
+
+sales = pd.DataFrame({&quot;item&quot;: [&quot;Tea&quot;, &quot;Cake&quot;], &quot;units&quot;: [4, 2]})
+print(sales.to_csv(index=False).strip())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">item,units
+Tea,4
+Cake,2</pre></div>
+
+
+</section>
+<section class="article-section" id="sql">
+  <h2>Read query results into pandas</h2>
+  <p>Use read_sql_query when a database should filter or aggregate data first. Use query parameters for values. This example uses an in-memory SQLite database and needs no database server.</p>
+
+<pre><code>from contextlib import closing
+import sqlite3
+import pandas as pd
+
+with closing(sqlite3.connect(&quot;:memory:&quot;)) as db:
+    db.execute(&quot;CREATE TABLE sales (item TEXT, units INTEGER)&quot;)
+    db.executemany(&quot;INSERT INTO sales VALUES (?, ?)&quot;, [(&quot;Tea&quot;, 4), (&quot;Cake&quot;, 2)])
+    rows = pd.read_sql_query(&quot;SELECT units FROM sales WHERE item = ?&quot;, db, params=(&quot;Tea&quot;,))
+print(rows[&quot;units&quot;].tolist())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[4]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://pandas.pydata.org/docs/user_guide/io.html">pandas input and output tools</a></li>
+<li><a href="https://docs.python.org/3.15/library/sqlite3.html">sqlite3 library reference</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/pandas/window-functions/">Previous lesson · Rolling windows and time zones</a>
+<a href="/docs/read/en/pandas/larger-datasets/">Next lesson · Read and summarize larger datasets</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

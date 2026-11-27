@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Put shared state in the closest common parent and pass values and event handlers to the children.">
+  <title>Share state between components · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/react/shared-state/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/shared-state/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/shared-state/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#react">All documentation · React</a> <a href="/docs/read/my/react/shared-state/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Share state between components</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">Put shared state in the closest common parent and pass values and event handlers to the children.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/react/shared-state">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#lift">Give each value one owner</a></li>
+<li><a href="#controlled">Keep children reusable</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="lift">
+  <h2>Give each value one owner</h2>
+  <p>Two components that show the same selection should read the same state. If every child keeps its own copy, the values can drift apart. Store the selected ID in the parent and derive the selected item while rendering.</p>
+
+<pre><code>import { useState } from &quot;react&quot;;
+
+function Choice({ label, selected, onChoose }) {
+  return &lt;button aria-pressed={selected} onClick={onChoose}&gt;{label}&lt;/button&gt;;
+}
+
+export default function ProductPicker() {
+  const [product, setProduct] = useState(&quot;pen&quot;);
+  return (
+    &lt;&gt;
+      &lt;Choice label=&quot;Pen&quot; selected={product === &quot;pen&quot;} onChoose={() =&gt; setProduct(&quot;pen&quot;)} /&gt;
+      &lt;Choice label=&quot;Notebook&quot; selected={product === &quot;notebook&quot;} onChoose={() =&gt; setProduct(&quot;notebook&quot;)} /&gt;
+      &lt;p&gt;Selected: {product}&lt;/p&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="controlled">
+  <h2>Keep children reusable</h2>
+  <p>A controlled child gets its current value from props and asks the parent to change it through a callback. Local state is still useful for things only one child cares about.</p>
+
+<pre><code>import { useState } from &quot;react&quot;;
+
+function QuantityInput({ value, onChange }) {
+  return (
+    &lt;label&gt;
+      Quantity
+      &lt;input type=&quot;number&quot; min=&quot;1&quot; value={value}
+        onChange={event =&gt; onChange(event.target.value)} /&gt;
+    &lt;/label&gt;
+  );
+}
+
+export default function OrderForm() {
+  const [quantity, setQuantity] = useState(&quot;1&quot;);
+  return &lt;QuantityInput value={quantity} onChange={setQuantity} /&gt;;
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://react.dev/learn/sharing-state-between-components">Sharing state between components</a></li>
+<li><a href="https://react.dev/learn/choosing-the-state-structure">Choosing the state structure</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/react/effects/">Previous lesson · Effects and synchronization</a>
+<a href="/docs/read/en/react/context-and-reducers/">Next lesson · Context and reducers</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

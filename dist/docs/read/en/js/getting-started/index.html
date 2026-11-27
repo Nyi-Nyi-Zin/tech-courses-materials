@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="JavaScript is a programming language. It gives the browser instructions it can run, such as calculating a price or changing a message after a button click. Start by making the browser write one message.">
+  <title>Run your first JavaScript · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/getting-started/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/getting-started/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/getting-started/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/getting-started/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Run your first JavaScript</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">JavaScript is a programming language. It gives the browser instructions it can run, such as calculating a price or changing a message after a button click. Start by making the browser write one message.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/getting-started">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#console">Use the browser Console</a></li>
+<li><a href="#script">Place JavaScript in a &lt;script&gt; element</a></li>
+<li><a href="#external-script">Link a separate JavaScript file</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="console">
+  <h2>Use the browser Console</h2>
+  <p>Developer Tools lets you inspect a web page. The Console tab lets you run JavaScript and see messages from the page. console.log() is an instruction for printing a message there. The quotes mark the text you want to print.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a page in your browser. Right-click the page and choose Inspect, find the Console tab, type this line, and press Enter.</p>
+<pre><code>console.log(&quot;Your order is ready.&quot;);</code></pre>
+<p class="example-result"><strong>What to expect</strong> The Console shows “Your order is ready.”. It may also show undefined as the result of the instruction itself.</p>
+
+</section>
+<section class="article-section" id="script">
+  <h2>Place JavaScript in a &lt;script&gt; element</h2>
+  <p>The browser executes code inside a script element when it reaches that element. This example places the script near the end of body. The paragraph belongs to the visible page; the log goes to the Console.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Place JavaScript in a &amp;lt;script&amp;gt; element&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;Product catalog&lt;/p&gt;
+  &lt;script&gt;
+    console.log(&quot;The catalog page loaded.&quot;);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> “Product catalog” appears on the page. Open Console and reload to see “The catalog page loaded.”.</p>
+
+</section>
+<section class="article-section" id="external-script">
+  <h2>Link a separate JavaScript file</h2>
+  <p>A .js file can contain the JavaScript for a page. src on a script element gives the browser the file path. With a classic external script in head, defer tells the browser to wait until it has finished reading the HTML before running it.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this line in app.js beside your HTML file. Remove the old inline &lt;script&gt; block and add &lt;script defer src=&quot;app.js&quot;&gt;&lt;/script&gt; inside &lt;head&gt;. Save both files and reload.</p>
+<pre><code>console.log(&quot;app.js is linked.&quot;);</code></pre>
+<p class="example-result"><strong>What to expect</strong> After reloading, the Console logs “app.js is linked.”.</p>
+<p class="example-check"><strong>If the result differs</strong> Check the filename and the browser Console for a load error if the new message is missing.</p>
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide">MDN · JavaScript Guide</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/scripting.html#the-script-element">WHATWG · The script element</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/values/">Next lesson · Values, types, variables, and operators</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

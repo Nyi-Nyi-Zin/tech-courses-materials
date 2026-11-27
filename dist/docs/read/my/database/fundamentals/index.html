@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Database ဆိုတာ လိုအပ်တဲ့အခါ ပြန်ရှာဖတ်နိုင်အောင် စနစ်တကျ စုစည်းသိမ်းထားတဲ့ အချက်အလက်တွေ (data) ပါ။">
+  <title>Database ဆိုတာ ဘာလဲ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/fundamentals/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/fundamentals/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/fundamentals/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/fundamentals/" lang="en" hreflang="en">English</a></nav>
+  <h1>Database ဆိုတာ ဘာလဲ</h1>
+  
+  <p class="intro">Database ဆိုတာ လိုအပ်တဲ့အခါ ပြန်ရှာဖတ်နိုင်အောင် စနစ်တကျ စုစည်းသိမ်းထားတဲ့ အချက်အလက်တွေ (data) ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/fundamentals">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#database-example">အွန်လိုင်းဆိုင်တစ်ခုမှာ Database သုံးပုံ</a></li>
+<li><a href="#database-and-dbms">Database နဲ့ DBMS</a></li>
+<li><a href="#sql-and-nosql">SQL နဲ့ NoSQL Database တွေ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="database-example">
+  <h2>အွန်လိုင်းဆိုင်တစ်ခုမှာ Database သုံးပုံ</h2>
+  <p>အွန်လိုင်းဆိုင်တစ်ခုက ကုန်ပစ္စည်းအမည်၊ ဈေးနှုန်း၊ လက်ကျန်အရေအတွက်နဲ့ အော်ဒါမှတ်တမ်းတွေကို Database ထဲမှာ သိမ်းထားနိုင်ပါတယ်။ ပစ္စည်းတစ်ခုရဲ့ စာမျက်နှာကို ဖွင့်ကြည့်တဲ့အခါ ဆိုင်ရဲ့စနစ်က သိမ်းထားတဲ့ ဈေးနှုန်းကို ပြန်ဖတ်ပြီး ပြပေးပါတယ်။ အော်ဒါတင်လိုက်ရင်လည်း အော်ဒါမှတ်တမ်းအသစ် ထည့်သိမ်းပေးပါတယ်။</p>
+
+<pre><code>-- Read the saved price when a product page opens.
+SELECT name, price
+FROM products
+WHERE id = 1;
+
+-- Record a new order at checkout.
+INSERT INTO orders (id) VALUES (101);</code></pre>
+
+
+</section>
+<section class="article-section" id="database-and-dbms">
+  <h2>Database နဲ့ DBMS</h2>
+  <p>အွန်လိုင်းဆိုင်မှာ ဈေးနှုန်းဖတ်တာ၊ အော်ဒါအသစ် သိမ်းတာနဲ့ လက်ကျန်အရေအတွက် ပြင်တာတွေကို Database Management System (DBMS) က ကိုင်တွယ်ပေးပါတယ်။ DBMS ဆိုတာ Database ထဲက data ကို စီမံပေးတဲ့ software ပါ။ PostgreSQL၊ MySQL နဲ့ MongoDB တို့က DBMS ဥပမာတွေပါ။</p>
+
+<pre><code>SELECT current_database() AS connected_database,
+       version() AS database_server;</code></pre>
+
+
+</section>
+<section class="article-section" id="sql-and-nosql">
+  <h2>SQL နဲ့ NoSQL Database တွေ</h2>
+  <p>DBMS တွေဟာ data ကို စီထားပုံမှာ ကွာခြားပါတယ်။ အသုံးများတဲ့ အုပ်စုနှစ်ခုက SQL Database နဲ့ NoSQL Database ပါ။ SQL ဆိုတာ table တွေ ဖန်တီးဖို့၊ data ဖတ်ဖို့နဲ့ ပြင်ဖို့ သုံးတဲ့ language ပါ။ SQL သုံးတဲ့ relational database တွေကို SQL Database လို့ ခေါ်လေ့ရှိပါတယ်။ NoSQL အုပ်စုမှာ document၊ key-value နဲ့ graph စတဲ့ data model တွေ ပါဝင်ပါတယ်။ အောက်ကပုံမှာ အော်ဒါတစ်ခုထဲက ပစ္စည်းမှတ်တမ်းကို relational table ရဲ့ row နဲ့ MongoDB document အဖြစ် ယှဉ်ပြထားပါတယ်။</p>
+
+<pre><code>-- PostgreSQL: read the order item row
+SELECT order_id, item, quantity
+FROM order_items
+WHERE order_id = 101;
+
+-- MongoDB shell: read the order item document
+db.order_items.findOne({ order_id: 101 });</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/database/sql-and-nosql-orders.jpg" data-image-preview><img src="/docs/media/database/sql-and-nosql-orders.jpg" alt="Relational table ရဲ့ row နဲ့ MongoDB ရဲ့ document နှစ်ခုလုံးမှာ order_id က 101၊ item က Notebook၊ quantity က 2 ဖြစ်ပါတယ်။" width="1536" height="1024" loading="lazy" decoding="async"></a>
+    <figcaption>SQL ဘက်မှာ column ခေါင်းစဉ်တွေနဲ့ row တစ်ကြောင်းကို မြင်ရပြီး MongoDB ဘက်မှာ field နာမည်နဲ့ တန်ဖိုးကို တွဲမြင်ရပါတယ်။</figcaption>
+  </figure><dl class="lesson-terms"><div><dt><code>SQL / Relational</code></dt><dd>PostgreSQL၊ MySQL၊ SQLite နဲ့ Microsoft SQL Server တို့က data ကို row နဲ့ column ပါတဲ့ table တွေထဲမှာ စီထားတယ်။ SQL က table ဆောက်ဖို့၊ data ရှာဖတ်ဖို့နဲ့ ပြင်ဆင်ဖို့ သုံးတဲ့ language ပါ။</dd></div><div><dt><code>NoSQL</code></dt><dd>NoSQL မှာ data သိမ်းပုံ အမျိုးမျိုး ပါတယ်။ MongoDB က document တွေနဲ့ သိမ်းတယ်။ Redis ကို key-value store အဖြစ် အသုံးများတယ်။ Cassandra က wide-column model သုံးပြီး Neo4j က node တွေနဲ့ သူတို့ရဲ့ ဆက်စပ်မှုတွေကို graph ပုံစံနဲ့ သိမ်းတယ်။</dd></div></dl>
+
+
+</section><section class="article-section"><h2>ဆက်လေ့လာရန် သင်ခန်းစာများ</h2><ul><li id="relational-tables"><a href="/docs/read/my/database/relational-model/#relational-tables">PostgreSQL မှာ Foreign Key သုံးပုံ</a></li>
+<li id="order-item-relationships"><a href="/docs/read/my/database/relational-model/#order-item-relationships">အော်ဒါနဲ့ ပစ္စည်းအကြား ဆက်စပ်မှု</a></li>
+<li id="client-server"><a href="/docs/read/my/web-fundamentals/client-server/#client-server">Client နဲ့ Server ရဲ့ တာဝန်များ</a></li>
+<li id="server-types"><a href="/docs/read/my/web-fundamentals/client-server/#server-types">Server အမျိုးအစားများ</a></li>
+<li id="hosting"><a href="/docs/read/my/database/database-deployment/#hosting">Database Deployment (On-premises နဲ့ Cloud)</a></li>
+<li id="web-app-flow"><a href="/docs/read/my/web-fundamentals/web-app-architecture/#web-app-flow">Web App တစ်ခု အလုပ်လုပ်ပုံ</a></li></ul></section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.mongodb.com/docs/manual/core/document/">MongoDB · Documents</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/relational-model/">နောက်သင်ခန်းစာ · Database တွေမှာ ဆက်စပ်နေတဲ့ Data ကို သိမ်းပုံ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

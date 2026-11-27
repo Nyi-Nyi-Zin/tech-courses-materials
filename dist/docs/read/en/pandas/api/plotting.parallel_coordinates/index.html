@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plot each observation as a line across multiple variable axes, grouped by class.">
+  <title>pandas.plotting.parallel_coordinates · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/plotting.parallel_coordinates/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/plotting.parallel_coordinates/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/plotting.parallel_coordinates">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Plotting</span><a href="/docs/read/my/pandas/api/plotting.parallel_coordinates/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>plotting.<wbr>parallel_coordinates</code></h1>
+    <p class="article-version">pandas 3.1.1 · Plotting · <span lang="en">function</span></p>
+    <p class="intro">Plot each observation as a line across multiple variable axes, grouped by class.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Inspect the call</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">pd.plotting.parallel_coordinates(…)</code> <span>Full signature</span></summary><pre><code lang="en">pd.plotting.parallel_coordinates(
+    frame,
+    class_column,
+    cols=None,
+    ax=None,
+    color=None,
+    use_columns=False,
+    xticks=None,
+    colormap=None,
+    axvlines=True,
+    axvlines_kwds=None,
+    sort_labels=False,
+    **kwargs,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Inspect the call</h2>
+      <p>Run this code to inspect the callable and its parameters. Its data, backend, or environment is needed to execute the operation itself.</p>
+      <label><span>Python code</span><textarea rows="16" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import importlib
+from inspect import signature
+
+path = &#39;pandas.plotting.parallel_coordinates&#39;
+parts = path.split(&quot;.&quot;)
+for end in range(len(parts), 0, -1):
+    try:
+        operation = importlib.import_module(&quot;.&quot;.join(parts[:end]))
+        break
+    except ImportError:
+        continue
+
+for name in parts[end:]:
+    operation = getattr(operation, name)
+
+print(path)
+print(signature(operation))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>frame</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>DataFrame</span><p>Supply the DataFrame the function processes.</p></td></tr>
+<tr><th scope="row"><code>class_column</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>str</span><p>Provide the column indicating the class or group plotted.</p></td></tr>
+<tr><th scope="row"><code>cols</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>list</span></td></tr>
+<tr><th scope="row"><code>ax</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>matplotlib.axis</span><p>Provide the existing Matplotlib axes on which to draw.</p></td></tr>
+<tr><th scope="row"><code>color</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>list or tuple</span><p>Choose the color or colors for the plot or styled cells.</p></td></tr>
+<tr><th scope="row"><code>use_columns</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span></td></tr>
+<tr><th scope="row"><code>xticks</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>list or tuple</span></td></tr>
+<tr><th scope="row"><code>colormap</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str or matplotlib colormap</span><p>Choose the color map used by the chart.</p></td></tr>
+<tr><th scope="row"><code>axvlines</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>True</code></td>
+      <td><span>bool</span></td></tr>
+<tr><th scope="row"><code>axvlines_kwds</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>keywords</span></td></tr>
+<tr><th scope="row"><code>sort_labels</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span></td></tr>
+<tr><th scope="row"><code>**kwargs</code></th>
+      <td>Optional<br><small>Additional keyword arguments</small></td>
+      <td></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>matplotlib.axes.Axes</p></section>
+    <section class="article-section"><h2>Example for a local Python session</h2><pre><code lang="en">import pandas as pd
+import matplotlib
+frame = pd.DataFrame({&quot;team&quot;: [&quot;A&quot;, &quot;A&quot;, &quot;B&quot;], &quot;units&quot;: [2., 5., 7.], &quot;price&quot;: [4., 3., 2.]})
+print(pd.plotting.parallel_coordinates(frame, &quot;team&quot;))</code></pre></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.plotting.parallel_coordinates.html#pandas.plotting.parallel_coordinates">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/plotting.lag_plot/"><span>Previous in this category</span><strong>pandas.plotting.lag_plot</strong></a><a href="/docs/read/en/pandas/api/plotting.radviz/"><span>Next in this category</span><strong>pandas.plotting.radviz</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="အောက်၊ အပေါ် error အကွာအဝေး ဆွဲပါ။ မသေချာမှုတန်ဖိုးက ဘာကို ပြလဲ label ရေးပါ။">
+  <title>Error Bars နှင့် Bands ဖြင့် မသေချာမှု ပြခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/uncertainty-charts/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/uncertainty-charts/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/uncertainty-charts/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#matplotlib">သင်ခန်းစာအားလုံး · Matplotlib</a> <a href="/docs/read/en/matplotlib/uncertainty-charts/" lang="en" hreflang="en">English</a></nav>
+  <h1>Error Bars နှင့် Bands ဖြင့် မသေချာမှု ပြခြင်း</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">အောက်၊ အပေါ် error အကွာအဝေး ဆွဲပါ။ မသေချာမှုတန်ဖိုးက ဘာကို ပြလဲ label ရေးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/matplotlib/uncertainty-charts">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#error-bars">Estimate ကနေ အပေါင်းအကွာအဝေး သုံးခြင်း</a></li>
+<li><a href="#bands">ဆက်တိုက် Interval ပြခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="error-bars">
+  <h2>Estimate ကနေ အပေါင်းအကွာအဝေး သုံးခြင်း</h2>
+  <p>yerr မှာ estimate တစ်ခုစီကနေ error အကွာအဝေး ပေးပါ။ ဘက်မညီတဲ့ interval ဆိုရင် အောက်ဘက်အကွာ အရင်၊ အပေါ်ဘက်အကွာ နောက် ပေးပါ။ Bar က confidence interval၊ standard error ဒါမှမဟုတ် တခြားတန်ဖိုး ဘာပြလဲ label ရေးပါ။</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.errorbar([&quot;A&quot;, &quot;B&quot;], [8, 10], yerr=[[1, 2], [2, 1]], fmt=&quot;o&quot;, capsize=5)
+ax.set(ylabel=&quot;Estimated units&quot;, title=&quot;Estimates with illustrative intervals&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/uncertainty-charts-error-bars.png" data-image-preview><img src="/docs/media/data/uncertainty-charts-error-bars.png" alt="ဆိုင် A ရဲ့ estimate က 8 ဖြစ်ပြီး 7 ကနေ 10 အထိပါ။ ဆိုင် B ရဲ့ estimate က 10 ဖြစ်ပြီး 8 ကနေ 11 အထိပါ။" width="584" height="443" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="bands">
+  <h2>ဆက်တိုက် Interval ပြခြင်း</h2>
+  <p>fill_between က x တစ်လျှောက် အောက်နဲ့ အပေါ်တန်ဖိုးကြား band ဆွဲပါတယ်။ အချိန်အလိုက် ပြောင်းလဲတဲ့ interval အတွက် သုံးပြီး အောက်၊ အပေါ် value ကို ဆိုင်ရာ x နဲ့ ကိုက်အောင် စီပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.errorbar.html">Axes.errorbar</a></li>
+<li><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.fill_between.html">Axes.fill_between</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/matplotlib/export-chart/">အရင်သင်ခန်းစာ · Chart များကို ဖိုင်ထုတ်ခြင်း</a>
+<a href="/docs/read/my/matplotlib/heatmaps-and-colorbars/">နောက်သင်ခန်းစာ · Heatmaps နှင့် Colorbars</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

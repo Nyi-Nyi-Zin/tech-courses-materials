@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ကိန်းဂဏန်း ခန့်မှန်းမော်ဒယ် fit လုပ်ပြီး အမှားပမာဏကို target ရဲ့ unit နဲ့ ဖတ်ပါ။">
+  <title>Linear Regression နှင့် Regression Metrics · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/linear-regression/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/linear-regression/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/linear-regression/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#machine-learning">သင်ခန်းစာအားလုံး · Machine Learning</a> <a href="/docs/read/en/machine-learning/linear-regression/" lang="en" hreflang="en">English</a></nav>
+  <h1>Linear Regression နှင့် Regression Metrics</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">ကိန်းဂဏန်း ခန့်မှန်းမော်ဒယ် fit လုပ်ပြီး အမှားပမာဏကို target ရဲ့ unit နဲ့ ဖတ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/machine-learning/linear-regression">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#regression">Fit လုပ်ပြီး ခန့်မှန်းခြင်း</a></li>
+<li><a href="#metrics">MAE၊ RMSE သို့မဟုတ် R² ရွေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="regression">
+  <h2>Fit လုပ်ပြီး ခန့်မှန်းခြင်း</h2>
+  <p>LinearRegression က ordinary least squares နဲ့ intercept နဲ့ coefficient တွေ fit လုပ်ပါတယ်။ ခန့်မှန်းတဲ့အခါ feature column တူတူကို အစဉ်တူတူ ပေးပါ။ Coefficient တစ်ခုတည်းနဲ့ အကြောင်းရင်းဖြစ်ကြောင်း မဆုံးဖြတ်နိုင်ပါ။</p>
+
+<pre><code>from sklearn.linear_model import LinearRegression
+
+model = LinearRegression().fit([[1], [2], [3]], [3, 5, 7])
+print(round(float(model.predict([[4]])[0]), 2))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">9.0</pre></div>
+
+
+</section>
+<section class="article-section" id="metrics">
+  <h2>MAE၊ RMSE သို့မဟုတ် R² ရွေးခြင်း</h2>
+  <p>MAE က absolute error ပျမ်းမျှဖြစ်ပြီး target နဲ့ unit တူပါတယ်။ RMSE က error ကြီးတာကို ပိုအလေးပေးပြီး unit တူပါတယ်။ R² က evaluation set ရဲ့ target mean ကို baseline ထားပြီး ရလဒ်ကို ဖော်ပြပါတယ်။ အနုတ်လည်း ဖြစ်နိုင်ပါတယ်။</p>
+
+<pre><code>from sklearn.metrics import mean_absolute_error
+
+actual = [100, 200, 300]
+predicted = [90, 210, 320]
+print(round(mean_absolute_error(actual, predicted), 2))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">13.33</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/linear_model.html">Linear models</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html">Model evaluation and scoring</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/machine-learning/train-test-split/">အရင်သင်ခန်းစာ · ဒေတာခွဲ၍ Baseline နဲ့ ယှဉ်ခြင်း</a>
+<a href="/docs/read/my/machine-learning/classification/">နောက်သင်ခန်းစာ · Classification နှင့် Confusion Matrices</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

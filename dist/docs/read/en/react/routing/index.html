@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Map URLs to screens. Give each important screen an address that people can bookmark or share.">
+  <title>Routing with React Router · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/react/routing/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/routing/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/routing/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#react">All documentation · React</a> <a href="/docs/read/my/react/routing/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Routing with React Router</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">Map URLs to screens. Give each important screen an address that people can bookmark or share.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/react/routing">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#routes">Add links and routes</a></li>
+<li><a href="#refresh">Serve direct page requests</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="routes">
+  <h2>Add links and routes</h2>
+  <p>Install react-router and wrap your route tree in BrowserRouter. Routes selects the matching route. NavLink shows which link is active. A path such as /products/:id captures the product ID for useParams.</p>
+
+<pre><code>import React from &quot;react&quot;;
+import { BrowserRouter, NavLink, Route, Routes, useParams } from &quot;react-router&quot;;
+
+function Product() {
+  const { id } = useParams();
+  return &lt;h1&gt;Product {id}&lt;/h1&gt;;
+}
+
+export default function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;nav&gt;
+        &lt;NavLink to=&quot;/&quot; end&gt;Home&lt;/NavLink&gt;{&quot; &quot;}
+        &lt;NavLink to=&quot;/products/42&quot;&gt;Pen&lt;/NavLink&gt;
+      &lt;/nav&gt;
+      &lt;Routes&gt;
+        &lt;Route path=&quot;/&quot; element={&lt;h1&gt;Inventory&lt;/h1&gt;} /&gt;
+        &lt;Route path=&quot;/products/:id&quot; element={&lt;Product /&gt;} /&gt;
+        &lt;Route path=&quot;*&quot; element={&lt;h1&gt;Page not found&lt;/h1&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="refresh">
+  <h2>Serve direct page requests</h2>
+  <p>When a user reloads /products/42, the request reaches the host first. Configure a single-page app fallback to index.html for client page paths, while keeping API and asset routes separate. Test a link, a direct reload, the Back button, and an unknown URL. A client-side not-found screen does not set the server’s HTTP status.</p>
+
+<pre><code># Nginx: inside the server block for the SPA
+location /products/ {
+    try_files $uri $uri/ /index.html;
+}
+
+# Keep existing /api/ and asset locations separate.</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://reactrouter.com/start/declarative/routing">React Router · Declarative routing</a></li>
+<li><a href="https://reactrouter.com/api/components/NavLink">React Router · NavLink</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/react/custom-hooks/">Previous lesson · Reuse behavior with custom Hooks</a>
+<a href="/docs/read/en/react/error-boundaries/">Next lesson · Recover from render errors</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

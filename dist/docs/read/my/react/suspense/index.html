@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="လိုအပ်မှ code load မယ့် screen အပိုင်းကို wrap လုပ်ပြီး load လုပ်နေချိန် loading message ပြပါ။">
+  <title>Suspense နဲ့ Loading ပြပါ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/react/suspense/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/suspense/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/suspense/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#react">သင်ခန်းစာအားလုံး · React</a> <a href="/docs/read/en/react/suspense/" lang="en" hreflang="en">English</a></nav>
+  <h1>Suspense နဲ့ Loading ပြပါ</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">လိုအပ်မှ code load မယ့် screen အပိုင်းကို wrap လုပ်ပြီး load လုပ်နေချိန် loading message ပြပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/react/suspense">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#lazy">လိုမှ Component Code ကို Load ပါ</a></li>
+<li><a href="#place">ဘယ်အပိုင်း Loading ပြမလဲ ရွေးပါ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="lazy">
+  <h2>လိုမှ Component Code ကို Load ပါ</h2>
+  <p>lazy ကို component အပြင်မှာ ကြေညာပါ။ import လုပ်တဲ့ module က component ကို default export ထုတ်ထားရပါမယ်။ Code တက်နေချိန် Suspense က fallback ပြပါတယ်။ Import ပျက်ရင် Suspense ကို wrap လုပ်ထားတဲ့ error boundary နဲ့ ကိုင်တွယ်ပါ။</p>
+
+<pre><code>import React, { lazy, Suspense } from &quot;react&quot;;
+import SectionBoundary from &quot;./SectionBoundary.jsx&quot;;
+
+const StockChart = lazy(() =&gt; import(&quot;./StockChart.jsx&quot;));
+
+export default function Reports() {
+  return (
+    &lt;SectionBoundary&gt;
+      &lt;Suspense fallback={&lt;p role=&quot;status&quot;&gt;Loading chart…&lt;/p&gt;}&gt;
+        &lt;StockChart /&gt;
+      &lt;/Suspense&gt;
+    &lt;/SectionBoundary&gt;
+  );
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="place">
+  <h2>ဘယ်အပိုင်း Loading ပြမလဲ ရွေးပါ</h2>
+  <p>Loading ကြာတဲ့အပိုင်းနားမှာ boundary ထားပါ။ ဒါဆို navigation နဲ့ headings ဆက်ပေါ်နေပါတယ်။ Suspense က lazy နဲ့ support လုပ်ထားတဲ့ data sources တွေနဲ့ အလုပ်လုပ်ပါတယ်။ Effect ထဲမှာ fetch စထားရင် loading နဲ့ error state ကို ကိုယ်တိုင် သတ်မှတ်ပါ။</p>
+
+<pre><code>import { lazy, Suspense } from &quot;react&quot;;
+
+const ProductReviews = lazy(() =&gt; import(&quot;./ProductReviews.jsx&quot;));
+
+export default function ProductPage() {
+  return (
+    &lt;main&gt;
+      &lt;h1&gt;Notebook&lt;/h1&gt;
+      &lt;p&gt;Available in three colors.&lt;/p&gt;
+      &lt;Suspense fallback={&lt;p&gt;Loading reviews…&lt;/p&gt;}&gt;
+        &lt;ProductReviews /&gt;
+      &lt;/Suspense&gt;
+    &lt;/main&gt;
+  );
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://react.dev/reference/react/Suspense">React · Suspense</a></li>
+<li><a href="https://react.dev/reference/react/lazy">React · lazy</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/react/error-boundaries/">အရင်သင်ခန်းစာ · Render Error ဖြစ်ရင် ပြန်ထိန်းပါ</a>
+<a href="/docs/read/my/react/component-testing/">နောက်သင်ခန်းစာ · React Components ကို UI ကနေ စမ်းပါ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

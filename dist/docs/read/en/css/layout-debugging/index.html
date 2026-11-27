@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Start with the element that looks wrong. The browser’s Developer Tools show rules that match and the final values the browser calculated.">
+  <title>Debug a broken layout · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/layout-debugging/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/layout-debugging/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/layout-debugging/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/layout-debugging/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Debug a broken layout</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Start with the element that looks wrong. The browser’s Developer Tools show rules that match and the final values the browser calculated.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/layout-debugging">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#inspect">Read Styles and Computed</a></li>
+<li><a href="#overflow">Find a box that is wider than its parent</a></li>
+<li><a href="#long-text">Let long text wrap inside a flex item</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="inspect">
+  <h2>Read Styles and Computed</h2>
+  <p>Right-click the teal-colored target and select Inspect. Styles shows the matching rules and crosses out a declaration when another wins. Computed shows the resolved values. Toggle a competing rule in DevTools to see its effect before editing the file.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Read Styles and Computed&lt;/title&gt;
+  &lt;style&gt;
+    .notice { color: purple; }
+    .notice { color: teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first paragraph is teal. Disable the later color declaration in Styles; it becomes purple. Reloading restores the file’s styles.</p>
+
+</section>
+<section class="article-section" id="overflow">
+  <h2>Find a box that is wider than its parent</h2>
+  <p>Overflow happens when content exceeds the available space. Inspect the parent and child widths first. For a box meant to shrink, max-width: 100% limits its width to the parent’s available width.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Find a box that is wider than its parent&lt;/title&gt;
+  &lt;style&gt;
+    .panel { width: 180px; outline: 2px solid purple; }
+    .wide { width: 280px; background: #d6efea; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;panel&quot;&gt;&lt;div class=&quot;wide&quot;&gt;Product list&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The teal box extends past the purple boundary. Add max-width: 100% to .wide to fit it inside.</p>
+
+</section>
+<section class="article-section" id="long-text">
+  <h2>Let long text wrap inside a flex item</h2>
+  <p>A long string with no spaces can force a flex item to stay wider than the row. Give that text item min-width: 0 so it can shrink, and use overflow-wrap: anywhere so the browser can wrap the string. Keep a separate button readable with flex-shrink: 0.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Let long text wrap inside a flex item&lt;/title&gt;
+  &lt;style&gt;
+    .toolbar { display: flex; gap: 8px; width: 240px; outline: 1px solid teal; }
+    .reference { min-width: 0; overflow-wrap: anywhere; }
+    button { flex-shrink: 0; align-self: start; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;toolbar&quot;&gt;&lt;span class=&quot;reference&quot;&gt;ITEM-2026-YANGON-0044-1C31B3B8097AE57E&lt;/span&gt;&lt;button type=&quot;button&quot;&gt;Save&lt;/button&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The entire reference wraps and the Save button fits beside it. Remove both text rules to reproduce the overflow.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/overflow">MDN · Overflow</a></li>
+<li><a href="https://developer.chrome.com/docs/devtools/css/">Chrome DevTools · View and change CSS</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/responsive/">Previous lesson · Responsive styles and focus</a>
+<a href="/docs/read/en/css/pseudo-elements/">Next lesson · Pseudo-elements</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Modules define which types and values other files can use.">
+  <title>Modules and type-only imports · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/modules/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/modules/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/modules/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#typescript">All documentation · TypeScript</a> <a href="/docs/read/my/typescript/modules/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Modules and type-only imports</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">Modules define which types and values other files can use.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/typescript/modules">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#imports">Keep type imports explicit</a></li>
+<li><a href="#resolution">Match module settings to your runtime</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="imports">
+  <h2>Keep type imports explicit</h2>
+  <p>Use import type for declarations that are only used in type positions. It is removed from the JavaScript output. Use a normal import for values you call or read at runtime.</p>
+
+<pre><code>// product.ts
+export type Product = { name: string; price: number };
+export const currency = &quot;USD&quot;;
+
+// label.ts
+import { currency } from &quot;./product.js&quot;;
+import type { Product } from &quot;./product.js&quot;;
+
+export function label(item: Product) {
+  return item.name + &quot;: &quot; + currency + &quot; &quot; + item.price;
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="resolution">
+  <h2>Match module settings to your runtime</h2>
+  <p>Use settings that match the environment loading your files. In a Node ESM project, relative paths to compiled files normally include the .js extension. A bundler can use different resolution rules, so use the settings recommended by your build tool.</p>
+
+<pre><code>// package.json: { &quot;type&quot;: &quot;module&quot; }
+// tsconfig.json: { &quot;compilerOptions&quot;: { &quot;module&quot;: &quot;NodeNext&quot; } }
+
+// format.ts
+export const formatLabel = (name: string) =&gt; name.toUpperCase();
+
+// main.ts
+// The import points to format.js in the compiled output.
+import { formatLabel } from &quot;./format.js&quot;;
+console.log(formatLabel(&quot;Notebook&quot;));</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/modules.html">TypeScript modules</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/modules/reference.html">Module resolution reference</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/typescript/type-tools/">Previous lesson · keyof and utility types</a>
+<a href="/docs/read/en/typescript/mapped-types/">Next lesson · Mapped types</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

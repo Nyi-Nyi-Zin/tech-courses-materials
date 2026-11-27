@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare adding capacity to one server, copying data to replicas, and distributing different parts of a dataset across servers.">
+  <title>Database scaling, replication, and sharding · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/database-scaling/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/database-scaling/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/database-scaling/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/database-scaling/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Database scaling, replication, and sharding</h1>
+  
+  <p class="intro">Compare adding capacity to one server, copying data to replicas, and distributing different parts of a dataset across servers.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/database-scaling">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#capacity">Identify what is reaching its limit</a></li>
+<li><a href="#warehouse-example">Apply the choices to inventory</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="capacity">
+  <h2>Identify what is reaching its limit</h2>
+  <p>Look at query time, CPU, memory and disk usage, and read and write traffic. Adding CPU, memory, or storage to one server is vertical scaling. Using additional servers to share work is horizontal scaling.</p>
+
+<pre><code>-- Find the queries that use the most shared block reads.
+-- Requires pg_stat_statements to be enabled.
+SELECT calls, total_exec_time, shared_blks_read, query
+FROM pg_stat_statements
+ORDER BY shared_blks_read DESC
+LIMIT 5;</code></pre>
+<dl class="lesson-terms"><div><dt><code>Replication</code></dt><dd>Copy changes from a primary to other servers. Read replicas can serve read traffic and a suitable standby can support failover. With asynchronous replication, recent writes can take time to appear on a replica.</dd></div><div><dt><code>Table partitioning</code></dt><dd>Split a logical table into smaller parts, such as one partition per month, so the engine can skip irrelevant partitions for suitable queries. These partitions can live on one server.</dd></div><div><dt><code>Sharding</code></dt><dd>Distribute different parts of the same dataset across servers. A shard key helps route reads and writes to the right shard. A query spanning several shards may need extra work to gather and combine results.</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="warehouse-example">
+  <h2>Apply the choices to inventory</h2>
+  <p>Apply the two mechanisms to different requests. A replica can serve another copy of the data, and a shard can hold just the records for one part of the inventory. If a read-heavy report can tolerate a short delay, examine whether a read replica helps. For a dataset distributed by warehouse ID, a query for one warehouse can target fewer shards, while a cross-warehouse report may have to read many. Check how traffic is distributed so that one busy warehouse does not dominate a shard.</p>
+
+<pre><code>-- The backend can route this report to a read replica if
+-- it can tolerate replication lag.
+SELECT SUM(quantity) AS total_units
+FROM stock_balances
+WHERE warehouse_id = 3;
+
+-- In a sharded design, warehouse_id = 3 also tells the
+-- shard router which part of the inventory to query.</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/high-availability.html">PostgreSQL · Replication and standby servers</a></li>
+<li><a href="https://www.postgresql.org/docs/19/ddl-partitioning.html">PostgreSQL · Table partitioning</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/sharding/">MongoDB · Sharding</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/storage-and-recovery/">Previous lesson · Database storage and crash recovery</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

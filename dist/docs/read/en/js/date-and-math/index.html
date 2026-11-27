@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Represent a time and calculate values with built-in JavaScript features.">
+  <title>Date and Math · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/date-and-math/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/date-and-math/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/date-and-math/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/date-and-math/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Date and Math</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Represent a time and calculate values with built-in JavaScript features.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/date-and-math">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#date">Create a Date with an explicit time zone</a></li>
+<li><a href="#math">Round numbers and choose limits with Math</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="date">
+  <h2>Create a Date with an explicit time zone</h2>
+  <p>A Date represents an instant. A string ending in Z specifies UTC, and toISOString() prints UTC. Use a time zone explicitly when formatting the same instant as local date and time for a user.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const opening = new Date(&quot;2026-11-23T03:00:00Z&quot;);
+console.log(opening.toISOString());
+const time = new Intl.DateTimeFormat(&quot;en-GB&quot;, {
+  timeZone: &quot;Asia/Yangon&quot;, hour: &quot;2-digit&quot;, minute: &quot;2-digit&quot;
+});
+console.log(time.format(opening));</code></pre>
+<p class="example-result"><strong>What to expect</strong> The ISO string shows 03:00 UTC. The same instant formats as 09:30 in Yangon.</p>
+
+</section>
+<section class="article-section" id="math">
+  <h2>Round numbers and choose limits with Math</h2>
+  <p>Math.round() rounds to the nearest integer, with ties toward positive infinity. Math.floor() rounds downward. Math.ceil() rounds upward. Math.min() and Math.max() pick the smallest and largest arguments.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>console.log(Math.round(2.6), Math.floor(2.6), Math.ceil(2.6));
+console.log(Math.max(1500, 2500, 1800));</code></pre>
+<p class="example-result"><strong>What to expect</strong> 2.6 rounds to 3, floors to 2, and ceils to 3. The largest price is 2500.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">MDN · Date</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat">MDN · Intl/DateTimeFormat</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math">MDN · Math</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/array-methods/">Previous lesson · Find, test, and sort arrays</a>
+<a href="/docs/read/en/js/map-and-set/">Next lesson · Map and Set</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

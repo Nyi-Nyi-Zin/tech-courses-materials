@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ဖိုင်ဖတ်၊ ရေးပါ။ ဖြစ်နိုင်တဲ့ error ကို ကိုင်တွယ်ပြီး traceback နဲ့ မှားတဲ့ code ကို ရှာပါ။">
+  <title>Files၊ Exceptions နှင့် Debugging · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/python/files/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/files/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/files/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#python">သင်ခန်းစာအားလုံး · Python</a> <a href="/docs/read/en/python/files/" lang="en" hreflang="en">English</a></nav>
+  <h1>Files၊ Exceptions နှင့် Debugging</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">ဖိုင်ဖတ်၊ ရေးပါ။ ဖြစ်နိုင်တဲ့ error ကို ကိုင်တွယ်ပြီး traceback နဲ့ မှားတဲ့ code ကို ရှာပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/python/files">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#files-and-context">Context Manager သုံးခြင်း</a></li>
+<li><a href="#exceptions">မျှော်မှန်းထားတဲ့ Exception ကို ဖမ်းခြင်း</a></li>
+<li><a href="#tracebacks">Traceback ဖတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="files-and-context">
+  <h2>Context Manager သုံးခြင်း</h2>
+  <p>with က block ပြီးရင် ဖိုင်ကို ပိတ်ပေးပါတယ်။ Exception ဖြစ်ရင်လည်း ပိတ်ပေးပါတယ်။ ကိုယ်ထိန်းချုပ်တဲ့ text file အတွက် encoding သတ်မှတ်ပါ။ Path က ဖိုင်လမ်းကြောင်းကို ကိုင်တွယ်ပါတယ်။ ပြင်ပစနစ်က ဖိုင်တွေအတွက် encoding ကို စစ်ပါ။</p>
+
+<pre><code>from pathlib import Path
+
+path = Path(&quot;orders.txt&quot;)
+path.write_text(&quot;Coffee\nTea\n&quot;, encoding=&quot;utf-8&quot;)
+with path.open(encoding=&quot;utf-8&quot;) as handle:
+    orders = handle.read().splitlines()
+print(orders)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[&#39;Coffee&#39;, &#39;Tea&#39;]</pre></div>
+
+
+</section>
+<section class="article-section" id="exceptions">
+  <h2>မျှော်မှန်းထားတဲ့ Exception ကို ဖမ်းခြင်း</h2>
+  <p>ကိုင်တွယ်နိုင်တဲ့ exception type ကို အတိအကျ ဖမ်းပါ။ try block မှာ exception မဖြစ်ရင် else run ပါတယ်။ try statement ကနေ ထွက်တိုင်း finally run လို့ cleanup အတွက် သုံးနိုင်ပါတယ်။</p>
+
+<pre><code>def parse_quantity(text):
+    try:
+        return int(text)
+    except ValueError:
+        return None
+
+print(parse_quantity(&quot;4&quot;), parse_quantity(&quot;ERROR&quot;))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">4 None</pre></div>
+
+
+</section>
+<section class="article-section" id="tracebacks">
+  <h2>Traceback ဖတ်ခြင်း</h2>
+  <p>နောက်ဆုံးကြောင်းမှာ error type နဲ့ message ပါပါတယ်။ ကိုယ့် code ထဲက နောက်ဆုံးသက်ဆိုင်ရာ frame ကို ရှာပြီး အဲဒီ line ရဲ့ value တွေ စစ်ပါ။ Data မမှန်ရင် ငြင်းပယ်မလား၊ မှတ်တမ်းတင်မလား၊ သတ်မှတ်ထားတဲ့ fallback သုံးမလား ဆုံးဖြတ်ပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.python.org/3.15/tutorial/inputoutput.html#reading-and-writing-files">Reading and writing files</a></li>
+<li><a href="https://docs.python.org/3.15/tutorial/errors.html">Errors and exceptions</a></li>
+<li><a href="https://docs.python.org/3.15/library/pathlib.html">pathlib</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/python/functions/">အရင်သင်ခန်းစာ · Functions၊ Modules နှင့် Type Hints</a>
+<a href="/docs/read/my/python/classes/">နောက်သင်ခန်းစာ · Classes၊ Instances နှင့် Python 3.15</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

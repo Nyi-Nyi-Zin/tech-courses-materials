@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Trace the values behind a wrong result and pause code to see them at a specific point.">
+  <title>Debug with browser DevTools · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/debugging/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/debugging/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/debugging/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/debugging/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Debug with browser DevTools</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Trace the values behind a wrong result and pause code to see them at a specific point.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/debugging">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#trace-values">Trace the first wrong value</a></li>
+<li><a href="#breakpoint">Pause at a breakpoint and step over</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="trace-values">
+  <h2>Trace the first wrong value</h2>
+  <p>Start with the expected result and inspect one intermediate value at a time. Here Number() returns NaN because the input contains a comma. Fix the conversion after you confirm the raw value.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const rawPrice = &quot;2,500&quot;;
+const price = Number(rawPrice);
+console.log(&quot;Raw:&quot;, rawPrice, &quot;Parsed:&quot;, price);
+console.log(&quot;Total:&quot;, price * 2);</code></pre>
+<p class="example-result"><strong>What to expect</strong> Run once to see NaN. Change &quot;2,500&quot; to &quot;2500&quot; and run again to see 5000.</p>
+
+</section>
+<section class="article-section" id="breakpoint">
+  <h2>Pause at a breakpoint and step over</h2>
+  <p>Open browser DevTools before clicking Total. The debugger statement pauses before the multiplication when the debugger is active. Inspect quantity and price in Scope, then select Step over to execute the next line. In a saved file, you can replace debugger with a line breakpoint by clicking a line number in Sources.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Pause at a breakpoint and step over&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;button id=&quot;total&quot;&gt;Total&lt;/button&gt;
+&lt;p id=&quot;result&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+document.querySelector(&quot;#total&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+  const quantity = 2;
+  const price = 1500;
+  debugger;
+  const total = quantity * price;
+  document.querySelector(&quot;#result&quot;).textContent = total + &quot; MMK&quot;;
+});
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> When paused, quantity is 2 and price is 1500. Resume to see 3000 MMK. With DevTools closed, Total displays the result immediately.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.chrome.com/docs/devtools/javascript/breakpoints">Chrome DevTools · JavaScript breakpoints</a></li>
+<li><a href="https://developer.chrome.com/docs/devtools/javascript">Chrome DevTools · Debug JavaScript</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/storage-and-errors/">Previous lesson · Browser storage and error handling</a>
+<a href="/docs/read/en/js/iterators-and-generators/">Next lesson · Iterators and generators</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Numeric matrix ကို ပြပြီး တန်ဖိုးတွေ ဘယ်အရောင်နဲ့ ကိုက်လဲ ဖော်ပြပါ။">
+  <title>Heatmaps နှင့် Colorbars · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/heatmaps-and-colorbars/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/heatmaps-and-colorbars/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/heatmaps-and-colorbars/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#matplotlib">သင်ခန်းစာအားလုံး · Matplotlib</a> <a href="/docs/read/en/matplotlib/heatmaps-and-colorbars/" lang="en" hreflang="en">English</a></nav>
+  <h1>Heatmaps နှင့် Colorbars</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">Numeric matrix ကို ပြပြီး တန်ဖိုးတွေ ဘယ်အရောင်နဲ့ ကိုက်လဲ ဖော်ပြပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/matplotlib/heatmaps-and-colorbars">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#heatmap">Matrix ကို Pixel တွေနဲ့ ကိုယ်စားပြုခြင်း</a></li>
+<li><a href="#normalization">နှိုင်းယှဉ်ရာမှာ Scale တူတူ သုံးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="heatmap">
+  <h2>Matrix ကို Pixel တွေနဲ့ ကိုယ်စားပြုခြင်း</h2>
+  <p>imshow က ပုံစံညီတဲ့ matrix ကို image အဖြစ် ပြပါတယ်။ Scale ပြဖို့ colorbar ထည့်ပါ။ Row၊ column အဓိပ္ပာယ် မပျောက်ဖို့ axis နှစ်ခုလုံး label ထည့်ပါ။</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(layout=&quot;constrained&quot;)
+image = ax.imshow([[4, 7, 5], [8, 6, 3]], cmap=&quot;viridis&quot;, vmin=0, vmax=10)
+ax.set_xticks([0, 1, 2], [&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;])
+ax.set_yticks([0, 1], [&quot;Store A&quot;, &quot;Store B&quot;])
+fig.colorbar(image, ax=ax, label=&quot;Units&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/heatmaps-and-colorbars-heatmap.png" data-image-preview><img src="/docs/media/data/heatmaps-and-colorbars-heatmap.png" alt="တနင်္လာကနေ ဗုဒ္ဓဟူးအထိ ဆိုင်နှစ်ဆိုင်က units sold heatmap ပါ။ Colorbar က သုညကနေ ဆယ် unit အထိပါ။" width="658" height="499" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="normalization">
+  <h2>နှိုင်းယှဉ်ရာမှာ Scale တူတူ သုံးခြင်း</h2>
+  <p>ယှဉ်မယ့် heatmap တွေမှာ normalization တူတူ ဒါမှမဟုတ် vmin၊ vmax တူတူ လိုပါတယ်။ အရေးပါတဲ့ midpoint ရဲ့ ဘက်နှစ်ဘက်က ကွာဟချက်တွေ ပြချင်ရင် diverging scale ရွေးပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.imshow.html">Axes.imshow</a></li>
+<li><a href="https://matplotlib.org/stable/users/explain/colors/colormaps.html">Choosing colormaps</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/matplotlib/uncertainty-charts/">အရင်သင်ခန်းစာ · Error Bars နှင့် Bands ဖြင့် မသေချာမှု ပြခြင်း</a>
+<a href="/docs/read/my/matplotlib/annotations-and-ticks/">နောက်သင်ခန်းစာ · Point များ မှတ်သား၍ Tick ပုံစံချခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

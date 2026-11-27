@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pull Request ဆိုတာ branch တစ်ခုက changes တွေကို နောက် branch တစ်ခုထဲ ပေါင်းဖို့ တင်ပြတာပါ။ Team က မပေါင်းခင် ဘာတွေပြင်ထားလဲ ကြည့်နိုင်တယ်၊ checks တွေ စစ်နိုင်တယ်၊ ပြင်သင့်တာတွေ ဆွေးနွေးနိုင်ပါတယ်။">
+  <title>Pull Request ဖွင့်ခြင်းနဲ့ Code Review · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/github/pull-requests/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/github/pull-requests/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/github/pull-requests/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#github">သင်ခန်းစာအားလုံး · GitHub</a> <a href="/docs/read/en/github/pull-requests/" lang="en" hreflang="en">English</a></nav>
+  <h1>Pull Request ဖွင့်ခြင်းနဲ့ Code Review</h1>
+  
+  <p class="intro">Pull Request ဆိုတာ branch တစ်ခုက changes တွေကို နောက် branch တစ်ခုထဲ ပေါင်းဖို့ တင်ပြတာပါ။ Team က မပေါင်းခင် ဘာတွေပြင်ထားလဲ ကြည့်နိုင်တယ်၊ checks တွေ စစ်နိုင်တယ်၊ ပြင်သင့်တာတွေ ဆွေးနွေးနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/github/pull-requests">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#feature">Feature Branch မှာ Commit လုပ်ပြီး Push တင်ခြင်း</a></li>
+<li><a href="#open">Base နဲ့ Compare Branch ရွေးခြင်း</a></li>
+<li><a href="#review">Review အတိုင်း ပြင်ပြီး Merge ပြီးတဲ့ main ကို Update လုပ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="feature">
+  <h2>Feature Branch မှာ Commit လုပ်ပြီး Push တင်ခြင်း</h2>
+  <p>project-notes ထဲမှာ commit လုပ်စရာ မကျန်တော့တဲ့ အခြေအနေကနေ စပါ။ main က origin/main ကို track လုပ်ထားရပါမယ်။ ပြင်ဆင်ချက်တစ်ခုအတွက် branch ခွဲ၊ checklist ထည့်၊ ပြီးရင် branch ကို GitHub ပေါ် push လုပ်ပါ။ နမူနာကို Git Bash၊ macOS ဒါမှမဟုတ် Linux မှာ run ပါ။ CHECKLIST.md ကို editor နဲ့လည်း ဆောက်နိုင်ပါတယ်။</p>
+
+<pre><code>git switch main
+git pull --ff-only
+git switch -c add-checklist
+printf &#39;# Project Checklist\n- [ ] Review the README\n&#39; &gt; CHECKLIST.md
+git add CHECKLIST.md
+git commit -m &quot;Add project checklist&quot;
+git push -u origin add-checklist</code></pre>
+
+
+</section>
+<section class="article-section" id="open">
+  <h2>Base နဲ့ Compare Branch ရွေးခြင်း</h2>
+  <p>GitHub ရဲ့ Pull requests tab မှာ New pull request ကို ရွေးပါ။ Base က changes လက်ခံမယ့် branch ပါ။ Compare က changes ပါတဲ့ branch ပါ။ Diff ကို စစ်ပြီး title ရေးပါ။ Description ထဲမှာ ဘာပြင်ထားလဲ၊ ဘယ်လို စစ်ထားလဲ ရေးပါ။</p>
+
+<pre><code>Base: main
+Compare: add-checklist
+Title: Add project checklist
+Description: Adds CHECKLIST.md. Verified the Markdown preview.</code></pre>
+
+
+</section>
+<section class="article-section" id="review">
+  <h2>Review အတိုင်း ပြင်ပြီး Merge ပြီးတဲ့ main ကို Update လုပ်ခြင်း</h2>
+  <p>Files changed နဲ့ လိုအပ်တဲ့ review၊ automated checks တွေကို ကြည့်ပါ။ Reviewer ပြောတာ ပြင်ချင်ရင် add-checklist ပေါ်မှာပဲ commit အသစ်လုပ်ပြီး ထပ် push ပါ။ ဖွင့်ထားတဲ့ Pull Request မှာ အလိုအလျောက် update ဖြစ်ပါတယ်။ GitHub မှာ approve လုပ်ပြီး merge ပြီးတဲ့အခါ Local main ကို update လုပ်ပါ။</p>
+
+<pre><code>git switch main
+git pull --ff-only
+git log --oneline -5</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.github.com/en/get-started/using-github/github-flow">GitHub Docs · GitHub flow</a></li>
+<li><a href="https://docs.github.com/en/pull-requests/get-started/pull-request-quickstart">GitHub Docs · Quickstart for pull requests</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/github/push-a-repository/">အရင်သင်ခန်းစာ · Local Repository ချိတ်ပြီး GitHub ပေါ် Push လုပ်ခြင်း</a>
+<a href="/docs/read/my/github/issues-and-forks/">နောက်သင်ခန်းစာ · GitHub Issues နဲ့ Repository Fork လုပ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

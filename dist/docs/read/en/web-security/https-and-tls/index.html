@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Before sending a login or a document, the browser needs a protected connection to the right server. HTTPS carries HTTP over TLS.">
+  <title>HTTPS, TLS, and HSTS · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/https-and-tls/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/https-and-tls/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/https-and-tls/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/https-and-tls/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>HTTPS, TLS, and HSTS</h1>
+  
+  <p class="intro">Before sending a login or a document, the browser needs a protected connection to the right server. HTTPS carries HTTP over TLS.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/https-and-tls">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#transport">Protect each network hop</a></li>
+<li><a href="#hsts">Remember HTTPS on later visits</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="transport">
+  <h2>Protect each network hop</h2>
+  <p>The browser checks the server certificate for the hostname and a trusted issuer. TLS protects data in transit against reading and modification. If a proxy terminates TLS, review the next connection separately. Load scripts, styles, and images over HTTPS too.</p>
+
+<pre><code>Browser to reverse proxy    HTTPS, valid certificate for docs.example
+Reverse proxy to API        Authenticated TLS on the internal connection</code></pre>
+
+
+</section>
+<section class="article-section" id="hsts">
+  <h2>Remember HTTPS on later visits</h2>
+  <p>Redirect HTTP to HTTPS. Once HTTPS works reliably, send Strict-Transport-Security on the HTTPS response. The browser remembers the rule for max-age seconds. Start with a short rollout. Enable includeSubDomains only after every affected subdomain supports HTTPS.</p>
+
+<pre><code>Strict-Transport-Security: max-age=300</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html">OWASP · TLS</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security">MDN · Strict-Transport-Security</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/introduction/">Previous lesson · Introduction to Web Security</a>
+<a href="/docs/read/en/web-security/origins-and-cors/">Next lesson · Same-Origin Policy and CORS</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

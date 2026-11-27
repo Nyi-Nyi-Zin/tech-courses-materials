@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Write a test that uses a component the way a person would use it, then assert what appears on screen.">
+  <title>Test React components through the UI · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/react/component-testing/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/component-testing/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/component-testing/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#react">All documentation · React</a> <a href="/docs/read/my/react/component-testing/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Test React components through the UI</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">Write a test that uses a component the way a person would use it, then assert what appears on screen.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/react/component-testing">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#tools">Set up Vitest and Testing Library</a></li>
+<li><a href="#behavior">Click and check the visible output</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="tools">
+  <h2>Set up Vitest and Testing Library</h2>
+  <p>In a React and Vite project, install the DOM environment and the testing libraries. The environment comment in the test below enables jsdom for that file. The cleanup hook removes the rendered component after each test.</p>
+
+<pre><code>npm install -D vitest jsdom @testing-library/react @testing-library/dom @testing-library/user-event
+npx vitest run</code></pre>
+
+
+</section>
+<section class="article-section" id="behavior">
+  <h2>Click and check the visible output</h2>
+  <p>Find the button by its role and accessible name. Await the user action, then assert the new status text. Save this example as quantity.test.jsx. For network work, wait for the changed UI and cover both a successful response and a failure.</p>
+
+<pre><code>// @vitest-environment jsdom
+import React, { useState } from &quot;react&quot;;
+import { afterEach, expect, test } from &quot;vitest&quot;;
+import { cleanup, render, screen } from &quot;@testing-library/react&quot;;
+import userEvent from &quot;@testing-library/user-event&quot;;
+
+afterEach(cleanup);
+
+function Quantity() {
+  const [quantity, setQuantity] = useState(0);
+  return (
+    &lt;&gt;
+      &lt;button onClick={() =&gt; setQuantity(value =&gt; value + 1)}&gt;Add one&lt;/button&gt;
+      &lt;p role=&quot;status&quot;&gt;{quantity}&lt;/p&gt;
+    &lt;/&gt;
+  );
+}
+
+test(&quot;adds one to the visible quantity&quot;, async () =&gt; {
+  const user = userEvent.setup();
+  render(&lt;Quantity /&gt;);
+  await user.click(screen.getByRole(&quot;button&quot;, { name: &quot;Add one&quot; }));
+  expect(screen.getByRole(&quot;status&quot;).textContent).toBe(&quot;1&quot;);
+});</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://vitest.dev/config/environment.html">Vitest · Environment</a></li>
+<li><a href="https://testing-library.com/docs/queries/byrole/">Testing Library · ByRole</a></li>
+<li><a href="https://testing-library.com/docs/user-event/intro/">Testing Library · user-event</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/react/suspense/">Previous lesson · Show a loading fallback with Suspense</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Write tests for return values and edge cases, and record events that explain a run.">
+  <title>Testing and logging Python programs · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/python/testing-and-logging/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/testing-and-logging/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/testing-and-logging/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#python">All documentation · Python</a> <a href="/docs/read/my/python/testing-and-logging/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Testing and logging Python programs</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">Write tests for return values and edge cases, and record events that explain a run.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/python/testing-and-logging">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#tests">Test a normal input and a boundary</a></li>
+<li><a href="#logging">Record meaningful events</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="tests">
+  <h2>Test a normal input and a boundary</h2>
+  <p>Put calculation code in functions so tests can call it directly. Test a representative case, boundary values, and invalid input where relevant. unittest assertions report what differs. The example runs a tiny test suite and prints the result.</p>
+
+<pre><code>from io import StringIO
+import unittest
+
+def line_total(qty, price):
+    if qty &lt; 0:
+        raise ValueError(&quot;Negative quantity&quot;)
+    return qty * price
+
+class OrderTests(unittest.TestCase):
+    def test_total(self):
+        self.assertEqual(line_total(2, 3), 6)
+        self.assertEqual(line_total(0, 3), 0)
+
+    def test_invalid_quantity(self):
+        with self.assertRaises(ValueError):
+            line_total(-1, 3)
+
+suite = unittest.defaultTestLoader.loadTestsFromTestCase(OrderTests)
+result = unittest.TextTestRunner(stream=StringIO()).run(suite)
+print(result.testsRun, result.wasSuccessful())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">2 True</pre></div>
+
+
+</section>
+<section class="article-section" id="logging">
+  <h2>Record meaningful events</h2>
+  <p>Use a module-level logger and configure handlers at the program entry point. Use INFO for milestones, WARNING for recoverable problems, and exception() inside an exception handler if the traceback helps. Keep secrets and private records out of logs.</p>
+
+<pre><code>import logging
+
+logging.basicConfig(level=logging.INFO, format=&quot;%(levelname)s %(message)s&quot;)
+logger = logging.getLogger(__name__)
+logger.info(&quot;Loaded %d rows&quot;, 120)</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.python.org/3.15/library/unittest.html">unittest</a></li>
+<li><a href="https://docs.python.org/3.15/library/logging.html">logging</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/python/dataclasses-and-typing/">Previous lesson · Dataclasses and typed interfaces</a>
+<a href="/docs/read/en/python/project-structure/">Next lesson · Reusable modules and project dependencies</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

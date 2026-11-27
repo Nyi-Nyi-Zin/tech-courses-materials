@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A browser uses a main thread to run the page’s JavaScript and respond to the user. A Web Worker can do computation separately. The page and worker exchange messages because the worker cannot directly change the page’s DOM.">
+  <title>Web Workers · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/web-workers/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/web-workers/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/web-workers/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/web-workers/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Web Workers</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">A browser uses a main thread to run the page’s JavaScript and respond to the user. A Web Worker can do computation separately. The page and worker exchange messages because the worker cannot directly change the page’s DOM.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/web-workers">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#page">Prepare the page that shows the result</a></li>
+<li><a href="#start-worker">Start the worker and send it values</a></li>
+<li><a href="#receive">Calculate and reply in the worker</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="page">
+  <h2>Prepare the page that shows the result</h2>
+  <p>The page has a paragraph for the result and a script loaded as a module. role=&quot;status&quot; identifies an area that can announce changes to assistive technology.</p>
+<p class="example-setup"><strong>How to try it</strong> Create a new folder and save the code as index.html.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Worker demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p id=&quot;total&quot; role=&quot;status&quot;&gt;Adding values…&lt;/p&gt;
+  &lt;script type=&quot;module&quot; src=&quot;./main.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> After the next two files are ready, the page can show the worker’s result.</p>
+
+</section>
+<section class="article-section" id="start-worker">
+  <h2>Start the worker and send it values</h2>
+  <p>new Worker starts another script. new URL resolves the file next to this module. postMessage sends supported data to that script. onmessage receives the reply and updates the DOM from the page. Since this is a one-time calculation, terminate() stops the worker after a reply or an error.</p>
+<p class="example-setup"><strong>How to try it</strong> Save as main.js beside index.html.</p>
+<pre><code>const worker = new Worker(new URL(&quot;./total-worker.js&quot;, import.meta.url), { type: &quot;module&quot; });
+const output = document.querySelector(&quot;#total&quot;);
+worker.onmessage = event =&gt; {
+  output.textContent = &quot;Total: &quot; + event.data;
+  worker.terminate();
+};
+worker.onerror = () =&gt; {
+  output.textContent = &quot;Could not calculate the total.&quot;;
+  worker.terminate();
+};
+worker.postMessage([12, 18, 24]);</code></pre>
+<p class="example-result"><strong>What to expect</strong> This script sends three numbers to the worker. The last step supplies that worker.</p>
+
+</section>
+<section class="article-section" id="receive">
+  <h2>Calculate and reply in the worker</h2>
+  <p>The worker has its own global object, called self here. Its onmessage reads the copied values in event.data. The worker computes the total and posts a message back to the main page.</p>
+<p class="example-setup"><strong>How to try it</strong> Save as total-worker.js beside the other two files. Serve this folder with Live Server or python -m http.server 8000 and open http://localhost:8000.</p>
+<pre><code>self.onmessage = event =&gt; {
+  const total = event.data.reduce((sum, value) =&gt; sum + value, 0);
+  self.postMessage(total);
+};</code></pre>
+<p class="example-result"><strong>What to expect</strong> The page changes to Total: 54. Change the list in main.js and reload to see the new total.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers">MDN · Using Web Workers</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm">MDN · Structured clone algorithm</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/regular-expressions/">Previous lesson · Regular expressions</a>
+<a href="/docs/read/en/js/reference/">Next lesson · JavaScript method reference</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

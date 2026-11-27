@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Responsive layout က ရရှိတဲ့ နေရာအကျယ်အလိုက် ပုံစံပြောင်းပါတယ်။ ကျဉ်းတဲ့နေရာမှာ သုံးလို့ရတဲ့ပုံစံက စပြီး နေရာပိုရမှ rule ထပ်ထည့်ပါ။ Keyboard သုံးသူတွေအတွက် ဘယ်ခလုတ်ရောက်နေပြီလဲ သိနိုင်တဲ့ အမှတ်အသားလည်း လိုပါတယ်။">
+  <title>Responsive Styles နဲ့ Focus · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/responsive/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/responsive/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/responsive/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/responsive/" lang="en" hreflang="en">English</a></nav>
+  <h1>Responsive Styles နဲ့ Focus</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Responsive layout က ရရှိတဲ့ နေရာအကျယ်အလိုက် ပုံစံပြောင်းပါတယ်။ ကျဉ်းတဲ့နေရာမှာ သုံးလို့ရတဲ့ပုံစံက စပြီး နေရာပိုရမှ rule ထပ်ထည့်ပါ။ Keyboard သုံးသူတွေအတွက် ဘယ်ခလုတ်ရောက်နေပြီလဲ သိနိုင်တဲ့ အမှတ်အသားလည်း လိုပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/responsive">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#queries">Media Query က ဘယ်အခါ အလုပ်လုပ်လဲ။</a></li>
+<li><a href="#container-queries">Component ရဲ့ နေရာအကျယ်နဲ့ ပြောင်းခြင်း</a></li>
+<li><a href="#focus">Keyboard Focus ကို မြင်ရအောင် ပြခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="queries">
+  <h2>Media Query က ဘယ်အခါ အလုပ်လုပ်လဲ။</h2>
+  <p>Media query ဆိုတာ browser ပတ်ဝန်းကျင်ကို စစ်တဲ့ စည်းကမ်းပါ။ မြင်ကွင်းက အနည်းဆုံး CSS pixel 600 ကျယ်ရင် @media (min-width: 600px) အတွင်းက rule တွေ သက်ရောက်ပါတယ်။ နမူနာထဲက viewport meta စာကြောင်းကြောင့် ဖုန်းမှာ ဖုန်းအကျယ်နဲ့ စီနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;When does a media query apply?&lt;/title&gt;
+  &lt;style&gt;
+    .cards { display: grid; gap: 10px; }
+    .cards &gt; div { background: #d6efea; padding: 8px; }
+    @media (min-width: 600px) { .cards { grid-template-columns: 1fr 1fr 1fr; } }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;cards&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> 600px အောက်မှာ card တွေ အောက်ဆင်းစီပါတယ်။ 600px နဲ့အထက်မှာ တန်းတစ်တန်းတည်း နေပါတယ်။ DevTools ရဲ့ device toolbar သို့မဟုတ် window အရွယ်ပြောင်းပြီး စမ်းပါ။</p>
+
+</section>
+<section class="article-section" id="container-queries">
+  <h2>Component ရဲ့ နေရာအကျယ်နဲ့ ပြောင်းခြင်း</h2>
+  <p>Container query က မြင်ကွင်းအပြည့်ကို မူတည်မယ့်အစား component ကို ခြုံထားတဲ့ element ကို စစ်ပါတယ်။ container-type: inline-size နဲ့ ဒီအပြင်အကွက်ရဲ့ အကျယ်ကို စစ်နိုင်ပါတယ်။ Rule က အတွင်းက descendant ကို ပြောင်းပေးပါတယ်။ Component တူတူကို main အပိုင်းနဲ့ နေရာကျဉ်းတဲ့ sidebar မှာ သုံးတဲ့အခါ အသုံးဝင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Respond to a component’s own space&lt;/title&gt;
+  &lt;style&gt;
+    .panel { container-type: inline-size; width: 100%; max-width: 480px; }
+    .cards { display: grid; gap: 8px; }
+    .cards &gt; div { background: #d6efea; padding: 8px; }
+    @container (min-width: 360px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;section class=&quot;panel&quot;&gt;&lt;div class=&quot;cards&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Panel 360px ကျယ်တာနဲ့အထက်မှာ တစ်တန်းတည်း စီပါတယ်။ Browser ကျယ်နေရင်တောင် max-width ကို 300px ပြောင်းရင် card တွေ အောက်ဆင်းပါမယ်။</p>
+
+</section>
+<section class="article-section" id="focus">
+  <h2>Keyboard Focus ကို မြင်ရအောင် ပြခြင်း</h2>
+  <p>Focus က keyboard နဲ့ လုပ်ဆောင်ချက်ပေးလို့ရတဲ့ လက်ရှိနေရာပါ။ Tab နှိပ်ပြီး တစ်ခုကနေ တစ်ခု သွားနိုင်ပါတယ်။ :hover က mouse pointer ခလုတ်ပေါ် ရှိချိန် ကိုက်ပါတယ်။ Keyboard နဲ့ သွားလာတဲ့အခါလို focus အမှတ်အသားလိုတဲ့ အခြေအနေမှာ :focus-visible နဲ့ style သတ်မှတ်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Show keyboard focus&lt;/title&gt;
+  &lt;style&gt;
+    button:hover { background: #d6efea; }
+    button:focus-visible { outline: 3px solid purple; outline-offset: 3px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;button type=&quot;button&quot;&gt;Pen&lt;/button&gt; &lt;button type=&quot;button&quot;&gt;Notebook&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Mouse တင်ရင် ခလုတ်နောက်ခံ ပြောင်းပါမယ်။ Tab နှိပ်ပြီး ခရမ်းရောင် focus အနားသတ် နေရာရွှေ့ပုံကို ကြည့်ပါ။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Using">MDN · Using media queries</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_queries">MDN · CSS container queries</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:focus-visible">MDN · Focus visible</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/positioning/">အရင်သင်ခန်းစာ · နေရာချခြင်းနဲ့ အလွှာအစဉ်</a>
+<a href="/docs/read/my/css/layout-debugging/">နောက်သင်ခန်းစာ · Layout ပြဿနာ ရှာပြီး ပြင်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

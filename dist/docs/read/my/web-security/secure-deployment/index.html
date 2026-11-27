@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Release တစ်ခုမှာ ကိုယ့်အဖွဲ့ရေးတဲ့ code၊ တခြားသူတွေ ထိန်းသိမ်းတဲ့ dependency တွေအပြင် build နဲ့ hosting ဘက်က setting တွေပါ ပါဝင်ပါတယ်။ အဲဒီထဲက တစ်ခုပြောင်းရင် user ဆီ ရောက်သွားတဲ့ software လည်း ပြောင်းနိုင်ပါတယ်။">
+  <title>Deployment နဲ့ Software Supply Chain Security · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/secure-deployment/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/secure-deployment/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/secure-deployment/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-security">သင်ခန်းစာအားလုံး · Web Security</a> <a href="/docs/read/en/web-security/secure-deployment/" lang="en" hreflang="en">English</a></nav>
+  <h1>Deployment နဲ့ Software Supply Chain Security</h1>
+  
+  <p class="intro">Release တစ်ခုမှာ ကိုယ့်အဖွဲ့ရေးတဲ့ code၊ တခြားသူတွေ ထိန်းသိမ်းတဲ့ dependency တွေအပြင် build နဲ့ hosting ဘက်က setting တွေပါ ပါဝင်ပါတယ်။ အဲဒီထဲက တစ်ခုပြောင်းရင် user ဆီ ရောက်သွားတဲ့ software လည်း ပြောင်းနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-security/secure-deployment">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#dependencies">Build ထဲ ပါလာမယ့် dependency တွေ စစ်ခြင်း</a></li>
+<li><a href="#release-integrity">စစ်ပြီးသား build ကို production တင်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="dependencies">
+  <h2>Build ထဲ ပါလာမယ့် dependency တွေ စစ်ခြင်း</h2>
+  <p>Lockfile ကို commit တင်ပြီး dependency စာရင်းနဲ့အတူ ပြောင်းသွားတာတွေကို review လုပ်ပါ။ npm project မှာ npm ci က lockfile အတိုင်း install လုပ်ပြီး manifest နဲ့ lockfile မကိုက်ရင် ရပ်ပါတယ်။ Security advisory တွေကို ဖတ်ပြီး update စမ်းပါ။ ကိုယ်တိုင် ထည့်ထားတဲ့ package အပြင် အဲဒီ package တွေကနေ ပါလာတဲ့ package တွေကိုပါ မှတ်ထားရင် ဘယ် release ထိခိုက်လဲ ရှာလို့ရပါတယ်။</p>
+
+<pre><code># Run in the reviewed project checkout with its committed package-lock.json.
+npm ci
+npm audit</code></pre>
+
+
+</section>
+<section class="article-section" id="release-integrity">
+  <h2>စစ်ပြီးသား build ကို production တင်ခြင်း</h2>
+  <p>CI credential တွေရဲ့ လုပ်ပိုင်ခွင့်ကို ကန့်သတ်ပါ။ Release branch ကို ကာကွယ်ပြီး မစစ်ရသေးတဲ့ changes တွေ run တဲ့နေရာမှာ deployment secret မပေးပါနဲ့။ တစ်ကြိမ် build လုပ်ပြီး ဘယ် source ကနေ ဘယ် build စနစ်က ထုတ်သလဲဆိုတဲ့ အထောက်အထား သို့မဟုတ် signature ကို စစ်ပါ။ အဲဒီ artifact ကိုပဲ production တင်ပါ။ Debug output ပိတ်၊ sample account ဖယ်ပြီး runtime အတွက် လိုသလောက် ခွင့်ပေးပါ။ Browser က ယူတဲ့ version အသေသတ်မှတ်ထားသော ပြင်ပဖိုင်တွေအတွက် Subresource Integrity နဲ့ ဖိုင်ကိုက်မကိုက် စစ်နိုင်ပါတယ်။</p>
+
+<pre><code>Pull request   Review code and lockfile; run checks without deploy credentials
+Build          Produce the artifact and trusted provenance
+Production     Verify provenance, then deploy the approved artifact</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Software_Supply_Chain_Security_Cheat_Sheet.html">OWASP · Software supply chain security</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity">MDN · Subresource Integrity</a></li>
+<li><a href="https://docs.npmjs.com/cli/commands/npm-ci/">npm · npm ci</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-security/data-and-secrets/">အရင်သင်ခန်းစာ · Private Data၊ Encryption နဲ့ Secret ထိန်းသိမ်းခြင်း</a>
+<a href="/docs/read/my/web-security/monitoring-and-incidents/">နောက်သင်ခန်းစာ · Error ကိုင်တွယ်ခြင်း၊ Security Log နဲ့ Incident Response</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

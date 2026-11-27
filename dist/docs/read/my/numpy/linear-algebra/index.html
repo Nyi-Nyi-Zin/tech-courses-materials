@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Matrix တွေ မြှောက်ပြီး NumPy နဲ့ linear equation တွေ ဖြေရှင်းပါ။">
+  <title>Matrix တွက်ချက်မှုနှင့် Linear Systems · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/linear-algebra/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/linear-algebra/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/linear-algebra/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#numpy">သင်ခန်းစာအားလုံး · NumPy</a> <a href="/docs/read/en/numpy/linear-algebra/" lang="en" hreflang="en">English</a></nav>
+  <h1>Matrix တွက်ချက်မှုနှင့် Linear Systems</h1>
+  <p class="article-version">2.5.5</p>
+  <p class="intro">Matrix တွေ မြှောက်ပြီး NumPy နဲ့ linear equation တွေ ဖြေရှင်းပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/numpy/linear-algebra">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#multiply">Matrix နှင့် Vector မြှောက်ခြင်း</a></li>
+<li><a href="#solve">Linear System ဖြေရှင်းခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="multiply">
+  <h2>Matrix နှင့် Vector မြှောက်ခြင်း</h2>
+  <p>2D matrix မှာ column n ခုရှိရင် အရှည် n ရှိတဲ့ 1D vector နဲ့ @ သုံးပြီး မြှောက်နိုင်ပါတယ်။ Result မှာ matrix row တစ်ခုစီအတွက် value တစ်ခု ရပါတယ်။ မတွက်ခင် shape ကိုက်မကိုက် စစ်ပါ။</p>
+
+<pre><code>import numpy as np
+
+costs = np.array([[2, 1], [4, 2]])
+prices = np.array([3, 5])
+print((costs @ prices).tolist())</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[11, 22]</pre></div>
+
+
+</section>
+<section class="article-section" id="solve">
+  <h2>Linear System ဖြေရှင်းခြင်း</h2>
+  <p>Square ဖြစ်ပြီး full rank ရှိတဲ့ A @ x = b အတွက် linalg.solve သုံးပါ။ Rectangular system အတွက် least squares စဉ်းစားပါ။ ရလာတဲ့ x က မူရင်း equation နဲ့ အနီးစပ်ဆုံး ကိုက်မကိုက် စစ်ပါ။</p>
+
+<pre><code>import numpy as np
+
+A = np.array([[2, 1], [1, -1]])
+b = np.array([7, 2])
+x = np.linalg.solve(A, b)
+print(x.round(2).tolist())
+print(np.allclose(A @ x, b))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[3.0, 1.0]
+True</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://numpy.org/doc/stable/reference/routines.linalg.html">NumPy linear algebra</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/numpy/statistics/">အရင်သင်ခန်းစာ · အနှစ်ချုပ်စာရင်းအင်း နှင့် Random Sampling</a>
+<a href="/docs/read/my/numpy/ufuncs-and-masks/">နောက်သင်ခန်းစာ · Universal Functions နှင့် Mask သုံးပြီး တွက်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

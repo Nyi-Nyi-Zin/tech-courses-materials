@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Flexbox arranges a group of boxes in one direction at a time. The box with display: flex is the flex container. Its direct children are the flex items.">
+  <title>Flexbox · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/flexbox/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/flexbox/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/flexbox/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/flexbox/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Flexbox</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Flexbox arranges a group of boxes in one direction at a time. The box with display: flex is the flex container. Its direct children are the flex items.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/flexbox">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#axis">Choose the direction of the main axis</a></li>
+<li><a href="#alignment">Align items on each axis</a></li>
+<li><a href="#wrap">Wrap items when a row runs out of room</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="axis">
+  <h2>Choose the direction of the main axis</h2>
+  <p>The main axis is the direction items follow. flex-direction: row follows the horizontal writing direction in this example. column places items vertically. The cross axis goes across the main axis.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Choose the direction of the main axis&lt;/title&gt;
+  &lt;style&gt;
+    .cards { display: flex; flex-direction: row; gap: 12px; }
+    .cards &gt; div { background: #d6efea; padding: 8px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;cards&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Three items appear in a row. Change row to column to stack them.</p>
+
+</section>
+<section class="article-section" id="alignment">
+  <h2>Align items on each axis</h2>
+  <p>justify-content uses extra space along the main axis. align-items aligns items across it. With a row direction here, those are horizontal and vertical respectively.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Align items on each axis&lt;/title&gt;
+  &lt;style&gt;
+    .cards { display: flex; min-height: 100px; justify-content: space-between; align-items: center; border: 2px solid; }
+    .cards &gt; div { background: #d6efea; padding: 8px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;cards&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Items spread across the row and sit at the vertical center.</p>
+
+</section>
+<section class="article-section" id="wrap">
+  <h2>Wrap items when a row runs out of room</h2>
+  <p>Flexbox uses one line by default. flex-wrap: wrap allows more lines. A flex item can get a starting size with flex-basis; here each uses 100px. gap separates items and the lines when they wrap.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Wrap items when a row runs out of room&lt;/title&gt;
+  &lt;style&gt;
+    .cards { display: flex; flex-wrap: wrap; width: 240px; gap: 10px; }
+    .cards &gt; div { flex-basis: 100px; background: #d6efea; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;cards&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Pen and Notebook fit on line one. Folder moves to line two.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.w3.org/TR/css-flexbox-1/">W3C · Flexbox</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Flexible_box_layout/Basic_concepts">MDN · Basic concepts of flexbox</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/spacing-and-visibility/">Previous lesson · Margins, overflow, and visibility</a>
+<a href="/docs/read/en/css/grid/">Next lesson · Grid</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

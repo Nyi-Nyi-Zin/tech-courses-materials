@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Frontend နဲ့ API ကို domain ခွဲတင်တဲ့အခါ JavaScript က API response ကို ဖတ်လို့ရမရ browser က စစ်ပါတယ်။ အဲဒီ data ကို ဘယ်သူအသုံးပြုခွင့်ရှိလဲဆိုတာတော့ API ဘက်က စစ်ရပါတယ်။">
+  <title>Same-Origin Policy နဲ့ CORS · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/origins-and-cors/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/origins-and-cors/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/origins-and-cors/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-security">သင်ခန်းစာအားလုံး · Web Security</a> <a href="/docs/read/en/web-security/origins-and-cors/" lang="en" hreflang="en">English</a></nav>
+  <h1>Same-Origin Policy နဲ့ CORS</h1>
+  
+  <p class="intro">Frontend နဲ့ API ကို domain ခွဲတင်တဲ့အခါ JavaScript က API response ကို ဖတ်လို့ရမရ browser က စစ်ပါတယ်။ အဲဒီ data ကို ဘယ်သူအသုံးပြုခွင့်ရှိလဲဆိုတာတော့ API ဘက်က စစ်ရပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-security/origins-and-cors">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#origin">Origin နှစ်ခုကို နှိုင်းယှဉ်ခြင်း</a></li>
+<li><a href="#cors">ခွင့်ပြုထားတဲ့ frontend က response ဖတ်နိုင်အောင် ပြင်ဆင်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="origin">
+  <h2>Origin နှစ်ခုကို နှိုင်းယှဉ်ခြင်း</h2>
+  <p>Origin တစ်ခုမှာ scheme၊ host နဲ့ port ပါပါတယ်။ Path ပြောင်းပေမဲ့ origin တူနိုင်ပါတယ်။ Subdomain ဒါမှမဟုတ် port ပြောင်းရင်တော့ origin ကွဲပါတယ်။ ပုံမှန်အားဖြင့် တခြား origin ရဲ့ response တွေကို script က ဖတ်နိုင်တဲ့ အခြေအနေကို browser က ကန့်သတ်ထားပါတယ်။</p>
+
+<pre><code>const app = new URL(&quot;https://app.example/documents&quot;);
+new URL(&quot;/settings&quot;, app).origin === app.origin;          // true
+new URL(&quot;https://api.example&quot;).origin === app.origin;     // false</code></pre>
+
+
+</section>
+<section class="article-section" id="cors">
+  <h2>ခွင့်ပြုထားတဲ့ frontend က response ဖတ်နိုင်အောင် ပြင်ဆင်ခြင်း</h2>
+  <p>Cookie သုံးတဲ့ cross-origin fetch မှာ client က credentials ကို include သတ်မှတ်ရပြီး browser ရဲ့ cookie စည်းမျဉ်းတွေနဲ့လည်း ကိုက်ရပါမယ်။ API က ခွင့်ပြုထားတဲ့ origin အတိအကျကိုသာ ပြန်ပေးပါ။ Origin အလိုက် header ပြောင်းရင် Vary ထည့်ပါ။ Preflight လိုတဲ့ request မှာ browser က OPTIONS နဲ့ အရင်မေးပြီး API က ခွင့်ပြုတဲ့ method နဲ့ header တွေကို ဖြေရပါတယ်။ Endpoint တိုင်းမှာ အသုံးပြုသူရဲ့ လုပ်ပိုင်ခွင့်ကိုလည်း စစ်ပါ။</p>
+
+<pre><code>Access-Control-Allow-Origin: https://app.example
+Access-Control-Allow-Credentials: true
+Vary: Origin</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Same-origin_policy">MDN · Same-origin policy</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS">MDN · CORS</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-security/https-and-tls/">အရင်သင်ခန်းစာ · HTTPS၊ TLS နဲ့ HSTS</a>
+<a href="/docs/read/my/web-security/authentication/">နောက်သင်ခန်းစာ · Authentication၊ Password နဲ့ Account ပြန်ရယူခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

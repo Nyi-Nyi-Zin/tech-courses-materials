@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Look up the call syntax, try it, and check a common mistake.">
+  <title>JavaScript method reference · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/reference/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/reference/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/reference/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/reference/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>JavaScript method reference</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Look up the call syntax, try it, and check a common mistake.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/reference">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#map-array">array.map(callback)</a></li>
+<li><a href="#filter-array">array.filter(callback)</a></li>
+<li><a href="#trim-string">string.trim()</a></li>
+<li><a href="#query-selector">document.querySelector(selector)</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="map-array">
+  <h2>array.map(callback)</h2>
+  <p>Call a function for every item in this array and collect the returned values in a new array.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const catalog = [
+  { name: &quot;Pen&quot;, price: 1500 },
+  { name: &quot;Notebook&quot;, price: 2500 },
+  { name: &quot;Folder&quot;, price: 3000 }
+];
+console.log(catalog.map(item =&gt; item.price + 100));</code></pre>
+<p class="example-result"><strong>What to expect</strong> The new prices are [1600, 2600, 3100].</p>
+<p class="example-check"><strong>Common mistake</strong> A callback body with braces needs an explicit return to produce a value.</p>
+</section>
+<section class="article-section" id="filter-array">
+  <h2>array.filter(callback)</h2>
+  <p>Return a new array containing items that pass a test.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const catalog = [
+  { name: &quot;Pen&quot;, price: 1500 },
+  { name: &quot;Notebook&quot;, price: 2500 },
+  { name: &quot;Folder&quot;, price: 3000 }
+];
+const matches = catalog.filter(item =&gt; item.price &gt;= 2500);
+console.log(matches.length);</code></pre>
+<p class="example-result"><strong>What to expect</strong> Two items cost at least 2500 MMK.</p>
+<p class="example-check"><strong>Common mistake</strong> filter() always returns an array, even if it finds zero or one item.</p>
+</section>
+<section class="article-section" id="trim-string">
+  <h2>string.trim()</h2>
+  <p>Get a new string without whitespace at the beginning or end. Spaces inside the text stay.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const text = &quot;  Desk Lamp  &quot;;
+console.log(&quot;[&quot; + text.trim() + &quot;]&quot;);</code></pre>
+<p class="example-result"><strong>What to expect</strong> The string contains Desk Lamp with its original middle space.</p>
+<p class="example-check"><strong>Common mistake</strong> Use the returned value. trim() leaves the original string unchanged.</p>
+</section>
+<section class="article-section" id="query-selector">
+  <h2>document.querySelector(selector)</h2>
+  <p>Return the first element matching a CSS selector, or null if none matches.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;document.querySelector(selector)&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;ul&gt;&lt;li class=&quot;product&quot;&gt;Pen&lt;/li&gt;&lt;li class=&quot;product&quot;&gt;Notebook&lt;/li&gt;&lt;/ul&gt;
+  &lt;script&gt;
+const firstProduct = document.querySelector(&quot;.product&quot;);
+if (firstProduct) firstProduct.textContent = &quot;Featured pen&quot;;
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first list item becomes Featured pen. The second stays Notebook.</p>
+<p class="example-check"><strong>Common mistake</strong> Use a dot before a class name and # before an id.</p>
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">MDN · Array/map</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">MDN · Array/filter</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim">MDN · String/trim</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">MDN · Document/querySelector</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/web-workers/">Previous lesson · Web Workers</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

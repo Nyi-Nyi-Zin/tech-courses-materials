@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Build a moving window defined by an observation count, time span or custom indexer.">
+  <title>pandas.Series.rolling · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/Series.rolling/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/Series.rolling/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/Series.rolling">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Series and accessors</span><a href="/docs/read/my/pandas/api/Series.rolling/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>Series.<wbr>rolling</code></h1>
+    <p class="article-version">pandas 3.1.1 · Series and accessors · <span lang="en">method</span></p>
+    <p class="intro">Build a moving window defined by an observation count, time span or custom indexer.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">Series.rolling(…)</code> <span>Full signature</span></summary><pre><code lang="en">Series.rolling(
+    window,
+    min_periods=None,
+    center=False,
+    win_type=None,
+    on=None,
+    closed=None,
+    step=None,
+    method=&#39;single&#39;,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="7" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+orders = pd.DataFrame({
+    &quot;team&quot;: [&quot;North&quot;, &quot;North&quot;, &quot;South&quot;],
+    &quot;day&quot;: pd.to_datetime([&quot;2025-01-01&quot;, &quot;2025-01-02&quot;, &quot;2025-01-03&quot;]),
+    &quot;units&quot;: [4, None, 7],
+})
+print(orders[&quot;units&quot;].rolling(window=2, min_periods=1).mean())</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>window</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>int, timedelta, str, offset, or BaseIndexer subclass</span><p>Set the number of observations, time span, or custom indexer defining each window.</p></td></tr>
+<tr><th scope="row"><code>min_periods</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>int</span><p>Require this many valid observations in a window before pandas reports a value.</p></td></tr>
+<tr><th scope="row"><code>center</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Set each result&#39;s label to the center of its window where supported.</p></td></tr>
+<tr><th scope="row"><code>win_type</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str</span><p>Choose a SciPy window type for weighted rolling calculations.</p></td></tr>
+<tr><th scope="row"><code>on</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str</span><p>Choose the shared key columns or name the axis column used by the operation.</p></td></tr>
+<tr><th scope="row"><code>closed</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str</span><p>Choose which interval boundaries are included.</p></td></tr>
+<tr><th scope="row"><code>step</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>int</span><p>Set how many positions to advance between successive selections or windows.</p></td></tr>
+<tr><th scope="row"><code>method</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>&#39;single&#39;</code></td>
+      <td><span>str {&#39;single&#39;, &#39;table&#39;}</span><p>Choose the algorithm used to calculate, align, or fill the result.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>pandas.api.typing.Window or pandas.api.typing.Rolling</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.rolling.html#pandas.Series.rolling">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/Series.rmul/"><span>Previous in this category</span><strong>pandas.Series.rmul</strong></a><a href="/docs/read/en/pandas/api/Series.round/"><span>Next in this category</span><strong>pandas.Series.round</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

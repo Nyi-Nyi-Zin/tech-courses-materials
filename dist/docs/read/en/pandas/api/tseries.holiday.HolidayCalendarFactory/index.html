@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Create a holiday calendar class by combining sets of rules.">
+  <title>pandas.tseries.holiday.HolidayCalendarFactory · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/tseries.holiday.HolidayCalendarFactory/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/tseries.holiday.HolidayCalendarFactory/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/tseries.holiday.HolidayCalendarFactory">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Date offsets and frequencies</span><a href="/docs/read/my/pandas/api/tseries.holiday.HolidayCalendarFactory/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>tseries.<wbr>holiday.<wbr>HolidayCalendarFactory</code></h1>
+    <p class="article-version">pandas 3.1.1 · Date offsets and frequencies · <span lang="en">function</span></p>
+    <p class="intro">Create a holiday calendar class by combining sets of rules.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><pre><code lang="en">holiday.HolidayCalendarFactory(
+    name,
+    base,
+    other,
+    base_class=&lt;class &#39;pandas.tseries.holiday.AbstractHolidayCalendar&#39;&gt;,
+)</code></pre></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+from pandas.tseries.holiday import USFederalHolidayCalendar, AbstractHolidayCalendar
+calendar = USFederalHolidayCalendar()
+from pandas.tseries.holiday import HolidayCalendarFactory
+print(HolidayCalendarFactory(&quot;ExampleCalendar&quot;, USFederalHolidayCalendar, USFederalHolidayCalendar).__name__)</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>name</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>str</span><p>Set a name or identify the named object used by the operation.</p></td></tr>
+<tr><th scope="row"><code>base</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>AbstractHolidayCalendar</span></td></tr>
+<tr><th scope="row"><code>other</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>AbstractHolidayCalendar</span><p>Supply the second object or value used in the operation.</p></td></tr>
+<tr><th scope="row"><code>base_class</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>&lt;class &#39;pandas.tseries.holiday.AbstractHolidayCalendar&#39;&gt;</code></td>
+      <td><span>type</span></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>type</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.tseries.holiday.HolidayCalendarFactory.html#pandas.tseries.holiday.HolidayCalendarFactory">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/tseries.holiday.Holiday.dates/"><span>Previous in this category</span><strong>pandas.tseries.holiday.Holiday.dates</strong></a><a href="/docs/read/en/pandas/api/tseries.holiday.nearest_workday/"><span>Next in this category</span><strong>pandas.tseries.holiday.nearest_workday</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

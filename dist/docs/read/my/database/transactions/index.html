@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ဆက်စပ်ပြောင်းလဲမှုတွေကို transaction တစ်ခုထဲ ထားပါ။ Application က data ဖတ်ပုံနဲ့ ကိုက်ညီရင် index နဲ့ query access မြန်နိုင်ပါတယ်။">
+  <title>Data ပြောင်းခြင်း၊ Transactions နှင့် Indexes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/transactions/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/transactions/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/transactions/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/transactions/" lang="en" hreflang="en">English</a></nav>
+  <h1>Data ပြောင်းခြင်း၊ Transactions နှင့် Indexes</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">ဆက်စပ်ပြောင်းလဲမှုတွေကို transaction တစ်ခုထဲ ထားပါ။ Application က data ဖတ်ပုံနဲ့ ကိုက်ညီရင် index နဲ့ query access မြန်နိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/transactions">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#commit">ပြောင်းလဲမှုများ သိမ်းခြင်း သို့မဟုတ် ပြန်ဖျက်ခြင်း</a></li>
+<li><a href="#index">Index မထည့်ခင်နဲ့ ထည့်ပြီးနောက် Query Plan နှိုင်းယှဉ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="commit">
+  <h2>ပြောင်းလဲမှုများ သိမ်းခြင်း သို့မဟုတ် ပြန်ဖျက်ခြင်း</h2>
+  <p>BEGIN က transaction စပါတယ်။ COMMIT က changes သိမ်းပြီး ROLLBACK က ပယ်ဖျက်ပါတယ်။ Update သို့ delete လုပ်တဲ့အခါ ရည်ရွယ်တဲ့ rows ကို WHERE နဲ့ ရွေးပါ။ ဒီဥပမာက သင်တန်းကြေး ပြောင်းလိုက်တာကို ပြန်ဖျက်ပါတယ်။</p>
+
+<pre><code>BEGIN;
+UPDATE courses SET fee = 35.00 WHERE id = 1;
+SELECT title, fee FROM courses WHERE id = 1;
+ROLLBACK;
+SELECT title, fee FROM courses WHERE id = 1;</code></pre>
+
+
+</section>
+<section class="article-section" id="index">
+  <h2>Index မထည့်ခင်နဲ့ ထည့်ပြီးနောက် Query Plan နှိုင်းယှဉ်ခြင်း</h2>
+  <p>Transaction က အပြောင်းအလဲတွေကို အတူသိမ်းဖို့ သုံးပါတယ်။ မှတ်တမ်းကို ပြန်ဖတ်တဲ့အခါ လိုတဲ့ row ကို မြန်မြန်ရှာနိုင်ဖို့ Index သုံးနိုင်ပါတယ်။ ယာယီ table တစ်ခုထဲမှာ sku ကို B-tree index မထည့်ခင်နဲ့ ထည့်ပြီးနောက် query တစ်ခုတည်းကို run ပါ။ နမူနာမှာ SKU တစ်ခုစီ တစ်ကြောင်းပဲ ရှိတယ်။ ANALYZE က planner သုံးတဲ့ စာရင်းအင်းတွေကို ပြန်တွက်တယ်။ EXPLAIN ANALYZE က SELECT ကို တကယ် run ပြီး plan နဲ့ တိုင်းထားတဲ့ ရလဒ်တွေကို ပြတယ်။ အဆုံးမှာ ROLLBACK နဲ့ နမူနာကို ပြန်ရှင်းတယ်။</p>
+
+<pre><code>BEGIN;
+CREATE TEMP TABLE lesson_index_products (sku text, name text);
+INSERT INTO lesson_index_products (sku, name)
+SELECT &#39;SKU-&#39; || n, &#39;Product &#39; || n
+FROM generate_series(1, 20000) AS sample(n);
+ANALYZE lesson_index_products;
+
+EXPLAIN (ANALYZE, BUFFERS)
+SELECT * FROM lesson_index_products WHERE sku = &#39;SKU-18000&#39;;
+
+CREATE INDEX ON lesson_index_products (sku);
+
+EXPLAIN (ANALYZE, BUFFERS)
+SELECT * FROM lesson_index_products WHERE sku = &#39;SKU-18000&#39;;
+ROLLBACK;</code></pre>
+<dl class="lesson-terms"><div><dt><code>Seq Scan</code></dt><dd>Table ကို ဖတ်ပြီး row တွေက filter နဲ့ ကိုက်မကိုက် စစ်တယ်။</dd></div><div><dt><code>Index Scan</code></dt><dd>ကိုက်ညီတဲ့ records ကို index ထဲမှာ ရှာပြီး သက်ဆိုင်ရာ table rows တွေကို ဖတ်တယ်။</dd></div><div><dt><code>Index trade-off</code></dt><dd>Index က storage ယူပြီး data ရေးတဲ့အခါ ပြင်ရတာ ပိုလာတယ်။ Table သေးရင် သို့မဟုတ် row အများကြီး ပြန်ဖတ်ရရင် planner က Seq Scan ကို ရွေးနိုင်သေးတယ်။</dd></div></dl>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Plan နှစ်ခုစလုံးမှာ query နဲ့ ကိုက်တဲ့ row တစ်ကြောင်း ရှိကြောင်း ပြမယ်။ ပထမ plan မှာ Seq Scan၊ ဒုတိယမှာ Index Scan ကို ပုံမှန်အားဖြင့် တွေ့ရမယ်။ Scan type နဲ့ buffers ကို တိုက်ကြည့်ပါ။ စက်နဲ့ cache အခြေအနေအလိုက် ကြာချိန် ကွာနိုင်တယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/tutorial-transactions.html">Transactions</a></li>
+<li><a href="https://www.postgresql.org/docs/19/indexes.html">Indexes</a></li>
+<li><a href="https://www.postgresql.org/docs/19/using-explain.html">Using EXPLAIN</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/normalization/">အရင်သင်ခန်းစာ · Normalization နဲ့ Tables ဆောက်ပါ</a>
+<a href="/docs/read/my/database/transaction-isolation/">နောက်သင်ခန်းစာ · Transaction Isolation နဲ့ တစ်ပြိုင်နက် Update များ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

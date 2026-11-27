@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Read how JavaScript represents missing or invalid values, then put results into a string.">
+  <title>Missing values and template literals · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/missing-values-and-templates/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/missing-values-and-templates/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/missing-values-and-templates/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/missing-values-and-templates/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Missing values and template literals</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Read how JavaScript represents missing or invalid values, then put results into a string.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/missing-values-and-templates">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#undefined">When does undefined appear?</a></li>
+<li><a href="#null">Set an empty value with null</a></li>
+<li><a href="#nan">Detect an invalid number with Number.isNaN()</a></li>
+<li><a href="#template-literals">Insert values with template literals</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="undefined">
+  <h2>When does undefined appear?</h2>
+  <p>A declared variable with no assigned value reads as undefined. Reading an absent property also gives undefined. Log each value separately to see where it came from.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>let receipt;
+const order = { product: &quot;Pen&quot; };
+console.log(receipt);
+console.log(order.note);</code></pre>
+<p class="example-result"><strong>What to expect</strong> Both lines print undefined.</p>
+
+</section>
+<section class="article-section" id="null">
+  <h2>Set an empty value with null</h2>
+  <p>Set a value to null when your code deliberately records an absence. Here the note field exists and the shop has recorded that it has no note.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const order = { product: &quot;Pen&quot;, note: null };
+console.log(order.note);
+console.log(order.note === null);</code></pre>
+<p class="example-result"><strong>What to expect</strong> The console prints null, then true.</p>
+
+</section>
+<section class="article-section" id="nan">
+  <h2>Detect an invalid number with Number.isNaN()</h2>
+  <p>NaN is a special number value that can result from an invalid calculation or conversion. NaN is unequal to itself, so use Number.isNaN(value) to detect it.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const quantity = Number(&quot;two&quot;);
+console.log(quantity);
+console.log(Number.isNaN(quantity));</code></pre>
+<p class="example-result"><strong>What to expect</strong> The console prints NaN, then true. Change &quot;two&quot; to &quot;2&quot; and compare.</p>
+
+</section>
+<section class="article-section" id="template-literals">
+  <h2>Insert values with template literals</h2>
+  <p>Backticks delimit a template literal. JavaScript evaluates the expression inside a dollar sign followed by braces and converts the result to string text. A template literal can also span multiple lines.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const product = &quot;Pen&quot;;
+const quantity = 2;
+const price = 1500;
+console.log(`${product}: ${quantity * price} MMK`);</code></pre>
+<p class="example-result"><strong>What to expect</strong> The console prints Pen: 3000 MMK. Change the quantity and run again.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures">MDN · JavaScript data types</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN">MDN · Number/isNaN</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">MDN · Template literals</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/values/">Previous lesson · Values, types, variables, and operators</a>
+<a href="/docs/read/en/js/conditions-and-loops/">Next lesson · Conditions and loops</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

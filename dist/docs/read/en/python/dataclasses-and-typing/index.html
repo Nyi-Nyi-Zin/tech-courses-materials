@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Model structured values and communicate the expected types at a function boundary.">
+  <title>Dataclasses and typed interfaces · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/python/dataclasses-and-typing/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/dataclasses-and-typing/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/dataclasses-and-typing/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#python">All documentation · Python</a> <a href="/docs/read/my/python/dataclasses-and-typing/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Dataclasses and typed interfaces</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">Model structured values and communicate the expected types at a function boundary.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/python/dataclasses-and-typing">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#dataclass">Represent a record with a dataclass</a></li>
+<li><a href="#type-hints">Make optional values explicit</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="dataclass">
+  <h2>Represent a record with a dataclass</h2>
+  <p>@dataclass can generate methods such as __init__, __repr__, and __eq__ from annotated fields. Use field(default_factory=list) to create a fresh list for each record. Add explicit validation when invalid inputs are possible.</p>
+
+<pre><code>from dataclasses import dataclass, field
+
+@dataclass
+class Order:
+    order_id: int
+    items: list[str] = field(default_factory=list)
+
+first, second = Order(1), Order(2)
+first.items.append(&quot;Tea&quot;)
+print(first.items, second.items)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[&#39;Tea&#39;] []</pre></div>
+
+
+</section>
+<section class="article-section" id="type-hints">
+  <h2>Make optional values explicit</h2>
+  <p>Type hints describe the intended values for tools and readers. str | None says the value can be text or None. Python generally does not enforce function annotations at runtime, so validate inputs from files, APIs, and users.</p>
+
+<pre><code>def normalize(name: str | None) -&gt; str:
+    return name.strip() if name is not None else &quot;Unknown&quot;
+
+print(normalize(&quot; Tea &quot;), normalize(None))</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">Tea Unknown</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.python.org/3.15/library/dataclasses.html">dataclasses</a></li>
+<li><a href="https://docs.python.org/3.15/library/typing.html">typing</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/python/async-await/">Previous lesson · Concurrency with async and await</a>
+<a href="/docs/read/en/python/testing-and-logging/">Next lesson · Testing and logging Python programs</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

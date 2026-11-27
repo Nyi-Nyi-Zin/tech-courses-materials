@@ -1,4 +1,9 @@
 import { p, part, page, guide } from './content.js';
+import { databaseFundamentals, postgresIntroduction } from './database-fundamentals.js';
+import { databaseScaling, storageAndRecovery } from './database-learning.js';
+import { postgresCommands, postgresConnection, postgresCrud, postgresInstall } from './postgresql-basics.js';
+import { postgresRoles } from './postgresql-roles.js';
+import { schoolQueries, schoolSchemaSection, schoolTableChanges } from './postgresql-school.js';
 
 const ts = guide('typescript', 'TypeScript', '7.0.2',
   p('Check JavaScript code with types. Learn inference, narrowing, generics, and compiler setup.', 'JavaScript code ကို types နဲ့ စစ်ပါ။ Inference၊ Narrowing၊ Generics နဲ့ Compiler Setup ကို လေ့လာပါ။'),
@@ -55,7 +60,7 @@ function describe(result: Result) {
   return items[0];
 }
 
-const firstDrink = first(["Tea", "Coffee"]); // string | undefined`),
+const firstProduct = first(["Pen", "Notebook"]); // string | undefined`),
         part('promise', p('Describe an asynchronous result', 'Async Result Type သတ်မှတ်ခြင်း'),
           p('An async function returns a Promise. When an API response enters the program, check its data shape at runtime before treating it as a typed value.', 'Async function က Promise ပြန်ပါတယ်။ API response ဝင်လာတဲ့အခါ type သတ်မှတ်ပြီး အသုံးမပြုခင် data ပုံစံကို runtime မှာ စစ်ပါ။'),
           `async function positivePrices(load: () => Promise<number[]>): Promise<number[]> {
@@ -66,73 +71,97 @@ const firstDrink = first(["Tea", "Coffee"]); // string | undefined`),
       [['Generics', 'https://www.typescriptlang.org/docs/handbook/2/generics.html'], ['Everyday types', 'https://www.typescriptlang.org/docs/handbook/2/everyday-types.html']]),
   ]);
 
-const postgres = guide('database', 'PostgreSQL', '19.0',
-  p('Model related tables, write queries, and use transactions to keep related changes together.', 'ဆက်စပ်တဲ့ tables တည်ဆောက်ပါ။ Queries ရေးပြီး ဆက်စပ်ပြောင်းလဲမှုတွေကို transactions နဲ့ အတူတူ ကိုင်တွယ်ပါ။'),
+const database = guide('database', 'Database', 'PostgreSQL 19.0',
+  p('Compare data models and learn to choose a database for an application. Practice SQL in PostgreSQL, then explore storage, recovery, and scaling.', 'Data model တွေကို နှိုင်းယှဉ်ပြီး software အတွက် database ရွေးချယ်ပုံကို လေ့လာပါ။ ပြီးရင် PostgreSQL မှာ SQL စမ်းရေးပြီး storage၊ recovery နဲ့ scaling ကို ဆက်လေ့လာပါ။'),
   [
+    ...databaseFundamentals,
+    postgresIntroduction,
+    postgresInstall,
     page('setup', p('Connect with psql and create tables', 'psql နဲ့ ချိတ်ပြီး Tables တည်ဆောက်ခြင်း'),
-      p('PostgreSQL stores related data in tables. psql is its terminal client. The examples use PostgreSQL 19 and assume a local server and a role you can sign in with.', 'PostgreSQL က ဆက်စပ်တဲ့ data ကို tables တွေထဲ သိမ်းပါတယ်။ psql က terminal client ပါ။ ဥပမာတွေက PostgreSQL 19 သုံးပြီး local server နဲ့ ဝင်လို့ရတဲ့ role ရှိတယ်လို့ ယူဆထားပါတယ်။'),
+      p('Start the server you installed in the previous lesson. Choose the connection command for your operating system, then create a practice database and set up students, courses, and enrollments.', 'အရင်သင်ခန်းစာမှာ ထည့်ထားတဲ့ server ကို ဖွင့်ထားပါ။ ကိုယ့် OS အတွက် connection command ကို ရွေးပြီး practice database ဆောက်မယ်။ ပြီးရင် students၊ courses နဲ့ enrollments tables တွေ ဆောက်ကြည့်မယ်။'),
       [
-        part('psql', p('Inspect your connection', 'Connection စစ်ခြင်း'),
-          p('In the terminal, connect to the postgres database using your local role. Replace postgres following -U if your role is different. Inside psql, use the backslash commands to inspect databases, roles, and tables. These are psql commands.', 'Terminal ကနေ local role နဲ့ postgres database ကို ချိတ်ပါ။ Role နာမည် မတူရင် -U နောက်က postgres ကို အစားထိုးပါ။ psql ထဲမှာ backslash commands နဲ့ databases၊ roles နဲ့ tables ကြည့်ပါ။ ဒါတွေက psql commands ပါ။'),
-          `# Terminal
-psql -h localhost -U postgres -d postgres
-
--- Inside psql
-\\conninfo
-\\l
-\\du
-\\dt
-SELECT version();`),
-        part('schema', p('Model products and sales', 'Products နှင့် Sales Tables တည်ဆောက်ခြင်း'),
-          p('A primary key identifies a row. A foreign key requires a matching row in the referenced table for a non-null value. Combine it with NOT NULL when every sale must refer to a product.', 'Primary key က row တစ်ခုကို ခွဲသိစေပါတယ်။ Foreign key က null မဟုတ်တဲ့ value အတွက် ချိတ်ထားတဲ့ table မှာ ကိုက်ညီတဲ့ row ရှိဖို့ လိုပါတယ်။ Sale တိုင်းမှာ product ရှိရမယ်ဆို NOT NULL ပေါင်းပါ။'),
-          `CREATE TABLE products (
-  id integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  name text NOT NULL,
-  price numeric(10, 2) NOT NULL CHECK (price >= 0)
-);
-
-CREATE TABLE sales (
-  id integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  product_id integer NOT NULL REFERENCES products(id),
-  quantity integer NOT NULL CHECK (quantity > 0)
-);
-
-INSERT INTO products (name, price) VALUES ('Tea', 2.00), ('Coffee', 3.00);
-INSERT INTO sales (product_id, quantity)
-SELECT id, 2 FROM products WHERE name = 'Tea';`),
+        ...postgresConnection,
+        schoolSchemaSection,
       ],
       [['PostgreSQL 19 documentation', 'https://www.postgresql.org/docs/19/'], ['psql manual', 'https://www.postgresql.org/docs/19/app-psql.html'], ['Constraints', 'https://www.postgresql.org/docs/19/ddl-constraints.html']]),
-    page('queries', p('Queries, joins, and groups', 'Queries၊ Joins နှင့် Groups'),
-      p('SQL queries select, combine, and summarize rows. Request an explicit order when the order matters.', 'SQL queries နဲ့ rows ရွေး၊ ပေါင်း၊ အနှစ်ချုပ်နိုင်ပါတယ်။ ရလဒ် အစဉ်အရေးကြီးရင် ORDER BY ထည့်ပါ။'),
-      [
-        part('filter', p('Filter rows before grouping', 'အုပ်စုမခွဲခင် Rows စစ်ခြင်း'),
-          p('SELECT chooses columns, WHERE filters rows, and ORDER BY sorts the result. Use LIMIT with a sort if you want a predictable first group of rows. GROUP BY collects rows and HAVING filters groups after aggregation.', 'SELECT က columns ရွေး၊ WHERE က rows စစ်၊ ORDER BY က ရလဒ်စီပါတယ်။ ပထမ rows တွေ တိကျစေဖို့ LIMIT နဲ့ sort တွဲသုံးပါ။ GROUP BY က အုပ်စုခွဲပြီး HAVING က aggregation နောက် အုပ်စုတွေ စစ်ပါတယ်။')),
-        part('join', p('Keep products with zero sales', 'Sales မရှိတဲ့ Products ပါ ထည့်ခြင်း'),
-          p('INNER JOIN keeps matching rows. LEFT JOIN also keeps every unmatched row from the left table. COUNT(s.id) counts matching sale rows, while SUM(s.quantity) adds the units sold.', 'INNER JOIN က ကိုက်ညီတဲ့ rows ကို ယူပါတယ်။ LEFT JOIN က ဘယ်ဘက် table မှာ match မရှိတဲ့ row တွေပါ ထည့်ပါတယ်။ COUNT(s.id) က sale rows ရေတွက်ပြီး SUM(s.quantity) က ရောင်းရတဲ့ units ပေါင်းပါတယ်။'),
-          `SELECT p.name,
-       COUNT(s.id) AS sale_count,
-       COALESCE(SUM(s.quantity), 0) AS units_sold
-FROM products AS p
-LEFT JOIN sales AS s ON s.product_id = p.id
-GROUP BY p.id, p.name
-ORDER BY units_sold DESC, p.id;`),
-      ],
-      [['Querying a table', 'https://www.postgresql.org/docs/19/tutorial-select.html'], ['Joins', 'https://www.postgresql.org/docs/19/tutorial-join.html'], ['Aggregate functions', 'https://www.postgresql.org/docs/19/tutorial-agg.html']]),
+    postgresCommands,
+    postgresCrud,
+    postgresRoles,
+    schoolQueries,
+    schoolTableChanges,
     page('transactions', p('Data changes, transactions, and indexes', 'Data ပြောင်းခြင်း၊ Transactions နှင့် Indexes'),
       p('Use transactions to keep related changes together. Use indexes to improve query access when they fit how the application reads data.', 'ဆက်စပ်ပြောင်းလဲမှုတွေကို transaction တစ်ခုထဲ ထားပါ။ Application က data ဖတ်ပုံနဲ့ ကိုက်ညီရင် index နဲ့ query access မြန်နိုင်ပါတယ်။'),
       [
         part('commit', p('Save or undo a group of changes', 'ပြောင်းလဲမှုများ သိမ်းခြင်း သို့မဟုတ် ပြန်ဖျက်ခြင်း'),
-          p('BEGIN starts a transaction. COMMIT makes its changes permanent and ROLLBACK discards them. Use WHERE to target the intended rows when you update or delete. This example rolls back a price change.', 'BEGIN က transaction စပါတယ်။ COMMIT က changes သိမ်းပြီး ROLLBACK က ပယ်ဖျက်ပါတယ်။ Update သို့ delete လုပ်တဲ့အခါ ရည်ရွယ်တဲ့ rows ကို WHERE နဲ့ ရွေးပါ။ ဒီဥပမာက ဈေးနှုန်းပြောင်းတာကို ပြန်ဖျက်ပါတယ်။'),
+          p('BEGIN starts a transaction. COMMIT makes its changes permanent and ROLLBACK discards them. Use WHERE to target the intended rows when you update or delete. This example rolls back a course fee change.', 'BEGIN က transaction စပါတယ်။ COMMIT က changes သိမ်းပြီး ROLLBACK က ပယ်ဖျက်ပါတယ်။ Update သို့ delete လုပ်တဲ့အခါ ရည်ရွယ်တဲ့ rows ကို WHERE နဲ့ ရွေးပါ။ ဒီဥပမာက သင်တန်းကြေး ပြောင်းလိုက်တာကို ပြန်ဖျက်ပါတယ်။'),
           `BEGIN;
-UPDATE products SET price = 2.50 WHERE name = 'Tea';
-SELECT name, price FROM products WHERE name = 'Tea';
+UPDATE courses SET fee = 35.00 WHERE id = 1;
+SELECT title, fee FROM courses WHERE id = 1;
+ROLLBACK;
+SELECT title, fee FROM courses WHERE id = 1;`),
+        {
+          ...part('index', p('Compare plans before and after an index', 'Index မထည့်ခင်နဲ့ ထည့်ပြီးနောက် Query Plan နှိုင်းယှဉ်ခြင်း'),
+            p(
+              'A transaction controls which changes are saved together. The next example looks at a separate question about the same database work: how PostgreSQL finds the row a query asks for. Run the same query against a temporary table before and after adding a B-tree index on sku. Each SKU occurs once in this sample. ANALYZE updates the planner statistics. EXPLAIN ANALYZE runs the SELECT and reports the plan and observed results. The rollback cleans up the sample.',
+              'Transaction က အပြောင်းအလဲတွေကို အတူသိမ်းဖို့ သုံးပါတယ်။ မှတ်တမ်းကို ပြန်ဖတ်တဲ့အခါ လိုတဲ့ row ကို မြန်မြန်ရှာနိုင်ဖို့ Index သုံးနိုင်ပါတယ်။ ယာယီ table တစ်ခုထဲမှာ sku ကို B-tree index မထည့်ခင်နဲ့ ထည့်ပြီးနောက် query တစ်ခုတည်းကို run ပါ။ နမူနာမှာ SKU တစ်ခုစီ တစ်ကြောင်းပဲ ရှိတယ်။ ANALYZE က planner သုံးတဲ့ စာရင်းအင်းတွေကို ပြန်တွက်တယ်။ EXPLAIN ANALYZE က SELECT ကို တကယ် run ပြီး plan နဲ့ တိုင်းထားတဲ့ ရလဒ်တွေကို ပြတယ်။ အဆုံးမှာ ROLLBACK နဲ့ နမူနာကို ပြန်ရှင်းတယ်။'
+            ),
+            `BEGIN;
+CREATE TEMP TABLE lesson_index_products (sku text, name text);
+INSERT INTO lesson_index_products (sku, name)
+SELECT 'SKU-' || n, 'Product ' || n
+FROM generate_series(1, 20000) AS sample(n);
+ANALYZE lesson_index_products;
+
+EXPLAIN (ANALYZE, BUFFERS)
+SELECT * FROM lesson_index_products WHERE sku = 'SKU-18000';
+
+CREATE INDEX ON lesson_index_products (sku);
+
+EXPLAIN (ANALYZE, BUFFERS)
+SELECT * FROM lesson_index_products WHERE sku = 'SKU-18000';
 ROLLBACK;`),
-        part('index', p('Measure before adding an index', 'Index မထည့်ခင် တိုင်းတာခြင်း'),
-          p('An index can reduce work when a query filters on a matching column. Indexes take storage and add write work. EXPLAIN shows the planned query. EXPLAIN ANALYZE actually runs the statement.', 'Query က ကိုက်ညီတဲ့ column ပေါ် စစ်တဲ့အခါ index က လုပ်ရမယ့်အလုပ် နည်းစေနိုင်ပါတယ်။ Index အတွက် storage နဲ့ write အလုပ် ပိုလိုပါတယ်။ EXPLAIN က plan ပြပြီး EXPLAIN ANALYZE က statement ကို တကယ် run ပါတယ်။'),
-          `CREATE INDEX sales_product_id_idx ON sales (product_id);
-EXPLAIN SELECT * FROM sales WHERE product_id = 1;`),
+          terms: [
+            ['Seq Scan', p('Reads the table and checks rows against the filter.', 'Table ကို ဖတ်ပြီး row တွေက filter နဲ့ ကိုက်မကိုက် စစ်တယ်။')],
+            ['Index Scan', p('Looks up matching entries in the index and fetches the corresponding table rows.', 'ကိုက်ညီတဲ့ records ကို index ထဲမှာ ရှာပြီး သက်ဆိုင်ရာ table rows တွေကို ဖတ်တယ်။')],
+            ['Index trade-off', p('An index takes storage and adds work to writes. For small tables or queries returning much of a table, the planner may still choose a sequential scan.', 'Index က storage ယူပြီး data ရေးတဲ့အခါ ပြင်ရတာ ပိုလာတယ်။ Table သေးရင် သို့မဟုတ် row အများကြီး ပြန်ဖတ်ရရင် planner က Seq Scan ကို ရွေးနိုင်သေးတယ်။')],
+          ],
+          expected: p(
+            'Both plans should report one actual matching row. The first plan typically shows Seq Scan and the second Index Scan. Compare the scan type and buffers. Elapsed time can vary by machine and cache state.',
+            'Plan နှစ်ခုစလုံးမှာ query နဲ့ ကိုက်တဲ့ row တစ်ကြောင်း ရှိကြောင်း ပြမယ်။ ပထမ plan မှာ Seq Scan၊ ဒုတိယမှာ Index Scan ကို ပုံမှန်အားဖြင့် တွေ့ရမယ်။ Scan type နဲ့ buffers ကို တိုက်ကြည့်ပါ။ စက်နဲ့ cache အခြေအနေအလိုက် ကြာချိန် ကွာနိုင်တယ်။'
+          ),
+        },
       ],
       [['Transactions', 'https://www.postgresql.org/docs/19/tutorial-transactions.html'], ['Indexes', 'https://www.postgresql.org/docs/19/indexes.html'], ['Using EXPLAIN', 'https://www.postgresql.org/docs/19/using-explain.html']]),
+    storageAndRecovery,
+    databaseScaling,
   ]);
 
-export const platformGuides = [ts, postgres];
+database.lessonOrder = [
+  {
+    title: p('Database fundamentals', 'Database အခြေခံ'),
+    lessons: Object.fromEntries(databaseFundamentals.map(lesson => [lesson.id, []])),
+  },
+  {
+    title: p('PostgreSQL and SQL', 'PostgreSQL နဲ့ SQL'),
+    lessons: {
+      'postgresql-introduction': [], install: [], setup: [], 'psql-commands': [], crud: [],
+      queries: [], normalization: [],
+    },
+  },
+  {
+    title: p('Transactions, indexes, and advanced queries', 'Transactions၊ Indexes နဲ့ အဆင့်မြင့် Queries'),
+    lessons: {
+      transactions: [], 'transaction-isolation': [], cte: [], 'window-functions': [], upserts: [],
+    },
+  },
+  {
+    title: p('Database administration', 'Database စီမံခြင်း'),
+    lessons: { 'roles-and-ownership': [], 'schema-and-access': [], 'backup-and-restore': [] },
+  },
+  {
+    title: p('Storage, recovery, and scaling', 'Storage၊ Recovery နဲ့ Scaling'),
+    lessons: { 'storage-and-recovery': [], 'database-scaling': [] },
+  },
+];
+
+export const platformGuides = [ts, database];

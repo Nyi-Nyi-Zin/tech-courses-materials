@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Apply operations element by element and protect calculations with an explicit mask.">
+  <title>Universal functions and masked calculations · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/ufuncs-and-masks/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/ufuncs-and-masks/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/ufuncs-and-masks/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#numpy">All documentation · NumPy</a> <a href="/docs/read/my/numpy/ufuncs-and-masks/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Universal functions and masked calculations</h1>
+  <p class="article-version">2.5.5</p>
+  <p class="intro">Apply operations element by element and protect calculations with an explicit mask.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/numpy/ufuncs-and-masks">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#divide">Divide where the denominator is valid</a></li>
+<li><a href="#choose">Choose values with np.where</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="divide">
+  <h2>Divide where the denominator is valid</h2>
+  <p>A universal function, or ufunc, applies an operation element by element. In np.divide, where controls which entries are calculated. Initialize out to NaN so positions excluded by the mask retain a known value.</p>
+
+<pre><code>import numpy as np
+
+orders = np.array([12, 0, 18])
+visitors = np.array([60, 0, 90])
+rate = np.full(visitors.shape, np.nan)
+np.divide(orders, visitors, out=rate, where=visitors != 0)
+print(rate.tolist())</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/ufuncs-and-masks-divide.png" data-image-preview><img src="/docs/media/data/ufuncs-and-masks-divide.png" alt="The orders and visitors arrays yield rates 0.2, NaN, and 0.2. The center position has zero visitors and a False mask." width="720" height="350" loading="lazy" decoding="async"></a>
+    <figcaption>The mask skips the zero denominator and preserves the initialized NaN.</figcaption>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[0.2, nan, 0.2]</pre></div>
+
+
+</section>
+<section class="article-section" id="choose">
+  <h2>Choose values with np.where</h2>
+  <p>np.where(condition, x, y) selects values from x or y after its arguments have been evaluated. When the operation itself needs masking, such as division by zero, use the where argument of the ufunc.</p>
+
+<pre><code>import numpy as np
+
+stock = np.array([3, 8, 0])
+print(np.where(stock &lt; 5, &quot;Restock&quot;, &quot;OK&quot;).tolist())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[&#39;Restock&#39;, &#39;OK&#39;, &#39;Restock&#39;]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://numpy.org/doc/stable/user/basics.ufuncs.html">NumPy universal functions</a></li>
+<li><a href="https://numpy.org/doc/stable/reference/generated/numpy.divide.html">numpy.divide</a></li>
+<li><a href="https://numpy.org/doc/stable/reference/generated/numpy.where.html">numpy.where</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/numpy/linear-algebra/">Previous lesson · Matrix operations and linear systems</a>
+<a href="/docs/read/en/numpy/sorting-and-searching/">Next lesson · Sort, rank, and search arrays</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

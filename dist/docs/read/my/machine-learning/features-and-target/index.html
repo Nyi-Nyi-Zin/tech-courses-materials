@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Model က ဘာမြင်ရမလဲ၊ ဘာခန့်မှန်းမလဲ၊ scikit-learn က estimator ကို ဘယ်လို fit လုပ်လဲ လေ့လာပါ။">
+  <title>Features၊ Targets နှင့် Estimator အခြေခံ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/features-and-target/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/features-and-target/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/features-and-target/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#machine-learning">သင်ခန်းစာအားလုံး · Machine Learning</a> <a href="/docs/read/en/machine-learning/features-and-target/" lang="en" hreflang="en">English</a></nav>
+  <h1>Features၊ Targets နှင့် Estimator အခြေခံ</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Model က ဘာမြင်ရမလဲ၊ ဘာခန့်မှန်းမလဲ၊ scikit-learn က estimator ကို ဘယ်လို fit လုပ်လဲ လေ့လာပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/machine-learning/features-and-target">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#supervised">X နဲ့ y သတ်မှတ်ခြင်း</a></li>
+<li><a href="#interface">Fit၊ Predict နှင့် Transform</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="supervised">
+  <h2>X နဲ့ y သတ်မှတ်ခြင်း</h2>
+  <p>X က ပုံမှန်အားဖြင့် sample ကို row၊ feature ကို column ထားပါတယ်။ y မှာ row တစ်ခုစီအတွက် target တစ်ခု ပါတတ်ပါတယ်။ Regression က ကိန်းဂဏန်း၊ classification က label ခန့်မှန်းပါတယ်။ Clustering က label target မရှိဘဲ row တွေကို အုပ်စုခွဲပါတယ်။</p>
+
+<pre><code>import pandas as pd
+
+homes = pd.DataFrame({&quot;area_m2&quot;: [52, 64, 75], &quot;bedrooms&quot;: [1, 2, 2], &quot;price_k&quot;: [116, 153, 165]})
+X = homes[[&quot;area_m2&quot;, &quot;bedrooms&quot;]]
+y = homes[&quot;price_k&quot;]
+print(X.shape, y.shape)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">(3, 2) (3,)</pre></div>
+
+
+</section>
+<section class="article-section" id="interface">
+  <h2>Fit၊ Predict နှင့် Transform</h2>
+  <p>fit က ဒေတာကနေ သင်ယူပါတယ်။ ခန့်မှန်းတဲ့ estimator က input အသစ်ကို predict နဲ့ ခန့်မှန်းပါတယ်။ Scaler လို transformer က training row ပေါ်မှာ parameter တွေ သင်ယူပြီး transform နဲ့ သုံးပါတယ်။ အပြင်မှာ ခန့်မှန်းမယ့်အချိန် တကယ်ရနိုင်တဲ့ feature တွေကိုပဲ ရွေးပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/getting_started.html">Getting started with scikit-learn</a></li>
+<li><a href="https://scikit-learn.org/stable/common_pitfalls.html">Common pitfalls and recommended practices</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/machine-learning/train-test-split/">နောက်သင်ခန်းစာ · ဒေတာခွဲ၍ Baseline နဲ့ ယှဉ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Method ခေါ်ပုံကို ရှာပြီး နမူနာစမ်းပါ။ မှားတတ်တဲ့အချက်ကိုလည်း စစ်နိုင်ပါတယ်။">
+  <title>JavaScript Methods အမြန်ရှာရန် · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/reference/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/reference/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/reference/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/reference/" lang="en" hreflang="en">English</a></nav>
+  <h1>JavaScript Methods အမြန်ရှာရန်</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Method ခေါ်ပုံကို ရှာပြီး နမူနာစမ်းပါ။ မှားတတ်တဲ့အချက်ကိုလည်း စစ်နိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/reference">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#map-array">array.map(callback)</a></li>
+<li><a href="#filter-array">array.filter(callback)</a></li>
+<li><a href="#trim-string">string.trim()</a></li>
+<li><a href="#query-selector">document.querySelector(selector)</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="map-array">
+  <h2>array.map(callback)</h2>
+  <p>Array item တစ်ခုစီအတွက် function ခေါ်ပြီး return ပြန်တဲ့ တန်ဖိုးတွေကို array အသစ်ထဲ စုပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const catalog = [
+  { name: &quot;Pen&quot;, price: 1500 },
+  { name: &quot;Notebook&quot;, price: 2500 },
+  { name: &quot;Folder&quot;, price: 3000 }
+];
+console.log(catalog.map(item =&gt; item.price + 100));</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ဈေးအသစ်တွေက [1600, 2600, 3100] ပါ။</p>
+<p class="example-check"><strong>မှားတတ်တဲ့အချက်</strong> Callback မှာ { } နဲ့ body ရေးထားရင် တန်ဖိုးအတွက် return ကို ရေးပါ။</p>
+</section>
+<section class="article-section" id="filter-array">
+  <h2>array.filter(callback)</h2>
+  <p>သတ်မှတ်ချက်ကိုက်တဲ့ item တွေပဲ ထည့်ထားတဲ့ array အသစ် ရပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const catalog = [
+  { name: &quot;Pen&quot;, price: 1500 },
+  { name: &quot;Notebook&quot;, price: 2500 },
+  { name: &quot;Folder&quot;, price: 3000 }
+];
+const matches = catalog.filter(item =&gt; item.price &gt;= 2500);
+console.log(matches.length);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> 2500 MMK နဲ့အထက် ဈေးရှိတဲ့ item နှစ်ခု ရပါမယ်။</p>
+<p class="example-check"><strong>မှားတတ်တဲ့အချက်</strong> filter() က item တစ်ခုမှ မတွေ့ရင်၊ တစ်ခုပဲ တွေ့ရင်တောင် array ပြန်ပါတယ်။</p>
+</section>
+<section class="article-section" id="trim-string">
+  <h2>string.trim()</h2>
+  <p>ရှေ့နဲ့ နောက်က space တွေ ဖယ်ထားတဲ့ string အသစ် ရပါတယ်။ အလယ်က space တွေက ကျန်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const text = &quot;  Desk Lamp  &quot;;
+console.log(&quot;[&quot; + text.trim() + &quot;]&quot;);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Desk Lamp ရဲ့ အလယ် space ပါနေပြီး ဘေးနှစ်ဖက်က space တွေ ပျောက်ပါမယ်။</p>
+<p class="example-check"><strong>မှားတတ်တဲ့အချက်</strong> trim() ပြန်ပေးတဲ့ တန်ဖိုးကို ယူသုံးပါ။ မူလ string က အရင်အတိုင်း ရှိပါတယ်။</p>
+</section>
+<section class="article-section" id="query-selector">
+  <h2>document.querySelector(selector)</h2>
+  <p>CSS selector နဲ့ ကိုက်တဲ့ ပထမ element ကို ပြန်ပေးပြီး မကိုက်ရင် null ပြန်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;document.querySelector(selector)&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;ul&gt;&lt;li class=&quot;product&quot;&gt;Pen&lt;/li&gt;&lt;li class=&quot;product&quot;&gt;Notebook&lt;/li&gt;&lt;/ul&gt;
+  &lt;script&gt;
+const firstProduct = document.querySelector(&quot;.product&quot;);
+if (firstProduct) firstProduct.textContent = &quot;Featured pen&quot;;
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမ item က Featured pen ဖြစ်လာပြီး ဒုတိယ item က Notebook အတိုင်း ကျန်ပါတယ်။</p>
+<p class="example-check"><strong>မှားတတ်တဲ့အချက်</strong> Class နာမည်ရှေ့မှာ .၊ id ရှေ့မှာ # ထည့်ပါ။</p>
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">MDN · Array/map</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">MDN · Array/filter</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim">MDN · String/trim</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">MDN · Document/querySelector</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/web-workers/">အရင်သင်ခန်းစာ · Web Worker နဲ့ နောက်ကွယ်မှာ အလုပ်လုပ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

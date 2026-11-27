@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The order example introduced embedding and referencing. A receipt needs the price at checkout, while a catalog page needs the current price. Those two screens give us a reason to use both patterns in the same order design. Design a MongoDB order around the data the application reads and updates together.">
+  <title>Document design: embedding and references · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/document-model/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/document-model/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/document-model/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/document-model/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Document design: embedding and references</h1>
+  
+  <p class="intro">The order example introduced embedding and referencing. A receipt needs the price at checkout, while a catalog page needs the current price. Those two screens give us a reason to use both patterns in the same order design. Design a MongoDB order around the data the application reads and updates together.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/document-model">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#embed">Embed order items in the order</a></li>
+<li><a href="#reference">Reference the current product record</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="embed">
+  <h2>Embed order items in the order</h2>
+  <p>When the application usually opens an order with its items and the list stays reasonably small, keep the item details in an array inside the order. Order 101 can include items such as the following.</p>
+
+<pre><code>{
+  &quot;_id&quot;: 101,
+  &quot;items&quot;: [
+    { &quot;productId&quot;: 1, &quot;quantity&quot;: 2, &quot;unitPriceAtOrder&quot;: 4500 }
+  ]
+}</code></pre>
+<dl class="lesson-terms"><div><dt><code>orders</code></dt><dd>{ &quot;_id&quot;: 101, &quot;items&quot;: [{ &quot;productId&quot;: 1, &quot;quantity&quot;: 2, &quot;unitPriceAtOrder&quot;: 4500 }] }</dd></div><div><dt><code>unitPriceAtOrder</code></dt><dd>Store the price agreed at checkout so the historical receipt keeps the same price when the catalog changes.</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="reference">
+  <h2>Reference the current product record</h2>
+  <p>The embedded order item already keeps the checkout price. What if the shop also needs the current product name or catalog price? Keep independently updated catalog data in products. productId 1 points to product 1 in that collection. Fetch the product separately or use a lookup when the application needs its current details. References also help when the related list could grow without a clear bound.</p>
+
+<pre><code>const order = db.orders.findOne({ _id: 101 });
+const item = order.items[0];
+const product = db.products.findOne({ _id: item.productId });
+
+printjson({
+  name: product.name,
+  unitPriceAtOrder: item.unitPriceAtOrder,
+  currentPrice: product.currentPrice
+});</code></pre>
+<dl class="lesson-terms"><div><dt><code>products</code></dt><dd>{ &quot;_id&quot;: 1, &quot;name&quot;: &quot;Notebook&quot;, &quot;currentPrice&quot;: 5000 }</dd></div><div><dt><code>Read and update together</code></dt><dd>Embed details needed together. Reference shared records that change independently. This example combines both in one order design.</dd></div></dl>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.mongodb.com/docs/manual/data-modeling/schema-design-process/map-relationships/">MongoDB · Map schema relationships</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/data-modeling/embedding/">MongoDB · Embedded data</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/relational-model/">Previous lesson · How databases connect related data</a>
+<a href="/docs/read/en/database/database-deployment/">Next lesson · Where a database server runs</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

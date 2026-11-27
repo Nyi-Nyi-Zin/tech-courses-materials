@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Some browser operations take time. Synchronous code runs its current instructions before moving on. Asynchronous operations let other work continue while a timer, network response, or another result is pending.">
+  <title>Asynchronous JavaScript, promises, and the event loop · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/async/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/async/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/async/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/async/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Asynchronous JavaScript, promises, and the event loop</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Some browser operations take time. Synchronous code runs its current instructions before moving on. Asynchronous operations let other work continue while a timer, network response, or another result is pending.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/async">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#timer">What can run while a timer waits?</a></li>
+<li><a href="#promises">What does a Promise represent?</a></li>
+<li><a href="#chain">Return a transformed result from then()</a></li>
+<li><a href="#await">Read a promise result with async and await</a></li>
+<li><a href="#loop">How does the browser schedule callbacks?</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="timer">
+  <h2>What can run while a timer waits?</h2>
+  <p>setTimeout is a browser API. It registers a function to run after at least the delay you give it, in milliseconds. The function is a callback, which means you pass it to be called later. The timer does not pause the remaining synchronous instructions.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>console.log(&quot;Start&quot;);
+setTimeout(() =&gt; console.log(&quot;Timer&quot;), 100);
+console.log(&quot;End&quot;);</code></pre>
+<p class="example-result"><strong>What to expect</strong> Start and End appear first. Timer appears later.</p>
+
+</section>
+<section class="article-section" id="promises">
+  <h2>What does a Promise represent?</h2>
+  <p>A Promise represents the eventual outcome of an operation. Pending means the result is still unknown. Fulfilled means the operation supplied a value. Rejected means it ended with a reason for failure. Use then() to register a handler for success and catch() to handle rejection.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const result = new Promise(resolve =&gt; {
+  setTimeout(() =&gt; resolve(&quot;Your order is ready.&quot;), 100);
+});
+result.then(message =&gt; console.log(message)).catch(error =&gt; console.error(error));
+console.log(&quot;Waiting&quot;);</code></pre>
+<p class="example-result"><strong>What to expect</strong> Waiting appears first. When the promise fulfills, its handler prints “Your order is ready.”.</p>
+
+</section>
+<section class="article-section" id="chain">
+  <h2>Return a transformed result from then()</h2>
+  <p>then() returns a new promise. If its handler returns a value, that value becomes the fulfillment value of the new promise. A second handler can read the transformed result.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const product = Promise.resolve(&quot;Pen&quot;);
+const message = product.then(value =&gt; &quot;Ready: &quot; + value);
+message.then(value =&gt; console.log(value));</code></pre>
+<p class="example-result"><strong>What to expect</strong> The second handler prints “Ready: Pen”.</p>
+
+</section>
+<section class="article-section" id="await">
+  <h2>Read a promise result with async and await</h2>
+  <p>An async function always returns a promise. await waits for its input within that function. Other code outside the function can continue running. If the awaited promise rejects, try/catch can handle the failure.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>async function readOrder() {
+  try {
+    const product = await Promise.resolve(&quot;Pen&quot;);
+    console.log(product);
+  } catch (error) {
+    console.error(error);
+  }
+}
+readOrder();
+console.log(&quot;Order requested&quot;);</code></pre>
+<p class="example-result"><strong>What to expect</strong> Order requested prints before Pen, even though the awaited promise is already fulfilled.</p>
+
+</section>
+<section class="article-section" id="loop">
+  <h2>How does the browser schedule callbacks?</h2>
+  <p>The event loop coordinates work waiting to run. A ready timer callback runs in a task. A promise reaction is a microtask. After the current synchronous work finishes, the browser processes microtasks before choosing the next task.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>console.log(&quot;A&quot;);
+setTimeout(() =&gt; console.log(&quot;Timer task&quot;), 0);
+Promise.resolve().then(() =&gt; console.log(&quot;Promise microtask&quot;));
+console.log(&quot;B&quot;);</code></pre>
+<p class="example-result"><strong>What to expect</strong> The order is A, B, Promise microtask, then Timer task.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loops">WHATWG · Event loops</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">MDN · Using promises</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">MDN · async function</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/dom-selectors-and-events/">Previous lesson · DOM selectors and input events</a>
+<a href="/docs/read/en/js/http/">Next lesson · HTTP requests and Fetch</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

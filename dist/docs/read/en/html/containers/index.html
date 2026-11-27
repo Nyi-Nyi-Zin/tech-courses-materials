@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Generic containers group content when a more specific element does not describe its purpose.">
+  <title>Grouping Content with &lt;div&gt; and &lt;span&gt; · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/containers/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/containers/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/containers/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/containers/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Grouping Content with &lt;div&gt; and &lt;span&gt;</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Generic containers group content when a more specific element does not describe its purpose.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/containers">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#div">Group elements with &lt;div&gt;</a></li>
+<li><a href="#span">Mark part of a line with &lt;span&gt;</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="div">
+  <h2>Group elements with &lt;div&gt;</h2>
+  <p>A div groups elements so CSS or JavaScript can work with them together. By default it creates a block box, so it starts on a new line. It adds no special meaning to the group.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Group elements with &amp;lt;div&amp;gt;&lt;/title&gt;
+  &lt;style&gt;
+.card { border: 2px solid teal; padding: 12px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;card&quot;&gt;
+  &lt;h2&gt;Desk Lamp&lt;/h2&gt;
+  &lt;p&gt;2,500 MMK&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Orders close at 5 PM.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The name and price sit inside one bordered card.</p>
+
+</section>
+<section class="article-section" id="span">
+  <h2>Mark part of a line with &lt;span&gt;</h2>
+  <p>A span wraps part of a line without starting a new block. Give it a class when you need to style only that part. For emphasis that has meaning, use a suitable element such as &lt;strong&gt;.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Mark part of a line with &amp;lt;span&amp;gt;&lt;/title&gt;
+  &lt;style&gt;
+.price { color: teal; font-weight: bold; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;Desk Lamp: &lt;span class=&quot;price&quot;&gt;2,500 MMK&lt;/span&gt; per item.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Only the price turns teal and stays on the same line.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/div">MDN · &lt;div&gt;</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/span">MDN · &lt;span&gt;</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/file-paths/">Previous lesson · HTML File Paths</a>
+<a href="/docs/read/en/html/text-markup/">Next lesson · HTML Comments and Quotations</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

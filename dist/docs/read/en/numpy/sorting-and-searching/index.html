@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use positions for indirect sorting, find matching locations, and search a sorted array.">
+  <title>Sort, rank, and search arrays · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/sorting-and-searching/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/sorting-and-searching/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/sorting-and-searching/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#numpy">All documentation · NumPy</a> <a href="/docs/read/my/numpy/sorting-and-searching/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Sort, rank, and search arrays</h1>
+  <p class="article-version">2.5.5</p>
+  <p class="intro">Use positions for indirect sorting, find matching locations, and search a sorted array.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/numpy/sorting-and-searching">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#indirect-sort">Preserve alignment with argsort</a></li>
+<li><a href="#search">Find positions and insertion points</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="indirect-sort">
+  <h2>Preserve alignment with argsort</h2>
+  <p>np.sort returns sorted values. np.argsort returns positions, which you can reuse to sort related arrays together. Set stable=True when tied values should keep their original order.</p>
+
+<pre><code>import numpy as np
+
+names = np.array([&quot;Tea&quot;, &quot;Cake&quot;, &quot;Coffee&quot;])
+counts = np.array([4, 1, 3])
+order = np.argsort(counts, stable=True)
+print(names[order].tolist())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[&#39;Cake&#39;, &#39;Coffee&#39;, &#39;Tea&#39;]</pre></div>
+
+
+</section>
+<section class="article-section" id="search">
+  <h2>Find positions and insertion points</h2>
+  <p>flatnonzero gives positions of true entries in a flattened mask. searchsorted gives insertion positions for sorted arrays. side=&quot;left&quot; finds the first valid position before equal values.</p>
+
+<pre><code>import numpy as np
+
+scores = np.array([10, 20, 20, 50])
+print(np.flatnonzero(scores &gt;= 20).tolist())
+print(np.searchsorted(scores, 20, side=&quot;left&quot;))</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[1, 2, 3]
+1</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://numpy.org/doc/stable/reference/routines.sort.html">Sorting, searching, and counting</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/numpy/ufuncs-and-masks/">Previous lesson · Universal functions and masked calculations</a>
+<a href="/docs/read/en/numpy/numerical-accuracy/">Next lesson · Floating-point accuracy and missing values</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

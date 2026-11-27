@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use the students, courses, and enrollments tables from Setup. Run each query independently to see how it changes the result.">
+  <title>Queries, joins, and groups · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/queries/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/queries/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/queries/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/queries/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Queries, joins, and groups</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">Use the students, courses, and enrollments tables from Setup. Run each query independently to see how it changes the result.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/queries">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#filter">Filter rows with WHERE</a></li>
+<li><a href="#order-by">Sort rows with ORDER BY</a></li>
+<li><a href="#limit">Return the first row with LIMIT</a></li>
+<li><a href="#group-by">Count enrollments with GROUP BY</a></li>
+<li><a href="#having">Filter grouped results with HAVING</a></li>
+<li><a href="#join">Keep courses with zero enrollments</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="filter">
+  <h2>Filter rows with WHERE</h2>
+  <p>WHERE keeps rows that meet the condition. This example selects courses with a fee of 25.00 or more. In the sample data, SQL Basics and Web Development match.</p>
+
+<pre><code>SELECT title, fee
+FROM courses
+WHERE fee &gt;= 25.00
+ORDER BY id;</code></pre>
+
+
+</section>
+<section class="article-section" id="order-by">
+  <h2>Sort rows with ORDER BY</h2>
+  <p>DESC shows the highest fee first. For equal fees, id ASC puts the lower ID first.</p>
+
+<pre><code>SELECT title, fee
+FROM courses
+ORDER BY fee DESC, id ASC;</code></pre>
+
+
+</section>
+<section class="article-section" id="limit">
+  <h2>Return the first row with LIMIT</h2>
+  <p>LIMIT 1 returns at most one row. ORDER BY makes the first row predictable. SQL Basics comes first in this sample.</p>
+
+<pre><code>SELECT title, fee
+FROM courses
+ORDER BY fee DESC, id ASC
+LIMIT 1;</code></pre>
+
+
+</section>
+<section class="article-section" id="group-by">
+  <h2>Count enrollments with GROUP BY</h2>
+  <p>Filtering and ordering help us find individual rows. To answer how many students are enrolled in each course, we have to combine rows by course first. GROUP BY makes one group for each course ID present in enrollments. COUNT(*) counts the enrolled students in each group.</p>
+
+<pre><code>SELECT course_id, COUNT(*) AS student_count
+FROM enrollments
+GROUP BY course_id
+ORDER BY course_id;</code></pre>
+
+
+</section>
+<section class="article-section" id="having">
+  <h2>Filter grouped results with HAVING</h2>
+  <p>HAVING checks each group’s count after grouping. This query keeps courses with at least two students. WHERE is applied before groups are formed.</p>
+
+<pre><code>SELECT course_id, COUNT(*) AS student_count
+FROM enrollments
+GROUP BY course_id
+HAVING COUNT(*) &gt;= 2
+ORDER BY course_id;</code></pre>
+
+
+</section>
+<section class="article-section" id="join">
+  <h2>Keep courses with zero enrollments</h2>
+  <p>Counting enrollments by course ID tells us the total for each ID that appears in the enrollment table. To include course names and courses with zero enrollments, start from the course table. LEFT JOIN keeps every course. COUNT(e.student_id) counts matching students and skips the NULLs from an unmatched course. Computer Fundamentals therefore shows 0. An INNER JOIN would return courses with a matching enrollment.</p>
+
+<pre><code>SELECT c.title, COUNT(e.student_id) AS student_count
+FROM courses AS c
+LEFT JOIN enrollments AS e ON e.course_id = c.id
+GROUP BY c.id, c.title
+ORDER BY student_count DESC, c.id;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/tutorial-select.html">Querying a table</a></li>
+<li><a href="https://www.postgresql.org/docs/19/tutorial-join.html">Joins</a></li>
+<li><a href="https://www.postgresql.org/docs/19/queries-table-expressions.html">Table expressions</a></li>
+<li><a href="https://www.postgresql.org/docs/19/queries-limit.html">Sorting and limiting rows</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/crud/">Previous lesson · SQL basics and CRUD with one table</a>
+<a href="/docs/read/en/database/normalization/">Next lesson · Design tables with normalization</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

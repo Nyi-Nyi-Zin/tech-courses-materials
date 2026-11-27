@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ဆုံးဖြတ်ချက်ကုန်ကျစရိတ်ကို ထင်ဟပ်တဲ့ metric သုံးပြီး နောက်ဆုံး test set မသုံးဘဲ threshold ရွေးပါ။">
+  <title>Imbalanced Classes နှင့် Threshold ရွေးခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/classification-thresholds/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/classification-thresholds/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/classification-thresholds/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#machine-learning">သင်ခန်းစာအားလုံး · Machine Learning</a> <a href="/docs/read/en/machine-learning/classification-thresholds/" lang="en" hreflang="en">English</a></nav>
+  <h1>Imbalanced Classes နှင့် Threshold ရွေးခြင်း</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">ဆုံးဖြတ်ချက်ကုန်ကျစရိတ်ကို ထင်ဟပ်တဲ့ metric သုံးပြီး နောက်ဆုံး test set မသုံးဘဲ threshold ရွေးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/machine-learning/classification-thresholds">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#metrics">ဖြစ်ခဲတဲ့ Outcome အတွက် Metric ရွေးခြင်း</a></li>
+<li><a href="#threshold">Probability ကို ဆုံးဖြတ်ချက်အဖြစ် ပြောင်းခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="metrics">
+  <h2>ဖြစ်ခဲတဲ့ Outcome အတွက် Metric ရွေးခြင်း</h2>
+  <p>Positive class ရှားပြီး model က row အများစုကို negative ခန့်မှန်းရင် accuracy မြင့်နိုင်ပါတယ်။ Precision၊ recall နဲ့ confusion matrix စစ်ပါ။ Threshold ပြောင်းရင် precision နဲ့ recall ဘယ်လို လဲလှယ်ရလဲ precision-recall curve က ပြပါတယ်။</p>
+
+
+
+
+</section>
+<section class="article-section" id="threshold">
+  <h2>Probability ကို ဆုံးဖြတ်ချက်အဖြစ် ပြောင်းခြင်း</h2>
+  <p>Threshold လျှော့ရင် positive case ပိုတွေ့နိုင်သလို false alarm ပိုများနိုင်ပါတယ်။ Validation data နဲ့ သတ်မှတ်ထားတဲ့ cost တွေသုံးပြီး threshold ရွေးပါ။ ပြီးရင် မထိထားတဲ့ test data ပေါ် performance တင်ပြပါ။</p>
+
+<pre><code>import numpy as np
+from sklearn.metrics import precision_score, recall_score
+
+y_true = [0, 0, 1, 1]
+scores = np.array([0.10, 0.55, 0.45, 0.80])
+for cutoff in [0.60, 0.40]:
+    flags = scores &gt;= cutoff
+    print(f&quot;{cutoff:.2f}: precision={precision_score(y_true, flags):.2f}, &quot;
+          f&quot;recall={recall_score(y_true, flags):.2f}&quot;)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">0.60: precision=1.00, recall=0.50
+0.40: precision=0.67, recall=1.00</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html">Model evaluation</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/classification_threshold.html">Decision threshold tuning</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/machine-learning/hyperparameter-tuning/">အရင်သင်ခန်းစာ · Cross-validation ဖြင့် Hyperparameter Tuning လုပ်ခြင်း</a>
+<a href="/docs/read/my/machine-learning/trees-and-ensembles/">နောက်သင်ခန်းစာ · Decision Trees၊ Random Forests နှင့် Boosting</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

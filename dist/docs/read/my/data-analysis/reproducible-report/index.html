@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Raw input သိမ်း၊ ပြောင်းလဲမှုတွေ မှတ်ပြီး ရလဒ်နဲ့ ပါဝင်မှုကို တွဲတင်ပြပါ။">
+  <title>ပြန်လုပ်လို့ရတဲ့ Analysis Report တည်ဆောက်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/reproducible-report/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/reproducible-report/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/reproducible-report/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#data-analysis">သင်ခန်းစာအားလုံး · Data Analysis</a> <a href="/docs/read/en/data-analysis/reproducible-report/" lang="en" hreflang="en">English</a></nav>
+  <h1>ပြန်လုပ်လို့ရတဲ့ Analysis Report တည်ဆောက်ခြင်း</h1>
+  
+  <p class="intro">Raw input သိမ်း၊ ပြောင်းလဲမှုတွေ မှတ်ပြီး ရလဒ်နဲ့ ပါဝင်မှုကို တွဲတင်ပြပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/data-analysis/reproducible-report">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#reproduce">Input မှတ်ပြီး ပြန်သုံးနိုင်တဲ့ အဆင့်တွေ ဆောက်ခြင်း</a></li>
+<li><a href="#coverage">KPI နဲ့အတူ ပါဝင်မှု တွက်ပြီး တင်ပြခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="reproduce">
+  <h2>Input မှတ်ပြီး ပြန်သုံးနိုင်တဲ့ အဆင့်တွေ ဆောက်ခြင်း</h2>
+  <p>မူရင်းဖိုင်ကို read-only မိတ္တူထားပြီး ရယူရက်၊ filter၊ ပါဝင်ကာလ၊ column အဓိပ္ပာယ်နဲ့ software version တွေ မှတ်ပါ။ Transformation code နဲ့ parameter value တွေ သိမ်းပါ။ Notebook မှာ restart လုပ်ပြီး cell အားလုံး အစဉ်လိုက် run ကာ အရင် state မလိုကြောင်း စစ်ပါ။</p>
+
+
+
+
+</section>
+<section class="article-section" id="coverage">
+  <h2>KPI နဲ့အတူ ပါဝင်မှု တွက်ပြီး တင်ပြခြင်း</h2>
+  <p>Metric၊ unit၊ နှိုင်းယှဉ်ချက်နဲ့ ဖယ်ထားတာတွေကို report တစ်ခုထဲ ဖော်ပြပါ။ ပါသင့်တဲ့ record နဲ့ တန်ဖိုးသုံးလို့ရတဲ့ record ကို ခွဲပါ။ နောက်ဆုံး chart မရေးခင် schema ပြောင်းတာ၊ row မျှော်လင့်မထားဘဲ လျော့တာကို စစ်ပါ။</p>
+
+<pre><code>import pandas as pd
+
+amount = pd.Series([4.0, None, 8.0, 2.0])
+used = int(amount.notna().sum())
+assert 0 &lt; used &lt;= len(amount)
+print(f&quot;Usable total: {amount.sum(min_count=1):.1f}&quot;)
+print(f&quot;Coverage: {used}/{len(amount)}&quot;)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">Usable total: 14.0
+Coverage: 3/4</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://jupyter-notebook.readthedocs.io/en/stable/notebook.html">Jupyter Notebook documentation</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/missing_data.html">pandas missing data guide</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/data-analysis/correlation-and-confounding/">အရင်သင်ခန်းစာ · Correlation၊ Confounding နှင့် လက်တွေ့ အဓိပ္ပာယ်ဖတ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

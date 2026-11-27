@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="780" viewBox="0 120 1600 780" role="img" aria-labelledby="title description">
+  <title id="title">Web app request flow</title>
+  <desc id="description">The browser requests frontend files from the Web Server and runs them. The frontend inside the browser initiates an HTTPS request to the Backend on the Application Server, which returns JSON. The Backend can read or write PostgreSQL, read and write files on a Samba share over SMB, and use Redis as an optional cache.</desc>
+  <defs>
+    <marker id="request-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0 12 6 0 12Z" fill="#3457c7"/>
+    </marker>
+    <marker id="response-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0 12 6 0 12Z" fill="#137b6d"/>
+    </marker>
+    <marker id="cache-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0 12 6 0 12Z" fill="#a96716"/>
+    </marker>
+    <g id="browser-icon">
+      <rect x="0" y="0" width="70" height="52" rx="8"/>
+      <path d="M0 15h70M12 8h1m8 0h1"/>
+    </g>
+    <g id="server-icon">
+      <rect x="0" y="0" width="72" height="22" rx="6"/>
+      <rect x="0" y="28" width="72" height="22" rx="6"/>
+      <path d="M13 11h15m-15 28h15m30-28h1m-1 28h1"/>
+    </g>
+  </defs>
+
+  <rect width="1600" height="900" fill="#f7f9fd"/>
+  <g stroke-width="2.5">
+    <rect x="62" y="225" width="390" height="568" rx="23" fill="#eaf0ff" stroke="#8fa4e6"/>
+    <rect x="92" y="500" width="330" height="242" rx="19" fill="#fff" stroke="#5473d7"/>
+    <rect x="665" y="225" width="329" height="181" rx="19" fill="#edf2ff" stroke="#8fa4e6"/>
+    <rect x="665" y="500" width="329" height="242" rx="19" fill="#edf2ff" stroke="#8fa4e6"/>
+    <rect x="1222" y="215" width="316" height="135" rx="17" fill="#fff4e2" stroke="#d5a14e"/>
+    <rect x="1222" y="472" width="316" height="135" rx="17" fill="#e5f7f4" stroke="#72b0a6"/>
+    <rect x="1222" y="707" width="316" height="135" rx="17" fill="#e5f7f4" stroke="#72b0a6"/>
+  </g>
+
+  <g fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M452 273H664" stroke="#3457c7" marker-end="url(#request-arrow)"/>
+    <path d="M422 567H664" stroke="#3457c7" marker-end="url(#request-arrow)"/>
+    <path d="M665 350H453" stroke="#137b6d" marker-end="url(#response-arrow)"/>
+    <path d="M665 669H423" stroke="#137b6d" marker-end="url(#response-arrow)"/>
+    <path d="M994 532H1101V278H1221" stroke="#a96716" stroke-dasharray="9 7" marker-end="url(#cache-arrow)"/>
+    <path d="M994 609H1101V538H1221" stroke="#137b6d" marker-end="url(#response-arrow)"/>
+    <path d="M994 685H1101V774H1221" stroke="#137b6d" marker-end="url(#response-arrow)"/>
+    <path d="M257 374V485" stroke="#8098d0" stroke-dasharray="5 8"/>
+  </g>
+  <path d="M257 489l-7-11h14Z" fill="#8098d0"/>
+
+  <g fill="none" stroke="#2a4884" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#browser-icon" transform="translate(222 273)"/>
+    <use href="#browser-icon" transform="translate(222 547)"/>
+    <path d="M234 573h17v12h-17Zm25 0h21m-21 10h21"/>
+    <use href="#server-icon" transform="translate(794 258)"/>
+    <use href="#server-icon" transform="translate(794 550)"/>
+  </g>
+  <g fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m1294 245-23 31h17l-6 27 23-32h-17Z" stroke="#a96716"/>
+    <g stroke="#137b6d">
+      <ellipse cx="1290" cy="520" rx="26" ry="10"/>
+      <path d="M1264 520v38a26 10 0 0 0 52 0v-38m-52 20a26 10 0 0 0 52 0"/>
+      <path d="M1271 750h14l7 8h17a7 7 0 0 1 7 7v24a7 7 0 0 1-7 7h-38a7 7 0 0 1-7-7v-32a7 7 0 0 1 7-7Z"/>
+    </g>
+  </g>
+
+  <g text-anchor="middle" font-family="DejaVu Sans, sans-serif" fill="#192941">
+    <g font-size="31" font-weight="700">
+      <text x="257" y="202">Browser</text>
+      <text x="830" y="202">Web Server</text>
+      <text x="830" y="476">Application Server</text>
+      <text x="1380" y="191">Cache Server</text>
+      <text x="1380" y="448">Database Server</text>
+      <text x="1380" y="683">File Server</text>
+    </g>
+    <g font-size="28" font-weight="700">
+      <text x="830" y="355">Frontend Files</text>
+      <text x="257" y="647">Frontend</text>
+      <text x="830" y="647">Backend</text>
+      <text x="1418" y="277">Redis</text>
+      <text x="1424" y="550" font-size="25">PostgreSQL</text>
+      <text x="1424" y="784" font-size="22">Samba (SMB)</text>
+    </g>
+    <g fill="#435978" font-size="20">
+      <text x="257" y="354">On the user’s device</text>
+      <text x="257" y="680">Runs in the browser</text>
+      <text x="830" y="680">API</text>
+      <text x="1418" y="309" fill="#805013">Optional</text>
+    </g>
+    <rect x="104" y="410" width="306" height="34" rx="7" fill="#eaf0ff"/>
+    <text x="257" y="434" font-size="20" fill="#435978">Runs the downloaded frontend</text>
+    <g font-size="18" font-weight="700">
+      <text x="558" y="254" fill="#3457c7">Page request</text>
+      <text x="558" y="331" fill="#137166">HTML · CSS · JS</text>
+      <text x="569" y="548" fill="#3457c7">HTTPS request</text>
+      <text x="569" y="650" fill="#137166">JSON response</text>
+      <text x="1160" y="260" fill="#805013">Look up</text>
+      <text x="1160" y="520" fill="#137166">SQL</text>
+      <text x="1160" y="757" fill="#137166">SMB</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nest runs different types of handlers before and after a controller. Put each job at the stage that fits it.">
+  <title>Request lifecycle, guards, and interceptors · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/request-lifecycle/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/request-lifecycle/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/request-lifecycle/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#nestjs">All documentation · NestJS</a> <a href="/docs/read/my/nestjs/request-lifecycle/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Request lifecycle, guards, and interceptors</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">Nest runs different types of handlers before and after a controller. Put each job at the stage that fits it.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/nestjs/request-lifecycle">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#flow">Follow a request to the controller</a></li>
+<li><a href="#pipe">Parse a route parameter at the boundary</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="flow">
+  <h2>Follow a request to the controller</h2>
+  <p>A typical request goes through middleware, guards, the incoming side of interceptors, and then pipes before the handler. The response returns through interceptors. An uncaught exception can be handled by exception filters.</p>
+
+<pre><code>import {
+  Controller, Get, Param, ParseIntPipe, UseGuards, UseInterceptors
+} from &quot;@nestjs/common&quot;;
+import { SessionGuard } from &quot;./session.guard&quot;;
+import { TimingInterceptor } from &quot;./timing.interceptor&quot;;
+
+// Request: middleware -&gt; guard -&gt; interceptor -&gt; pipe -&gt; handler
+// Response: handler -&gt; interceptor -&gt; client
+@UseGuards(SessionGuard)
+@UseInterceptors(TimingInterceptor)
+@Controller(&quot;products&quot;)
+export class ProductsController {
+  @Get(&quot;:id&quot;)
+  findOne(@Param(&quot;id&quot;, ParseIntPipe) id: number) {
+    return { id };
+  }
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="pipe">
+  <h2>Parse a route parameter at the boundary</h2>
+  <p>Use ParseIntPipe to turn a route parameter into an integer and reject invalid input. A guard decides whether a handler can run. Use an interceptor for logic that wraps the handler, such as timing or response mapping.</p>
+
+<pre><code>import { Controller, Get, Param, ParseIntPipe } from &quot;@nestjs/common&quot;;
+
+@Controller(&quot;products&quot;)
+export class ProductsController {
+  @Get(&quot;:id&quot;)
+  read(@Param(&quot;id&quot;, ParseIntPipe) id: number) {
+    return { id };
+  }
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.nestjs.com/faq/request-lifecycle">NestJS request lifecycle</a></li>
+<li><a href="https://docs.nestjs.com/pipes">Pipes</a></li>
+<li><a href="https://docs.nestjs.com/guards">Guards</a></li>
+<li><a href="https://docs.nestjs.com/interceptors">Interceptors</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/nestjs/validation/">Previous lesson · Validate requests and test routes</a>
+<a href="/docs/read/en/nestjs/configuration-and-data/">Next lesson · Configuration and the database layer</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

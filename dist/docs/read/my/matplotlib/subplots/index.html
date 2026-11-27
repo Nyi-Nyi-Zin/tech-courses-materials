@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Chart ဆွဲတဲ့နေရာ အများကြီး စီပါ။ နှိုင်းယှဉ်လို့ရတဲ့ တိုင်းတာမှုတွေမှာ scale မျှဝေပါ။">
+  <title>Subplots နှင့် Constrained Layout · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/subplots/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/subplots/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/subplots/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#matplotlib">သင်ခန်းစာအားလုံး · Matplotlib</a> <a href="/docs/read/en/matplotlib/subplots/" lang="en" hreflang="en">English</a></nav>
+  <h1>Subplots နှင့် Constrained Layout</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">Chart ဆွဲတဲ့နေရာ အများကြီး စီပါ။ နှိုင်းယှဉ်လို့ရတဲ့ တိုင်းတာမှုတွေမှာ scale မျှဝေပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/matplotlib/subplots">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#grid">Chart များ Grid ဖြင့် စီခြင်း</a></li>
+<li><a href="#shared-axes">လိုအပ်ရင် Axis မျှသုံးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="grid">
+  <h2>Chart များ Grid ဖြင့် စီခြင်း</h2>
+  <p>subplots က Figure နဲ့ Axes တွေ ဆောက်ပေးပါတယ်။ 1×2 grid မှာ Axes နှစ်ခုကို unpack လုပ်နိုင်ပါတယ်။ 2D array အမြဲလိုရင် squeeze=False သုံးပါ။ Label နဲ့ title တွေ နေရာအဆင်ပြေဖို့ layout=&quot;constrained&quot; သုံးပါ။</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, (left, right) = plt.subplots(1, 2, layout=&quot;constrained&quot;)
+left.plot([2, 4, 3])
+left.set_title(&quot;Daily volume&quot;)
+right.bar([&quot;Tea&quot;, &quot;Cake&quot;], [6, 4])
+right.set_title(&quot;Item volume&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/subplots-grid.png" data-image-preview><img src="/docs/media/data/subplots-grid.png" alt="နေ့စဉ်အရောင်းပမာဏပြ line chart နဲ့ item အလိုက်ပမာဏပြ bar chart ကို ဘေးချင်းကပ် ထားပါတယ်။" width="659" height="499" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="shared-axes">
+  <h2>လိုအပ်ရင် Axis မျှသုံးခြင်း</h2>
+  <p>sharex နဲ့ sharey က axes တွေ ချိတ်ပေးပါတယ်။ Unit နဲ့ range ကို တိုက်ရိုက် ယှဉ်ချင်ရင် scale မျှသုံးပါ။ Unit မတူတဲ့ chart တွေမှာ Axes label ကို အတိအကျ ရေးပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://matplotlib.org/stable/users/explain/axes/constrainedlayout_guide.html">Constrained layout guide</a></li>
+<li><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html">pyplot.subplots API</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/matplotlib/chart-design/">အရင်သင်ခန်းစာ · Labels၊ Scales၊ Legends နှင့် Color</a>
+<a href="/docs/read/my/matplotlib/export-chart/">နောက်သင်ခန်းစာ · Chart များကို ဖိုင်ထုတ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

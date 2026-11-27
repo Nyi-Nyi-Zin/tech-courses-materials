@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Write reusable functions, define clear inputs and return values, and organize related code.">
+  <title>Functions, modules, and type hints · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/python/functions/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/functions/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/functions/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#python">All documentation · Python</a> <a href="/docs/read/my/python/functions/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Functions, modules, and type hints</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">Write reusable functions, define clear inputs and return values, and organize related code.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/python/functions">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#parameters">Parameters and return values</a></li>
+<li><a href="#defaults">Default arguments and scope</a></li>
+<li><a href="#modules">Import modules</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="parameters">
+  <h2>Parameters and return values</h2>
+  <p>def defines a function. Arguments can be passed by position or by keyword when the signature permits. A function with no explicit return value returns None. Type annotations help tools and readers understand the interface.</p>
+
+<pre><code>def line_total(quantity: int, unit_price: float, *, discount: float = 0.0) -&gt; float:
+    return quantity * unit_price * (1 - discount)
+
+print(line_total(4, 2.5, discount=0.1))</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">9.0</pre></div>
+
+
+</section>
+<section class="article-section" id="defaults">
+  <h2>Default arguments and scope</h2>
+  <p>Python evaluates default arguments when the function is defined. If the default should be a fresh list each call, use None and create the list inside the function. Assigning a name inside a function normally makes it local.</p>
+
+<pre><code>def add_item(item, items=None):
+    if items is None:
+        items = []
+    items.append(item)
+    return items
+
+print(add_item(&quot;Tea&quot;), add_item(&quot;Cake&quot;))</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[&#39;Tea&#39;] [&#39;Cake&#39;]</pre></div>
+
+
+</section>
+<section class="article-section" id="modules">
+  <h2>Import modules</h2>
+  <p>A module groups Python definitions. Import a module to use its public names. In a script, the __name__ check keeps command-line entry code from running when the file is imported.</p>
+
+<pre><code>import math
+
+def main():
+    print(math.ceil(14 / 3))
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">5</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.python.org/3.15/tutorial/controlflow.html#defining-functions">Defining functions</a></li>
+<li><a href="https://docs.python.org/3.15/tutorial/modules.html">Modules</a></li>
+<li><a href="https://docs.python.org/3.15/library/typing.html">Typing support</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/python/collections/">Previous lesson · Lists, tuples, sets, and dictionaries</a>
+<a href="/docs/read/en/python/files/">Next lesson · Files, exceptions, and debugging</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

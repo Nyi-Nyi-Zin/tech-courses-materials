@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The previous lesson used one session to see what happens when changes are rolled back. With two sessions connected, we can see what one transaction reads while the other changes the data. Choose what a transaction can see while other transactions read or change the same database.">
+  <title>Transaction isolation and concurrent updates · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/transaction-isolation/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/transaction-isolation/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/transaction-isolation/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/transaction-isolation/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Transaction isolation and concurrent updates</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">The previous lesson used one session to see what happens when changes are rolled back. With two sessions connected, we can see what one transaction reads while the other changes the data. Choose what a transaction can see while other transactions read or change the same database.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/transaction-isolation">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#seat-setup">Create the course seats example</a></li>
+<li><a href="#levels">Session A · Start Repeatable Read</a></li>
+<li><a href="#session-b">Session B · Change the number of seats</a></li>
+<li><a href="#session-a-again">Session A · Compare before and after COMMIT</a></li>
+<li><a href="#stock">Reserve two seats in one statement</a></li>
+<li><a href="#serializable">Choose stricter isolation when needed</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="seat-setup">
+  <h2>Create the course seats example</h2>
+  <p>Complete Setup first, then connect two psql sessions to learning_db. Run this once in Session A before starting the transaction below. It sets the demo course to 10 open seats. Running it again resets the demo.</p>
+
+<pre><code>CREATE TABLE IF NOT EXISTS course_seats_demo (
+  course_id integer PRIMARY KEY REFERENCES courses(id),
+  seats_open integer NOT NULL CHECK (seats_open &gt;= 0)
+);
+
+INSERT INTO course_seats_demo (course_id, seats_open)
+VALUES (1, 10)
+ON CONFLICT (course_id) DO UPDATE SET seats_open = EXCLUDED.seats_open;</code></pre>
+
+
+</section>
+<section class="article-section" id="levels">
+  <h2>Session A · Start Repeatable Read</h2>
+  <p>Read Committed is the PostgreSQL default and takes a fresh snapshot for each statement. Repeatable Read keeps the snapshot established by the first query or data-modification statement. Run the following in Session A. It reads 10. Keep the transaction open and switch to Session B.</p>
+
+<pre><code>BEGIN ISOLATION LEVEL REPEATABLE READ;
+SELECT seats_open FROM course_seats_demo WHERE course_id = 1;</code></pre>
+
+
+</section>
+<section class="article-section" id="session-b">
+  <h2>Session B · Change the number of seats</h2>
+  <p>Run this in Session B and commit there. The new value is 15. Switch back to Session A when COMMIT succeeds.</p>
+
+<pre><code>BEGIN;
+UPDATE course_seats_demo SET seats_open = 15 WHERE course_id = 1;
+COMMIT;</code></pre>
+
+
+</section>
+<section class="article-section" id="session-a-again">
+  <h2>Session A · Compare before and after COMMIT</h2>
+  <p>The first SELECT still returns 10 because Session A is reading its original snapshot. The SELECT after COMMIT returns 15.</p>
+
+<pre><code>SELECT seats_open FROM course_seats_demo WHERE course_id = 1;
+COMMIT;
+SELECT seats_open FROM course_seats_demo WHERE course_id = 1;</code></pre>
+
+
+</section>
+<section class="article-section" id="stock">
+  <h2>Reserve two seats in one statement</h2>
+  <p>The update reserves two seats only when two or more seats are available. Check RETURNING for the new total. Zero rows means no matching course has enough open seats. In the browser this example starts independently with 10 seats.</p>
+
+<pre><code>UPDATE course_seats_demo
+SET seats_open = seats_open - 2
+WHERE course_id = 1 AND seats_open &gt;= 2
+RETURNING course_id, seats_open;</code></pre>
+
+
+</section>
+<section class="article-section" id="serializable">
+  <h2>Choose stricter isolation when needed</h2>
+  <p>Serializable checks that successfully committed transactions behave as if they ran in some serial order. If a transaction fails with SQLSTATE 40001, roll it back and retry from the beginning. PostgreSQL treats Read Uncommitted as Read Committed.</p>
+
+<pre><code>BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+UPDATE course_seats_demo
+SET seats_open = seats_open - 1
+WHERE course_id = 1 AND seats_open &gt; 0
+RETURNING seats_open;
+
+COMMIT;
+-- On SQLSTATE 40001, roll back and retry the whole transaction.</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/transaction-iso.html">PostgreSQL 19 · Transaction isolation</a></li>
+<li><a href="https://www.postgresql.org/docs/19/sql-update.html">PostgreSQL 19 · UPDATE</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/transactions/">Previous lesson · Data changes, transactions, and indexes</a>
+<a href="/docs/read/en/database/cte/">Next lesson · Break down queries with CTEs</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

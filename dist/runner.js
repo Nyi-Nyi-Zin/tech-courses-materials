@@ -204,6 +204,7 @@ function boot(config, makeNest) {
     if (config.runtime === 'react') {
       appendScript(source.reactScript);
       react = window.FrontendReact;
+      window.React = react.ReactExports;
       document.body.innerHTML = '<div id="root"></div>';
     }
     const packages = {
@@ -223,7 +224,7 @@ function boot(config, makeNest) {
       source.js + '\n})(window[' + JSON.stringify(contextKey) + ']);');
     delete window[contextKey];
     const exported = context.module.exports;
-    if (react) {
+    if (react && !config.reactEntry) {
       if (typeof exported.default !== 'function') throw new Error('Export a default App component.');
       const root = react.createRoot(document.querySelector('#root'));
       react.flushSync(() => root.render(react.React.createElement(exported.default)));

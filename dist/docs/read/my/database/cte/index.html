@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CTE က statement တစ်ခုထဲက query ရလဒ်ကို နာမည်ပေးပါတယ်။ သီးသန့်ကြည့်ရင် ပိုရှင်းတဲ့ အဆင့်တွေကို ခွဲနိုင်ပါတယ်။">
+  <title>CTE နဲ့ Queries ကို အဆင့်ခွဲခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/cte/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/cte/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/cte/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/cte/" lang="en" hreflang="en">English</a></nav>
+  <h1>CTE နဲ့ Queries ကို အဆင့်ခွဲခြင်း</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">CTE က statement တစ်ခုထဲက query ရလဒ်ကို နာမည်ပေးပါတယ်။ သီးသန့်ကြည့်ရင် ပိုရှင်းတဲ့ အဆင့်တွေကို ခွဲနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/cte">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#reuse">Join မလုပ်ခင် အနှစ်ချုပ်ခြင်း</a></li>
+<li><a href="#planner">တကယ်သုံးမယ့် Query Plan ကြည့်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="reuse">
+  <h2>Join မလုပ်ခင် အနှစ်ချုပ်ခြင်း</h2>
+  <p>အရင်ဆုံး course တစ်ခုစီအတွက် စာရင်းသွင်းထားသူတွေကို ရေတွက်ပါ။ နာမည်ပေးထားတဲ့ ရလဒ်ကို courses နဲ့ join ပါ။ ဒီနမူနာက Setup မှာ ဆောက်ခဲ့တဲ့ tables တွေကို သုံးပါတယ်။</p>
+
+<pre><code>WITH totals AS (
+  SELECT course_id, COUNT(*) AS student_count
+  FROM enrollments
+  GROUP BY course_id
+)
+SELECT c.title, COALESCE(t.student_count, 0) AS student_count
+FROM courses AS c
+LEFT JOIN totals AS t ON t.course_id = c.id
+ORDER BY student_count DESC, c.id;</code></pre>
+
+
+</section>
+<section class="article-section" id="planner">
+  <h2>တကယ်သုံးမယ့် Query Plan ကြည့်ခြင်း</h2>
+  <p>CTE နဲ့ query ဖတ်ရလွယ်လာနိုင်ပါတယ်။ Nonrecursive ဖြစ်ပြီး side effect မရှိတဲ့ CTE ကို တစ်ကြိမ်ပဲ သုံးရင် PostgreSQL က parent query ထဲ ပေါင်းနိုင်ပါတယ်။ ပြန်ဖွဲ့တာနဲ့ plan ပြောင်းမပြောင်း EXPLAIN နဲ့ ကြည့်ပါ။</p>
+
+<pre><code>EXPLAIN
+WITH course_roster AS (
+  SELECT course_id, student_id FROM enrollments
+)
+SELECT student_id
+FROM course_roster
+WHERE course_id = 1;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/queries-with.html">PostgreSQL WITH queries</a></li>
+<li><a href="https://www.postgresql.org/docs/19/using-explain.html">Using EXPLAIN</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/transaction-isolation/">အရင်သင်ခန်းစာ · Transaction Isolation နဲ့ တစ်ပြိုင်နက် Update များ</a>
+<a href="/docs/read/my/database/window-functions/">နောက်သင်ခန်းစာ · Window Functions နဲ့ Rank နှင့် Total တွက်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

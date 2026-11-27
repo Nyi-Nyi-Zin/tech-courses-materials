@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A document title should appear as text, even when it contains angle brackets. Cross-site scripting (XSS) occurs when untrusted content is interpreted as executable page content.">
+  <title>Cross-Site Scripting, CSP, and Clickjacking · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/xss-and-browser-headers/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/xss-and-browser-headers/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/xss-and-browser-headers/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/xss-and-browser-headers/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Cross-Site Scripting, CSP, and Clickjacking</h1>
+  
+  <p class="intro">A document title should appear as text, even when it contains angle brackets. Cross-site scripting (XSS) occurs when untrusted content is interpreted as executable page content.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/xss-and-browser-headers">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#output-context">Render text in its intended context</a></li>
+<li><a href="#headers">Limit scripts and frame embedding</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="output-context">
+  <h2>Render text in its intended context</h2>
+  <p>For ordinary text in the DOM, assign textContent or use framework text interpolation with automatic escaping. Stored XSS starts with saved data, reflected XSS uses data returned in a response, and DOM-based XSS arises in client-side processing. Rich HTML needs a maintained HTML sanitizer. For links, separately validate the URL scheme and destination.</p>
+
+<pre><code>const heading = document.createElement(&quot;h2&quot;);
+heading.textContent = &quot;Draft &lt;April&gt;&quot;;
+document.body.append(heading);
+// The page displays the literal text: Draft &lt;April&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="headers">
+  <h2>Limit scripts and frame embedding</h2>
+  <p>This policy suits a page with external scripts from its own origin and no embedding. frame-ancestors prevents another page from framing it, reducing clickjacking, where a person is misled into clicking a disguised control. Test a policy with Content-Security-Policy-Report-Only before enforcement. For apps needing inline scripts, design a nonce- or hash-based policy. Send these headers on the HTML response.</p>
+
+<pre><code>Content-Security-Policy: default-src &#39;self&#39;; script-src &#39;self&#39;; object-src &#39;none&#39;; base-uri &#39;none&#39;; frame-ancestors &#39;none&#39;
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html">OWASP · XSS prevention</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP">MDN · Content Security Policy</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html">OWASP · Clickjacking defense</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/csrf/">Previous lesson · Cross-Site Request Forgery (CSRF)</a>
+<a href="/docs/read/en/web-security/input-and-injection/">Next lesson · Input Validation and Injection Prevention</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Attachment ကို file အဖြစ် တင်နိုင်သလို ပြင်ပက import လုပ်နိုင်ပါတယ်။ Upload မှာ မစစ်ရသေးတဲ့ file ကို storage ထဲ ထည့်ရပါတယ်။ URL ကနေ import လုပ်ရင် server ကိုယ်တိုင် ပြင်ပကို network ချိတ်ဆက်ရတာလည်း ပါလာပါတယ်။">
+  <title>File Upload နဲ့ Server က ပြင်ပကို ပို့တဲ့ Request များ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/files-and-outbound-requests/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/files-and-outbound-requests/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/files-and-outbound-requests/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-security">သင်ခန်းစာအားလုံး · Web Security</a> <a href="/docs/read/en/web-security/files-and-outbound-requests/" lang="en" hreflang="en">English</a></nav>
+  <h1>File Upload နဲ့ Server က ပြင်ပကို ပို့တဲ့ Request များ</h1>
+  
+  <p class="intro">Attachment ကို file အဖြစ် တင်နိုင်သလို ပြင်ပက import လုပ်နိုင်ပါတယ်။ Upload မှာ မစစ်ရသေးတဲ့ file ကို storage ထဲ ထည့်ရပါတယ်။ URL ကနေ import လုပ်ရင် server ကိုယ်တိုင် ပြင်ပကို network ချိတ်ဆက်ရတာလည်း ပါလာပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-security/files-and-outbound-requests">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#upload">File စစ်ပြီးမှ သက်ဆိုင်သူကို ဖွင့်ခွင့်ပေးခြင်း</a></li>
+<li><a href="#ssrf">Server ချိတ်ဆက်နိုင်တဲ့ နေရာတွေကို ကန့်သတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="upload">
+  <h2>File စစ်ပြီးမှ သက်ဆိုင်သူကို ဖွင့်ခွင့်ပေးခြင်း</h2>
+  <p>File ကို အသေးစိတ် မဖတ်ခင် တင်ခွင့်နဲ့ အရွယ်အစားကို အရင်စစ်ပါ။ Extension နဲ့ browser ပို့တဲ့ MIME type က ကနဦးအချက်အလက်ပဲ ဖြစ်ပါတယ်။ File အတွင်းက data ကို သက်ဆိုင်ရာ parser နဲ့ စစ်ပြီး လိုအပ်ရင် scan လုပ်ပါ၊ ပုံဆိုရင် ပြန် encode လုပ်ပါ။ Storage key အသစ်ထုတ်ပြီး စစ်ဆေးဆဲ file တွေကို web root အပြင်ဘက် private နေရာမှာ ထားပါ။ Download လုပ်ချိန်မှာ ခွင့်ပြုချက် ပြန်စစ်ပါ။ Scan မအောင်မြင်ရင် file ကို ဆက်ပိတ်ထားပါ။</p>
+
+<pre><code>Upload received   Private quarantine, generated storage key
+Checks passed     Mark available to authorized document members
+Check failed      Keep unavailable; record the reason internally</code></pre>
+
+
+</section>
+<section class="article-section" id="ssrf">
+  <h2>Server ချိတ်ဆက်နိုင်တဲ့ နေရာတွေကို ကန့်သတ်ခြင်း</h2>
+  <p>User input က backend ချိတ်ဆက်မယ့် နေရာကို ဆုံးဖြတ်နိုင်တဲ့အခါ SSRF အန္တရာယ် ရှိပါတယ်။ Provider ကို ကြိုသိထားရင် URL အပြည့်အစုံ လက်ခံစရာမလိုပါဘူး။ File ID ကို စစ်ပြီး သတ်မှတ်ထားတဲ့ origin နဲ့ URL ဆောက်ပါ။ Network အထွက်ကို ကန့်သတ်ပါ။ Redirect ကို ပိတ်ပါ၊ လိုအပ်ရင် သွားမယ့်နေရာတိုင်းကို ပြန်စစ်ပါ။ ကြာချိန်နဲ့ data ပမာဏ ကန့်သတ်ပြီး အဲဒီ file ကို ရယူခွင့်ပါ စစ်ပါ။</p>
+
+<pre><code>function providerFileUrl(fileId) {
+  if (!/^[a-zA-Z0-9_-]{1,64}$/.test(fileId)) {
+    throw new Error(&quot;Invalid file ID&quot;);
+  }
+  return new URL(&quot;/files/&quot; + fileId, &quot;https://files.example&quot;);
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html">OWASP · File upload</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html">OWASP · SSRF prevention</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-security/api-security/">အရင်သင်ခန်းစာ · API Security နဲ့ Resource ကန့်သတ်ချက်များ</a>
+<a href="/docs/read/my/web-security/webhooks-and-data-integrity/">နောက်သင်ခန်းစာ · Webhook နဲ့ ပြင်ပက လက်ခံတဲ့ Data မှန်ကန်မှု</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

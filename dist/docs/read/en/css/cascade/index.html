@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The browser first finds rules that match an element. It then chooses the winning value when rules set the same property. Finally, some properties can take a value from a parent.">
+  <title>Selectors, cascade, and inheritance · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/cascade/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/cascade/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/cascade/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/cascade/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Selectors, cascade, and inheritance</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">The browser first finds rules that match an element. It then chooses the winning value when rules set the same property. Finally, some properties can take a value from a parent.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/cascade">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#selectors">Select elements by tag, class, or ID</a></li>
+<li><a href="#descendants">Select an element inside another element</a></li>
+<li><a href="#priority">How does the cascade choose?</a></li>
+<li><a href="#specificity">Which selector has greater specificity?</a></li>
+<li><a href="#inheritance">How does inheritance work?</a></li>
+<li><a href="#variables">Reuse values with custom properties</a></li>
+<li><a href="#layers">Order groups of rules with @layer</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="selectors">
+  <h2>Select elements by tag, class, or ID</h2>
+  <p>A selector is a pattern for matching elements. p matches every paragraph. A dot followed by a class name matches elements with that class. A hash followed by an ID matches the element with that id. Use classes for styles you plan to reuse.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Select elements by tag, class, or ID&lt;/title&gt;
+  &lt;style&gt;
+    p { color: teal; }
+    .notice { font-weight: bold; }
+    #catalog-title { color: purple; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 id=&quot;catalog-title&quot;&gt;Product catalog&lt;/h1&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Both paragraphs are teal, the first is bold, and the heading is purple.</p>
+
+</section>
+<section class="article-section" id="descendants">
+  <h2>Select an element inside another element</h2>
+  <p>A space between selectors means the element on the right must be somewhere inside an element matching the selector on the left. A greater-than sign narrows that relationship to a direct child.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Select an element inside another element&lt;/title&gt;
+  &lt;style&gt;
+    .card p { color: blue; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;card&quot;&gt;&lt;p&gt;Your order is ready.&lt;/p&gt;&lt;/div&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Only “Your order is ready.” becomes blue because it is the paragraph inside the card.</p>
+
+</section>
+<section class="article-section" id="priority">
+  <h2>How does the cascade choose?</h2>
+  <p>The cascade is the procedure for resolving competing declarations. In this example, the two rules have the same selector and set the same property. Other priorities are equal, so the rule written later wins. The border from the first rule still applies because the second rule does not set border.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;How does the cascade choose?&lt;/title&gt;
+  &lt;style&gt;
+    .notice { color: teal; border: 1px solid; }
+    .notice { color: purple; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first paragraph is purple and still has a border. Reverse the two rules to make it teal.</p>
+
+</section>
+<section class="article-section" id="specificity">
+  <h2>Which selector has greater specificity?</h2>
+  <p>Specificity compares matching selectors after higher-priority cascade rules tie. An ID selector is stronger than a class selector, and a class selector is stronger than a type selector such as p. Source order breaks a tie when their priorities and specificity match.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Which selector has greater specificity?&lt;/title&gt;
+  &lt;style&gt;
+    .notice { color: purple; }
+    p { color: teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first paragraph is purple even though the p rule comes later. The second paragraph is teal.</p>
+
+</section>
+<section class="article-section" id="inheritance">
+  <h2>How does inheritance work?</h2>
+  <p>Inheritance means an element can get a computed property value from its parent. Properties such as color normally inherit. A property like border does not normally inherit; the parent and child each have a separate box.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;How does inheritance work?&lt;/title&gt;
+  &lt;style&gt;
+    .orders { color: teal; border: 2px solid; }
+    .notice { color: purple; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;orders&quot;&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The container has one border. “Your order is ready” is purple, and “Your package is on the way” inherits teal.</p>
+
+</section>
+<section class="article-section" id="variables">
+  <h2>Reuse values with custom properties</h2>
+  <p>A custom property is a value you name yourself. Names start with --. :root matches the root element so descendants can inherit the value. var(--accent, teal) reads that value and uses teal as a fallback if the custom property is missing.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Reuse values with custom properties&lt;/title&gt;
+  &lt;style&gt;
+    :root { --accent: purple; }
+    .notice { color: var(--accent, teal); }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first paragraph is purple. Delete the --accent declaration to make it teal.</p>
+
+</section>
+<section class="article-section" id="layers">
+  <h2>Order groups of rules with @layer</h2>
+  <p>A cascade layer is a named priority group. With normal declarations in the same origin, a later layer wins over an earlier layer before specificity is compared. Declare the intended layer order first. Normal declarations outside any layer outrank normal declarations in layers.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Order groups of rules with @layer&lt;/title&gt;
+  &lt;style&gt;
+    @layer base, theme;
+    @layer base { .notice { color: teal; } }
+    @layer theme { p { color: purple; } }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Both paragraphs are purple because theme is the later layer.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Selectors">MDN · CSS selectors</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Introduction">MDN · Cascade</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Inheritance">MDN · Inheritance</a></li>
+<li><a href="https://www.w3.org/TR/css-cascade-5/#layering">W3C · Cascade layers</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/getting-started/">Previous lesson · Your first CSS rule</a>
+<a href="/docs/read/en/css/layout/">Next lesson · Normal flow, box model, and display</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

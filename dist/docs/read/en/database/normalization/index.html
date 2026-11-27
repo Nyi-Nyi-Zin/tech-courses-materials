@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Store each kind of fact in the table it belongs to. Join related tables when you need the full record.">
+  <title>Design tables with normalization · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/normalization/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/normalization/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/normalization/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/normalization/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Design tables with normalization</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">Store each kind of fact in the table it belongs to. Join related tables when you need the full record.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/normalization">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#separate">Read a normalized enrollment list</a></li>
+<li><a href="#dependencies">Follow what each field depends on</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="separate">
+  <h2>Read a normalized enrollment list</h2>
+  <p>Run this in learning_db after Setup. Each enrollment stores one student ID and one course ID. Joining with students and courses shows the names and titles. Aye can appear twice in the report while their name is stored once in students.</p>
+
+<pre><code>SELECT s.name AS student, c.title AS course, e.enrolled_on
+FROM enrollments AS e
+JOIN students AS s ON s.id = e.student_id
+JOIN courses AS c ON c.id = e.course_id
+ORDER BY s.id, c.id;</code></pre>
+
+
+</section>
+<section class="article-section" id="dependencies">
+  <h2>Follow what each field depends on</h2>
+  <p>For first normal form, store each registration in its own row instead of adding course_1 and course_2 fields to the student record. For second normal form, enrolled_on depends on the whole enrollment key (student_id, course_id). The title depends only on course_id, so it belongs in courses. For third normal form, if courses have a department_id, store department names in departments because department_id determines the department name.</p>
+
+<pre><code>CREATE TABLE departments (
+  id integer PRIMARY KEY,
+  name text NOT NULL
+);
+
+CREATE TABLE courses (
+  id integer PRIMARY KEY,
+  title text NOT NULL,
+  department_id integer REFERENCES departments(id)
+);
+
+CREATE TABLE enrollments (
+  student_id integer REFERENCES students(id),
+  course_id integer REFERENCES courses(id),
+  enrolled_on date NOT NULL,
+  PRIMARY KEY (student_id, course_id)
+);</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/ddl-constraints.html">PostgreSQL 19 · Constraints</a></li>
+<li><a href="https://learn.microsoft.com/en-us/office/troubleshoot/access/database-normalization-description">Microsoft Learn · Database normalization</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/queries/">Previous lesson · Queries, joins, and groups</a>
+<a href="/docs/read/en/database/transactions/">Next lesson · Data changes, transactions, and indexes</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

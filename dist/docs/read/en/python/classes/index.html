@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use classes to keep state and behavior together, and see selected changes in the current Python series.">
+  <title>Classes, instances, and Python 3.15 · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/python/classes/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/classes/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/classes/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#python">All documentation · Python</a> <a href="/docs/read/my/python/classes/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Classes, instances, and Python 3.15</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">Use classes to keep state and behavior together, and see selected changes in the current Python series.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/python/classes">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#instances">Instance attributes and methods</a></li>
+<li><a href="#inheritance">Inheritance and composition</a></li>
+<li><a href="#current-series">Selected changes in Python 3.15</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="instances">
+  <h2>Instance attributes and methods</h2>
+  <p>__init__ initializes an instance. self names the instance passed to a method. Use instance attributes for values that differ per object. A class attribute belongs to the class and is shared by instances until shadowed.</p>
+
+<pre><code>class OrderLine:
+    def __init__(self, quantity, unit_price):
+        self.quantity = quantity
+        self.unit_price = unit_price
+
+    def total(self):
+        return self.quantity * self.unit_price
+
+print(OrderLine(3, 2.5).total())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">7.5</pre></div>
+
+
+</section>
+<section class="article-section" id="inheritance">
+  <h2>Inheritance and composition</h2>
+  <p>A subclass can override inherited behavior. super() delegates according to Python’s method resolution order. Use composition when an object should hold another object that provides a service, such as an order holding a list of order lines.</p>
+
+
+
+
+</section>
+<section class="article-section" id="current-series">
+  <h2>Selected changes in Python 3.15</h2>
+  <p>Python 3.15 enables UTF-8 Mode by default and adds language features such as explicit lazy imports and unpacking in comprehensions. Explicitly specifying external data encodings remains useful. Ordinary import and standard comprehensions work in these examples.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.python.org/3.15/tutorial/classes.html">Python classes</a></li>
+<li><a href="https://docs.python.org/3.15/whatsnew/3.15.html">What’s new in Python 3.15</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/python/files/">Previous lesson · Files, exceptions, and debugging</a>
+<a href="/docs/read/en/python/names-and-objects/">Next lesson · Names, mutable objects, and copies</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Web security protects the people, data, and operations of a web application. Consider a private document shared by an author with one editor. Opening it, changing it, and recovering it after an outage pose different security questions.">
+  <title>Introduction to Web Security · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/introduction/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/introduction/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/introduction/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/introduction/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Introduction to Web Security</h1>
+  
+  <p class="intro">Web security protects the people, data, and operations of a web application. Consider a private document shared by an author with one editor. Opening it, changing it, and recovering it after an outage pose different security questions.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/introduction">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#security-goals">Confidentiality, integrity, and availability</a></li>
+<li><a href="#threat-model">Model the data flow and its trust boundaries</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="security-goals">
+  <h2>Confidentiality, integrity, and availability</h2>
+  <p>Confidentiality limits disclosure. Integrity preserves authorized changes and protects against unintended ones. Availability keeps the service and its data accessible when needed. Each goal can be expressed as an observable outcome.</p>
+
+<pre><code>Confidentiality   An uninvited reader sees no document content.
+Integrity         A viewer cannot save a revision.
+Availability      A restored backup opens at the expected revision.</code></pre>
+
+
+</section>
+<section class="article-section" id="threat-model">
+  <h2>Model the data flow and its trust boundaries</h2>
+  <p>A threat is something that could cause harm. A vulnerability is a weakness that makes the harm possible. At each trust boundary, record the asset, what could go wrong, and which component enforces the rule. In this example the browser proposes an edit and the API decides whether to accept it.</p>
+
+<pre><code>Asset       Private document and revision history
+Boundary    Browser sends a proposed revision to the API
+Risk        A former editor could retain write access
+Control     Check current membership on each save
+Evidence    Revoking the editor prevents the next save</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html">OWASP · Threat modeling</a></li>
+<li><a href="https://owasp.org/Top10/2025/">OWASP Top 10 (2025)</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/https-and-tls/">Next lesson · HTTPS, TLS, and HSTS</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use label-based and position-based selection, and update a DataFrame with Copy-on-Write in mind.">
+  <title>Select, filter, sort, and assign · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/indexing/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/indexing/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/indexing/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#pandas">All documentation · pandas</a> <a href="/docs/read/my/pandas/indexing/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Select, filter, sort, and assign</h1>
+  <p class="article-version">3.1.1</p>
+  <p class="intro">Use label-based and position-based selection, and update a DataFrame with Copy-on-Write in mind.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/pandas/indexing">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#selection">Select with loc and iloc</a></li>
+<li><a href="#copy-on-write">Assign with one loc operation</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="selection">
+  <h2>Select with loc and iloc</h2>
+  <p>loc selects by label and can apply a Boolean mask. A label slice includes both bounds when present. iloc selects by integer position and uses the usual exclusive stop for slices.</p>
+
+<pre><code>import pandas as pd
+
+frame = pd.DataFrame({&quot;item&quot;: [&quot;Tea&quot;, &quot;Cake&quot;, &quot;Coffee&quot;], &quot;sales&quot;: [8, 15, 12]})
+selected = frame.loc[frame[&quot;sales&quot;].ge(10)].sort_values(&quot;sales&quot;, ascending=False)
+print(selected[&quot;item&quot;].tolist())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[&#39;Cake&#39;, &#39;Coffee&#39;]</pre></div>
+
+
+</section>
+<section class="article-section" id="copy-on-write">
+  <h2>Assign with one loc operation</h2>
+  <p>pandas 3.x uses Copy-on-Write. Chained assignment cannot update the original DataFrame. To update the original, select the matching rows and target column together inside a single loc assignment.</p>
+
+<pre><code>import pandas as pd
+
+frame = pd.DataFrame({&quot;item&quot;: [&quot;Tea&quot;, &quot;Cake&quot;], &quot;sales&quot;: [8, 15]})
+frame.loc[frame[&quot;item&quot;].eq(&quot;Tea&quot;), &quot;sales&quot;] = 10
+print(frame[&quot;sales&quot;].tolist())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[10, 15]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://pandas.pydata.org/docs/user_guide/indexing.html">Indexing and selecting data</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/migration.html#copy-on-write-cow">Copy-on-Write</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/pandas/read-csv/">Previous lesson · Read and inspect a CSV</a>
+<a href="/docs/read/en/pandas/missing-data/">Next lesson · Missing data, data types, and duplicates</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

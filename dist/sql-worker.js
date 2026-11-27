@@ -1,4 +1,5 @@
 import { PGlite } from './vendor/postgres/index.js';
+import { schoolSchema, schoolSeatSetup } from './docs/postgresql-school.js';
 
 const seed = [
   'CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT NOT NULL)',
@@ -19,10 +20,14 @@ function table(result) {
   return { columns, rows };
 }
 
-async function run({ sql, checks }) {
+async function run({ sql, checks, dataset = 'practice' }) {
   const db = new PGlite();
   try {
-    await db.exec(seed);
+    if (dataset === 'school' || dataset === 'school-seats') {
+      // Commit the fixture before running examples that start and roll back a transaction.
+      await db.exec(schoolSchema);
+      if (dataset === 'school-seats') await db.exec(schoolSeatSetup);
+    } else if (dataset !== 'empty') await db.exec(seed);
     const output = (await db.exec(sql)).filter(result => result.fields.length > 0).map(table);
     const results = [];
     for (const test of checks) {

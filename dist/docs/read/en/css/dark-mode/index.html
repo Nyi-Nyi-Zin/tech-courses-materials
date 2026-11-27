@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A theme is a set of colors used together. Name shared colors with CSS custom properties, then change those properties when the chosen theme changes.">
+  <title>Light and dark themes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/dark-mode/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/dark-mode/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/dark-mode/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/dark-mode/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Light and dark themes</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">A theme is a set of colors used together. Name shared colors with CSS custom properties, then change those properties when the chosen theme changes.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/dark-mode">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#preference">Follow the system’s color preference</a></li>
+<li><a href="#override">Set a page theme with an attribute</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="preference">
+  <h2>Follow the system’s color preference</h2>
+  <p>prefers-color-scheme is a media feature. It can match the user’s dark preference. color-scheme tells the browser which theme to use for native controls as well.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Follow the system’s color preference&lt;/title&gt;
+  &lt;style&gt;
+    :root { --page: #fff; --ink: #17233a; color-scheme: light; }
+    @media (prefers-color-scheme: dark) {
+      :root { --page: #17233a; --ink: #fff; color-scheme: dark; }
+    }
+    body { background: var(--page); color: var(--ink); }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Toggle your system color preference or emulate prefers-color-scheme in DevTools to see the page colors swap.</p>
+
+</section>
+<section class="article-section" id="override">
+  <h2>Set a page theme with an attribute</h2>
+  <p>An attribute selector can select a specific setting on an element. [data-theme=&quot;dark&quot;] matches an element with that exact attribute value. A future JavaScript button can change the attribute when the reader chooses a theme.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Set a page theme with an attribute&lt;/title&gt;
+  &lt;style&gt;
+    .panel { --page: #fff; --ink: #17233a; }
+    .panel[data-theme=&quot;dark&quot;] { --page: #17233a; --ink: #fff; }
+    .panel { background: var(--page); color: var(--ink); padding: 12px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;section class=&quot;panel&quot; data-theme=&quot;dark&quot;&gt;&lt;p&gt;Pens and notebooks&lt;/p&gt;&lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The panel is dark. Change data-theme to light, save, and reload to use the base colors.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-color-scheme">MDN · Prefers color scheme</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/color-scheme">MDN · Color scheme</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/form-and-table-styling/">Previous lesson · Style forms and tables</a>
+<a href="/docs/read/en/css/motion/">Next lesson · Transitions and animations</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

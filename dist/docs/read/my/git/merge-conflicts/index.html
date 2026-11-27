@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Branch နှစ်ခုမှာ ဖိုင်ရဲ့ တူညီတဲ့နေရာကို ပုံစံမတူအောင် ပြင်ထားရင် Git က merge ကို ခဏရပ်ထားနိုင်ပါတယ်။ အဲဒီနေရာမှာ ဘယ်စာသားကို နောက်ဆုံးထားမလဲ ကိုယ်တိုင် ဆုံးဖြတ်ပေးရပါမယ်။">
+  <title>Merge Conflict ဖြေရှင်းခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/git/merge-conflicts/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/git/merge-conflicts/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/git/merge-conflicts/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#git">သင်ခန်းစာအားလုံး · Git</a> <a href="/docs/read/en/git/merge-conflicts/" lang="en" hreflang="en">English</a></nav>
+  <h1>Merge Conflict ဖြေရှင်းခြင်း</h1>
+  
+  <p class="intro">Branch နှစ်ခုမှာ ဖိုင်ရဲ့ တူညီတဲ့နေရာကို ပုံစံမတူအောင် ပြင်ထားရင် Git က merge ကို ခဏရပ်ထားနိုင်ပါတယ်။ အဲဒီနေရာမှာ ဘယ်စာသားကို နောက်ဆုံးထားမလဲ ကိုယ်တိုင် ဆုံးဖြတ်ပေးရပါမယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/git/merge-conflicts">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#reproduce">တူညီတဲ့ စာကြောင်းကို Branch နှစ်ခုမှာ ပြင်ခြင်း</a></li>
+<li><a href="#resolve">နောက်ဆုံးထားမယ့် စာသားရွေးပြီး Merge အပြီးသတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="reproduce">
+  <h2>တူညီတဲ့ စာကြောင်းကို Branch နှစ်ခုမှာ ပြင်ခြင်း</h2>
+  <p>Branch သင်ခန်းစာပြီးရင် project-notes ရဲ့ main မှာ commit လုပ်စရာ မကျန်တော့တဲ့ အခြေအနေကနေ စပါ။ စာကြောင်းတစ်ကြောင်းပါတဲ့ ဖိုင် ဆောက်ပြီး branch တစ်ခုစီမှာ အဲဒီစာကြောင်းကို မတူအောင် ပြင်ပါ။ နောက်ဆုံး merge မှာ status.txt ကို conflict ဖြစ်တယ်လို့ ပြပါမယ်။</p>
+
+<pre><code>printf &#39;Draft\n&#39; &gt; status.txt
+git add status.txt
+git commit -m &quot;Add draft status&quot;
+git switch -c update-status
+printf &#39;Ready for review\n&#39; &gt; status.txt
+git commit -am &quot;Mark status ready for review&quot;
+git switch main
+printf &#39;Review scheduled\n&#39; &gt; status.txt
+git commit -am &quot;Schedule review&quot;
+git merge update-status</code></pre>
+
+
+</section>
+<section class="article-section" id="resolve">
+  <h2>နောက်ဆုံးထားမယ့် စာသားရွေးပြီး Merge အပြီးသတ်ခြင်း</h2>
+  <p>git status နဲ့ conflict ဖြစ်နေတဲ့ဖိုင် ရှာပါ။ status.txt ကို ဖွင့်ရင် &lt;&lt;&lt;&lt;&lt;&lt;&lt;၊ ======= နဲ့ &gt;&gt;&gt;&gt;&gt;&gt;&gt; လို့စတဲ့ marker တွေ တွေ့ပါမယ်။ Marker တွေ အပါအဝင် အဲဒီအပိုင်းတစ်ခုလုံးကို သဘောတူတဲ့ စာသားနဲ့ အစားထိုးပါ။ ပြီးရင် save၊ stage၊ commit လုပ်ပါ။ Merge ကို ရပ်ပြီး အရင်အခြေအနေ ပြန်သွားချင်ရင် commit မလုပ်ခင် git merge --abort သုံးနိုင်ပါတယ်။</p>
+
+<pre><code>git status
+printf &#39;Ready for scheduled review\n&#39; &gt; status.txt
+git add status.txt
+git commit -m &quot;Resolve project status conflict&quot;
+git status</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging">Git · Basic branching and merging</a></li>
+<li><a href="https://git-scm.com/docs/git-merge">Git · git merge</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/git/branches-and-merging/">အရင်သင်ခန်းစာ · Branch ခွဲခြင်းနဲ့ Merge လုပ်ခြင်း</a>
+<a href="/docs/read/my/git/ignoring-and-undoing/">နောက်သင်ခန်းစာ · ဖိုင်တွေ Ignore လုပ်ခြင်းနဲ့ Changes ပြန်ဖျက်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use a local PostgreSQL server on port 5432. Start as the administrator postgres and use a fresh practice database named mydb and a new login role named nyinyizin. Run the sections in order. The psql command starts from your OS terminal. SQL and the backslash commands go inside psql.">
+  <title>PostgreSQL users, roles, and ownership · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/roles-and-ownership/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/roles-and-ownership/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/roles-and-ownership/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/roles-and-ownership/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>PostgreSQL users, roles, and ownership</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">Use a local PostgreSQL server on port 5432. Start as the administrator postgres and use a fresh practice database named mydb and a new login role named nyinyizin. Run the sections in order. The psql command starts from your OS terminal. SQL and the backslash commands go inside psql.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/roles-and-ownership">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#admin-login">Open psql as postgres</a></li>
+<li><a href="#create-user">Create a login role and set its password</a></li>
+<li><a href="#role-attributes">Grant and remove individual role attributes</a></li>
+<li><a href="#superuser">Read and reset the SUPERUSER attribute</a></li>
+<li><a href="#database-owner">Create mydb and set its owner</a></li>
+<li><a href="#user-login">Connect as nyinyizin</a></li>
+<li><a href="#owned-table">Make a table owned by the new role</a></li>
+<li><a href="#return-as-admin">Reconnect as postgres to mydb</a></li>
+<li><a href="#cleanup">Restore ownership and remove the login role</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="admin-login">
+  <h2>Open psql as postgres</h2>
+  <p>Run this in your terminal. Use the postgres login from setup, and enter its password if prompted. If your installation uses a different administrator role, use that role consistently, including when restoring ownership in the last section. Use a different pair of names throughout if mydb or nyinyizin is already in use.</p>
+
+<pre><code>psql -h localhost -p 5432 -U postgres -d postgres</code></pre>
+
+
+</section>
+<section class="article-section" id="create-user">
+  <h2>Create a login role and set its password</h2>
+  <p>Run these lines inside psql. CREATE USER creates a role with LOGIN enabled. The password prompt asks you to enter the password twice without displaying it. Check the new role with the last line.</p>
+
+<pre><code>CREATE USER nyinyizin;
+\password nyinyizin
+\du nyinyizin</code></pre>
+<dl class="lesson-terms"><div><dt><code>CREATE USER … WITH PASSWORD</code></dt><dd>SQL also accepts a password in CREATE USER. Use \password for this terminal exercise so the password does not appear in the SQL you type.</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="role-attributes">
+  <h2>Grant and remove individual role attributes</h2>
+  <p>This optional example grants CREATEDB to create databases and CREATEROLE to create and manage eligible roles. Inspect the changes with \du, then remove both attributes before proceeding. Changing these attributes does not change the role’s LOGIN setting.</p>
+
+<pre><code>ALTER USER nyinyizin WITH CREATEDB CREATEROLE;
+\du nyinyizin
+ALTER USER nyinyizin WITH NOCREATEDB NOCREATEROLE;</code></pre>
+
+
+</section>
+<section class="article-section" id="superuser">
+  <h2>Read and reset the SUPERUSER attribute</h2>
+  <p>A superuser bypasses PostgreSQL permission checks except the right to log in. This optional example is for a disposable local server. In one transaction as postgres, grant the attribute, inspect it, then reset the elevated attributes before committing. The temporary grant stays inside that transaction.</p>
+
+<pre><code>BEGIN;
+ALTER USER nyinyizin WITH SUPERUSER;
+\du nyinyizin
+ALTER USER nyinyizin WITH NOSUPERUSER NOCREATEROLE NOCREATEDB NOREPLICATION NOBYPASSRLS;
+COMMIT;
+\du nyinyizin</code></pre>
+
+
+</section>
+<section class="article-section" id="database-owner">
+  <h2>Create mydb and set its owner</h2>
+  <p>Still connected as postgres, create the practice database and transfer the database object to nyinyizin. The role can own this database with its elevated attributes removed. Confirm the Owner column shows nyinyizin and leave psql with \q.</p>
+
+<pre><code>CREATE DATABASE mydb;
+ALTER DATABASE mydb OWNER TO nyinyizin;
+\l mydb
+\q</code></pre>
+<dl class="lesson-terms"><div><dt><code>ALTER DATABASE … OWNER TO</code></dt><dd>Transfers ownership of the database object. Tables within it have their own owners.</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="user-login">
+  <h2>Connect as nyinyizin</h2>
+  <p>Run this in the OS terminal, then enter the password you set for nyinyizin. The default prompt for this ordinary role is mydb=&gt;.</p>
+
+<pre><code>psql -h localhost -p 5432 -U nyinyizin -d mydb</code></pre>
+<dl class="lesson-terms"><div><dt><code>psql</code></dt><dd>Starts the PostgreSQL command-line client.</dd></div><div><dt><code>-h localhost</code></dt><dd>Connects to the server on this computer over TCP.</dd></div><div><dt><code>-p 5432</code></dt><dd>Uses TCP port 5432.</dd></div><div><dt><code>-U nyinyizin</code></dt><dd>Authenticates as the login role nyinyizin.</dd></div><div><dt><code>-d mydb</code></dt><dd>Connects directly to mydb.</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="owned-table">
+  <h2>Make a table owned by the new role</h2>
+  <p>Inside mydb, verify the connection and create a small disposable table as nyinyizin. Its owner is the role that creates it. Use \dt to verify the owner, then exit with \q.</p>
+
+<pre><code>\conninfo
+SELECT current_user, current_database();
+CREATE TABLE public.role_demo (id integer PRIMARY KEY);
+\dt public.role_demo
+\q</code></pre>
+
+
+</section>
+<section class="article-section" id="return-as-admin">
+  <h2>Reconnect as postgres to mydb</h2>
+  <p>Run this in the OS terminal before restoring ownership and removing the practice role.</p>
+
+<pre><code>psql -h localhost -p 5432 -U postgres -d mydb</code></pre>
+
+
+</section>
+<section class="article-section" id="cleanup">
+  <h2>Restore ownership and remove the login role</h2>
+  <p>Run these lines inside mydb as postgres after the nyinyizin session is closed. The first ALTER DATABASE restores the database owner. REASSIGN OWNED then transfers objects still owned by the practice role, including role_demo. Verify the table ownership before dropping the role.</p>
+
+<pre><code>ALTER DATABASE mydb OWNER TO postgres;
+REASSIGN OWNED BY nyinyizin TO postgres;
+\dt public.role_demo
+DROP USER nyinyizin;
+\du nyinyizin</code></pre>
+<dl class="lesson-terms"><div><dt><code>REASSIGN OWNED</code></dt><dd>Changes ownership of the old role’s objects in the current database and shared objects such as databases and tablespaces. In this exercise the source is the new practice role.</dd></div><div><dt><code>DROP USER</code></dt><dd>Removes the role. PostgreSQL refuses if database objects or privileges still depend on it. If this happens outside the exercise, inspect the reported dependencies before retrying.</dd></div></dl>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/sql-createuser.html">PostgreSQL · CREATE USER</a></li>
+<li><a href="https://www.postgresql.org/docs/19/role-attributes.html">PostgreSQL · Role attributes</a></li>
+<li><a href="https://www.postgresql.org/docs/19/sql-alteruser.html">PostgreSQL · ALTER USER</a></li>
+<li><a href="https://www.postgresql.org/docs/19/sql-alterdatabase.html">PostgreSQL · ALTER DATABASE</a></li>
+<li><a href="https://www.postgresql.org/docs/19/sql-reassign-owned.html">PostgreSQL · REASSIGN OWNED</a></li>
+<li><a href="https://www.postgresql.org/docs/19/sql-dropuser.html">PostgreSQL · DROP USER</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/upserts/">Previous lesson · Insert or update with ON CONFLICT</a>
+<a href="/docs/read/en/database/schema-and-access/">Next lesson · Change tables, manage access, and create views</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

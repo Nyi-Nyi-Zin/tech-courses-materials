@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Load configuration once, validate required settings on startup, and keep database access in a provider.">
+  <title>Configuration and the database layer · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/configuration-and-data/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/configuration-and-data/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/configuration-and-data/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#nestjs">All documentation · NestJS</a> <a href="/docs/read/my/nestjs/configuration-and-data/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Configuration and the database layer</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">Load configuration once, validate required settings on startup, and keep database access in a provider.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/nestjs/configuration-and-data">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#settings">Validate required settings on startup</a></li>
+<li><a href="#provider">Separate HTTP from persistence</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="settings">
+  <h2>Validate required settings on startup</h2>
+  <p>Install @nestjs/config, then register ConfigModule. A validation function can fail startup when a required setting is missing. Supply DATABASE_URL through the environment and inject ConfigService in the provider that creates the database connection.</p>
+
+<pre><code>import { Module } from &quot;@nestjs/common&quot;;
+import { ConfigModule } from &quot;@nestjs/config&quot;;
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({
+      validate(config) {
+        if (!config.DATABASE_URL) throw new Error(&quot;DATABASE_URL is required&quot;);
+        return config;
+      },
+    }),
+  ],
+})
+export class AppModule {}</code></pre>
+
+
+</section>
+<section class="article-section" id="provider">
+  <h2>Separate HTTP from persistence</h2>
+  <p>Controllers read inputs and give responses. A service runs business rules and calls a repository or database client. Nest can work with a driver or ORM through providers. Keep schema changes in migrations so environments can apply the same changes.</p>
+
+<pre><code>@Injectable()
+export class InventoryService {
+  constructor(private readonly products: ProductRepository) {}
+
+  availableProducts() {
+    return this.products.findWithStock();
+  }
+}
+
+@Controller(&quot;inventory&quot;)
+export class InventoryController {
+  constructor(private readonly inventory: InventoryService) {}
+
+  @Get()
+  list() {
+    return this.inventory.availableProducts();
+  }
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.nestjs.com/techniques/configuration">Configuration and validation</a></li>
+<li><a href="https://docs.nestjs.com/techniques/database">Database integration</a></li>
+<li><a href="https://docs.nestjs.com/providers">Providers</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/nestjs/request-lifecycle/">Previous lesson · Request lifecycle, guards, and interceptors</a>
+<a href="/docs/read/en/nestjs/openapi-and-errors/">Next lesson · Document routes and HTTP errors</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

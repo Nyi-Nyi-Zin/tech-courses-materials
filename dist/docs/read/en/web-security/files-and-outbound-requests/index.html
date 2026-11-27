@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An attachment can arrive as uploaded bytes or through an import feature. Uploads introduce untrusted files into storage. URL imports also give the application a reason to open a network connection.">
+  <title>File Uploads and Server-Side Requests · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/files-and-outbound-requests/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/files-and-outbound-requests/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/files-and-outbound-requests/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/files-and-outbound-requests/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>File Uploads and Server-Side Requests</h1>
+  
+  <p class="intro">An attachment can arrive as uploaded bytes or through an import feature. Uploads introduce untrusted files into storage. URL imports also give the application a reason to open a network connection.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/files-and-outbound-requests">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#upload">Validate, isolate, then publish an attachment</a></li>
+<li><a href="#ssrf">Constrain outbound connections to known destinations</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="upload">
+  <h2>Validate, isolate, then publish an attachment</h2>
+  <p>Check permission and size before expensive parsing. The filename extension and declared MIME type are hints. Verify expected content with a maintained parser and apply scanning or re-encoding as appropriate. Generate a storage key, keep pending files private outside the web root, and recheck access on download. A failed scan must leave the file unavailable.</p>
+
+<pre><code>Upload received   Private quarantine, generated storage key
+Checks passed     Mark available to authorized document members
+Check failed      Keep unavailable; record the reason internally</code></pre>
+
+
+</section>
+<section class="article-section" id="ssrf">
+  <h2>Constrain outbound connections to known destinations</h2>
+  <p>Server-side request forgery (SSRF) is a risk when an input influences where the backend connects. For a known provider, accept a file ID and construct a URL from a fixed origin. Restrict network egress, disable redirects or validate every hop, and set time and byte limits. Require access to the requested remote object.</p>
+
+<pre><code>function providerFileUrl(fileId) {
+  if (!/^[a-zA-Z0-9_-]{1,64}$/.test(fileId)) {
+    throw new Error(&quot;Invalid file ID&quot;);
+  }
+  return new URL(&quot;/files/&quot; + fileId, &quot;https://files.example&quot;);
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html">OWASP · File upload</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html">OWASP · SSRF prevention</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/api-security/">Previous lesson · API Security and Resource Limits</a>
+<a href="/docs/read/en/web-security/webhooks-and-data-integrity/">Next lesson · Webhooks and Data Integrity</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

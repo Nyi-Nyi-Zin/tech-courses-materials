@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Choose features available at prediction time and fit column-specific transforms inside a pipeline.">
+  <title>Feature engineering for numeric and categorical data · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/feature-engineering/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/feature-engineering/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/feature-engineering/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#machine-learning">All documentation · Machine Learning</a> <a href="/docs/read/my/machine-learning/feature-engineering/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Feature engineering for numeric and categorical data</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Choose features available at prediction time and fit column-specific transforms inside a pipeline.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/machine-learning/feature-engineering">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#design">Design features around prediction time</a></li>
+<li><a href="#pipeline">Impute, scale, and encode by column</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="design">
+  <h2>Design features around prediction time</h2>
+  <p>Start with fields available when a prediction must be made. Logically useful features can include ratios, totals, or calendar parts. Compute historical aggregates from earlier data only. Apply the same feature definitions at training and inference time.</p>
+
+
+
+
+</section>
+<section class="article-section" id="pipeline">
+  <h2>Impute, scale, and encode by column</h2>
+  <p>ColumnTransformer applies different transformations to column groups. Use an imputer for missing values when appropriate. OneHotEncoder can ignore unknown categories for inference. Fit the transformer together with the estimator during validation.</p>
+
+<pre><code>import pandas as pd
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+
+train = pd.DataFrame({&quot;price&quot;: [2.0, 3.0, None, 8.0, 9.0, 7.0],
+                      &quot;store&quot;: [&quot;A&quot;, &quot;B&quot;, &quot;A&quot;, &quot;B&quot;, &quot;A&quot;, &quot;B&quot;]})
+preprocess = ColumnTransformer([
+    (&quot;num&quot;, make_pipeline(SimpleImputer(strategy=&quot;median&quot;), StandardScaler()), [&quot;price&quot;]),
+    (&quot;store&quot;, OneHotEncoder(handle_unknown=&quot;ignore&quot;), [&quot;store&quot;]),
+])
+model = make_pipeline(preprocess, LogisticRegression())
+model.fit(train, [0, 0, 0, 1, 1, 1])
+new = pd.DataFrame({&quot;price&quot;: [5.0], &quot;store&quot;: [&quot;C&quot;]})
+print(model.predict_proba(new).shape)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">(1, 2)</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/preprocessing.html">Preprocessing data</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/compose.html">Pipelines and composite estimators</a></li>
+<li><a href="https://scikit-learn.org/stable/common_pitfalls.html">Common pitfalls and data leakage</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/machine-learning/learning-curves/">Previous lesson · Diagnose models with learning curves</a>
+<a href="/docs/read/en/machine-learning/hyperparameter-tuning/">Next lesson · Tune hyperparameters with cross-validation</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

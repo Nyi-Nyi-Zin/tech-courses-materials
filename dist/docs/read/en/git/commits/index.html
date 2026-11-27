@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Create the first file in project-notes. You will see how an edit becomes part of a recorded version.">
+  <title>Staging Changes and Making Commits · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/git/commits/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/git/commits/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/git/commits/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#git">All documentation · Git</a> <a href="/docs/read/my/git/commits/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Staging Changes and Making Commits</h1>
+  
+  <p class="intro">Create the first file in project-notes. You will see how an edit becomes part of a recorded version.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/git/commits">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#working-tree">Edit a file in the working tree</a></li>
+<li><a href="#stage">Choose what to include in the next commit</a></li>
+<li><a href="#commit">Record and inspect the first commit</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="working-tree">
+  <h2>Edit a file in the working tree</h2>
+  <p>The working tree contains the files you are editing. Create README.md with this command in Git Bash, macOS, or Linux, or create the file in an editor. Git reports it as untracked until you add it.</p>
+
+<pre><code>printf &#39;# Project Notes\n&#39; &gt; README.md
+git status --short</code></pre>
+
+
+</section>
+<section class="article-section" id="stage">
+  <h2>Choose what to include in the next commit</h2>
+  <p>git add copies the current file contents into the staging area. git diff --staged shows what the next commit will include. If you edit the file again after staging it, stage it again to include the latest edit.</p>
+
+<pre><code>git add README.md
+git diff --staged</code></pre>
+
+
+</section>
+<section class="article-section" id="commit">
+  <h2>Record and inspect the first commit</h2>
+  <p>A commit records the staged snapshot in the local repository. Use a message that describes the change. git log --oneline should show the new commit and its abbreviated ID. During later edits, git diff shows unstaged changes to tracked files.</p>
+
+<pre><code>git commit -m &quot;Add project README&quot;
+git log --oneline
+git status</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository">Git · Recording changes</a></li>
+<li><a href="https://git-scm.com/docs/git-diff">Git · git diff</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/git/introduction/">Previous lesson · Introduction to Git</a>
+<a href="/docs/read/en/git/branches-and-merging/">Next lesson · Branches and Merging</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="JavaScript က programming language တစ်ခုပါ။ ဈေးတွက်တာ၊ ခလုတ်နှိပ်ပြီး စာသားပြောင်းတာလို browser ကို လုပ်စေချင်တဲ့ အလုပ်ကို ညွှန်ကြားနိုင်ပါတယ်။ Browser မှာ စာတစ်ကြောင်း ထုတ်ကြည့်တာကနေ စပါမယ်။">
+  <title>ပထမဆုံး JavaScript Run ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/getting-started/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/getting-started/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/getting-started/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/getting-started/" lang="en" hreflang="en">English</a></nav>
+  <h1>ပထမဆုံး JavaScript Run ခြင်း</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">JavaScript က programming language တစ်ခုပါ။ ဈေးတွက်တာ၊ ခလုတ်နှိပ်ပြီး စာသားပြောင်းတာလို browser ကို လုပ်စေချင်တဲ့ အလုပ်ကို ညွှန်ကြားနိုင်ပါတယ်။ Browser မှာ စာတစ်ကြောင်း ထုတ်ကြည့်တာကနေ စပါမယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/getting-started">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#console">Browser Console သုံးခြင်း</a></li>
+<li><a href="#script">&lt;script&gt; ထဲမှာ JavaScript ရေးခြင်း</a></li>
+<li><a href="#external-script">JavaScript ဖိုင်သီးသန့် ချိတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="console">
+  <h2>Browser Console သုံးခြင်း</h2>
+  <p>Developer Tools နဲ့ web page ကို စစ်ကြည့်လို့ရပါတယ်။ Console tab မှာ JavaScript စမ်း run ပြီး စာမျက်နှာက ထုတ်တဲ့ message တွေကို ကြည့်နိုင်ပါတယ်။ console.log() က အဲဒီနေရာမှာ စာထုတ်ဖို့ ညွှန်ကြားချက်ပါ။ ထုတ်ချင်တဲ့ စာသားကို quotation marks ကြားမှာ ရေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser နဲ့ စာမျက်နှာတစ်ခု ဖွင့်ပါ။ Right-click နှိပ်၊ Inspect ရွေးပြီး Console tab ကို သွားပါ။ ဒီစာကြောင်းကို ရိုက်ပြီး Enter နှိပ်ပါ။</p>
+<pre><code>console.log(&quot;Your order is ready.&quot;);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Console မှာ “Your order is ready.” ပေါ်ပါမယ်။ ညွှန်ကြားချက်ရဲ့ ပြန်ရလဒ်အဖြစ် undefined ကိုပါ ပြနိုင်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="script">
+  <h2>&lt;script&gt; ထဲမှာ JavaScript ရေးခြင်း</h2>
+  <p>Browser က &lt;script&gt; element ကို ရောက်တဲ့အခါ အထဲက code ကို run ပါတယ်။ နမူနာမှာ script ကို body အဆုံးနားမှာ ထားပါတယ်။ စာပိုဒ်က စာမျက်နှာမှာ ပေါ်ပြီး log က Console မှာ ပေါ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Place JavaScript in a &amp;lt;script&amp;gt; element&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;Product catalog&lt;/p&gt;
+  &lt;script&gt;
+    console.log(&quot;The catalog page loaded.&quot;);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စာမျက်နှာမှာ “Product catalog” ပေါ်ပါမယ်။ Console ဖွင့်ပြီး reload လုပ်ရင် “The catalog page loaded.” မြင်ရပါမယ်။</p>
+
+</section>
+<section class="article-section" id="external-script">
+  <h2>JavaScript ဖိုင်သီးသန့် ချိတ်ခြင်း</h2>
+  <p>.js ဖိုင်ထဲမှာ page အတွက် JavaScript ရေးနိုင်ပါတယ်။ script ရဲ့ src က browser ကို ဖိုင်လိပ်စာ ပြောပေးပါတယ်။ ပုံမှန် external script ကို head မှာ ထားတဲ့အခါ defer ပါရင် HTML ကို ဖတ်ပြီးမှ script run ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီစာကြောင်းကို HTML ဖိုင်နဲ့ folder တူတဲ့ app.js ထဲ သိမ်းပါ။ အရင် &lt;script&gt; block ကို ဖယ်ပြီး &lt;head&gt; အတွင်း &lt;script defer src=&quot;app.js&quot;&gt;&lt;/script&gt; ထည့်ပါ။ ဖိုင်နှစ်ခုလုံး သိမ်းပြီး reload လုပ်ပါ။</p>
+<pre><code>console.log(&quot;app.js is linked.&quot;);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Reload လုပ်ပြီးရင် Console မှာ “app.js is linked.” ပေါ်ပါမယ်။</p>
+<p class="example-check"><strong>ရလဒ်ကွာနေရင်</strong> စာအသစ် မပေါ်ရင် ဖိုင်နာမည်ကို စစ်ပါ။ Browser Console မှာ ဖိုင်မတွေ့တဲ့ error ရှိလား ကြည့်ပါ။</p>
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide">MDN · JavaScript Guide</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/scripting.html#the-script-element">WHATWG · The script element</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/values/">နောက်သင်ခန်းစာ · Value၊ Type၊ Variable နဲ့ Operator</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

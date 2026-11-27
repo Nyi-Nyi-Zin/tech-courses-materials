@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Field တွေ သုံးရလွယ်ဖို့ အကွာအဝေးနဲ့ focus style ပေးပါ။ Table တွေမှာ တန်ဖိုးတွေ နှိုင်းရလွယ်အောင် ညှိပါ။">
+  <title>Form နဲ့ Table ကို Style ပေးခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/form-and-table-styling/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/form-and-table-styling/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/form-and-table-styling/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/form-and-table-styling/" lang="en" hreflang="en">English</a></nav>
+  <h1>Form နဲ့ Table ကို Style ပေးခြင်း</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Field တွေ သုံးရလွယ်ဖို့ အကွာအဝေးနဲ့ focus style ပေးပါ။ Table တွေမှာ တန်ဖိုးတွေ နှိုင်းရလွယ်အောင် ညှိပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/form-and-table-styling">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#form">Field တွေ Style ပေးပြီး Focus မြင်သာအောင်ထားခြင်း</a></li>
+<li><a href="#table">ဈေးနှုန်း ညှိပြီး Row တွေ အရောင်ခွဲခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="form">
+  <h2>Field တွေ Style ပေးပြီး Focus မြင်သာအောင်ထားခြင်း</h2>
+  <p>Form control တွေကို ပတ်ဝန်းကျင်စာသားနဲ့ font တူဖို့ font: inherit ပေးပါ။ နှိပ်လို့ကောင်းအောင် padding ပေးပါ။ :focus-visible က keyboard နဲ့ ရွှေ့တဲ့အခါ လက်ရှိ focus ရောက်နေတဲ့ control ကို မြင်သာစေပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Style fields and keep focus visible&lt;/title&gt;
+  &lt;style&gt;
+form { display: grid; gap: 8px; max-width: 300px; }
+input, button { font: inherit; padding: 8px; border: 1px solid #497676; border-radius: 6px; }
+button { background: #006767; color: white; }
+:focus-visible { outline: 3px solid #a13a00; outline-offset: 2px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form&gt;&lt;label for=&quot;name&quot;&gt;Order name&lt;/label&gt;&lt;input id=&quot;name&quot; name=&quot;name&quot;&gt;&lt;button type=&quot;button&quot;&gt;Continue&lt;/button&gt;&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Preview ထဲအရင် နှိပ်ပါ။ Tab နဲ့ field နဲ့ button ကြား ရွှေ့ပြီး focus အနားသတ်ကို ကြည့်ပါ။</p>
+
+</section>
+<section class="article-section" id="table">
+  <h2>ဈေးနှုန်း ညှိပြီး Row တွေ အရောင်ခွဲခြင်း</h2>
+  <p>border-collapse: collapse က ကပ်လျက် border တွေ ပေါင်းပေးပါတယ်။ tbody tr:nth-child(even) က table body ထဲက စုံဂဏန်း row တွေ ရွေးပါတယ်။ ဈေးနှုန်းဂဏန်းတွေ တန်းအောင် ညာဘက်ညှိပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Align prices and stripe table rows&lt;/title&gt;
+  &lt;style&gt;
+table { width: 100%; max-width: 360px; border-collapse: collapse; }
+th, td { padding: 8px; text-align: left; border-bottom: 1px solid #888; }
+tr &gt; :last-child { text-align: right; }
+tbody tr:nth-child(even) { background: #def5f5; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;table&gt;&lt;caption&gt;Product price list&lt;/caption&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Product&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Price (MMK)&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Pen&lt;/td&gt;&lt;td&gt;1,500&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Desk Lamp&lt;/td&gt;&lt;td&gt;2,500&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ဒုတိယ row မှာ နောက်ခံရောင်ရှိပြီး ဈေးနှုန်းတွေ ညာဘက် တစ်တန်းတည်း ဖြစ်ပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Styling_web_forms">MDN · Styling forms</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/border-collapse">MDN · border-collapse</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/images-and-transforms/">အရင်သင်ခန်းစာ · ပုံဆံ့အောင် ထည့်ပုံနဲ့ Transforms</a>
+<a href="/docs/read/my/css/dark-mode/">နောက်သင်ခန်းစာ · Light Theme နဲ့ Dark Theme</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ပုံစံသတ်မှတ်ထားတဲ့ value တွေကို class နဲ့ ဖော်ပြပြီး function က ဘယ် type ကို မျှော်လင့်လဲ ရေးပါ။">
+  <title>Dataclasses နှင့် Typed Interfaces · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/python/dataclasses-and-typing/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/dataclasses-and-typing/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/dataclasses-and-typing/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#python">သင်ခန်းစာအားလုံး · Python</a> <a href="/docs/read/en/python/dataclasses-and-typing/" lang="en" hreflang="en">English</a></nav>
+  <h1>Dataclasses နှင့် Typed Interfaces</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">ပုံစံသတ်မှတ်ထားတဲ့ value တွေကို class နဲ့ ဖော်ပြပြီး function က ဘယ် type ကို မျှော်လင့်လဲ ရေးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/python/dataclasses-and-typing">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#dataclass">Record ကို Dataclass ဖြင့် ဖော်ပြခြင်း</a></li>
+<li><a href="#type-hints">Optional Value ကို အတိအကျ ဖော်ပြခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="dataclass">
+  <h2>Record ကို Dataclass ဖြင့် ဖော်ပြခြင်း</h2>
+  <p>@dataclass က annotated field တွေပေါ်ကနေ __init__၊ __repr__ နဲ့ __eq__ တို့ ထုတ်ပေးနိုင်ပါတယ်။ Record တစ်ခုစီအတွက် list အသစ်ရဖို့ field(default_factory=list) သုံးပါ။ Input မှားနိုင်ရင် သီးသန့် validation ထည့်ပါ။</p>
+
+<pre><code>from dataclasses import dataclass, field
+
+@dataclass
+class Order:
+    order_id: int
+    items: list[str] = field(default_factory=list)
+
+first, second = Order(1), Order(2)
+first.items.append(&quot;Tea&quot;)
+print(first.items, second.items)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[&#39;Tea&#39;] []</pre></div>
+
+
+</section>
+<section class="article-section" id="type-hints">
+  <h2>Optional Value ကို အတိအကျ ဖော်ပြခြင်း</h2>
+  <p>Type hint က tool တွေနဲ့ ဖတ်သူအတွက် ရည်ရွယ်ထားတဲ့ value ကို ဖော်ပြပါတယ်။ str | None က စာသား သို့မဟုတ် None ဖြစ်နိုင်တယ်လို့ ဆိုပါတယ်။ Python က function annotation ကို ပုံမှန်အားဖြင့် runtime မှာ မစစ်လို့ file၊ API နဲ့ user ဘက်က input တွေကို စစ်ပါ။</p>
+
+<pre><code>def normalize(name: str | None) -&gt; str:
+    return name.strip() if name is not None else &quot;Unknown&quot;
+
+print(normalize(&quot; Tea &quot;), normalize(None))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">Tea Unknown</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.python.org/3.15/library/dataclasses.html">dataclasses</a></li>
+<li><a href="https://docs.python.org/3.15/library/typing.html">typing</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/python/async-await/">အရင်သင်ခန်းစာ · async နှင့် await ဖြင့် Concurrency</a>
+<a href="/docs/read/my/python/testing-and-logging/">နောက်သင်ခန်းစာ · Python Program စမ်းသပ်ခြင်းနှင့် Logging</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

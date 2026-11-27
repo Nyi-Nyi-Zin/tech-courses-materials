@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Go from a raw CSV to a monthly sales chart with an explanation of what it includes.">
+  <title>Store Sales Analysis walkthrough · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/store-sales/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/store-sales/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/store-sales/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#data-analysis">All documentation · Data Analysis</a> <a href="/docs/read/my/data-analysis/store-sales/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Store Sales Analysis walkthrough</h1>
+  
+  <p class="intro">Go from a raw CSV to a monthly sales chart with an explanation of what it includes.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/data-analysis/store-sales">Open interactive docs</a></p>
+  <p class="reading-link"><a href="/docs/media/data/store_sales.csv" download>Download sample CSV</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#question">Define the result</a></li>
+<li><a href="#worked-example">Clean, group, and plot</a></li>
+<li><a href="#findings">Report the finding and its limitations</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="question">
+  <h2>Define the result</h2>
+  <p>Which calendar month has the most usable recorded sales? This small synthetic file is for demonstrating the workflow. Its amounts have no specified currency. Each non-duplicate row represents one store transaction.</p>
+
+
+
+
+</section>
+<section class="article-section" id="worked-example">
+  <h2>Clean, group, and plot</h2>
+  <p>Save the supplied CSV next to your script. Read source codes intact, deduplicate exact rows, and use numeric conversion before recovering amounts. Group by month and use min_count=1 so an all-missing group stays missing.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+import pandas as pd
+
+raw = pd.read_csv(&quot;store_sales.csv&quot;, dtype=&quot;string&quot;, keep_default_na=False)
+data = raw.drop_duplicates().copy()
+date = pd.to_datetime(data[&quot;Transaction Date&quot;], format=&quot;%Y-%m-%d&quot;, errors=&quot;coerce&quot;)
+quantity = pd.to_numeric(data[&quot;Quantity&quot;], errors=&quot;coerce&quot;)
+price = pd.to_numeric(data[&quot;Price Per Unit&quot;], errors=&quot;coerce&quot;)
+recorded = pd.to_numeric(data[&quot;Total Spent&quot;], errors=&quot;coerce&quot;)
+sales = recorded.fillna(quantity * price)
+monthly = sales.groupby(date.dt.to_period(&quot;M&quot;)).sum(min_count=1)
+
+fig, ax = plt.subplots(layout=&quot;constrained&quot;)
+ax.plot(monthly.index.astype(str), monthly, marker=&quot;o&quot;)
+ax.set(title=&quot;Store sales by month&quot;, xlabel=&quot;Month&quot;, ylabel=&quot;Recorded sales&quot;)
+print(str(monthly.idxmax()), float(monthly.max()))
+print(float(sales.sum()), float(monthly.sum()), int(sales.isna().sum()))
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/store-sales-worked-example.png" data-image-preview><img src="/docs/media/data/store-sales-worked-example.png" alt="Store sales by month are 11.5, 17, 15, and 21.5 from January to April. April is highest." width="659" height="499" loading="lazy" decoding="async"></a>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">2023-04 21.5
+67.0 65.0 1</pre></div>
+
+
+</section>
+<section class="article-section" id="findings">
+  <h2>Report the finding and its limitations</h2>
+  <p>April 2023 recorded the highest usable monthly sales, at 21.5. The monthly sum is 65 versus 67 overall because one usable amount of 2 has an unreadable date. One other transaction has an unresolved amount. The series falls in March before increasing in April.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">pandas.read_csv</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/groupby.html">pandas GroupBy guide</a></li>
+<li><a href="https://matplotlib.org/stable/users/explain/quick_start.html">Matplotlib quick start</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/data-analysis/analysis-and-validation/">Previous lesson · Analyze trends and reconcile results</a>
+<a href="/docs/read/en/data-analysis/metric-coverage/">Next lesson · Measure coverage and test missing-data assumptions</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

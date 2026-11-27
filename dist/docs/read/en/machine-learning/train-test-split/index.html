@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hold out rows for evaluation, and use a simple prediction rule as a reference.">
+  <title>Split data and compare with a baseline · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/train-test-split/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/train-test-split/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/train-test-split/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#machine-learning">All documentation · Machine Learning</a> <a href="/docs/read/my/machine-learning/train-test-split/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Split data and compare with a baseline</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Hold out rows for evaluation, and use a simple prediction rule as a reference.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/machine-learning/train-test-split">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#split">Choose a split that matches the task</a></li>
+<li><a href="#baseline">Build a simple comparison</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="split">
+  <h2>Choose a split that matches the task</h2>
+  <p>For independent rows, train_test_split can shuffle and hold out part of the data. random_state makes that split repeatable. Consider stratify=y for classification when enough examples of each class exist. Use time-aware or group-aware splitting when rows are dependent.</p>
+
+<pre><code>from sklearn.model_selection import train_test_split
+
+train, test = train_test_split(list(range(20)), test_size=0.25, random_state=42)
+print(len(train), len(test))</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/train-test-split-split.png" data-image-preview><img src="/docs/media/data/train-test-split-split.png" alt="Twenty records divide into fifteen training records and five test records." width="720" height="330" loading="lazy" decoding="async"></a>
+    <figcaption>A test size of 0.25 holds out one-quarter of these records for evaluation.</figcaption>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">15 5</pre></div>
+
+
+</section>
+<section class="article-section" id="baseline">
+  <h2>Build a simple comparison</h2>
+  <p>A median-price baseline learns the median of the training targets and predicts it for every test row. Compare models using the same untouched test rows and the same metric.</p>
+
+<pre><code>from sklearn.dummy import DummyRegressor
+
+baseline = DummyRegressor(strategy=&quot;median&quot;)
+baseline.fit([[1], [2], [3]], [5, 6, 20])
+print(baseline.predict([[8], [9]]).tolist())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[6.0, 6.0]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">train_test_split API</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.dummy.DummyRegressor.html">DummyRegressor API</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/cross_validation.html">Cross-validation</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/machine-learning/features-and-target/">Previous lesson · Features, targets, and estimator basics</a>
+<a href="/docs/read/en/machine-learning/linear-regression/">Next lesson · Linear regression and regression metrics</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

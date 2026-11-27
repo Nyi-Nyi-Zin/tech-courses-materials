@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Write the receiver to an Excel sheet. Use ExcelWriter to manage multiple sheets in one workbook.">
+  <title>pandas.DataFrame.to_excel · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/DataFrame.to_excel/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/DataFrame.to_excel/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/DataFrame.to_excel">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>DataFrame</span><a href="/docs/read/my/pandas/api/DataFrame.to_excel/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>DataFrame.<wbr>to_excel</code></h1>
+    <p class="article-version">pandas 3.1.1 · DataFrame · <span lang="en">method</span></p>
+    <p class="intro">Write the receiver to an Excel sheet. Use ExcelWriter to manage multiple sheets in one workbook.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">DataFrame.to_excel(…)</code> <span>Full signature</span></summary><pre><code lang="en">DataFrame.to_excel(
+    excel_writer,
+    *,
+    sheet_name=&#39;Sheet1&#39;,
+    na_rep=&#39;&#39;,
+    float_format=None,
+    columns=None,
+    header=True,
+    index=True,
+    index_label=None,
+    startrow=0,
+    startcol=0,
+    engine=None,
+    merge_cells=True,
+    inf_rep=&#39;inf&#39;,
+    freeze_panes=None,
+    storage_options=None,
+    engine_kwargs=None,
+    autofilter=False,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="7" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+import openpyxl
+from io import BytesIO
+frame = pd.DataFrame({&quot;units&quot;: [2., 5., 7.], &quot;price&quot;: [4., 3., 2.]})
+file = BytesIO()
+frame.to_excel(file, engine=&quot;openpyxl&quot;)
+print(len(file.getvalue()), &quot;bytes&quot;)</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>excel_writer</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>path-like, file-like, or ExcelWriter object</span><p>Provide an output workbook writer or file destination.</p></td></tr>
+<tr><th scope="row"><code>sheet_name</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;Sheet1&#39;</code></td>
+      <td><span>str</span><p>Choose worksheets by name or zero-based position. None requests every sheet where supported.</p></td></tr>
+<tr><th scope="row"><code>na_rep</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;&#39;</code></td>
+      <td><span>str</span><p>Choose the text used to display missing values.</p></td></tr>
+<tr><th scope="row"><code>float_format</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>str</span><p>Provide a format string or callable to control numeric display.</p></td></tr>
+<tr><th scope="row"><code>columns</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>sequence or list of str</span><p>Supply column labels or control how columns are handled.</p></td></tr>
+<tr><th scope="row"><code>header</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>True</code></td>
+      <td><span>bool or list of str</span><p>Define which row or rows provide column names, or control whether to write them.</p></td></tr>
+<tr><th scope="row"><code>index</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>Supply row labels or control how existing row labels are used.</p></td></tr>
+<tr><th scope="row"><code>index_label</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>str or sequence</span><p>Choose the column heading written for row index values.</p></td></tr>
+<tr><th scope="row"><code>startrow</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>0</code></td>
+      <td><span>int</span><p>Set the zero-based first row of the written worksheet region.</p></td></tr>
+<tr><th scope="row"><code>startcol</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>0</code></td>
+      <td><span>int</span><p>Set the zero-based first column of the written worksheet region.</p></td></tr>
+<tr><th scope="row"><code>engine</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>str</span><p>Choose the implementation that performs the operation.</p></td></tr>
+<tr><th scope="row"><code>merge_cells</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>True</code></td>
+      <td><span>bool or &#39;columns&#39;</span><p>Choose whether grouped header labels should occupy merged Excel cells.</p></td></tr>
+<tr><th scope="row"><code>inf_rep</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;inf&#39;</code></td>
+      <td><span>str</span><p>Choose the written representation for infinite numeric values.</p></td></tr>
+<tr><th scope="row"><code>freeze_panes</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>tuple of int (length 2)</span><p>Provide the Excel pane location to keep the specified rows or columns visible.</p></td></tr>
+<tr><th scope="row"><code>storage_options</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict</span><p>Pass storage-backend options such as connection settings or HTTP headers.</p></td></tr>
+<tr><th scope="row"><code>engine_kwargs</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict</span><p>Pass a dictionary of options to the selected engine.</p></td></tr>
+<tr><th scope="row"><code>autofilter</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>False</code></td>
+      <td><span>bool</span></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>None</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_excel.html#pandas.DataFrame.to_excel">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/DataFrame.to_dict/"><span>Previous in this category</span><strong>pandas.DataFrame.to_dict</strong></a><a href="/docs/read/en/pandas/api/DataFrame.to_feather/"><span>Next in this category</span><strong>pandas.DataFrame.to_feather</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

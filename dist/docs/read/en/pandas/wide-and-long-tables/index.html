@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Move repeated measurement columns into rows and choose how to pivot them back.">
+  <title>Reshape between wide and long tables · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/wide-and-long-tables/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/wide-and-long-tables/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/wide-and-long-tables/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#pandas">All documentation · pandas</a> <a href="/docs/read/my/pandas/wide-and-long-tables/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Reshape between wide and long tables</h1>
+  <p class="article-version">3.1.1</p>
+  <p class="intro">Move repeated measurement columns into rows and choose how to pivot them back.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/pandas/wide-and-long-tables">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#melt">Move measurement columns into rows</a></li>
+<li><a href="#pivot">Pivot unique pairs or aggregate repeats</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="melt">
+  <h2>Move measurement columns into rows</h2>
+  <p>Wide data can store one column per month. melt keeps the identifier columns and puts the former column names and their values into two columns. The row grain changes from one row per store to one row per store and month.</p>
+
+<pre><code>import pandas as pd
+
+wide = pd.DataFrame({&quot;store&quot;: [&quot;A&quot;, &quot;B&quot;], &quot;Jan&quot;: [8, 6], &quot;Feb&quot;: [10, 9]})
+long = wide.melt(id_vars=&quot;store&quot;, var_name=&quot;month&quot;, value_name=&quot;units&quot;)
+for row in long.itertuples(index=False):
+    print(row.store, row.month, row.units)</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/wide-and-long-tables-melt.png" data-image-preview><img src="/docs/media/data/wide-and-long-tables-melt.png" alt="The wide table has one row per store. The long table has four rows, one for each store and month pair." width="720" height="375" loading="lazy" decoding="async"></a>
+    <figcaption>The value 10 moves from store A’s Feb column to a row labeled A and Feb.</figcaption>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">A Jan 8
+B Jan 6
+A Feb 10
+B Feb 9</pre></div>
+
+
+</section>
+<section class="article-section" id="pivot">
+  <h2>Pivot unique pairs or aggregate repeats</h2>
+  <p>pivot requires each index and column pair to be unique. If multiple rows for one store and month represent separate orders, use pivot_table with a deliberate aggregation. Verify the row grain before deciding whether summing is meaningful.</p>
+
+<pre><code>import pandas as pd
+
+orders = pd.DataFrame({
+    &quot;store&quot;: [&quot;A&quot;, &quot;A&quot;, &quot;A&quot;],
+    &quot;month&quot;: [&quot;Jan&quot;, &quot;Jan&quot;, &quot;Feb&quot;],
+    &quot;units&quot;: [3, 5, 10],
+})
+summary = orders.pivot_table(index=&quot;store&quot;, columns=&quot;month&quot;, values=&quot;units&quot;, aggfunc=&quot;sum&quot;)
+print(summary.loc[&quot;A&quot;, [&quot;Jan&quot;, &quot;Feb&quot;]].tolist())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[8, 10]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://pandas.pydata.org/docs/user_guide/reshaping.html">pandas reshaping and pivot tables</a></li>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.melt.html">pandas.DataFrame.melt</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/pandas/dates/">Previous lesson · Parse dates and group time series</a>
+<a href="/docs/read/en/pandas/strings-and-categories/">Next lesson · Clean text and define categories</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

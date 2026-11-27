@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use coroutines, schedule independent I/O tasks, and handle cancellation.">
+  <title>Concurrency with async and await · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/python/async-await/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/async-await/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/async-await/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#python">All documentation · Python</a> <a href="/docs/read/my/python/async-await/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Concurrency with async and await</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">Use coroutines, schedule independent I/O tasks, and handle cancellation.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/python/async-await">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#coroutines">Coroutines and the event loop</a></li>
+<li><a href="#task-group">Run independent tasks together</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="coroutines">
+  <h2>Coroutines and the event loop</h2>
+  <p>Calling an async def function creates a coroutine object. await waits for an awaitable and can suspend the current task so other tasks can run. Use asyncio.run() as a normal script entry point. A notebook with an active event loop can typically use top-level await.</p>
+
+<pre><code>import asyncio
+
+async def main():
+    await asyncio.sleep(0)
+    print(&quot;Ready&quot;)
+
+asyncio.run(main())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">Ready</pre></div>
+
+
+</section>
+<section class="article-section" id="task-group">
+  <h2>Run independent tasks together</h2>
+  <p>TaskGroup schedules coroutines and waits for the group before leaving its block. A task failure generally cancels its sibling tasks. Prefer asynchronous I/O inside the event loop and keep CPU-heavy or blocking work away from it. Use try/finally for cleanup and let cancellation propagate.</p>
+
+<pre><code>import asyncio
+
+async def read_source(name):
+    await asyncio.sleep(0.01)
+    return name
+
+async def main():
+    async with asyncio.TaskGroup() as group:
+        sales = group.create_task(read_source(&quot;sales&quot;))
+        inventory = group.create_task(read_source(&quot;inventory&quot;))
+    print(sales.result(), inventory.result())
+
+asyncio.run(main())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">sales inventory</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.python.org/3.15/library/asyncio-task.html">asyncio coroutines and tasks</a></li>
+<li><a href="https://docs.python.org/3.15/library/asyncio-runner.html">asyncio runners</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/python/decorators/">Previous lesson · Decorators and reusable wrappers</a>
+<a href="/docs/read/en/python/dataclasses-and-typing/">Next lesson · Dataclasses and typed interfaces</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Report၊ slide သို့မဟုတ် web အတွက် format နဲ့ အရွယ်အစား ရွေးပြီး ဖိုင်ထုတ်ပါ။">
+  <title>Chart များကို ဖိုင်ထုတ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/export-chart/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/export-chart/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/export-chart/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#matplotlib">သင်ခန်းစာအားလုံး · Matplotlib</a> <a href="/docs/read/en/matplotlib/export-chart/" lang="en" hreflang="en">English</a></nav>
+  <h1>Chart များကို ဖိုင်ထုတ်ခြင်း</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">Report၊ slide သို့မဟုတ် web အတွက် format နဲ့ အရွယ်အစား ရွေးပြီး ဖိုင်ထုတ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/matplotlib/export-chart">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#formats">Raster သို့မဟုတ် Vector ရွေးခြင်း</a></li>
+<li><a href="#verify">Export ဖိုင် ပြန်စစ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="formats">
+  <h2>Raster သို့မဟုတ် Vector ရွေးခြင်း</h2>
+  <p>PNG က raster format ဖြစ်ပါတယ်။ မဖြတ်ခင် pixel အရွယ်အစားကို figsize လက်မနဲ့ dpi က သတ်မှတ်ပါတယ်။ SVG နဲ့ PDF က line နဲ့ စာသားကို အရွယ်ချဲ့လို့ရတဲ့ vector အဖြစ် ထိန်းထားနိုင်ပြီး element တချို့ raster ပြောင်းနိုင်ပါတယ်။</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(6, 4), layout=&quot;constrained&quot;)
+ax.bar([&quot;Tea&quot;, &quot;Cake&quot;], [6, 4])
+ax.set(ylabel=&quot;Units sold&quot;)
+fig.savefig(&quot;sales.png&quot;, dpi=150, bbox_inches=&quot;tight&quot;)
+fig.savefig(&quot;sales.svg&quot;, bbox_inches=&quot;tight&quot;)</code></pre>
+
+
+</section>
+<section class="article-section" id="verify">
+  <h2>Export ဖိုင် ပြန်စစ်ခြင်း</h2>
+  <p>bbox_inches=&quot;tight&quot; က figure content ပတ်လည်အတိုင်း ဖြတ်ပေးလို့ နောက်ဆုံး pixel အရွယ်အစား ပြောင်းနိုင်ပါတယ်။ Label မပြတ်ကြောင်း ထုတ်ထားတဲ့ဖိုင် ဖွင့်စစ်ပါ။ Batch render လုပ်ရင် figure တစ်ခုစီ ပြီးတာနဲ့ ပိတ်ပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.savefig.html">Figure.savefig API</a></li>
+<li><a href="https://matplotlib.org/stable/release/prev_whats_new/whats_new_3.11.0.html">What’s new in Matplotlib 3.11</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/matplotlib/subplots/">အရင်သင်ခန်းစာ · Subplots နှင့် Constrained Layout</a>
+<a href="/docs/read/my/matplotlib/uncertainty-charts/">နောက်သင်ခန်းစာ · Error Bars နှင့် Bands ဖြင့် မသေချာမှု ပြခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

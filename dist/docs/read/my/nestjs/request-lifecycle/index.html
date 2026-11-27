@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nest က controller မတိုင်ခင်နဲ့ ပြီးတဲ့နောက် handler အမျိုးမျိုး run ပါတယ်။ အလုပ်တစ်ခုစီကို သင့်တော်တဲ့အဆင့်မှာ ထားပါ။">
+  <title>Request Lifecycle၊ Guards နှင့် Interceptors · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/request-lifecycle/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/request-lifecycle/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/request-lifecycle/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#nestjs">သင်ခန်းစာအားလုံး · NestJS</a> <a href="/docs/read/en/nestjs/request-lifecycle/" lang="en" hreflang="en">English</a></nav>
+  <h1>Request Lifecycle၊ Guards နှင့် Interceptors</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">Nest က controller မတိုင်ခင်နဲ့ ပြီးတဲ့နောက် handler အမျိုးမျိုး run ပါတယ်။ အလုပ်တစ်ခုစီကို သင့်တော်တဲ့အဆင့်မှာ ထားပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/nestjs/request-lifecycle">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#flow">Request က Controller ဆီ ရောက်ပုံ</a></li>
+<li><a href="#pipe">Route Parameter ကို ဝင်ပေါက်မှာ Parse လုပ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="flow">
+  <h2>Request က Controller ဆီ ရောက်ပုံ</h2>
+  <p>ပုံမှန် request က middleware၊ guards၊ interceptors ရဲ့ အဝင်ဘက်၊ pipes အစဉ်အတိုင်း ဖြတ်ပြီး handler ဆီ ရောက်ပါတယ်။ Response က interceptors ကနေ ပြန်ထွက်ပါတယ်။ မဖမ်းထားတဲ့ exception ကို filters က ကိုင်တွယ်နိုင်ပါတယ်။</p>
+
+<pre><code>import {
+  Controller, Get, Param, ParseIntPipe, UseGuards, UseInterceptors
+} from &quot;@nestjs/common&quot;;
+import { SessionGuard } from &quot;./session.guard&quot;;
+import { TimingInterceptor } from &quot;./timing.interceptor&quot;;
+
+// Request: middleware -&gt; guard -&gt; interceptor -&gt; pipe -&gt; handler
+// Response: handler -&gt; interceptor -&gt; client
+@UseGuards(SessionGuard)
+@UseInterceptors(TimingInterceptor)
+@Controller(&quot;products&quot;)
+export class ProductsController {
+  @Get(&quot;:id&quot;)
+  findOne(@Param(&quot;id&quot;, ParseIntPipe) id: number) {
+    return { id };
+  }
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="pipe">
+  <h2>Route Parameter ကို ဝင်ပေါက်မှာ Parse လုပ်ခြင်း</h2>
+  <p>Route parameter ကို ကိန်းပြည့် ပြောင်းပြီး မမှန်တဲ့ input ငြင်းဖို့ ParseIntPipe သုံးပါ။ Guard က handler run လို့ရမရ ဆုံးဖြတ်ပါတယ်။ ကြာချိန်တိုင်းတာတာ၊ response ပုံစံပြောင်းတာလို handler မတိုင်ခင်နဲ့ ပြီးတဲ့နောက် လုပ်ရမယ့်အလုပ်အတွက် interceptor သုံးပါ။</p>
+
+<pre><code>import { Controller, Get, Param, ParseIntPipe } from &quot;@nestjs/common&quot;;
+
+@Controller(&quot;products&quot;)
+export class ProductsController {
+  @Get(&quot;:id&quot;)
+  read(@Param(&quot;id&quot;, ParseIntPipe) id: number) {
+    return { id };
+  }
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.nestjs.com/faq/request-lifecycle">NestJS request lifecycle</a></li>
+<li><a href="https://docs.nestjs.com/pipes">Pipes</a></li>
+<li><a href="https://docs.nestjs.com/guards">Guards</a></li>
+<li><a href="https://docs.nestjs.com/interceptors">Interceptors</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/nestjs/validation/">အရင်သင်ခန်းစာ · Requests Validate လုပ်ပြီး Routes စမ်းခြင်း</a>
+<a href="/docs/read/my/nestjs/configuration-and-data/">နောက်သင်ခန်းစာ · Configuration နှင့် Database Layer</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

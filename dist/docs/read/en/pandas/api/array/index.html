@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Build a one-dimensional pandas array and optionally specify its dtype.">
+  <title>pandas.array · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/array/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/array/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/array">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Arrays, scalars, and data types</span><a href="/docs/read/my/pandas/api/array/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>array</code></h1>
+    <p class="article-version">pandas 3.1.1 · Arrays, scalars, and data types · <span lang="en">function</span></p>
+    <p class="intro">Build a one-dimensional pandas array and optionally specify its dtype.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><pre><code lang="en">pd.array(data, dtype=None, copy=True)</code></pre></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+print(pd.array([1, None, 3], dtype=&quot;Int64&quot;))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>data</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>Sequence of objects</span><p>Provide the input data read, transformed, or stored by this call.</p></td></tr>
+<tr><th scope="row"><code>dtype</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str, np.dtype, or ExtensionDtype</span><p>Choose the data type for the input conversion or result.</p></td></tr>
+<tr><th scope="row"><code>copy</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>Control whether data is copied where the API supports that choice.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>ExtensionArray</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.array.html#pandas.array">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/api.types.union_categoricals/"><span>Previous in this category</span><strong>pandas.api.types.union_categoricals</strong></a><a href="/docs/read/en/pandas/api/arrays.IntervalArray.contains/"><span>Next in this category</span><strong>pandas.arrays.IntervalArray.contains</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Preserve identifiers, control missing-value parsing, and inspect the schema before analysis.">
+  <title>Read and inspect a CSV · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/read-csv/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/read-csv/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/read-csv/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#pandas">All documentation · pandas</a> <a href="/docs/read/my/pandas/read-csv/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Read and inspect a CSV</h1>
+  <p class="article-version">3.1.1</p>
+  <p class="intro">Preserve identifiers, control missing-value parsing, and inspect the schema before analysis.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/pandas/read-csv">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#read-options">Choose CSV parsing rules</a></li>
+<li><a href="#inspect">Inspect shape and types</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="read-options">
+  <h2>Choose CSV parsing rules</h2>
+  <p>read_csv accepts a path or a file-like object. Use dtype for identifiers with leading zeros. Set na_values for known missing codes. When keep_default_na=False is used without na_values, pandas does not use its default missing-string list.</p>
+
+<pre><code>from io import StringIO
+import pandas as pd
+
+source = StringIO(&quot;id,item,total\n001,Tea,3\n002,Cake,ERROR\n&quot;)
+frame = pd.read_csv(source, dtype={&quot;id&quot;: &quot;string&quot;}, na_values={&quot;total&quot;: [&quot;ERROR&quot;]})
+print(frame[&quot;id&quot;].tolist())
+print(frame[&quot;total&quot;].isna().sum())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[&#39;001&#39;, &#39;002&#39;]
+1</pre></div>
+
+
+</section>
+<section class="article-section" id="inspect">
+  <h2>Inspect shape and types</h2>
+  <p>Use head() for examples, shape for counts, and dtypes for inferred types. DataFrame.info() prints a summary including column types. Check delimiters, encoding, parsing errors, and missing values when the output differs from the source schema.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">pandas.read_csv</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/io.html">Input and output tools</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/pandas/dataframes/">Previous lesson · Series, DataFrames, and indexes</a>
+<a href="/docs/read/en/pandas/indexing/">Next lesson · Select, filter, sort, and assign</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

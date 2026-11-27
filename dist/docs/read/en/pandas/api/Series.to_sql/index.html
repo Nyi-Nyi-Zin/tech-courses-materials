@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Write tabular data to a SQL table. Use if_exists to control what happens when the table is already present.">
+  <title>pandas.Series.to_sql · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/Series.to_sql/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/Series.to_sql/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/Series.to_sql">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Series and accessors</span><a href="/docs/read/my/pandas/api/Series.to_sql/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>Series.<wbr>to_sql</code></h1>
+    <p class="article-version">pandas 3.1.1 · Series and accessors · <span lang="en">method</span></p>
+    <p class="intro">Write tabular data to a SQL table. Use if_exists to control what happens when the table is already present.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">Series.to_sql(…)</code> <span>Full signature</span></summary><pre><code lang="en">Series.to_sql(
+    name,
+    con,
+    *,
+    schema=None,
+    if_exists=&#39;fail&#39;,
+    index=True,
+    index_label=None,
+    chunksize=None,
+    dtype=None,
+    method=None,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="6" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+import sqlite3
+values = pd.Series([2., 5., 7.], name=&quot;units&quot;)
+connection = sqlite3.connect(&quot;:memory:&quot;)
+values.to_sql(&quot;orders&quot;, connection, index=False)
+print(pd.read_sql_query(&quot;SELECT * FROM orders&quot;, connection))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>name</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>str</span><p>Set a name or identify the named object used by the operation.</p></td></tr>
+<tr><th scope="row"><code>con</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>ADBC connection, sqlalchemy.engine.(Engine or Connection) or sqlite3.Connection</span><p>Provide a database connection or supported SQLAlchemy connectable.</p></td></tr>
+<tr><th scope="row"><code>schema</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>str</span><p>Provide the schema defining the field names and types.</p></td></tr>
+<tr><th scope="row"><code>if_exists</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;fail&#39;</code></td>
+      <td><span>{&#39;fail&#39;, &#39;replace&#39;, &#39;append&#39;, &#39;delete_rows&#39;}</span><p>Set how a database write handles an already existing table.</p></td></tr>
+<tr><th scope="row"><code>index</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>Supply row labels or control how existing row labels are used.</p></td></tr>
+<tr><th scope="row"><code>index_label</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>str or sequence</span><p>Choose the column heading written for row index values.</p></td></tr>
+<tr><th scope="row"><code>chunksize</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>int</span><p>Set how many rows to read or write in each batch.</p></td></tr>
+<tr><th scope="row"><code>dtype</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict or scalar</span><p>Choose the data type for the input conversion or result.</p></td></tr>
+<tr><th scope="row"><code>method</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>{None, &#39;multi&#39;, callable}</span><p>Choose the algorithm used to calculate, align, or fill the result.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>None or int</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.to_sql.html#pandas.Series.to_sql">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/Series.to_pickle/"><span>Previous in this category</span><strong>pandas.Series.to_pickle</strong></a><a href="/docs/read/en/pandas/api/Series.to_string/"><span>Next in this category</span><strong>pandas.Series.to_string</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

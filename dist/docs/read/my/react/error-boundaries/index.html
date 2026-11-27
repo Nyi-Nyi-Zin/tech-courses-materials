@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="UI ရဲ့ အပိုင်းတစ်ခုကို error boundary နဲ့ ခြံထားပါ။ Render ပျက်ရင် အဲဒီနေရာမှာ နားလည်လွယ်တဲ့ message ပြနိုင်ပါတယ်။">
+  <title>Render Error ဖြစ်ရင် ပြန်ထိန်းပါ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/react/error-boundaries/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/error-boundaries/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/error-boundaries/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#react">သင်ခန်းစာအားလုံး · React</a> <a href="/docs/read/en/react/error-boundaries/" lang="en" hreflang="en">English</a></nav>
+  <h1>Render Error ဖြစ်ရင် ပြန်ထိန်းပါ</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">UI ရဲ့ အပိုင်းတစ်ခုကို error boundary နဲ့ ခြံထားပါ။ Render ပျက်ရင် အဲဒီနေရာမှာ နားလည်လွယ်တဲ့ message ပြနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/react/error-boundaries">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#boundary">Fallback UI ပြပါ</a></li>
+<li><a href="#recover">တခြား Error တွေကို ဖြစ်တဲ့နေရာမှာ ကိုင်တွယ်ပါ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="boundary">
+  <h2>Fallback UI ပြပါ</h2>
+  <p>Class boundary က child render error ကို fallback UI အဖြစ် ပြောင်းပြနိုင်ပါတယ်။ ဘာပြမလဲ ပြောင်းဖို့ getDerivedStateFromError သုံးပါ။ componentDidCatch ကနေ error နဲ့ component stack ကို logging service ဆီ ပို့နိုင်ပါတယ်။</p>
+
+<pre><code>import React, { Component } from &quot;react&quot;;
+
+class SectionBoundary extends Component {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  render() {
+    return this.state.failed
+      ? &lt;p role=&quot;alert&quot;&gt;This section could not load.&lt;/p&gt;
+      : this.props.children;
+  }
+}
+
+export default SectionBoundary;</code></pre>
+
+
+</section>
+<section class="article-section" id="recover">
+  <h2>တခြား Error တွေကို ဖြစ်တဲ့နေရာမှာ ကိုင်တွယ်ပါ</h2>
+  <p>fetch မအောင်တာနဲ့ event handler error တွေကို ဖြစ်တဲ့နေရာမှာ ကိုင်တွယ်ပါ။ Boundary က သူ့ကိုယ်ပိုင် error နဲ့ server rendering error ကို မဖမ်းပါဘူး။ Record ပြောင်းတိုင်း boundary အသစ်နဲ့ စဖို့ key ကို record ID အတိုင်း ပြောင်းပါ။</p>
+
+<pre><code>&lt;SectionBoundary key={productId}&gt;
+  &lt;StockPanel productId={productId} /&gt;
+&lt;/SectionBoundary&gt;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary">React · Catching rendering errors</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/react/routing/">အရင်သင်ခန်းစာ · React Router နဲ့ Routing</a>
+<a href="/docs/read/my/react/suspense/">နောက်သင်ခန်းစာ · Suspense နဲ့ Loading ပြပါ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Grid arranges the direct children of a container in rows and columns. Each row or column track has a size. Use display: grid on the parent to enable this layout.">
+  <title>Grid · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/grid/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/grid/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/grid/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/grid/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Grid</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Grid arranges the direct children of a container in rows and columns. Each row or column track has a size. Use display: grid on the parent to enable this layout.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/grid">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#columns">Divide the available width with fr</a></li>
+<li><a href="#areas">Place page regions with named areas</a></li>
+<li><a href="#auto-fit">Let the grid decide how many columns fit</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="columns">
+  <h2>Divide the available width with fr</h2>
+  <p>grid-template-columns sets the size of each column. fr divides available space after fixed sizes and gaps. Two values of 1fr share that space equally. Items are placed across the track columns and then onto the next row.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Divide the available width with fr&lt;/title&gt;
+  &lt;style&gt;
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cards &gt; div { background: #d6efea; padding: 12px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;cards&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Pen and Notebook fill the first row; Folder starts the next one. Try 1fr 2fr.</p>
+
+</section>
+<section class="article-section" id="areas">
+  <h2>Place page regions with named areas</h2>
+  <p>grid-template-areas draws a map using one quoted string per row. Repeating a name within a row lets that area span columns. grid-area assigns an item to a named spot.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Place page regions with named areas&lt;/title&gt;
+  &lt;style&gt;
+    .page { display: grid; gap: 8px; grid-template-columns: 7rem minmax(0, 1fr);
+      grid-template-areas: &quot;head head&quot; &quot;side content&quot;; }
+    .page &gt; * { background: #d6efea; padding: 8px; }
+    header { grid-area: head; }
+    aside { grid-area: side; }
+    main { grid-area: content; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;page&quot;&gt;&lt;header&gt;Example Store&lt;/header&gt;&lt;aside&gt;Categories&lt;/aside&gt;&lt;main&gt;Pens and notebooks&lt;/main&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The header spans both columns. Categories appears next to the product list in the second row.</p>
+
+</section>
+<section class="article-section" id="auto-fit">
+  <h2>Let the grid decide how many columns fit</h2>
+  <p>repeat(auto-fit, ...) fills the row with as many tracks as fit and collapses unused tracks. minmax sets a minimum and maximum track size. min(100%, 150px) lets the minimum fit very narrow screens.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Let the grid decide how many columns fit&lt;/title&gt;
+  &lt;style&gt;
+    .cards { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); }
+    .cards &gt; div { background: #d6efea; padding: 8px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;cards&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Resize the browser. The cards use fewer columns as the available width shrinks.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.w3.org/TR/css-grid-2/">W3C · CSS Grid</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout/Basic_concepts">MDN · Basic concepts of grid layout</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/flexbox/">Previous lesson · Flexbox</a>
+<a href="/docs/read/en/css/flex-and-grid-sizing/">Next lesson · Flex sizing and grid placement</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

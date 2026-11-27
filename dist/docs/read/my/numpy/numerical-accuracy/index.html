@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tolerance ရွေးပါ။ Finite value တွေ စစ်ပြီး တွက်ချက်မှုကနေ ဖယ်ထားတာတွေ မှတ်ပါ။">
+  <title>Floating-point တိကျမှုနှင့် Missing Values · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/numerical-accuracy/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/numerical-accuracy/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/numerical-accuracy/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#numpy">သင်ခန်းစာအားလုံး · NumPy</a> <a href="/docs/read/en/numpy/numerical-accuracy/" lang="en" hreflang="en">English</a></nav>
+  <h1>Floating-point တိကျမှုနှင့် Missing Values</h1>
+  <p class="article-version">2.5.5</p>
+  <p class="intro">Tolerance ရွေးပါ။ Finite value တွေ စစ်ပြီး တွက်ချက်မှုကနေ ဖယ်ထားတာတွေ မှတ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/numpy/numerical-accuracy">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#tolerances">Tolerance ဖြင့် တိုက်စစ်ခြင်း</a></li>
+<li><a href="#finite">NaN နှင့် Infinity ခွဲသိခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="tolerances">
+  <h2>Tolerance ဖြင့် တိုက်စစ်ခြင်း</h2>
+  <p>Binary floating-point တွက်ချက်မှုမှာ အနည်းငယ် rounding ကွာနိုင်ပါတယ်။ isclose က reference တန်ဖိုးပေါ် မူတည်တဲ့ relative tolerance နဲ့ absolute tolerance ကို တွဲသုံးပါတယ်။ ကိန်းဂဏန်းရဲ့ scale နဲ့ အဓိပ္ပာယ်အလိုက် tolerance ရွေးပါ။</p>
+
+<pre><code>import numpy as np
+
+print(np.isclose(0.1 + 0.2, 0.3, rtol=0, atol=1e-12))
+print(np.isclose(0.02, 0.0, rtol=0, atol=0.01))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">True
+False</pre></div>
+
+
+</section>
+<section class="article-section" id="finite">
+  <h2>NaN နှင့် Infinity ခွဲသိခြင်း</h2>
+  <p>isfinite က NaN နဲ့ အပေါင်း၊ အနုတ် infinity ကို ဖယ်ပါတယ်။ nanmean က NaN ကို ကျော်ပေမယ့် infinity ပါနိုင်ပါတယ်။ မမှန်တဲ့ measurement အတွက် rule သတ်မှတ်ပြီး တွက်ရာမှာ တကယ်ပါဝင်တဲ့ observation အရေအတွက်ကို မှတ်ပါ။</p>
+
+<pre><code>import numpy as np
+
+a = np.array([2.0, np.nan, np.inf, 6.0])
+valid = a[np.isfinite(a)]
+print(valid.size, float(valid.mean()))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">2 4.0</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://numpy.org/doc/stable/reference/generated/numpy.isclose.html">numpy.isclose</a></li>
+<li><a href="https://numpy.org/doc/stable/reference/generated/numpy.isfinite.html">numpy.isfinite</a></li>
+<li><a href="https://numpy.org/doc/stable/reference/generated/numpy.nanmean.html">numpy.nanmean</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/numpy/sorting-and-searching/">အရင်သင်ခန်းစာ · Array များ အစဉ်စီ၊ အဆင့်သတ်မှတ်၍ ရှာခြင်း</a>
+<a href="/docs/read/my/numpy/array-io/">နောက်သင်ခန်းစာ · Array များ ဖတ်ခြင်း၊ သိမ်းခြင်းနှင့် မျှဝေခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

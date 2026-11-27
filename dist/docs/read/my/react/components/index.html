@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Component က ပြန်သုံးလို့ရတဲ့ UI အပိုင်းတစ်ခုပါ။ Function component က props object တစ်ခု လက်ခံပြီး JSX ပြန်ပါတယ်။">
+  <title>Components၊ JSX နှင့် Props · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/react/components/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/components/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/components/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#react">သင်ခန်းစာအားလုံး · React</a> <a href="/docs/read/en/react/components/" lang="en" hreflang="en">English</a></nav>
+  <h1>Components၊ JSX နှင့် Props</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">Component က ပြန်သုံးလို့ရတဲ့ UI အပိုင်းတစ်ခုပါ။ Function component က props object တစ်ခု လက်ခံပြီး JSX ပြန်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/react/components">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#jsx">Components ပေါင်းစပ်ခြင်း</a></li>
+<li><a href="#root">Client-side App ကို Mount လုပ်ခြင်း</a></li>
+<li><a href="#lists">List တွေမှာ Stable Keys သုံးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="jsx">
+  <h2>Components ပေါင်းစပ်ခြင်း</h2>
+  <p>Component နာမည်ကို စာလုံးအကြီးနဲ့ စပါ။ JSX က elements တွေကို display logic နားမှာ ရေးနိုင်စေပါတယ်။ JavaScript expressions အတွက် braces သုံးပြီး tag တိုင်း ပိတ်ပါ။ Parent က child ဆီ props ပို့ပါတယ်။</p>
+
+<pre><code>function ProductCard({ name, available }) {
+  return (
+    &lt;article&gt;
+      &lt;h2&gt;{name}&lt;/h2&gt;
+      &lt;p&gt;{available ? &quot;Available&quot; : &quot;Sold out&quot;}&lt;/p&gt;
+    &lt;/article&gt;
+  );
+}
+
+export default function Catalog() {
+  return &lt;ProductCard name=&quot;Pen&quot; available={true} /&gt;;
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="root">
+  <h2>Client-side App ကို Mount လုပ်ခြင်း</h2>
+  <p>JSX support ပါတဲ့ project မှာ react နဲ့ react-dom version တူတူ ထည့်ပါ။ HTML မှာ id=&quot;root&quot; ပါတဲ့ div ထည့်ပါ။ Entry file မှာ export လုပ်ထားတဲ့ Catalog component ကို createRoot နဲ့ တစ်ကြိမ် render လုပ်ပါ။</p>
+
+<pre><code>import { createRoot } from &quot;react-dom/client&quot;;
+import Catalog from &quot;./Catalog.jsx&quot;;
+
+const container = document.getElementById(&quot;root&quot;);
+createRoot(container).render(&lt;Catalog /&gt;);</code></pre>
+
+
+</section>
+<section class="article-section" id="lists">
+  <h2>List တွေမှာ Stable Keys သုံးခြင်း</h2>
+  <p>Data ကို elements အဖြစ် ပြောင်းဖို့ map သုံးပါ။ Sibling တစ်ခုချင်းစီကို ID လို data ထဲက stable key ပေးပါ။ Row တွေ ရွှေ့၊ ထည့်၊ ဖယ်တဲ့အခါ React က item တွေ ပြန်ချိတ်နိုင်ပါတယ်။</p>
+
+<pre><code>const products = [
+  { id: 101, name: &quot;Notebook&quot; },
+  { id: 102, name: &quot;Pencil&quot; },
+];
+
+export default function ProductList() {
+  return (
+    &lt;ul&gt;
+      {products.map(product =&gt; &lt;li key={product.id}&gt;{product.name}&lt;/li&gt;)}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://react.dev/versions">React version and releases</a></li>
+<li><a href="https://react.dev/learn">React quick start</a></li>
+<li><a href="https://react.dev/learn/rendering-lists">Rendering lists</a></li>
+<li><a href="https://react.dev/reference/react-dom/client/createRoot">createRoot</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/react/state/">နောက်သင်ခန်းစာ · State၊ Events နှင့် Forms</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

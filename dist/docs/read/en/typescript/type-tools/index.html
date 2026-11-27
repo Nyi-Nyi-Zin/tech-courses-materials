@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Derive related types from the original type to keep field names consistent.">
+  <title>keyof and utility types · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/type-tools/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/type-tools/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/type-tools/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#typescript">All documentation · TypeScript</a> <a href="/docs/read/my/typescript/type-tools/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>keyof and utility types</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">Derive related types from the original type to keep field names consistent.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/typescript/type-tools">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#keyof">Allow only real field names</a></li>
+<li><a href="#utility">Describe a view or a patch</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="keyof">
+  <h2>Allow only real field names</h2>
+  <p>keyof makes a union of the keys of a type. With a generic constraint, the caller can only supply a key that belongs to the object. T[K] gives the type of that property.</p>
+
+<pre><code>function readField&lt;T, K extends keyof T&gt;(row: T, key: K): T[K] {
+  return row[key];
+}
+
+const price = readField({ name: &quot;Pen&quot;, price: 2 }, &quot;price&quot;);</code></pre>
+
+
+</section>
+<section class="article-section" id="utility">
+  <h2>Describe a view or a patch</h2>
+  <p>Pick selects fields. Omit removes fields. Partial makes fields optional at the top level. These types describe values for the compiler. They do not remove fields from runtime objects.</p>
+
+<pre><code>type Product = { id: number; name: string; price: number };
+type ProductCard = Pick&lt;Product, &quot;name&quot; | &quot;price&quot;&gt;;
+type ProductUpdate = Partial&lt;Omit&lt;Product, &quot;id&quot;&gt;&gt;;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/keyof-types.html">keyof type operator</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">Utility types</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/typescript/function-contracts/">Previous lesson · Callbacks and function signatures</a>
+<a href="/docs/read/en/typescript/modules/">Next lesson · Modules and type-only imports</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

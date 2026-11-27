@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browser က နောက်တစ်ခါ ပြန်သုံးဖို့ တန်ဖိုးအနည်းငယ် သိမ်းနိုင်ပါတယ်။ ပြန်ဖတ်တာ၊ ပုံစံပြောင်းတာမှာ အမှားဖြစ်နိုင်ပါတယ်။ Storage ဖတ်ပုံနဲ့ အလုပ်မအောင်မြင်ရင် ပြောပြပုံကို လေ့လာပါ။">
+  <title>Browser Storage နဲ့ Error ကိုင်တွယ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/storage-and-errors/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/storage-and-errors/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/storage-and-errors/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/storage-and-errors/" lang="en" hreflang="en">English</a></nav>
+  <h1>Browser Storage နဲ့ Error ကိုင်တွယ်ခြင်း</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Browser က နောက်တစ်ခါ ပြန်သုံးဖို့ တန်ဖိုးအနည်းငယ် သိမ်းနိုင်ပါတယ်။ ပြန်ဖတ်တာ၊ ပုံစံပြောင်းတာမှာ အမှားဖြစ်နိုင်ပါတယ်။ Storage ဖတ်ပုံနဲ့ အလုပ်မအောင်မြင်ရင် ပြောပြပုံကို လေ့လာပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/storage-and-errors">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#storage">localStorage နဲ့ Value သိမ်းခြင်း၊ ပြန်ဖတ်ခြင်း</a></li>
+<li><a href="#errors">အလုပ်တစ်ခု Error ပစ်တဲ့အခါ ကိုင်တွယ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="storage">
+  <h2>localStorage နဲ့ Value သိမ်းခြင်း၊ ပြန်ဖတ်ခြင်း</h2>
+  <p>localStorage က လက်ရှိ origin (protocol၊ host နဲ့ port အတွဲ) အတွက် key နဲ့ စာသား သိမ်းပါတယ်။ Key မရှိရင် getItem က null ပြန်ပေးပါတယ်။ Object သိမ်းခင် JSON.stringify၊ ပြန်ဖတ်တဲ့အခါ JSON.parse သုံးပါ။ Tab တစ်ခုရဲ့ session အတွင်းပဲ သိမ်းချင်ရင် sessionStorage ကို သုံးနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Local server နမူနာလို ကိုယ်ပိုင် HTTP(S) page တစ်ခု ဖွင့်ပါ။ Developer Tools → Console ထဲမှာ ဒီ code ကို run ပါ။ Browser privacy setting ကြောင့် တချို့နေရာမှာ storage ပိတ်ထားနိုင်ပါတယ်။</p>
+<pre><code>localStorage.setItem(&quot;docs-product-example&quot;, JSON.stringify({ product: &quot;Pen&quot; }));
+const saved = localStorage.getItem(&quot;docs-product-example&quot;);
+console.log(saved === null ? &quot;No saved product&quot; : JSON.parse(saved).product);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen လို့ ပေါ်ပါမယ်။ HTTP(S) page တစ်ခုတည်းကို reload လုပ်ပြီး localStorage.getItem(&quot;docs-product-example&quot;) ခေါ်ကြည့်ပါ။ တန်ဖိုးကျန်နေပါမယ်။ ပြန်ဖျက်ချင်ရင် အဲဒီ key နဲ့ removeItem ခေါ်ပါ။</p>
+
+</section>
+<section class="article-section" id="errors">
+  <h2>အလုပ်တစ်ခု Error ပစ်တဲ့အခါ ကိုင်တွယ်ခြင်း</h2>
+  <p>Exception ဖြစ်ရင် လက်ရှိ အလုပ် ပြတ်သွားပါတယ်။ try ထဲက code ကို အရင် run ပါတယ်။ Error ပစ်ရင် catch block က error ကို ရပါတယ်။ အသုံးဝင်တဲ့ message ပြနိုင်တဲ့ ဒါမှမဟုတ် သုံးလို့ရတဲ့ default တန်ဖိုး ရွေးနိုင်တဲ့နေရာမှာ အမှားကို ကိုင်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>try {
+  const saved = JSON.parse(&quot;{broken}&quot;);
+  console.log(saved);
+} catch (error) {
+  console.log(&quot;Could not read saved data:&quot;, error.name);
+}</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> “Could not read saved data: SyntaxError” ပေါ်ပါမယ်။ {broken} အစား မှန်တဲ့ JSON ထည့်ရင် try ထဲက code အဆုံးထိ run ပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API">MDN · Web Storage API</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch">MDN · try...catch</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/http/">အရင်သင်ခန်းစာ · HTTP Request နဲ့ Fetch</a>
+<a href="/docs/read/my/js/debugging/">နောက်သင်ခန်းစာ · Browser DevTools နဲ့ Debug လုပ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

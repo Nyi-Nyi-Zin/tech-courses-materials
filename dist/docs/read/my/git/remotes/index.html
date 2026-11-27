@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Remote ဆိုတာ ချိတ်ဆက်ထားတဲ့ repository လိပ်စာကို နာမည်တပ်ပြီး မှတ်ထားတာပါ။ အဲဒီကနေ commit တွေ ယူတာနဲ့ ပို့တာ သိလာရင် GitHub မှာ ဒီ Project ကိုပဲ ဆက်ပြီး ပူးပေါင်း လုပ်ဆောင်နိုင်ပါတယ်။">
+  <title>Remote Repository၊ Fetch၊ Pull နဲ့ Push · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/git/remotes/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/git/remotes/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/git/remotes/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#git">သင်ခန်းစာအားလုံး · Git</a> <a href="/docs/read/en/git/remotes/" lang="en" hreflang="en">English</a></nav>
+  <h1>Remote Repository၊ Fetch၊ Pull နဲ့ Push</h1>
+  
+  <p class="intro">Remote ဆိုတာ ချိတ်ဆက်ထားတဲ့ repository လိပ်စာကို နာမည်တပ်ပြီး မှတ်ထားတာပါ။ အဲဒီကနေ commit တွေ ယူတာနဲ့ ပို့တာ သိလာရင် GitHub မှာ ဒီ Project ကိုပဲ ဆက်ပြီး ပူးပေါင်း လုပ်ဆောင်နိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/git/remotes">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#clone">ရှိပြီးသား Repository ကို Clone လုပ်ခြင်း</a></li>
+<li><a href="#sync">Remote Changes ကို မပေါင်းခင် ကြည့်ခြင်း</a></li>
+<li><a href="#push">Feature Branch က Commit တွေ မျှဝေခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="clone">
+  <h2>ရှိပြီးသား Repository ကို Clone လုပ်ခြင်း</h2>
+  <p>Local copy အသစ်လိုရင် Project ရဲ့ အပြင်ဘက် folder ဒါမှမဟုတ် တခြား workspace မှာ clone လုပ်ပါ။ Git က repository history ကို ကူးပြီး remote ကို ပုံမှန်အားဖြင့် origin လို့ နာမည်ပေးပါတယ်။ OWNER နေရာမှာ account ဒါမှမဟုတ် organization နာမည် ထည့်ပြီး URL အစစ်ကို သုံးပါ။</p>
+
+<pre><code>git clone https://github.com/OWNER/project-notes.git
+cd project-notes
+git remote -v</code></pre>
+
+
+</section>
+<section class="article-section" id="sync">
+  <h2>Remote Changes ကို မပေါင်းခင် ကြည့်ခြင်း</h2>
+  <p>origin/main ကို ချိတ်ထားတဲ့ repository မှာ git fetch origin က remote branch တွေအတွက် ကိုယ့်စက်ထဲက မှတ်တမ်းကို update လုပ်ပေးပါတယ်။ လက်ရှိ branch ထဲ merge မလုပ်သေးတဲ့အတွက် main နဲ့ origin/main ကို အရင် ယှဉ်ကြည့်နိုင်ပါတယ်။ main မှာ working tree ရှင်းနေရင် git pull --ff-only က fetch လုပ်ပြီး တိုက်ရိုက်ရှေ့ဆက်လို့ရတဲ့အခါ main ကို update လုပ်ပါတယ်။ နှစ်ဖက်လုံးမှာ ကိုယ်စီ commit အသစ်တွေ ရှိနေရင် History ကို အရင်စစ်ပါ။</p>
+
+<pre><code>git switch main
+git fetch origin
+git log --oneline main..origin/main
+git pull --ff-only</code></pre>
+
+
+</section>
+<section class="article-section" id="push">
+  <h2>Feature Branch က Commit တွေ မျှဝေခြင်း</h2>
+  <p>Remote repository ကို write access ရှိရင် feature branch ဆောက်ပြီး origin ဆီ push လုပ်ပါ။ -u က Local branch နဲ့ remote branch ဆက်စပ်မှုကို မှတ်ထားပေးလို့ နောက်တစ်ခါ git push လို့ပဲ ရိုက်နိုင်ပါတယ်။ Branch အတွက် Pull Request ဖွင့်ပုံကို GitHub သင်ခန်းစာမှာ ဆက်ကြည့်ပါ။</p>
+
+<pre><code>git switch -c update-notes
+git push -u origin update-notes</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes">Git · Working with remotes</a></li>
+<li><a href="https://git-scm.com/docs/git-pull">Git · git pull</a></li>
+<li><a href="https://git-scm.com/docs/git-push">Git · git push</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/git/ignoring-and-undoing/">အရင်သင်ခန်းစာ · ဖိုင်တွေ Ignore လုပ်ခြင်းနဲ့ Changes ပြန်ဖျက်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

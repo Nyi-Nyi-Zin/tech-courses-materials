@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ရှာမယ့် တန်ဖိုးတစ်ခုစီအတွက် တူညီတဲ့တန်ဖိုး သို့မဟုတ် အဲဒီထက် ငယ်ပြီး အနီးဆုံးတန်ဖိုးရဲ့ နေရာနံပါတ်ကို ရှာပေးပါတယ်။">
+  <title>pandas.Index.asof_locs · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/Index.asof_locs/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/Index.asof_locs/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/Index.asof_locs">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API Reference">
+    <a href="/docs/read/my/pandas/api-reference/#find-an-api">pandas API Reference</a><span aria-hidden="true">/</span><span>Index Objects</span><a href="/docs/read/en/pandas/api/Index.asof_locs/" lang="en" hreflang="en">English</a>
+  </nav>
+    <h1><code>pandas.<wbr>Index.<wbr>asof_locs</code></h1>
+    <p class="article-version">pandas 3.1.1 · Index Objects · <span lang="en">method</span></p>
+    <p class="intro">ရှာမယ့် တန်ဖိုးတစ်ခုစီအတွက် တူညီတဲ့တန်ဖိုး သို့မဟုတ် အဲဒီထက် ငယ်ပြီး အနီးဆုံးတန်ဖိုးရဲ့ နေရာနံပါတ်ကို ရှာပေးပါတယ်။</p>
+
+    <nav class="api-breadcrumbs" aria-label="ဒီစာမျက်နှာမှာ"><ul><li><a href="#syntax">ခေါ်သုံးပုံ</a></li><li><a href="#example">နမူနာ စမ်းကြည့်ရန်</a></li><li><a href="#parameters">ထည့်သွင်းနိုင်တဲ့ Arguments</a></li><li><a href="#returns">ပြန်ပေးတဲ့ ရလဒ်</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>ခေါ်သုံးပုံ</h2><pre><code lang="en">Index.asof_locs(where, mask)</code></pre></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>နမူနာ စမ်းကြည့်ရန်</h2>
+      <p>နမူနာကုဒ်ကို ပြင်ပြီး Run Python နှိပ်ပါ။ ရလဒ်ကို အောက်မှာ ကြည့်နိုင်ပါတယ်။</p>
+      <label><span>Python ကုဒ်</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+import numpy as np
+labels = pd.Index([2, 5, 7])
+query = pd.Index([3, 6, 8])
+print(labels.asof_locs(query, np.array([True, False, True])))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>ရပ်ရန်</button>
+        <button type="button" data-reset disabled>မူလကုဒ် ပြန်ထားရန်</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="ရလဒ်"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>ထည့်သွင်းနိုင်တဲ့ Arguments</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">ထည့်သွင်းပုံ</th><th scope="col">လက်ခံတဲ့ တန်ဖိုးနဲ့ သုံးပုံ</th></tr></thead><tbody><tr><th scope="row"><code>where</code></th>
+      <td>ထည့်ပေးရမယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small></td>
+      <td><span>Index</span><p>ဒေတာရွေးဖို့ သတ်မှတ်ချက်တစ်ခု ထည့်ပါ၊ ဒါမှမဟုတ် တန်ဖိုးရှာမယ့် label ကို သတ်မှတ်ပါ။</p></td></tr>
+<tr><th scope="row"><code>mask</code></th>
+      <td>ထည့်ပေးရမယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small></td>
+      <td><span>np.ndarray[bool]</span><p>အစားထိုးရမယ့် နေရာတွေကို True နဲ့ False တန်ဖိုးတွေပါတဲ့ mask နဲ့ သတ်မှတ်ပါတယ်။</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>ပြန်ပေးတဲ့ ရလဒ်</h2><p>ပြန်ပေးတဲ့ အမျိုးအစားက np.ndarray[np.intp] ဖြစ်ပါတယ်။</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.Index.asof_locs.html#pandas.Index.asof_locs">pandas တရားဝင် ကိုးကားချက်</a>
+      <nav class="pagination" aria-label="pandas API Reference"><a href="/docs/read/my/pandas/api/Index.asof/"><span>အရင် API</span><strong>pandas.Index.asof</strong></a><a href="/docs/read/my/pandas/api/Index.astype/"><span>နောက် API</span><strong>pandas.Index.astype</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Condition အလိုက် code လမ်းကြောင်း ရွေးပါ။ Collection ထဲက value တွေကို loop ပတ်ပြီး လိုရင် ရပ်ပါ သို့မဟုတ် ကျော်ပါ။">
+  <title>Conditions၊ Loops နှင့် Pattern Matching · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/python/control-flow/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/control-flow/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/control-flow/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#python">သင်ခန်းစာအားလုံး · Python</a> <a href="/docs/read/en/python/control-flow/" lang="en" hreflang="en">English</a></nav>
+  <h1>Conditions၊ Loops နှင့် Pattern Matching</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">Condition အလိုက် code လမ်းကြောင်း ရွေးပါ။ Collection ထဲက value တွေကို loop ပတ်ပြီး လိုရင် ရပ်ပါ သို့မဟုတ် ကျော်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/python/control-flow">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#branching">Code လမ်းကြောင်း ရွေးခြင်း</a></li>
+<li><a href="#loops">for နှင့် while သုံး၍ ထပ်လုပ်ခြင်း</a></li>
+<li><a href="#match">Value သို့မဟုတ် ပုံစံကို match လုပ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="branching">
+  <h2>Code လမ်းကြောင်း ရွေးခြင်း</h2>
+  <p>if က condition စစ်ပါတယ်။ elif နဲ့ နောက်ထပ် condition ထည့်စစ်နိုင်ပြီး else က ကျန်တဲ့အခြေအနေကို ကိုင်တွယ်ပါတယ်။ Block သတ်မှတ်ဖို့ indentation သုံးပါတယ်။ တူမတူ == နဲ့ စစ်ပြီး value သတ်မှတ်ဖို့ = သုံးပါ။</p>
+
+<pre><code>total = 20
+if total &gt;= 20:
+    print(&quot;Free delivery&quot;)
+else:
+    print(&quot;Add delivery fee&quot;)</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/control-flow-branching.png" data-image-preview><img src="/docs/media/data/control-flow-branching.png" alt="total &gt;= 20 စစ်တဲ့ flowchart ပါ။ မှန်ရင် Free delivery၊ မှားရင် Add delivery fee ထုတ်ပါတယ်။" width="720" height="350" loading="lazy" decoding="async"></a>
+    <figcaption>total က 20 ဖြစ်လို့ True ဘက်က code ကို run ပါတယ်။</figcaption>
+  </figure>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">Free delivery</pre></div>
+
+
+</section>
+<section class="article-section" id="loops">
+  <h2>for နှင့် while သုံး၍ ထပ်လုပ်ခြင်း</h2>
+  <p>for က iterable ထဲက value တစ်ခုချင်း ယူပါတယ်။ range(start, stop) ထဲ stop မပါပါ။ while က condition မှန်သမျှ ထပ်လုပ်ပါတယ်။ break က အတွင်းဆုံး loop ကနေ ထွက်ပါတယ်။ continue က လက်ရှိအကြိမ်ကို ကျော်ပြီး pass က ဘာမှမလုပ်တဲ့ statement ပါ။</p>
+
+<pre><code>for number in range(1, 6):
+    if number == 2:
+        continue
+    if number == 5:
+        break
+    print(number)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">1
+3
+4</pre></div>
+
+
+</section>
+<section class="article-section" id="match">
+  <h2>Value သို့မဟုတ် ပုံစံကို match လုပ်ခြင်း</h2>
+  <p>match က pattern ကိုက်ပြီး guard ပါရင် guard မှန်တဲ့ ပထမဆုံး case ကို ရွေးပါတယ်။ Pattern ထဲက သာမန်နာမည်က value ကို ဖမ်းသိမ်းတတ်ပါတယ်။ စာသားအတိအကျ စစ်ဖို့ quotation marks သုံးပြီး အားလုံးနဲ့ကိုက်ဖို့ _ သုံးပါ။</p>
+
+<pre><code>command = [&quot;show&quot;, &quot;Coffee&quot;]
+match command:
+    case [&quot;show&quot;, item]:
+        print(item)
+    case _:
+        print(&quot;Unknown command&quot;)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">Coffee</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.python.org/3.15/tutorial/controlflow.html">More control flow tools</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/python/values-and-strings/">အရင်သင်ခန်းစာ · Variables၊ Data Types နှင့် Strings</a>
+<a href="/docs/read/my/python/collections/">နောက်သင်ခန်းစာ · Lists၊ Tuples၊ Sets နှင့် Dictionaries</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

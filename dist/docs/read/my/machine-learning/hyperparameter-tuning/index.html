@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="သတ်မှတ်ထားတဲ့ parameter အပိုင်းကို ရှာပြီး နောက်ဆုံး test set ကို evaluation အတွက် ချန်ထားပါ။">
+  <title>Cross-validation ဖြင့် Hyperparameter Tuning လုပ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/hyperparameter-tuning/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/hyperparameter-tuning/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/hyperparameter-tuning/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#machine-learning">သင်ခန်းစာအားလုံး · Machine Learning</a> <a href="/docs/read/en/machine-learning/hyperparameter-tuning/" lang="en" hreflang="en">English</a></nav>
+  <h1>Cross-validation ဖြင့် Hyperparameter Tuning လုပ်ခြင်း</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">သတ်မှတ်ထားတဲ့ parameter အပိုင်းကို ရှာပြီး နောက်ဆုံး test set ကို evaluation အတွက် ချန်ထားပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/machine-learning/hyperparameter-tuning">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#search">Search နည်းနှင့် Metric ရွေးခြင်း</a></li>
+<li><a href="#evaluate">Training Data မှာ Tune လုပ်ပြီး Holdout နဲ့ တိုင်းခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="search">
+  <h2>Search နည်းနှင့် Metric ရွေးခြင်း</h2>
+  <p>Parameter က training data ကနေ သင်ယူတာပါ။ Hyperparameter က fit မလုပ်ခင် estimator ကို ပြင်တာပါ။ GridSearchCV က ပေးထားတဲ့ grid ကို cross-validation နဲ့ စစ်ပါတယ်။ RandomizedSearchCV က အကြိမ်ရေ သတ်မှတ်ပြီး search space ထဲက ရွေးစစ်ပါတယ်။</p>
+
+
+
+
+</section>
+<section class="article-section" id="evaluate">
+  <h2>Training Data မှာ Tune လုပ်ပြီး Holdout နဲ့ တိုင်းခြင်း</h2>
+  <p>ပြဿနာနဲ့ ကိုက်တဲ့ fold နဲ့ metric ရွေးပါ။ Parameter grid မှာ model__C လို pipeline step နာမည်သုံးပါ။ Holdout မှာ ပြန် fit ထားတဲ့ best pipeline ကို တစ်ခါ အကဲဖြတ်ပါ။ Tuning အဆင့်က စွမ်းဆောင်ရည်ကို တိုင်းဖို့ မထိထားတဲ့ test set သို့မဟုတ် nested cross-validation သုံးပါ။</p>
+
+<pre><code>from sklearn.datasets import load_iris
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import GridSearchCV, train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=42)
+pipeline = Pipeline([(&quot;scale&quot;, StandardScaler()), (&quot;model&quot;, LogisticRegression(max_iter=500))])
+search = GridSearchCV(pipeline, {&quot;model__C&quot;: [0.1, 1, 10]}, cv=3, scoring=&quot;f1_macro&quot;)
+search.fit(X_train, y_train)
+print(len(search.cv_results_[&quot;params&quot;]))
+print(search.score(X_test, y_test) &gt; 0.8)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">3
+True</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/grid_search.html">Tuning estimator hyperparameters</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/cross_validation.html">Cross-validation</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/machine-learning/feature-engineering/">အရင်သင်ခန်းစာ · Numeric နှင့် Categorical Data အတွက် Feature Engineering</a>
+<a href="/docs/read/my/machine-learning/classification-thresholds/">နောက်သင်ခန်းစာ · Imbalanced Classes နှင့် Threshold ရွေးခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

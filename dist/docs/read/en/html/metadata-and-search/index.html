@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How do people find a web page through Google? Learn how search works and what you can do when writing your page’s content, headings, links, and metadata.">
+  <title>Search Engine Optimization (SEO) · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/metadata-and-search/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/metadata-and-search/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/metadata-and-search/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/metadata-and-search/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Search Engine Optimization (SEO)</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">How do people find a web page through Google? Learn how search works and what you can do when writing your page’s content, headings, links, and metadata.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/metadata-and-search">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#basics">What is SEO?</a></li>
+<li><a href="#content-and-headings">Answer the search and organize the page</a></li>
+<li><a href="#head">Page title &lt;title&gt;</a></li>
+<li><a href="#description">Page summary with meta description</a></li>
+<li><a href="#crawlable-links">Link to related pages with &lt;a href&gt;</a></li>
+<li><a href="#image-alt">Describe meaningful images with alt text</a></li>
+<li><a href="#viewport">Set the mobile viewport</a></li>
+<li><a href="#canonical">Preferred URL with rel=&quot;canonical&quot;</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="basics">
+  <h2>What is SEO?</h2>
+  <p>Search Engine Optimization (SEO) means improving a website so people can find it more easily through unpaid search results. A search engine discovers and reads pages (crawling), then decides which pages to add to its index (indexing). When someone searches for “what is a server”, it picks and orders relevant results from that index.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;article&gt;
+  &lt;h2&gt;What Is a Server? | Web Development Guide&lt;/h2&gt;
+  &lt;p&gt;A server responds to requests from browsers and other clients.&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> This is a mock search result. The heading and short description help someone decide whether the page answers their question.</p>
+
+</section>
+<section class="article-section" id="content-and-headings">
+  <h2>Answer the search and organize the page</h2>
+  <p>Start with a direct answer to the visitor’s question. Use an h1 for the main heading and h2 elements for related sections. Put the main topic where it reads naturally. Add examples or details that help the visitor understand the answer.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;main&gt;
+  &lt;h1&gt;What Is a Server?&lt;/h1&gt;
+  &lt;p&gt;A server is a computer or program that responds to requests from clients.&lt;/p&gt;
+
+  &lt;h2&gt;How a Web Server Responds&lt;/h2&gt;
+  &lt;p&gt;When you open a website, your browser requests a page.
+     The web server can respond with an HTML document.&lt;/p&gt;
+&lt;/main&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first paragraph answers the question. The subheading then leads into a concrete example.</p>
+
+</section>
+<section class="article-section" id="head">
+  <h2>Page title &lt;title&gt;</h2>
+  <p>The title names the entire HTML document and appears in the tab. Search engines can also consider it when generating the title link on a results page. Give each page a short distinct title and use a consistent visible heading so the topic is clear.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, place the code inside the existing &lt;head&gt;. Replace any existing tag for the same setting, then save and reload.</p>
+<pre><code>&lt;title&gt;What Is a Server? | Web Development Guide&lt;/title&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Reload and look at the browser tab. In the interactive preview, the title is printed in the preview pane. Google may use other text from the page to generate a title link.</p>
+
+</section>
+<section class="article-section" id="description">
+  <h2>Page summary with meta description</h2>
+  <p>A meta description gives a short summary of what is available on the page. Google may use it to generate the snippet below a result’s title, or pick text from the page that better answers the search. Write descriptions that reflect the content of each page.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, place the code inside the existing &lt;head&gt;. Replace any existing tag for the same setting, then save and reload.</p>
+<pre><code>&lt;meta name=&quot;description&quot;
+      content=&quot;Learn what a server is and how it responds to a browser request.&quot;&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Inspect the head in DevTools to find the description. The interactive preview prints the tag so you can see its content.</p>
+
+</section>
+<section class="article-section" id="crawlable-links">
+  <h2>Link to related pages with &lt;a href&gt;</h2>
+  <p>Once a reader understands what a server is, offer a relevant next step. Use an anchor with an href that points to a real page. Search engines can follow these links to discover other pages. Clear link text tells readers and search engines what they will find there.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;p&gt;See also:
+  &lt;a href=&quot;https://javascript-training.cloudninemm.com/docs/read/en/database/fundamentals/&quot;&gt;
+    Learn about databases and database servers
+  &lt;/a&gt;
+&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The link text names the linked lesson. In the interactive preview, clicking the link shows its URL in the console.</p>
+
+</section>
+<section class="article-section" id="image-alt">
+  <h2>Describe meaningful images with alt text</h2>
+  <p>When an image explains part of the topic, use alt to describe the point the image makes in that context. It helps people who cannot see the image and helps search engines understand it. For a purely decorative image, use alt=&quot;&quot;.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;img src=&quot;https://javascript-training.cloudninemm.com/docs/media/database/what-is-a-server.webp&quot;
+     alt=&quot;Rows of server racks in a data center.&quot;
+     width=&quot;320&quot;
+     height=&quot;180&quot;&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The photo shows server racks. Inspect the image element in DevTools to read its alt text.</p>
+
+</section>
+<section class="article-section" id="viewport">
+  <h2>Set the mobile viewport</h2>
+  <p>The viewport is the area in which the browser displays the page. The device-width setting helps mobile browsers lay out this page at the actual device width. This metadata supports responsive design and applies when a visitor opens the page.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, place the code inside the existing &lt;head&gt;. Replace any existing tag for the same setting, then save and reload.</p>
+<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The tag is in head. On a phone or in the device toolbar, the layout can use the phone’s viewport width.</p>
+
+</section>
+<section class="article-section" id="canonical">
+  <h2>Preferred URL with rel=&quot;canonical&quot;</h2>
+  <p>If several URLs show equivalent content, a canonical link signals the preferred URL to a search engine. It can evaluate other signals too, such as internal links and a sitemap. Put the canonical link in head and use the preferred URL consistently in those other places.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, place the code inside the existing &lt;head&gt;. Replace any existing tag for the same setting, then save and reload.</p>
+<pre><code>&lt;link rel=&quot;canonical&quot; href=&quot;https://example.com/guides/what-is-a-server&quot;&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> If /guides/what-is-a-server and /guides/what-is-a-server?ref=home show the same content, both can signal the URL without ?ref=home as preferred. The visitor’s address bar stays on the URL they opened.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide">Google Search Central · SEO Starter Guide</a></li>
+<li><a href="https://developers.google.com/search/docs/appearance/title-link">Google Search Central · Title links</a></li>
+<li><a href="https://developers.google.com/search/docs/appearance/snippet">Google Search Central · Snippets</a></li>
+<li><a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable">Google Search Central · Crawlable links</a></li>
+<li><a href="https://developers.google.com/search/docs/appearance/google-images">Google Search Central · Image SEO</a></li>
+<li><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">Google Search Central · Canonical URLs</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/popovers/">Previous lesson · HTML Popovers</a>
+<a href="/docs/read/en/html/reference/">Next lesson · HTML Tag Reference</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

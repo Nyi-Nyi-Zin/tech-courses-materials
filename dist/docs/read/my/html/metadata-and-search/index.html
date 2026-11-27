@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Google မှာ ရှာတဲ့သူတွေ ကိုယ့်ဝက်ဘ်စာမျက်နှာကို ဘယ်လို ရှာတွေ့နိုင်လဲ။ Search engine က စာမျက်နှာတွေကို ဘယ်လို ရှာဖတ်လဲဆိုတာက စပြီး HTML ထဲမှာ အကြောင်းအရာ၊ ခေါင်းစဉ်၊ link နဲ့ metadata တွေ ဘယ်လိုရေးနိုင်လဲဆိုတာ လေ့လာပါမယ်။">
+  <title>Search Engine Optimization (SEO) · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/metadata-and-search/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/metadata-and-search/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/metadata-and-search/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/metadata-and-search/" lang="en" hreflang="en">English</a></nav>
+  <h1>Search Engine Optimization (SEO)</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Google မှာ ရှာတဲ့သူတွေ ကိုယ့်ဝက်ဘ်စာမျက်နှာကို ဘယ်လို ရှာတွေ့နိုင်လဲ။ Search engine က စာမျက်နှာတွေကို ဘယ်လို ရှာဖတ်လဲဆိုတာက စပြီး HTML ထဲမှာ အကြောင်းအရာ၊ ခေါင်းစဉ်၊ link နဲ့ metadata တွေ ဘယ်လိုရေးနိုင်လဲဆိုတာ လေ့လာပါမယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/metadata-and-search">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#basics">SEO ဆိုတာ ဘာလဲ။</a></li>
+<li><a href="#content-and-headings">ဖတ်သူ ရှာနေတဲ့အဖြေကို ပေးပြီး ခေါင်းစဉ်တွေ စီပါ</a></li>
+<li><a href="#head">စာမျက်နှာ နာမည် &lt;title&gt;</a></li>
+<li><a href="#description">Meta Description နဲ့ စာမျက်နှာ အကျဉ်းရေးခြင်း</a></li>
+<li><a href="#crawlable-links">&lt;a href&gt; နဲ့ ဆက်စပ်တဲ့ စာမျက်နှာတွေကို ချိတ်ပါ</a></li>
+<li><a href="#image-alt">အကြောင်းအရာပါတဲ့ ပုံတွေကို alt စာသားနဲ့ ဖော်ပြပါ</a></li>
+<li><a href="#viewport">ဖုန်းအတွက် Viewport သတ်မှတ်ခြင်း</a></li>
+<li><a href="#canonical">rel=&quot;canonical&quot; နဲ့ ဦးစားပေး URL သတ်မှတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="basics">
+  <h2>SEO ဆိုတာ ဘာလဲ။</h2>
+  <p>Search Engine Optimization (SEO) ဆိုတာ ကြော်ငြာခ ပေးစရာမလိုတဲ့ ရှာဖွေမှုရလဒ်တွေကနေ ကိုယ့်ဝက်ဘ်ဆိုက်ကို လူတွေ ပိုလွယ်လွယ် ရှာတွေ့နိုင်အောင် ပြင်ဆင်တာပါ။ Search engine က စာမျက်နှာတွေကို ရှာပြီး ဖတ်ပါတယ်။ ဒီအဆင့်ကို crawling လို့ခေါ်ပါတယ်။ ဖတ်ပြီးရင် ရှာဖွေတဲ့အခါ ပြန်ထုတ်သုံးနိုင်ဖို့ ဘယ်စာမျက်နှာတွေကို သူ့စာရင်းထဲ ထည့်မလဲ ဆုံးဖြတ်ပါတယ်။ ဒါကို indexing လို့ခေါ်ပါတယ်။ တစ်ယောက်ယောက်က “what is a server” လို့ ရှာတဲ့အခါ အဲဒီစာရင်းထဲက ကိုက်ညီတဲ့ စာမျက်နှာတွေကို ရွေးပြီး အစဉ်လိုက် ပြပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;article&gt;
+  &lt;h2&gt;What Is a Server? | Web Development Guide&lt;/h2&gt;
+  &lt;p&gt;A server responds to requests from browsers and other clients.&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ဒါက ရှာဖွေမှုရလဒ် ဘယ်လိုပုံစံရှိလဲဆိုတာ ပြထားတဲ့ နမူနာပါ။ ခေါင်းစဉ်နဲ့ စာတိုကို ဖတ်ပြီး ဒီစာမျက်နှာက ကိုယ်သိချင်တာကို ဖြေထားလားဆိုတာ ဆုံးဖြတ်နိုင်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="content-and-headings">
+  <h2>ဖတ်သူ ရှာနေတဲ့အဖြေကို ပေးပြီး ခေါင်းစဉ်တွေ စီပါ</h2>
+  <p>ဖတ်သူ မေးထားတဲ့ မေးခွန်းကို အစမှာပဲ တိုက်ရိုက် ဖြေပေးပါ။ စာမျက်နှာရဲ့ အဓိကခေါင်းစဉ်ကို &lt;h1&gt; နဲ့ ရေးပြီး ဆက်စပ်တဲ့ အပိုင်းတွေကို &lt;h2&gt; နဲ့ ခွဲပါ။ ဖတ်သူ ရှာတတ်တဲ့ စကားလုံးတွေကို အကြောင်းအရာနဲ့ ကိုက်တဲ့နေရာမှာ သဘာဝကျကျ သုံးပါ။ နားလည်လွယ်ဖို့ နမူနာ ဒါမှမဟုတ် လိုတဲ့အသေးစိတ်ကို ဆက်ထည့်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;main&gt;
+  &lt;h1&gt;What Is a Server?&lt;/h1&gt;
+  &lt;p&gt;A server is a computer or program that responds to requests from clients.&lt;/p&gt;
+
+  &lt;h2&gt;How a Web Server Responds&lt;/h2&gt;
+  &lt;p&gt;When you open a website, your browser requests a page.
+     The web server can respond with an HTML document.&lt;/p&gt;
+&lt;/main&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမစာပိုဒ်မှာ server ဆိုတာ ဘာလဲ သိရပါတယ်။ အောက်က ခေါင်းစဉ်ခွဲမှာတော့ website တစ်ခု ဖွင့်လိုက်တဲ့အခါ server ဘာလုပ်လဲဆိုတာ ဆက်ဖတ်နိုင်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="head">
+  <h2>စာမျက်နှာ နာမည် &lt;title&gt;</h2>
+  <p>title က HTML document တစ်ခုလုံးရဲ့ နာမည်ဖြစ်ပြီး browser tab မှာ ပေါ်ပါတယ်။ Search engine က ရှာဖွေမှုရလဒ်မှာ နှိပ်လို့ရတဲ့ ခေါင်းစဉ်ကို ရွေးတဲ့အခါလည်း သုံးနိုင်ပါတယ်။ Page တစ်ခုစီမှာ ခွဲသိနိုင်တဲ့ title အတိုရေးပြီး စာမျက်နှာပေါ်က heading ကိုလည်း အကြောင်းအရာ ကိုက်ညီအောင် ရေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက ရှိပြီးသား &lt;head&gt; အတွင်း ဒီ code ကို ထည့်ပါ။ တူညီတဲ့ setting အတွက် tag ရှိပြီးသားဆို အစားထိုးပြီး save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;title&gt;What Is a Server? | Web Development Guide&lt;/title&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Reload လုပ်ပြီး browser tab ကို ကြည့်ပါ။ Interactive preview မှာ title စာသားကို preview ထဲမှာ ပြပေးပါတယ်။ Google က ရှာဖွေမှုရလဒ်အတွက် စာမျက်နှာထဲက တခြားစာသားကိုလည်း ခေါင်းစဉ်အဖြစ် သုံးနိုင်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="description">
+  <h2>Meta Description နဲ့ စာမျက်နှာ အကျဉ်းရေးခြင်း</h2>
+  <p>Meta description က စာမျက်နှာမှာ ဘာတွေ ဖတ်နိုင်မလဲဆိုတာ အတိုချုပ် ပြောပါတယ်။ Google က result ခေါင်းစဉ်အောက်က စာတိုအဖြစ် သုံးနိုင်သလို မေးထားတာနဲ့ ပိုကိုက်ညီတဲ့ စာကြောင်းကို page ထဲကနေ ယူပြနိုင်ပါတယ်။ Page တစ်ခုစီရဲ့ တကယ့်အကြောင်းအရာကို ထင်ဟပ်အောင် ရေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက ရှိပြီးသား &lt;head&gt; အတွင်း ဒီ code ကို ထည့်ပါ။ တူညီတဲ့ setting အတွက် tag ရှိပြီးသားဆို အစားထိုးပြီး save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;meta name=&quot;description&quot;
+      content=&quot;Learn what a server is and how it responds to a browser request.&quot;&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> DevTools မှာ &lt;head&gt; ကို ကြည့်ရင် description ကို တွေ့ပါမယ်။ Interactive preview မှာတော့ အထဲက စာသားကို မြင်ရအောင် tag ကို ပြပေးပါတယ်။</p>
+
+</section>
+<section class="article-section" id="crawlable-links">
+  <h2>&lt;a href&gt; နဲ့ ဆက်စပ်တဲ့ စာမျက်နှာတွေကို ချိတ်ပါ</h2>
+  <p>ဖတ်သူက server ဆိုတာ ဘာလဲ သိသွားရင် ဆက်ဖတ်လို့ရမယ့် စာမျက်နှာကို ချိတ်ပေးပါ။ &lt;a&gt; ရဲ့ href ထဲမှာ ဖွင့်လို့ရတဲ့ URL ထည့်ထားရင် search engine က link အတိုင်း လိုက်ပြီး အခြားစာမျက်နှာတွေကို ရှာတွေ့နိုင်ပါတယ်။ Link စာသားကို ဖတ်ရုံနဲ့ သွားမယ့်နေရာမှာ ဘာအကြောင်း ဖတ်ရမလဲ သိအောင် ရေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;p&gt;See also:
+  &lt;a href=&quot;https://javascript-training.cloudninemm.com/docs/read/en/database/fundamentals/&quot;&gt;
+    Learn about databases and database servers
+  &lt;/a&gt;
+&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Link စာသားမှာ ဆက်ဖတ်ရမယ့် အကြောင်းအရာကို မြင်ရပါမယ်။ Interactive preview ထဲမှာ link နှိပ်ရင် သွားမယ့် URL ကို console မှာ ပြပေးပါတယ်။</p>
+
+</section>
+<section class="article-section" id="image-alt">
+  <h2>အကြောင်းအရာပါတဲ့ ပုံတွေကို alt စာသားနဲ့ ဖော်ပြပါ</h2>
+  <p>ပုံက သင်ခန်းစာအကြောင်းအရာကို ရှင်းပြပေးတဲ့အခါ ဒီပုံကနေ ဖတ်သူ ဘာသိရမလဲဆိုတာ alt ထဲမှာ ရေးပါ။ ပုံမမြင်ရတဲ့ ဖတ်သူတွေနဲ့ search engine တွေကို ပုံရဲ့ အကြောင်းအရာ နားလည်ဖို့ ကူညီပါတယ်။ အလှဆင်ဖို့သက်သက် ထည့်တဲ့ပုံမှာ alt=&quot;&quot; လို့ ရေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;img src=&quot;https://javascript-training.cloudninemm.com/docs/media/database/what-is-a-server.webp&quot;
+     alt=&quot;Rows of server racks in a data center.&quot;
+     width=&quot;320&quot;
+     height=&quot;180&quot;&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပုံမှာ server rack တွေကို မြင်ရပါမယ်။ DevTools မှာ image element ကို ကြည့်ရင် alt စာသားကို ဖတ်နိုင်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="viewport">
+  <h2>ဖုန်းအတွက် Viewport သတ်မှတ်ခြင်း</h2>
+  <p>Viewport က browser ထဲမှာ စာမျက်နှာပြတဲ့ နေရာပါ။ device-width ကြောင့် ဖုန်း browser က ဖုန်းရဲ့ အကျယ်အတိုင်း စာမျက်နှာ စီနိုင်ပါတယ်။ ဒီ metadata က responsive design အတွက် အသုံးဝင်ပြီး ဝင်ဖတ်သူ ဖွင့်တဲ့အခါ သက်ရောက်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက ရှိပြီးသား &lt;head&gt; အတွင်း ဒီ code ကို ထည့်ပါ။ တူညီတဲ့ setting အတွက် tag ရှိပြီးသားဆို အစားထိုးပြီး save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Tag က head ထဲမှာ ရှိပါတယ်။ ဖုန်းနဲ့ ဖွင့်ရင် ဒါမှမဟုတ် device toolbar မှာ ကြည့်ရင် layout က ဖုန်းမြင်ကွင်းအကျယ်ကို သုံးနိုင်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="canonical">
+  <h2>rel=&quot;canonical&quot; နဲ့ ဦးစားပေး URL သတ်မှတ်ခြင်း</h2>
+  <p>URL အများကြီးမှာ အကြောင်းအရာတူနေရင် canonical link နဲ့ ဘယ် URL ကို ဦးစားပေးချင်လဲ search engine ကို ပြောပါတယ်။ Search engine က site ထဲက links နဲ့ sitemap လို တခြားအချက်တွေကိုပါ ကြည့်နိုင်ပါတယ်။ canonical link ကို head ထဲ ထည့်ပြီး အဲဒီ ဦးစားပေး URL ကို site ထဲက links နဲ့ sitemap မှာလည်း တူတူ သုံးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက ရှိပြီးသား &lt;head&gt; အတွင်း ဒီ code ကို ထည့်ပါ။ တူညီတဲ့ setting အတွက် tag ရှိပြီးသားဆို အစားထိုးပြီး save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;link rel=&quot;canonical&quot; href=&quot;https://example.com/guides/what-is-a-server&quot;&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> /guides/what-is-a-server နဲ့ /guides/what-is-a-server?ref=home မှာ အကြောင်းအရာတူရင် နှစ်ခုလုံးက ?ref=home မပါတဲ့ URL ကို ဦးစားပေးဖို့ ညွှန်းနိုင်ပါတယ်။ Browser ရဲ့ address bar မှာတော့ ဖတ်သူ ဖွင့်ခဲ့တဲ့ URL ကိုပဲ မြင်ရပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide">Google Search Central · SEO Starter Guide</a></li>
+<li><a href="https://developers.google.com/search/docs/appearance/title-link">Google Search Central · Title links</a></li>
+<li><a href="https://developers.google.com/search/docs/appearance/snippet">Google Search Central · Snippets</a></li>
+<li><a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable">Google Search Central · Crawlable links</a></li>
+<li><a href="https://developers.google.com/search/docs/appearance/google-images">Google Search Central · Image SEO</a></li>
+<li><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">Google Search Central · Canonical URLs</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/popovers/">အရင်သင်ခန်းစာ · HTML Popovers</a>
+<a href="/docs/read/my/html/reference/">နောက်သင်ခန်းစာ · HTML Tag Reference</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Preprocessing နဲ့ prediction ပေါင်းပါ။ သင်ယူတဲ့ step တစ်ခုစီကို training data ပဲ မြင်အောင် ထားပါ။">
+  <title>Preprocessing Pipelines နှင့် Data Leakage · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/pipeline-and-leakage/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/pipeline-and-leakage/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/pipeline-and-leakage/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#machine-learning">သင်ခန်းစာအားလုံး · Machine Learning</a> <a href="/docs/read/en/machine-learning/pipeline-and-leakage/" lang="en" hreflang="en">English</a></nav>
+  <h1>Preprocessing Pipelines နှင့် Data Leakage</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Preprocessing နဲ့ prediction ပေါင်းပါ။ သင်ယူတဲ့ step တစ်ခုစီကို training data ပဲ မြင်အောင် ထားပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/machine-learning/pipeline-and-leakage">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#leakage">Test Set ကို Fit လုပ်ရာမှာ မသုံးခြင်း</a></li>
+<li><a href="#mixed-columns">ရောနေတဲ့ Data Types ကို ကိုင်တွယ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="leakage">
+  <h2>Test Set ကို Fit လုပ်ရာမှာ မသုံးခြင်း</h2>
+  <p>Leakage ဆိုတာ တကယ် ခန့်မှန်းတဲ့အချိန် မရနိုင်တဲ့ အချက်တွေ training သို့မဟုတ် evaluation ထဲ ပါသွားတာပါ။ Scaler၊ imputer၊ feature selector မ fit ခင် data ခွဲပါ။ Pipeline က transform တွေကို training data နဲ့ fit လုပ်ပြီး အဲဒီအတိုင်း test row ပေါ် ပြန်သုံးပါတယ်။</p>
+
+<pre><code>from sklearn.linear_model import LinearRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+
+model = make_pipeline(StandardScaler(), LinearRegression())
+model.fit([[2], [4], [6]], [5, 9, 13])
+print(round(float(model.predict([[8]])[0]), 2))</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/pipeline-and-leakage-leakage.png" data-image-preview><img src="/docs/media/data/pipeline-and-leakage-leakage.png" alt="Training data နဲ့ preprocessing နဲ့ model ကို fit လုပ်ပါတယ်။ Validation data အတွက် fit လုပ်ပြီးသား အဆင့်တွေကနေ ခန့်မှန်းချက် ထုတ်ပါတယ်။" width="720" height="355" loading="lazy" decoding="async"></a>
+    <figcaption>Cross-validation fold တစ်ခုစီမှာ အဲဒီ fold ရဲ့ training data နဲ့ သီးသန့် pipeline fit လုပ်ပါတယ်။</figcaption>
+  </figure>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">17.0</pre></div>
+
+
+</section>
+<section class="article-section" id="mixed-columns">
+  <h2>ရောနေတဲ့ Data Types ကို ကိုင်တွယ်ခြင်း</h2>
+  <p>Column အလိုက် transform နည်း ကွာရင် ColumnTransformer သုံးပါ။ ဥပမာ number တွေကို impute သို့မဟုတ် scale လုပ်ပြီး category တွေကို one-hot encode လုပ်ပါ။ Training fold တစ်ခုစီထဲမှာပဲ parameter တွေ fit ဖြစ်ဖို့ ColumnTransformer ကို pipeline ထဲ ထည့်ပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/compose.html">Pipelines and composite estimators</a></li>
+<li><a href="https://scikit-learn.org/stable/common_pitfalls.html">Common pitfalls and recommended practices</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/machine-learning/classification/">အရင်သင်ခန်းစာ · Classification နှင့် Confusion Matrices</a>
+<a href="/docs/read/my/machine-learning/validation-and-clustering/">နောက်သင်ခန်းစာ · Cross-validation၊ Overfitting နှင့် Clustering</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

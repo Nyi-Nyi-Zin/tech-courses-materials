@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ရက်စွဲစာသားတစ်ခုကို ကြည့်ပြီး strptime ပုံစံကို ခန့်မှန်းပေးပါတယ်။">
+  <title>pandas.tseries.api.guess_datetime_format · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/tseries.api.guess_datetime_format/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/tseries.api.guess_datetime_format/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/tseries.api.guess_datetime_format">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API Reference">
+    <a href="/docs/read/my/pandas/api-reference/#find-an-api">pandas API Reference</a><span aria-hidden="true">/</span><span>အထွေထွေ Functions</span><a href="/docs/read/en/pandas/api/tseries.api.guess_datetime_format/" lang="en" hreflang="en">English</a>
+  </nav>
+    <h1><code>pandas.<wbr>tseries.<wbr>api.<wbr>guess_datetime_format</code></h1>
+    <p class="article-version">pandas 3.1.1 · အထွေထွေ Functions · <span lang="en">function</span></p>
+    <p class="intro">ရက်စွဲစာသားတစ်ခုကို ကြည့်ပြီး strptime ပုံစံကို ခန့်မှန်းပေးပါတယ်။</p>
+
+    <nav class="api-breadcrumbs" aria-label="ဒီစာမျက်နှာမှာ"><ul><li><a href="#syntax">ခေါ်သုံးပုံ</a></li><li><a href="#example">နမူနာ စမ်းကြည့်ရန်</a></li><li><a href="#parameters">ထည့်သွင်းနိုင်တဲ့ Arguments</a></li><li><a href="#returns">ပြန်ပေးတဲ့ ရလဒ်</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>ခေါ်သုံးပုံ</h2><pre><code lang="en">api.guess_datetime_format(dt_str, dayfirst=False)</code></pre></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>နမူနာ စမ်းကြည့်ရန်</h2>
+      <p>နမူနာကုဒ်ကို ပြင်ပြီး Run Python နှိပ်ပါ။ ရလဒ်ကို အောက်မှာ ကြည့်နိုင်ပါတယ်။</p>
+      <label><span>Python ကုဒ်</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+from pandas.tseries.api import guess_datetime_format
+print(guess_datetime_format(&quot;2025-01-03&quot;))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>ရပ်ရန်</button>
+        <button type="button" data-reset disabled>မူလကုဒ် ပြန်ထားရန်</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="ရလဒ်"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>ထည့်သွင်းနိုင်တဲ့ Arguments</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">ထည့်သွင်းပုံ</th><th scope="col">လက်ခံတဲ့ တန်ဖိုးနဲ့ သုံးပုံ</th></tr></thead><tbody><tr><th scope="row"><code>dt_str</code></th>
+      <td>ထည့်ပေးရမယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small></td>
+      <td><span>စာသား (str)</span></td></tr>
+<tr><th scope="row"><code>dayfirst</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True / False (bool)</span><p>ရက်နဲ့ လကို အစဉ်ခွဲမရတဲ့ ရက်စွဲစာသားတွေကို ဖတ်တဲ့အခါ ရက်ကို ရှေ့မှာ ယူပါတယ်။</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>ပြန်ပေးတဲ့ ရလဒ်</h2><p>စာသားကို str အဖြစ် ပြန်ပေးပါတယ်။ ရလဒ်ကို တခြားနေရာမှာ ရေးထားရင် None ပြန်ပေးပါတယ်။</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.tseries.api.guess_datetime_format.html#pandas.tseries.api.guess_datetime_format">pandas တရားဝင် ကိုးကားချက်</a>
+      <nav class="pagination" aria-label="pandas API Reference"><a href="/docs/read/my/pandas/api/to_timedelta/"><span>အရင် API</span><strong>pandas.to_timedelta</strong></a><a href="/docs/read/my/pandas/api/unique/"><span>နောက် API</span><strong>pandas.unique</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

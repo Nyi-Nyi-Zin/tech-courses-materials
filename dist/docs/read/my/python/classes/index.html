@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="State နဲ့ behavior အတူထားဖို့ class သုံးပါ။ လက်ရှိ Python series ရဲ့ အပြောင်းအလဲတချို့ကိုလည်း ကြည့်ပါ။">
+  <title>Classes၊ Instances နှင့် Python 3.15 · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/python/classes/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/classes/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/classes/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#python">သင်ခန်းစာအားလုံး · Python</a> <a href="/docs/read/en/python/classes/" lang="en" hreflang="en">English</a></nav>
+  <h1>Classes၊ Instances နှင့် Python 3.15</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">State နဲ့ behavior အတူထားဖို့ class သုံးပါ။ လက်ရှိ Python series ရဲ့ အပြောင်းအလဲတချို့ကိုလည်း ကြည့်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/python/classes">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#instances">Instance Attributes နှင့် Methods</a></li>
+<li><a href="#inheritance">Inheritance နှင့် Composition</a></li>
+<li><a href="#current-series">Python 3.15 မှာ ပြောင်းလဲထားတာများ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="instances">
+  <h2>Instance Attributes နှင့် Methods</h2>
+  <p>__init__ က instance ကို စတင်ပြင်ဆင်ပါတယ်။ self က method ဆီ ပေးလိုက်တဲ့ instance ကို ညွှန်းပါတယ်။ Object တစ်ခုစီ ကွာမယ့် value တွေအတွက် instance attribute သုံးပါ။ Class attribute ကို class က ပိုင်ပြီး instance က နာမည်တူ attribute မသတ်မှတ်မချင်း မျှဝေသုံးပါတယ်။</p>
+
+<pre><code>class OrderLine:
+    def __init__(self, quantity, unit_price):
+        self.quantity = quantity
+        self.unit_price = unit_price
+
+    def total(self):
+        return self.quantity * self.unit_price
+
+print(OrderLine(3, 2.5).total())</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">7.5</pre></div>
+
+
+</section>
+<section class="article-section" id="inheritance">
+  <h2>Inheritance နှင့် Composition</h2>
+  <p>Subclass က inherited behavior ကို override လုပ်နိုင်ပါတယ်။ super() က Python method resolution order အတိုင်း ဆက်ခေါ်ပါတယ်။ Order ထဲမှာ order line list ထားသလို object တစ်ခုထဲ နောက် object ထည့်သုံးချင်ရင် composition သုံးပါ။</p>
+
+
+
+
+</section>
+<section class="article-section" id="current-series">
+  <h2>Python 3.15 မှာ ပြောင်းလဲထားတာများ</h2>
+  <p>Python 3.15 မှာ UTF-8 Mode ကို default ဖွင့်ထားပြီး explicit lazy import နဲ့ comprehension ထဲ unpack လုပ်တာလို language feature အသစ်တွေ ပါလာပါတယ်။ ပြင်ပဒေတာရဲ့ encoding ကို သိရင် အတိအကျ သတ်မှတ်တာ အသုံးဝင်ဆဲပါ။ ဒီဥပမာတွေမှာ သာမန် import နဲ့ comprehension သုံးထားပါတယ်။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.python.org/3.15/tutorial/classes.html">Python classes</a></li>
+<li><a href="https://docs.python.org/3.15/whatsnew/3.15.html">What’s new in Python 3.15</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/python/files/">အရင်သင်ခန်းစာ · Files၊ Exceptions နှင့် Debugging</a>
+<a href="/docs/read/my/python/names-and-objects/">နောက်သင်ခန်းစာ · Names၊ Mutable Objects နှင့် Copies</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

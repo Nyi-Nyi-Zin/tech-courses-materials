@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Wrap a function to add reusable behavior and preserve useful function metadata.">
+  <title>Decorators and reusable wrappers · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/python/decorators/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/decorators/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/decorators/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#python">All documentation · Python</a> <a href="/docs/read/my/python/decorators/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Decorators and reusable wrappers</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">Wrap a function to add reusable behavior and preserve useful function metadata.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/python/decorators">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#wrapper">Wrap a call with a decorator</a></li>
+<li><a href="#resources">Use context managers for cleanup</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="wrapper">
+  <h2>Wrap a call with a decorator</h2>
+  <p>A decorator takes a function and returns a replacement callable. @announce applies the decorator when Python defines the function. The wrapper forwards arguments and returns the original result. functools.wraps keeps metadata such as the name and documentation.</p>
+
+<pre><code>from functools import wraps
+
+def announce(function):
+    @wraps(function)
+    def wrapped(*args, **kwargs):
+        print(&quot;Running&quot;, function.__name__)
+        return function(*args, **kwargs)
+    return wrapped
+
+@announce
+def total(quantity, price):
+    return quantity * price
+
+print(total(2, 3.5), total.__name__)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">Running total
+7.0 total</pre></div>
+
+
+</section>
+<section class="article-section" id="resources">
+  <h2>Use context managers for cleanup</h2>
+  <p>A with block ties setup and cleanup to a scope. Use contextlib.contextmanager to express setup before yield and cleanup in finally. This is useful for files, transactions, temporary directories, and measured sections of code.</p>
+
+<pre><code>from contextlib import contextmanager
+
+@contextmanager
+def operation():
+    print(&quot;open&quot;)
+    try:
+        yield &quot;ready&quot;
+    finally:
+        print(&quot;close&quot;)
+
+with operation() as status:
+    print(status)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">open
+ready
+close</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.python.org/3.15/reference/compound_stmts.html#function-definitions">Function definitions and decorators</a></li>
+<li><a href="https://docs.python.org/3.15/library/functools.html">functools.wraps</a></li>
+<li><a href="https://docs.python.org/3.15/library/contextlib.html">contextlib</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/python/iterators-and-generators/">Previous lesson · Iterators and generators</a>
+<a href="/docs/read/en/python/async-await/">Next lesson · Concurrency with async and await</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

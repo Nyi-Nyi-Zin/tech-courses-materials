@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="လုပ်ပိုင်ခွင့် စစ်တာ မအောင်မြင်တာနဲ့ database ချိတ်လို့ မရတာဟာ မတူတဲ့ ဖြစ်ရပ်တွေပါ။ User က လုပ်ထားတာ အောင်မြင်လား သိဖို့လိုပြီး တာဝန်ရှိသူက ဘာပျက်သလဲ၊ data တကယ်ပြောင်းသွားလား ပြန်စစ်နိုင်ဖို့ လိုပါတယ်။">
+  <title>Error ကိုင်တွယ်ခြင်း၊ Security Log နဲ့ Incident Response · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/monitoring-and-incidents/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/monitoring-and-incidents/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/monitoring-and-incidents/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-security">သင်ခန်းစာအားလုံး · Web Security</a> <a href="/docs/read/en/web-security/monitoring-and-incidents/" lang="en" hreflang="en">English</a></nav>
+  <h1>Error ကိုင်တွယ်ခြင်း၊ Security Log နဲ့ Incident Response</h1>
+  
+  <p class="intro">လုပ်ပိုင်ခွင့် စစ်တာ မအောင်မြင်တာနဲ့ database ချိတ်လို့ မရတာဟာ မတူတဲ့ ဖြစ်ရပ်တွေပါ။ User က လုပ်ထားတာ အောင်မြင်လား သိဖို့လိုပြီး တာဝန်ရှိသူက ဘာပျက်သလဲ၊ data တကယ်ပြောင်းသွားလား ပြန်စစ်နိုင်ဖို့ လိုပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-security/monitoring-and-incidents">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#fail-closed">အမှားဖြစ်ချိန်မှာ ခွင့်ပြုချက်နဲ့ data ကို ထိန်းထားခြင်း</a></li>
+<li><a href="#alert-and-recover">Security event ကနေ အရေးယူဆောင်ရွက်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="fail-closed">
+  <h2>အမှားဖြစ်ချိန်မှာ ခွင့်ပြုချက်နဲ့ data ကို ထိန်းထားခြင်း</h2>
+  <p>လုပ်ပိုင်ခွင့်ကို အတည်မပြုနိုင်ရင် အလုပ်ကို ရပ်ပါ။ အတူပြောင်းရမယ့် record တွေကို transaction တစ်ခုထဲ ထည့်ပါ။ တစ်ဝက်မှာ ပျက်သွားရင် မူလအတိုင်း ပြန်ထားနိုင်ပါတယ်။ User ကို ဖြစ်ခဲ့တာနဲ့ request ID ပေးပြီး stack trace နဲ့ database အသေးစိတ်ကို access ကန့်သတ်ထားတဲ့ diagnostic log ထဲမှာ ထားပါ။ ထပ်လုပ်လည်း အကျိုးဆက် မထပ်တဲ့ အလုပ်မျိုးကိုပဲ retry လုပ်ပါ။</p>
+
+<pre><code>HTTP/1.1 503 Service Unavailable
+Content-Type: application/json
+
+{&quot;message&quot;:&quot;Could not save your changes. Try again later.&quot;,&quot;requestId&quot;:&quot;req-57&quot;}</code></pre>
+
+
+</section>
+<section class="article-section" id="alert-and-recover">
+  <h2>Security event ကနေ အရေးယူဆောင်ရွက်ခြင်း</h2>
+  <p>အရေးပါတဲ့ access ငြင်းပယ်မှု၊ လုပ်ပိုင်ခွင့် ပြောင်းလဲမှုနဲ့ key အသစ်လဲမှုတွေကို ရှာဖတ်လို့ရတဲ့ field တွေနဲ့ မှတ်ပါ။ Password၊ token နဲ့ စာအကြောင်းအရာတွေ ဖယ်ထားပါ။ Log ဖတ်ခွင့်နဲ့ သိမ်းထားမယ့် သက်တမ်းကို သတ်မှတ်ပါ။ အရေးကြီးတဲ့ alert ကို ဘယ်သူလက်ခံမလဲ ကြိုသတ်မှတ်ပါ။ Incident ဖြစ်ရင် အထောက်အထား ထိန်းသိမ်း၊ ထိခိုက်တဲ့ access ကို ပိတ်၊ စစ်ပြီးသား အခြေအနေကနေ ပြန်ဖွင့်ပြီး မူလကာကွယ်မှုကို ပြန်စစ်ပါ။</p>
+
+<pre><code>{&quot;event&quot;:&quot;document.edit.denied&quot;,&quot;actorId&quot;:&quot;user-7&quot;,&quot;requestId&quot;:&quot;req-57&quot;}
+Alert owner     On-call application team
+Recovery check  Revoked sessions are denied; authorized readers can reopen files</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html">OWASP · Logging</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html">OWASP · Error handling</a></li>
+<li><a href="https://owasp.org/Top10/2025/">OWASP Top 10 (2025)</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-security/secure-deployment/">အရင်သင်ခန်းစာ · Deployment နဲ့ Software Supply Chain Security</a>
+<a href="/docs/read/my/web-security/owasp-and-release-review/">နောက်သင်ခန်းစာ · OWASP Top 10 နဲ့ Release မလုပ်ခင် စစ်ဆေးခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

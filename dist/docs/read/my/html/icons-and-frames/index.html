@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Favicon က browser ရဲ့ tab လို နေရာတွေမှာ စာမျက်နှာကို ကိုယ်စားပြုပါတယ်။ Iframe က စာမျက်နှာထဲမှာ document တစ်ခု ထပ်ပြပါတယ်။">
+  <title>Favicons နဲ့ Iframes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/icons-and-frames/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/icons-and-frames/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/icons-and-frames/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/icons-and-frames/" lang="en" hreflang="en">English</a></nav>
+  <h1>Favicons နဲ့ Iframes</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Favicon က browser ရဲ့ tab လို နေရာတွေမှာ စာမျက်နှာကို ကိုယ်စားပြုပါတယ်။ Iframe က စာမျက်နှာထဲမှာ document တစ်ခု ထပ်ပြပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/icons-and-frames">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#favicon">&lt;head&gt; ထဲမှာ Favicon ထည့်ခြင်း</a></li>
+<li><a href="#iframe">&lt;iframe&gt; နဲ့ Document တစ်ခု ထည့်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="favicon">
+  <h2>&lt;head&gt; ထဲမှာ Favicon ထည့်ခြင်း</h2>
+  <p>rel=&quot;icon&quot; ပါတဲ့ link က icon ဖိုင်ကို ညွှန်းပါတယ်။ Site မှာ href ကို ./favicon.svg လို ပုံဖိုင်လမ်းကြောင်း ပေးလေ့ရှိပါတယ်။ ဒီနမူနာမှာ ဖိုင်ထပ်မလိုအောင် ပုံကို HTML ထဲ တစ်ခါတည်း ထည့်ထားပါတယ်။ Tab ပေါ်က icon ကို ကြည့်ဖို့ ဒီ HTML ကို သိမ်းပြီး သီးခြား tab မှာ ဖွင့်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Add a favicon in &amp;lt;head&amp;gt;&lt;/title&gt;
+  &lt;link rel=&quot;icon&quot; href=&quot;data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2032%2032%27%3E%3Ccircle%20cx=%2716%27%20cy=%2716%27%20r=%2714%27%20fill=%27teal%27/%3E%3C/svg%3E&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;&lt;img id=&quot;icon&quot; width=&quot;26&quot; height=&quot;26&quot; alt=&quot;&quot;&gt; Example Store&lt;/h1&gt;
+  &lt;script&gt;
+document.querySelector(&quot;#icon&quot;).src = document.querySelector(&#39;link[rel=&quot;icon&quot;]&#39;).href;
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Preview မှာ ခေါင်းစဉ်ဘေးမှာ icon ကို မြင်ရပါမယ်။ လက်ရှိ tab က Docs စာမျက်နှာကိုပဲ ပြထားပါတယ်။</p>
+
+</section>
+<section class="article-section" id="iframe">
+  <h2>&lt;iframe&gt; နဲ့ Document တစ်ခု ထည့်ခြင်း</h2>
+  <p>iframe ထဲက document က အပြင်စာမျက်နှာနဲ့ သီးခြားပါ။ URL ထည့်ဖို့ src၊ HTML ကို တိုက်ရိုက်ရေးဖို့ srcdoc သုံးပါ။ အတွင်းက အကြောင်းအရာကို assistive technology က သိနိုင်အောင် title ပေးပါ။ Website တချို့က iframe ထဲ ထည့်ပြခွင့် မပေးပါဘူး။ ဒီနမူနာမှာ HTML ကို inline ရေးပြီး sandbox မှာ ထပ်ဆောင်းခွင့်ပြုချက် မပေးထားပါဘူး။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Embed a document with &amp;lt;iframe&amp;gt;&lt;/title&gt;
+  &lt;style&gt;
+iframe { width: min(100%, 300px); box-sizing: border-box; border: 1px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2&gt;Opening hours&lt;/h2&gt;
+&lt;iframe title=&quot;Weekly opening hours&quot; sandbox
+  srcdoc=&quot;&lt;p&gt;Monday–Friday, 9–5&lt;/p&gt;&quot;&gt;&lt;/iframe&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အပြင်စာမျက်နှာမှာ Opening hours၊ frame ထဲမှာ Monday–Friday, 9–5 ပေါ်ပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel#icon">MDN · rel=&quot;icon&quot;</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe">MDN · &lt;iframe&gt;</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/media/">အရင်သင်ခန်းစာ · HTML မှာ အသံနဲ့ ဗီဒီယို ထည့်ခြင်း</a>
+<a href="/docs/read/my/html/tables/">နောက်သင်ခန်းစာ · HTML ဇယားများ &lt;table&gt;</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A signed-in person may be an editor of one document and a viewer of another. Authorization decides whether this person may perform this action on this specific resource.">
+  <title>Authorization and Object-Level Access Control · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/authorization/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/authorization/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/authorization/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/authorization/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Authorization and Object-Level Access Control</h1>
+  
+  <p class="intro">A signed-in person may be an editor of one document and a viewer of another. Authorization decides whether this person may perform this action on this specific resource.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/authorization">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#access-matrix">Describe the roles and permitted actions</a></li>
+<li><a href="#scoped-update">Enforce the rule when writing the row</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="access-matrix">
+  <h2>Describe the roles and permitted actions</h2>
+  <p>Start with no access and grant only the operations each role needs. Define who may invite collaborators as well as who may edit content. Check current membership on the server for every request, including downloads and background exports.</p>
+
+<pre><code>Role      Read    Edit    Invite
+Owner     Yes     Yes     Yes
+Editor    Yes     Yes     No
+Viewer    Yes     No      No
+Guest     No      No      No</code></pre>
+
+
+</section>
+<section class="article-section" id="scoped-update">
+  <h2>Enforce the rule when writing the row</h2>
+  <p>Suppose each document has a tenant and a membership row for every collaborator, including its owner. Scope the write to both tenant and current membership. Bind user and tenant identifiers from verified server context. Only report success when a row was updated. Hiding the Edit button helps the interface, while this check protects the data.</p>
+
+<pre><code>UPDATE documents AS d SET title = $1
+WHERE d.id = $2 AND d.tenant_id = $3
+  AND EXISTS (
+    SELECT 1 FROM document_members AS m
+    WHERE m.document_id = d.id AND m.user_id = $4
+      AND m.role IN (&#39;owner&#39;, &#39;editor&#39;)
+  )
+RETURNING d.id;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html">OWASP · Authorization</a></li>
+<li><a href="https://owasp.org/API-Security/editions/2023/en/0x11-t10/">OWASP · API Security Top 10</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/sessions-and-tokens/">Previous lesson · Sessions, Cookies, OAuth, and OpenID Connect</a>
+<a href="/docs/read/en/web-security/csrf/">Next lesson · Cross-Site Request Forgery (CSRF)</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

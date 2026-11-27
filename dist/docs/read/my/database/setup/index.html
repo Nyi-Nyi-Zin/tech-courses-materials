@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="အရင်သင်ခန်းစာမှာ ထည့်ထားတဲ့ server ကို ဖွင့်ထားပါ။ ကိုယ့် OS အတွက် connection command ကို ရွေးပြီး practice database ဆောက်မယ်။ ပြီးရင် students၊ courses နဲ့ enrollments tables တွေ ဆောက်ကြည့်မယ်။">
+  <title>psql နဲ့ ချိတ်ပြီး Tables တည်ဆောက်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/setup/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/setup/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/setup/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/setup/" lang="en" hreflang="en">English</a></nav>
+  <h1>psql နဲ့ ချိတ်ပြီး Tables တည်ဆောက်ခြင်း</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">အရင်သင်ခန်းစာမှာ ထည့်ထားတဲ့ server ကို ဖွင့်ထားပါ။ ကိုယ့် OS အတွက် connection command ကို ရွေးပြီး practice database ဆောက်မယ်။ ပြီးရင် students၊ courses နဲ့ enrollments tables တွေ ဆောက်ကြည့်မယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/setup">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#psql">Windows PowerShell ကနေ psql ချိတ်ခြင်း</a></li>
+<li><a href="#macos">Postgres.app သုံးထားတဲ့ macOS ကနေ ချိတ်ခြင်း</a></li>
+<li><a href="#ubuntu">Ubuntu မှာ Local postgres Account နဲ့ ချိတ်ခြင်း</a></li>
+<li><a href="#short-login">postgres နဲ့ အတိုကောက် ဝင်ခြင်း</a></li>
+<li><a href="#prompt">psql Prompt ကို ဖတ်ခြင်း</a></li>
+<li><a href="#create-database">လေ့ကျင့်ဖို့ Database တစ်ခု ဆောက်ခြင်း</a></li>
+<li><a href="#schema">Students၊ Courses နဲ့ Enrollments Tables ဆောက်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="psql">
+  <h2>Windows PowerShell ကနေ psql ချိတ်ခြင်း</h2>
+  <p>PowerShell မှာ ရိုက်ပါ။ Password တောင်းရင် install တုန်းက သတ်မှတ်ထားတဲ့ PostgreSQL password ကို ထည့်ပါ။ Port သို့မဟုတ် role မတူရင် သက်ဆိုင်တဲ့တန်ဖိုးကို ပြောင်းပါ။</p>
+
+<pre><code>psql -h localhost -p 5432 -U postgres -d postgres</code></pre>
+<dl class="lesson-terms"><div><dt><code>psql</code></dt><dd>PostgreSQL terminal client ကို ဖွင့်တယ်။</dd></div><div><dt><code>-h localhost</code></dt><dd>ဘယ်စက်ကို ချိတ်မလဲဆိုတာ ရွေးတယ်။ localhost က psql run နေတဲ့ ကိုယ့်စက်ပါ။</dd></div><div><dt><code>-p 5432</code></dt><dd>အဲဒီစက်ပေါ်က TCP port ကို ရွေးတယ်။</dd></div><div><dt><code>-U postgres</code></dt><dd>postgres ဆိုတဲ့ PostgreSQL role နဲ့ ဝင်တယ်။</dd></div><div><dt><code>-d postgres</code></dt><dd>postgres ဆိုတဲ့ database ကို ဖွင့်တယ်။ ဒီဥပမာမှာ role နာမည်နဲ့ database နာမည်က တူနေတယ်။</dd></div></dl>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> postgres=# လို prompt ပေါ်ရင် psql ထဲ ရောက်နေပါပြီ။ Password ရိုက်နေချိန် စာလုံးတွေ မပေါ်တာ ပုံမှန်ပါ။</p>
+
+</section>
+<section class="article-section" id="macos">
+  <h2>Postgres.app သုံးထားတဲ့ macOS ကနေ ချိတ်ခြင်း</h2>
+  <p>Terminal မှာ Postgres.app က သတ်မှတ်ပေးထားတဲ့ macOS account နာမည်ကို role အဖြစ် သုံးပါ။ Shell က whoami ကို run လုပ်ပြီး account နာမည် ထည့်ပေးတယ်။ Postgres.app server ရဲ့ port က မတူရင် ပြောင်းပါ။</p>
+
+<pre><code>psql -h localhost -p 5432 -U &quot;$(whoami)&quot; -d postgres</code></pre>
+
+
+</section>
+<section class="article-section" id="ubuntu">
+  <h2>Ubuntu မှာ Local postgres Account နဲ့ ချိတ်ခြင်း</h2>
+  <p>ပုံမှန် Ubuntu package installation မှာ local Unix socket ကနေ ချိတ်ပါတယ်။ sudo -u postgres က psql ကို OS ရဲ့ postgres user အဖြစ် run ပေးတယ်။ Peer authentication က အဲဒီ OS user နာမည်ကို PostgreSQL role နာမည်နဲ့ တိုက်စစ်နိုင်တယ်။ -d က postgres database ကို ရွေးတယ်။</p>
+
+<pre><code>sudo -u postgres psql -d postgres</code></pre>
+
+
+</section>
+<section class="article-section" id="short-login">
+  <h2>postgres နဲ့ အတိုကောက် ဝင်ခြင်း</h2>
+  <p>OS terminal မှာ ရိုက်ပါ။ postgres role ကို ရွေးပေးတယ်။ Client ရဲ့ default settings နဲ့ဆို psql က postgres database၊ local connection နဲ့ port 5432 ကို သုံးတယ်။ Local authentication နဲ့ ဝင်မရရင် အပေါ်က ကိုယ့် OS အတွက် command အပြည့်အစုံကို သုံးပါ။</p>
+
+<pre><code>psql -U postgres</code></pre>
+
+
+</section>
+<section class="article-section" id="prompt">
+  <h2>psql Prompt ကို ဖတ်ခြင်း</h2>
+  <p>Prompt ကို program က ပြပေးတာပါ။ Prompt နောက်မှာ command ကိုပဲ ရိုက်ပါ။ psql ထဲမှာ terminal command ကို မှားရိုက်မိလို့ continuation prompt ဖြစ်သွားရင် အောက်ကအတိုင်း ပြန်ရှင်းပါ။</p>
+
+<pre><code>postgres=# SELECT
+postgres-#   CURRENT_DATE;
+ current_date
+--------------
+ 2026-11-24
+(1 row)</code></pre>
+<dl class="lesson-terms"><div><dt><code>postgres=#</code></dt><dd>postgres database ထဲမှာ command လက်ခံဖို့ အသင့်ဖြစ်နေတယ်။ Default prompt မှာ # က ပုံမှန်အားဖြင့် superuser ကို ဆိုလိုတယ်။ သာမန် role ဆို postgres=&gt; လို့ မြင်ရတယ်။</dd></div><div><dt><code>postgres-#</code></dt><dd>SQL statement မပြီးသေးတာပါ။ အဆုံးမှာ semicolon မထည့်ရသေးလို့ ဖြစ်တာများတယ်။</dd></div><div><dt><code>\r / Ctrl+C</code></dt><dd>ရိုက်လက်စ statement ကို \r နဲ့ ရှင်းပါ။ Quote မပိတ်ဘဲ ကျန်နေရင် Ctrl+C နှိပ်ပါ။ OS terminal command ပြန်ရိုက်ဖို့ \q နဲ့ psql ထဲက ထွက်ပါ။</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="create-database">
+  <h2>လေ့ကျင့်ဖို့ Database တစ်ခု ဆောက်ခြင်း</h2>
+  <p>psql ထဲမှာ database ဆောက်ခွင့်ရှိတဲ့ role နဲ့ CREATE DATABASE ကို run ပါ။ ပြီးရင် client ထဲက မထွက်ဘဲ database ပြောင်းဖို့ psql command ဖြစ်တဲ့ \c ကို သုံးပါ။ နောက်သင်ခန်းစာတွေကို ဒီ database ထဲမှာ စမ်းပါ။</p>
+
+<pre><code>CREATE DATABASE learning_db;
+\c learning_db</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> CREATE DATABASE လို့ ပြပြီး learning_db ကို ချိတ်ထားကြောင်း ပေါ်မယ်။ Prompt က learning_db နဲ့ စမယ်။</p>
+<p class="example-check"><strong>ရလဒ်ကွာနေရင်</strong> learning_db ရှိပြီးသားဆို \c learning_db ပဲ run ပါ။ connection refused ဆိုရင် ရွေးထားတဲ့ address မှာ server လက်ခံနေလား စစ်ပါ။ password authentication failed ဆိုရင် ချိတ်ထားတဲ့ server အတွက် role နဲ့ password ကို ပြန်စစ်ပါ။</p>
+</section>
+<section class="article-section" id="schema">
+  <h2>Students၊ Courses နဲ့ Enrollments Tables ဆောက်ခြင်း</h2>
+  <p>learning_db ထဲမှာ run ပါ။ Enrollment row တစ်ကြောင်းက student တစ်ယောက်နဲ့ course တစ်ခုကို ချိတ်ပါတယ်။ Student တစ်ယောက်က course အများကြီး တက်နိုင်သလို course တစ်ခုမှာလည်း student အများကြီး ရှိနိုင်တယ်။ Parent table နှစ်ခုကို အရင်ဆောက်ပြီးမှ enrollments ဆောက်ပါ။ အရင်သင်ခန်းစာက learning_db ရှိပြီးသားဆိုရင်လည်း ဒီ block တစ်ခုလုံး run လို့ရပါတယ်။</p>
+
+<pre><code>CREATE TABLE IF NOT EXISTS students (
+  id integer PRIMARY KEY,
+  name text NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS courses (
+  id integer PRIMARY KEY,
+  title text NOT NULL,
+  fee numeric(10, 2) NOT NULL CHECK (fee &gt;= 0)
+);
+
+CREATE TABLE IF NOT EXISTS enrollments (
+  student_id integer REFERENCES students(id),
+  course_id integer REFERENCES courses(id),
+  enrolled_on date NOT NULL,
+  PRIMARY KEY (student_id, course_id)
+);
+
+INSERT INTO students (id, name)
+VALUES (1, &#39;Aye&#39;), (2, &#39;Min&#39;), (3, &#39;Su&#39;)
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO courses (id, title, fee)
+VALUES (1, &#39;SQL Basics&#39;, 30.00), (2, &#39;Web Development&#39;, 25.00),
+       (3, &#39;Computer Fundamentals&#39;, 20.00)
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO enrollments (student_id, course_id, enrolled_on)
+VALUES (1, 1, DATE &#39;2026-01-05&#39;), (2, 1, DATE &#39;2026-01-06&#39;),
+       (1, 2, DATE &#39;2026-01-07&#39;)
+ON CONFLICT (student_id, course_id) DO NOTHING;</code></pre>
+<dl class="lesson-terms"><div><dt><code>students / courses</code></dt><dd>Parent table နှစ်ခုက student နာမည်နဲ့ course အချက်အလက်တွေကို သိမ်းတယ်။ Table တစ်ခုစီရဲ့ ID က သူ့ primary key ပါ။</dd></div><div><dt><code>enrollments / REFERENCES</code></dt><dd>Foreign key နှစ်ခုကြောင့် ID နှစ်ခုလုံး သက်ဆိုင်ရာ table မှာ ရှိရတယ်။ Column နှစ်ခုပေါင်းထားတဲ့ primary key က student တစ်ယောက် course တစ်ခုတည်းမှာ နှစ်ခါစာရင်းသွင်းတာကို တားတယ်။</dd></div><div><dt><code>IF NOT EXISTS / ON CONFLICT</code></dt><dd>ထပ် run ရင် ရှိပြီးသား table တွေကို ဆက်သုံးပြီး key တူတဲ့ နမူနာ row တွေကို ကျော်သွားတယ်။</dd></div></dl>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> နမူနာအသစ်မှာ student သုံးယောက်၊ course သုံးခုနဲ့ enrollment သုံးကြောင်း ရှိမယ်။ Aye က course နှစ်ခု တက်ပြီး Computer Fundamentals မှာ စာရင်းသွင်းသူ မရှိသေးဘူး။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/">PostgreSQL 19 documentation</a></li>
+<li><a href="https://www.postgresql.org/docs/19/app-psql.html">psql manual</a></li>
+<li><a href="https://www.postgresql.org/docs/19/ddl-constraints.html">Constraints</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/install/">အရင်သင်ခန်းစာ · PostgreSQL နဲ့ psql ထည့်သွင်းခြင်း</a>
+<a href="/docs/read/my/database/psql-commands/">နောက်သင်ခန်းစာ · psql နဲ့ Databases၊ Roles၊ Schemas နဲ့ Tables စစ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

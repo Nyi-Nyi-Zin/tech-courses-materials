@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Search a documented parameter space and keep the final test set for evaluation.">
+  <title>Tune hyperparameters with cross-validation · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/hyperparameter-tuning/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/hyperparameter-tuning/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/hyperparameter-tuning/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#machine-learning">All documentation · Machine Learning</a> <a href="/docs/read/my/machine-learning/hyperparameter-tuning/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Tune hyperparameters with cross-validation</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Search a documented parameter space and keep the final test set for evaluation.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/machine-learning/hyperparameter-tuning">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#search">Choose a search strategy and metric</a></li>
+<li><a href="#evaluate">Tune on training data, then evaluate on the holdout</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="search">
+  <h2>Choose a search strategy and metric</h2>
+  <p>Parameters are fitted from training data. Hyperparameters configure the estimator before fitting. GridSearchCV evaluates a supplied grid with cross-validation. RandomizedSearchCV samples from the search space using a fixed evaluation budget.</p>
+
+
+
+
+</section>
+<section class="article-section" id="evaluate">
+  <h2>Tune on training data, then evaluate on the holdout</h2>
+  <p>Choose folds and a metric for your problem. Use pipeline step names such as model__C in a parameter grid. Evaluate the refitted best pipeline once on the holdout. Use an untouched test set or nested cross-validation when estimating the performance of the tuning process.</p>
+
+<pre><code>from sklearn.datasets import load_iris
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import GridSearchCV, train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=42)
+pipeline = Pipeline([(&quot;scale&quot;, StandardScaler()), (&quot;model&quot;, LogisticRegression(max_iter=500))])
+search = GridSearchCV(pipeline, {&quot;model__C&quot;: [0.1, 1, 10]}, cv=3, scoring=&quot;f1_macro&quot;)
+search.fit(X_train, y_train)
+print(len(search.cv_results_[&quot;params&quot;]))
+print(search.score(X_test, y_test) &gt; 0.8)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">3
+True</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/grid_search.html">Tuning estimator hyperparameters</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/cross_validation.html">Cross-validation</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/machine-learning/feature-engineering/">Previous lesson · Feature engineering for numeric and categorical data</a>
+<a href="/docs/read/en/machine-learning/classification-thresholds/">Next lesson · Handle imbalanced classes and choose a threshold</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Web app မှာ ဘယ်လိုအန္တရာယ်တွေ ရှိနိုင်လဲ ဆွေးနွေးဖို့ OWASP Top 10 (2025) ကို သုံးနိုင်ပါတယ်။ ကိုယ်တင်မယ့် feature အတွက် ဘယ်အချက်တွေ အောင်မြင်ရမလဲ အသေးစိတ် သတ်မှတ်ဖို့ Application Security Verification Standard (ASVS) ကို သုံးပါ။ Document မျှဝေတဲ့ နမူနာနဲ့ ပြန်ချိတ်ကြည့်ရအောင်။">
+  <title>OWASP Top 10 နဲ့ Release မလုပ်ခင် စစ်ဆေးခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/owasp-and-release-review/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/owasp-and-release-review/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/owasp-and-release-review/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-security">သင်ခန်းစာအားလုံး · Web Security</a> <a href="/docs/read/en/web-security/owasp-and-release-review/" lang="en" hreflang="en">English</a></nav>
+  <h1>OWASP Top 10 နဲ့ Release မလုပ်ခင် စစ်ဆေးခြင်း</h1>
+  
+  <p class="intro">Web app မှာ ဘယ်လိုအန္တရာယ်တွေ ရှိနိုင်လဲ ဆွေးနွေးဖို့ OWASP Top 10 (2025) ကို သုံးနိုင်ပါတယ်။ ကိုယ်တင်မယ့် feature အတွက် ဘယ်အချက်တွေ အောင်မြင်ရမလဲ အသေးစိတ် သတ်မှတ်ဖို့ Application Security Verification Standard (ASVS) ကို သုံးပါ။ Document မျှဝေတဲ့ နမူနာနဲ့ ပြန်ချိတ်ကြည့်ရအောင်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-security/owasp-and-release-review">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#risk-map">အန္တရာယ် ၁၀ မျိုးနဲ့ သက်ဆိုင်တဲ့ ကာကွယ်မှုများ</a></li>
+<li><a href="#acceptance">Private document feature ကို စစ်ဆေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="risk-map">
+  <h2>အန္တရာယ် ၁၀ မျိုးနဲ့ သက်ဆိုင်တဲ့ ကာကွယ်မှုများ</h2>
+  <p>အောက်က တစ်ကြောင်းချင်းကို ကိုယ့် app အတွက် မေးခွန်းတစ်ခုလို ဖတ်ပါ။ ဥပမာ dependency အသစ်တစ်ခု ပါလာတာက supply chain နဲ့ ဆိုင်ပါတယ်။ Production တင်လိုက်တဲ့ build က တကယ်စစ်ထားတဲ့ build ဟုတ်လားဆိုတာ integrity နဲ့ ဆိုင်ပါတယ်။ Feature တစ်ခုကို အမျိုးအစား မျိုးစုံကနေ စစ်လို့ရပါတယ်။</p>
+
+<pre><code>A01  Broken Access Control                    Check document membership on save
+A02  Security Misconfiguration                Disable production debug output
+A03  Software Supply Chain Failures           Review dependencies and build access
+A04  Cryptographic Failures                   Protect keys and encrypt sensitive copies
+A05  Injection                                Bind values in database queries
+A06  Insecure Design                          Model risks before adding sharing
+A07  Authentication Failures                  Protect sign-in and recovery
+A08  Software or Data Integrity Failures      Verify release artifacts before use
+A09  Security Logging and Alerting Failures   Route actionable events to an owner
+A10  Mishandling of Exceptional Conditions    Roll back incomplete changes</code></pre>
+
+
+</section>
+<section class="article-section" id="acceptance">
+  <h2>Private document feature ကို စစ်ဆေးခြင်း</h2>
+  <p>Project ရဲ့ test environment မှာ နမူနာ account နဲ့ နမူနာ document ကို သုံးပါ။ စည်းမျဉ်းတစ်ခုစီအတွက် မူလအခြေအနေ၊ လုပ်ဆောင်ချက်၊ မျှော်မှန်းတဲ့ response နဲ့ database ထဲက နောက်ဆုံးရလဒ်ကို မှတ်ပါ။ ခွင့်ပြုရမယ့်အလုပ်ရော၊ ငြင်းပယ်ရမယ့်အလုပ်ပါ စစ်ပါ။ Release နဲ့အတူ ရလဒ်ကို မှတ်ထားပြီး permission ဒါမှမဟုတ် storage ပြောင်းရင် ပြန်စစ်ပါ။</p>
+
+<pre><code>Given                 When                    Expected evidence
+Current editor        Save a valid title      New title persists after reload
+Invited viewer        Request an edit         Access denied; revision unchanged
+Expired session       Open private document   Sign-in required; no private content
+Scanning unavailable  Upload an attachment    File remains private and pending
+Backup restored       Open sample document    Expected revision and permissions</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://owasp.org/Top10/2025/">OWASP Top 10 (2025)</a></li>
+<li><a href="https://asvs.owasp.org/">OWASP Application Security Verification Standard</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-security/monitoring-and-incidents/">အရင်သင်ခန်းစာ · Error ကိုင်တွယ်ခြင်း၊ Security Log နဲ့ Incident Response</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Identify invalid values, choose nullable dtypes, and resolve duplicates using the correct row grain.">
+  <title>Missing data, data types, and duplicates · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/missing-data/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/missing-data/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/missing-data/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#pandas">All documentation · pandas</a> <a href="/docs/read/my/pandas/missing-data/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Missing data, data types, and duplicates</h1>
+  <p class="article-version">3.1.1</p>
+  <p class="intro">Identify invalid values, choose nullable dtypes, and resolve duplicates using the correct row grain.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/pandas/missing-data">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#missing">Detect and convert missing values</a></li>
+<li><a href="#text-dtypes">Text and nullable dtypes in pandas 3.x</a></li>
+<li><a href="#duplicates">Resolve exact and key duplicates</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="missing">
+  <h2>Detect and convert missing values</h2>
+  <p>Use isna() and notna() to inspect missing values. to_numeric(errors=&quot;coerce&quot;) converts invalid text into missing values. Keep original values or flags when the conversion needs an audit trail.</p>
+
+<pre><code>import pandas as pd
+
+raw = pd.Series([&quot;2&quot;, &quot;ERROR&quot;, &quot;4&quot;], dtype=&quot;string&quot;)
+quantity = pd.to_numeric(raw, errors=&quot;coerce&quot;).astype(&quot;Int64&quot;)
+print(quantity.isna().tolist())
+print(quantity.sum())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[False, True, False]
+6</pre></div>
+
+
+</section>
+<section class="article-section" id="text-dtypes">
+  <h2>Text and nullable dtypes in pandas 3.x</h2>
+  <p>Since pandas 3.0, text values are inferred as the dedicated str dtype instead of object. Inferred str typically represents missing values with NaN, while explicit string uses pd.NA. Use Int64 with a capital I for nullable pandas integers when missing values are allowed.</p>
+
+
+
+
+</section>
+<section class="article-section" id="duplicates">
+  <h2>Resolve exact and key duplicates</h2>
+  <p>duplicated() flags repeated rows after the first by default. Pass subset to inspect key duplicates. A repeated ID can be valid in a line-item table, so verify the intended grain before dropping rows.</p>
+
+<pre><code>import pandas as pd
+
+frame = pd.DataFrame({&quot;id&quot;: [1, 2, 2], &quot;total&quot;: [2, 5, 5]})
+print(frame.duplicated().sum())
+print(len(frame.drop_duplicates()))</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">1
+2</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://pandas.pydata.org/docs/user_guide/missing_data.html">Working with missing data</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/migration-3-strings.html">Migration to the new string dtype</a></li>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.to_numeric.html">pandas.to_numeric</a></li>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.duplicated.html">DataFrame.duplicated</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/pandas/indexing/">Previous lesson · Select, filter, sort, and assign</a>
+<a href="/docs/read/en/pandas/groupby/">Next lesson · Group, aggregate, and reshape</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

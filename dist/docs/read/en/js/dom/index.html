@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The browser turns HTML into a tree in memory called the Document Object Model, or DOM. Browser APIs are operations the browser provides for JavaScript. They can find and change elements or respond to a click.">
+  <title>The DOM and events · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/dom/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/dom/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/dom/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/dom/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>The DOM and events</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">The browser turns HTML into a tree in memory called the Document Object Model, or DOM. Browser APIs are operations the browser provides for JavaScript. They can find and change elements or respond to a click.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/dom">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#nodes">Find an element with querySelector</a></li>
+<li><a href="#create-list-items">Create a list item and append it</a></li>
+<li><a href="#update-remove-items">Update and remove existing list items</a></li>
+<li><a href="#toggle-class">Toggle a class on an element</a></li>
+<li><a href="#events">Listen for a button click</a></li>
+<li><a href="#bubbling">Follow a click as it bubbles</a></li>
+<li><a href="#delegation">Use one listener for a group of buttons</a></li>
+<li><a href="#forms">Read form values on submit</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="nodes">
+  <h2>Find an element with querySelector</h2>
+  <p>document represents the page. querySelector accepts a CSS selector and returns its first match or null when no match exists. textContent replaces the text of the element that was found.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Find an element with querySelector&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p id=&quot;message&quot;&gt;Preparing your order…&lt;/p&gt;
+  &lt;script&gt;
+    const message = document.querySelector(&quot;#message&quot;);
+    message.textContent = &quot;Your order is ready.&quot;;
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The page shows the updated sentence “Your order is ready.”.</p>
+<p class="example-check"><strong>If the result differs</strong> If nothing changes and the Console mentions null, check that the selector matches the ID and that the script runs after the paragraph has been read.</p>
+</section>
+<section class="article-section" id="create-list-items">
+  <h2>Create a list item and append it</h2>
+  <p>createElement(&quot;li&quot;) builds an element in memory. Set its text, then call append on the parent to insert it into the page. Use textContent for a plain text value.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Create a list item and append it&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;ul id=&quot;catalog&quot;&gt;&lt;li&gt;Pen&lt;/li&gt;&lt;/ul&gt;
+  &lt;script&gt;
+    const item = document.createElement(&quot;li&quot;);
+    item.textContent = &quot;Notebook&quot;;
+    document.querySelector(&quot;#catalog&quot;).append(item);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The list shows Pen and then Notebook.</p>
+
+</section>
+<section class="article-section" id="update-remove-items">
+  <h2>Update and remove existing list items</h2>
+  <p>After selecting a list item, assign textContent to change its label. remove() detaches an element from its parent. The browser redraws the page using the updated tree.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Update and remove existing list items&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;ul&gt;&lt;li id=&quot;pen&quot;&gt;Pen&lt;/li&gt;&lt;li id=&quot;folder&quot;&gt;Folder&lt;/li&gt;&lt;/ul&gt;
+  &lt;script&gt;
+    document.querySelector(&quot;#pen&quot;).textContent = &quot;Blue pen&quot;;
+    document.querySelector(&quot;#folder&quot;).remove();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Only Blue pen remains in the list.</p>
+
+</section>
+<section class="article-section" id="toggle-class">
+  <h2>Toggle a class on an element</h2>
+  <p>classList is the list of classes on an element. toggle() adds the class if it is missing and removes it if it is present. For operations based on an ID, confirm that the element exists and belongs to the list before changing it.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Toggle a class on an element&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;ul id=&quot;catalog&quot;&gt;&lt;li id=&quot;pen&quot;&gt;Pen&lt;/li&gt;&lt;/ul&gt;
+  &lt;script&gt;
+    const catalog = document.querySelector(&quot;#catalog&quot;);
+    const item = document.getElementById(&quot;pen&quot;);
+    if (item &amp;&amp; item.matches(&quot;li&quot;) &amp;&amp; catalog.contains(item)) {
+      item.classList.toggle(&quot;featured&quot;);
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Inspect the Pen item to see class=&quot;featured&quot;. Try looking up a missing ID and confirm the page still loads without an error.</p>
+
+</section>
+<section class="article-section" id="events">
+  <h2>Listen for a button click</h2>
+  <p>An event is a notification from the browser that something happened. addEventListener takes the event name and a function to run when it occurs. That function is called an event listener.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Listen for a button click&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id=&quot;ready&quot; type=&quot;button&quot;&gt;Mark ready&lt;/button&gt;
+  &lt;p id=&quot;status&quot;&gt;Waiting&lt;/p&gt;
+  &lt;script&gt;
+    const button = document.querySelector(&quot;#ready&quot;);
+    const status = document.querySelector(&quot;#status&quot;);
+    button.addEventListener(&quot;click&quot;, () =&gt; {
+      status.textContent = &quot;Your order is ready.&quot;;
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The page starts with Waiting. Click the button and the message changes to “Your order is ready.”.</p>
+
+</section>
+<section class="article-section" id="bubbling">
+  <h2>Follow a click as it bubbles</h2>
+  <p>Many events, including click, bubble from the element where they start to ancestors. event.target is the element the event started on in this example. event.currentTarget is the element whose listener is currently running.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Follow a click as it bubbles&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id=&quot;catalog&quot;&gt;&lt;button type=&quot;button&quot; id=&quot;pen&quot;&gt;Pen&lt;/button&gt;&lt;/div&gt;
+  &lt;p id=&quot;result&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+    document.querySelector(&quot;#catalog&quot;).addEventListener(&quot;click&quot;, event =&gt; {
+      document.querySelector(&quot;#result&quot;).textContent =
+        event.target.id + &quot; → &quot; + event.currentTarget.id;
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Click Pen. The page shows pen → catalog because the catalog listener received the button’s click.</p>
+
+</section>
+<section class="article-section" id="delegation">
+  <h2>Use one listener for a group of buttons</h2>
+  <p>Event delegation means putting the listener on a shared parent. closest() looks for the nearest element matching the selector, starting with the click target. dataset reads data-* attributes. Ignore clicks that did not start within one of the intended buttons.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Use one listener for a group of buttons&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id=&quot;catalog&quot;&gt;
+    &lt;button type=&quot;button&quot; data-product=&quot;Pen&quot;&gt;&lt;strong&gt;Pen&lt;/strong&gt;&lt;/button&gt;
+    &lt;button type=&quot;button&quot; data-product=&quot;Notebook&quot;&gt;Notebook&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;p id=&quot;result&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const catalog = document.querySelector(&quot;#catalog&quot;);
+    catalog.addEventListener(&quot;click&quot;, event =&gt; {
+      const button = event.target.closest(&quot;button[data-product]&quot;);
+      if (!button || !catalog.contains(button)) return;
+      document.querySelector(&quot;#result&quot;).textContent = button.dataset.product;
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Click either button, including the bold text inside Pen. The result displays the product name.</p>
+
+</section>
+<section class="article-section" id="forms">
+  <h2>Read form values on submit</h2>
+  <p>The form receives a submit event after the browser checks required controls. preventDefault() keeps the browser on this page. FormData can collect values by the name attribute.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Read form values on submit&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form id=&quot;order&quot;&gt;
+    &lt;label for=&quot;product&quot;&gt;Product&lt;/label&gt;
+    &lt;input id=&quot;product&quot; name=&quot;product&quot; required&gt;
+    &lt;button type=&quot;submit&quot;&gt;Confirm&lt;/button&gt;
+  &lt;/form&gt;
+  &lt;p id=&quot;result&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const order = document.querySelector(&quot;#order&quot;);
+    order.addEventListener(&quot;submit&quot;, event =&gt; {
+      event.preventDefault();
+      const values = new FormData(order);
+      document.querySelector(&quot;#result&quot;).textContent = values.get(&quot;product&quot;);
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Submit an empty field to see browser validation. Type Pen and submit again. Pen appears below the form.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://dom.spec.whatwg.org/">WHATWG · DOM Standard</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Events">MDN · Introduction to events</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">MDN · FormData</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/scope-and-classes/">Previous lesson · Scope, closures, and classes</a>
+<a href="/docs/read/en/js/dom-selectors-and-events/">Next lesson · DOM selectors and input events</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

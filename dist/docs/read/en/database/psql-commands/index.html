@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Type these commands inside psql after connecting. Backslash commands are processed by the psql client and end at Enter. SQL statements such as SELECT are sent to the server and normally end with a semicolon.">
+  <title>Inspect databases, roles, schemas, and tables · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/psql-commands/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/psql-commands/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/psql-commands/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/psql-commands/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Inspect databases, roles, schemas, and tables</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">Type these commands inside psql after connecting. Backslash commands are processed by the psql client and end at Enter. SQL statements such as SELECT are sent to the server and normally end with a semicolon.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/psql-commands">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#connection">Where am I connected?</a></li>
+<li><a href="#databases">List databases</a></li>
+<li><a href="#database-count">Count the databases</a></li>
+<li><a href="#roles">List roles</a></li>
+<li><a href="#schemas">List schemas</a></li>
+<li><a href="#tables">List visible tables</a></li>
+<li><a href="#describe">Inspect a table’s columns and constraints</a></li>
+<li><a href="#version">Check the connected server version</a></li>
+<li><a href="#help">Find help or exit</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="connection">
+  <h2>Where am I connected?</h2>
+  <p>The connection summary shows the current database, role, and connection address or socket.</p>
+
+<pre><code>\conninfo</code></pre>
+
+
+</section>
+<section class="article-section" id="databases">
+  <h2>List databases</h2>
+  <p>Shows the databases on this server. Look for learning_db after creating it. The columns and values can vary with your psql and server versions and locale settings.</p>
+
+<pre><code>\l</code></pre>
+<dl class="lesson-terms"><div><dt><code>Name</code></dt><dd>The database name, such as learning_db.</dd></div><div><dt><code>Owner</code></dt><dd>The role that owns the database.</dd></div><div><dt><code>Encoding</code></dt><dd>The character encoding. UTF8 supports Burmese text.</dd></div><div><dt><code>Locale Provider</code></dt><dd>Where the database gets its locale behavior. Examples include libc (operating system), icu, and builtin (PostgreSQL).</dd></div><div><dt><code>Collate</code></dt><dd>The locale setting for comparing and sorting text.</dd></div><div><dt><code>Ctype</code></dt><dd>The locale setting for character classification and case conversion.</dd></div><div><dt><code>Locale</code></dt><dd>The locale identifier for providers that use this field, such as ICU. It may be blank for libc.</dd></div><div><dt><code>ICU Rules</code></dt><dd>Custom ICU collation rules, if configured.</dd></div><div><dt><code>Access privileges</code></dt><dd>Explicit database privileges for roles, such as CONNECT or CREATE. A blank cell can mean the built-in defaults apply.</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="database-count">
+  <h2>Count the databases</h2>
+  <p>This SQL query counts the database entries on the connected server, including template databases.</p>
+
+<pre><code>SELECT count(*) AS database_count FROM pg_database;</code></pre>
+
+
+</section>
+<section class="article-section" id="roles">
+  <h2>List roles</h2>
+  <p>The Role name column contains role names. The Attributes column summarizes the special settings of each role. The built-in administrator on a typical local installation may show the attributes below. Run \du postgres to inspect just that role.</p>
+
+<pre><code>\du</code></pre>
+<dl class="lesson-terms"><div><dt><code>Superuser</code></dt><dd>Bypasses database permission checks except the right to log in.</dd></div><div><dt><code>Create role</code></dt><dd>Can create roles and manage eligible roles it administers.</dd></div><div><dt><code>Create DB</code></dt><dd>Can create databases.</dd></div><div><dt><code>Replication</code></dt><dd>Can start streaming replication when its login and connection rules also allow it.</dd></div><div><dt><code>Bypass RLS</code></dt><dd>Bypasses row-level security policies, which can otherwise restrict access to individual rows.</dd></div><div><dt><code>LOGIN / Cannot login</code></dt><dd>LOGIN lets a role authenticate if its connection rules allow it. A role without LOGIN can still group privileges.</dd></div></dl>
+<p class="example-result"><strong>What to expect</strong> Example row: postgres | Superuser, Create role, Create DB, Replication, Bypass RLS</p>
+
+</section>
+<section class="article-section" id="schemas">
+  <h2>List schemas</h2>
+  <p>Shows schemas in the current database. A schema is a namespace for objects such as tables. The examples use the usual public schema.</p>
+
+<pre><code>\dn</code></pre>
+
+
+</section>
+<section class="article-section" id="tables">
+  <h2>List visible tables</h2>
+  <p>Shows tables visible from the current schema search path. Run \dt public.* to explicitly list tables in public. If the database is empty, there may be no tables to show.</p>
+
+<pre><code>\dt</code></pre>
+
+
+</section>
+<section class="article-section" id="describe">
+  <h2>Inspect a table’s columns and constraints</h2>
+  <p>After creating courses in the setup lesson, this displays its columns, data types, defaults, and constraints. Replace courses with the table you want to inspect.</p>
+
+<pre><code>\d courses</code></pre>
+
+
+</section>
+<section class="article-section" id="version">
+  <h2>Check the connected server version</h2>
+  <p>The SQL function version() reports the server version. In your OS terminal, psql --version reports the client version.</p>
+
+<pre><code>SELECT version();</code></pre>
+
+
+</section>
+<section class="article-section" id="help">
+  <h2>Find help or exit</h2>
+  <p>Try these one at a time. Use \q last because it returns you to the operating-system terminal. If command output opens in a pager, press q by itself to close the pager and stay in psql.</p>
+
+<pre><code>\?
+\h SELECT
+\q</code></pre>
+<dl class="lesson-terms"><div><dt><code>\?</code></dt><dd>Lists psql backslash commands.</dd></div><div><dt><code>\h SELECT</code></dt><dd>Shows syntax help for the SQL SELECT statement.</dd></div><div><dt><code>\q</code></dt><dd>Closes psql and returns to your terminal.</dd></div></dl>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/app-psql.html">PostgreSQL · psql</a></li>
+<li><a href="https://www.postgresql.org/docs/19/catalog-pg-database.html">PostgreSQL · Database catalog</a></li>
+<li><a href="https://www.postgresql.org/docs/19/role-attributes.html">PostgreSQL · Role attributes</a></li>
+<li><a href="https://www.postgresql.org/docs/19/functions-info.html">PostgreSQL · Server information functions</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/setup/">Previous lesson · Connect with psql and create tables</a>
+<a href="/docs/read/en/database/crud/">Next lesson · SQL basics and CRUD with one table</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

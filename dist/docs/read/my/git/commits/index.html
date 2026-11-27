@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="project-notes ထဲမှာ ပထမဆုံးဖိုင် ဆောက်ကြည့်ပါမယ်။ ဖိုင်ထဲမှာ ပြင်လိုက်တဲ့အရာက Project မှတ်တမ်းထဲ ဘယ်လိုရောက်သွားလဲဆိုတာ အဆင့်လိုက် ကြည့်ပါ။">
+  <title>Changes Stage လုပ်ခြင်းနဲ့ Commit သိမ်းခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/git/commits/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/git/commits/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/git/commits/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#git">သင်ခန်းစာအားလုံး · Git</a> <a href="/docs/read/en/git/commits/" lang="en" hreflang="en">English</a></nav>
+  <h1>Changes Stage လုပ်ခြင်းနဲ့ Commit သိမ်းခြင်း</h1>
+  
+  <p class="intro">project-notes ထဲမှာ ပထမဆုံးဖိုင် ဆောက်ကြည့်ပါမယ်။ ဖိုင်ထဲမှာ ပြင်လိုက်တဲ့အရာက Project မှတ်တမ်းထဲ ဘယ်လိုရောက်သွားလဲဆိုတာ အဆင့်လိုက် ကြည့်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/git/commits">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#working-tree">Working Tree ထဲမှာ ဖိုင်ပြင်ခြင်း</a></li>
+<li><a href="#stage">နောက် Commit ထဲ ထည့်မယ့် Change ကို ရွေးခြင်း</a></li>
+<li><a href="#commit">ပထမ Commit သိမ်းပြီး History ကြည့်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="working-tree">
+  <h2>Working Tree ထဲမှာ ဖိုင်ပြင်ခြင်း</h2>
+  <p>Working tree ဆိုတာ ကိုယ်ဖွင့်ပြီး ပြင်နေတဲ့ Project ဖိုင်တွေပါ။ Git Bash၊ macOS ဒါမှမဟုတ် Linux မှာ အောက်က command နဲ့ README.md ဆောက်ပါ။ Editor နဲ့လည်း ဆောက်လို့ရပါတယ်။ Git မှာ add မလုပ်ရသေးရင် ဒီဖိုင်ကို untracked လို့ ပြပါမယ်။</p>
+
+<pre><code>printf &#39;# Project Notes\n&#39; &gt; README.md
+git status --short</code></pre>
+
+
+</section>
+<section class="article-section" id="stage">
+  <h2>နောက် Commit ထဲ ထည့်မယ့် Change ကို ရွေးခြင်း</h2>
+  <p>git add က လက်ရှိဖိုင်ထဲက data ကို staging area ထဲ ထည့်ပေးပါတယ်။ git diff --staged နဲ့ နောက် commit ထဲ ဘာပါမလဲ ကြည့်လို့ရပါတယ်။ Stage လုပ်ပြီးမှ ဖိုင်ထပ်ပြင်ရင် နောက်ဆုံးပြင်ထားတာပါဖို့ ထပ် add လုပ်ပါ။</p>
+
+<pre><code>git add README.md
+git diff --staged</code></pre>
+
+
+</section>
+<section class="article-section" id="commit">
+  <h2>ပထမ Commit သိမ်းပြီး History ကြည့်ခြင်း</h2>
+  <p>Commit က stage လုပ်ထားတဲ့ Project အခြေအနေကို local repository ထဲမှာ မှတ်တမ်းတင်ပါတယ်။ ဘာလုပ်ခဲ့လဲ သိသာတဲ့ message ရေးပါ။ git log --oneline မှာ commit အသစ်နဲ့ အတိုကောက် ID ကို တွေ့ပါမယ်။ နောက်ပိုင်း ပြင်ဆင်တဲ့အခါ git diff နဲ့ stage မလုပ်ရသေးတဲ့ tracked file ရဲ့ changes ကို ကြည့်နိုင်ပါတယ်။</p>
+
+<pre><code>git commit -m &quot;Add project README&quot;
+git log --oneline
+git status</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository">Git · Recording changes</a></li>
+<li><a href="https://git-scm.com/docs/git-diff">Git · git diff</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/git/introduction/">အရင်သင်ခန်းစာ · Git မိတ်ဆက်</a>
+<a href="/docs/read/my/git/branches-and-merging/">နောက်သင်ခန်းစာ · Branch ခွဲခြင်းနဲ့ Merge လုပ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Generics preserve a relationship between types without tying a function to one concrete type.">
+  <title>Generics and async types · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/generics/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/generics/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/generics/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#typescript">All documentation · TypeScript</a> <a href="/docs/read/my/typescript/generics/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Generics and async types</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">Generics preserve a relationship between types without tying a function to one concrete type.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/typescript/generics">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#type-param">Reuse a function without losing types</a></li>
+<li><a href="#promise">Describe an asynchronous result</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="type-param">
+  <h2>Reuse a function without losing types</h2>
+  <p>The type parameter T connects the array element type to the return type. Include undefined when an empty array can have no result.</p>
+
+<pre><code>function first&lt;T&gt;(items: readonly T[]): T | undefined {
+  return items[0];
+}
+
+const firstProduct = first([&quot;Pen&quot;, &quot;Notebook&quot;]); // string | undefined</code></pre>
+
+
+</section>
+<section class="article-section" id="promise">
+  <h2>Describe an asynchronous result</h2>
+  <p>An async function returns a Promise. When an API response enters the program, check its data shape at runtime before treating it as a typed value.</p>
+
+<pre><code>async function positivePrices(load: () =&gt; Promise&lt;number[]&gt;): Promise&lt;number[]&gt; {
+  const prices = await load();
+  return prices.filter(price =&gt; price &gt; 0);
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">Generics</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">Everyday types</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/typescript/types/">Previous lesson · Object types, unions, and narrowing</a>
+<a href="/docs/read/en/typescript/function-contracts/">Next lesson · Callbacks and function signatures</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,4 +1,5 @@
-import { p, page, part } from './content.js';
+import { p, page, part, snippet } from './content.js';
+import { schoolSeatSetup } from './postgresql-school.js';
 
 export const advancedPlatform = {
   typescript: [
@@ -85,48 +86,82 @@ export function formatSku(id: number): string;`),
       'Store each kind of fact in the table it belongs to. Join related tables when you need the full record.',
       'အချက်အလက် အမျိုးအစားတစ်ခုစီကို သက်ဆိုင်ရာ table မှာ သိမ်းပါ။ Record အပြည့်လိုရင် ဆက်စပ်နေတဲ့ tables တွေကို join ပါ။',
     ), [
-      part('separate', p('Move repeating values into rows', 'ထပ်နေတဲ့ Values တွေကို Rows ခွဲပါ'), p(
-        'For order items, use one row per product per order. This keeps the design from needing item_1 and item_2 columns. With a key made of order_id and product_id, quantity belongs to the whole key. Product name depends on product_id alone and belongs in products.',
-        'Order တစ်ခုရဲ့ ပစ္စည်းတွေကို order နဲ့ product တစ်စုံစီအတွက် row တစ်ခုထားပါ။ ဒါဆို item_1 နဲ့ item_2 လို column တွေ ထပ်ထည့်စရာ မလိုပါဘူး။ order_id နဲ့ product_id ကို တွဲပြီး key လုပ်ရင် quantity က key နှစ်ခုလုံးပေါ် မူတည်ပါတယ်။ Product name က product_id တစ်ခုပေါ်ပဲ မူတည်လို့ products ထဲမှာ သိမ်းပါ။',
-      ), `CREATE TABLE products (
+      part('separate', p('Read a normalized enrollment list', 'Normalization လုပ်ထားတဲ့ Enrollment စာရင်း ဖတ်ခြင်း'), p(
+        'Run this in learning_db after Setup. Each enrollment stores one student ID and one course ID. Joining with students and courses shows the names and titles. Aye can appear twice in the report while their name is stored once in students.',
+        'Setup ပြီးရင် learning_db ထဲမှာ run ပါ။ Enrollment တစ်ကြောင်းမှာ student ID တစ်ခုနဲ့ course ID တစ်ခုပဲ သိမ်းတယ်။ နာမည်နဲ့ သင်တန်းခေါင်းစဉ်ကို ကြည့်ဖို့ students နဲ့ courses ကို JOIN လုပ်တယ်။ အစီရင်ခံစာထဲမှာ Aye နှစ်ကြောင်းပေါ်နိုင်ပြီး students ထဲမှာတော့ နာမည်ကို တစ်ကြောင်းပဲ သိမ်းတယ်။',
+      ), `SELECT s.name AS student, c.title AS course, e.enrolled_on
+FROM enrollments AS e
+JOIN students AS s ON s.id = e.student_id
+JOIN courses AS c ON c.id = e.course_id
+ORDER BY s.id, c.id;`),
+      snippet('dependencies', p('Follow what each field depends on', 'Field တစ်ခုချင်းက ဘာပေါ် မှီလဲ စစ်ပါ'), p(
+        'For first normal form, store each registration in its own row instead of adding course_1 and course_2 fields to the student record. For second normal form, enrolled_on depends on the whole enrollment key (student_id, course_id). The title depends only on course_id, so it belongs in courses. For third normal form, if courses have a department_id, store department names in departments because department_id determines the department name.',
+        'First normal form မှာ student record ထဲ course_1၊ course_2 လို column တွေ ထပ်ထည့်မယ့်အစား enrollment တစ်ခုစီကို row တစ်ကြောင်းစီ သိမ်းပါ။ Second normal form မှာ enrolled_on က student_id နဲ့ course_id နှစ်ခုလုံးကို မှီတယ်။ Course title က course_id တစ်ခုတည်းကို မှီလို့ courses ထဲမှာ သိမ်းတယ်။ Third normal form မှာ courses ထဲ department_id ပါလာရင် department နာမည်ကို departments ထဲမှာ သိမ်းပါ။ Department နာမည်ကို department_id က ဆုံးဖြတ်လို့ပါ။',
+      ), `CREATE TABLE departments (
   id integer PRIMARY KEY,
   name text NOT NULL
 );
-CREATE TABLE orders (id integer PRIMARY KEY);
-CREATE TABLE order_items (
-  order_id integer REFERENCES orders (id),
-  product_id integer REFERENCES products (id),
-  quantity integer NOT NULL CHECK (quantity > 0),
-  unit_price numeric(10, 2) NOT NULL CHECK (unit_price >= 0),
-  PRIMARY KEY (order_id, product_id)
+
+CREATE TABLE courses (
+  id integer PRIMARY KEY,
+  title text NOT NULL,
+  department_id integer REFERENCES departments(id)
+);
+
+CREATE TABLE enrollments (
+  student_id integer REFERENCES students(id),
+  course_id integer REFERENCES courses(id),
+  enrolled_on date NOT NULL,
+  PRIMARY KEY (student_id, course_id)
 );`),
-      part('dependencies', p('Follow what each field depends on', 'Field တစ်ခုချင်းက ဘာပေါ် မှီလဲ စစ်ပါ'), p(
-        'First normal form removes repeating groups. In second normal form, a non-key field cannot depend on just part of a candidate key. In a typical third normal form design, non-key facts do not depend on other non-key facts. For example, store category_name with category_id in categories. The sale’s unit_price stays on order_items because changing today’s price should preserve old receipts.',
-        'First normal form က ထပ်နေတဲ့ column အုပ်စုတွေကို ဖယ်ပါတယ်။ Second normal form မှာ non-key field တစ်ခုက ပေါင်းထားတဲ့ key ရဲ့ အစိတ်အပိုင်းတစ်ခုပေါ်ပဲ မူတည်တာမျိုး မရှိပါဘူး။ Third normal form မှာ non-key fact တစ်ခုက တခြား non-key fact ပေါ် ထပ်မမှီအောင် စီပါတယ်။ ဥပမာ category_name ကို category_id နဲ့အတူ categories ထဲထားပါ။ ရောင်းခဲ့တဲ့ unit_price ကိုတော့ order_items မှာ သိမ်းတော့ ဒီနေ့ဈေးပြောင်းရင်လည်း ပြေစာအဟောင်း မပြောင်းပါဘူး။',
-      )),
     ], [
       ['PostgreSQL 19 · Constraints', 'https://www.postgresql.org/docs/19/ddl-constraints.html'],
       ['Microsoft Learn · Database normalization', 'https://learn.microsoft.com/en-us/office/troubleshoot/access/database-normalization-description'],
     ]),
     page('transaction-isolation', p('Transaction isolation and concurrent updates', 'Transaction Isolation နဲ့ တစ်ပြိုင်နက် Update များ'), p(
-      'Choose what a transaction can see while other transactions read or change the same database.',
-      'တခြား transaction တွေက database တစ်ခုတည်းကို ဖတ်တာ၊ ပြောင်းတာ လုပ်နေချိန် ကိုယ့် transaction က ဘာတွေမြင်ရမလဲ ရွေးပါ။',
+      'The previous lesson used one session to see what happens when changes are rolled back. With two sessions connected, we can see what one transaction reads while the other changes the data. Choose what a transaction can see while other transactions read or change the same database.',
+      'Database တစ်ခုတည်းမှာ transaction နှစ်ခု တစ်ပြိုင်နက် လုပ်ဆောင်တဲ့အခါ တစ်ဖက်က ပြင်ထားတဲ့ data ကို ကျန်တစ်ဖက်က ဘယ်အချိန်မှာ မြင်ရလဲဆိုတာ isolation level ပေါ်မှာ မူတည်ပါတယ်။ ဒီနမူနာမှာ psql session နှစ်ခု သုံးထားပါတယ်။',
     ), [
-      part('levels', p('Choose an isolation level', 'Isolation Level ရွေးပါ'), p(
-        'Read Committed is the PostgreSQL default. Each statement sees a fresh snapshot of committed data. Repeatable Read keeps one snapshot for ordinary reads after the first data statement. Serializable adds checks so committed transactions behave as if they ran in a serial order. PostgreSQL treats Read Uncommitted as Read Committed.',
-        'Read Committed က PostgreSQL ရဲ့ default ပါ။ Statement တစ်ခုစီက အဲဒီအချိန်ထိ commit လုပ်ထားတဲ့ data ကို မြင်ရပါတယ်။ Repeatable Read က ပထမ data statement နောက်ပိုင်း ဖတ်တဲ့အခါ snapshot တစ်ခုတည်း သုံးပါတယ်။ Serializable က အောင်မြင်ပြီး commit ဖြစ်တဲ့ transaction တွေ တစ်ခုပြီးတစ်ခု run သလို ရလဒ်ရဖို့ ထပ်စစ်ပါတယ်။ PostgreSQL က Read Uncommitted ကို Read Committed အတိုင်း ကိုင်တွယ်ပါတယ်။',
+      part('seat-setup', p('Create the course seats example', 'Course နေရာလွတ် နမူနာ ဆောက်ခြင်း'), p(
+        'Complete Setup first, then connect two psql sessions to learning_db. Run this once in Session A before starting the transaction below. It sets the demo course to 10 open seats. Running it again resets the demo.',
+        'Setup ပြီးရင် psql session နှစ်ခုကို learning_db ဆီ ချိတ်ပါ။ အောက်က transaction မစခင် ဒီ block ကို Session A မှာ တစ်ခါ run ပါ။ နမူနာ course အတွက် နေရာလွတ် 10 နေရာ သတ်မှတ်ပေးတယ်။ ထပ် run ရင် နမူနာကို အစကနေ ပြန်ထားပေးတယ်။',
+      ), schoolSeatSetup),
+      part('levels', p('Session A · Start Repeatable Read', 'Session A · Repeatable Read စတင်ခြင်း'), p(
+        'Read Committed is the PostgreSQL default and takes a fresh snapshot for each statement. Repeatable Read keeps the snapshot established by the first query or data-modification statement. Run the following in Session A. It reads 10. Keep the transaction open and switch to Session B.',
+        'Read Committed က PostgreSQL ရဲ့ default ဖြစ်ပြီး statement တစ်ခုချင်းစီအတွက် snapshot အသစ် ယူတယ်။ Repeatable Read က ပထမ query သို့မဟုတ် data ပြောင်းတဲ့ statement ယူထားတဲ့ snapshot ကို ဆက်သုံးတယ်။ ဒီ block ကို Session A မှာ run ပါ။ 10 ကို မြင်ရမယ်။ Transaction ကို ဖွင့်ထားပြီး Session B ဆီ ပြောင်းပါ။',
       ), `BEGIN ISOLATION LEVEL REPEATABLE READ;
-SELECT id, quantity FROM products WHERE id = 1;
--- Commit a quantity change in a second psql session.
-SELECT id, quantity FROM products WHERE id = 1;
+SELECT seats_open FROM course_seats_demo WHERE course_id = 1;`),
+      part('session-b', p('Session B · Change the number of seats', 'Session B · နေရာလွတ် အရေအတွက် ပြောင်းခြင်း'), p(
+        'Run this in Session B and commit there. The new value is 15. Switch back to Session A when COMMIT succeeds.',
+        'ဒီ block ကို Session B မှာ run ပြီး commit လုပ်ပါ။ တန်ဖိုးအသစ်က 15 ပါ။ COMMIT အောင်မြင်ရင် Session A ဆီ ပြန်သွားပါ။',
+      ), `BEGIN;
+UPDATE course_seats_demo SET seats_open = 15 WHERE course_id = 1;
 COMMIT;`),
-      part('stock', p('Update stock in one statement', 'Stock ကို Statement တစ်ခုတည်းနဲ့ ပြင်ပါ'), p(
-        'In Café Inventory, an absolute quantity is set by the admin. For a sale that removes two items, use a relative update with a quantity check in the same statement. Zero returned rows can mean there is too little stock or the product does not exist. If a transaction fails with SQLSTATE 40001, roll back and retry the whole transaction with a bounded retry policy.',
-        'Café Inventory မှာ admin က quantity အတိအကျ ထည့်ပါတယ်။ နှစ်ခုရောင်းလို့ stock နှစ်ခု လျှော့မယ်ဆိုရင် quantity လောက်လား စစ်တာနဲ့ လျှော့တာကို statement တစ်ခုတည်းမှာ လုပ်ပါ။ Row မပြန်လာရင် stock မလောက်တာ ဒါမှမဟုတ် product မရှိတာ ဖြစ်နိုင်ပါတယ်။ SQLSTATE 40001 နဲ့ transaction ပျက်ရင် rollback လုပ်ပြီး အကြိမ်ရေ ကန့်သတ်ထားတဲ့ retry နဲ့ transaction အစကနေ ပြန် run ပါ။',
-      ), `UPDATE products
-SET quantity = quantity - 2
-WHERE id = 1 AND quantity >= 2
-RETURNING id, quantity;`),
+      part('session-a-again', p('Session A · Compare before and after COMMIT', 'Session A · COMMIT မတိုင်ခင်နဲ့ ပြီးနောက် တိုက်ကြည့်ခြင်း'), p(
+        'The first SELECT still returns 10 because Session A is reading its original snapshot. The SELECT after COMMIT returns 15.',
+        'Session A က မူလ snapshot ကို ဖတ်နေသေးလို့ ပထမ SELECT မှာ 10 ပဲ မြင်ရမယ်။ COMMIT ပြီးမှ ထပ်ဖတ်တဲ့ SELECT မှာ 15 ကို မြင်ရမယ်။',
+      ), `SELECT seats_open FROM course_seats_demo WHERE course_id = 1;
+COMMIT;
+SELECT seats_open FROM course_seats_demo WHERE course_id = 1;`),
+      part('stock', p('Reserve two seats in one statement', 'Statement တစ်ကြောင်းတည်းနဲ့ နေရာနှစ်ခု ယူခြင်း'), p(
+        'The update reserves two seats only when two or more seats are available. Check RETURNING for the new total. Zero rows means no matching course has enough open seats. In the browser this example starts independently with 10 seats.',
+        'နေရာလွတ် နှစ်ခုနဲ့အထက် ရှိမှ ဒီ update က နှစ်နေရာ ယူပေးတယ်။ RETURNING နဲ့ လက်ကျန်နေရာလွတ်ကို ကြည့်ပါ။ Row မရရင် ကိုက်ညီတဲ့ course မှာ နေရာနှစ်ခု မကျန်တာ သို့မဟုတ် course မရှိတာ ဖြစ်နိုင်တယ်။ Browser မှာ ဒီနမူနာကို သီးသန့် နေရာလွတ် 10 နေရာက စတယ်။',
+      ), `UPDATE course_seats_demo
+SET seats_open = seats_open - 2
+WHERE course_id = 1 AND seats_open >= 2
+RETURNING course_id, seats_open;`),
+      snippet('serializable', p('Choose stricter isolation when needed', 'လိုအပ်ရင် ပိုတင်းကျပ်တဲ့ Isolation ကို ရွေးခြင်း'), p(
+        'Serializable checks that successfully committed transactions behave as if they ran in some serial order. If a transaction fails with SQLSTATE 40001, roll it back and retry from the beginning. PostgreSQL treats Read Uncommitted as Read Committed.',
+        'Serializable က commit အောင်မြင်တဲ့ transactions တွေ တစ်ခုစီ အစဉ်လိုက် လုပ်ထားသလို ရလဒ်တူမတူ စစ်ပေးတယ်။ SQLSTATE 40001 ဖြစ်ရင် transaction ကို rollback လုပ်ပြီး အစကနေ ပြန်စမ်းပါ။ PostgreSQL က Read Uncommitted ကို Read Committed အတိုင်း ကိုင်တွယ်တယ်။',
+      ), `BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+UPDATE course_seats_demo
+SET seats_open = seats_open - 1
+WHERE course_id = 1 AND seats_open > 0
+RETURNING seats_open;
+
+COMMIT;
+-- On SQLSTATE 40001, roll back and retry the whole transaction.`),
     ], [
       ['PostgreSQL 19 · Transaction isolation', 'https://www.postgresql.org/docs/19/transaction-iso.html'],
       ['PostgreSQL 19 · UPDATE', 'https://www.postgresql.org/docs/19/sql-update.html'],
@@ -135,17 +170,28 @@ RETURNING id, quantity;`),
       'Create a logical backup of one database and prove you can restore it to a separate database.',
       'Database တစ်ခုကို logical backup ယူပြီး သီးသန့် database ထဲ ပြန်သွင်းလို့ရတာ စစ်ပါ။',
     ), [
-      part('dump', p('Create a custom-format archive', 'Custom Format Backup ဖန်တီးပါ'), p(
-        'Use pg_dump with -Fc. The source account needs read access to the objects and data being backed up. The pg_dump client must be at least as new as the server’s major version. Keep backup files private because they contain database contents.',
-        'pg_dump ကို -Fc နဲ့ သုံးပါ။ Backup ယူမယ့် objects နဲ့ data ကို ဖတ်ခွင့်ရှိတဲ့ account သုံးပါ။ pg_dump client ရဲ့ major version က server နဲ့ တူရမယ် ဒါမှမဟုတ် ပိုအသစ်ဖြစ်ရပါမယ်။ Backup ဖိုင်ထဲမှာ database အချက်အလက် ပါလို့ သီးသန့် သိမ်းပါ။',
-      ), `pg_dump -h localhost -U cafe -Fc -f cafe.dump cafe_inventory
-pg_restore --list cafe.dump`),
-      part('restore', p('Restore into a fresh database', 'Database အသစ်ထဲ Restore လုပ်ပါ'), p(
+      { ...part('dump', p('Create a custom-format archive', 'Custom Format Backup ဖန်တီးပါ'), p(
+        'Use pg_dump with -Fc. After Setup, run this from the OS terminal. The source account needs read access to the objects and data being backed up. The pg_dump client must be at least as new as the server’s major version. Keep backup files private because they contain database contents.',
+        'pg_dump ကို -Fc နဲ့ သုံးပါ။ Setup ပြီးရင် OS terminal မှာ run ပါ။ Backup ယူမယ့် objects နဲ့ data ကို ဖတ်ခွင့်ရှိတဲ့ account သုံးပါ။ pg_dump client ရဲ့ major version က server နဲ့ တူရမယ် ဒါမှမဟုတ် ပိုအသစ်ဖြစ်ရပါမယ်။ Backup ဖိုင်ထဲမှာ database အချက်အလက် ပါလို့ သီးသန့် သိမ်းပါ။',
+      ), `pg_dump -h localhost -p 5432 -U postgres -Fc -f learning_db.dump learning_db
+pg_restore --list learning_db.dump`),
+        terms: [
+          ['pg_dump -h localhost -p 5432 -U postgres -Fc -f learning_db.dump learning_db', p('Connect as postgres on localhost, read learning_db, and save a custom-format archive to learning_db.dump. The -f flag sets the output filename.', 'localhost မှာ postgres role နဲ့ ချိတ်ပြီး learning_db ကို ဖတ်တယ်။ -Fc နဲ့ custom-format archive ထုတ်ပြီး -f က သတ်မှတ်တဲ့ learning_db.dump ဖိုင်ထဲ သိမ်းတယ်။')],
+          ['pg_restore --list learning_db.dump', p('List the objects in the archive without restoring them.', 'Archive ထဲက database objects စာရင်းကို ပြတယ်။ Database ထဲကို restore မလုပ်သေးပါဘူး။')],
+        ],
+      },
+      { ...part('restore', p('Restore into a fresh database', 'Database အသစ်ထဲ Restore လုပ်ပါ'), p(
         'Create an empty test database with an account allowed to create databases. If another account owns the test database, connect as that account to restore. For this restore check, --no-owner and --no-privileges skip restoring the original owners and grants. Compare key table counts and check an app read. Plan a separate backup of roles and other cluster-wide objects, and use your host’s point-in-time recovery tools if you need replay to a particular time.',
         'Database ဆောက်ခွင့်ရှိတဲ့ account နဲ့ test database အလွတ် ဆောက်ပါ။ Database owner က တခြား account ဖြစ်ရင် အဲဒီ account နဲ့ restore လုပ်ပါ။ ဒီ restore စမ်းသပ်မှုမှာ --no-owner နဲ့ --no-privileges က မူလ owners နဲ့ grants ကို ပြန်မထည့်ပါဘူး။ အရေးကြီးတဲ့ table တွေရဲ့ row count တိုက်ပြီး app ကနေ data ဖတ်စမ်းပါ။ Roles နဲ့ cluster တစ်ခုလုံးသုံး objects တွေအတွက် သီးသန့် backup စီစဉ်ပါ။ သတ်မှတ်ထားတဲ့ အချိန်တစ်ခုဆီ ပြန်သွားဖို့ လိုရင် host ရဲ့ point-in-time recovery tools သုံးပါ။',
-      ), `createdb -h localhost -U postgres -O cafe cafe_inventory_restore
-pg_restore -h localhost -U cafe -d cafe_inventory_restore --exit-on-error --no-owner --no-privileges cafe.dump
-psql -h localhost -U cafe -d cafe_inventory_restore -c "SELECT count(*) FROM products;"`),
+      ), `createdb -h localhost -p 5432 -U postgres learning_db_restore
+pg_restore -h localhost -p 5432 -U postgres -d learning_db_restore --exit-on-error --no-owner --no-privileges learning_db.dump
+psql -h localhost -p 5432 -U postgres -d learning_db_restore -c "SELECT count(*) FROM students;"`),
+        terms: [
+          ['createdb … learning_db_restore', p('Creates the empty target database as postgres.', 'Restore ပြန်သွင်းမယ့် database အလွတ်ကို postgres နဲ့ ဆောက်တယ်။')],
+          ['pg_restore … -d learning_db_restore --exit-on-error', p('Restores learning_db.dump into the database selected by -d and stops on the first error.', 'learning_db.dump ကို -d နဲ့ ရွေးထားတဲ့ database ထဲ ပြန်သွင်းတယ်။ --exit-on-error ကြောင့် ပထမ error မှာ ရပ်တယ်။')],
+          ['psql … -c "SELECT count(*) FROM students;"', p('Runs the quoted SQL once and exits. Compare the student row count with the source database.', 'Quote ထဲက SQL ကို တစ်ခါ run ပြီး terminal ဆီ ပြန်ထွက်တယ်။ students row အရေအတွက်ကို မူလ database နဲ့ တိုက်ကြည့်ပါ။')],
+        ],
+      },
     ], [
       ['PostgreSQL 19 · pg_dump', 'https://www.postgresql.org/docs/19/app-pgdump.html'],
       ['PostgreSQL 19 · pg_restore', 'https://www.postgresql.org/docs/19/app-pgrestore.html'],

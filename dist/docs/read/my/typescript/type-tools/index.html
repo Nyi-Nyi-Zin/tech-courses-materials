@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Field နာမည်တွေ တူညီနေဖို့ မူလ type ကနေ ဆက်စပ် types တွေ ဆောက်ပါ။">
+  <title>keyof နှင့် Utility Types · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/type-tools/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/type-tools/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/type-tools/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#typescript">သင်ခန်းစာအားလုံး · TypeScript</a> <a href="/docs/read/en/typescript/type-tools/" lang="en" hreflang="en">English</a></nav>
+  <h1>keyof နှင့် Utility Types</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">Field နာမည်တွေ တူညီနေဖို့ မူလ type ကနေ ဆက်စပ် types တွေ ဆောက်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/typescript/type-tools">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#keyof">တကယ်ရှိတဲ့ Field နာမည်တွေပဲ လက်ခံခြင်း</a></li>
+<li><a href="#utility">View သို့ Patch အတွက် Type ဆောက်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="keyof">
+  <h2>တကယ်ရှိတဲ့ Field နာမည်တွေပဲ လက်ခံခြင်း</h2>
+  <p>keyof က type တစ်ခုရဲ့ keys တွေကို union အဖြစ် ထုတ်ပေးပါတယ်။ Generic constraint နဲ့ object မှာ တကယ်ရှိတဲ့ key ကိုပဲ ပေးနိုင်ပါတယ်။ T[K] က အဲဒီ property ရဲ့ type ပြန်ပါတယ်။</p>
+
+<pre><code>function readField&lt;T, K extends keyof T&gt;(row: T, key: K): T[K] {
+  return row[key];
+}
+
+const price = readField({ name: &quot;Pen&quot;, price: 2 }, &quot;price&quot;);</code></pre>
+
+
+</section>
+<section class="article-section" id="utility">
+  <h2>View သို့ Patch အတွက် Type ဆောက်ခြင်း</h2>
+  <p>Pick က fields ရွေးပြီး Omit က fields ဖယ်ပါတယ်။ Partial က top level fields ကို optional လုပ်ပါတယ်။ အဲဒီ types တွေက compiler အတွက် သတ်မှတ်ချက်ပါ။ Runtime object ထဲက fields ကို မဖယ်ပေးပါဘူး။</p>
+
+<pre><code>type Product = { id: number; name: string; price: number };
+type ProductCard = Pick&lt;Product, &quot;name&quot; | &quot;price&quot;&gt;;
+type ProductUpdate = Partial&lt;Omit&lt;Product, &quot;id&quot;&gt;&gt;;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/keyof-types.html">keyof type operator</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">Utility types</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/typescript/function-contracts/">အရင်သင်ခန်းစာ · Callbacks နှင့် Function Signatures</a>
+<a href="/docs/read/my/typescript/modules/">နောက်သင်ခန်းစာ · Modules နှင့် Type-only Imports</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

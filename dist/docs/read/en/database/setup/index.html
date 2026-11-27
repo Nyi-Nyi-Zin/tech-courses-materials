@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Start the server you installed in the previous lesson. Choose the connection command for your operating system, then create a practice database and set up students, courses, and enrollments.">
+  <title>Connect with psql and create tables · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/setup/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/setup/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/setup/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/setup/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Connect with psql and create tables</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">Start the server you installed in the previous lesson. Choose the connection command for your operating system, then create a practice database and set up students, courses, and enrollments.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/setup">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#psql">Connect from Windows PowerShell</a></li>
+<li><a href="#macos">Connect from macOS with Postgres.app</a></li>
+<li><a href="#ubuntu">Connect from Ubuntu with the local postgres account</a></li>
+<li><a href="#short-login">Use the short postgres login command</a></li>
+<li><a href="#prompt">Read the psql prompt</a></li>
+<li><a href="#create-database">Create a practice database</a></li>
+<li><a href="#schema">Create students, courses, and enrollments</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="psql">
+  <h2>Connect from Windows PowerShell</h2>
+  <p>Run this from PowerShell and enter the PostgreSQL password you chose during installation if prompted. If your port or role differs, replace the corresponding value.</p>
+
+<pre><code>psql -h localhost -p 5432 -U postgres -d postgres</code></pre>
+<dl class="lesson-terms"><div><dt><code>psql</code></dt><dd>Starts the PostgreSQL terminal client.</dd></div><div><dt><code>-h localhost</code></dt><dd>Selects the host. localhost is the machine on which you run psql.</dd></div><div><dt><code>-p 5432</code></dt><dd>Selects the TCP port on that machine.</dd></div><div><dt><code>-U postgres</code></dt><dd>Logs in as the PostgreSQL role named postgres.</dd></div><div><dt><code>-d postgres</code></dt><dd>Opens the database named postgres. The role and database happen to share a name in this example.</dd></div></dl>
+<p class="example-result"><strong>What to expect</strong> A prompt such as postgres=# means you are inside psql. Password input may stay invisible as you type.</p>
+
+</section>
+<section class="article-section" id="macos">
+  <h2>Connect from macOS with Postgres.app</h2>
+  <p>In Terminal, use your macOS account name as the default Postgres.app role. The shell expands whoami to that account name. Replace the port if your Postgres.app server uses a different one.</p>
+
+<pre><code>psql -h localhost -p 5432 -U &quot;$(whoami)&quot; -d postgres</code></pre>
+
+
+</section>
+<section class="article-section" id="ubuntu">
+  <h2>Connect from Ubuntu with the local postgres account</h2>
+  <p>On a typical Ubuntu package installation this connects through the local Unix socket. sudo -u postgres runs psql as the operating-system user postgres, which can match the PostgreSQL role under peer authentication. The -d option selects the postgres database.</p>
+
+<pre><code>sudo -u postgres psql -d postgres</code></pre>
+
+
+</section>
+<section class="article-section" id="short-login">
+  <h2>Use the short postgres login command</h2>
+  <p>Run this in your OS terminal. It selects the postgres role. With the default client settings, psql also uses postgres as the database name and uses the default local connection and port 5432. If your local authentication rejects it, use the full command for your OS above.</p>
+
+<pre><code>psql -U postgres</code></pre>
+
+
+</section>
+<section class="article-section" id="prompt">
+  <h2>Read the psql prompt</h2>
+  <p>The prompt is printed by the program. Type only the command that follows it. If terminal flags typed inside psql leave you at a continuation prompt, use the recovery steps below.</p>
+
+<pre><code>postgres=# SELECT
+postgres-#   CURRENT_DATE;
+ current_date
+--------------
+ 2026-11-24
+(1 row)</code></pre>
+<dl class="lesson-terms"><div><dt><code>postgres=#</code></dt><dd>Ready for a command in the postgres database. The # normally indicates a superuser. A normal role sees postgres=&gt; with the default prompt.</dd></div><div><dt><code>postgres-#</code></dt><dd>The statement is unfinished, often because the SQL statement is missing a final semicolon.</dd></div><div><dt><code>\r / Ctrl+C</code></dt><dd>Use the backslash r command to clear a pending statement, or press Ctrl+C if you are stuck in an open quote. Run \q to leave psql before retrying an OS terminal command.</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="create-database">
+  <h2>Create a practice database</h2>
+  <p>Inside psql, run CREATE DATABASE as a role with database-creation permission. Then run the psql command \c to switch databases without leaving the client. Use the practice database for the following lessons.</p>
+
+<pre><code>CREATE DATABASE learning_db;
+\c learning_db</code></pre>
+<p class="example-result"><strong>What to expect</strong> CREATE DATABASE, followed by a message that you are connected to learning_db. The prompt starts with learning_db.</p>
+<p class="example-check"><strong>If the result differs</strong> If learning_db already exists, run just \c learning_db. A local client can see “connection refused” when nothing is listening on the chosen address, and “password authentication failed” when the role or password is wrong for that installation.</p>
+</section>
+<section class="article-section" id="schema">
+  <h2>Create students, courses, and enrollments</h2>
+  <p>Run this in learning_db. Each enrollment links one student to one course. A student can take several courses, and a course can have several students. Create the two parent tables before creating enrollments. Run the whole example if you already have learning_db from an earlier lesson.</p>
+
+<pre><code>CREATE TABLE IF NOT EXISTS students (
+  id integer PRIMARY KEY,
+  name text NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS courses (
+  id integer PRIMARY KEY,
+  title text NOT NULL,
+  fee numeric(10, 2) NOT NULL CHECK (fee &gt;= 0)
+);
+
+CREATE TABLE IF NOT EXISTS enrollments (
+  student_id integer REFERENCES students(id),
+  course_id integer REFERENCES courses(id),
+  enrolled_on date NOT NULL,
+  PRIMARY KEY (student_id, course_id)
+);
+
+INSERT INTO students (id, name)
+VALUES (1, &#39;Aye&#39;), (2, &#39;Min&#39;), (3, &#39;Su&#39;)
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO courses (id, title, fee)
+VALUES (1, &#39;SQL Basics&#39;, 30.00), (2, &#39;Web Development&#39;, 25.00),
+       (3, &#39;Computer Fundamentals&#39;, 20.00)
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO enrollments (student_id, course_id, enrolled_on)
+VALUES (1, 1, DATE &#39;2026-01-05&#39;), (2, 1, DATE &#39;2026-01-06&#39;),
+       (1, 2, DATE &#39;2026-01-07&#39;)
+ON CONFLICT (student_id, course_id) DO NOTHING;</code></pre>
+<dl class="lesson-terms"><div><dt><code>students / courses</code></dt><dd>The two parent tables store student names and course details. Each table uses its own ID as the primary key.</dd></div><div><dt><code>enrollments / REFERENCES</code></dt><dd>The foreign keys require both IDs to exist. The two-column primary key prevents a student from enrolling in the same course twice.</dd></div><div><dt><code>IF NOT EXISTS / ON CONFLICT</code></dt><dd>Running the example again keeps the existing tables and skips seed rows whose keys are already present.</dd></div></dl>
+<p class="example-result"><strong>What to expect</strong> A fresh example has three students, three courses, and three enrollments. Aye takes two courses and Computer Fundamentals has no enrollments.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/">PostgreSQL 19 documentation</a></li>
+<li><a href="https://www.postgresql.org/docs/19/app-psql.html">psql manual</a></li>
+<li><a href="https://www.postgresql.org/docs/19/ddl-constraints.html">Constraints</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/install/">Previous lesson · Install PostgreSQL and psql</a>
+<a href="/docs/read/en/database/psql-commands/">Next lesson · Inspect databases, roles, schemas, and tables</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

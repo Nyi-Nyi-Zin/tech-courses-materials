@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The Client and Server lesson introduced several types of servers. Now follow a request to see when each role comes into play. Use the diagram to see when the backend accesses PostgreSQL, Redis, or the file server.">
+  <title>Web app request flow · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-fundamentals/web-app-architecture/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-fundamentals/web-app-architecture/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-fundamentals/web-app-architecture/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-fundamentals">All documentation · Web Fundamentals</a> <a href="/docs/read/my/web-fundamentals/web-app-architecture/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Web app request flow</h1>
+  
+  <p class="intro">The Client and Server lesson introduced several types of servers. Now follow a request to see when each role comes into play. Use the diagram to see when the backend accesses PostgreSQL, Redis, or the file server.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-fundamentals/web-app-architecture">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#web-app-flow">How a web app works</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="web-app-flow">
+  <h2>How a web app works</h2>
+  <p>Open a school’s course registration app in your browser. The browser requests the frontend files from the web server and runs them. When you open the course list, the frontend in the browser starts an API request. The browser sends it to the backend over HTTPS and gives the response to the frontend. If you upload a PDF for an enrollment, the backend writes the file to a share on the Samba file server and can record its location with the enrollment in the database.</p>
+
+<pre><code>// Frontend: the browser sends a request to the backend API.
+async function loadCourses() {
+  const response = await fetch(&quot;/api/courses&quot;);
+  if (!response.ok) throw new Error(&quot;Could not load courses.&quot;);
+  return response.json();
+}</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/database/web-app-flow.svg?v=5" data-image-preview><img src="/docs/media/database/web-app-flow.svg?v=5" alt="The Browser requests frontend files from the Web Server and receives HTML, CSS, and JavaScript. The Frontend inside the Browser initiates an HTTPS request to the Backend on the Application Server and receives JSON. The Backend connects to the optional Redis cache, PostgreSQL, and the Samba file server over SMB as needed." width="1600" height="780" loading="lazy" decoding="async"></a>
+    <figcaption>The upper arrows show the frontend files being loaded. The lower arrows show the API request from the frontend running inside the browser and the JSON response. The dashed line marks the optional Redis cache.</figcaption>
+  </figure><dl class="lesson-terms"><div><dt><code>Browser</code></dt><dd>Downloads and runs the frontend files, then sends API requests initiated by the frontend.</dd></div><div><dt><code>Web Server</code></dt><dd>Serves the frontend build, including the HTML, JavaScript, and CSS files that the browser needs.</dd></div><div><dt><code>Application Server</code></dt><dd>Runs the backend API. For a course list request, it returns the course data and can read it from Redis or PostgreSQL.</dd></div><div><dt><code>Cache Server</code></dt><dd>Redis can temporarily store results such as a course list. The backend can return a cached result when available. On a cache miss, it can query PostgreSQL and cache the new result for a limited time.</dd></div><div><dt><code>Database Server</code></dt><dd>Runs PostgreSQL, which executes SQL and manages records such as courses and enrollments. PostgreSQL keeps its data files on persistent storage so the records remain after the server process restarts.</dd></div><div><dt><code>File Server</code></dt><dd>Samba is the file server software in this example. It shares a folder over SMB so the backend can write uploaded PDFs and read them again for downloads.</dd></div></dl>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">MDN · Using the Fetch API</a></li>
+<li><a href="https://www.postgresql.org/docs/current/tutorial-arch.html">PostgreSQL · Client/server architecture</a></li>
+<li><a href="https://redis.io/docs/latest/develop/use-cases/cache-aside/">Redis · Cache-aside</a></li>
+<li><a href="https://www.samba.org/samba/what_is_samba.html">Samba · SMB file sharing</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-fundamentals/dns/">Previous lesson · What Is DNS? How Does a Domain Name Lead to an IP Address?</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Key နဲ့ value တွဲသိမ်းဖို့ Map၊ ထပ်နေတဲ့တန်ဖိုးတွေ တစ်ခုပဲ သိမ်းဖို့ Set သုံးပါ။">
+  <title>Map နဲ့ Set · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/map-and-set/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/map-and-set/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/map-and-set/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/map-and-set/" lang="en" hreflang="en">English</a></nav>
+  <h1>Map နဲ့ Set</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Key နဲ့ value တွဲသိမ်းဖို့ Map၊ ထပ်နေတဲ့တန်ဖိုးတွေ တစ်ခုပဲ သိမ်းဖို့ Set သုံးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/map-and-set">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#map">Map နဲ့ Key အလိုက် တန်ဖိုး ရှာခြင်း</a></li>
+<li><a href="#set">Set နဲ့ မထပ်တဲ့ တန်ဖိုးတွေ သိမ်းခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="map">
+  <h2>Map နဲ့ Key အလိုက် တန်ဖိုး ရှာခြင်း</h2>
+  <p>Map က key နဲ့ value တွဲသိမ်းပြီး ထည့်ထားတဲ့အစဉ်ကို မှတ်ထားပါတယ်။ set(key, value) က အသစ်ထည့် သို့မဟုတ် တန်ဖိုးပြောင်းပါတယ်။ get(key) က တန်ဖိုးကို ဖတ်ပြီး has(key) က key ရှိမရှိ စစ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const prices = new Map();
+prices.set(&quot;Pen&quot;, 1500);
+prices.set(&quot;Notebook&quot;, 2500);
+console.log(prices.get(&quot;Pen&quot;));
+console.log(prices.has(&quot;Folder&quot;));</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen ရဲ့ ဈေးက 1500 ဖြစ်ပြီး Folder key က မရှိပါဘူး။</p>
+
+</section>
+<section class="article-section" id="set">
+  <h2>Set နဲ့ မထပ်တဲ့ တန်ဖိုးတွေ သိမ်းခြင်း</h2>
+  <p>Set က တန်ဖိုးတူရင် တစ်ခါပဲ သိမ်းပါတယ်။ String ဆိုရင် စာသား အတိအကျ နှိုင်းပါတယ်။ add(value) နဲ့ ထည့်၊ has(value) နဲ့ ရှိမရှိ စစ်၊ size နဲ့ မထပ်တဲ့အရေအတွက် သိနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const products = new Set([&quot;Pen&quot;, &quot;Notebook&quot;, &quot;Pen&quot;]);
+console.log(products.size);
+console.log([...products]);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Size က 2 ဖြစ်ပြီး Pen နဲ့ Notebook ပဲ ရှိပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">MDN · Map</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">MDN · Set</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/date-and-math/">အရင်သင်ခန်းစာ · Date နဲ့ Math</a>
+<a href="/docs/read/my/js/scope-and-classes/">နောက်သင်ခန်းစာ · Scope၊ Closure နဲ့ Class</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

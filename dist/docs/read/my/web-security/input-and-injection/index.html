@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="စာခေါင်းစဉ် ပြောင်းတဲ့ request မှာ တန်ဖိုးအသစ် ပါလာပါတယ်။ ပထမဆုံး ဘယ်လိုတန်ဖိုးမျိုး လက်ခံမလဲ သတ်မှတ်ပါ။ လက်ခံပြီးတဲ့ တန်ဖိုးကို database ဆီ ပို့ချိန်မှာ SQL command နဲ့ ခွဲပြီး data အဖြစ် ပေးရပါတယ်။">
+  <title>Input Validation နဲ့ Injection ကာကွယ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/input-and-injection/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/input-and-injection/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/input-and-injection/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-security">သင်ခန်းစာအားလုံး · Web Security</a> <a href="/docs/read/en/web-security/input-and-injection/" lang="en" hreflang="en">English</a></nav>
+  <h1>Input Validation နဲ့ Injection ကာကွယ်ခြင်း</h1>
+  
+  <p class="intro">စာခေါင်းစဉ် ပြောင်းတဲ့ request မှာ တန်ဖိုးအသစ် ပါလာပါတယ်။ ပထမဆုံး ဘယ်လိုတန်ဖိုးမျိုး လက်ခံမလဲ သတ်မှတ်ပါ။ လက်ခံပြီးတဲ့ တန်ဖိုးကို database ဆီ ပို့ချိန်မှာ SQL command နဲ့ ခွဲပြီး data အဖြစ် ပေးရပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-security/input-and-injection">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#validation">Server မှာ အမျိုးအစား၊ အရှည်နဲ့ လုပ်ငန်းစည်းမျဉ်း စစ်ခြင်း</a></li>
+<li><a href="#parameterized-queries">SQL တန်ဖိုးကို parameter နဲ့ ပို့ပြီး column ရွေးချယ်မှုကို ကန့်သတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="validation">
+  <h2>Server မှာ အမျိုးအစား၊ အရှည်နဲ့ လုပ်ငန်းစည်းမျဉ်း စစ်ခြင်း</h2>
+  <p>Browser မှာ အမြန်အသိပေးလို့ရပေမဲ့ မသိမ်းခင် server မှာ ထပ်စစ်ရပါတယ်။ စာခေါင်းစဉ်ထဲမှာ apostrophe ပါနိုင်ပါတယ်။ ရှေ့နောက် နေရာလွတ်တွေ ဖယ်ပြီး app က သတ်မှတ်ထားတဲ့ အရှည်နဲ့ ကိုက်မကိုက် စစ်ပါ။ ရက်စွဲဆိုရင်လည်း အဆုံးရက်က အစရက်နောက်မှာ ရှိလား စစ်ရပါတယ်။ ဒီလုပ်ဆောင်ချက်က ပြင်ခွင့်ပေးတဲ့ field တွေကိုပဲ လက်ခံပါ။</p>
+
+<pre><code>function readTitle(value) {
+  if (typeof value !== &quot;string&quot;) return null;
+  const title = value.trim();
+  const length = Array.from(title).length;
+  return length &gt;= 1 &amp;&amp; length &lt;= 120 ? title : null;
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="parameterized-queries">
+  <h2>SQL တန်ဖိုးကို parameter နဲ့ ပို့ပြီး column ရွေးချယ်မှုကို ကန့်သတ်ခြင်း</h2>
+  <p>PostgreSQL client မှာ placeholder သုံးရင် title ထဲမှာ punctuation ပါလည်း query ဖွဲ့စည်းပုံ မပြောင်းပါဘူး။ Column နာမည်နဲ့ sort direction လို SQL ဖွဲ့စည်းပုံကို ပြောင်းမယ့် အရာတွေကိုတော့ code ထဲမှာ ကြိုသတ်မှတ်ထားတဲ့ ရွေးချယ်စရာတွေကနေ ယူပါ။ File ဖတ်ဖို့ဆိုရင်လည်း user ထည့်တဲ့ နာမည်နဲ့ shell command ဆောက်တာထက် filesystem API သုံးပါ။</p>
+
+<pre><code>const result = await pool.query(
+  &quot;SELECT id, title FROM documents WHERE owner_id = $1 AND title = $2&quot;,
+  [session.userId, &quot;Editor&#39;s notes&quot;]
+);</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html">OWASP · Input validation</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">OWASP · SQL injection prevention</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-security/xss-and-browser-headers/">အရင်သင်ခန်းစာ · Cross-Site Scripting၊ CSP နဲ့ Clickjacking</a>
+<a href="/docs/read/my/web-security/api-security/">နောက်သင်ခန်းစာ · API Security နဲ့ Resource ကန့်သတ်ချက်များ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

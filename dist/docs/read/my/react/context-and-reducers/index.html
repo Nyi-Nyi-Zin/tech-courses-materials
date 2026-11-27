@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Context က component tree အောက်ဘက်ကို values ပေးပါတယ်။ Reducer က state update rules တွေကို function တစ်ခုထဲ စုပါတယ်။">
+  <title>Context နှင့် Reducers · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/react/context-and-reducers/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/context-and-reducers/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/context-and-reducers/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#react">သင်ခန်းစာအားလုံး · React</a> <a href="/docs/read/en/react/context-and-reducers/" lang="en" hreflang="en">English</a></nav>
+  <h1>Context နှင့် Reducers</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">Context က component tree အောက်ဘက်ကို values ပေးပါတယ်။ Reducer က state update rules တွေကို function တစ်ခုထဲ စုပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/react/context-and-reducers">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#context">အနီးဆုံး Provider က Value ဖတ်ခြင်း</a></li>
+<li><a href="#reducer">Actions နဲ့ Updates ဖော်ပြခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="context">
+  <h2>အနီးဆုံး Provider က Value ဖတ်ခြင်း</h2>
+  <p>Context object နဲ့ useContext ခေါ်ပါ။ Component ရဲ့အပေါ်မှာ အနီးဆုံးကိုက်ညီတဲ့ provider က value ဖတ်ပါတယ်။ React 19 မှာ context object ကို provider အဖြစ် တိုက်ရိုက် render လုပ်နိုင်ပါတယ်။</p>
+
+<pre><code>import { createContext, useContext } from &quot;react&quot;;
+
+const Currency = createContext(&quot;USD&quot;);
+
+function Price({ amount }) {
+  return &lt;span&gt;{useContext(Currency)} {amount}&lt;/span&gt;;
+}
+
+export default function App() {
+  return &lt;Currency value=&quot;MMK&quot;&gt;&lt;Price amount={3500} /&gt;&lt;/Currency&gt;;
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="reducer">
+  <h2>Actions နဲ့ Updates ဖော်ပြခြင်း</h2>
+  <p>useReducer မှာ reducer နဲ့ initial value ပေးပါ။ ဘာဖြစ်ခဲ့လဲ ဖော်ပြတဲ့ action ကို dispatch လုပ်ပါ။ Reducer က pure ဖြစ်ရပြီး state ပြောင်းရင် object အသစ် ပြန်ပေးပါ။</p>
+
+<pre><code>function cartReducer(state, action) {
+  if (action.type === &quot;added&quot;) {
+    return { ...state, units: state.units + 1 };
+  }
+  return state;
+}
+
+// Inside the component:
+// const [cart, dispatch] = useReducer(cartReducer, { units: 0 });
+// dispatch({ type: &quot;added&quot; });</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://react.dev/learn/passing-data-deeply-with-context">Passing data with context</a></li>
+<li><a href="https://react.dev/learn/extracting-state-logic-into-a-reducer">Extracting state logic into a reducer</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/react/shared-state/">အရင်သင်ခန်းစာ · Components ကြား State မျှဝေခြင်း</a>
+<a href="/docs/read/my/react/custom-hooks/">နောက်သင်ခန်းစာ · Custom Hooks နဲ့ Behavior ပြန်သုံးခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

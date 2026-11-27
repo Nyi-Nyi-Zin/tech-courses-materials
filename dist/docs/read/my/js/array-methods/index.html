@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ဘယ် item ကို ရွေးရမလဲ၊ item နှစ်ခုကို ဘယ်လိုစီမလဲ ဆုံးဖြတ်ဖို့ callback function သုံးပါ။">
+  <title>Array ထဲ ရှာခြင်း၊ စစ်ခြင်းနဲ့ အစဉ်စီခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/array-methods/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/array-methods/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/array-methods/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/array-methods/" lang="en" hreflang="en">English</a></nav>
+  <h1>Array ထဲ ရှာခြင်း၊ စစ်ခြင်းနဲ့ အစဉ်စီခြင်း</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">ဘယ် item ကို ရွေးရမလဲ၊ item နှစ်ခုကို ဘယ်လိုစီမလဲ ဆုံးဖြတ်ဖို့ callback function သုံးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/array-methods">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#find">find() က ကိုက်ညီတဲ့ ပထမ Item ကို ပြန်ပေးခြင်း</a></li>
+<li><a href="#some">some() နဲ့ Item အနည်းဆုံးတစ်ခု ကိုက်လား စစ်ခြင်း</a></li>
+<li><a href="#every">every() နဲ့ Item အားလုံး ကိုက်လား စစ်ခြင်း</a></li>
+<li><a href="#sort">sort() နဲ့ မူလ Array အစဉ် ပြောင်းခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="find">
+  <h2>find() က ကိုက်ညီတဲ့ ပထမ Item ကို ပြန်ပေးခြင်း</h2>
+  <p>find() က item တစ်ခုစီကို callback ဆီပေးပြီး သတ်မှတ်ချက် ကိုက်တဲ့ ပထမ item ကို ပြန်ပေးပါတယ်။ တစ်ခုမှ မကိုက်ရင် undefined ရပါတယ်။ Item ရှိမရှိ မသေချာရင် property ကို ?. နဲ့ ဖတ်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const catalog = [
+  { name: &quot;Pen&quot;, price: 1500 },
+  { name: &quot;Notebook&quot;, price: 2500 },
+  { name: &quot;Folder&quot;, price: 3000 }
+];
+const match = catalog.find(item =&gt; item.price &gt; 2000);
+console.log(match?.name);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Notebook က အရင်ကိုက်ပါတယ်။ 4000 ပြောင်းရင် undefined ထွက်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="some">
+  <h2>some() နဲ့ Item အနည်းဆုံးတစ်ခု ကိုက်လား စစ်ခြင်း</h2>
+  <p>some() က callback ထဲက သတ်မှတ်ချက်နဲ့ ကိုက်တဲ့ item တစ်ခုတွေ့တာနဲ့ true ပြန်ပါတယ်။ တစ်ခုမှ မကိုက်ရင် false ပြန်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const catalog = [
+  { name: &quot;Pen&quot;, price: 1500 },
+  { name: &quot;Notebook&quot;, price: 2500 },
+  { name: &quot;Folder&quot;, price: 3000 }
+];
+console.log(catalog.some(item =&gt; item.price &lt; 2000));
+console.log(catalog.some(item =&gt; item.price &lt; 1000));</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> 2000 အောက်ဈေး ရှိလို့ true၊ 1000 အောက်ဈေး မရှိလို့ false ထွက်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="every">
+  <h2>every() နဲ့ Item အားလုံး ကိုက်လား စစ်ခြင်း</h2>
+  <p>every() က သတ်မှတ်ချက် မကိုက်တဲ့ item တစ်ခုတွေ့တာနဲ့ false ပြန်ပါတယ်။ မကိုက်တာ တစ်ခုမှ မရှိရင် true ပါ။ Array အလွတ်ဆိုလည်း true ရပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const catalog = [
+  { name: &quot;Pen&quot;, price: 1500 },
+  { name: &quot;Notebook&quot;, price: 2500 },
+  { name: &quot;Folder&quot;, price: 3000 }
+];
+console.log(catalog.every(item =&gt; item.price &gt; 0));
+console.log(catalog.every(item =&gt; item.price &lt; 2000));</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ဈေးအားလုံး 0 ထက်ကြီးပေမယ့် 2000 နဲ့ အထက်တန်ဖိုး ရှိပါတယ်။</p>
+
+</section>
+<section class="article-section" id="sort">
+  <h2>sort() နဲ့ မူလ Array အစဉ် ပြောင်းခြင်း</h2>
+  <p>Comparator မပေးရင် sort() က string ပုံစံအဖြစ် နှိုင်းပါတယ်။ ဂဏန်းတွေကို ငယ်စဉ်ကြီးလိုက် စီဖို့ a - b ပေးပါ။ sort() က မူလ array ကို ပြောင်းပါတယ်။ စီပြီးသား copy လိုရင် toSorted() သုံးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const prices = [10, 2, 30];
+console.log([...prices].sort((a, b) =&gt; a - b));
+console.log(prices);
+prices.sort((a, b) =&gt; a - b);
+console.log(prices);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စီထားတဲ့ copy က [2, 10, 30] ပါ။ မူလ array က sort() မခေါ်ခင်အထိ [10, 2, 30] ပါ။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">MDN · Array/find</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some">MDN · Array/some</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every">MDN · Array/every</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">MDN · Array/sort</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted">MDN · Array/toSorted</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/arrays-and-objects/">အရင်သင်ခန်းစာ · String၊ Array နဲ့ Object</a>
+<a href="/docs/read/my/js/date-and-math/">နောက်သင်ခန်းစာ · Date နဲ့ Math</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

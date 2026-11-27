@@ -32,16 +32,10 @@ const withStack = (base, language) => [
 ];
 
 export const curricula = { en: withStack(tracks, 'en'), my: withStack(myTracks, 'my') };
-export const languageOptions = [
-  { code: 'en', label: 'English' },
-  { code: 'my', label: 'မြန်မာ' },
-];
-
 export const messages = {
   en: {
     description: 'Practice HTML, CSS, JavaScript, TypeScript, PostgreSQL, React, and NestJS in your browser.',
     skip: 'Skip to content',
-    docs: 'Docs',
     relatedGuide: 'Read the guide',
     storageError: 'Your browser could not save your code or progress.',
     storageNote: 'Your code and progress are saved in this browser.',
@@ -50,7 +44,6 @@ export const messages = {
     paths: 'Learning paths',
     showSidebar: 'Show sidebar',
     hideSidebar: 'Hide sidebar',
-    language: 'Language',
     progress: 'Progress',
     overallProgress: 'Overall progress',
     trackProgress: '{track} progress',
@@ -135,7 +128,6 @@ export const messages = {
   my: {
     description: 'HTML၊ CSS နဲ့ JavaScript ကို browser ထဲမှာ လေ့လာပြီး လက်တွေ့လေ့ကျင့်ပါ။',
     skip: 'အကြောင်းအရာဆီ သွားရန်',
-    docs: 'လမ်းညွှန်',
     relatedGuide: 'သက်ဆိုင်ရာ လမ်းညွှန်ဖတ်ပါ',
     storageError: 'ဒီ browser မှာ သင့် code နဲ့ လေ့ကျင့်မှုအခြေအနေကို သိမ်းလို့မရပါ။',
     storageNote: 'သင့် code နဲ့ လေ့ကျင့်မှုအခြေအနေကို ဒီ browser ထဲမှာ သိမ်းထားပါတယ်။',
@@ -144,7 +136,6 @@ export const messages = {
     paths: 'သင်ယူနိုင်သည့် အပိုင်းများ',
     showSidebar: 'ဘေးမီနူး ပြရန်',
     hideSidebar: 'ဘေးမီနူး ဖျောက်ရန်',
-    language: 'ဘာသာစကား',
     progress: 'ပြီးစီးမှု',
     overallProgress: 'လေ့ကျင့်ခန်းအားလုံး၏ ပြီးစီးမှု',
     trackProgress: '{track} အပိုင်း၏ ပြီးစီးမှု',

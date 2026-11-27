@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ရွေ့လျားအနှစ်ချုပ် တွက်ပြီး ရည်ရွယ်တဲ့ ဒေသစံတော်ချိန်ရက်စွဲနဲ့ စုပါ။">
+  <title>Rolling Windows နှင့် Time Zones · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/window-functions/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/window-functions/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/window-functions/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#pandas">သင်ခန်းစာအားလုံး · pandas</a> <a href="/docs/read/en/pandas/window-functions/" lang="en" hreflang="en">English</a></nav>
+  <h1>Rolling Windows နှင့် Time Zones</h1>
+  <p class="article-version">3.1.1</p>
+  <p class="intro">ရွေ့လျားအနှစ်ချုပ် တွက်ပြီး ရည်ရွယ်တဲ့ ဒေသစံတော်ချိန်ရက်စွဲနဲ့ စုပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/pandas/window-functions">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#rolling">Count သို့မဟုတ် Time အလိုက် Window ရွေးခြင်း</a></li>
+<li><a href="#timezone">Timestamp ကို Localize သို့မဟုတ် Convert လုပ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="rolling">
+  <h2>Count သို့မဟုတ် Time အလိုက် Window ရွေးခြင်း</h2>
+  <p>rolling(3) က နေရာတစ်ခုစီမှာ observation သုံးခုအထိ ယူပါတယ်။ သင့်တော်တဲ့ datetime index ရှိရင် rolling(&quot;7D&quot;) က အချိန်အလိုက် ယူပါတယ်။ အနည်းဆုံး observation ဘယ်နှခုလိုလဲ min_periods နဲ့ ရေးပြီး time data ကို အရင်စီပါ။</p>
+
+<pre><code>import pandas as pd
+
+sales = pd.Series([2, 4, 6, 8])
+print(sales.rolling(3, min_periods=1).mean().tolist())</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[2.0, 3.0, 4.0, 6.0]</pre></div>
+
+
+</section>
+<section class="article-section" id="timezone">
+  <h2>Timestamp ကို Localize သို့မဟုတ် Convert လုပ်ခြင်း</h2>
+  <p>tz_localize က timezone မပါတဲ့ timestamp ကို timezone သတ်မှတ်ပါတယ်။ tz_convert က aware timestamp ပြတဲ့ timezone ပြောင်းပြီး ဖြစ်တဲ့ အချိန်တစ်ချက်ကို ထိန်းထားပါတယ်။ Report က ဒေသစံတော်ချိန်အလိုက် ဖြစ်ရင် နေ့၊ လ မခွဲခင် ပြောင်းပါ။</p>
+
+<pre><code>import pandas as pd
+
+instant = pd.Timestamp(&quot;2023-02-28 21:00&quot;, tz=&quot;UTC&quot;)
+print(instant.tz_convert(&quot;Asia/Yangon&quot;).isoformat())</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">2023-03-01T03:30:00+06:30</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://pandas.pydata.org/docs/user_guide/window.html">Window operations</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/timeseries.html">Time series and date functionality</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/pandas/strings-and-categories/">အရင်သင်ခန်းစာ · စာသားသန့်စင်ခြင်းနှင့် Category သတ်မှတ်ခြင်း</a>
+<a href="/docs/read/my/pandas/data-formats/">နောက်သင်ခန်းစာ · CSV၊ Excel၊ Parquet နှင့် SQL သုံးခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

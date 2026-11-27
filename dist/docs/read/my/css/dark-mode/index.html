@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Theme ဆိုတာ စာမျက်နှာတစ်လျှောက် တွဲသုံးတဲ့ အရောင်အစုပါ။ ပြန်သုံးမယ့်အရောင်တွေကို CSS custom property နာမည်ပေးထားပြီး theme ပြောင်းတဲ့အခါ အဲဒီတန်ဖိုးတွေ ပြင်နိုင်ပါတယ်။">
+  <title>Light Theme နဲ့ Dark Theme · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/dark-mode/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/dark-mode/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/dark-mode/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/dark-mode/" lang="en" hreflang="en">English</a></nav>
+  <h1>Light Theme နဲ့ Dark Theme</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Theme ဆိုတာ စာမျက်နှာတစ်လျှောက် တွဲသုံးတဲ့ အရောင်အစုပါ။ ပြန်သုံးမယ့်အရောင်တွေကို CSS custom property နာမည်ပေးထားပြီး theme ပြောင်းတဲ့အခါ အဲဒီတန်ဖိုးတွေ ပြင်နိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/dark-mode">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#preference">System ရဲ့ အရောင်ရွေးထားမှုကို လိုက်ခြင်း</a></li>
+<li><a href="#override">Attribute နဲ့ Page Theme သတ်မှတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="preference">
+  <h2>System ရဲ့ အရောင်ရွေးထားမှုကို လိုက်ခြင်း</h2>
+  <p>prefers-color-scheme က media query မှာ စစ်လို့ရတဲ့ အချက်တစ်ခုပါ။ User ရဲ့ system မှာ dark ရွေးထားရင် တွဲသုံးနိုင်ပါတယ်။ color-scheme က browser ပိုင် form controls တွေကိုပါ ဘယ် theme နဲ့ ပြရမလဲ ပြောပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Follow the system’s color preference&lt;/title&gt;
+  &lt;style&gt;
+    :root { --page: #fff; --ink: #17233a; color-scheme: light; }
+    @media (prefers-color-scheme: dark) {
+      :root { --page: #17233a; --ink: #fff; color-scheme: dark; }
+    }
+    body { background: var(--page); color: var(--ink); }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> System theme ကို toggle လုပ်ပါ။ DevTools မှာ prefers-color-scheme ပြောင်းစမ်းလို့လည်း ရပါတယ်။ နောက်ခံနဲ့ စာအရောင် ပြောင်းပါမယ်။</p>
+
+</section>
+<section class="article-section" id="override">
+  <h2>Attribute နဲ့ Page Theme သတ်မှတ်ခြင်း</h2>
+  <p>Attribute selector က element တစ်ခုမှာ သတ်မှတ်တဲ့ တန်ဖိုးရှိလား ရွေးပေးပါတယ်။ [data-theme=&quot;dark&quot;] က attribute တန်ဖိုး dark အတိအကျပါတာကို ရွေးပါတယ်။ နောက်ပိုင်း JavaScript နဲ့ ခလုတ်တစ်ခု လုပ်ပြီး ဖတ်သူရွေးတဲ့အခါ attribute ကို ပြောင်းပေးနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Set a page theme with an attribute&lt;/title&gt;
+  &lt;style&gt;
+    .panel { --page: #fff; --ink: #17233a; }
+    .panel[data-theme=&quot;dark&quot;] { --page: #17233a; --ink: #fff; }
+    .panel { background: var(--page); color: var(--ink); padding: 12px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;section class=&quot;panel&quot; data-theme=&quot;dark&quot;&gt;&lt;p&gt;Pens and notebooks&lt;/p&gt;&lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Panel က နောက်ခံအမှောင်နဲ့ ပေါ်ပါမယ်။ data-theme ကို light ပြောင်းပြီး save၊ reload လုပ်ရင် မူလအရောင်တွေ ပြန်သုံးပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-color-scheme">MDN · Prefers color scheme</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/color-scheme">MDN · Color scheme</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/form-and-table-styling/">အရင်သင်ခန်းစာ · Form နဲ့ Table ကို Style ပေးခြင်း</a>
+<a href="/docs/read/my/css/motion/">နောက်သင်ခန်းစာ · Transition နဲ့ Animation</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

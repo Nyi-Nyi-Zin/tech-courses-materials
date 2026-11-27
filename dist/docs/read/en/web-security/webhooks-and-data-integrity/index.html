@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A webhook is an HTTP notification from another service. An integration might post a notice when a document is published. Before changing local state, verify who sent the message, whether its contents are expected, and whether you already processed it.">
+  <title>Webhooks and Data Integrity · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/webhooks-and-data-integrity/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/webhooks-and-data-integrity/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/webhooks-and-data-integrity/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/webhooks-and-data-integrity/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Webhooks and Data Integrity</h1>
+  
+  <p class="intro">A webhook is an HTTP notification from another service. An integration might post a notice when a document is published. Before changing local state, verify who sent the message, whether its contents are expected, and whether you already processed it.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/webhooks-and-data-integrity">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#verify-message">Verify the original bytes</a></li>
+<li><a href="#safe-processing">Read plain data and handle retries</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="verify-message">
+  <h2>Verify the original bytes</h2>
+  <p>Use the provider’s documented verification library. For a signed webhook such as GitHub’s, verify the signature over the original request body with the configured secret before processing the event. Parsing and serializing JSON again can change the bytes. A valid signature establishes message integrity but a repeated genuine message can still arrive.</p>
+
+<pre><code>Receive     Apply a body size limit and preserve the raw bytes
+Verify      Use the provider verifier and configured secret
+Interpret   Accept the expected event type, account, and payload schema</code></pre>
+
+
+</section>
+<section class="article-section" id="safe-processing">
+  <h2>Read plain data and handle retries</h2>
+  <p>Parse external messages as plain data and validate the expected fields. Avoid formats that construct executable or application-defined objects from input. Use a stable authenticated event or business identifier and a uniqueness constraint. Record the identifier and local change in one transaction, so a retry cannot apply the change twice.</p>
+
+<pre><code>First verified publication event    Record the event and publish the notice
+Same verified event delivered again  Keep the existing notice
+Unrecognized event type              Make no document changes</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries">GitHub Docs · Validating webhook deliveries</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html">OWASP · Deserialization</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/files-and-outbound-requests/">Previous lesson · File Uploads and Server-Side Requests</a>
+<a href="/docs/read/en/web-security/data-and-secrets/">Next lesson · Private Data, Encryption, and Secrets</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

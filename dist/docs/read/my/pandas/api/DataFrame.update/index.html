@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="အခြား object ထဲက တန်ဖိုးရှိတဲ့နေရာတွေကို label အလိုက် ညှိပြီး မူလ object ကို ပြင်ပေးပါတယ်။">
+  <title>pandas.DataFrame.update · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/DataFrame.update/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/DataFrame.update/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/DataFrame.update">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API Reference">
+    <a href="/docs/read/my/pandas/api-reference/#find-an-api">pandas API Reference</a><span aria-hidden="true">/</span><span>DataFrame</span><a href="/docs/read/en/pandas/api/DataFrame.update/" lang="en" hreflang="en">English</a>
+  </nav>
+    <h1><code>pandas.<wbr>DataFrame.<wbr>update</code></h1>
+    <p class="article-version">pandas 3.1.1 · DataFrame · <span lang="en">method</span></p>
+    <p class="intro">အခြား object ထဲက တန်ဖိုးရှိတဲ့နေရာတွေကို label အလိုက် ညှိပြီး မူလ object ကို ပြင်ပေးပါတယ်။</p>
+
+    <nav class="api-breadcrumbs" aria-label="ဒီစာမျက်နှာမှာ"><ul><li><a href="#syntax">ခေါ်သုံးပုံ</a></li><li><a href="#example">နမူနာ စမ်းကြည့်ရန်</a></li><li><a href="#parameters">ထည့်သွင်းနိုင်တဲ့ Arguments</a></li><li><a href="#returns">ပြန်ပေးတဲ့ ရလဒ်</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>ခေါ်သုံးပုံ</h2><pre><code lang="en">DataFrame.update(other, join=&#39;left&#39;, overwrite=True, filter_func=None, errors=&#39;ignore&#39;)</code></pre></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>နမူနာ စမ်းကြည့်ရန်</h2>
+      <p>နမူနာကုဒ်ကို ပြင်ပြီး Run Python နှိပ်ပါ။ ရလဒ်ကို အောက်မှာ ကြည့်နိုင်ပါတယ်။</p>
+      <label><span>Python ကုဒ်</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+frame = pd.DataFrame({&quot;units&quot;: [2., 5., 7.], &quot;price&quot;: [4., 3., 2.]})
+frame.update(pd.DataFrame({&quot;units&quot;: [20, 50, 70]}))
+print(frame)</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>ရပ်ရန်</button>
+        <button type="button" data-reset disabled>မူလကုဒ် ပြန်ထားရန်</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="ရလဒ်"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>ထည့်သွင်းနိုင်တဲ့ Arguments</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">ထည့်သွင်းပုံ</th><th scope="col">လက်ခံတဲ့ တန်ဖိုးနဲ့ သုံးပုံ</th></tr></thead><tbody><tr><th scope="row"><code>other</code></th>
+      <td>ထည့်ပေးရမယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small></td>
+      <td><span>DataFrame သို့မဟုတ် DataFrame အဖြစ် ပြောင်းလို့ရတဲ့ object</span><p>ဒီလုပ်ဆောင်ချက်မှာ သုံးမယ့် ဒုတိယ object သို့မဟုတ် တန်ဖိုးကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>join</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>&#39;left&#39;</code></td>
+      <td><span>{&#39;left&#39;}</span><p>Axis တွေကို တန်းညှိတဲ့အခါ ဘယ် label တွေကို ထားမလဲ ရွေးပါ။</p></td></tr>
+<tr><th scope="row"><code>overwrite</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool)</span><p>ရှိပြီးသား entry ကို အစားထိုးခွင့်ရှိမရှိ သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>filter_func</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>ခေါ်သုံးလို့ရတဲ့ function (callable)(1d-array) -&gt; True / False (bool) 1d-array</span></td></tr>
+<tr><th scope="row"><code>errors</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>&#39;ignore&#39;</code></td>
+      <td><span>{&#39;raise&#39;၊ &#39;ignore&#39;}</span><p>Input မမှန်တဲ့အခါ သို့မဟုတ် လုပ်ဆောင်ချက် မအောင်မြင်တဲ့အခါ ဘယ်လို ကိုင်တွယ်မလဲ သတ်မှတ်ပါတယ်။</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>ပြန်ပေးတဲ့ ရလဒ်</h2><p>None ပြန်ပေးပါတယ်။</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.update.html#pandas.DataFrame.update">pandas တရားဝင် ကိုးကားချက်</a>
+      <nav class="pagination" aria-label="pandas API Reference"><a href="/docs/read/my/pandas/api/DataFrame.unstack/"><span>အရင် API</span><strong>pandas.DataFrame.unstack</strong></a><a href="/docs/read/my/pandas/api/DataFrame.value_counts/"><span>နောက် API</span><strong>pandas.DataFrame.value_counts</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

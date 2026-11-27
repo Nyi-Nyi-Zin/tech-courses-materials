@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Validate inputs at the API boundary. Return a clear HTTP status for invalid input and missing records.">
+  <title>Validate requests and test routes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/validation/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/validation/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/validation/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#nestjs">All documentation · NestJS</a> <a href="/docs/read/my/nestjs/validation/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Validate requests and test routes</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">Validate inputs at the API boundary. Return a clear HTTP status for invalid input and missing records.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/nestjs/validation">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#pipes">Use a DTO with a validation pipe</a></li>
+<li><a href="#testing">Check both valid and invalid requests</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="pipes">
+  <h2>Use a DTO with a validation pipe</h2>
+  <p>Install class-validator and class-transformer for ValidationPipe. Create DTOs as classes and add validation decorators. With whitelist enabled, properties without validation decorators are removed. Add forbidNonWhitelisted to reject those properties instead.</p>
+
+<pre><code>import { Body, Controller, Post, ValidationPipe } from &quot;@nestjs/common&quot;;
+import { IsInt, IsNotEmpty, IsString, Min } from &quot;class-validator&quot;;
+
+class CreateOrderDto {
+  @IsString()
+  @IsNotEmpty()
+  item!: string;
+
+  @IsInt()
+  @Min(1)
+  quantity!: number;
+}
+
+@Controller(&quot;orders&quot;)
+export class OrdersController {
+  @Post()
+  create(@Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+    input: CreateOrderDto) {
+    return input;
+  }
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="testing">
+  <h2>Check both valid and invalid requests</h2>
+  <p>Test service logic in isolation. Use an end-to-end test for the HTTP route to verify request parsing, validation, status, and response together. Cover a valid body and an invalid body, such as quantity 0.</p>
+
+<pre><code>// In the end-to-end suite with the Nest application started.
+import request from &quot;supertest&quot;;
+
+it(&quot;accepts an order with a positive quantity&quot;, async () =&gt; {
+  const order = { item: &quot;Notebook&quot;, quantity: 2 };
+  await request(app.getHttpServer()).post(&quot;/orders&quot;).send(order).expect(201, order);
+});
+
+it(&quot;rejects an order with quantity zero&quot;, async () =&gt; {
+  await request(app.getHttpServer())
+    .post(&quot;/orders&quot;)
+    .send({ item: &quot;Notebook&quot;, quantity: 0 })
+    .expect(400);
+});</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.nestjs.com/techniques/validation">Validation</a></li>
+<li><a href="https://docs.nestjs.com/exception-filters">Exception filters</a></li>
+<li><a href="https://docs.nestjs.com/fundamentals/testing">Testing</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/nestjs/providers/">Previous lesson · Providers, modules, and dependency injection</a>
+<a href="/docs/read/en/nestjs/request-lifecycle/">Next lesson · Request lifecycle, guards, and interceptors</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

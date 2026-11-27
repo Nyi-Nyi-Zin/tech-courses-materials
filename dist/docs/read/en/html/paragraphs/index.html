@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use a paragraph for a group of sentences about one idea. Use a line break where a line needs to end within that paragraph. A thematic break marks a larger change, such as a change of scene in a story.">
+  <title>Paragraphs, Line Breaks, and Thematic Breaks · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/paragraphs/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/paragraphs/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/paragraphs/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/paragraphs/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Paragraphs, Line Breaks, and Thematic Breaks</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Use a paragraph for a group of sentences about one idea. Use a line break where a line needs to end within that paragraph. A thematic break marks a larger change, such as a change of scene in a story.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/paragraphs">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#paragraph">How a paragraph is rendered</a></li>
+<li><a href="#nesting">What can go inside &lt;p&gt;</a></li>
+<li><a href="#line-break">Intentional line breaks &lt;br&gt;</a></li>
+<li><a href="#thematic-break">Thematic Break &lt;hr&gt;</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="paragraph">
+  <h2>How a paragraph is rendered</h2>
+  <p>Write a paragraph between &lt;p&gt; and &lt;/p&gt;. The browser shows each paragraph separately, usually with space above and below. In normal whitespace handling, a line break or several spaces in the markup collapse to a single space between words. The browser wraps long text based on the available space.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;p&gt;The library lends books
+   and magazines every morning.&lt;/p&gt;
+&lt;p&gt;Returns are accepted until 6:00 PM.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> “books and magazines” flows as part of one paragraph even though it spans two source lines. “Returns” starts a new paragraph.</p>
+
+</section>
+<section class="article-section" id="nesting">
+  <h2>What can go inside &lt;p&gt;</h2>
+  <p>A paragraph can contain text and phrasing elements such as a, strong, and em. A list or heading belongs next to the paragraph in the HTML structure. If a div starts before you close p, the HTML parser closes the paragraph automatically and the DOM differs from what the indentation might suggest.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;p&gt;Choose &lt;em&gt;one&lt;/em&gt; of the available books.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;History&lt;/li&gt;
+  &lt;li&gt;Science&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> DevTools shows the p and ul as siblings. The em element is a child of the paragraph.</p>
+
+</section>
+<section class="article-section" id="line-break">
+  <h2>Intentional line breaks &lt;br&gt;</h2>
+  <p>Use br when a line break is part of the content, such as an address or a poem. For a new idea, start a new paragraph. For more space between paragraphs, adjust their CSS margins.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;p&gt;Library Desk&lt;br&gt;25 Market Street&lt;br&gt;Yangon&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The address occupies three lines within one paragraph.</p>
+
+</section>
+<section class="article-section" id="thematic-break">
+  <h2>Thematic Break &lt;hr&gt;</h2>
+  <p>Use &lt;hr&gt; between paragraphs where a story changes scene or a section switches to a different topic. Most browsers draw a horizontal line at that point. Write &lt;hr&gt; on its own because it is a void element.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;p&gt;The hikers reached the campsite before sunset.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Back in town, the team prepared for the next day.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The line between the paragraphs marks the change of scene from the campsite to the town.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-p-element">WHATWG · The p element</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-br-element">WHATWG · The br element</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-hr-element">WHATWG · The hr element</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Whitespace">MDN · Whitespace in the DOM</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/headings/">Previous lesson · Headings &lt;h1&gt;–&lt;h6&gt;</a>
+<a href="/docs/read/en/html/inline-text/">Next lesson · Inline Text Elements</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

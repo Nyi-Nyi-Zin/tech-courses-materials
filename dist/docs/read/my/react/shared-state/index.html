@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="မျှဝေသုံးမယ့် state ကို components နှစ်ခုရဲ့ အနီးဆုံး common parent မှာ ထားပါ။ Values နဲ့ event handlers ကို children ဆီ props နဲ့ ပို့ပါ။">
+  <title>Components ကြား State မျှဝေခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/react/shared-state/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/shared-state/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/shared-state/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#react">သင်ခန်းစာအားလုံး · React</a> <a href="/docs/read/en/react/shared-state/" lang="en" hreflang="en">English</a></nav>
+  <h1>Components ကြား State မျှဝေခြင်း</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">မျှဝေသုံးမယ့် state ကို components နှစ်ခုရဲ့ အနီးဆုံး common parent မှာ ထားပါ။ Values နဲ့ event handlers ကို children ဆီ props နဲ့ ပို့ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/react/shared-state">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#lift">Value တစ်ခုစီအတွက် Owner တစ်ခုထားခြင်း</a></li>
+<li><a href="#controlled">Child Components ပြန်သုံးလို့ရအောင် ထားခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="lift">
+  <h2>Value တစ်ခုစီအတွက် Owner တစ်ခုထားခြင်း</h2>
+  <p>Selection တူတူ ပြတဲ့ components တွေက state တစ်ခုတည်း ဖတ်သင့်ပါတယ်။ Child တစ်ခုစီမှာ မိတ္တူသိမ်းရင် တန်ဖိုးတွေ ကွဲသွားနိုင်ပါတယ်။ ရွေးထားတဲ့ ID ကို parent မှာထားပြီး render ချိန်မှာ item ကို ရှာပါ။</p>
+
+<pre><code>import { useState } from &quot;react&quot;;
+
+function Choice({ label, selected, onChoose }) {
+  return &lt;button aria-pressed={selected} onClick={onChoose}&gt;{label}&lt;/button&gt;;
+}
+
+export default function ProductPicker() {
+  const [product, setProduct] = useState(&quot;pen&quot;);
+  return (
+    &lt;&gt;
+      &lt;Choice label=&quot;Pen&quot; selected={product === &quot;pen&quot;} onChoose={() =&gt; setProduct(&quot;pen&quot;)} /&gt;
+      &lt;Choice label=&quot;Notebook&quot; selected={product === &quot;notebook&quot;} onChoose={() =&gt; setProduct(&quot;notebook&quot;)} /&gt;
+      &lt;p&gt;Selected: {product}&lt;/p&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="controlled">
+  <h2>Child Components ပြန်သုံးလို့ရအောင် ထားခြင်း</h2>
+  <p>Controlled child က လက်ရှိ value ကို props ကနေ ယူပြီး ပြောင်းစေချင်ရင် callback နဲ့ parent ကို အသိပေးပါတယ်။ Child တစ်ခုတည်း လိုအပ်တဲ့ အချက်တွေ အတွက် local state သုံးနိုင်ပါတယ်။</p>
+
+<pre><code>import { useState } from &quot;react&quot;;
+
+function QuantityInput({ value, onChange }) {
+  return (
+    &lt;label&gt;
+      Quantity
+      &lt;input type=&quot;number&quot; min=&quot;1&quot; value={value}
+        onChange={event =&gt; onChange(event.target.value)} /&gt;
+    &lt;/label&gt;
+  );
+}
+
+export default function OrderForm() {
+  const [quantity, setQuantity] = useState(&quot;1&quot;);
+  return &lt;QuantityInput value={quantity} onChange={setQuantity} /&gt;;
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://react.dev/learn/sharing-state-between-components">Sharing state between components</a></li>
+<li><a href="https://react.dev/learn/choosing-the-state-structure">Choosing the state structure</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/react/effects/">အရင်သင်ခန်းစာ · Effects နှင့် Synchronization</a>
+<a href="/docs/read/my/react/context-and-reducers/">နောက်သင်ခန်းစာ · Context နှင့် Reducers</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="အရင်သင်ခန်းစာမှာ psql ကနေ ထွက်ထားရင် setup သင်ခန်းစာက ကိုယ့် OS အတွက် command နဲ့ terminal ကနေ ပြန်ချိတ်ပါ။ psql ထဲ ရောက်ရင် \c learning_db ကို run ပါ။ ပြီးရင် SQL block တွေကို အစဉ်လိုက် run ပြီး users table ဆောက်ပါ။ နမူနာ row တစ်ကြောင်းကို ထည့်၊ ဖတ်၊ ပြင်၊ ဖျက်ကြည့်မယ်။">
+  <title>SQL အခြေခံနဲ့ Table တစ်ခုမှာ CRUD စမ်းခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/crud/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/crud/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/crud/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/crud/" lang="en" hreflang="en">English</a></nav>
+  <h1>SQL အခြေခံနဲ့ Table တစ်ခုမှာ CRUD စမ်းခြင်း</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">အရင်သင်ခန်းစာမှာ psql ကနေ ထွက်ထားရင် setup သင်ခန်းစာက ကိုယ့် OS အတွက် command နဲ့ terminal ကနေ ပြန်ချိတ်ပါ။ psql ထဲ ရောက်ရင် \c learning_db ကို run ပါ။ ပြီးရင် SQL block တွေကို အစဉ်လိုက် run ပြီး users table ဆောက်ပါ။ နမူနာ row တစ်ကြောင်းကို ထည့်၊ ဖတ်၊ ပြင်၊ ဖျက်ကြည့်မယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/crud">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#create-table">users Table ဆောက်ခြင်း</a></li>
+<li><a href="#insert">INSERT နဲ့ Row ထည့်ခြင်း</a></li>
+<li><a href="#inspect-users">users Table ကို ရှာပြီး ဖွဲ့စည်းပုံ စစ်ခြင်း</a></li>
+<li><a href="#select">SELECT နဲ့ Rows ဖတ်ခြင်း</a></li>
+<li><a href="#update">UPDATE နဲ့ Row ပြင်ခြင်း</a></li>
+<li><a href="#delete">DELETE နဲ့ Row ဖျက်ခြင်း</a></li>
+<li><a href="#drop-table">Transaction ထဲမှာ DROP TABLE စမ်းခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="create-table">
+  <h2>users Table ဆောက်ခြင်း</h2>
+  <p>CREATE TABLE နဲ့ table နာမည်၊ columns တွေ သတ်မှတ်တယ်။ Column type က ဘယ်လိုတန်ဖိုးတွေ လက်ခံမလဲ သတ်မှတ်ပြီး constraint က ထပ်လိုတဲ့ စည်းကမ်းတွေ သတ်မှတ်တယ်။</p>
+
+<pre><code>CREATE TABLE users (
+  id integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name varchar(100) NOT NULL,
+  email text NOT NULL UNIQUE
+);</code></pre>
+<dl class="lesson-terms"><div><dt><code>integer / IDENTITY / PRIMARY KEY</code></dt><dd>id က ကိန်းပြည့်ပါ။ Row ထည့်တဲ့အခါ PostgreSQL က id ကို ထုတ်ပေးတယ်။ Primary key ကြောင့် id က မထပ်ရသလို NULL လည်း မဖြစ်ရဘူး။</dd></div><div><dt><code>SERIAL PRIMARY KEY</code></dt><dd>အရင် SQL နမူနာတွေမှာ ဒီရေးနည်းကိုလည်း တွေ့နိုင်တယ်။ SERIAL က sequence နဲ့ ကိန်းပြည့် ID ထုတ်ပေးတယ်။ Sequence နဲ့ ထုတ်တဲ့ ID တွေ ကြားမှာ နံပါတ်ကျော်တာ ရှိနိုင်တယ်။</dd></div><div><dt><code>varchar(100) / NOT NULL</code></dt><dd>name က စာလုံးရေ 100 အထိ ထည့်လို့ရတဲ့ စာသားဖြစ်ပြီး တန်ဖိုး မဖြစ်မနေ ထည့်ရမယ်။</dd></div><div><dt><code>text / UNIQUE</code></dt><dd>email က စာလုံးရေ ကန့်သတ်ချက် မသတ်မှတ်ထားတဲ့ စာသားပါ။ NOT NULL ကြောင့် တန်ဖိုးလိုပြီး UNIQUE ကြောင့် email ထပ်လို့မရဘူး။</dd></div><div><dt><code>numeric(10, 2) / boolean / date</code></dt><dd>ဈေးနှုန်းလို တိကျတဲ့ ဒဿမကိန်း၊ true/false နဲ့ ရက်စွဲတွေအတွက် numeric၊ boolean နဲ့ date တို့လည်း သုံးလို့ရတယ်။ courses table မှာ သင်တန်းကြေးအတွက် numeric(10, 2) သုံးထားတယ်။</dd></div></dl>
+
+<p class="example-check"><strong>ရလဒ်ကွာနေရင်</strong> users table က အရင်သင်ခန်းစာကတည်းက ရှိနေတယ်ဆိုရင် practice database အသစ်မှာ စမ်းပါ။ ဒါမှမဟုတ် ဥပမာအားလုံးမှာ table နာမည်ကို တစ်မျိုးတည်း ပြောင်းသုံးပါ။</p>
+</section>
+<section class="article-section" id="insert">
+  <h2>INSERT နဲ့ Row ထည့်ခြင်း</h2>
+  <p>INSERT INTO users (name, email) က တန်ဖိုးထည့်မယ့် table နဲ့ column နှစ်ခုကို ရွေးတယ်။ VALUES က ရွေးထားတဲ့အစဉ်အတိုင်း တန်ဖိုးပေးတယ်။ PostgreSQL က id ထုတ်ပေးပြီး RETURNING က ထည့်ပြီးသား row ကို ပြတယ်။</p>
+
+<pre><code>INSERT INTO users (name, email) VALUES (&#39;Nyi&#39;, &#39;nyi@example.com&#39;)
+RETURNING id, name, email;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Row တစ်ကြောင်း ပြန်လာပြီး psql မှာ INSERT 0 1 လို့ ပြမယ်။ နောက်ဆုံးက 1 က ထည့်လိုက်တဲ့ row အရေအတွက်ပါ။</p>
+
+</section>
+<section class="article-section" id="inspect-users">
+  <h2>users Table ကို ရှာပြီး ဖွဲ့စည်းပုံ စစ်ခြင်း</h2>
+  <p>psql ထဲမှာ \dt က မြင်ရတဲ့ tables ကို ပြတယ်။ \d users က users table ရဲ့ columns၊ data types၊ default တန်ဖိုးနဲ့ constraints တွေကို ပြတယ်။ တစ်ကြောင်းချင်း run ပါ။</p>
+
+<pre><code>\dt
+\d users</code></pre>
+
+
+</section>
+<section class="article-section" id="select">
+  <h2>SELECT နဲ့ Rows ဖတ်ခြင်း</h2>
+  <p>SELECT က ပြမယ့် columns ကို ရွေးတယ်။ FROM က ဖတ်မယ့် table ကို ရွေးတယ်။ WHERE က နမူနာ email နဲ့ ကိုက်တဲ့ row ကိုပဲ ပြတယ်။ ဒီ practice table ရဲ့ row နဲ့ column အားလုံးကို ကြည့်ချင်ရင် SELECT * FROM users; ကို သီးသန့် run ပါ။</p>
+
+<pre><code>SELECT id, name, email
+FROM users
+WHERE email = &#39;nyi@example.com&#39;;</code></pre>
+
+
+</section>
+<section class="article-section" id="update">
+  <h2>UPDATE နဲ့ Row ပြင်ခြင်း</h2>
+  <p>UPDATE က table ကို ရွေးတယ်။ SET က ပြောင်းမယ့်တန်ဖိုးကို သတ်မှတ်တယ်။ WHERE က နမူနာ email နဲ့ ကိုက်တဲ့ row ကိုပဲ ရွေးတယ်။ မပြင်ခင် အပေါ်က SELECT နဲ့ ရည်ရွယ်တဲ့ row ဟုတ်မဟုတ် စစ်ပါ။ RETURNING က ပြင်ပြီးသား row ကို ပြတယ်။</p>
+
+<pre><code>UPDATE users SET name = &#39;Nyi Nyi&#39;
+WHERE email = &#39;nyi@example.com&#39;
+RETURNING id, name, email;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပြန်လာတဲ့ name က Nyi Nyi ဖြစ်ပြီး psql မှာ UPDATE 1 လို့ ပြမယ်။</p>
+
+</section>
+<section class="article-section" id="delete">
+  <h2>DELETE နဲ့ Row ဖျက်ခြင်း</h2>
+  <p>DELETE FROM က table ကို ရွေးတယ်။ WHERE ကြောင့် နမူနာ email နဲ့ ကိုက်တဲ့ row ကိုပဲ ဖျက်တယ်။ မဖျက်ခင် SELECT နဲ့ ကိုယ်ဖျက်ချင်တဲ့ row ဟုတ်မဟုတ် ကြည့်ပါ။ WHERE ချန်ထားရင် table ထဲက row အားလုံးကို ဖျက်မယ်။</p>
+
+<pre><code>DELETE FROM users
+WHERE email = &#39;nyi@example.com&#39;
+RETURNING id, name, email;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> psql မှာ DELETE 1 လို့ ပြမယ်။ နမူနာ SELECT ကို ပြန် run ရင် ကိုက်ညီတဲ့ row မရှိတော့ဘူး။</p>
+
+</section>
+<section class="article-section" id="drop-table">
+  <h2>Transaction ထဲမှာ DROP TABLE စမ်းခြင်း</h2>
+  <p>အပေါ်က row အလိုက် CRUD လုပ်ပြီးမှ လေ့ကျင့်ထားတဲ့ users table နဲ့ ဒီ block ကို စမ်းနိုင်တယ်။ DROP TABLE က table ဖွဲ့စည်းပုံနဲ့ rows တွေကို ဖျက်တယ်။ ဒီနမူနာမှာ ROLLBACK ပါလို့ table ပြန်ရမယ်။</p>
+
+<pre><code>BEGIN;
+DROP TABLE users;
+ROLLBACK;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ROLLBACK ပြီးရင် \dt users နဲ့ table ဆက်ရှိနေတာ စစ်ပါ။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/tutorial-sql.html">PostgreSQL · The SQL tutorial</a></li>
+<li><a href="https://www.postgresql.org/docs/19/datatype.html">PostgreSQL · Data types</a></li>
+<li><a href="https://www.postgresql.org/docs/19/datatype-numeric.html#DATATYPE-SERIAL">PostgreSQL · Serial types</a></li>
+<li><a href="https://www.postgresql.org/docs/19/ddl-constraints.html">PostgreSQL · Constraints</a></li>
+<li><a href="https://www.postgresql.org/docs/19/dml-returning.html">PostgreSQL · RETURNING</a></li>
+<li><a href="https://www.postgresql.org/docs/19/sql-droptable.html">PostgreSQL · DROP TABLE</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/psql-commands/">အရင်သင်ခန်းစာ · psql နဲ့ Databases၊ Roles၊ Schemas နဲ့ Tables စစ်ခြင်း</a>
+<a href="/docs/read/my/database/queries/">နောက်သင်ခန်းစာ · Queries၊ Joins နဲ့ Groups</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Read and write files, catch expected failures, and locate errors with tracebacks.">
+  <title>Files, exceptions, and debugging · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/python/files/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/files/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/files/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#python">All documentation · Python</a> <a href="/docs/read/my/python/files/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Files, exceptions, and debugging</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">Read and write files, catch expected failures, and locate errors with tracebacks.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/python/files">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#files-and-context">Use a context manager</a></li>
+<li><a href="#exceptions">Catch an expected exception</a></li>
+<li><a href="#tracebacks">Read a traceback</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="files-and-context">
+  <h2>Use a context manager</h2>
+  <p>with closes the file after the block, including when an exception is raised. Specify an encoding for text you control. Path handles filesystem paths, and encoding matters when a file comes from an external system.</p>
+
+<pre><code>from pathlib import Path
+
+path = Path(&quot;orders.txt&quot;)
+path.write_text(&quot;Coffee\nTea\n&quot;, encoding=&quot;utf-8&quot;)
+with path.open(encoding=&quot;utf-8&quot;) as handle:
+    orders = handle.read().splitlines()
+print(orders)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[&#39;Coffee&#39;, &#39;Tea&#39;]</pre></div>
+
+
+</section>
+<section class="article-section" id="exceptions">
+  <h2>Catch an expected exception</h2>
+  <p>Catch the specific exception you can handle. else runs after a try block that raises no exception. finally runs when control leaves the try statement and is useful for cleanup.</p>
+
+<pre><code>def parse_quantity(text):
+    try:
+        return int(text)
+    except ValueError:
+        return None
+
+print(parse_quantity(&quot;4&quot;), parse_quantity(&quot;ERROR&quot;))</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">4 None</pre></div>
+
+
+</section>
+<section class="article-section" id="tracebacks">
+  <h2>Read a traceback</h2>
+  <p>The final line names the error and message. Find the last relevant frame in your own code and inspect the values on that line. For invalid data, decide whether to reject it, report it, or use a documented fallback.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.python.org/3.15/tutorial/inputoutput.html#reading-and-writing-files">Reading and writing files</a></li>
+<li><a href="https://docs.python.org/3.15/tutorial/errors.html">Errors and exceptions</a></li>
+<li><a href="https://docs.python.org/3.15/library/pathlib.html">pathlib</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/python/functions/">Previous lesson · Functions, modules, and type hints</a>
+<a href="/docs/read/en/python/classes/">Next lesson · Classes, instances, and Python 3.15</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

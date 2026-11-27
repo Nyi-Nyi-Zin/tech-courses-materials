@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Measure a relationship and check how outliers, subgroup mix, and study design affect the claim.">
+  <title>Correlation, confounding, and practical interpretation · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/correlation-and-confounding/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/correlation-and-confounding/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/correlation-and-confounding/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#data-analysis">All documentation · Data Analysis</a> <a href="/docs/read/my/data-analysis/correlation-and-confounding/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Correlation, confounding, and practical interpretation</h1>
+  
+  <p class="intro">Measure a relationship and check how outliers, subgroup mix, and study design affect the claim.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/data-analysis/correlation-and-confounding">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#association">Choose a measure and inspect the data</a></li>
+<li><a href="#confounding">Check other explanations</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="association">
+  <h2>Choose a measure and inspect the data</h2>
+  <p>Pearson correlation measures linear association. Spearman correlation uses ranks and can describe a monotonic but nonlinear relationship. Look at a scatter plot, check constant variables and outliers, and use rows where both values are available.</p>
+
+<pre><code>from scipy.stats import pearsonr, spearmanr
+
+x = [1, 2, 3, 4, 5]
+y = [1, 4, 9, 16, 25]
+print(round(float(pearsonr(x, y).statistic), 2))
+print(round(float(spearmanr(x, y).statistic), 2))</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">0.98
+1.0</pre></div>
+
+
+</section>
+<section class="article-section" id="confounding">
+  <h2>Check other explanations</h2>
+  <p>A relationship between promotions and sales can reflect season, store size, or product mix. Compare relevant subgroups and document limits before making a causal claim. A randomized design or another justified causal method is needed to estimate effects in many settings.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html">scipy.stats.pearsonr</a></li>
+<li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.spearmanr.html">scipy.stats.spearmanr</a></li>
+<li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda33q.htm">NIST scatter plots</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/data-analysis/hypothesis-testing/">Previous lesson · Hypothesis testing and experiment results</a>
+<a href="/docs/read/en/data-analysis/reproducible-report/">Next lesson · Build a reproducible analysis report</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

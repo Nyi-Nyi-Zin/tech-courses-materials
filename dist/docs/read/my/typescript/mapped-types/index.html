@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ရှိပြီးသား object type ရဲ့ fields တွေကနေ type အသစ် ဆောက်ပါ။ မူရင်း type ပြောင်းရင် လိုက်ပြောင်းသင့်တဲ့ type တွေမှာ သုံးပါ။">
+  <title>Mapped Types · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/mapped-types/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/mapped-types/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/mapped-types/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#typescript">သင်ခန်းစာအားလုံး · TypeScript</a> <a href="/docs/read/en/typescript/mapped-types/" lang="en" hreflang="en">English</a></nav>
+  <h1>Mapped Types</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">ရှိပြီးသား object type ရဲ့ fields တွေကနေ type အသစ် ဆောက်ပါ။ မူရင်း type ပြောင်းရင် လိုက်ပြောင်းသင့်တဲ့ type တွေမှာ သုံးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/typescript/mapped-types">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#keys">Type ထဲက Key တစ်ခုချင်းစီကို သုံးပါ</a></li>
+<li><a href="#remap">Key နဲ့ Modifier ပြောင်းပါ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="keys">
+  <h2>Type ထဲက Key တစ်ခုချင်းစီကို သုံးပါ</h2>
+  <p>keyof T က T ရဲ့ property names တွေကို ရယူပါတယ်။ Mapped type က key တစ်ခုချင်းကို သုံးပါတယ်။ T[Key] က အဲဒီ property ရဲ့ value type ပါ။ ဒီနမူနာမှာ product update အတွက် field တိုင်းကို optional လုပ်ထားပါတယ်။</p>
+
+<pre><code>type Product = { name: string; quantity: number };
+
+type Patch&lt;T&gt; = {
+  [Key in keyof T]?: T[Key];
+};
+
+const update: Patch&lt;Product&gt; = { quantity: 8 };</code></pre>
+
+
+</section>
+<section class="article-section" id="remap">
+  <h2>Key နဲ့ Modifier ပြောင်းပါ</h2>
+  <p>Key နာမည် ပြောင်းဖို့ as clause သုံးပါ။ Optional ကို ဖယ်ဖို့ -?၊ ရေးလို့ရအောင် readonly ဖယ်ဖို့ -readonly သုံးပါ။ ဒီပြောင်းလဲမှုတွေက compiler စစ်တဲ့ type အပေါ် သက်ရောက်ပါတယ်။</p>
+
+<pre><code>type Getters&lt;T&gt; = {
+  [Key in Extract&lt;keyof T, string&gt; as `get${Capitalize&lt;Key&gt;}`]: () =&gt; T[Key];
+};
+
+type ProductGetters = Getters&lt;Product&gt;;
+// { getName: () =&gt; string; getQuantity: () =&gt; number }</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/mapped-types.html">TypeScript Handbook · Mapped types</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html">TypeScript Handbook · Indexed access types</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/typescript/modules/">အရင်သင်ခန်းစာ · Modules နှင့် Type-only Imports</a>
+<a href="/docs/read/my/typescript/conditional-types/">နောက်သင်ခန်းစာ · Conditional Types နဲ့ infer</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

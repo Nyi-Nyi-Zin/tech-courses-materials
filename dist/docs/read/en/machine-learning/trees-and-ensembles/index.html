@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Choose a tree-based baseline and understand how ensemble methods combine estimators.">
+  <title>Decision trees, random forests, and boosting · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/trees-and-ensembles/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/trees-and-ensembles/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/trees-and-ensembles/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#machine-learning">All documentation · Machine Learning</a> <a href="/docs/read/my/machine-learning/trees-and-ensembles/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Decision trees, random forests, and boosting</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Choose a tree-based baseline and understand how ensemble methods combine estimators.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/machine-learning/trees-and-ensembles">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#tree">Control tree complexity</a></li>
+<li><a href="#ensembles">Compare averaging and sequential improvement</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="tree">
+  <h2>Control tree complexity</h2>
+  <p>Decision trees learn splits by feature and threshold. A deep tree can overfit. Limit parameters such as max_depth or min_samples_leaf, and evaluate on data outside training.</p>
+
+
+
+
+</section>
+<section class="article-section" id="ensembles">
+  <h2>Compare averaging and sequential improvement</h2>
+  <p>Random forests average many randomized trees. Gradient boosting adds trees sequentially to improve the current model for a loss function. Compare both to a simple baseline using the same validation plan.</p>
+
+<pre><code>from sklearn.datasets import load_iris
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=42)
+model = RandomForestClassifier(n_estimators=30, max_depth=4, random_state=42)
+model.fit(X_train, y_train)
+print(len(model.estimators_))
+print(model.score(X_test, y_test) &gt; 0.8)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">30
+True</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/tree.html">Decision trees</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/ensemble.html">Ensemble models</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/machine-learning/classification-thresholds/">Previous lesson · Handle imbalanced classes and choose a threshold</a>
+<a href="/docs/read/en/machine-learning/pca-and-dimensionality/">Next lesson · Reduce dimensions with PCA</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

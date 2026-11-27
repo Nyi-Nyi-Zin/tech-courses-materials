@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="တန်ဖိုးမရှိတာနဲ့ ဂဏန်းတွက်မရတာကို JavaScript မှာ ဘယ်လို ဖော်ပြလဲ ကြည့်ပါ။ ပြီးရင် ရလဒ်ကို string ထဲ ထည့်ပါ။">
+  <title>Missing Values နဲ့ Template Literals · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/missing-values-and-templates/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/missing-values-and-templates/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/missing-values-and-templates/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/missing-values-and-templates/" lang="en" hreflang="en">English</a></nav>
+  <h1>Missing Values နဲ့ Template Literals</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">တန်ဖိုးမရှိတာနဲ့ ဂဏန်းတွက်မရတာကို JavaScript မှာ ဘယ်လို ဖော်ပြလဲ ကြည့်ပါ။ ပြီးရင် ရလဒ်ကို string ထဲ ထည့်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/missing-values-and-templates">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#undefined">undefined ဘယ်အချိန်မှာ ရလဲ။</a></li>
+<li><a href="#null">null နဲ့ တန်ဖိုးမရှိကြောင်း သတ်မှတ်ခြင်း</a></li>
+<li><a href="#nan">Number.isNaN() နဲ့ ဂဏန်းမမှန်တာ စစ်ခြင်း</a></li>
+<li><a href="#template-literals">Template Literal နဲ့ တန်ဖိုးတွေ ထည့်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="undefined">
+  <h2>undefined ဘယ်အချိန်မှာ ရလဲ။</h2>
+  <p>Variable ကြေညာပြီး value မပေးရင် undefined ရပါတယ်။ Object မှာ မရှိတဲ့ property ကို ဖတ်ရင်လည်း undefined ရပါတယ်။ ဘယ်နေရာက ရလာလဲ သိဖို့ တစ်ခုစီ log ထုတ်ကြည့်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>let receipt;
+const order = { product: &quot;Pen&quot; };
+console.log(receipt);
+console.log(order.note);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> နှစ်ကြောင်းစလုံး undefined ထွက်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="null">
+  <h2>null နဲ့ တန်ဖိုးမရှိကြောင်း သတ်မှတ်ခြင်း</h2>
+  <p>တန်ဖိုး မရှိဘူးလို့ code က ရည်ရွယ်ချက်ရှိရှိ မှတ်ထားချင်ရင် null ပေးနိုင်ပါတယ်။ ဒီ order မှာ note field ရှိပြီး မှတ်ချက်မရှိကြောင်း သတ်မှတ်ထားပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const order = { product: &quot;Pen&quot;, note: null };
+console.log(order.note);
+console.log(order.note === null);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Console မှာ null၊ ပြီးရင် true ထွက်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="nan">
+  <h2>Number.isNaN() နဲ့ ဂဏန်းမမှန်တာ စစ်ခြင်း</h2>
+  <p>ဂဏန်းတွက်မရတာ ဒါမှမဟုတ် ဂဏန်းအဖြစ် ပြောင်းမရတာကနေ NaN ဆိုတဲ့ အထူး number value ရနိုင်ပါတယ်။ NaN က မိမိကိုယ်တိုင်နဲ့တောင် မညီလို့ Number.isNaN(value) နဲ့ စစ်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const quantity = Number(&quot;two&quot;);
+console.log(quantity);
+console.log(Number.isNaN(quantity));</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Console မှာ NaN၊ ပြီးရင် true ထွက်ပါမယ်။ &quot;two&quot; ကို &quot;2&quot; ပြောင်းပြီး နှိုင်းပါ။</p>
+
+</section>
+<section class="article-section" id="template-literals">
+  <h2>Template Literal နဲ့ တန်ဖိုးတွေ ထည့်ခြင်း</h2>
+  <p>Template literal ကို backtick နှစ်ဖက်နဲ့ ရေးပါတယ်။ Dollar sign နောက်က ကွင်းထဲရှိ expression ကို JavaScript က တွက်ပြီး ရလဒ်ကို စာသားအဖြစ် ထည့်ပေးပါတယ်။ လိုင်းများစွာလည်း ဆင်းရေးနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const product = &quot;Pen&quot;;
+const quantity = 2;
+const price = 1500;
+console.log(`${product}: ${quantity * price} MMK`);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Console မှာ Pen: 3000 MMK ထွက်ပါမယ်။ ပစ္စည်းအရေအတွက် ပြောင်းပြီး Run ထပ်လုပ်ပါ။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures">MDN · JavaScript data types</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN">MDN · Number/isNaN</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">MDN · Template literals</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/values/">အရင်သင်ခန်းစာ · Value၊ Type၊ Variable နဲ့ Operator</a>
+<a href="/docs/read/my/js/conditions-and-loops/">နောက်သင်ခန်းစာ · Condition နဲ့ Loop</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

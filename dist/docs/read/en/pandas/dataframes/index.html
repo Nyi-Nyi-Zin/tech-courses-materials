@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Understand the objects pandas uses for labeled tabular data and how they align values.">
+  <title>Series, DataFrames, and indexes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/dataframes/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/dataframes/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/dataframes/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#pandas">All documentation · pandas</a> <a href="/docs/read/my/pandas/dataframes/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Series, DataFrames, and indexes</h1>
+  <p class="article-version">3.1.1</p>
+  <p class="intro">Understand the objects pandas uses for labeled tabular data and how they align values.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/pandas/dataframes">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#tabular-model">Series and DataFrame</a></li>
+<li><a href="#alignment">Index alignment</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="tabular-model">
+  <h2>Series and DataFrame</h2>
+  <p>A Series is one-dimensional and has an index. A DataFrame is a two-dimensional table whose columns can have different dtypes. Selecting one column by a scalar label generally gives a Series. Selecting a list of columns gives a DataFrame.</p>
+
+<pre><code>import pandas as pd
+
+frame = pd.DataFrame({&quot;item&quot;: [&quot;Coffee&quot;, &quot;Tea&quot;], &quot;price&quot;: [2.0, 1.5]})
+print(frame.shape)
+print(frame[&quot;price&quot;].tolist())</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/dataframes-tabular-model.png" data-image-preview><img src="/docs/media/data/dataframes-tabular-model.png" alt="A DataFrame has item and price columns. Selecting price gives a Series with values 2.0 and 1.5 and the same index labels." width="720" height="328" loading="lazy" decoding="async"></a>
+    <figcaption>A single column selection keeps the row index.</figcaption>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">(2, 2)
+[2.0, 1.5]</pre></div>
+
+
+</section>
+<section class="article-section" id="alignment">
+  <h2>Index alignment</h2>
+  <p>Arithmetic between Series aligns by label. If only one Series contains a label, the usual sum is missing at that label. Use add(fill_value=0) only when a missing side should count as zero.</p>
+
+<pre><code>import pandas as pd
+
+morning = pd.Series({&quot;Tea&quot;: 2, &quot;Coffee&quot;: 4})
+evening = pd.Series({&quot;Coffee&quot;: 3, &quot;Cake&quot;: 1})
+print(morning.add(evening, fill_value=0).sort_index().to_dict())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">{&#39;Cake&#39;: 1.0, &#39;Coffee&#39;: 7.0, &#39;Tea&#39;: 2.0}</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://pandas.pydata.org/docs/user_guide/dsintro.html">Intro to pandas data structures</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/index.html">Pandas user guide</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/pandas/read-csv/">Next lesson · Read and inspect a CSV</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A condition lets the program choose an action. A loop lets it repeat an action. First try each idea with one simple rule.">
+  <title>Conditions and loops · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/conditions-and-loops/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/conditions-and-loops/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/conditions-and-loops/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/conditions-and-loops/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Conditions and loops</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">A condition lets the program choose an action. A loop lets it repeat an action. First try each idea with one simple rule.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/conditions-and-loops">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#if-else">Choose a branch with if, else if, and else</a></li>
+<li><a href="#switch">Match an exact value with switch</a></li>
+<li><a href="#loops">Repeat a counted task with for</a></li>
+<li><a href="#while">Repeat while a condition is true</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="if-else">
+  <h2>Choose a branch with if, else if, and else</h2>
+  <p>A condition is an expression JavaScript evaluates to make a decision. Code between braces forms a block. If the first condition is true it runs that block. Otherwise it checks else if. The final else covers what is left.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const quantity = 3;
+if (quantity &gt;= 5) {
+  console.log(&quot;Group order&quot;);
+} else if (quantity &gt;= 1) {
+  console.log(&quot;Regular order&quot;);
+} else {
+  console.log(&quot;Choose at least one item&quot;);
+}</code></pre>
+<p class="example-result"><strong>What to expect</strong> The result is “Regular order”. Try 5 and 0 to check the two boundaries.</p>
+
+</section>
+<section class="article-section" id="switch">
+  <h2>Match an exact value with switch</h2>
+  <p>switch compares a single value against case labels. break exits the switch after the matching case runs. Without it, execution can continue into the next case. default handles unmatched values.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const productCode = &quot;P&quot;;
+switch (productCode) {
+  case &quot;P&quot;:
+    console.log(&quot;Pen&quot;);
+    break;
+  case &quot;N&quot;:
+    console.log(&quot;Notebook&quot;);
+    break;
+  default:
+    console.log(&quot;Unknown product&quot;);
+}</code></pre>
+<p class="example-result"><strong>What to expect</strong> It prints Pen. Change the code to N or X to try the other cases.</p>
+
+</section>
+<section class="article-section" id="loops">
+  <h2>Repeat a counted task with for</h2>
+  <p>A for loop has a start, a test, and an update. JavaScript runs the start once. Before each pass it tests the condition. After each pass it runs the update. itemNumber += 1 adds one to itemNumber.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>for (let itemNumber = 1; itemNumber &lt;= 3; itemNumber += 1) {
+  console.log(&quot;Item&quot;, itemNumber);
+}</code></pre>
+<p class="example-result"><strong>What to expect</strong> Item 1, Item 2, and Item 3 appear on separate lines. The next test fails when itemNumber reaches 4.</p>
+
+</section>
+<section class="article-section" id="while">
+  <h2>Repeat while a condition is true</h2>
+  <p>while tests before every pass. Update the variables it checks so the condition can become false. break stops the current loop; continue starts the next pass early. Place the update where it will still run on any pass that continues.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>let remaining = 3;
+while (remaining &gt; 0) {
+  remaining -= 1;
+  if (remaining === 1) continue;
+  console.log(remaining);
+}</code></pre>
+<p class="example-result"><strong>What to expect</strong> The Console prints 2 and 0. The loop skips printing 1 and stops once the condition becomes false.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling">MDN · Control flow</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration">MDN · Loops and iteration</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/missing-values-and-templates/">Previous lesson · Missing values and template literals</a>
+<a href="/docs/read/en/js/functions/">Next lesson · Functions and modules</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

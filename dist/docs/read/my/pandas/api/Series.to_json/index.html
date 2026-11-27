@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ဒေတာကို JSON အဖြစ် ပြောင်းပေးပါတယ်။ ဖွဲ့စည်းပုံကို orient နဲ့ ရွေးနိုင်ပြီး record တစ်ခုစီကို တစ်ကြောင်းစီ ရေးဖို့ lines ကို သုံးနိုင်ပါတယ်။">
+  <title>pandas.Series.to_json · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/Series.to_json/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/Series.to_json/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/Series.to_json">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API Reference">
+    <a href="/docs/read/my/pandas/api-reference/#find-an-api">pandas API Reference</a><span aria-hidden="true">/</span><span>Series နှင့် Accessors</span><a href="/docs/read/en/pandas/api/Series.to_json/" lang="en" hreflang="en">English</a>
+  </nav>
+    <h1><code>pandas.<wbr>Series.<wbr>to_json</code></h1>
+    <p class="article-version">pandas 3.1.1 · Series နှင့် Accessors · <span lang="en">method</span></p>
+    <p class="intro">ဒေတာကို JSON အဖြစ် ပြောင်းပေးပါတယ်။ ဖွဲ့စည်းပုံကို orient နဲ့ ရွေးနိုင်ပြီး record တစ်ခုစီကို တစ်ကြောင်းစီ ရေးဖို့ lines ကို သုံးနိုင်ပါတယ်။</p>
+
+    <nav class="api-breadcrumbs" aria-label="ဒီစာမျက်နှာမှာ"><ul><li><a href="#syntax">ခေါ်သုံးပုံ</a></li><li><a href="#example">နမူနာ စမ်းကြည့်ရန်</a></li><li><a href="#parameters">ထည့်သွင်းနိုင်တဲ့ Arguments</a></li><li><a href="#returns">ပြန်ပေးတဲ့ ရလဒ်</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>ခေါ်သုံးပုံ</h2><details class="api-full-signature"><summary><code lang="en">Series.to_json(…)</code> <span>ခေါ်သုံးပုံ အပြည့်အစုံ</span></summary><pre><code lang="en">Series.to_json(
+    path_or_buf=None,
+    *,
+    orient=None,
+    date_format=None,
+    double_precision=10,
+    force_ascii=True,
+    date_unit=&#39;ms&#39;,
+    default_handler=None,
+    lines=False,
+    compression=&#39;infer&#39;,
+    index=None,
+    indent=None,
+    storage_options=None,
+    mode=&#39;w&#39;,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>နမူနာ စမ်းကြည့်ရန်</h2>
+      <p>နမူနာကုဒ်ကို ပြင်ပြီး Run Python နှိပ်ပါ။ ရလဒ်ကို အောက်မှာ ကြည့်နိုင်ပါတယ်။</p>
+      <label><span>Python ကုဒ်</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+values = pd.Series([2., 5., 7.], name=&quot;units&quot;)
+print(values.to_json())</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>ရပ်ရန်</button>
+        <button type="button" data-reset disabled>မူလကုဒ် ပြန်ထားရန်</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="ရလဒ်"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>ထည့်သွင်းနိုင်တဲ့ Arguments</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">ထည့်သွင်းပုံ</th><th scope="col">လက်ခံတဲ့ တန်ဖိုးနဲ့ သုံးပုံ</th></tr></thead><tbody><tr><th scope="row"><code>path_or_buf</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)၊ ဖိုင်လမ်းကြောင်း object၊ ဖိုင်ပုံစံ object သို့မဟုတ် None</span><p>ဖိုင်လမ်းကြောင်း သို့မဟုတ် ဖတ်နိုင်၊ ရေးနိုင်တဲ့ stream ကို ထည့်ပါ။ Writer တချို့မှာ ဒါကို ချန်ထားရင် ရလဒ်ကို တိုက်ရိုက် ပြန်ပေးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>orient</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span><p>ထုတ်ပေးတဲ့ ဒေတာမှာ row label၊ column နဲ့ တန်ဖိုးတွေကို ဘယ်ပုံစံနဲ့ စီမလဲ ရွေးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>date_format</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>{None၊ &#39;epoch&#39;၊ &#39;iso&#39;}</span><p>ရက်စွဲနဲ့အချိန်ကို ဖတ်ဖို့ ဒါမှမဟုတ် ပြသဖို့ &quot;%Y-%m-%d&quot; လို ပုံစံတစ်ခု သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>double_precision</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>10</code></td>
+      <td><span>ကိန်းပြည့် (int)</span></td></tr>
+<tr><th scope="row"><code>force_ascii</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>date_unit</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;ms&#39;</code></td>
+      <td><span>စာသား (str)</span><p>ရက်စွဲနဲ့ အချိန်ကို ဖတ်တဲ့အခါ သို့မဟုတ် ရေးထုတ်တဲ့အခါ သုံးမယ့် timestamp ယူနစ်ကို ရွေးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>default_handler</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>ခေါ်သုံးလို့ရတဲ့ function (callable)</span></td></tr>
+<tr><th scope="row"><code>lines</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True / False (bool)</span><p>API က ပံ့ပိုးရင် JSON record တစ်ခုစီကို တစ်ကြောင်းစီ ရေးဖို့ သတ်မှတ်နိုင်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>compression</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;infer&#39;</code></td>
+      <td><span>စာသား (str) သို့မဟုတ် dict</span><p>ဒေတာကို ချုံ့မလား၊ ပြန်ဖြည်မလားနဲ့ ဘယ် compression ပုံစံ သုံးမလဲ ရွေးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>index</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>True / False (bool) သို့မဟုတ် None</span><p>Row label တွေ ထည့်ဖို့ ဒါမှမဟုတ် မူလ row label တွေကို ဘယ်လို သုံးမလဲ သတ်မှတ်ဖို့ သုံးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>indent</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>ကိန်းပြည့် (int)</span></td></tr>
+<tr><th scope="row"><code>storage_options</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>dict</span><p>Connection setting ဒါမှမဟုတ် HTTP header လို ဒေတာသိမ်းဆည်းရာမှာ သုံးမယ့် option တွေကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>mode</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;w&#39;</code></td>
+      <td><span>စာသား (str)</span><p>ဖိုင် သို့မဟုတ် ဒေတာသိုလှောင်ရာကို ဖွင့်မယ့် mode ရွေးပါ။</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>ပြန်ပေးတဲ့ ရလဒ်</h2><p>ပြန်ပေးတဲ့ အမျိုးအစားက None သို့မဟုတ် စာသား (str) ဖြစ်ပါတယ်။</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.to_json.html#pandas.Series.to_json">pandas တရားဝင် ကိုးကားချက်</a>
+      <nav class="pagination" aria-label="pandas API Reference"><a href="/docs/read/my/pandas/api/Series.to_hdf/"><span>အရင် API</span><strong>pandas.Series.to_hdf</strong></a><a href="/docs/read/my/pandas/api/Series.to_latex/"><span>နောက် API</span><strong>pandas.Series.to_latex</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

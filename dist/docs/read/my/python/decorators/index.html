@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Function ကို wrapper နဲ့ ပတ်ပြီး ပြန်သုံးနိုင်တဲ့ behavior ထည့်ပါ။ မူရင်း function metadata ကိုလည်း ထိန်းထားပါ။">
+  <title>Decorators နှင့် ပြန်သုံးနိုင်တဲ့ Wrappers · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/python/decorators/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/decorators/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/decorators/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#python">သင်ခန်းစာအားလုံး · Python</a> <a href="/docs/read/en/python/decorators/" lang="en" hreflang="en">English</a></nav>
+  <h1>Decorators နှင့် ပြန်သုံးနိုင်တဲ့ Wrappers</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">Function ကို wrapper နဲ့ ပတ်ပြီး ပြန်သုံးနိုင်တဲ့ behavior ထည့်ပါ။ မူရင်း function metadata ကိုလည်း ထိန်းထားပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/python/decorators">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#wrapper">Decorator နဲ့ Function Call ကို ပတ်ခြင်း</a></li>
+<li><a href="#resources">Cleanup အတွက် Context Manager သုံးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="wrapper">
+  <h2>Decorator နဲ့ Function Call ကို ပတ်ခြင်း</h2>
+  <p>Decorator က function တစ်ခု လက်ခံပြီး အစားထိုးခေါ်နိုင်တဲ့ callable ပြန်ပေးပါတယ်။ @announce က function သတ်မှတ်ချိန်မှာ decorator သုံးပါတယ်။ Wrapper က argument တွေ ပေးပို့ပြီး မူရင်း result ပြန်ပေးပါတယ်။ functools.wraps က နာမည်နဲ့ documentation လို metadata ထိန်းပေးပါတယ်။</p>
+
+<pre><code>from functools import wraps
+
+def announce(function):
+    @wraps(function)
+    def wrapped(*args, **kwargs):
+        print(&quot;Running&quot;, function.__name__)
+        return function(*args, **kwargs)
+    return wrapped
+
+@announce
+def total(quantity, price):
+    return quantity * price
+
+print(total(2, 3.5), total.__name__)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">Running total
+7.0 total</pre></div>
+
+
+</section>
+<section class="article-section" id="resources">
+  <h2>Cleanup အတွက် Context Manager သုံးခြင်း</h2>
+  <p>with block က ပြင်ဆင်တာနဲ့ cleanup ကို scope တစ်ခုနဲ့ ချိတ်ပါတယ်။ contextlib.contextmanager မှာ yield မတိုင်ခင် ပြင်ဆင်ပြီး finally ထဲ cleanup ရေးပါ။ File၊ transaction၊ temporary directory နဲ့ code အပိုင်းတိုင်းတာရာမှာ အသုံးဝင်ပါတယ်။</p>
+
+<pre><code>from contextlib import contextmanager
+
+@contextmanager
+def operation():
+    print(&quot;open&quot;)
+    try:
+        yield &quot;ready&quot;
+    finally:
+        print(&quot;close&quot;)
+
+with operation() as status:
+    print(status)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">open
+ready
+close</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.python.org/3.15/reference/compound_stmts.html#function-definitions">Function definitions and decorators</a></li>
+<li><a href="https://docs.python.org/3.15/library/functools.html">functools.wraps</a></li>
+<li><a href="https://docs.python.org/3.15/library/contextlib.html">contextlib</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/python/iterators-and-generators/">အရင်သင်ခန်းစာ · Iterators နှင့် Generators</a>
+<a href="/docs/read/my/python/async-await/">နောက်သင်ခန်းစာ · async နှင့် await ဖြင့် Concurrency</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

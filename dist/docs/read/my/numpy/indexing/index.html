@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Position၊ condition နဲ့ dimension အလိုက် array value တွေ ယူပါ သို့မဟုတ် ပြင်ပါ။">
+  <title>Indexing၊ Slices နှင့် Masks · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/indexing/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/indexing/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/indexing/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#numpy">သင်ခန်းစာအားလုံး · NumPy</a> <a href="/docs/read/en/numpy/indexing/" lang="en" hreflang="en">English</a></nav>
+  <h1>Indexing၊ Slices နှင့် Masks</h1>
+  <p class="article-version">2.5.5</p>
+  <p class="intro">Position၊ condition နဲ့ dimension အလိုက် array value တွေ ယူပါ သို့မဟုတ် ပြင်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/numpy/indexing">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#positions">Axis အလိုက် Index ယူခြင်း</a></li>
+<li><a href="#masks">Boolean Mask သုံးခြင်း</a></li>
+<li><a href="#views">Memory မျှဝေမှု သိထားခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="positions">
+  <h2>Axis အလိုက် Index ယူခြင်း</h2>
+  <p>2D array ထဲက cell ယူဖို့ array[row, column] သုံးပါ။ -1 က နောက်ဆုံးနေရာ ဖြစ်ပြီး colon က axis တစ်ခုလုံး ရွေးပေးနိုင်ပါတယ်။</p>
+
+<pre><code>import numpy as np
+
+data = np.array([[10, 3, 7], [12, 4, 8]])
+print(data[0, -1])
+print(data[:, -1].tolist())</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">7
+[7, 8]</pre></div>
+
+
+</section>
+<section class="article-section" id="masks">
+  <h2>Boolean Mask သုံးခြင်း</h2>
+  <p>Comparison တစ်ခုက Boolean array ပြန်ပေးပါတယ်။ &amp; သို့မဟုတ် | နဲ့ mask တွေ ချိတ်ရင် comparison တစ်ခုစီကို ကွင်းခတ်ပါ။ ပြောင်းပြန်ယူဖို့ ~ သုံးပါ။</p>
+
+<pre><code>import numpy as np
+
+marks = np.array([80, 32, 50, 91, 67])
+mask = (marks &gt;= 50) &amp; (marks &lt;= 80)
+print(marks[mask].tolist())</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[80, 50, 67]</pre></div>
+
+
+</section>
+<section class="article-section" id="views">
+  <h2>Memory မျှဝေမှု သိထားခြင်း</h2>
+  <p>Basic slice က မူရင်း array data ကို မျှသုံးတဲ့ view ပြန်ပေးပါတယ်။ Integer-array နဲ့ Boolean-array indexing နဲ့ value ယူရင် copy ပြန်ရပါတယ်။ သီးခြား result လိုရင် copy() သုံးပါ။</p>
+
+<pre><code>import numpy as np
+
+a = np.array([10, 20, 30])
+b = a[:2]
+b[0] = 99
+print(a.tolist())</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[99, 20, 30]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://numpy.org/doc/stable/user/basics.indexing.html">Indexing on ndarrays</a></li>
+<li><a href="https://numpy.org/doc/stable/user/basics.copies.html">Copies and views</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/numpy/arrays/">အရင်သင်ခန်းစာ · Arrays၊ Shape နှင့် dtype</a>
+<a href="/docs/read/my/numpy/reshaping/">နောက်သင်ခန်းစာ · Array ပုံစံပြောင်း၍ ပေါင်းစပ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

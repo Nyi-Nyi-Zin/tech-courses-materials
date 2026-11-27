@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Apply element-wise operations and summarize over a chosen axis.">
+  <title>Broadcasting, vectorization, and reductions · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/broadcasting/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/broadcasting/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/broadcasting/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#numpy">All documentation · NumPy</a> <a href="/docs/read/my/numpy/broadcasting/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Broadcasting, vectorization, and reductions</h1>
+  <p class="article-version">2.5.5</p>
+  <p class="intro">Apply element-wise operations and summarize over a chosen axis.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/numpy/broadcasting">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#elementwise">Element-wise calculations</a></li>
+<li><a href="#align">Align shapes from the right</a></li>
+<li><a href="#reduce">Reduce one axis</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="elementwise">
+  <h2>Element-wise calculations</h2>
+  <p>Array arithmetic applies operations element by element. The * operator multiplies matching elements. Use @ or matmul for matrix multiplication.</p>
+
+<pre><code>import numpy as np
+
+quantity = np.array([2, 4, 3])
+price = np.array([1.5, 2, 4])
+print((quantity * price).tolist())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[3.0, 8.0, 12.0]</pre></div>
+
+
+</section>
+<section class="article-section" id="align">
+  <h2>Align shapes from the right</h2>
+  <p>NumPy compares dimensions starting from the right. Two dimensions are compatible when equal or when one is 1. Missing leading dimensions are treated as 1. Use a new axis when aligning a column vector with a matrix.</p>
+
+<pre><code>import numpy as np
+
+marks = np.array([[50, 60], [65, 70]])
+print((marks + [5, 3]).tolist())
+print(marks.sum(axis=0).tolist())</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/broadcasting-align.png" data-image-preview><img src="/docs/media/data/broadcasting-align.png" alt="Adding [5, 3] to each of two marks rows produces [55, 63] and [70, 73]." width="720" height="316" loading="lazy" decoding="async"></a>
+    <figcaption>The length-2 vector matches the last dimension of the matrix.</figcaption>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[[55, 63], [70, 73]]
+[115, 130]</pre></div>
+
+
+</section>
+<section class="article-section" id="reduce">
+  <h2>Reduce one axis</h2>
+  <p>In a rows-by-columns array, sum(axis=0) combines rows and returns one value per column. sum(axis=1) combines columns and returns one value per row. keepdims=True retains the reduced axis with length 1.</p>
+
+<pre><code>import numpy as np
+
+marks = np.array([[50, 60], [65, 70]])
+print(marks.sum(axis=0).tolist())
+print(marks.sum(axis=1).tolist())
+print(marks.sum(axis=0, keepdims=True).shape)</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/broadcasting-reduce.png" data-image-preview><img src="/docs/media/data/broadcasting-reduce.png" alt="Summing four marks by axis 0 gives [115, 130]. Summing by axis 1 gives [110, 135]." width="720" height="345" loading="lazy" decoding="async"></a>
+    <figcaption>axis=0 returns one total per column and axis=1 returns one total per row.</figcaption>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[115, 130]
+[110, 135]
+(1, 2)</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://numpy.org/doc/stable/user/basics.broadcasting.html">Broadcasting rules</a></li>
+<li><a href="https://numpy.org/doc/stable/user/absolute_beginners.html">NumPy absolute basics</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/numpy/reshaping/">Previous lesson · Reshape, transpose, and combine arrays</a>
+<a href="/docs/read/en/numpy/statistics/">Next lesson · Descriptive statistics and random sampling</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

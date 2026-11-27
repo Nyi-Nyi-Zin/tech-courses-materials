@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Print a DataFrame summary with its index, column types, non-null counts and memory use.">
+  <title>pandas.DataFrame.info · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/DataFrame.info/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/DataFrame.info/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/DataFrame.info">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>DataFrame</span><a href="/docs/read/my/pandas/api/DataFrame.info/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>DataFrame.<wbr>info</code></h1>
+    <p class="article-version">pandas 3.1.1 · DataFrame · <span lang="en">method</span></p>
+    <p class="intro">Print a DataFrame summary with its index, column types, non-null counts and memory use.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><pre><code lang="en">DataFrame.info(verbose=None, buf=None, max_cols=None, memory_usage=None, show_counts=None)</code></pre></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="9" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+
+df = pd.DataFrame({
+    &quot;item&quot;: [&quot;Notebook&quot;, &quot;Pen&quot;, None],
+    &quot;quantity&quot;: [3, None, 7],
+})
+
+# Show each column and how many rows have a value.
+df.info(show_counts=True, memory_usage=False)</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>verbose</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>bool</span><p>Set True for the full column report or False for the compact report. With None, pandas uses the column-count threshold.</p></td></tr>
+<tr><th scope="row"><code>buf</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>writable buffer</span><p>Pass a writable buffer such as StringIO to capture the report as text. With None, it prints to standard output.</p></td></tr>
+<tr><th scope="row"><code>max_cols</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>int</span><p>When verbose is None, pandas uses the compact report if the DataFrame has more columns than this threshold.</p></td></tr>
+<tr><th scope="row"><code>memory_usage</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>True, False, or &quot;deep&quot;</span><p>True shows memory use, False hides it, and &quot;deep&quot; requests a more detailed measurement. None follows the pandas display setting.</p></td></tr>
+<tr><th scope="row"><code>show_counts</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>bool</span><p>True shows the non-null count for each column in the full report. False hides those counts. With None, pandas checks its row and column display limits.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>Prints the summary and returns None. To use the report as text, pass a writable buffer as buf.</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html#pandas.DataFrame.info">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/DataFrame.infer_objects/"><span>Previous in this category</span><strong>pandas.DataFrame.infer_objects</strong></a><a href="/docs/read/en/pandas/api/DataFrame.insert/"><span>Next in this category</span><strong>pandas.DataFrame.insert</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

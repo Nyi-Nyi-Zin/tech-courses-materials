@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ရက်စွဲကို အသုံးပြုလို့ရအောင် ပြောင်းပါ။ အချိန်အုပ်စု ရွေးပြီး မမှန်တဲ့ရက်စွဲ သို့မဟုတ် timezone ပါတာတွေ ကိုင်တွယ်ပါ။">
+  <title>ရက်စွဲပြောင်း၍ Time Series အုပ်စုခွဲခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/dates/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/dates/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/dates/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#pandas">သင်ခန်းစာအားလုံး · pandas</a> <a href="/docs/read/en/pandas/dates/" lang="en" hreflang="en">English</a></nav>
+  <h1>ရက်စွဲပြောင်း၍ Time Series အုပ်စုခွဲခြင်း</h1>
+  <p class="article-version">3.1.1</p>
+  <p class="intro">ရက်စွဲကို အသုံးပြုလို့ရအောင် ပြောင်းပါ။ အချိန်အုပ်စု ရွေးပြီး မမှန်တဲ့ရက်စွဲ သို့မဟုတ် timezone ပါတာတွေ ကိုင်တွယ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/pandas/dates">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#parse">သိထားတဲ့ Format နဲ့ Parse လုပ်ခြင်း</a></li>
+<li><a href="#monthly">ပြက္ခဒိန်လ အလိုက် စုခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="parse">
+  <h2>သိထားတဲ့ Format နဲ့ Parse လုပ်ခြင်း</h2>
+  <p>Source က format တစ်မျိုးတည်း သုံးရင် to_datetime မှာ format ထည့်ပါ။ errors=&quot;coerce&quot; က မမှန်တဲ့ input ကို NaT ပြောင်းပါတယ်။ Offset ပါတဲ့ value တွေကို UTC တစ်ခုတည်းအဖြစ် ပြောင်းဖို့ utc=True သုံးနိုင်ပြီး local day အလိုက် မစုခင် reporting timezone ရွေးပါ။</p>
+
+<pre><code>import pandas as pd
+
+dates = pd.to_datetime(pd.Series([&quot;2023-03-01&quot;, &quot;ERROR&quot;]), format=&quot;%Y-%m-%d&quot;, errors=&quot;coerce&quot;)
+print(dates.isna().tolist())</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[False, True]</pre></div>
+
+
+</section>
+<section class="article-section" id="monthly">
+  <h2>ပြက္ခဒိန်လ အလိုက် စုခြင်း</h2>
+  <p>ပြက္ခဒိန်လ အလိုက် တံဆိပ်ပေးဖို့ monthly period သုံးပါ။ Datetime index ပေါ် resample လုပ်ရင် အချိန်အပိုင်းတွေ ပုံမှန်ခွဲပေးပါတယ်။ ဘာတွက်မလဲ အတိအကျ သတ်မှတ်ပြီး data မရှိတဲ့လနဲ့ အရောင်းသုည ဖြစ်တဲ့လကို ခွဲပါ။</p>
+
+<pre><code>import pandas as pd
+
+sales = pd.DataFrame({&quot;date&quot;: pd.to_datetime([&quot;2023-01-05&quot;, &quot;2023-01-09&quot;, &quot;2023-02-02&quot;]), &quot;total&quot;: [4, 2, 6]})
+monthly = sales.groupby(sales[&quot;date&quot;].dt.to_period(&quot;M&quot;))[&quot;total&quot;].sum(min_count=1)
+print({str(month): float(value) for month, value in monthly.items()})</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">{&#39;2023-01&#39;: 6.0, &#39;2023-02&#39;: 6.0}</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://pandas.pydata.org/docs/user_guide/timeseries.html">Time series and date functionality</a></li>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.to_datetime.html">pandas.to_datetime</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/pandas/merge/">အရင်သင်ခန်းစာ · Table များ Merge နှင့် Concatenate လုပ်ခြင်း</a>
+<a href="/docs/read/my/pandas/wide-and-long-tables/">နောက်သင်ခန်းစာ · Wide နှင့် Long Table ပုံစံ ပြောင်းခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="When you enter https://www.example.com, the browser needs an address to connect to before it can request the page. The URL gives it the name www.example.com. The browser uses DNS (Domain Name System) to look up the IP address for that name.">
+  <title>What Is DNS? How Does a Domain Name Lead to an IP Address? · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-fundamentals/dns/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-fundamentals/dns/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-fundamentals/dns/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=75">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-fundamentals">All documentation · Web Fundamentals</a> <a href="/docs/read/my/web-fundamentals/dns/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>What Is DNS? How Does a Domain Name Lead to an IP Address?</h1>
+  
+  <figure class="lesson-figure lesson-figure--banner">
+    <a href="/docs/media/web-fundamentals/dns-domain-to-ip.jpg" data-image-preview><img src="/docs/media/web-fundamentals/dns-domain-to-ip.jpg" alt="DNS looks up the IP address for www.example.com so that the browser can connect to a web server. The diagram uses 192.0.2.1 as an illustrative address." width="2048" height="1143" loading="lazy" decoding="async"></a>
+  </figure>
+  <p class="intro">When you enter <code>https://www.example.com</code>, the browser needs an address to connect to before it can request the page. The URL gives it the name <code>www.example.com</code>. The browser uses <strong>DNS (Domain Name System)</strong> to look up the IP address for that name.</p>
+<p class="intro">Think of tapping someone&#39;s name in your phone contacts. The phone looks up the saved number and calls it. The domain name is like the person&#39;s name, the IP address is like the number, and DNS is like the contacts list. In practice, many DNS servers share responsibility for the records.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-fundamentals/dns">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#ip-address">What Is an IP Address?</a></li>
+<li><a href="#domain-and-ip">How Is a Domain Name Structured?</a></li>
+<li><a href="#web-hosting">What Does Web Hosting Do?</a></li>
+<li><a href="#dns-lookup">How Does the Browser Look Up www.example.com?</a></li>
+<li><a href="#dns-records">What Does a DNS Record Specify?</a></li>
+<li><a href="#try-dns">Try nslookup on Windows</a></li>
+<li><a href="#references">References</a></li></ul>
+  </section>
+  <section class="article-section" id="ip-address">
+  <h2>What Is an IP Address?</h2>
+  <p>Computers, phones, and servers use numeric <strong>IP addresses</strong> to communicate over a network. Like a phone number on a call, an IP address helps identify where to send data. There are two formats you will encounter.</p>
+<div class="lesson-table"><table>
+        <thead><tr><th scope="col">Format</th><th scope="col">Example</th><th scope="col">What it looks like</th></tr></thead>
+        <tbody><tr><td>IPv4</td><td><code>192.0.2.10</code></td><td>Four groups of decimal digits separated by dots.</td></tr><tr><td>IPv6</td><td><code>2001:db8::10</code></td><td>Groups of hexadecimal digits separated by colons. IPv6 supports more addresses than IPv4.</td></tr></tbody>
+      </table></div>
+<p>A laptop connected to home Wi-Fi might have a <strong>private IP address</strong> such as <code>192.168.1.10</code>. It uses that address on the home network. When you open a website over the internet, the browser may connect to the <strong>public IP address</strong> of a web server, a load balancer that distributes requests, or a content delivery network (CDN).</p>
+<p>A domain name can resolve to several IP addresses. Several websites can also share one IP address. If moving to a new host changes the address, you can update the DNS records and keep the domain name.</p>
+
+
+
+
+</section>
+<section class="article-section" id="domain-and-ip">
+  <h2>How Is a Domain Name Structured?</h2>
+  <figure class="lesson-figure lesson-figure--banner">
+    <a href="/docs/media/web-fundamentals/domain-name-structure.jpg" data-image-preview><img src="/docs/media/web-fundamentals/domain-name-structure.jpg" alt="In www.example.com, www is the subdomain label, example is the second-level label, and .com is the top-level domain. The registered domain is example.com." width="2048" height="1143" loading="lazy" decoding="async"></a>
+  </figure>
+  <p>Read <code>www.example.com</code> from right to left to see how the parts fit together.</p>
+<div class="lesson-table"><table>
+        <thead><tr><th scope="col">Part</th><th scope="col">What it means</th></tr></thead>
+        <tbody><tr><td><code>.com</code></td><td>A top-level domain (TLD). <code>.org</code>, <code>.net</code>, and <code>.mm</code> are other examples.</td></tr><tr><td><code>example.com</code></td><td>The registered domain name in this example. <code>example</code> is the name under <code>.com</code>.</td></tr><tr><td><code>www.example.com</code></td><td>A subdomain of <code>example.com</code>. Another possible subdomain is <code>blog.example.com</code>.</td></tr></tbody>
+      </table></div>
+<p>To use your own domain name, register an available name through a domain registrar and renew the registration to keep using it after its term ends. Once you have a name, you need hosting to make the website available at that name.</p>
+
+
+
+
+</section>
+<section class="article-section" id="web-hosting">
+  <h2>What Does Web Hosting Do?</h2>
+  <figure class="lesson-figure lesson-figure--banner">
+    <a href="/docs/media/web-fundamentals/web-hosting-types.jpg" data-image-preview><img src="/docs/media/web-fundamentals/web-hosting-types.jpg" alt="Four hosting options: shared hosting, VPS, dedicated server, and managed hosting." width="2048" height="1143" loading="lazy" decoding="async"></a>
+  </figure>
+  <p><strong>Web hosting</strong> makes a website available over the internet. A basic site can include HTML, CSS, JavaScript, and images. A web app can also run a backend that receives requests and generates responses. If the app needs a database, it can connect to a separate database service.</p>
+<p>A <strong>web server</strong> is software that accepts HTTP requests from the browser and sends responses. It can run on a physical server, a virtual machine, or infrastructure managed by a hosting provider.</p>
+<div class="lesson-table"><table>
+        <thead><tr><th scope="col">Hosting type</th><th scope="col">How it works</th></tr></thead>
+        <tbody><tr><td>Shared hosting</td><td>Several websites share resources such as CPU and memory on a server.</td></tr><tr><td>VPS</td><td>You can install and manage software on a virtual machine allocated to you.</td></tr><tr><td>Dedicated server</td><td>You get a physical server for your own use.</td></tr><tr><td>Managed hosting</td><td>You deploy the website and the provider manages the infrastructure. Vercel and Firebase Hosting are examples.</td></tr></tbody>
+      </table></div>
+<p>After deployment, the hosting provider may give you an IP address or a hostname. Add the value supplied by the provider to the DNS record so visitors can open the site at <code>www.example.com</code>.</p>
+
+
+
+
+</section>
+<section class="article-section" id="dns-lookup">
+  <h2>How Does the Browser Look Up www.example.com?</h2>
+  <figure class="lesson-figure lesson-figure--banner">
+    <a href="/docs/media/web-fundamentals/dns-resolution.jpg" data-image-preview><img src="/docs/media/web-fundamentals/dns-resolution.jpg" alt="When a browser asks for the IP address of example.com, the resolver follows referrals from the root and .com DNS servers, gets the IP address from the authoritative server, and returns it to the browser." width="2048" height="1143" loading="lazy" decoding="async"></a>
+  </figure>
+  <p>The browser or operating system can check whether it still has a cached DNS answer. If there is no usable answer, it asks a <strong>recursive resolver</strong>. Your network may provide one, or you can use a public resolver such as Cloudflare (<code>1.1.1.1</code>) or Google Public DNS (<code>8.8.8.8</code>).</p>
+<p>If the resolver has neither the answer nor the relevant referrals cached, it follows these steps.</p>
+<ol class="lesson-list"><li>The <strong>root nameserver</strong> directs the resolver to the TLD nameservers responsible for <code>.com</code>.</li><li>The <strong><code>.com</code> TLD nameserver</strong> directs it to the authoritative nameservers responsible for the <code>example.com</code> DNS records.</li><li>The <strong>authoritative nameserver</strong> returns the record for <code>www.example.com</code>. The record can contain an IP address or another hostname that the resolver needs to look up.</li></ol>
+<p>The resolver handles these queries and returns the resulting IP address. The browser connects to that address and, once the HTTPS connection is established, requests the page from the web server.</p>
+
+
+
+
+</section>
+<section class="article-section" id="dns-records">
+  <h2>What Does a DNS Record Specify?</h2>
+  <figure class="lesson-figure lesson-figure--banner">
+    <a href="/docs/media/web-fundamentals/dns-record-types.jpg" data-image-preview><img src="/docs/media/web-fundamentals/dns-record-types.jpg" alt="Example DNS records: A points to IPv4, AAAA points to IPv6, CNAME points to another hostname, and MX specifies a mail server." width="2048" height="1143" loading="lazy" decoding="async"></a>
+  </figure>
+  <p>In the hosting example above, use an <code>A</code> record when the provider supplies an IPv4 address. If the provider supplies a hostname for <code>www</code> to point to, a <code>CNAME</code> record is commonly used.</p>
+<div class="lesson-table"><table>
+        <thead><tr><th scope="col">Record</th><th scope="col">What it does</th><th scope="col">Example</th></tr></thead>
+        <tbody><tr><td><code>A</code></td><td>Maps a name to an IPv4 address.</td><td><code>example.com</code> → <code>192.0.2.10</code></td></tr><tr><td><code>AAAA</code></td><td>Maps a name to an IPv6 address.</td><td><code>example.com</code> → <code>2001:db8::10</code></td></tr><tr><td><code>CNAME</code></td><td>Makes a name an alias for another hostname. The resolver continues the lookup using that hostname.</td><td><code>www.example.com</code> → <code>example.com</code></td></tr><tr><td><code>MX</code></td><td>Specifies the mail server that receives email for the domain.</td><td><code>example.com</code> → <code>mail.example.com</code></td></tr></tbody>
+      </table></div>
+<p>In the <code>CNAME</code> example, the browser keeps using <code>www.example.com</code> while the resolver looks up the IP address for <code>example.com</code>. An HTTP redirect that changes the address in the browser is configured on the web server side.</p>
+
+
+
+
+</section>
+<section class="article-section" id="try-dns">
+  <h2>Try nslookup on Windows</h2>
+  <p>Run these commands one at a time in Command Prompt.</p>
+
+<pre><code>nslookup -type=A example.com
+nslookup -type=A example.com 1.1.1.1
+nslookup -type=A example.com 8.8.8.8</code></pre>
+<p><code>-type=A</code> requests the <code>A</code> record, which contains an IPv4 address. The first command queries your device&#39;s configured resolver. The other two commands query the resolver specified at the end of the command, so you can try them without changing your device&#39;s DNS settings.</p>
+<p><code>Server</code> and <code>Address</code> at the top of the output show the resolver you queried. Look below for the IPv4 address returned for <code>example.com</code>. Replace <code>-type=A</code> with <code>-type=AAAA</code> to look for IPv6 addresses.</p>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>References</h2>
+    <ul><li><a href="https://www.cloudflare.com/learning/dns/what-is-dns/">Cloudflare — What is DNS?</a></li>
+<li><a href="https://www.cloudflare.com/learning/dns/dns-server-types/">Cloudflare — Types of DNS servers</a></li>
+<li><a href="https://www.cloudflare.com/learning/dns/dns-records/">Cloudflare — DNS Records</a></li>
+<li><a href="https://www.icann.org/resources/pages/register-domain-name-2017-06-20-en">ICANN — Registering a domain name</a></li>
+<li><a href="https://www.icann.org/resources/pages/renew-domain-name-2018-12-07-en">ICANN — Renewing a domain name</a></li>
+<li><a href="https://vercel.com/docs/domains/working-with-domains/add-a-domain">Vercel — Adding and configuring a custom domain</a></li>
+<li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/nslookup">Microsoft Learn — nslookup</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-fundamentals/client-server/">Previous lesson · Client and Server</a>
+<a href="/docs/read/en/web-fundamentals/web-app-architecture/">Next lesson · Web app request flow</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

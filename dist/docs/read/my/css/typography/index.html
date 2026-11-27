@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Typography ဆိုတာ ဖတ်ရလွယ်ဖို့ စာသားကို စီစဉ်ပြသပုံပါ။ CSS နဲ့ စာလုံးအရွယ်၊ စာကြောင်းကြား အကွာအဝေးနဲ့ browser က အရင်သုံးမယ့် font ကို ရွေးနိုင်ပါတယ်။">
+  <title>စာသားအရွယ်၊ ယူနစ်နဲ့ Font · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/typography/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/typography/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/typography/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/typography/" lang="en" hreflang="en">English</a></nav>
+  <h1>စာသားအရွယ်၊ ယူနစ်နဲ့ Font</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Typography ဆိုတာ ဖတ်ရလွယ်ဖို့ စာသားကို စီစဉ်ပြသပုံပါ။ CSS နဲ့ စာလုံးအရွယ်၊ စာကြောင်းကြား အကွာအဝေးနဲ့ browser က အရင်သုံးမယ့် font ကို ရွေးနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/typography">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#scale">px၊ em၊ rem နဲ့ စာလုံးအရွယ် သတ်မှတ်ခြင်း</a></li>
+<li><a href="#percentage">Parent အကျယ်နဲ့ တိုင်းပြီး Box အကျယ် ပေးခြင်း</a></li>
+<li><a href="#line-height">line-height နဲ့ စာကြောင်းအကွာ ပြောင်းခြင်း</a></li>
+<li><a href="#load">Fallback Font ရွေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="scale">
+  <h2>px၊ em၊ rem နဲ့ စာလုံးအရွယ် သတ်မှတ်ခြင်း</h2>
+  <p>px က CSS pixel ယူနစ်ပါ။ font-size ရေးတဲ့အခါ em က parent ရဲ့ စာလုံးအရွယ်ကို အခြေခံပြီး rem က root element ရဲ့ စာလုံးအရွယ်ကို အခြေခံပါတယ်။ Root 16px ရှိရင် 1.25rem က 20px ပါ။ font-size မှာ % သုံးရင် parent ရဲ့ အရွယ်အပေါ် တွက်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Set font size with px, em, and rem&lt;/title&gt;
+  &lt;style&gt;
+    html { font-size: 16px; }
+    .notices { font-size: 20px; }
+    .em { font-size: 1.25em; }
+    .rem { font-size: 1.25rem; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;notices&quot;&gt;&lt;p class=&quot;em&quot;&gt;Sized in em&lt;/p&gt;&lt;p class=&quot;rem&quot;&gt;Sized in rem&lt;/p&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Parent တူပေမယ့် em ပါတဲ့ စာပိုဒ်က 25px၊ rem ပါတဲ့ စာပိုဒ်က 20px ဖြစ်ပါမယ်။ DevTools → Computed မှာ ကြည့်နိုင်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="percentage">
+  <h2>Parent အကျယ်နဲ့ တိုင်းပြီး Box အကျယ် ပေးခြင်း</h2>
+  <p>Normal flow မှာ width ကို % နဲ့ပေးရင် အပြင်က နေရာချဖို့ အခြေခံတဲ့ အကွက်ရဲ့ အကျယ်ကနေ တွက်ပါတယ်။ ဥပမာ content အကျယ် 240px ရဲ့ 75% က 180px ပါ။ Parent အကျယ် ပြောင်းရင် child ရဲ့ အကျယ်လည်း လိုက်ပြောင်းပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Size a box relative to its parent&lt;/title&gt;
+  &lt;style&gt;
+    .panel { width: 240px; outline: 1px solid teal; }
+    .panel p { width: 75%; background: #d6efea; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;panel&quot;&gt;&lt;p&gt;Your order is ready.&lt;/p&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> 240px ကျယ်တဲ့ panel ထဲက ရောင်စုံစာပိုဒ်က 180px ကျယ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="line-height">
+  <h2>line-height နဲ့ စာကြောင်းအကွာ ပြောင်းခြင်း</h2>
+  <p>line-height က စာကြောင်းတစ်ကြောင်းစီရဲ့ အမြင့် သတ်မှတ်ပါတယ်။ 1.5 လို ကိန်းဂဏန်းသုံးရင် element ရဲ့ စာလုံးအရွယ်နဲ့ မြှောက်တွက်ပါတယ်။ 20px စာလုံးမှာ 1.5 ဆို စာကြောင်းအမြင့် 30px ဖြစ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Adjust line spacing with line-height&lt;/title&gt;
+  &lt;style&gt;
+    p { font-size: 20px; line-height: 1.5; width: 20ch; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;The library is open every morning and lends books to local residents.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စာသား လိုင်းဆင်းပြီး စာကြောင်းတွေကြား နေရာမြင်ရပါမယ်။ 1.5 နဲ့ 1.1 ပြောင်းပြီး နှိုင်းကြည့်ပါ။</p>
+
+</section>
+<section class="article-section" id="load">
+  <h2>Fallback Font ရွေးခြင်း</h2>
+  <p>font-family က browser အစဉ်လိုက် စမ်းမယ့် font စာရင်းပါ။ ပထမ font မရှိရင် ဒါမှမဟုတ် စာလုံးတစ်လုံး မပြနိုင်ရင် နောက် font ကို စမ်းပါတယ်။ sans-serif လို အမျိုးအစားနာမည် ရေးရင် browser က သင့်တော်ရာ font ရွေးပါတယ်။ ကိုယ်ပိုင် ဒါမှမဟုတ် သုံးခွင့်ရှိတဲ့ font ဖိုင်ကို @font-face နဲ့ ချိတ်နိုင်ပါတယ်။ font-display: swap ထည့်ရင် ဖိုင်လာနေချိန် fallback font နဲ့ စာသား အရင်ပေါ်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Choose fallback fonts&lt;/title&gt;
+  &lt;style&gt;
+    .notice { font-family: &quot;Noto Sans Myanmar&quot;, Arial, sans-serif; }
+    p { font-family: Georgia, serif; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမစာပိုဒ်မှာ စာရင်းထဲက သင့်တော်တဲ့ sans-serif font ကို သုံးပါမယ်။ ဒုတိယစာပိုဒ်မှာ serif font သုံးပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length">MDN · Length units</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-family">MDN · Font family</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@font-face">MDN · Font files</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/layout/">အရင်သင်ခန်းစာ · Normal Flow၊ Box Model နဲ့ Display</a>
+<a href="/docs/read/my/css/colors/">နောက်သင်ခန်းစာ · CSS အရောင်များ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

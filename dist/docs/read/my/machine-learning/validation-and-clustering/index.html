@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Split အမျိုးမျိုးမှာ model ရလဒ် တိုင်းပါ။ Label မပါတဲ့ row တွေကို K-means ဘယ်လို စုဖွဲ့လဲ လေ့လာပါ။">
+  <title>Cross-validation၊ Overfitting နှင့် Clustering · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/validation-and-clustering/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/validation-and-clustering/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/validation-and-clustering/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#machine-learning">သင်ခန်းစာအားလုံး · Machine Learning</a> <a href="/docs/read/en/machine-learning/validation-and-clustering/" lang="en" hreflang="en">English</a></nav>
+  <h1>Cross-validation၊ Overfitting နှင့် Clustering</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Split အမျိုးမျိုးမှာ model ရလဒ် တိုင်းပါ။ Label မပါတဲ့ row တွေကို K-means ဘယ်လို စုဖွဲ့လဲ လေ့လာပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/machine-learning/validation-and-clustering">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#cross-validation">Fold အများကြီးနဲ့ အကဲဖြတ်ခြင်း</a></li>
+<li><a href="#clustering">Label မပါဘဲ အုပ်စုခွဲခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="cross-validation">
+  <h2>Fold အများကြီးနဲ့ အကဲဖြတ်ခြင်း</h2>
+  <p>Cross-validation က training fold တွေပေါ် ထပ်ခါတလဲလဲ fit လုပ်ပြီး ဖယ်ထားတဲ့ validation fold တွေပေါ် score တိုင်းပါတယ်။ Training data မှာပဲ setting ရွေးဖို့ သုံးပြီး နောက်ဆုံး test set ပေါ် တစ်ခါ အကဲဖြတ်ပါ။ Training score မြင့်ပြီး validation score သိသိသာသာ နိမ့်ရင် overfit ဖြစ်နိုင်ပါတယ်။</p>
+
+<pre><code>from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import cross_val_score
+
+X = [[1], [2], [3], [4], [5], [6]]
+y = [3, 5, 7, 9, 11, 13]
+scores = cross_val_score(LinearRegression(), X, y, cv=3, scoring=&quot;neg_mean_absolute_error&quot;)
+print([round(-float(score) + 0.0, 6) for score in scores])</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[0.0, 0.0, 0.0]</pre></div>
+
+
+</section>
+<section class="article-section" id="clustering">
+  <h2>Label မပါဘဲ အုပ်စုခွဲခြင်း</h2>
+  <p>K-means က Euclidean distance နဲ့ အနီးဆုံး center ကို point တွဲပြီး cluster အတွင်း squared distance နည်းအောင် ရှာပါတယ်။ Unit ကွာတာကြောင့် distance ကို feature တစ်ခုက လွှမ်းမိုးရင် scale လုပ်ပါ။ အုပ်စုတူပေမယ့် label number ပြောင်းနိုင်ပါတယ်။</p>
+
+<pre><code>from sklearn.cluster import KMeans
+
+points = [[1], [2], [3], [9], [10], [11]]
+model = KMeans(n_clusters=2, n_init=10, random_state=42).fit(points)
+print(sorted(model.cluster_centers_.ravel().tolist()))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[2.0, 10.0]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/cross_validation.html">Cross-validation</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/clustering.html">Clustering algorithms</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html">Model evaluation and scoring</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/machine-learning/pipeline-and-leakage/">အရင်သင်ခန်းစာ · Preprocessing Pipelines နှင့် Data Leakage</a>
+<a href="/docs/read/my/machine-learning/house-prices/">နောက်သင်ခန်းစာ · အိမ်ဈေးခန့်မှန်းခြင်း အစအဆုံး ရှင်းလင်းချက်</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

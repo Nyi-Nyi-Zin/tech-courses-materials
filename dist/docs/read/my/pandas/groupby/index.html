@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Group အလိုက် အနှစ်ချုပ်တွက်ပြီး category ပျောက်တာကို ရလဒ်ထဲ ဘယ်လိုကိုင်တွယ်မလဲ သတ်မှတ်ပါ။">
+  <title>Group ဖွဲ့ခြင်း၊ တွက်ခြင်းနှင့် ပုံစံပြောင်းခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/groupby/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/groupby/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/groupby/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#pandas">သင်ခန်းစာအားလုံး · pandas</a> <a href="/docs/read/en/pandas/groupby/" lang="en" hreflang="en">English</a></nav>
+  <h1>Group ဖွဲ့ခြင်း၊ တွက်ခြင်းနှင့် ပုံစံပြောင်းခြင်း</h1>
+  <p class="article-version">3.1.1</p>
+  <p class="intro">Group အလိုက် အနှစ်ချုပ်တွက်ပြီး category ပျောက်တာကို ရလဒ်ထဲ ဘယ်လိုကိုင်တွယ်မလဲ သတ်မှတ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/pandas/groupby">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#summaries">Aggregate သို့မဟုတ် Transform လုပ်ခြင်း</a></li>
+<li><a href="#pivot">Pivot Table ဖြင့် Group တွေ ယှဉ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="summaries">
+  <h2>Aggregate သို့မဟုတ် Transform လုပ်ခြင်း</h2>
+  <p>groupby က key အလိုက် အုပ်စုခွဲပါတယ်။ agg က အုပ်စုတစ်စုစီကို အနှစ်ချုပ်တန်ဖိုးအဖြစ် တွက်ပေးပါတယ်။ transform က result ကို မူရင်း row အလိုက် ပြန်ညှိပေးလို့ group mean နဲ့ share အတွက် သုံးနိုင်ပါတယ်။ Key ပျောက်တဲ့ group ကိုလည်း ပြချင်ရင် dropna=False ထားပါ။</p>
+
+<pre><code>import pandas as pd
+
+sales = pd.DataFrame({&quot;item&quot;: [&quot;Tea&quot;, &quot;Tea&quot;, &quot;Cake&quot;], &quot;units&quot;: [2, 4, 3]})
+print(sales.groupby(&quot;item&quot;)[&quot;units&quot;].sum().to_dict())
+print(sales.groupby(&quot;item&quot;)[&quot;units&quot;].transform(&quot;mean&quot;).tolist())</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/groupby-summaries.png" data-image-preview><img src="/docs/media/data/groupby-summaries.png" alt="Input row သုံးကြောင်းကို နှစ်စုခွဲပါတယ်။ Tea အတွက် 2 နဲ့ 4 ပေါင်းရင် 6 units၊ Cake အတွက် 3 units ပါ။" width="720" height="358" loading="lazy" decoding="async"></a>
+    <figcaption>sum နဲ့ စုတွက်ရင် item group တစ်ခုစီအတွက် ရလဒ်တစ်ခု ရပါတယ်။</figcaption>
+  </figure>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">{&#39;Cake&#39;: 3, &#39;Tea&#39;: 6}
+[3.0, 3.0, 3.0]</pre></div>
+
+
+</section>
+<section class="article-section" id="pivot">
+  <h2>Pivot Table ဖြင့် Group တွေ ယှဉ်ခြင်း</h2>
+  <p>Index နဲ့ column အတွဲ တစ်မျိုးစီ တစ်ခုတည်းရှိရင် pivot သုံးပါ။ အတွဲတူ record တွေ ရှိရင် aggfunc သတ်မှတ်ပြီး pivot_table သုံးပါ။ မရှိတဲ့ အတွဲကို သုညဖြည့်တာ အဓိပ္ပာယ်ကိုက်မှ သုံးပါ။</p>
+
+<pre><code>import pandas as pd
+
+sales = pd.DataFrame({&quot;item&quot;: [&quot;Tea&quot;, &quot;Tea&quot;, &quot;Tea&quot;], &quot;store&quot;: [&quot;A&quot;, &quot;A&quot;, &quot;B&quot;], &quot;units&quot;: [2, 4, 3]})
+table = sales.pivot_table(index=&quot;item&quot;, columns=&quot;store&quot;, values=&quot;units&quot;, aggfunc=&quot;sum&quot;)
+print(table.loc[&quot;Tea&quot;, [&quot;A&quot;, &quot;B&quot;]].tolist())</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[6, 3]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://pandas.pydata.org/docs/user_guide/groupby.html">Group by, split, apply, combine</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/reshaping.html">Reshaping and pivot tables</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/pandas/missing-data/">အရင်သင်ခန်းစာ · Missing Data၊ Data Types နှင့် Duplicates</a>
+<a href="/docs/read/my/pandas/merge/">နောက်သင်ခန်းစာ · Table များ Merge နှင့် Concatenate လုပ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Join tables by matching keys. Set how for the join type and validate to check the expected key relationship.">
+  <title>pandas.merge · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/merge/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/merge/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/merge">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>General functions</span><a href="/docs/read/my/pandas/api/merge/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>merge</code></h1>
+    <p class="article-version">pandas 3.1.1 · General functions · <span lang="en">function</span></p>
+    <p class="intro">Join tables by matching keys. Set how for the join type and validate to check the expected key relationship.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">pd.merge(…)</code> <span>Full signature</span></summary><pre><code lang="en">pd.merge(
+    left,
+    right,
+    how=&#39;inner&#39;,
+    on=None,
+    left_on=None,
+    right_on=None,
+    left_index=False,
+    right_index=False,
+    sort=False,
+    suffixes=(&#39;_x&#39;, &#39;_y&#39;),
+    copy=…,
+    indicator=False,
+    validate=None,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="8" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+orders = pd.DataFrame({
+    &quot;team&quot;: [&quot;North&quot;, &quot;North&quot;, &quot;South&quot;],
+    &quot;day&quot;: pd.to_datetime([&quot;2025-01-01&quot;, &quot;2025-01-02&quot;, &quot;2025-01-03&quot;]),
+    &quot;units&quot;: [4, None, 7],
+})
+teams = pd.DataFrame({&quot;team&quot;: [&quot;North&quot;, &quot;South&quot;], &quot;region&quot;: [&quot;A&quot;, &quot;B&quot;]})
+print(pd.merge(orders, teams, on=&quot;team&quot;, how=&quot;left&quot;, validate=&quot;many_to_one&quot;))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>left</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>DataFrame or named Series</span><p>Supply the left DataFrame or a named Series.</p></td></tr>
+<tr><th scope="row"><code>right</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>DataFrame or named Series</span><p>Supply the right DataFrame or a named Series.</p></td></tr>
+<tr><th scope="row"><code>how</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>&#39;inner&#39;</code></td>
+      <td><span>{&#39;left&#39;, &#39;right&#39;, &#39;outer&#39;, &#39;inner&#39;, &#39;cross&#39;, &#39;left_anti&#39;, &#39;right_anti}</span><p>Choose a policy such as a join type or a missing-value removal rule.</p></td></tr>
+<tr><th scope="row"><code>on</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>Hashable or a sequence of the previous</span><p>Choose shared key labels. Without explicit keys, pandas can use column names that the inputs share.</p></td></tr>
+<tr><th scope="row"><code>left_on</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>Hashable or a sequence of the previous, or array-like</span><p>Identify the join keys in the left-hand object.</p></td></tr>
+<tr><th scope="row"><code>right_on</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>Hashable or a sequence of the previous, or array-like</span><p>Identify the join keys in the right-hand object.</p></td></tr>
+<tr><th scope="row"><code>left_index</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Use the left object&#39;s index labels as join keys.</p></td></tr>
+<tr><th scope="row"><code>right_index</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Use the right object&#39;s index labels as join keys.</p></td></tr>
+<tr><th scope="row"><code>sort</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Choose whether the resulting labels or groups are sorted where supported.</p></td></tr>
+<tr><th scope="row"><code>suffixes</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>(&#39;_x&#39;, &#39;_y&#39;)</code></td>
+      <td><span>list-like</span><p>Supply a pair for resolving duplicate column names in joined tables.</p></td></tr>
+<tr><th scope="row"><code>copy</code></th>
+      <td>Optional<br><small>Positional or keyword</small></td>
+      <td><span>bool</span><p>Control whether data is copied where the API supports that choice.</p></td></tr>
+<tr><th scope="row"><code>indicator</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool or str</span><p>Add an output column identifying which input supplied each joined row.</p></td></tr>
+<tr><th scope="row"><code>validate</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str</span><p>Check that key multiplicity matches the required relationship, such as &quot;one_to_one&quot; or &quot;many_to_one&quot;.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>DataFrame</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.merge.html#pandas.merge">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/melt/"><span>Previous in this category</span><strong>pandas.melt</strong></a><a href="/docs/read/en/pandas/api/merge_asof/"><span>Next in this category</span><strong>pandas.merge_asof</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

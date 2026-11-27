@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cell ထဲက တန်ဖိုး ပြသပုံကို ပြောင်းပေးပါတယ်။ ဥပမာ ဒဿမ ဘယ်နှလုံးပြမလဲ၊ တန်ဖိုးပျောက်ရင် ဘာစာသားပြမလဲ သတ်မှတ်နိုင်ပါတယ်။">
+  <title>pandas.io.formats.style.Styler.format · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/io.formats.style.Styler.format/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/io.formats.style.Styler.format/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/io.formats.style.Styler.format">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API Reference">
+    <a href="/docs/read/my/pandas/api-reference/#find-an-api">pandas API Reference</a><span aria-hidden="true">/</span><span>ဇယားပုံစံပြင်ခြင်း</span><a href="/docs/read/en/pandas/api/io.formats.style.Styler.format/" lang="en" hreflang="en">English</a>
+  </nav>
+    <h1><code>pandas.<wbr>io.<wbr>formats.<wbr>style.<wbr>Styler.<wbr>format</code></h1>
+    <p class="article-version">pandas 3.1.1 · ဇယားပုံစံပြင်ခြင်း · <span lang="en">method</span></p>
+    <p class="intro">Cell ထဲက တန်ဖိုး ပြသပုံကို ပြောင်းပေးပါတယ်။ ဥပမာ ဒဿမ ဘယ်နှလုံးပြမလဲ၊ တန်ဖိုးပျောက်ရင် ဘာစာသားပြမလဲ သတ်မှတ်နိုင်ပါတယ်။</p>
+
+    <nav class="api-breadcrumbs" aria-label="ဒီစာမျက်နှာမှာ"><ul><li><a href="#syntax">ခေါ်သုံးပုံ</a></li><li><a href="#example">နမူနာ စမ်းကြည့်ရန်</a></li><li><a href="#parameters">ထည့်သွင်းနိုင်တဲ့ Arguments</a></li><li><a href="#returns">ပြန်ပေးတဲ့ ရလဒ်</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>ခေါ်သုံးပုံ</h2><details class="api-full-signature"><summary><code lang="en">Styler.format(…)</code> <span>ခေါ်သုံးပုံ အပြည့်အစုံ</span></summary><pre><code lang="en">Styler.format(
+    formatter=None,
+    subset=None,
+    na_rep=None,
+    precision=None,
+    decimal=&#39;.&#39;,
+    thousands=None,
+    escape=None,
+    hyperlinks=None,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>နမူနာ စမ်းကြည့်ရန်</h2>
+      <p>နမူနာကုဒ်ကို ပြင်ပြီး Run Python နှိပ်ပါ။ ရလဒ်ကို အောက်မှာ ကြည့်နိုင်ပါတယ်။</p>
+      <label><span>Python ကုဒ်</span><textarea rows="8" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+orders = pd.DataFrame({
+    &quot;team&quot;: [&quot;North&quot;, &quot;North&quot;, &quot;South&quot;],
+    &quot;day&quot;: pd.to_datetime([&quot;2025-01-01&quot;, &quot;2025-01-02&quot;, &quot;2025-01-03&quot;]),
+    &quot;units&quot;: [4, None, 7],
+})
+import jinja2
+print(orders.style.format({&quot;units&quot;: &quot;{:.0f}&quot;}, na_rep=&quot;—&quot;))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>ရပ်ရန်</button>
+        <button type="button" data-reset disabled>မူလကုဒ် ပြန်ထားရန်</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="ရလဒ်"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>ထည့်သွင်းနိုင်တဲ့ Arguments</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">ထည့်သွင်းပုံ</th><th scope="col">လက်ခံတဲ့ တန်ဖိုးနဲ့ သုံးပုံ</th></tr></thead><tbody><tr><th scope="row"><code>formatter</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)၊ ခေါ်သုံးလို့ရတဲ့ function (callable)၊ dict သို့မဟုတ် None</span><p>ရွေးထားတဲ့ တန်ဖိုး သို့မဟုတ် label တွေကို ပြသမယ့် format စည်းမျဉ်းကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>subset</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>label၊ array ပုံစံ၊ IndexSlice</span><p>ထည့်ပေးထားတဲ့ label တွေအတွက်ပဲ လုပ်ဆောင်ဖို့ ကန့်သတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>na_rep</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span><p>တန်ဖိုးပျောက်နေတဲ့ နေရာမှာ ပြမယ့် စာသားကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>precision</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>ကိန်းပြည့် (int)</span><p>ဒဿမနောက်မှာ ထားမယ့် သို့မဟုတ် ပြမယ့် ဂဏန်းအရေအတွက်ကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>decimal</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>&#39;.&#39;</code></td>
+      <td><span>စာသား (str)</span><p>ဒဿမအမှတ်အဖြစ် သုံးတဲ့ စာလုံးကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>thousands</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span><p>ဂဏန်းတွေကို အစုလိုက် ခြားပေးတဲ့ စာလုံးကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>escape</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span><p>Output မှာ အထူးအဓိပ္ပာယ်ရှိတဲ့ စာလုံးတွေကို escape လုပ်မလုပ် သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>hyperlinks</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>{&quot;html&quot;၊ &quot;latex&quot;}</span></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>ပြန်ပေးတဲ့ ရလဒ်</h2><p>ပြန်ပေးတဲ့ အမျိုးအစားက Styler ဖြစ်ပါတယ်။</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.io.formats.style.Styler.format.html#pandas.io.formats.style.Styler.format">pandas တရားဝင် ကိုးကားချက်</a>
+      <nav class="pagination" aria-label="pandas API Reference"><a href="/docs/read/my/pandas/api/io.formats.style.Styler.export/"><span>အရင် API</span><strong>pandas.io.formats.style.Styler.export</strong></a><a href="/docs/read/my/pandas/api/io.formats.style.Styler.format_index/"><span>နောက် API</span><strong>pandas.io.formats.style.Styler.format_index</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

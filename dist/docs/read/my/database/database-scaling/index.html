@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Server တစ်လုံးကို စွမ်းရည်တိုးတာ၊ data ကို servers အများကြီးဆီ ကူးတာနဲ့ dataset ကို အပိုင်းခွဲပြီး servers အများကြီးမှာ ထားတာတို့ကို နှိုင်းယှဉ်ပါ။">
+  <title>Database Scaling၊ Replication နဲ့ Sharding · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/database-scaling/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/database-scaling/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/database-scaling/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/database-scaling/" lang="en" hreflang="en">English</a></nav>
+  <h1>Database Scaling၊ Replication နဲ့ Sharding</h1>
+  
+  <p class="intro">Server တစ်လုံးကို စွမ်းရည်တိုးတာ၊ data ကို servers အများကြီးဆီ ကူးတာနဲ့ dataset ကို အပိုင်းခွဲပြီး servers အများကြီးမှာ ထားတာတို့ကို နှိုင်းယှဉ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/database-scaling">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#capacity">ဘယ်အပိုင်းမှာ စွမ်းရည် ကန့်သတ်လာလဲ စစ်ခြင်း</a></li>
+<li><a href="#warehouse-example">Inventory App မှာ Scaling ရွေးပုံ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="capacity">
+  <h2>ဘယ်အပိုင်းမှာ စွမ်းရည် ကန့်သတ်လာလဲ စစ်ခြင်း</h2>
+  <p>Query ကြာချိန်၊ CPU၊ memory၊ disk သုံးစွဲမှုနဲ့ အဖတ်အရေးပမာဏကို ကြည့်ပါ။ Server တစ်လုံးကို CPU၊ memory သို့မဟုတ် storage တိုးပေးတာက vertical scaling ပါ။ အလုပ်မျှဝေဖို့ server တွေ ထပ်သုံးတာက horizontal scaling ပါ။</p>
+
+<pre><code>-- Find the queries that use the most shared block reads.
+-- Requires pg_stat_statements to be enabled.
+SELECT calls, total_exec_time, shared_blks_read, query
+FROM pg_stat_statements
+ORDER BY shared_blks_read DESC
+LIMIT 5;</code></pre>
+<dl class="lesson-terms"><div><dt><code>Replication</code></dt><dd>Primary server က အပြောင်းအလဲတွေကို တခြား servers ဆီ ကူးပေးတယ်။ Read replica က ဖတ်တဲ့ request တွေကို ကိုင်တွယ်နိုင်ပြီး standby ကို failover အတွက် သုံးနိုင်တယ်။ Asynchronous replication မှာ နောက်ဆုံးရေးထားတာ replica မှာ ပေါ်လာဖို့ အချိန်နည်းနည်း ကြာနိုင်တယ်။</dd></div><div><dt><code>Table partitioning</code></dt><dd>Table တစ်ခုကို လအလိုက်လိုမျိုး အပိုင်းခွဲထားရင် သင့်တော်တဲ့ query တွေမှာ မဆိုင်တဲ့အပိုင်းကို engine က ကျော်နိုင်တယ်။ ဒီ partitions တွေကို server တစ်လုံးတည်းမှာလည်း ထားနိုင်တယ်။</dd></div><div><dt><code>Sharding</code></dt><dd>Dataset တစ်ခုတည်းကို အပိုင်းခွဲပြီး မတူတဲ့ servers တွေပေါ် ဖြန့်ထားတယ်။ Shard key က ဖတ်ရမယ့်၊ ရေးရမယ့် shard ကို ရွေးဖို့ ကူညီတယ်။ Shard အများကြီးက data လိုတဲ့ query ဆိုရင် ရလဒ်တွေ ပြန်စုဖို့ အလုပ်ပိုလာနိုင်တယ်။</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="warehouse-example">
+  <h2>Inventory App မှာ Scaling ရွေးပုံ</h2>
+  <p>Inventory app မှာ report ဖတ်တဲ့ အလုပ်ကို replica ဆီ ခွဲပေးနိုင်သလို သိမ်းရမယ့် မှတ်တမ်းတွေကိုလည်း ဂိုဒေါင်အလိုက် shard ခွဲနိုင်ပါတယ်။ Report ဖတ်တာ များပြီး data နောက်ကျနည်းနည်းကို လက်ခံနိုင်ရင် read replica သုံးလို့ အဆင်ပြေမပြေ စမ်းကြည့်ပါ။ Warehouse ID နဲ့ shard ခွဲထားရင် ဂိုဒေါင်တစ်ခုတည်းကို ဖတ်တဲ့ query က shard နည်းနည်းပဲ ဖတ်ရနိုင်ပြီး ဂိုဒေါင်အားလုံးပါတဲ့ report က shard အများကြီး ဖတ်ရနိုင်တယ်။ ဂိုဒေါင်တစ်ခုတည်းက traffic အများကြီးကို ကိုင်နေရလားဆိုတာလည်း တိုင်းပါ။</p>
+
+<pre><code>-- The backend can route this report to a read replica if
+-- it can tolerate replication lag.
+SELECT SUM(quantity) AS total_units
+FROM stock_balances
+WHERE warehouse_id = 3;
+
+-- In a sharded design, warehouse_id = 3 also tells the
+-- shard router which part of the inventory to query.</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/high-availability.html">PostgreSQL · Replication and standby servers</a></li>
+<li><a href="https://www.postgresql.org/docs/19/ddl-partitioning.html">PostgreSQL · Table partitioning</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/sharding/">MongoDB · Sharding</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/storage-and-recovery/">အရင်သင်ခန်းစာ · Database Storage နဲ့ Crash Recovery</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

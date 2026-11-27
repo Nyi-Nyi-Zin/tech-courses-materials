@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ရှိပြီးသား DataFrame ရဲ့ သတ်မှတ်ထားတဲ့နေရာမှာ column အသစ် ထည့်ပေးပါတယ်။ ပုံမှန်အားဖြင့် အမည်တူ column ရှိပြီးသားဆို ValueError ဖြစ်ပါတယ်။">
+  <title>pandas.DataFrame.insert · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/DataFrame.insert/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/DataFrame.insert/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/DataFrame.insert">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API Reference">
+    <a href="/docs/read/my/pandas/api-reference/#find-an-api">pandas API Reference</a><span aria-hidden="true">/</span><span>DataFrame</span><a href="/docs/read/en/pandas/api/DataFrame.insert/" lang="en" hreflang="en">English</a>
+  </nav>
+    <h1><code>pandas.<wbr>DataFrame.<wbr>insert</code></h1>
+    <p class="article-version">pandas 3.1.1 · DataFrame · <span lang="en">method</span></p>
+    <p class="intro">ရှိပြီးသား DataFrame ရဲ့ သတ်မှတ်ထားတဲ့နေရာမှာ column အသစ် ထည့်ပေးပါတယ်။ ပုံမှန်အားဖြင့် အမည်တူ column ရှိပြီးသားဆို ValueError ဖြစ်ပါတယ်။</p>
+
+    <nav class="api-breadcrumbs" aria-label="ဒီစာမျက်နှာမှာ"><ul><li><a href="#syntax">ခေါ်သုံးပုံ</a></li><li><a href="#example">နမူနာ စမ်းကြည့်ရန်</a></li><li><a href="#parameters">ထည့်သွင်းနိုင်တဲ့ Arguments</a></li><li><a href="#returns">ပြန်ပေးတဲ့ ရလဒ်</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>ခေါ်သုံးပုံ</h2><pre><code lang="en">DataFrame.insert(loc, column, value, allow_duplicates=False)</code></pre></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>နမူနာ စမ်းကြည့်ရန်</h2>
+      <p>နမူနာကုဒ်ကို ပြင်ပြီး Run Python နှိပ်ပါ။ ရလဒ်ကို အောက်မှာ ကြည့်နိုင်ပါတယ်။</p>
+      <label><span>Python ကုဒ်</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+frame = pd.DataFrame({&quot;team&quot;: [&quot;A&quot;, &quot;A&quot;, &quot;B&quot;], &quot;units&quot;: [2., 5., 7.], &quot;price&quot;: [4., 3., 2.]})
+frame.insert(1, &quot;total&quot;, frame[&quot;units&quot;] * frame[&quot;price&quot;])
+print(frame)</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>ရပ်ရန်</button>
+        <button type="button" data-reset disabled>မူလကုဒ် ပြန်ထားရန်</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="ရလဒ်"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>ထည့်သွင်းနိုင်တဲ့ Arguments</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">ထည့်သွင်းပုံ</th><th scope="col">လက်ခံတဲ့ တန်ဖိုးနဲ့ သုံးပုံ</th></tr></thead><tbody><tr><th scope="row"><code>loc</code></th>
+      <td>ထည့်ပေးရမယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small></td>
+      <td><span>ကိန်းပြည့် (int)၊ 0 ကနေ ရှိပြီးသား column အရေအတွက်အထိ</span><p>Column အသစ် ထည့်မယ့် နေရာနံပါတ်ပါ။ 0 ဆို ရှေ့ဆုံးမှာ ထည့်ပါတယ်။ ရှိပြီးသား column အရေအတွက်နဲ့ တူတဲ့ နံပါတ်ဆို နောက်ဆုံးမှာ ထည့်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>column</code></th>
+      <td>ထည့်ပေးရမယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small></td>
+      <td><span>စာသား (str)၊ ကိန်းဂဏန်း သို့မဟုတ် hash တွက်လို့ရတဲ့ တန်ဖိုး</span><p>Column အသစ်အတွက် အမည်ပါ။ စာသား၊ ကိန်းဂဏန်း ဒါမှမဟုတ် hash တွက်လို့ရတဲ့ တခြားတန်ဖိုးကို သုံးနိုင်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>value</code></th>
+      <td>ထည့်ပေးရမယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small></td>
+      <td><span>တန်ဖိုးတစ်ခု (scalar)၊ Series သို့မဟုတ် list လို array ပုံစံ</span><p>Column အသစ်ထဲ ထည့်မယ့် ဒေတာပါ။ တန်ဖိုးတစ်ခုပဲ ထည့်ရင် row အားလုံးမှာ အဲဒီတန်ဖိုးကို သုံးပါတယ်။ List ဒါမှမဟုတ် array ထည့်ရင် တန်ဖိုးအရေအတွက်က row အရေအတွက်နဲ့ တူရပါမယ်။ Series ထည့်ရင် DataFrame ရဲ့ index label နဲ့ ညှိပြီး မကိုက်တဲ့ row တွေမှာ missing value ဖြစ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>allow_duplicates</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True သို့မဟုတ် False (bool)</span><p>ပုံမှန်တန်ဖိုး False ဆို column အမည် ရှိပြီးသားအခါ ValueError ဖြစ်ပါတယ်။ True ဆို DataFrame က label ထပ်ခွင့်ပြုထားတဲ့အခါ အမည်တူ column ထည့်နိုင်ပါတယ်။</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>ပြန်ပေးတဲ့ ရလဒ်</h2><p>မူလ DataFrame ထဲကို column တိုက်ရိုက်ထည့်ပြီး None ပြန်ပေးပါတယ်။</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.insert.html#pandas.DataFrame.insert">pandas တရားဝင် ကိုးကားချက်</a>
+      <nav class="pagination" aria-label="pandas API Reference"><a href="/docs/read/my/pandas/api/DataFrame.info/"><span>အရင် API</span><strong>pandas.DataFrame.info</strong></a><a href="/docs/read/my/pandas/api/DataFrame.interpolate/"><span>နောက် API</span><strong>pandas.DataFrame.interpolate</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use spacing and focus styles to make fields usable, and align table values for easy comparison.">
+  <title>Style forms and tables · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/form-and-table-styling/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/form-and-table-styling/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/form-and-table-styling/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/form-and-table-styling/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Style forms and tables</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Use spacing and focus styles to make fields usable, and align table values for easy comparison.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/form-and-table-styling">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#form">Style fields and keep focus visible</a></li>
+<li><a href="#table">Align prices and stripe table rows</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="form">
+  <h2>Style fields and keep focus visible</h2>
+  <p>Use font: inherit for controls to match surrounding text. Add padding for a comfortable target. :focus-visible lets keyboard users see which control is active.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Style fields and keep focus visible&lt;/title&gt;
+  &lt;style&gt;
+form { display: grid; gap: 8px; max-width: 300px; }
+input, button { font: inherit; padding: 8px; border: 1px solid #497676; border-radius: 6px; }
+button { background: #006767; color: white; }
+:focus-visible { outline: 3px solid #a13a00; outline-offset: 2px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form&gt;&lt;label for=&quot;name&quot;&gt;Order name&lt;/label&gt;&lt;input id=&quot;name&quot; name=&quot;name&quot;&gt;&lt;button type=&quot;button&quot;&gt;Continue&lt;/button&gt;&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Click inside the preview, then use Tab to move between the field and button and see the outline.</p>
+
+</section>
+<section class="article-section" id="table">
+  <h2>Align prices and stripe table rows</h2>
+  <p>border-collapse: collapse merges adjacent borders. tbody tr:nth-child(even) selects every second row in the table body. Right-align prices so their digits line up.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Align prices and stripe table rows&lt;/title&gt;
+  &lt;style&gt;
+table { width: 100%; max-width: 360px; border-collapse: collapse; }
+th, td { padding: 8px; text-align: left; border-bottom: 1px solid #888; }
+tr &gt; :last-child { text-align: right; }
+tbody tr:nth-child(even) { background: #def5f5; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;table&gt;&lt;caption&gt;Product price list&lt;/caption&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Product&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Price (MMK)&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Pen&lt;/td&gt;&lt;td&gt;1,500&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Desk Lamp&lt;/td&gt;&lt;td&gt;2,500&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The second product row is colored and both prices line up at the right.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Styling_web_forms">MDN · Styling forms</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/border-collapse">MDN · border-collapse</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/images-and-transforms/">Previous lesson · Image fitting and transforms</a>
+<a href="/docs/read/en/css/dark-mode/">Next lesson · Light and dark themes</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

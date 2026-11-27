@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Build a categorical object using integer codes and existing categories.">
+  <title>pandas.Categorical.from_codes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/Categorical.from_codes/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/Categorical.from_codes/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/Categorical.from_codes">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Arrays, scalars, and data types</span><a href="/docs/read/my/pandas/api/Categorical.from_codes/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>Categorical.<wbr>from_codes</code></h1>
+    <p class="article-version">pandas 3.1.1 · Arrays, scalars, and data types · <span lang="en">method</span></p>
+    <p class="intro">Build a categorical object using integer codes and existing categories.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><pre><code lang="en">Categorical.from_codes(codes, categories=None, ordered=None, dtype=None, validate=True)</code></pre></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+labels = pd.Categorical([&quot;A&quot;, &quot;B&quot;, &quot;A&quot;])
+print(labels.from_codes([0, 1, 0], categories=[&quot;A&quot;, &quot;B&quot;]))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>codes</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>array-like of int</span><p>Provide integer positions that refer to the supplied category or index level labels.</p></td></tr>
+<tr><th scope="row"><code>categories</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>index-like</span></td></tr>
+<tr><th scope="row"><code>ordered</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>bool</span><p>Choose whether the category sequence defines an ordering.</p></td></tr>
+<tr><th scope="row"><code>dtype</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>CategoricalDtype or &quot;category&quot;</span><p>Choose the data type for the input conversion or result.</p></td></tr>
+<tr><th scope="row"><code>validate</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>Check that key multiplicity matches the required relationship, such as &quot;one_to_one&quot; or &quot;many_to_one&quot;.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>Categorical</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.Categorical.from_codes.html#pandas.Categorical.from_codes">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/Categorical.as_unordered/"><span>Previous in this category</span><strong>pandas.Categorical.as_unordered</strong></a><a href="/docs/read/en/pandas/api/Categorical.map/"><span>Next in this category</span><strong>pandas.Categorical.map</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

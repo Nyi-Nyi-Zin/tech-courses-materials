@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DataFrame ထဲမှာ ဘယ် column တွေရှိလဲ၊ column တစ်ခုစီရဲ့ dtype က ဘာလဲ၊ တန်ဖိုးရှိတဲ့ row ဘယ်နှခုရှိလဲဆိုတာ အကျဉ်းချုပ် ကြည့်နိုင်ပါတယ်။">
+  <title>pandas.DataFrame.info · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/DataFrame.info/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/DataFrame.info/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/DataFrame.info">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API Reference">
+    <a href="/docs/read/my/pandas/api-reference/#find-an-api">pandas API Reference</a><span aria-hidden="true">/</span><span>DataFrame</span><a href="/docs/read/en/pandas/api/DataFrame.info/" lang="en" hreflang="en">English</a>
+  </nav>
+    <h1><code>pandas.<wbr>DataFrame.<wbr>info</code></h1>
+    <p class="article-version">pandas 3.1.1 · DataFrame · <span lang="en">method</span></p>
+    <p class="intro">DataFrame ထဲမှာ ဘယ် column တွေရှိလဲ၊ column တစ်ခုစီရဲ့ dtype က ဘာလဲ၊ တန်ဖိုးရှိတဲ့ row ဘယ်နှခုရှိလဲဆိုတာ အကျဉ်းချုပ် ကြည့်နိုင်ပါတယ်။</p>
+
+    <nav class="api-breadcrumbs" aria-label="ဒီစာမျက်နှာမှာ"><ul><li><a href="#syntax">ခေါ်သုံးပုံ</a></li><li><a href="#example">နမူနာ စမ်းကြည့်ရန်</a></li><li><a href="#parameters">ထည့်သွင်းနိုင်တဲ့ Arguments</a></li><li><a href="#returns">ပြန်ပေးတဲ့ ရလဒ်</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>ခေါ်သုံးပုံ</h2><pre><code lang="en">DataFrame.info(verbose=None, buf=None, max_cols=None, memory_usage=None, show_counts=None)</code></pre></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>နမူနာ စမ်းကြည့်ရန်</h2>
+      <p>နမူနာကုဒ်ကို ပြင်ပြီး Run Python နှိပ်ပါ။ ရလဒ်ကို အောက်မှာ ကြည့်နိုင်ပါတယ်။</p>
+      <label><span>Python ကုဒ်</span><textarea rows="9" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+
+df = pd.DataFrame({
+    &quot;item&quot;: [&quot;Notebook&quot;, &quot;Pen&quot;, None],
+    &quot;quantity&quot;: [3, None, 7],
+})
+
+# Show each column and how many rows have a value.
+df.info(show_counts=True, memory_usage=False)</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>ရပ်ရန်</button>
+        <button type="button" data-reset disabled>မူလကုဒ် ပြန်ထားရန်</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="ရလဒ်"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>ထည့်သွင်းနိုင်တဲ့ Arguments</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">ထည့်သွင်းပုံ</th><th scope="col">လက်ခံတဲ့ တန်ဖိုးနဲ့ သုံးပုံ</th></tr></thead><tbody><tr><th scope="row"><code>verbose</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>True / False (bool)</span><p>True ဆို column တစ်ခုချင်းစီရဲ့ အချက်အလက်ကို ပြပါတယ်။ False ဆို အတိုချုံးပြပါတယ်။ None ဆို column အရေအတွက်ပေါ် မူတည်ပြီး pandas က ရွေးပြပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>buf</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>ရေးလို့ရတဲ့ buffer</span><p>အကျဉ်းချုပ်စာသားကို သိမ်းထားချင်ရင် StringIO လို စာရေးလို့ရတဲ့ buffer ထည့်ပါ။ None ထားရင် ပုံမှန် output မှာ ပြပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>max_cols</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>ကိန်းပြည့် (int)</span><p>verbose ကို None ထားတဲ့အခါ ဒီသတ်မှတ်ချက်ထက် column ပိုများရင် အတိုချုံးပြပါတယ်။ ဥပမာ max_cols=2 ဆို column ၃ ခုရှိတဲ့ ဇယားကို အတိုချုံးပြပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>memory_usage</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>True၊ False သို့မဟုတ် &quot;deep&quot;</span><p>True ဆို memory အသုံးပြုမှုကို ပြပါတယ်။ False ဆို ဖျောက်ပါတယ်။ &quot;deep&quot; ဆို ပိုအသေးစိတ် တွက်ပေးပါတယ်။ None ဆို pandas ရဲ့ display setting အတိုင်း သုံးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>show_counts</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>True / False (bool)</span><p>True ဆို အသေးစိတ်အကျဉ်းချုပ်မှာ column တစ်ခုစီရဲ့ တန်ဖိုးရှိတဲ့ row အရေအတွက်ကို ပြပါတယ်။ False ဆို အဲဒီအရေအတွက်ကို ဖျောက်ပါတယ်။ None ဆို pandas က row နဲ့ column အရေအတွက်ကို ကြည့်ပြီး ဆုံးဖြတ်ပါတယ်။</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>ပြန်ပေးတဲ့ ရလဒ်</h2><p>အကျဉ်းချုပ်ကို output မှာ ပြပြီး None ပြန်ပေးပါတယ်။ စာသားအဖြစ် ဆက်သုံးချင်ရင် buf မှာ buffer တစ်ခု ထည့်ပါ။</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html#pandas.DataFrame.info">pandas တရားဝင် ကိုးကားချက်</a>
+      <nav class="pagination" aria-label="pandas API Reference"><a href="/docs/read/my/pandas/api/DataFrame.infer_objects/"><span>အရင် API</span><strong>pandas.DataFrame.infer_objects</strong></a><a href="/docs/read/my/pandas/api/DataFrame.insert/"><span>နောက် API</span><strong>pandas.DataFrame.insert</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

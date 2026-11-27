@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use the OWASP Top 10 (2025) to discuss common categories of risk. Use the Application Security Verification Standard (ASVS) to select verifiable requirements for the features you actually ship. The document-sharing example ties both to concrete evidence.">
+  <title>OWASP Top 10 and Release Verification · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/owasp-and-release-review/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/owasp-and-release-review/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/owasp-and-release-review/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/owasp-and-release-review/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>OWASP Top 10 and Release Verification</h1>
+  
+  <p class="intro">Use the OWASP Top 10 (2025) to discuss common categories of risk. Use the Application Security Verification Standard (ASVS) to select verifiable requirements for the features you actually ship. The document-sharing example ties both to concrete evidence.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/owasp-and-release-review">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#risk-map">Map the ten categories to a control</a></li>
+<li><a href="#acceptance">Verify a private document release</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="risk-map">
+  <h2>Map the ten categories to a control</h2>
+  <p>Read each row as a question about a real feature. For example, a new dependency raises a supply chain question. Knowing which build actually reached production raises an integrity question. One feature can belong to several categories.</p>
+
+<pre><code>A01  Broken Access Control                    Check document membership on save
+A02  Security Misconfiguration                Disable production debug output
+A03  Software Supply Chain Failures           Review dependencies and build access
+A04  Cryptographic Failures                   Protect keys and encrypt sensitive copies
+A05  Injection                                Bind values in database queries
+A06  Insecure Design                          Model risks before adding sharing
+A07  Authentication Failures                  Protect sign-in and recovery
+A08  Software or Data Integrity Failures      Verify release artifacts before use
+A09  Security Logging and Alerting Failures   Route actionable events to an owner
+A10  Mishandling of Exceptional Conditions    Roll back incomplete changes</code></pre>
+
+
+</section>
+<section class="article-section" id="acceptance">
+  <h2>Verify a private document release</h2>
+  <p>Use seeded test accounts and synthetic documents in the project test environment. For each rule record the starting state, action, expected response, and stored result. Include a successful action as well as a denied one. Retain the results with the release and rerun them when permissions or storage change.</p>
+
+<pre><code>Given                 When                    Expected evidence
+Current editor        Save a valid title      New title persists after reload
+Invited viewer        Request an edit         Access denied; revision unchanged
+Expired session       Open private document   Sign-in required; no private content
+Scanning unavailable  Upload an attachment    File remains private and pending
+Backup restored       Open sample document    Expected revision and permissions</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://owasp.org/Top10/2025/">OWASP Top 10 (2025)</a></li>
+<li><a href="https://asvs.owasp.org/">OWASP Application Security Verification Standard</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/monitoring-and-incidents/">Previous lesson · Errors, Security Logging, and Incident Response</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

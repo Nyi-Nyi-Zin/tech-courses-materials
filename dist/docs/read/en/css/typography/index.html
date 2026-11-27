@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Typography is how text is set so people can read it. CSS lets you choose the size, the space between lines, and the font the browser tries first.">
+  <title>Text size, units, and fonts · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/typography/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/typography/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/typography/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/typography/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Text size, units, and fonts</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Typography is how text is set so people can read it. CSS lets you choose the size, the space between lines, and the font the browser tries first.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/typography">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#scale">Set font size with px, em, and rem</a></li>
+<li><a href="#percentage">Size a box relative to its parent</a></li>
+<li><a href="#line-height">Adjust line spacing with line-height</a></li>
+<li><a href="#load">Choose fallback fonts</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="scale">
+  <h2>Set font size with px, em, and rem</h2>
+  <p>px is a CSS pixel. For font-size, em uses the parent’s text size as its reference. rem uses the root element’s text size. If the root size is 16px, 1.25rem is 20px. Percentages for font-size refer to the parent’s size.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Set font size with px, em, and rem&lt;/title&gt;
+  &lt;style&gt;
+    html { font-size: 16px; }
+    .notices { font-size: 20px; }
+    .em { font-size: 1.25em; }
+    .rem { font-size: 1.25rem; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;notices&quot;&gt;&lt;p class=&quot;em&quot;&gt;Sized in em&lt;/p&gt;&lt;p class=&quot;rem&quot;&gt;Sized in rem&lt;/p&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> In the same parent, the em paragraph is 25px and the rem paragraph is 20px. Confirm in DevTools → Computed.</p>
+
+</section>
+<section class="article-section" id="percentage">
+  <h2>Size a box relative to its parent</h2>
+  <p>For width in normal flow, a percentage uses the width of the containing block. For example, 75% of a 240px-wide content area is 180px. Change the parent’s width and the child’s width updates too.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Size a box relative to its parent&lt;/title&gt;
+  &lt;style&gt;
+    .panel { width: 240px; outline: 1px solid teal; }
+    .panel p { width: 75%; background: #d6efea; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;panel&quot;&gt;&lt;p&gt;Your order is ready.&lt;/p&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The colored paragraph is 180px wide inside the 240px panel.</p>
+
+</section>
+<section class="article-section" id="line-height">
+  <h2>Adjust line spacing with line-height</h2>
+  <p>line-height sets the height of each text line. A number such as 1.5 multiplies the element’s font size. With a 20px font, 1.5 produces a 30px line height.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Adjust line spacing with line-height&lt;/title&gt;
+  &lt;style&gt;
+    p { font-size: 20px; line-height: 1.5; width: 20ch; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;The library is open every morning and lends books to local residents.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The text wraps, and each line has room around it. Compare 1.5 with 1.1.</p>
+
+</section>
+<section class="article-section" id="load">
+  <h2>Choose fallback fonts</h2>
+  <p>font-family is a list the browser tries in order. If the first font is unavailable or cannot display a character, the browser tries another. A generic name like sans-serif lets the browser choose a suitable font. @font-face lets you supply a font file your site owns or is licensed to use; font-display: swap allows fallback text while that file loads.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Choose fallback fonts&lt;/title&gt;
+  &lt;style&gt;
+    .notice { font-family: &quot;Noto Sans Myanmar&quot;, Arial, sans-serif; }
+    p { font-family: Georgia, serif; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first paragraph uses the first suitable sans-serif font in its list. The second uses a serif font.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length">MDN · Length units</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-family">MDN · Font family</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@font-face">MDN · Font files</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/layout/">Previous lesson · Normal flow, box model, and display</a>
+<a href="/docs/read/en/css/colors/">Next lesson · CSS colors</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

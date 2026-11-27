@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ဆက်နွှယ်မှု တိုင်းပြီး outlier၊ subgroup အချိုးနဲ့ study design က ကောက်ချက်ကို ဘယ်လို သက်ရောက်လဲ စစ်ပါ။">
+  <title>Correlation၊ Confounding နှင့် လက်တွေ့ အဓိပ္ပာယ်ဖတ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/correlation-and-confounding/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/correlation-and-confounding/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/correlation-and-confounding/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#data-analysis">သင်ခန်းစာအားလုံး · Data Analysis</a> <a href="/docs/read/en/data-analysis/correlation-and-confounding/" lang="en" hreflang="en">English</a></nav>
+  <h1>Correlation၊ Confounding နှင့် လက်တွေ့ အဓိပ္ပာယ်ဖတ်ခြင်း</h1>
+  
+  <p class="intro">ဆက်နွှယ်မှု တိုင်းပြီး outlier၊ subgroup အချိုးနဲ့ study design က ကောက်ချက်ကို ဘယ်လို သက်ရောက်လဲ စစ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/data-analysis/correlation-and-confounding">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#association">Measure ရွေးပြီး ဒေတာကို ကြည့်ခြင်း</a></li>
+<li><a href="#confounding">တခြား ရှင်းလင်းချက်များ စစ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="association">
+  <h2>Measure ရွေးပြီး ဒေတာကို ကြည့်ခြင်း</h2>
+  <p>Pearson correlation က တန်းဖြောင့် ဆက်နွှယ်မှု တိုင်းပါတယ်။ Spearman က rank ကို သုံးလို့ တန်းဖြောင့်မဟုတ်ဘဲ ဦးတည်ချက်တစ်ခုတည်း ရှိတဲ့ ဆက်နွှယ်မှုကို ဖော်ပြနိုင်ပါတယ်။ Scatter plot ကြည့်၊ တန်ဖိုးတူနေတဲ့ variable နဲ့ outlier စစ်ပြီး နှစ်ခုလုံးရှိတဲ့ row တွေ သုံးပါ။</p>
+
+<pre><code>from scipy.stats import pearsonr, spearmanr
+
+x = [1, 2, 3, 4, 5]
+y = [1, 4, 9, 16, 25]
+print(round(float(pearsonr(x, y).statistic), 2))
+print(round(float(spearmanr(x, y).statistic), 2))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">0.98
+1.0</pre></div>
+
+
+</section>
+<section class="article-section" id="confounding">
+  <h2>တခြား ရှင်းလင်းချက်များ စစ်ခြင်း</h2>
+  <p>Promotion နဲ့ sales ဆက်နွှယ်မှုမှာ ရာသီ၊ ဆိုင်အရွယ်အစား သို့မဟုတ် product အချိုး ပါနိုင်ပါတယ်။ အကြောင်းရင်းလို့ မဆိုခင် သက်ဆိုင်တဲ့ subgroup တွေ ယှဉ်ပြီး ကန့်သတ်ချက် မှတ်ပါ။ သက်ရောက်မှု ခန့်မှန်းဖို့ အခြေအနေများစွာမှာ randomized design သို့မဟုတ် အထောက်အထားရှိတဲ့ causal method လိုပါတယ်။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html">scipy.stats.pearsonr</a></li>
+<li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.spearmanr.html">scipy.stats.spearmanr</a></li>
+<li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda33q.htm">NIST scatter plots</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/data-analysis/hypothesis-testing/">အရင်သင်ခန်းစာ · Hypothesis Testing နှင့် Experiment ရလဒ်</a>
+<a href="/docs/read/my/data-analysis/reproducible-report/">နောက်သင်ခန်းစာ · ပြန်လုပ်လို့ရတဲ့ Analysis Report တည်ဆောက်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TypeScript က program မ run ခင် types စစ်ပါတယ်။ Type annotations က runtime မှာ ဝင်လာတဲ့ data ကို validate မလုပ်ပေးပါဘူး။">
+  <title>TypeScript ထည့်သွင်းခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/setup/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/setup/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/setup/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#typescript">သင်ခန်းစာအားလုံး · TypeScript</a> <a href="/docs/read/en/typescript/setup/" lang="en" hreflang="en">English</a></nav>
+  <h1>TypeScript ထည့်သွင်းခြင်း</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">TypeScript က program မ run ခင် types စစ်ပါတယ်။ Type annotations က runtime မှာ ဝင်လာတဲ့ data ကို validate မလုပ်ပေးပါဘူး။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/typescript/setup">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#install">Project ထဲ ထည့်ပြီး စစ်ခြင်း</a></li>
+<li><a href="#strict">Strict Checking နှင့် Inference</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="install">
+  <h2>Project ထဲ ထည့်ပြီး စစ်ခြင်း</h2>
+  <p>Team တစ်ခုလုံး compiler version တူတူသုံးဖို့ TypeScript ကို development dependency အဖြစ် ထည့်ပါ။ tsconfig.json နဲ့ စပါ။ Build files မထုတ်ဘဲ စစ်ချင်ရင် tsc --noEmit run ပါ။</p>
+
+<pre><code>npm install --save-dev typescript@7.0.2
+npx tsc --init
+npx tsc --noEmit</code></pre>
+
+
+</section>
+<section class="article-section" id="strict">
+  <h2>Strict Checking နှင့် Inference</h2>
+  <p>Project အသစ်မှာ strict checking သုံးပါ။ TypeScript က values နဲ့ return expressions ကနေ type ကို ခန့်မှန်းပေးနိုင်ပါတယ်။ Function parameters နဲ့ export လုပ်တဲ့ contract လို နေရာတွေမှာ annotations ထည့်ပါ။</p>
+
+<pre><code>export function total(price: number, units: number) {
+  return price * units;
+}
+
+const amount = total(3, 2); // inferred as number</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://github.com/microsoft/TypeScript/releases/tag/v7.0.2">TypeScript 7.0.2 release</a></li>
+<li><a href="https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/">TypeScript 7.0 announcement</a></li>
+<li><a href="https://www.typescriptlang.org/tsconfig/strict.html">TSConfig strict</a></li>
+<li><a href="https://www.typescriptlang.org/tsconfig/noEmit.html">TSConfig noEmit</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/typescript/types/">နောက်သင်ခန်းစာ · Object Types၊ Unions နှင့် Narrowing</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

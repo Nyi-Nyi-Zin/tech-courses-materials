@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Learn where a box takes up space and what happens to content at its edges.">
+  <title>Margins, overflow, and visibility · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/spacing-and-visibility/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/spacing-and-visibility/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/spacing-and-visibility/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/spacing-and-visibility/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Margins, overflow, and visibility</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Learn where a box takes up space and what happens to content at its edges.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/spacing-and-visibility">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#auto-margin">Center a block with auto margins</a></li>
+<li><a href="#margin-collapse">Observe vertical margin collapse</a></li>
+<li><a href="#overflow">Choose an overflow value</a></li>
+<li><a href="#display-visibility">Hide with display or visibility</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="auto-margin">
+  <h2>Center a block with auto margins</h2>
+  <p>A width smaller than the containing block leaves space at the sides. margin-inline: auto divides that space equally. In horizontal writing, margin: 0 auto does the same and also sets top and bottom margins to zero.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Center a block with auto margins&lt;/title&gt;
+  &lt;style&gt;
+.card { width: min(240px, 100%); box-sizing: border-box; margin-inline: auto; padding: 10px; background: #def5f5; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;card&quot;&gt;Desk Lamp&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The card stays centered and shrinks on narrow previews.</p>
+
+</section>
+<section class="article-section" id="margin-collapse">
+  <h2>Observe vertical margin collapse</h2>
+  <p>In normal block flow, adjoining vertical margins can collapse into one. When both are positive, the larger one sets the gap. Flex and grid items keep their margins separate.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Observe vertical margin collapse&lt;/title&gt;
+  &lt;style&gt;
+.first { margin: 0 0 24px; }
+.second { margin: 16px 0 0; }
+p { background: #def5f5; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;main&gt;&lt;p class=&quot;first&quot;&gt;Pen&lt;/p&gt;&lt;p class=&quot;second&quot;&gt;Notebook&lt;/p&gt;&lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The gap is 24px. Add main { display: grid; } to get 40px.</p>
+
+</section>
+<section class="article-section" id="overflow">
+  <h2>Choose an overflow value</h2>
+  <p>visible can draw beyond the box. hidden clips and allows programmatic scrolling. clip prevents scrolling. auto allows users to scroll when content exceeds the box. scroll makes a scroll container even when all content fits.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Choose an overflow value&lt;/title&gt;
+  &lt;style&gt;
+.card { width: min(220px, 100%); height: 58px; overflow: auto; border: 1px solid teal; padding: 6px; box-sizing: border-box; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;card&quot; tabindex=&quot;0&quot;&gt;Pen&lt;br&gt;Notebook&lt;br&gt;Desk Lamp&lt;br&gt;Folder&lt;br&gt;Stapler&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Scroll inside the card to see all the products. Compare auto with hidden and visible.</p>
+
+</section>
+<section class="article-section" id="display-visibility">
+  <h2>Hide with display or visibility</h2>
+  <p>display: none removes the box from layout. visibility: hidden hides the box and keeps its layout space.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Hide with display or visibility&lt;/title&gt;
+  &lt;style&gt;
+.row { display: flex; gap: 4px; margin-bottom: 6px; }
+.kept &gt; :nth-child(2) { visibility: hidden; }
+.removed &gt; :nth-child(2) { display: none; }
+.row &gt; div { background: #d8efeb; padding: 6px; border: 1px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;row kept&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;row removed&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first row leaves a gap for Notebook. The second row has no Notebook gap.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin">MDN · margin</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Mastering_margin_collapsing">MDN · Margin collapse</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/overflow">MDN · overflow</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display">MDN · display</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/visibility">MDN · visibility</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/backgrounds-and-borders/">Previous lesson · Backgrounds, borders, and shadows</a>
+<a href="/docs/read/en/css/flexbox/">Next lesson · Flexbox</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

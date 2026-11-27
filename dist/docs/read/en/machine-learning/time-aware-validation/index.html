@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Avoid training on the future or on records from the same entity as the evaluation rows.">
+  <title>Validate models on time-ordered or grouped data · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/time-aware-validation/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/time-aware-validation/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/time-aware-validation/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#machine-learning">All documentation · Machine Learning</a> <a href="/docs/read/my/machine-learning/time-aware-validation/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Validate models on time-ordered or grouped data</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Avoid training on the future or on records from the same entity as the evaluation rows.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/machine-learning/time-aware-validation">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#time">Keep training before evaluation</a></li>
+<li><a href="#groups">Keep each entity in one fold at a time</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="time">
+  <h2>Keep training before evaluation</h2>
+  <p>In forecasting, a shuffled split can allow future observations into training. Sort by time and validate against later observations. TimeSeriesSplit expands training windows and can leave a gap before evaluation. Standard folds assume evenly spaced observations for comparable time intervals.</p>
+
+<pre><code>import numpy as np
+from sklearn.model_selection import TimeSeriesSplit
+
+rows = np.arange(8)
+for train, test in TimeSeriesSplit(n_splits=2, test_size=2, gap=1).split(rows):
+    print(train[-1], test[0])</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">2 4
+4 6</pre></div>
+
+
+</section>
+<section class="article-section" id="groups">
+  <h2>Keep each entity in one fold at a time</h2>
+  <p>If several rows share a customer, order, or session, group by that entity. GroupKFold keeps test groups disjoint from train groups in each split. Choose the group that matches what will be new at prediction time.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/cross_validation.html">Cross-validation</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html">TimeSeriesSplit API</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/machine-learning/pca-and-dimensionality/">Previous lesson · Reduce dimensions with PCA</a>
+<a href="/docs/read/en/machine-learning/model-deployment/">Next lesson · Save a model and deploy it for inference</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

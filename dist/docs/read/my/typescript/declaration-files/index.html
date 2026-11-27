@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ရှိပြီးသား JavaScript code ရဲ့ types တွေကို ဖော်ပြဖို့ .d.ts ဖိုင် သုံးပါ။">
+  <title>JavaScript အတွက် Declaration Files · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/declaration-files/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/declaration-files/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/declaration-files/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#typescript">သင်ခန်းစာအားလုံး · TypeScript</a> <a href="/docs/read/en/typescript/declaration-files/" lang="en" hreflang="en">English</a></nav>
+  <h1>JavaScript အတွက် Declaration Files</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">ရှိပြီးသား JavaScript code ရဲ့ types တွေကို ဖော်ပြဖို့ .d.ts ဖိုင် သုံးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/typescript/declaration-files">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#pair">JavaScript Exports နဲ့ ကိုက်ညီအောင် ရေးပါ</a></li>
+<li><a href="#publish">အသုံးပြုသူဆီ Types ရောက်အောင် သတ်မှတ်ပါ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="pair">
+  <h2>JavaScript Exports နဲ့ ကိုက်ညီအောင် ရေးပါ</h2>
+  <p>ဖော်ပြမယ့် JavaScript ဖိုင်နားမှာ declaration ထားပါ။ နမူနာ package မှာ named export သုံးထားလို့ declaration မှာလည်း အဲဒီ export နာမည်ကို သုံးပါတယ်။ Declaration က implementation ကို ဖော်ပြပါတယ်။ Runtime မှာ JavaScript ကပဲ အလုပ်လုပ်ပါတယ်။</p>
+
+<pre><code>// index.js in an ESM package
+export function formatSku(id) {
+  return &quot;SKU-&quot; + String(id).padStart(3, &quot;0&quot;);
+}
+
+// index.d.ts
+export function formatSku(id: number): string;</code></pre>
+
+
+</section>
+<section class="article-section" id="publish">
+  <h2>အသုံးပြုသူဆီ Types ရောက်အောင် သတ်မှတ်ပါ</h2>
+  <p>ရိုးရိုး ESM package မှာ main က JavaScript entry ကို ညွှန်ပြီး types က declaration ကို ညွှန်ပါ။ Publish လုပ်ရင် နှစ်ဖိုင်လုံး ထည့်ပါ။ exports map သုံးတဲ့ package မှာ သက်ဆိုင်ရာ entry ကို types condition ပေးပါ။ Package သုံးမယ့် project အသေးတစ်ခုမှာ strict checking နဲ့ စမ်းပါ။</p>
+
+<pre><code>{
+  &quot;type&quot;: &quot;module&quot;,
+  &quot;main&quot;: &quot;./index.js&quot;,
+  &quot;types&quot;: &quot;./index.d.ts&quot;,
+  &quot;files&quot;: [&quot;index.js&quot;, &quot;index.d.ts&quot;]
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/type-declarations.html">TypeScript Handbook · Type declarations</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html">TypeScript Handbook · Publishing declarations</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/modules/reference.html">TypeScript Handbook · Modules reference</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/typescript/conditional-types/">အရင်သင်ခန်းစာ · Conditional Types နဲ့ infer</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

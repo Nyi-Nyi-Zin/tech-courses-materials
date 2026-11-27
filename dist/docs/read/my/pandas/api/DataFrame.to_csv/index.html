@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DataFrame ကို CSV ဖိုင်အဖြစ် ထုတ်ပါတယ်။ Index ကို output ထဲ မထည့်ချင်ရင် index=False သုံးပါ။">
+  <title>pandas.DataFrame.to_csv · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/DataFrame.to_csv/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/DataFrame.to_csv/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/DataFrame.to_csv">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API Reference">
+    <a href="/docs/read/my/pandas/api-reference/#find-an-api">pandas API Reference</a><span aria-hidden="true">/</span><span>DataFrame</span><a href="/docs/read/en/pandas/api/DataFrame.to_csv/" lang="en" hreflang="en">English</a>
+  </nav>
+    <h1><code>pandas.<wbr>DataFrame.<wbr>to_csv</code></h1>
+    <p class="article-version">pandas 3.1.1 · DataFrame · <span lang="en">method</span></p>
+    <p class="intro">DataFrame ကို CSV ဖိုင်အဖြစ် ထုတ်ပါတယ်။ Index ကို output ထဲ မထည့်ချင်ရင် index=False သုံးပါ။</p>
+
+    <nav class="api-breadcrumbs" aria-label="ဒီစာမျက်နှာမှာ"><ul><li><a href="#syntax">ခေါ်သုံးပုံ</a></li><li><a href="#example">နမူနာ စမ်းကြည့်ရန်</a></li><li><a href="#parameters">ထည့်သွင်းနိုင်တဲ့ Arguments</a></li><li><a href="#returns">ပြန်ပေးတဲ့ ရလဒ်</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>ခေါ်သုံးပုံ</h2><details class="api-full-signature"><summary><code lang="en">DataFrame.to_csv(…)</code> <span>ခေါ်သုံးပုံ အပြည့်အစုံ</span></summary><pre><code lang="en">DataFrame.to_csv(
+    path_or_buf=None,
+    *,
+    sep=&#39;,&#39;,
+    na_rep=&#39;&#39;,
+    float_format=None,
+    columns=None,
+    header=True,
+    index=True,
+    index_label=None,
+    mode=&#39;w&#39;,
+    encoding=None,
+    compression=&#39;infer&#39;,
+    quoting=None,
+    quotechar=&#39;&quot;&#39;,
+    lineterminator=None,
+    chunksize=None,
+    date_format=None,
+    doublequote=True,
+    escapechar=None,
+    decimal=&#39;.&#39;,
+    errors=&#39;strict&#39;,
+    storage_options=None,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>နမူနာ စမ်းကြည့်ရန်</h2>
+      <p>နမူနာကုဒ်ကို ပြင်ပြီး Run Python နှိပ်ပါ။ ရလဒ်ကို အောက်မှာ ကြည့်နိုင်ပါတယ်။</p>
+      <label><span>Python ကုဒ်</span><textarea rows="7" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+orders = pd.DataFrame({
+    &quot;team&quot;: [&quot;North&quot;, &quot;North&quot;, &quot;South&quot;],
+    &quot;day&quot;: pd.to_datetime([&quot;2025-01-01&quot;, &quot;2025-01-02&quot;, &quot;2025-01-03&quot;]),
+    &quot;units&quot;: [4, None, 7],
+})
+print(orders.to_csv(index=False))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>ရပ်ရန်</button>
+        <button type="button" data-reset disabled>မူလကုဒ် ပြန်ထားရန်</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="ရလဒ်"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>ထည့်သွင်းနိုင်တဲ့ Arguments</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">ထည့်သွင်းပုံ</th><th scope="col">လက်ခံတဲ့ တန်ဖိုးနဲ့ သုံးပုံ</th></tr></thead><tbody><tr><th scope="row"><code>path_or_buf</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)၊ ဖိုင်လမ်းကြောင်း object၊ ဖိုင်ပုံစံ object သို့မဟုတ် None</span><p>CSV ရေးမယ့် ဖိုင်လမ်းကြောင်း သို့မဟုတ် ဖိုင်ပုံစံ object ကို ထည့်ပါ။ ချန်ထားရင် CSV စာသားကို တိုက်ရိုက် ပြန်ပေးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>sep</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;,&#39;</code></td>
+      <td><span>စာသား (str)</span><p>Field တွေ ဒါမှမဟုတ် စာသားအပိုင်းတွေကြား ခြားထားတဲ့ စာလုံးကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>na_rep</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;&#39;</code></td>
+      <td><span>စာသား (str)</span><p>တန်ဖိုးပျောက်နေတဲ့ နေရာမှာ ပြမယ့် စာသားကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>float_format</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)၊ ခေါ်သုံးလို့ရတဲ့ function (callable)</span><p>ကိန်းဂဏန်းတွေကို ဘယ်ပုံစံနဲ့ ပြမလဲ ဆုံးဖြတ်ဖို့ format စာသား သို့မဟုတ် function ကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>columns</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>အစဉ်လိုက် တန်ဖိုးအစု</span><p>Column label တွေ ထည့်ဖို့ ဒါမှမဟုတ် column တွေကို ဘယ်လို သုံးမလဲ သတ်မှတ်ဖို့ သုံးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>header</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool) သို့မဟုတ် စာသား list</span><p>ဘယ် row က column အမည်တွေကို ယူမလဲ သတ်မှတ်ဖို့၊ ဒါမှမဟုတ် output မှာ column အမည်တွေ ရေးမရေး ရွေးဖို့ သုံးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>index</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool)</span><p>CSV output မှာ index label တွေကို ထည့်မထည့် ရွေးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>index_label</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str) သို့မဟုတ် အစဉ်လိုက် တန်ဖိုးအစု သို့မဟုတ် False</span><p>Row index တန်ဖိုးတွေကို ရေးတဲ့ column အတွက် ခေါင်းစဉ်ကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>mode</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;w&#39;</code></td>
+      <td><span>{&#39;w&#39;၊ &#39;x&#39;၊ &#39;a&#39;}</span><p>ဖိုင် သို့မဟုတ် ဒေတာသိုလှောင်ရာကို ဖွင့်မယ့် mode ရွေးပါ။</p></td></tr>
+<tr><th scope="row"><code>encoding</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span><p>&quot;utf-8&quot; လို စာသား encoding အမည်ကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>compression</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;infer&#39;</code></td>
+      <td><span>စာသား (str) သို့မဟုတ် dict</span><p>ဒေတာကို ချုံ့မလား၊ ပြန်ဖြည်မလားနဲ့ ဘယ် compression ပုံစံ သုံးမလဲ ရွေးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>quoting</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>ချန်ထားလို့ရပါတယ် constant from csv module</span><p>Python csv module ရဲ့ quoting constant တွေထဲက တစ်ခုနဲ့ quote သုံးပုံကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>quotechar</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;&quot;&#39;</code></td>
+      <td><span>စာသား (str)</span><p>CSV field ကို အဖွင့်အပိတ် လုပ်ပေးတဲ့ quote စာလုံးကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>lineterminator</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span><p>Record တစ်ခုစီကို အဆုံးသတ်ပေးတဲ့ စာလုံး ဒါမှမဟုတ် စာသားကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>chunksize</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>ကိန်းပြည့် (int) သို့မဟုတ် None</span><p>တစ်သုတ်စီမှာ ဖတ်မယ့် သို့မဟုတ် ရေးမယ့် row အရေအတွက်ကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>date_format</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span><p>ရက်စွဲနဲ့အချိန်ကို ဖတ်ဖို့ ဒါမှမဟုတ် ပြသဖို့ &quot;%Y-%m-%d&quot; လို ပုံစံတစ်ခု သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>doublequote</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool)</span><p>Field ထဲမှာ ဆက်တိုက်ပါတဲ့ quote နှစ်လုံးကို quote တစ်လုံးအဖြစ် ယူမယူ သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>escapechar</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span><p>အထူးသတ်မှတ်ချက်ရှိတဲ့ စာလုံးတစ်လုံးကို ပုံမှန်စာလုံးအဖြစ် ဖတ်ဖို့ ရှေ့မှာ ထားမယ့် escape စာလုံးကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>decimal</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;.&#39;</code></td>
+      <td><span>စာသား (str)</span><p>ဒဿမအမှတ်အဖြစ် သုံးတဲ့ စာလုံးကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>errors</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;strict&#39;</code></td>
+      <td><span>စာသား (str)</span><p>Input မမှန်တဲ့အခါ သို့မဟုတ် လုပ်ဆောင်ချက် မအောင်မြင်တဲ့အခါ ဘယ်လို ကိုင်တွယ်မလဲ သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>storage_options</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>dict</span><p>Connection setting ဒါမှမဟုတ် HTTP header လို ဒေတာသိမ်းဆည်းရာမှာ သုံးမယ့် option တွေကို ထည့်ပါ။</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>ပြန်ပေးတဲ့ ရလဒ်</h2><p>ပြန်ပေးတဲ့ အမျိုးအစားက None သို့မဟုတ် စာသား (str) ဖြစ်ပါတယ်။</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html#pandas.DataFrame.to_csv">pandas တရားဝင် ကိုးကားချက်</a>
+      <nav class="pagination" aria-label="pandas API Reference"><a href="/docs/read/my/pandas/api/DataFrame.to_clipboard/"><span>အရင် API</span><strong>pandas.DataFrame.to_clipboard</strong></a><a href="/docs/read/my/pandas/api/DataFrame.to_dict/"><span>နောက် API</span><strong>pandas.DataFrame.to_dict</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fit an image into a box and change where a box is painted.">
+  <title>Image fitting and transforms · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/images-and-transforms/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/images-and-transforms/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/images-and-transforms/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/images-and-transforms/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Image fitting and transforms</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Fit an image into a box and change where a box is painted.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/images-and-transforms">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#object-fit">Fit a picture with object-fit</a></li>
+<li><a href="#transform">Move, turn, and scale with transform</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="object-fit">
+  <h2>Fit a picture with object-fit</h2>
+  <p>Give the image box a width and height. contain shows the full image and may leave blank space. cover fills the box and may crop the edges. Both preserve the aspect ratio.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Fit a picture with object-fit&lt;/title&gt;
+  &lt;style&gt;
+img { width: 94px; height: 94px; background: #def5f5; border: 1px solid teal; }
+.cover { object-fit: cover; }
+.contain { object-fit: contain; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;img class=&quot;cover&quot; src=&quot;data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%20160%2080%27%3E%3Crect%20width=%27160%27%20height=%2780%27%20fill=%27teal%27/%3E%3Ccircle%20cx=%2780%27%20cy=%2740%27%20r=%2730%27%20fill=%27orange%27/%3E%3C/svg%3E&quot; alt=&quot;Cropped illustration&quot;&gt;
+&lt;img class=&quot;contain&quot; src=&quot;data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%20160%2080%27%3E%3Crect%20width=%27160%27%20height=%2780%27%20fill=%27teal%27/%3E%3Ccircle%20cx=%2780%27%20cy=%2740%27%20r=%2730%27%20fill=%27orange%27/%3E%3C/svg%3E&quot; alt=&quot;Full illustration&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first square is filled. The second shows the whole picture with space above and below.</p>
+
+</section>
+<section class="article-section" id="transform">
+  <h2>Move, turn, and scale with transform</h2>
+  <p>translate() moves the painted element, rotate() turns it, and scale() changes its drawn size. It keeps its original space in normal flow. Function order can change the result.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Move, turn, and scale with transform&lt;/title&gt;
+  &lt;style&gt;
+.badge { display: inline-block; margin: 8px 44px 8px 4px; padding: 5px; background: teal; color: white; transform: translateX(24px) rotate(-10deg) scale(1.15); }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;&lt;span class=&quot;badge&quot;&gt;NEW&lt;/span&gt; Desk Lamp&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The badge moves right, tilts, and grows. The text after it stays at its original position.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/object-fit">MDN · object-fit</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transform">MDN · transform</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/pseudo-elements/">Previous lesson · Pseudo-elements</a>
+<a href="/docs/read/en/css/form-and-table-styling/">Next lesson · Style forms and tables</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

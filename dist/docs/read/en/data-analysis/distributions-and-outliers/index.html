@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Describe center and spread, flag unusual observations, and review them in their original context.">
+  <title>Summarize distributions and investigate outliers · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/distributions-and-outliers/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/distributions-and-outliers/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/distributions-and-outliers/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#data-analysis">All documentation · Data Analysis</a> <a href="/docs/read/my/data-analysis/distributions-and-outliers/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Summarize distributions and investigate outliers</h1>
+  
+  <p class="intro">Describe center and spread, flag unusual observations, and review them in their original context.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/data-analysis/distributions-and-outliers">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#summary">Compare the mean, median, and quartiles</a></li>
+<li><a href="#iqr">Flag values beyond an IQR fence</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="summary">
+  <h2>Compare the mean, median, and quartiles</h2>
+  <p>The median and interquartile range are less sensitive to extreme values than the mean and full range. Check the number of observations and use a histogram or box plot to see shape and skew. State how missing values were handled.</p>
+
+
+
+
+</section>
+<section class="article-section" id="iqr">
+  <h2>Flag values beyond an IQR fence</h2>
+  <p>The IQR is the difference between the third and first quartiles. A common exploratory fence is 1.5 IQRs past either quartile. A flagged value could be a data error, a legitimate rare event, or evidence of a different group. Inspect it before deciding what to do.</p>
+
+<pre><code>import numpy as np
+
+orders = np.array([10, 11, 12, 13, 14, 45])
+q1, q3 = np.quantile(orders, [0.25, 0.75])
+iqr = q3 - q1
+flag = (orders &lt; q1 - 1.5 * iqr) | (orders &gt; q3 + 1.5 * iqr)
+print(float(np.median(orders)), float(iqr))
+print(orders[flag].tolist())</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/distributions-and-outliers-iqr.png" data-image-preview><img src="/docs/media/data/distributions-and-outliers-iqr.png" alt="A horizontal box plot shows fences at 7.5 and 17.5. The point at 45 lies beyond the upper fence." width="720" height="385" loading="lazy" decoding="async"></a>
+    <figcaption>The rule flags 45 orders for investigation.</figcaption>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">12.5 2.5
+[45]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://numpy.org/doc/stable/reference/generated/numpy.quantile.html">NumPy quantile</a></li>
+<li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/boxplot.htm">NIST box plots</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/data-analysis/sampling-and-bias/">Previous lesson · Sampling, bias, and representative data</a>
+<a href="/docs/read/en/data-analysis/confidence-intervals/">Next lesson · Estimate uncertainty with confidence intervals</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

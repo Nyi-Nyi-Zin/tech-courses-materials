@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A field’s element, input type, and attributes tell the browser how to collect and validate a value.">
+  <title>Textarea, File Inputs, and Input Attributes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/form-field-types/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/form-field-types/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/form-field-types/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/form-field-types/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Textarea, File Inputs, and Input Attributes</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">A field’s element, input type, and attributes tell the browser how to collect and validate a value.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/form-field-types">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#textarea">Collect several lines with &lt;textarea&gt;</a></li>
+<li><a href="#file-input">Choose a file with type=&quot;file&quot;</a></li>
+<li><a href="#input-attributes">Read input attributes and validation</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="textarea">
+  <h2>Collect several lines with &lt;textarea&gt;</h2>
+  <p>A textarea accepts line breaks. rows sets the initial visible height in lines. Put initial text between the tags. In JavaScript, read the current editable text from .value.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Collect several lines with &amp;lt;textarea&amp;gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;label for=&quot;note&quot;&gt;Order note&lt;/label&gt;&lt;br&gt;
+&lt;textarea id=&quot;note&quot; name=&quot;note&quot; rows=&quot;3&quot;&gt;Less sugar&lt;/textarea&gt;
+&lt;pre id=&quot;result&quot;&gt;&lt;/pre&gt;
+  &lt;script&gt;
+const note = document.querySelector(&quot;#note&quot;);
+const preview = () =&gt; document.querySelector(&quot;#result&quot;).textContent = note.value;
+note.addEventListener(&quot;input&quot;, preview);
+preview();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Edit the note and add a new line. The text below updates immediately.</p>
+
+</section>
+<section class="article-section" id="file-input">
+  <h2>Choose a file with type=&quot;file&quot;</h2>
+  <p>A file input lets the user choose a file. accept helps the picker suggest appropriate types. Check file types and size on the server if you build an upload. Here JavaScript reads just the name from the selected File and keeps it in the preview.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Choose a file with type=&quot;file&quot;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;label for=&quot;photo&quot;&gt;Product photo&lt;/label&gt;&lt;br&gt;
+&lt;input id=&quot;photo&quot; type=&quot;file&quot; accept=&quot;image/*&quot;&gt;
+&lt;p id=&quot;result&quot; aria-live=&quot;polite&quot;&gt;Choose an image.&lt;/p&gt;
+  &lt;script&gt;
+const photo = document.querySelector(&quot;#photo&quot;);
+photo.addEventListener(&quot;change&quot;, () =&gt; {
+  document.querySelector(&quot;#result&quot;).textContent = photo.files[0]?.name ?? &quot;Choose an image.&quot;;
+});
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Select an image to display its filename. Nothing is uploaded.</p>
+
+</section>
+<section class="article-section" id="input-attributes">
+  <h2>Read input attributes and validation</h2>
+  <p>id connects a field to its label and name is the key used by form data. required demands a value. For a number, min and max set the accepted range and step controls the allowed increments. placeholder provides a short hint.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Read input attributes and validation&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form id=&quot;order&quot;&gt;
+  &lt;label for=&quot;quantity&quot;&gt;Quantity (1–5)&lt;/label&gt;
+  &lt;input id=&quot;quantity&quot; name=&quot;quantity&quot; type=&quot;number&quot; min=&quot;1&quot; max=&quot;5&quot; step=&quot;1&quot; placeholder=&quot;2&quot; required&gt;
+  &lt;button type=&quot;button&quot; id=&quot;check&quot;&gt;Check&lt;/button&gt;
+&lt;/form&gt;
+&lt;p id=&quot;result&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+const form = document.querySelector(&quot;#order&quot;);
+const result = document.querySelector(&quot;#result&quot;);
+document.querySelector(&quot;#check&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+  result.textContent = &quot;&quot;;
+  if (!form.reportValidity()) return;
+  const quantity = new FormData(form).get(&quot;quantity&quot;);
+  result.textContent = &quot;quantity = &quot; + quantity;
+});
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Enter 0 or 6 and press Check to see a validation message. With 2, the result displays quantity = 2.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea">MDN · &lt;textarea&gt;</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/file">MDN · File input</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input">MDN · &lt;input&gt;</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/form-controls/">Previous lesson · Checkboxes, Radio Buttons, and Select Menus</a>
+<a href="/docs/read/en/html/file-uploads/">Next lesson · File Uploads</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

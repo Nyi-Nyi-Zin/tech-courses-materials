@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Login ဝင်ထားသူတစ်ယောက်က document တစ်စောင်မှာ editor ဖြစ်ပြီး နောက်တစ်စောင်မှာ viewer ဖြစ်နိုင်ပါတယ်။ ဒီလူက ဒီ document ပေါ်မှာ အခုလုပ်ချင်တဲ့ အလုပ်ကို လုပ်ခွင့်ရှိလားဆိုတာ Authorization က ဆုံးဖြတ်ပါတယ်။">
+  <title>Authorization နဲ့ Document တစ်စောင်ချင်းစီရဲ့ လုပ်ပိုင်ခွင့် · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/authorization/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/authorization/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/authorization/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-security">သင်ခန်းစာအားလုံး · Web Security</a> <a href="/docs/read/en/web-security/authorization/" lang="en" hreflang="en">English</a></nav>
+  <h1>Authorization နဲ့ Document တစ်စောင်ချင်းစီရဲ့ လုပ်ပိုင်ခွင့်</h1>
+  
+  <p class="intro">Login ဝင်ထားသူတစ်ယောက်က document တစ်စောင်မှာ editor ဖြစ်ပြီး နောက်တစ်စောင်မှာ viewer ဖြစ်နိုင်ပါတယ်။ ဒီလူက ဒီ document ပေါ်မှာ အခုလုပ်ချင်တဲ့ အလုပ်ကို လုပ်ခွင့်ရှိလားဆိုတာ Authorization က ဆုံးဖြတ်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-security/authorization">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#access-matrix">Role တစ်ခုချင်းစီရဲ့ လုပ်ပိုင်ခွင့် သတ်မှတ်ခြင်း</a></li>
+<li><a href="#scoped-update">Database မှာ စာပြင်တဲ့အချိန် လုပ်ပိုင်ခွင့် စစ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="access-matrix">
+  <h2>Role တစ်ခုချင်းစီရဲ့ လုပ်ပိုင်ခွင့် သတ်မှတ်ခြင်း</h2>
+  <p>မည်သူ့ကိုမှ အလိုအလျောက် ခွင့်မပေးဘဲ role တစ်ခုစီအတွက် လိုသလောက်ပဲ သတ်မှတ်ပါ။ စာပြင်ခွင့်အပြင် နောက်တစ်ယောက်ကို ဖိတ်ခွင့်ပါ ထည့်တွက်ပါ။ Download နဲ့ export အပါအဝင် request တိုင်းမှာ လက်ရှိ membership ကို server က စစ်ပါ။</p>
+
+<pre><code>Role      Read    Edit    Invite
+Owner     Yes     Yes     Yes
+Editor    Yes     Yes     No
+Viewer    Yes     No      No
+Guest     No      No      No</code></pre>
+
+
+</section>
+<section class="article-section" id="scoped-update">
+  <h2>Database မှာ စာပြင်တဲ့အချိန် လုပ်ပိုင်ခွင့် စစ်ခြင်း</h2>
+  <p>Document တိုင်းမှာ အဖွဲ့အစည်းကို ဖော်ပြတဲ့ tenant ID ရှိပြီး owner အပါအဝင် ပါဝင်သူတိုင်းအတွက် membership row ရှိတယ်ဆိုပါစို့။ ပြင်ချိန်မှာ tenant ရော၊ လက်ရှိ membership ရော ကိုက်မှ update လုပ်ပါ။ User နဲ့ tenant ID ကို server က အတည်ပြုထားတဲ့ session ကနေ ယူပါ။ Row တကယ်ပြောင်းမှသာ အောင်မြင်ကြောင်း ပြန်ပါ။ UI မှာ Edit ခလုတ် ဖျောက်ထားရင်တောင် data ကို ကာကွယ်ပေးတာက ဒီစစ်ဆေးချက်ပါ။</p>
+
+<pre><code>UPDATE documents AS d SET title = $1
+WHERE d.id = $2 AND d.tenant_id = $3
+  AND EXISTS (
+    SELECT 1 FROM document_members AS m
+    WHERE m.document_id = d.id AND m.user_id = $4
+      AND m.role IN (&#39;owner&#39;, &#39;editor&#39;)
+  )
+RETURNING d.id;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html">OWASP · Authorization</a></li>
+<li><a href="https://owasp.org/API-Security/editions/2023/en/0x11-t10/">OWASP · API Security Top 10</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-security/sessions-and-tokens/">အရင်သင်ခန်းစာ · Session၊ Cookie၊ OAuth နဲ့ OpenID Connect</a>
+<a href="/docs/read/my/web-security/csrf/">နောက်သင်ခန်းစာ · Cross-Site Request Forgery (CSRF) ကာကွယ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

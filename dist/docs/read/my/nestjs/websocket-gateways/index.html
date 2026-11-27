@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Server က ပြောင်းလဲမှုတွေကို browser ဆီ ချက်ချင်း ပို့ဖို့ လိုတဲ့အခါ connection ကို ဖွင့်ထားပါ။">
+  <title>WebSockets နဲ့ Live Updates ပို့ပါ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/websocket-gateways/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/websocket-gateways/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/websocket-gateways/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#nestjs">သင်ခန်းစာအားလုံး · NestJS</a> <a href="/docs/read/en/nestjs/websocket-gateways/" lang="en" hreflang="en">English</a></nav>
+  <h1>WebSockets နဲ့ Live Updates ပို့ပါ</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">Server က ပြောင်းလဲမှုတွေကို browser ဆီ ချက်ချင်း ပို့ဖို့ လိုတဲ့အခါ connection ကို ဖွင့်ထားပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/nestjs/websocket-gateways">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#gateway">Socket.IO Gateway ဆောက်ပါ</a></li>
+<li><a href="#inventory">Stock သိမ်းပြီးမှ Change ပို့ပါ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="gateway">
+  <h2>Socket.IO Gateway ဆောက်ပါ</h2>
+  <p>@nestjs/websockets နဲ့ @nestjs/platform-socket.io install လုပ်ပါ။ Gateway ကို module providers ထဲ ထည့်ပါ။ နမူနာက ping ကို လက်ခံပြီး acknowledgement ပြန်ပေးပါတယ်။ Socket.IO adapter သုံးရင် browser ဘက်မှာ socket.io-client package သုံးပါ။</p>
+
+<pre><code>import { SubscribeMessage, WebSocketGateway } from &quot;@nestjs/websockets&quot;;
+
+@WebSocketGateway()
+export class InventoryGateway {
+  @SubscribeMessage(&quot;inventory:ping&quot;)
+  ping() {
+    return { status: &quot;ok&quot; };
+  }
+}
+
+// Browser client, served from the same origin
+// import { io } from &quot;socket.io-client&quot;;
+// const socket = io();
+// socket.timeout(3000).emit(&quot;inventory:ping&quot;, (error, reply) =&gt; {
+//   if (error) console.error(&quot;No reply&quot;);
+//   else console.log(reply.status);
+// });</code></pre>
+
+
+</section>
+<section class="article-section" id="inventory">
+  <h2>Stock သိမ်းပြီးမှ Change ပို့ပါ</h2>
+  <p>Live inventory အတွက် connection တိုင်းကို authenticate လုပ်ပြီး shop room ထဲ မထည့်ခင် access စစ်ပါ။ Database commit ပြီးမှ အဲဒီ room ဆီ event ပို့ပါ။ Client ပြန်ချိတ်တဲ့အခါ လွတ်သွားနိုင်တဲ့ changes တွေ ပြန်ရဖို့ API ကနေ list ပြန်ယူပါ။</p>
+
+<pre><code>// In an authorized update handler. The shop ID comes from the session.
+const change = await this.dataSource.transaction(async manager =&gt; {
+  const products = manager.getRepository(Product);
+  const product = await products.findOneByOrFail({ id: productId, shopId });
+  product.quantity = quantity;
+  const saved = await products.save(product);
+  return { id: saved.id, quantity: saved.quantity };
+});
+
+this.server.to(&quot;shop:&quot; + shopId).emit(&quot;inventory:updated&quot;, change);
+
+// Browser: &quot;connect&quot; also fires after reconnecting.
+socket.on(&quot;connect&quot;, reloadInventory);</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.nestjs.com/websockets/gateways">NestJS · Gateways</a></li>
+<li><a href="https://socket.io/docs/v4/emitting-events/#acknowledgements">Socket.IO · Acknowledgements</a></li>
+<li><a href="https://socket.io/docs/v4/rooms/">Socket.IO · Rooms</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/nestjs/queues/">အရင်သင်ခန်းစာ · Queue နဲ့ Background Jobs လုပ်ပါ</a>
+<a href="/docs/read/my/nestjs/caching/">နောက်သင်ခန်းစာ · မကြာခဏ ဖတ်တဲ့ Result ကို Cache ထားပါ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

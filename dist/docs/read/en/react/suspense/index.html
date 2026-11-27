@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Wrap a lazily loaded part of the screen so visitors see a loading message while its code arrives.">
+  <title>Show a loading fallback with Suspense · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/react/suspense/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/suspense/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/suspense/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#react">All documentation · React</a> <a href="/docs/read/my/react/suspense/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Show a loading fallback with Suspense</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">Wrap a lazily loaded part of the screen so visitors see a loading message while its code arrives.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/react/suspense">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#lazy">Load a component on demand</a></li>
+<li><a href="#place">Choose which part should wait</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="lazy">
+  <h2>Load a component on demand</h2>
+  <p>Declare lazy outside the component. The import should resolve to a module with the component as its default export. Suspense shows its fallback while the code loads. A rejected import can be handled by an error boundary around Suspense.</p>
+
+<pre><code>import React, { lazy, Suspense } from &quot;react&quot;;
+import SectionBoundary from &quot;./SectionBoundary.jsx&quot;;
+
+const StockChart = lazy(() =&gt; import(&quot;./StockChart.jsx&quot;));
+
+export default function Reports() {
+  return (
+    &lt;SectionBoundary&gt;
+      &lt;Suspense fallback={&lt;p role=&quot;status&quot;&gt;Loading chart…&lt;/p&gt;}&gt;
+        &lt;StockChart /&gt;
+      &lt;/Suspense&gt;
+    &lt;/SectionBoundary&gt;
+  );
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="place">
+  <h2>Choose which part should wait</h2>
+  <p>Put the boundary close to the slow part so the page navigation and headings can stay visible. Suspense works with lazy and supported data sources. For fetch calls started in an effect, keep using an explicit loading and error state.</p>
+
+<pre><code>import { lazy, Suspense } from &quot;react&quot;;
+
+const ProductReviews = lazy(() =&gt; import(&quot;./ProductReviews.jsx&quot;));
+
+export default function ProductPage() {
+  return (
+    &lt;main&gt;
+      &lt;h1&gt;Notebook&lt;/h1&gt;
+      &lt;p&gt;Available in three colors.&lt;/p&gt;
+      &lt;Suspense fallback={&lt;p&gt;Loading reviews…&lt;/p&gt;}&gt;
+        &lt;ProductReviews /&gt;
+      &lt;/Suspense&gt;
+    &lt;/main&gt;
+  );
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://react.dev/reference/react/Suspense">React · Suspense</a></li>
+<li><a href="https://react.dev/reference/react/lazy">React · lazy</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/react/error-boundaries/">Previous lesson · Recover from render errors</a>
+<a href="/docs/read/en/react/component-testing/">Next lesson · Test React components through the UI</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

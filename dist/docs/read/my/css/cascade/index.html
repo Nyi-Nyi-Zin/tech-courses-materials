@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browser က element နဲ့ ကိုက်တဲ့ rule တွေကို အရင်ရှာပါတယ်။ ကိုက်တဲ့ rule တွေက property တစ်ခုတည်းကို သတ်မှတ်ရင် ဘယ်တန်ဖိုးကို သုံးမလဲ ရွေးပါတယ်။ Property တချို့မှာ parent ဆီက တန်ဖိုးကိုလည်း ဆက်ယူနိုင်ပါတယ်။">
+  <title>ရွေးချယ်ပုံ၊ Cascade နဲ့ Inheritance · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/cascade/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/cascade/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/cascade/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/cascade/" lang="en" hreflang="en">English</a></nav>
+  <h1>ရွေးချယ်ပုံ၊ Cascade နဲ့ Inheritance</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Browser က element နဲ့ ကိုက်တဲ့ rule တွေကို အရင်ရှာပါတယ်။ ကိုက်တဲ့ rule တွေက property တစ်ခုတည်းကို သတ်မှတ်ရင် ဘယ်တန်ဖိုးကို သုံးမလဲ ရွေးပါတယ်။ Property တချို့မှာ parent ဆီက တန်ဖိုးကိုလည်း ဆက်ယူနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/cascade">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#selectors">Tag၊ Class၊ ID နဲ့ Element ရွေးခြင်း</a></li>
+<li><a href="#descendants">Element တစ်ခုအတွင်းက Element ကို ရွေးခြင်း</a></li>
+<li><a href="#priority">Cascade က တန်ဖိုး ဘယ်လိုရွေးလဲ။</a></li>
+<li><a href="#specificity">Specificity ဆိုတာ ဘာလဲ။</a></li>
+<li><a href="#inheritance">Inheritance ဘယ်လိုအလုပ်လုပ်လဲ။</a></li>
+<li><a href="#variables">Custom Properties နဲ့ တန်ဖိုးပြန်သုံးခြင်း</a></li>
+<li><a href="#layers">@layer နဲ့ Rule အုပ်စုတွေကို အစဉ်သတ်မှတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="selectors">
+  <h2>Tag၊ Class၊ ID နဲ့ Element ရွေးခြင်း</h2>
+  <p>Selector ဆိုတာ ဘယ် element တွေနဲ့ ကိုက်ရမလဲ ရေးထားတဲ့ ပုံစံပါ။ p က စာပိုဒ်တိုင်းကို ရွေးပါတယ်။ . နောက်မှာ class နာမည်ရေးရင် အဲဒီ class ပါတဲ့ element တွေကို ရွေးပါတယ်။ # နောက်မှာ id နာမည်ရေးရင် အဲဒီ id နဲ့ element ကို ရွေးပါတယ်။ ပြန်သုံးမယ့် style တွေအတွက် class သုံးလို့ရပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Select elements by tag, class, or ID&lt;/title&gt;
+  &lt;style&gt;
+    p { color: teal; }
+    .notice { font-weight: bold; }
+    #catalog-title { color: purple; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 id=&quot;catalog-title&quot;&gt;Product catalog&lt;/h1&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စာပိုဒ်နှစ်ခုလုံး စိမ်းပြာရောင်၊ ပထမစာပိုဒ် စာလုံးထူ၊ ခေါင်းစဉ် ခရမ်းရောင် ဖြစ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="descendants">
+  <h2>Element တစ်ခုအတွင်းက Element ကို ရွေးခြင်း</h2>
+  <p>Selector နှစ်ခုကြားမှာ space ခြားရင် ညာဘက်က element ဟာ ဘယ်ဘက်က selector နဲ့ ကိုက်တဲ့ element အတွင်း တစ်နေရာရာမှာ ရှိရပါတယ်။ &gt; သင်္ကေတ သုံးရင် တိုက်ရိုက် child ကိုပဲ ရွေးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Select an element inside another element&lt;/title&gt;
+  &lt;style&gt;
+    .card p { color: blue; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;card&quot;&gt;&lt;p&gt;Your order is ready.&lt;/p&gt;&lt;/div&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Card ထဲက စာပိုဒ်ဖြစ်တဲ့ “Your order is ready.” တစ်ကြောင်းပဲ အပြာရောင် ဖြစ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="priority">
+  <h2>Cascade က တန်ဖိုး ဘယ်လိုရွေးလဲ။</h2>
+  <p>Cascade ဆိုတာ သတ်မှတ်ချက်တွေ တိုက်နေတဲ့အခါ ဘယ်တန်ဖိုးသုံးမလဲ browser က ဆုံးဖြတ်တဲ့ အစီအစဉ်ပါ။ ဒီနမူနာမှာ selector တူ၊ property တူပြီး တခြားဦးစားပေးမှုတွေ တူနေလို့ နောက်မှရေးထားတဲ့ color ကို သုံးပါတယ်။ ဒုတိယ rule မှာ border မသတ်မှတ်ထားလို့ ပထမ rule ရဲ့ border ကို ဆက်သုံးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;How does the cascade choose?&lt;/title&gt;
+  &lt;style&gt;
+    .notice { color: teal; border: 1px solid; }
+    .notice { color: purple; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမစာကြောင်းက ခရမ်းရောင်ဖြစ်ပြီး အနားသတ် ဆက်ရှိပါမယ်။ Rule နှစ်ခု ရှေ့နောက် လဲကြည့်ရင် စိမ်းပြာရောင် ပြောင်းပါမယ်။</p>
+
+</section>
+<section class="article-section" id="specificity">
+  <h2>Specificity ဆိုတာ ဘာလဲ။</h2>
+  <p>Specificity က အထက်အဆင့် ဦးစားပေးမှုတွေ တူတဲ့အခါ ကိုက်နေတဲ့ selector တွေကို နှိုင်းတာပါ။ ID selector က class selector ထက် ဦးစားပိုရပြီး class selector က p လို tag နာမည်နဲ့ ရွေးတာထက် ဦးစားပိုရပါတယ်။ ဦးစားပေးမှုနဲ့ specificity တူရင် ရေးထားတဲ့ အစီအစဉ်ကို ကြည့်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Which selector has greater specificity?&lt;/title&gt;
+  &lt;style&gt;
+    .notice { color: purple; }
+    p { color: teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> p rule ကို နောက်မှ ရေးထားပေမယ့် ပထမစာပိုဒ်က ခရမ်းရောင် ဖြစ်ပါမယ်။ ဒုတိယစာပိုဒ်က စိမ်းပြာရောင် ဖြစ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="inheritance">
+  <h2>Inheritance ဘယ်လိုအလုပ်လုပ်လဲ။</h2>
+  <p>Inheritance ဆိုတာ element တစ်ခုက parent ရဲ့ တွက်ပြီးသား property တန်ဖိုးကို ဆက်ယူတာပါ။ color လို property က ပုံမှန်အားဖြင့် ဆက်ယူပါတယ်။ border ကတော့ parent တစ်ကွက်၊ child တစ်ကွက် သီးသန့်ရှိလို့ ပုံမှန်အားဖြင့် ဆက်မယူပါဘူး။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;How does inheritance work?&lt;/title&gt;
+  &lt;style&gt;
+    .orders { color: teal; border: 2px solid; }
+    .notice { color: purple; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;orders&quot;&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အပြင်အကွက်မှာ အနားသတ်တစ်ခု ပေါ်ပါတယ်။ “Your order is ready” က ခရမ်းရောင်၊ “Your package is on the way” က parent ဆီက စိမ်းပြာရောင် ရပါမယ်။</p>
+
+</section>
+<section class="article-section" id="variables">
+  <h2>Custom Properties နဲ့ တန်ဖိုးပြန်သုံးခြင်း</h2>
+  <p>Custom property က ကိုယ်ပေးထားတဲ့ နာမည်နဲ့ CSS တန်ဖိုးတစ်ခုပါ။ နာမည်ကို -- နဲ့ စပါတယ်။ :root က အပြင်ဆုံး element ကို ရွေးလို့ အောက်က element တွေက တန်ဖိုးကို ဆက်ယူနိုင်ပါတယ်။ var(--accent, teal) က --accent တန်ဖိုးကို ဖတ်ပြီး အဲဒီ property မရှိရင် teal ကို အစားထိုးသုံးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Reuse values with custom properties&lt;/title&gt;
+  &lt;style&gt;
+    :root { --accent: purple; }
+    .notice { color: var(--accent, teal); }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမစာပိုဒ်က ခရမ်းရောင် ဖြစ်ပါမယ်။ --accent သတ်မှတ်ချက်ကို ဖျက်ရင် စိမ်းပြာရောင် ပြောင်းပါမယ်။</p>
+
+</section>
+<section class="article-section" id="layers">
+  <h2>@layer နဲ့ Rule အုပ်စုတွေကို အစဉ်သတ်မှတ်ခြင်း</h2>
+  <p>Cascade layer ဆိုတာ rule တွေကို ဦးစားပေးအုပ်စု နာမည်တပ်ပြီး ခွဲထားတာပါ။ တူညီတဲ့ရင်းမြစ်က ပုံမှန်သတ်မှတ်ချက်တွေမှာ selector အား ဘယ်လောက်ရှိလဲ မနှိုင်းခင် နောက်အလွှာက ရှေ့အလွှာထက် အနိုင်ရပါတယ်။ Layer အစဉ်ကို အရင် ကြေညာပါ။ Layer အပြင်မှာရှိတဲ့ ပုံမှန်သတ်မှတ်ချက်က layer ထဲက သတ်မှတ်ချက်တွေထက် ဦးစားရပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Order groups of rules with @layer&lt;/title&gt;
+  &lt;style&gt;
+    @layer base, theme;
+    @layer base { .notice { color: teal; } }
+    @layer theme { p { color: purple; } }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> theme က နောက်အလွှာဖြစ်လို့ စာပိုဒ်နှစ်ခုလုံး ခရမ်းရောင် ဖြစ်ပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Selectors">MDN · CSS selectors</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Introduction">MDN · Cascade</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Inheritance">MDN · Inheritance</a></li>
+<li><a href="https://www.w3.org/TR/css-cascade-5/#layering">W3C · Cascade layers</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/getting-started/">အရင်သင်ခန်းစာ · ပထမဆုံး CSS Rule ရေးခြင်း</a>
+<a href="/docs/read/my/css/layout/">နောက်သင်ခန်းစာ · Normal Flow၊ Box Model နဲ့ Display</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

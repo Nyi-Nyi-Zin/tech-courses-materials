@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cell တစ်ကွက်က column သို့မဟုတ် row တစ်ခုထက်ပိုပြီး နေရာယူနိုင်ပါတယ်။ နောက်ထပ် cell ထည့်ခါနီးမှာ ပြည့်ပြီးသား နေရာတွေကို အရင်ရေတွက်ပါ။">
+  <title>colspan နဲ့ rowspan သုံးပြီး Table Cell တွေ ပေါင်းခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/table-spans/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/table-spans/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/table-spans/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/table-spans/" lang="en" hreflang="en">English</a></nav>
+  <h1>colspan နဲ့ rowspan သုံးပြီး Table Cell တွေ ပေါင်းခြင်း</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Cell တစ်ကွက်က column သို့မဟုတ် row တစ်ခုထက်ပိုပြီး နေရာယူနိုင်ပါတယ်။ နောက်ထပ် cell ထည့်ခါနီးမှာ ပြည့်ပြီးသား နေရာတွေကို အရင်ရေတွက်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/table-spans">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#colspan">colspan နဲ့ Column တွေ ဖြတ်ပြီး နေရာယူခြင်း</a></li>
+<li><a href="#rowspan">rowspan နဲ့ Row တွေ ဖြတ်ပြီး နေရာယူခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="colspan">
+  <h2>colspan နဲ့ Column တွေ ဖြတ်ပြီး နေရာယူခြင်း</h2>
+  <p>colspan=&quot;2&quot; ဆိုရင် cell တစ်ကွက်က row တစ်ခုတည်းထဲမှာ ကပ်လျက် column နှစ်ခုစာ နေရာယူပါတယ်။ အဲဒီနေရာနှစ်ခုအတွက် cell တစ်ခုပဲ ရေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Span columns with colspan&lt;/title&gt;
+  &lt;style&gt;
+th, td { border: 1px solid teal; padding: 8px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;table&gt;
+  &lt;caption&gt;Product availability&lt;/caption&gt;
+  &lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Folder&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Stapler&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt;Sold out&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Sold out က ခေါင်းစဉ်နှစ်ခုအောက်က column နှစ်ခုစလုံးကို နေရာယူပါမယ်။</p>
+
+</section>
+<section class="article-section" id="rowspan">
+  <h2>rowspan နဲ့ Row တွေ ဖြတ်ပြီး နေရာယူခြင်း</h2>
+  <p>rowspan=&quot;2&quot; ဆိုရင် cell တစ်ကွက်က လက်ရှိ row နဲ့ အောက်တစ်ကြောင်းက column တူတဲ့နေရာကိုပါ ယူပါတယ်။ ဒုတိယ row မှာ လွတ်နေတဲ့နေရာတွေအတွက်ပဲ cell ထည့်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Span rows with rowspan&lt;/title&gt;
+  &lt;style&gt;
+th, td { border: 1px solid teal; padding: 8px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;table&gt;
+  &lt;caption&gt;Product catalog&lt;/caption&gt;
+  &lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Category&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Item&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td rowspan=&quot;2&quot;&gt;Stationery&lt;/td&gt;&lt;td&gt;Pen&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Notebook&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Stationery က Pen နဲ့ Notebook နှစ်ခုလုံးဘေးမှာ cell အမြင့်တစ်ခုအဖြစ် ပေါ်ပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table">MDN · &lt;table&gt;</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/td">MDN · &lt;td&gt;</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/tables/">အရင်သင်ခန်းစာ · HTML ဇယားများ &lt;table&gt;</a>
+<a href="/docs/read/my/html/accessibility/">နောက်သင်ခန်းစာ · Semantic HTML နဲ့ Keyboard Accessibility</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

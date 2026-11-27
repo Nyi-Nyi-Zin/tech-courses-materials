@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browser မှာ https://www.example.com လို့ ရိုက်ထည့်လိုက်ရင် Browser က စာမျက်နှာကို တောင်းဖို့ ဘယ်လိပ်စာဆီ ချိတ်ရမလဲဆိုတာ သိဖို့လိုပါတယ်။ URL ထဲမှာတော့ www.example.com ဆိုတဲ့ နာမည်ပဲ ပါပါတယ်။ အဲဒီနာမည်အတွက် သုံးရမယ့် IP Address ကို DNS (Domain Name System) ကနေ ရှာယူပါတယ်။">
+  <title>DNS ဆိုတာ ဘာလဲ။ Domain Name ကနေ IP Address ကို ဘယ်လိုရှာလဲ။ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-fundamentals/dns/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-fundamentals/dns/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-fundamentals/dns/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=75">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-fundamentals">သင်ခန်းစာအားလုံး · Web Fundamentals</a> <a href="/docs/read/en/web-fundamentals/dns/" lang="en" hreflang="en">English</a></nav>
+  <h1>DNS ဆိုတာ ဘာလဲ။ Domain Name ကနေ IP Address ကို ဘယ်လိုရှာလဲ။</h1>
+  
+  <figure class="lesson-figure lesson-figure--banner">
+    <a href="/docs/media/web-fundamentals/dns-domain-to-ip.jpg" data-image-preview><img src="/docs/media/web-fundamentals/dns-domain-to-ip.jpg" alt="Browser က Web Server ဆီ ချိတ်ဆက်နိုင်ဖို့ DNS က www.example.com ရဲ့ IP Address ကို ရှာပေးပုံ။ ပုံထဲက 192.0.2.1 က နမူနာလိပ်စာပါ။" width="2048" height="1143" loading="lazy" decoding="async"></a>
+  </figure>
+  <p class="intro">Browser မှာ <code>https://www.example.com</code> လို့ ရိုက်ထည့်လိုက်ရင် Browser က စာမျက်နှာကို တောင်းဖို့ ဘယ်လိပ်စာဆီ ချိတ်ရမလဲဆိုတာ သိဖို့လိုပါတယ်။ URL ထဲမှာတော့ <code>www.example.com</code> ဆိုတဲ့ နာမည်ပဲ ပါပါတယ်။ အဲဒီနာမည်အတွက် သုံးရမယ့် IP Address ကို <strong>DNS (Domain Name System)</strong> ကနေ ရှာယူပါတယ်။</p>
+<p class="intro">ဖုန်းထဲမှာ လူတစ်ယောက်ရဲ့ နာမည်ကို နှိပ်လိုက်ရင် သိမ်းထားတဲ့ ဖုန်းနံပါတ်နဲ့ ခေါ်ပေးသလို စဉ်းစားကြည့်လို့ရပါတယ်။ ဒီဥပမာမှာ Domain Name က လူနာမည်၊ IP Address က ဖုန်းနံပါတ်၊ DNS က နာမည်နဲ့ နံပါတ်ကို တွဲရှာပေးတဲ့ ဖုန်းစာအုပ်နဲ့ တူပါတယ်။ လက်တွေ့မှာတော့ DNS အချက်အလက်တွေကို DNS Server အများအပြားက တာဝန်ခွဲပြီး ကိုင်တွယ်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-fundamentals/dns">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#ip-address">IP Address ဆိုတာ ဘာလဲ။</a></li>
+<li><a href="#domain-and-ip">Domain Name ကို ဘယ်လို ဖွဲ့ထားလဲ။</a></li>
+<li><a href="#web-hosting">Web Hosting က ဘာလုပ်ပေးလဲ။</a></li>
+<li><a href="#dns-lookup">Browser က www.example.com ကို ဘယ်လို ရှာလဲ။</a></li>
+<li><a href="#dns-records">DNS Record တစ်ခုမှာ ဘာတွေ သတ်မှတ်ထားလဲ။</a></li>
+<li><a href="#try-dns">Windows မှာ nslookup နဲ့ စမ်းကြည့်မယ်</a></li>
+<li><a href="#references">ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="ip-address">
+  <h2>IP Address ဆိုတာ ဘာလဲ။</h2>
+  <p>အင်တာနက်နဲ့ ချိတ်ထားတဲ့ ကွန်ပျူတာ၊ ဖုန်း၊ server တိုင်းမှာ <strong>IP address</strong> ဆိုတဲ့ နံပါတ်လိပ်စာ ရှိပါတယ်။ ဖုန်းနံပါတ်လိုပါပဲ၊ ဒီနံပါတ်မရှိရင် ဘယ်သူ့ဆီကမှ ခေါ်လို့မရသလို ဒေတာ ပို့လို့လည်း မရပါဘူး။ IP Address မှာ တွေ့ရမယ့် ပုံစံနှစ်မျိုး ရှိပါတယ်။</p>
+<div class="lesson-table"><table>
+        <thead><tr><th scope="col">ပုံစံ</th><th scope="col">နမူနာ</th><th scope="col">ရေးပုံ</th></tr></thead>
+        <tbody><tr><td>IPv4</td><td><code>192.0.2.10</code></td><td>ဂဏန်းအစုလေးခုကို အစက်နဲ့ ခွဲရေးပါတယ်။</td></tr><tr><td>IPv6</td><td><code>2001:db8::10</code></td><td>Hexadecimal အစုတွေကို <code>:</code> နဲ့ ခွဲရေးပါတယ်။ IPv4 ထက် အသုံးပြုနိုင်တဲ့ လိပ်စာ ပိုများပါတယ်။</td></tr></tbody>
+      </table></div>
+<p>အိမ်က Wi-Fi နဲ့ ချိတ်ထားတဲ့ Laptop မှာ <code>192.168.1.10</code> လို <strong>Private IP</strong> ရှိနိုင်ပါတယ်။ ဒီလိပ်စာကို အိမ်တွင်း Network လို သီးသန့် Network တွေမှာ သုံးပါတယ်။ အင်တာနက်ကနေ Website တစ်ခုဆီ ဝင်တဲ့အခါ Browser ချိတ်ဆက်တဲ့ <strong>Public IP</strong> က Web Server ရဲ့ လိပ်စာ ဖြစ်နိုင်သလို၊ Request တွေကို ဖြန့်ပေးတဲ့ Load Balancer သို့မဟုတ် CDN ရဲ့ လိပ်စာလည်း ဖြစ်နိုင်ပါတယ်။</p>
+<p>Domain Name တစ်ခုအတွက် IP Address တစ်ခုထက်ပိုပြီး ပြန်လာနိုင်ပါတယ်။ Website အများအပြားကလည်း IP Address တစ်ခုတည်းကို မျှဝေသုံးနိုင်ပါတယ်။ Hosting ပြောင်းလို့ ချိတ်ရမယ့် IP Address ပြောင်းသွားရင် DNS အချက်အလက်ကို ပြင်ပြီး အရင် Domain Name ကို ဆက်သုံးလို့ရပါတယ်။</p>
+
+
+
+
+</section>
+<section class="article-section" id="domain-and-ip">
+  <h2>Domain Name ကို ဘယ်လို ဖွဲ့ထားလဲ။</h2>
+  <figure class="lesson-figure lesson-figure--banner">
+    <a href="/docs/media/web-fundamentals/domain-name-structure.jpg" data-image-preview><img src="/docs/media/web-fundamentals/domain-name-structure.jpg" alt="www.example.com မှာ www က Subdomain အပိုင်း၊ example က .com အောက်က နာမည်၊ .com က Top-Level Domain ဖြစ်ပါတယ်။ မှတ်ပုံတင်ထားတဲ့ Domain က example.com ပါ။" width="2048" height="1143" loading="lazy" decoding="async"></a>
+  </figure>
+  <p><code>www.example.com</code> ကို ညာဘက်ကနေ အဆင့်လိုက် ကြည့်ရင် နာမည်ရဲ့ ဖွဲ့စည်းပုံကို မြင်ရပါတယ်။</p>
+<div class="lesson-table"><table>
+        <thead><tr><th scope="col">အပိုင်း</th><th scope="col">ဘာကို ဆိုလိုလဲ။</th></tr></thead>
+        <tbody><tr><td><code>.com</code></td><td>Top-Level Domain (TLD) ပါ။ <code>.org</code>၊ <code>.net</code> နဲ့ <code>.mm</code> တို့လည်း TLD တွေပါ။</td></tr><tr><td><code>example.com</code></td><td>ဒီဥပမာမှာ မှတ်ပုံတင်ထားတဲ့ Domain Name ပါ။ <code>example</code> က <code>.com</code> အောက်မှာ ရွေးထားတဲ့ နာမည်ပါ။</td></tr><tr><td><code>www.example.com</code></td><td><code>example.com</code> အောက်က Subdomain ပါ။ <code>blog.example.com</code> လို Subdomain ကိုလည်း လိုအပ်သလို သတ်မှတ်နိုင်ပါတယ်။</td></tr></tbody>
+      </table></div>
+<p>ကိုယ်ပိုင် Domain Name သုံးဖို့ ရနိုင်တဲ့ နာမည်ကို Domain Registrar ဆီမှာ မှတ်ပုံတင်ရပါတယ်။ သတ်မှတ်ထားတဲ့ ကာလကုန်သွားရင် ဆက်သုံးဖို့ သက်တမ်းတိုးရပါတယ်။ နာမည်ရပြီးရင် အဲဒီနာမည်နဲ့ ဖွင့်ကြည့်လို့ရမယ့် Website ကို တင်ဖို့ Hosting လိုလာပါတယ်။</p>
+
+
+
+
+</section>
+<section class="article-section" id="web-hosting">
+  <h2>Web Hosting က ဘာလုပ်ပေးလဲ။</h2>
+  <figure class="lesson-figure lesson-figure--banner">
+    <a href="/docs/media/web-fundamentals/web-hosting-types.jpg" data-image-preview><img src="/docs/media/web-fundamentals/web-hosting-types.jpg" alt="Shared Hosting၊ VPS၊ Dedicated Server နဲ့ Managed Hosting ဆိုတဲ့ Hosting ပုံစံ လေးမျိုး။" width="2048" height="1143" loading="lazy" decoding="async"></a>
+  </figure>
+  <p><strong>Web Hosting</strong> က Website ကို အင်တာနက်ကနေ ဝင်ကြည့်လို့ရအောင် တင်ထားပေးတဲ့ ဝန်ဆောင်မှုပါ။ ရိုးရိုး Website တစ်ခုမှာ HTML၊ CSS၊ JavaScript နဲ့ ပုံတွေကို တင်ထားနိုင်ပါတယ်။ Web App တစ်ခုဆိုရင် Request လက်ခံပြီး အဖြေထုတ်ပေးတဲ့ Backend ကိုပါ run ထားနိုင်ပါတယ်။ Database လိုအပ်ရင် သီးသန့် Database Service နဲ့လည်း ချိတ်သုံးနိုင်ပါတယ်။</p>
+<p>ဒီနေရာမှာ <strong>Web Server</strong> က Browser ရဲ့ HTTP Request ကို လက်ခံပြီး Response ပြန်ပေးတဲ့ Software ပါ။ အဲဒီ Software ကို Physical Server၊ Virtual Machine သို့မဟုတ် Hosting Provider စီမံပေးထားတဲ့ စနစ်ပေါ်မှာ run နိုင်ပါတယ်။</p>
+<div class="lesson-table"><table>
+        <thead><tr><th scope="col">Hosting ပုံစံ</th><th scope="col">ဘယ်လို သုံးလဲ။</th></tr></thead>
+        <tbody><tr><td>Shared Hosting</td><td>Website အများအပြားက Server ရဲ့ CPU၊ Memory လို အရင်းအမြစ်တွေကို မျှဝေသုံးပါတယ်။</td></tr><tr><td>VPS</td><td>ကိုယ့်အတွက် ခွဲပေးထားတဲ့ Virtual Machine မှာ လိုအပ်တဲ့ Software တွေကို ကိုယ်တိုင် ထည့်သွင်းပြီး စီမံနိုင်ပါတယ်။</td></tr><tr><td>Dedicated Server</td><td>Physical Server တစ်လုံးကို သီးသန့်သုံးပါတယ်။</td></tr><tr><td>Managed Hosting</td><td>Website ကို deploy တင်ပြီး Server လည်ပတ်ရေးကို Provider က စီမံပေးပါတယ်။ Vercel နဲ့ Firebase Hosting တို့က ဥပမာတွေပါ။</td></tr></tbody>
+      </table></div>
+<p>Website တင်ပြီးသွားရင် Hosting Provider က IP Address တစ်ခု ဒါမှမဟုတ် ချိတ်ပေးရမယ့် Hostname တစ်ခု ပေးနိုင်ပါတယ်။ <code>www.example.com</code> နဲ့ Website ကို ဖွင့်လို့ရအောင် DNS Record မှာ Provider ပေးထားတဲ့ တန်ဖိုးကို ထည့်ရပါတယ်။</p>
+
+
+
+
+</section>
+<section class="article-section" id="dns-lookup">
+  <h2>Browser က www.example.com ကို ဘယ်လို ရှာလဲ။</h2>
+  <figure class="lesson-figure lesson-figure--banner">
+    <a href="/docs/media/web-fundamentals/dns-resolution.jpg" data-image-preview><img src="/docs/media/web-fundamentals/dns-resolution.jpg" alt="Browser က example.com ရဲ့ IP Address ကို မေးတဲ့အခါ Resolver က Root DNS နဲ့ .com DNS ရဲ့ လမ်းညွှန်ချက်အတိုင်း Authoritative DNS ဆီ ဆက်မေးပြီး ရလာတဲ့ လိပ်စာကို Browser ဆီ ပြန်ပို့ပုံ။" width="2048" height="1143" loading="lazy" decoding="async"></a>
+  </figure>
+  <p>အရင်က ရှာထားတဲ့ DNS အဖြေ ရှိသေးလားဆိုတာ Browser သို့မဟုတ် Operating System ရဲ့ Cache မှာ စစ်နိုင်ပါတယ်။ သုံးလို့ရတဲ့ အဖြေ မရှိရင် <strong>Recursive Resolver</strong> ဆီ မေးပါတယ်။ Resolver က ကိုယ့် Network က သတ်မှတ်ပေးထားတဲ့ DNS ဝန်ဆောင်မှု ဖြစ်နိုင်သလို Cloudflare (<code>1.1.1.1</code>) နဲ့ Google Public DNS (<code>8.8.8.8</code>) လို Public Resolver လည်း ဖြစ်နိုင်ပါတယ်။</p>
+<p>Resolver ရဲ့ Cache ထဲမှာပါ အဖြေနဲ့ လိုအပ်တဲ့ လမ်းညွှန်ချက်တွေ မရှိဘူးဆိုရင် ဒီလို ဆက်ရှာပါတယ်။</p>
+<ol class="lesson-list"><li><strong>Root Nameserver</strong> ကို မေးတဲ့အခါ <code>.com</code> အတွက် တာဝန်ယူထားတဲ့ TLD Nameserver တွေကို ညွှန်ပေးပါတယ်။</li><li><strong><code>.com</code> TLD Nameserver</strong> ကို မေးတဲ့အခါ <code>example.com</code> ရဲ့ DNS Records တွေကို တာဝန်ယူထားတဲ့ Authoritative Nameserver တွေကို ညွှန်ပေးပါတယ်။</li><li><strong>Authoritative Nameserver</strong> ကို <code>www.example.com</code> အတွက် မေးတဲ့အခါ သတ်မှတ်ထားတဲ့ Record ကို ပြန်ပေးပါတယ်။ Record က IP Address ဖြစ်နိုင်သလို ဆက်ရှာရမယ့် တခြား Hostname တစ်ခုလည်း ဖြစ်နိုင်ပါတယ်။</li></ol>
+<p>ဒီအဆင့်တွေကို Resolver က လိုက်မေးပေးပါတယ်။ IP Address ရပြီဆိုရင် Browser ဘက်ကို ပြန်ပေးပြီး Browser က အဲဒီလိပ်စာဆီ ချိတ်ဆက်ပါတယ်။ HTTPS ချိတ်ဆက်မှု ပြီးတဲ့အခါမှ Browser က Web Server ဆီ စာမျက်နှာကို တောင်းပါတယ်။</p>
+
+
+
+
+</section>
+<section class="article-section" id="dns-records">
+  <h2>DNS Record တစ်ခုမှာ ဘာတွေ သတ်မှတ်ထားလဲ။</h2>
+  <figure class="lesson-figure lesson-figure--banner">
+    <a href="/docs/media/web-fundamentals/dns-record-types.jpg" data-image-preview><img src="/docs/media/web-fundamentals/dns-record-types.jpg" alt="DNS Record နမူနာများ။ A က IPv4၊ AAAA က IPv6၊ CNAME က တခြား Hostname ကို ညွှန်းပြီး MX က Email လက်ခံမယ့် Mail Server ကို သတ်မှတ်ပါတယ်။" width="2048" height="1143" loading="lazy" decoding="async"></a>
+  </figure>
+  <p>အပေါ်က Hosting ဥပမာကို ပြန်ကြည့်ပါ။ Provider က IPv4 ပေးရင် <code>A</code> Record သုံးနိုင်ပါတယ်။ Hostname ပေးပြီး <code>www</code> ကို အဲဒီနာမည်နဲ့ ချိတ်ခိုင်းရင် <code>CNAME</code> Record ကို သုံးလေ့ရှိပါတယ်။</p>
+<div class="lesson-table"><table>
+        <thead><tr><th scope="col">Record</th><th scope="col">ဘာအတွက် သုံးလဲ။</th><th scope="col">နမူနာ</th></tr></thead>
+        <tbody><tr><td><code>A</code></td><td>နာမည်တစ်ခုအတွက် IPv4 Address သတ်မှတ်ပါတယ်။</td><td><code>example.com</code> → <code>192.0.2.10</code></td></tr><tr><td><code>AAAA</code></td><td>နာမည်တစ်ခုအတွက် IPv6 Address သတ်မှတ်ပါတယ်။</td><td><code>example.com</code> → <code>2001:db8::10</code></td></tr><tr><td><code>CNAME</code></td><td>နာမည်တစ်ခုကို တခြား Hostname ရဲ့ Alias အဖြစ် သတ်မှတ်ပါတယ်။ Resolver က အဲဒီ Hostname အတွက် ဆက်ရှာပေးပါတယ်။</td><td><code>www.example.com</code> → <code>example.com</code></td></tr><tr><td><code>MX</code></td><td>Domain ဆီ ဝင်လာတဲ့ Email ကို ဘယ် Mail Server က လက်ခံမလဲဆိုတာ သတ်မှတ်ပါတယ်။</td><td><code>example.com</code> → <code>mail.example.com</code></td></tr></tbody>
+      </table></div>
+<p><code>CNAME</code> နမူနာမှာ Browser က <code>www.example.com</code> ကို ဆက်သုံးပါတယ်။ Resolver ကသာ <code>example.com</code> အတွက် IP Address ကို ဆက်ရှာပေးတာပါ။ Browser ရဲ့ Address Bar ကို ပြောင်းပေးတဲ့ HTTP Redirect က Web Server ဘက်မှာ သတ်မှတ်ရတဲ့ အလုပ်တစ်ခုပါ။</p>
+
+
+
+
+</section>
+<section class="article-section" id="try-dns">
+  <h2>Windows မှာ nslookup နဲ့ စမ်းကြည့်မယ်</h2>
+  <p>Command Prompt မှာ အောက်က Command တွေကို တစ်ကြောင်းချင်း run ကြည့်ပါ။</p>
+
+<pre><code>nslookup -type=A example.com
+nslookup -type=A example.com 1.1.1.1
+nslookup -type=A example.com 8.8.8.8</code></pre>
+<p><code>-type=A</code> က IPv4 Address ပါတဲ့ <code>A</code> Record ကို တောင်းတာပါ။ ပထမ Command က စက်မှာ သတ်မှတ်ထားတဲ့ Resolver ကို မေးပါတယ်။ ကျန်တဲ့ Command နှစ်ခုက နောက်ဆုံးမှာ ထည့်ပေးထားတဲ့ Resolver ဆီ တိုက်ရိုက်မေးတာဖြစ်လို့ စက်ရဲ့ DNS Setting ကို ပြောင်းစရာ မလိုပါဘူး။</p>
+<p>Output အပေါ်ပိုင်းက <code>Server</code> နဲ့ <code>Address</code> က ကိုယ်မေးခဲ့တဲ့ DNS Resolver ကို ပြတာပါ။ အောက်ပိုင်းမှာ <code>example.com</code> အတွက် ပြန်လာတဲ့ IPv4 Address ကို ကြည့်လို့ရပါတယ်။ IPv6 အတွက် စမ်းချင်ရင် <code>-type=A</code> နေရာမှာ <code>-type=AAAA</code> ပြောင်းပြီး run ကြည့်ပါ။</p>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.cloudflare.com/learning/dns/what-is-dns/">Cloudflare — DNS ဆိုတာ ဘာလဲ။</a></li>
+<li><a href="https://www.cloudflare.com/learning/dns/dns-server-types/">Cloudflare — DNS Server အမျိုးအစားများ</a></li>
+<li><a href="https://www.cloudflare.com/learning/dns/dns-records/">Cloudflare — DNS Records</a></li>
+<li><a href="https://www.icann.org/resources/pages/register-domain-name-2017-06-20-en">ICANN — Domain Name မှတ်ပုံတင်ခြင်း</a></li>
+<li><a href="https://www.icann.org/resources/pages/renew-domain-name-2018-12-07-en">ICANN — Domain Name သက်တမ်းတိုးခြင်း</a></li>
+<li><a href="https://vercel.com/docs/domains/working-with-domains/add-a-domain">Vercel — ကိုယ်ပိုင် Domain Name ချိတ်ဆက်ခြင်း</a></li>
+<li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/nslookup">Microsoft Learn — nslookup</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-fundamentals/client-server/">အရင်သင်ခန်းစာ · Client and Server</a>
+<a href="/docs/read/my/web-fundamentals/web-app-architecture/">နောက်သင်ခန်းစာ · Web App Request သွားလာပုံ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

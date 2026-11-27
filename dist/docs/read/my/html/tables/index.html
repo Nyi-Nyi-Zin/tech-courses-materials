@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Data table က row နဲ့ column တစ်လျှောက် တန်ဖိုးတွေ ဘယ်လို ဆက်စပ်လဲ ပြပါတယ်။ တန်ဖိုးတစ်ခုချင်း ဘာကို ဆိုလိုလဲ သိဖို့ HTML နဲ့ ခေါင်းစဉ်တွေ သတ်မှတ်ပေးနိုင်ပါတယ်။">
+  <title>HTML ဇယားများ &lt;table&gt; · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/tables/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/tables/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/tables/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/tables/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTML ဇယားများ &lt;table&gt;</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Data table က row နဲ့ column တစ်လျှောက် တန်ဖိုးတွေ ဘယ်လို ဆက်စပ်လဲ ပြပါတယ်။ တန်ဖိုးတစ်ခုချင်း ဘာကို ဆိုလိုလဲ သိဖို့ HTML နဲ့ ခေါင်းစဉ်တွေ သတ်မှတ်ပေးနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/tables">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#tables">Table ရဲ့ Row၊ Cell နဲ့ Caption</a></li>
+<li><a href="#table-footer">ဇယားအောက်ဆုံး အနှစ်ချုပ် &lt;tfoot&gt;</a></li>
+<li><a href="#scope">scope နဲ့ Header ကို သက်ဆိုင်ရာ Cell တွေနဲ့ ချိတ်ခြင်း</a></li>
+<li><a href="#table-columns">&lt;colgroup&gt; နဲ့ &lt;col&gt; သုံးပြီး ဇယား Column သတ်မှတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="tables">
+  <h2>Table ရဲ့ Row၊ Cell နဲ့ Caption</h2>
+  <p>table ထဲမှာ row တစ်ကြောင်းစီကို tr နဲ့ ရေးပါတယ်။ Data cell ကို td၊ header cell ကို th နဲ့ ရေးပါ။ မြင်ရတဲ့ table ခေါင်းစဉ်ဖြစ်တဲ့ caption ကို အစမှာ ထားပါတယ်။ thead က header rows တွေကို စုပေးပြီး tbody က data rows တွေကို စုပေးပါတယ်။ CSS မထည့်သေးလည်း browser က cells တွေကို columns အလိုက် စီပေးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;Product catalog&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Item&lt;/th&gt;&lt;th&gt;Price (MMK)&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Pen&lt;/td&gt;&lt;td&gt;1500&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Notebook&lt;/td&gt;&lt;td&gt;2500&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Caption နဲ့ column နှစ်ခု ပေါ်ပါတယ်။ ပစ္စည်းတစ်ခုစီရဲ့ ဈေးနှုန်းက နာမည်နဲ့ row တစ်တန်းတည်းမှာ ပေါ်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="table-footer">
+  <h2>ဇယားအောက်ဆုံး အနှစ်ချုပ် &lt;tfoot&gt;</h2>
+  <p>&lt;tbody&gt; ထဲက data rows တွေပြီးရင် စုစုပေါင်း၊ ပျမ်းမျှလို အနှစ်ချုပ် row တွေကို &lt;tfoot&gt; ထဲမှာ ထည့်ပါ။ Footer မှာလည်း row တစ်ကြောင်းစီကို &lt;tr&gt; နဲ့ ရေးပြီး အထဲမှာ cell တွေ ထည့်ပါတယ်။ ဒီနမူနာမှာ စုစုပေါင်းတန်ဖိုးကို ကိုယ်တိုင် ရေးထားပါတယ်။ ဈေးနှုန်းတစ်ခု ပြောင်းရင် စုစုပေါင်းကိုပါ ပြင်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;Order summary&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Item&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Price (MMK)&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Pen&lt;/td&gt;&lt;td&gt;1500&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Notebook&lt;/td&gt;&lt;td&gt;2500&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Total&lt;/th&gt;&lt;td&gt;4000&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပစ္စည်းစာရင်းရဲ့ အောက်မှာ Total row ပေါ်ပြီး စုစုပေါင်း 4000 MMK ကို ပြပါတယ်။</p>
+
+</section>
+<section class="article-section" id="scope">
+  <h2>scope နဲ့ Header ကို သက်ဆိုင်ရာ Cell တွေနဲ့ ချိတ်ခြင်း</h2>
+  <p>ရိုးရှင်းတဲ့ data table မှာ scope=&quot;col&quot; က သူ့ column ရဲ့ ခေါင်းစဉ်၊ scope=&quot;row&quot; က သူ့ row ရဲ့ ခေါင်းစဉ်ဆိုတာ ပြပေးပါတယ်။ Screen reader လို assistive tool က cell တစ်ခုကို ဖတ်တဲ့အခါ သက်ဆိုင်ရာ ခေါင်းစဉ်တွေကိုပါ တွဲဖတ်ပေးနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;Product prices&lt;/caption&gt;
+  &lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Product&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Price (MMK)&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Pen&lt;/th&gt;&lt;td&gt;1500&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Notebook&lt;/th&gt;&lt;td&gt;2500&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> 1500 ပါတဲ့ cell ရဲ့ row header က Pen ဖြစ်ပြီး column header က Price (MMK) ဖြစ်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="table-columns">
+  <h2>&lt;colgroup&gt; နဲ့ &lt;col&gt; သုံးပြီး ဇယား Column သတ်မှတ်ခြင်း</h2>
+  <p>ဇယားထဲက column တွေကို အုပ်စုဖွဲ့ဖို့ &lt;colgroup&gt; သုံးပါ။ &lt;caption&gt; နောက်၊ &lt;thead&gt; မတိုင်ခင် ထားပါ။ ဒီနမူနာထဲက &lt;col&gt; တစ်ခုစီက ဘယ်ကနေ ညာကို column တစ်ခုစီ ကိုယ်စားပြုပါတယ်။ ဒုတိယ &lt;col&gt; မှာ class ထည့်ထားလို့ ဈေးနှုန်း column ရဲ့ နောက်ခံအရောင်ကို CSS နဲ့ ပြောင်းနိုင်ပါတယ်။ ခေါင်းစဉ်နဲ့ တန်ဖိုးတွေကိုတော့ ပုံမှန်အတိုင်း &lt;th&gt; နဲ့ &lt;td&gt; ထဲမှာ ရေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Product prices&lt;/title&gt;
+  &lt;style&gt;
+    .price-column { background-color: #dbeafe; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;table&gt;
+  &lt;caption&gt;Product prices&lt;/caption&gt;
+  &lt;colgroup&gt;
+    &lt;col&gt;
+    &lt;col class=&quot;price-column&quot;&gt;
+  &lt;/colgroup&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Item&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Price (MMK)&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Pen&lt;/td&gt;&lt;td&gt;1500&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Notebook&lt;/td&gt;&lt;td&gt;2500&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ဈေးနှုန်း column ရဲ့ နောက်ခံမှာ အပြာနုရောင် ပေါ်ပါတယ်။ Class ကို ပထမ &lt;col&gt; ဆီ ရွှေ့ကြည့်ရင် ပစ္စည်းနာမည် column မှာ အရောင် ပေါ်ပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/tables.html">WHATWG · Tables</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/col">MDN · The col element</a></li>
+<li><a href="https://www.w3.org/WAI/tutorials/tables/two-headers/">W3C WAI · Tables with two headers</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/icons-and-frames/">အရင်သင်ခန်းစာ · Favicons နဲ့ Iframes</a>
+<a href="/docs/read/my/html/table-spans/">နောက်သင်ခန်းစာ · colspan နဲ့ rowspan သုံးပြီး Table Cell တွေ ပေါင်းခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

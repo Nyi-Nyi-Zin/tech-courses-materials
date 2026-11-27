@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Turn elements selected from XML into DataFrame rows and columns.">
+  <title>pandas.read_xml · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/read_xml/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/read_xml/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/read_xml">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Input and output</span><a href="/docs/read/my/pandas/api/read_xml/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>read_xml</code></h1>
+    <p class="article-version">pandas 3.1.1 · Input and output · <span lang="en">function</span></p>
+    <p class="intro">Turn elements selected from XML into DataFrame rows and columns.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Inspect the call</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">pd.read_xml(…)</code> <span>Full signature</span></summary><pre><code lang="en">pd.read_xml(
+    path_or_buffer,
+    *,
+    xpath=&#39;./*&#39;,
+    namespaces=None,
+    elems_only=False,
+    attrs_only=False,
+    names=None,
+    dtype=None,
+    converters=None,
+    parse_dates=None,
+    encoding=&#39;utf-8&#39;,
+    parser=&#39;lxml&#39;,
+    stylesheet=None,
+    iterparse=None,
+    compression=&#39;infer&#39;,
+    storage_options=None,
+    dtype_backend=…,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Inspect the call</h2>
+      <p>Run this code to inspect the callable and its parameters. Its data, backend, or environment is needed to execute the operation itself.</p>
+      <label><span>Python code</span><textarea rows="16" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import importlib
+from inspect import signature
+
+path = &#39;pandas.read_xml&#39;
+parts = path.split(&quot;.&quot;)
+for end in range(len(parts), 0, -1):
+    try:
+        operation = importlib.import_module(&quot;.&quot;.join(parts[:end]))
+        break
+    except ImportError:
+        continue
+
+for name in parts[end:]:
+    operation = getattr(operation, name)
+
+print(path)
+print(signature(operation))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>path_or_buffer</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>str, path object, or file-like object</span></td></tr>
+<tr><th scope="row"><code>xpath</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;./*&#39;</code></td>
+      <td><span>str</span></td></tr>
+<tr><th scope="row"><code>namespaces</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict</span></td></tr>
+<tr><th scope="row"><code>elems_only</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>False</code></td>
+      <td><span>bool</span></td></tr>
+<tr><th scope="row"><code>attrs_only</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>False</code></td>
+      <td><span>bool</span></td></tr>
+<tr><th scope="row"><code>names</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>list-like</span><p>Supply explicit names for labels, fields, or levels.</p></td></tr>
+<tr><th scope="row"><code>dtype</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>Type name or dict of column -&gt; type</span><p>Choose the data type for the input conversion or result.</p></td></tr>
+<tr><th scope="row"><code>converters</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict</span><p>Map column labels or positions to conversion functions.</p></td></tr>
+<tr><th scope="row"><code>parse_dates</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>bool or list of int or names or list of lists or dict</span><p>Choose whether to interpret selected fields as dates during a read.</p></td></tr>
+<tr><th scope="row"><code>encoding</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;utf-8&#39;</code></td>
+      <td><span>str</span><p>Name a text encoding such as &quot;utf-8&quot;.</p></td></tr>
+<tr><th scope="row"><code>parser</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;lxml&#39;</code></td>
+      <td><span>{&#39;lxml&#39;,&#39;etree&#39;}</span></td></tr>
+<tr><th scope="row"><code>stylesheet</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>str, path object or file-like object</span></td></tr>
+<tr><th scope="row"><code>iterparse</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict</span></td></tr>
+<tr><th scope="row"><code>compression</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;infer&#39;</code></td>
+      <td><span>str or dict</span><p>Choose whether and how to compress or decompress data.</p></td></tr>
+<tr><th scope="row"><code>storage_options</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict</span><p>Pass storage-backend options such as connection settings or HTTP headers.</p></td></tr>
+<tr><th scope="row"><code>dtype_backend</code></th>
+      <td>Optional<br><small>Keyword only</small></td>
+      <td><span>{&#39;numpy_nullable&#39;, &#39;pyarrow&#39;}</span><p>Choose nullable NumPy-backed dtypes or Arrow-backed dtypes.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>df</p></section>
+    <section class="article-section"><h2>Example for a local Python session</h2><pre><code lang="en">import pandas as pd
+from io import StringIO
+import lxml
+print(pd.read_xml(StringIO(&quot;&lt;rows&gt;&lt;row&gt;&lt;units&gt;2&lt;/units&gt;&lt;/row&gt;&lt;/rows&gt;&quot;)))</code></pre></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_xml.html#pandas.read_xml">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/read_table/"><span>Previous in this category</span><strong>pandas.read_table</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

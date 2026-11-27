@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="အလယ်တန်ဖိုးနဲ့ ကွာဟမှု တိုင်းပါ။ NaN ကို ရည်ရွယ်ချက်နဲ့ ကိုင်တွယ်ပြီး ပြန်ထုတ်နိုင်တဲ့ random generator သုံးပါ။">
+  <title>အနှစ်ချုပ်စာရင်းအင်း နှင့် Random Sampling · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/statistics/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/statistics/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/statistics/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#numpy">သင်ခန်းစာအားလုံး · NumPy</a> <a href="/docs/read/en/numpy/statistics/" lang="en" hreflang="en">English</a></nav>
+  <h1>အနှစ်ချုပ်စာရင်းအင်း နှင့် Random Sampling</h1>
+  <p class="article-version">2.5.5</p>
+  <p class="intro">အလယ်တန်ဖိုးနဲ့ ကွာဟမှု တိုင်းပါ။ NaN ကို ရည်ရွယ်ချက်နဲ့ ကိုင်တွယ်ပြီး ပြန်ထုတ်နိုင်တဲ့ random generator သုံးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/numpy/statistics">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#center-and-spread">Mean၊ Variance နှင့် Standard Deviation</a></li>
+<li><a href="#nan-and-random">NaN နှင့် ထပ်တူပြန်ထုတ်နိုင်တဲ့ Random Data</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="center-and-spread">
+  <h2>Mean၊ Variance နှင့် Standard Deviation</h2>
+  <p>Mean က ပျမ်းမျှပါ။ Variance က ကွာဟချက်ရဲ့ နှစ်ထပ်ကိန်းနဲ့ တွက်ပြီး standard deviation က variance ရဲ့ square root ပါ။ NumPy က ပိုင်းခြေမှာ N − ddof သုံးပါတယ်။ ပုံမှန် sample variance ခန့်မှန်းချက်အတွက် ddof=1 သုံးပါ။ Standard deviation ကတော့ population standard deviation အတွက် bias ရှိနိုင်ဆဲပါ။</p>
+
+<pre><code>import numpy as np
+
+marks = np.array([60, 70, 80])
+print(float(marks.mean()))
+print(float(marks.var(ddof=1)), float(marks.std(ddof=1)))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">70.0
+100.0 10.0</pre></div>
+
+
+</section>
+<section class="article-section" id="nan-and-random">
+  <h2>NaN နှင့် ထပ်တူပြန်ထုတ်နိုင်တဲ့ Random Data</h2>
+  <p>np.nanmean က NaN မထည့်ဘဲ ပျမ်းမျှတွက်ပါတယ်။ ဖယ်ခဲ့တဲ့ value အရေအတွက်ကို မှတ်ပါ။ Simulation လုပ်ဖို့ default_rng နဲ့ Generator ဆောက်ပါ။ Environment နဲ့ call အစဉ်တူရင် seed တူတဲ့ run ကို ပြန်ထုတ်နိုင်ပါတယ်။</p>
+
+<pre><code>import numpy as np
+
+rng = np.random.default_rng(42)
+sample = rng.integers(1, 7, size=4)
+print(sample.shape)
+print(float(np.nanmean([1.0, np.nan, 3.0])))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">(4,)
+2.0</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://numpy.org/doc/stable/reference/generated/numpy.std.html">numpy.std and ddof</a></li>
+<li><a href="https://numpy.org/doc/stable/reference/random/generator.html">Random Generator</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/numpy/broadcasting/">အရင်သင်ခန်းစာ · Broadcasting၊ Vectorization နှင့် Reductions</a>
+<a href="/docs/read/my/numpy/linear-algebra/">နောက်သင်ခန်းစာ · Matrix တွက်ချက်မှုနှင့် Linear Systems</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

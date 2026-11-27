@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Inspect types, missing values, duplicate candidates, and unusual patterns before writing cleaning rules.">
+  <title>Initial EDA and data-quality checks · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/initial-eda/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/initial-eda/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/initial-eda/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#data-analysis">All documentation · Data Analysis</a> <a href="/docs/read/my/data-analysis/initial-eda/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Initial EDA and data-quality checks</h1>
+  
+  <p class="intro">Inspect types, missing values, duplicate candidates, and unusual patterns before writing cleaning rules.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/data-analysis/initial-eda">Open interactive docs</a></p>
+  <p class="reading-link"><a href="/docs/media/data/store_sales.csv" download>Download sample CSV</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#profile">Profile the raw file</a></li>
+<li><a href="#quality">Check patterns, not just null counts</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="profile">
+  <h2>Profile the raw file</h2>
+  <p>Read the original values as strings when you want to see how source codes are represented. Inspect shape and column names first, then count blanks and unexpected labels in the columns you need.</p>
+
+<pre><code>import pandas as pd
+
+raw = pd.read_csv(&quot;store_sales.csv&quot;, dtype=&quot;string&quot;, keep_default_na=False)
+print(raw.shape)
+print(raw.duplicated().sum())
+print(raw[&quot;Location&quot;].str.strip().eq(&quot;&quot;).sum())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">(15, 8)
+1
+1</pre></div>
+
+
+</section>
+<section class="article-section" id="quality">
+  <h2>Check patterns, not just null counts</h2>
+  <p>Confirm ID uniqueness against the row grain. Validate date range, allowed categories, and numeric rules. Inspect candidate outliers before deciding they are errors or legitimate observations.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.itl.nist.gov/div898/handbook/eda/section1/eda11.htm">NIST Engineering Statistics Handbook — exploratory data analysis</a></li>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">pandas.read_csv</a></li>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.duplicated.html">pandas DataFrame.duplicated</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/data-analysis/data-collection/">Previous lesson · Collect data and record its context</a>
+<a href="/docs/read/en/data-analysis/cleaning-rules/">Next lesson · Clean data and retain evidence</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

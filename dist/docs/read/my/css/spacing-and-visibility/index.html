@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="အကွက်က ဘယ်နေရာယူလဲ၊ content က အနားသတ်ကို ကျော်ရင် ဘာဖြစ်လဲ လေ့လာပါ။">
+  <title>Margin၊ Overflow နဲ့ Visibility · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/spacing-and-visibility/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/spacing-and-visibility/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/spacing-and-visibility/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/spacing-and-visibility/" lang="en" hreflang="en">English</a></nav>
+  <h1>Margin၊ Overflow နဲ့ Visibility</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">အကွက်က ဘယ်နေရာယူလဲ၊ content က အနားသတ်ကို ကျော်ရင် ဘာဖြစ်လဲ လေ့လာပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/spacing-and-visibility">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#auto-margin">Auto Margin နဲ့ အကွက် အလယ်ချခြင်း</a></li>
+<li><a href="#margin-collapse">အပေါ်အောက် Margins ပေါင်းပုံ</a></li>
+<li><a href="#overflow">overflow တန်ဖိုး ရွေးခြင်း</a></li>
+<li><a href="#display-visibility">display နဲ့ visibility သုံးပြီး ဖျောက်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="auto-margin">
+  <h2>Auto Margin နဲ့ အကွက် အလယ်ချခြင်း</h2>
+  <p>Block အကျယ်က သူ့ parent ထက် ကျဉ်းရင် ဘေးမှာ နေရာလွတ်ကျန်ပါတယ်။ margin-inline: auto က အဲဒီနေရာကို တူတူခွဲယူပါတယ်။ အလျားလိုက်စာရေးတဲ့ layout မှာ margin: 0 auto လည်း အတူတူ အလယ်ချပြီး အပေါ်အောက် margin ပါ 0 ထားပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Center a block with auto margins&lt;/title&gt;
+  &lt;style&gt;
+.card { width: min(240px, 100%); box-sizing: border-box; margin-inline: auto; padding: 10px; background: #def5f5; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;card&quot;&gt;Desk Lamp&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အကွက်က အလယ်မှာ နေပြီး preview ကျဉ်းလာရင် လိုက်ကျဉ်းပါမယ်။</p>
+
+</section>
+<section class="article-section" id="margin-collapse">
+  <h2>အပေါ်အောက် Margins ပေါင်းပုံ</h2>
+  <p>ပုံမှန် block flow မှာ ထိနေတဲ့ vertical margin တွေ တစ်ခုအဖြစ် ပေါင်းနိုင်ပါတယ်။ နှစ်ခုလုံး အပေါင်းဆို ပိုကြီးတဲ့တန်ဖိုးကို ယူပါတယ်။ Flex နဲ့ grid item တွေမှာ margin သီးသန့်ရှိပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Observe vertical margin collapse&lt;/title&gt;
+  &lt;style&gt;
+.first { margin: 0 0 24px; }
+.second { margin: 16px 0 0; }
+p { background: #def5f5; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;main&gt;&lt;p class=&quot;first&quot;&gt;Pen&lt;/p&gt;&lt;p class=&quot;second&quot;&gt;Notebook&lt;/p&gt;&lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ကြားမှာ 24px ကွာပါတယ်။ main { display: grid; } ထည့်လိုက်ရင် 40px ကွာပါမယ်။</p>
+
+</section>
+<section class="article-section" id="overflow">
+  <h2>overflow တန်ဖိုး ရွေးခြင်း</h2>
+  <p>visible က ဘောင်အပြင်ထိ ပြနိုင်ပါတယ်။ hidden က ဖြတ်ပြပေမယ့် code နဲ့ scroll လုပ်နိုင်ပါတယ်။ clip က scroll မရပါဘူး။ auto က Content ဘောင်ကျော်မှ user ကို scroll လုပ်ခွင့်ပေးပြီး scroll က content ဆံ့နေရင်တောင် scroll container ဖြစ်စေပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Choose an overflow value&lt;/title&gt;
+  &lt;style&gt;
+.card { width: min(220px, 100%); height: 58px; overflow: auto; border: 1px solid teal; padding: 6px; box-sizing: border-box; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;card&quot; tabindex=&quot;0&quot;&gt;Pen&lt;br&gt;Notebook&lt;br&gt;Desk Lamp&lt;br&gt;Folder&lt;br&gt;Stapler&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Product စာရင်းအပြည့်ဖတ်ဖို့ အကွက်ထဲ scroll လုပ်ပါ။ auto၊ hidden နဲ့ visible ပြောင်းပြီး နှိုင်းပါ။</p>
+
+</section>
+<section class="article-section" id="display-visibility">
+  <h2>display နဲ့ visibility သုံးပြီး ဖျောက်ခြင်း</h2>
+  <p>display: none က အကွက်ကို layout ထဲကပါ ဖယ်ပါတယ်။ visibility: hidden က အကွက်ကို ဖျောက်ပြီး အရင်နေရာကို ချန်ထားပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Hide with display or visibility&lt;/title&gt;
+  &lt;style&gt;
+.row { display: flex; gap: 4px; margin-bottom: 6px; }
+.kept &gt; :nth-child(2) { visibility: hidden; }
+.removed &gt; :nth-child(2) { display: none; }
+.row &gt; div { background: #d8efeb; padding: 6px; border: 1px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;row kept&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;row removed&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမတန်းမှာ Notebook နေရာလွတ် ကျန်ပါတယ်။ ဒုတိယတန်းမှာ ကျန်တဲ့ item တွေ ကပ်နေပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin">MDN · margin</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Mastering_margin_collapsing">MDN · Margin collapse</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/overflow">MDN · overflow</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display">MDN · display</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/visibility">MDN · visibility</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/backgrounds-and-borders/">အရင်သင်ခန်းစာ · နောက်ခံ၊ အနားသတ်နဲ့ အရိပ်</a>
+<a href="/docs/read/my/css/flexbox/">နောက်သင်ခန်းစာ · Flexbox နဲ့ အတန်းလိုက် စီခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

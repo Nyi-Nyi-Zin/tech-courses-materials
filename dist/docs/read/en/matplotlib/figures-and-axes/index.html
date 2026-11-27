@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Create a figure and draw on an Axes object using the explicit plotting interface.">
+  <title>Figures, Axes, and the plotting interface · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/figures-and-axes/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/figures-and-axes/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/figures-and-axes/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#matplotlib">All documentation · Matplotlib</a> <a href="/docs/read/my/matplotlib/figures-and-axes/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Figures, Axes, and the plotting interface</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">Create a figure and draw on an Axes object using the explicit plotting interface.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/matplotlib/figures-and-axes">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#figure-axes-axis">Figure, Axes, and Axis</a></li>
+<li><a href="#chart-anatomy">Identify the parts of a chart</a></li>
+<li><a href="#output">Display or save a figure</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="figure-axes-axis">
+  <h2>Figure, Axes, and Axis</h2>
+  <p>A Figure contains one or more plotting areas called Axes. Each Axes has Axis objects that handle ticks and scales. Use the object-oriented interface when building several charts or sharing code.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.plot([1, 2, 3], [6, 9, 8], marker=&quot;o&quot;)
+ax.set(title=&quot;Orders by month&quot;, xlabel=&quot;Month&quot;, ylabel=&quot;Orders&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/figures-and-axes-figure-axes-axis.png" data-image-preview><img src="/docs/media/data/figures-and-axes-figure-axes-axis.png" alt="Line chart of 6, 9, and 8 orders across three months." width="575" height="463" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="chart-anatomy">
+  <h2>Identify the parts of a chart</h2>
+  <p>The Figure is the whole canvas, including the margins. The Axes is the chart area that contains the plotted line and points. The x-axis and y-axis encode the scales. The title describes the chart and the axis labels give the meaning of the values.</p>
+
+
+<figure class="lesson-figure">
+    <a href="/docs/media/data/figures-and-axes-chart-anatomy.png" data-image-preview><img src="/docs/media/data/figures-and-axes-chart-anatomy.png" alt="The order chart labels the outer Figure, the Axes plot area, the x-axis, the y-axis, and the point at month 2 and 9 orders." width="720" height="470" loading="lazy" decoding="async"></a>
+    <figcaption>The example creates the Figure and Axes together with plt.subplots().</figcaption>
+  </figure>
+
+
+</section>
+<section class="article-section" id="output">
+  <h2>Display or save a figure</h2>
+  <p>plt.show() displays open figures in an interactive environment. A headless script can save the Figure to a file. Save before a blocking show when using pyplot, or retain the Figure and call its savefig method.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://matplotlib.org/stable/users/explain/quick_start.html">Matplotlib quick start</a></li>
+<li><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html">matplotlib.pyplot.show</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/matplotlib/chart-selection/">Next lesson · Choose a chart for the question</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

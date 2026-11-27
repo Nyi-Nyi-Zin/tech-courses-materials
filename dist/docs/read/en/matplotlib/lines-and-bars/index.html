@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use lines for ordered measurements and bars to compare discrete categories.">
+  <title>Line charts and bar charts · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/lines-and-bars/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/lines-and-bars/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/lines-and-bars/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#matplotlib">All documentation · Matplotlib</a> <a href="/docs/read/my/matplotlib/lines-and-bars/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Line charts and bar charts</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">Use lines for ordered measurements and bars to compare discrete categories.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/matplotlib/lines-and-bars">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#lines">Plot an ordered trend</a></li>
+<li><a href="#bars">Compare categories with bars</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="lines">
+  <h2>Plot an ordered trend</h2>
+  <p>A line connects values in the order supplied. Sort chronological observations before plotting. Markers can distinguish measured points from the lines that connect them.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.plot([&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;], [11.5, 17, 15], marker=&quot;o&quot;)
+ax.set(xlabel=&quot;Month&quot;, ylabel=&quot;Recorded sales&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/lines-and-bars-lines.png" data-image-preview><img src="/docs/media/data/lines-and-bars-lines.png" alt="Recorded sales rise from 11.5 in January to 17 in February, then fall to 15 in March." width="571" height="440" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="bars">
+  <h2>Compare categories with bars</h2>
+  <p>bar draws one bar per category and starts at zero by default. Keep a zero baseline for ordinary comparisons. Use barh to keep long category names readable.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.bar([&quot;Tea&quot;, &quot;Coffee&quot;, &quot;Cake&quot;], [6, 10, 6])
+ax.set(ylabel=&quot;Units sold&quot;, title=&quot;Units sold by item&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/lines-and-bars-bars.png" data-image-preview><img src="/docs/media/data/lines-and-bars-bars.png" alt="Tea and cake have six units sold each. Coffee leads with ten." width="570" height="443" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://matplotlib.org/stable/plot_types/index.html">Plot types</a></li>
+<li><a href="https://matplotlib.org/stable/users/explain/quick_start.html">Matplotlib quick start</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/matplotlib/chart-selection/">Previous lesson · Choose a chart for the question</a>
+<a href="/docs/read/en/matplotlib/scatter-and-distributions/">Next lesson · Scatter plots, histograms, and box plots</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

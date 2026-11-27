@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ပြန်သုံးနိုင်တဲ့ function ရေးပါ။ Input နဲ့ return value ကို ရှင်းရှင်းသတ်မှတ်ပြီး ဆက်စပ် code ကို စုစည်းပါ။">
+  <title>Functions၊ Modules နှင့် Type Hints · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/python/functions/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/functions/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/functions/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#python">သင်ခန်းစာအားလုံး · Python</a> <a href="/docs/read/en/python/functions/" lang="en" hreflang="en">English</a></nav>
+  <h1>Functions၊ Modules နှင့် Type Hints</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">ပြန်သုံးနိုင်တဲ့ function ရေးပါ။ Input နဲ့ return value ကို ရှင်းရှင်းသတ်မှတ်ပြီး ဆက်စပ် code ကို စုစည်းပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/python/functions">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#parameters">Parameters နှင့် Return Values</a></li>
+<li><a href="#defaults">Default Arguments နှင့် Scope</a></li>
+<li><a href="#modules">Modules Import လုပ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="parameters">
+  <h2>Parameters နှင့် Return Values</h2>
+  <p>def နဲ့ function သတ်မှတ်ပါတယ်။ Signature ခွင့်ပြုရင် argument ကို အစဉ်လိုက်ဖြစ်စေ keyword နဲ့ဖြစ်စေ ပေးနိုင်ပါတယ်။ Return value မရေးရင် None ပြန်ပါတယ်။ Type annotation က tool တွေနဲ့ ဖတ်သူကို interface နားလည်စေပါတယ်။</p>
+
+<pre><code>def line_total(quantity: int, unit_price: float, *, discount: float = 0.0) -&gt; float:
+    return quantity * unit_price * (1 - discount)
+
+print(line_total(4, 2.5, discount=0.1))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">9.0</pre></div>
+
+
+</section>
+<section class="article-section" id="defaults">
+  <h2>Default Arguments နှင့် Scope</h2>
+  <p>Default argument ကို function သတ်မှတ်ချိန်မှာ တွက်ပါတယ်။ Call တိုင်း list အသစ်လိုရင် None ထားပြီး function ထဲမှာ list ဆောက်ပါ။ Function ထဲ assign လုပ်တဲ့ name က ပုံမှန်အားဖြင့် local ဖြစ်ပါတယ်။</p>
+
+<pre><code>def add_item(item, items=None):
+    if items is None:
+        items = []
+    items.append(item)
+    return items
+
+print(add_item(&quot;Tea&quot;), add_item(&quot;Cake&quot;))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[&#39;Tea&#39;] [&#39;Cake&#39;]</pre></div>
+
+
+</section>
+<section class="article-section" id="modules">
+  <h2>Modules Import လုပ်ခြင်း</h2>
+  <p>Module တစ်ခုမှာ Python definition တွေ စုထားပါတယ်။ Public name တွေ သုံးဖို့ import လုပ်ပါ။ Script ထဲ __name__ စစ်ထားရင် ဖိုင်ကို import လုပ်ချိန် command-line မှာ သုံးမယ့် code မ run ပါ။</p>
+
+<pre><code>import math
+
+def main():
+    print(math.ceil(14 / 3))
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">5</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.python.org/3.15/tutorial/controlflow.html#defining-functions">Defining functions</a></li>
+<li><a href="https://docs.python.org/3.15/tutorial/modules.html">Modules</a></li>
+<li><a href="https://docs.python.org/3.15/library/typing.html">Typing support</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/python/collections/">အရင်သင်ခန်းစာ · Lists၊ Tuples၊ Sets နှင့် Dictionaries</a>
+<a href="/docs/read/my/python/files/">နောက်သင်ခန်းစာ · Files၊ Exceptions နှင့် Debugging</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

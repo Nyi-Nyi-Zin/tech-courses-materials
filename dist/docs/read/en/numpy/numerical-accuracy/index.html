@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Choose tolerances, identify finite values, and keep track of excluded data.">
+  <title>Floating-point accuracy and missing values · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/numerical-accuracy/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/numerical-accuracy/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/numerical-accuracy/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#numpy">All documentation · NumPy</a> <a href="/docs/read/my/numpy/numerical-accuracy/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Floating-point accuracy and missing values</h1>
+  <p class="article-version">2.5.5</p>
+  <p class="intro">Choose tolerances, identify finite values, and keep track of excluded data.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/numpy/numerical-accuracy">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#tolerances">Compare using a tolerance</a></li>
+<li><a href="#finite">Distinguish NaN and infinity</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="tolerances">
+  <h2>Compare using a tolerance</h2>
+  <p>Binary floating-point arithmetic can produce small rounding differences. isclose combines a relative tolerance based on the reference value and an absolute tolerance. Set the tolerances according to the scale and meaning of the numbers.</p>
+
+<pre><code>import numpy as np
+
+print(np.isclose(0.1 + 0.2, 0.3, rtol=0, atol=1e-12))
+print(np.isclose(0.02, 0.0, rtol=0, atol=0.01))</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">True
+False</pre></div>
+
+
+</section>
+<section class="article-section" id="finite">
+  <h2>Distinguish NaN and infinity</h2>
+  <p>isfinite excludes both NaN and positive or negative infinity. nanmean ignores NaN but can still include infinity. Choose a rule for invalid measurements and report how many observations each calculation actually used.</p>
+
+<pre><code>import numpy as np
+
+a = np.array([2.0, np.nan, np.inf, 6.0])
+valid = a[np.isfinite(a)]
+print(valid.size, float(valid.mean()))</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">2 4.0</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://numpy.org/doc/stable/reference/generated/numpy.isclose.html">numpy.isclose</a></li>
+<li><a href="https://numpy.org/doc/stable/reference/generated/numpy.isfinite.html">numpy.isfinite</a></li>
+<li><a href="https://numpy.org/doc/stable/reference/generated/numpy.nanmean.html">numpy.nanmean</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/numpy/sorting-and-searching/">Previous lesson · Sort, rank, and search arrays</a>
+<a href="/docs/read/en/numpy/array-io/">Next lesson · Read, save, and share arrays</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

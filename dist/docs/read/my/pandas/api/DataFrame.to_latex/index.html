@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ဒေတာကို LaTeX ဇယားပုံစံနဲ့ ထုတ်ပေးပါတယ်။">
+  <title>pandas.DataFrame.to_latex · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/DataFrame.to_latex/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/DataFrame.to_latex/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/DataFrame.to_latex">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API Reference">
+    <a href="/docs/read/my/pandas/api-reference/#find-an-api">pandas API Reference</a><span aria-hidden="true">/</span><span>DataFrame</span><a href="/docs/read/en/pandas/api/DataFrame.to_latex/" lang="en" hreflang="en">English</a>
+  </nav>
+    <h1><code>pandas.<wbr>DataFrame.<wbr>to_latex</code></h1>
+    <p class="article-version">pandas 3.1.1 · DataFrame · <span lang="en">method</span></p>
+    <p class="intro">ဒေတာကို LaTeX ဇယားပုံစံနဲ့ ထုတ်ပေးပါတယ်။</p>
+
+    <nav class="api-breadcrumbs" aria-label="ဒီစာမျက်နှာမှာ"><ul><li><a href="#syntax">ခေါ်သုံးပုံ</a></li><li><a href="#example">နမူနာ စမ်းကြည့်ရန်</a></li><li><a href="#parameters">ထည့်သွင်းနိုင်တဲ့ Arguments</a></li><li><a href="#returns">ပြန်ပေးတဲ့ ရလဒ်</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>ခေါ်သုံးပုံ</h2><details class="api-full-signature"><summary><code lang="en">DataFrame.to_latex(…)</code> <span>ခေါ်သုံးပုံ အပြည့်အစုံ</span></summary><pre><code lang="en">DataFrame.to_latex(
+    buf=None,
+    *,
+    columns=None,
+    header=True,
+    index=True,
+    na_rep=&#39;NaN&#39;,
+    formatters=None,
+    float_format=None,
+    sparsify=None,
+    index_names=True,
+    bold_rows=False,
+    column_format=None,
+    longtable=None,
+    escape=None,
+    encoding=None,
+    decimal=&#39;.&#39;,
+    multicolumn=None,
+    multicolumn_format=None,
+    multirow=None,
+    caption=None,
+    label=None,
+    position=None,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>နမူနာ စမ်းကြည့်ရန်</h2>
+      <p>နမူနာကုဒ်ကို ပြင်ပြီး Run Python နှိပ်ပါ။ ရလဒ်ကို အောက်မှာ ကြည့်နိုင်ပါတယ်။</p>
+      <label><span>Python ကုဒ်</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+import jinja2
+frame = pd.DataFrame({&quot;units&quot;: [2., 5., 7.], &quot;price&quot;: [4., 3., 2.]})
+print(frame.to_latex())</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>ရပ်ရန်</button>
+        <button type="button" data-reset disabled>မူလကုဒ် ပြန်ထားရန်</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="ရလဒ်"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>ထည့်သွင်းနိုင်တဲ့ Arguments</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">ထည့်သွင်းပုံ</th><th scope="col">လက်ခံတဲ့ တန်ဖိုးနဲ့ သုံးပုံ</th></tr></thead><tbody><tr><th scope="row"><code>buf</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)၊ Path သို့မဟုတ် StringIO-like</span><p>Output ရေးမယ့် ဖိုင်ပုံစံ buffer ကို ထည့်ပါ။ ချန်ထားရင် ဒီ API ရဲ့ သတ်မှတ်ချက်အတိုင်း ရလဒ်ကို ပြန်ပေးတာ သို့မဟုတ် output မှာ ပြတာကို လုပ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>columns</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>Label တွေပါတဲ့ list</span><p>Column label တွေ ထည့်ဖို့ ဒါမှမဟုတ် column တွေကို ဘယ်လို သုံးမလဲ သတ်မှတ်ဖို့ သုံးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>header</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool) သို့မဟုတ် စာသား list</span><p>ဘယ် row က column အမည်တွေကို ယူမလဲ သတ်မှတ်ဖို့၊ ဒါမှမဟုတ် output မှာ column အမည်တွေ ရေးမရေး ရွေးဖို့ သုံးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>index</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool)</span><p>Row label တွေ ထည့်ဖို့ ဒါမှမဟုတ် မူလ row label တွေကို ဘယ်လို သုံးမလဲ သတ်မှတ်ဖို့ သုံးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>na_rep</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;NaN&#39;</code></td>
+      <td><span>စာသား (str)</span><p>တန်ဖိုးပျောက်နေတဲ့ နေရာမှာ ပြမယ့် စာသားကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>formatters</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>Function တွေပါတဲ့ list သို့မဟုတ် စာသား key ကနေ function ကို ချိတ်ထားတဲ့ dict ({str: function})</span><p>Column သို့မဟုတ် တန်ဖိုးတစ်ခုချင်းကို ပြသပုံပြောင်းပေးမယ့် function တွေကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>float_format</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>Argument တစ်ခု လက်ခံတဲ့ function သို့မဟုတ် စာသား (str)</span><p>ကိန်းဂဏန်းတွေကို ဘယ်ပုံစံနဲ့ ပြမလဲ ဆုံးဖြတ်ဖို့ format စာသား သို့မဟုတ် function ကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>sparsify</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>index_names</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>bold_rows</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>column_format</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span></td></tr>
+<tr><th scope="row"><code>longtable</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>escape</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>True / False (bool)</span><p>Output မှာ အထူးအဓိပ္ပာယ်ရှိတဲ့ စာလုံးတွေကို escape လုပ်မလုပ် သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>encoding</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span><p>&quot;utf-8&quot; လို စာသား encoding အမည်ကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>decimal</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;.&#39;</code></td>
+      <td><span>စာသား (str)</span><p>ဒဿမအမှတ်အဖြစ် သုံးတဲ့ စာလုံးကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>multicolumn</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>multicolumn_format</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span></td></tr>
+<tr><th scope="row"><code>multirow</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>caption</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str) သို့မဟုတ် tuple</span><p>ထုတ်ပေးတဲ့ရလဒ်မှာ ပြမယ့် ခေါင်းစဉ် ဒါမှမဟုတ် ပုံစာကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>label</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span><p>Entry တစ်ခုကို ခွဲခြားဖို့ သို့မဟုတ် ရလဒ်ကို အမည်တပ်ဖို့ label ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>position</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>ပြန်ပေးတဲ့ ရလဒ်</h2><p>ပြန်ပေးတဲ့ အမျိုးအစားက စာသား (str) သို့မဟုတ် None ဖြစ်ပါတယ်။</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_latex.html#pandas.DataFrame.to_latex">pandas တရားဝင် ကိုးကားချက်</a>
+      <nav class="pagination" aria-label="pandas API Reference"><a href="/docs/read/my/pandas/api/DataFrame.to_json/"><span>အရင် API</span><strong>pandas.DataFrame.to_json</strong></a><a href="/docs/read/my/pandas/api/DataFrame.to_markdown/"><span>နောက် API</span><strong>pandas.DataFrame.to_markdown</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

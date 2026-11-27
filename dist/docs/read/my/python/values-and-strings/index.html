@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ကိန်းဂဏန်းနဲ့ စာသားသုံးပါ။ Input ကို type ပြောင်းပြီး တန်ဖိုးတွေကို ဖတ်ရလွယ်အောင် ပုံစံချပါ။">
+  <title>Variables၊ Data Types နှင့် Strings · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/python/values-and-strings/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/values-and-strings/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/values-and-strings/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#python">သင်ခန်းစာအားလုံး · Python</a> <a href="/docs/read/en/python/values-and-strings/" lang="en" hreflang="en">English</a></nav>
+  <h1>Variables၊ Data Types နှင့် Strings</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">ကိန်းဂဏန်းနဲ့ စာသားသုံးပါ။ Input ကို type ပြောင်းပြီး တန်ဖိုးတွေကို ဖတ်ရလွယ်အောင် ပုံစံချပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/python/values-and-strings">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#names-and-types">နာမည်နှင့် Type များ</a></li>
+<li><a href="#clean-and-format">စာသား သန့်စင်၍ ပုံစံချခြင်း</a></li>
+<li><a href="#conversion">Input ကို Type ပြောင်းခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="names-and-types">
+  <h2>နာမည်နှင့် Type များ</h2>
+  <p>Assignment က နာမည်တစ်ခုကို object တစ်ခုနဲ့ ချိတ်ပေးပါတယ်။ int က ကိန်းပြည့်၊ float က floating-point ကိန်း၊ str က စာသား၊ bool က True သို့မဟုတ် False ပါ။ None ရဲ့ type က NoneType ဖြစ်ပါတယ်။ ပုံမှန်စားဖို့ /၊ အောက်ဘက်ကိန်းပြည့်ရအောင် စားဖို့ // သုံးပါ။</p>
+
+<pre><code>quantity = 3
+unit_price = 2.5
+print(quantity * unit_price)
+print(7 / 2, 7 // 2)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">7.5
+3.5 3</pre></div>
+
+
+</section>
+<section class="article-section" id="clean-and-format">
+  <h2>စာသား သန့်စင်၍ ပုံစံချခြင်း</h2>
+  <p>String ကို နေရာမှာတင် ပြောင်းလို့မရပါ။ strip() နဲ့ title() က string အသစ် ပြန်ပေးပါတယ်။ f-string မှာ ကွင်းတွန့်ထဲက expression ကို တွက်ပြီး .2f က ဒဿမနှစ်နေရာနဲ့ ပြပါတယ်။</p>
+
+<pre><code>item = &quot;  iced coffee  &quot;.strip().title()
+price = 7.5
+print(f&quot;{item} — {price:.2f}&quot;)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">Iced Coffee — 7.50</pre></div>
+
+
+</section>
+<section class="article-section" id="conversion">
+  <h2>Input ကို Type ပြောင်းခြင်း</h2>
+  <p>input() က string ပြန်ပေးပါတယ်။ မတွက်ခင် int() သို့မဟုတ် float() နဲ့ ပြောင်းပါ။ int(&quot;3.5&quot;) က ValueError ဖြစ်ပါတယ်။ ငွေပမာဏကို ကိန်းပြည့်များနဲ့ သိမ်းရင် cents လို အငယ်ဆုံး unit ကို သတ်မှတ်ပါ။</p>
+
+<pre><code>text = &quot;4&quot;
+print(int(text) * 3)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">12</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.python.org/3.15/tutorial/introduction.html">An informal introduction to Python</a></li>
+<li><a href="https://docs.python.org/3.15/library/functions.html">Built-in functions</a></li>
+<li><a href="https://docs.python.org/3.15/tutorial/inputoutput.html#formatted-string-literals">Formatted string literals</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/python/setup/">အရင်သင်ခန်းစာ · Python ထည့်သွင်း၍ Project ပြင်ဆင်ခြင်း</a>
+<a href="/docs/read/my/python/control-flow/">နောက်သင်ခန်းစာ · Conditions၊ Loops နှင့် Pattern Matching</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

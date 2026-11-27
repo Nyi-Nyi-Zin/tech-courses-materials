@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Identify what the model sees, what it should predict, and how scikit-learn fits estimators.">
+  <title>Features, targets, and estimator basics · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/features-and-target/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/features-and-target/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/features-and-target/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#machine-learning">All documentation · Machine Learning</a> <a href="/docs/read/my/machine-learning/features-and-target/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Features, targets, and estimator basics</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Identify what the model sees, what it should predict, and how scikit-learn fits estimators.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/machine-learning/features-and-target">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#supervised">Define X and y</a></li>
+<li><a href="#interface">Fit, predict, and transform</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="supervised">
+  <h2>Define X and y</h2>
+  <p>X is usually shaped as samples by features. y often contains one target per row. Regression predicts numerical values and classification predicts labels. Clustering groups rows without a labeled target.</p>
+
+<pre><code>import pandas as pd
+
+homes = pd.DataFrame({&quot;area_m2&quot;: [52, 64, 75], &quot;bedrooms&quot;: [1, 2, 2], &quot;price_k&quot;: [116, 153, 165]})
+X = homes[[&quot;area_m2&quot;, &quot;bedrooms&quot;]]
+y = homes[&quot;price_k&quot;]
+print(X.shape, y.shape)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">(3, 2) (3,)</pre></div>
+
+
+</section>
+<section class="article-section" id="interface">
+  <h2>Fit, predict, and transform</h2>
+  <p>fit learns from data. Predictive estimators use predict on new inputs. Transformers such as scalers learn parameters on training rows and apply them with transform. Keep features available at the moment a real prediction will be made.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/getting_started.html">Getting started with scikit-learn</a></li>
+<li><a href="https://scikit-learn.org/stable/common_pitfalls.html">Common pitfalls and recommended practices</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/machine-learning/train-test-split/">Next lesson · Split data and compare with a baseline</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

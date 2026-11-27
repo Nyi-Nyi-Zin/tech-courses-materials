@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CSS can make a change happen gradually. A transition responds to a change in value. An animation follows a named sequence of steps.">
+  <title>Transitions and animations · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/motion/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/motion/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/motion/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/motion/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Transitions and animations</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">CSS can make a change happen gradually. A transition responds to a change in value. An animation follows a named sequence of steps.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/motion">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#transition">Transition a changed value</a></li>
+<li><a href="#keyframes">Define animation steps with @keyframes</a></li>
+<li><a href="#reduced-motion">Respect a reduced-motion preference</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="transition">
+  <h2>Transition a changed value</h2>
+  <p>Set transition on the base rule so it applies as a state starts and ends. The first value names the property; the second sets the duration. The hover or focus rule provides the new value.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Transition a changed value&lt;/title&gt;
+  &lt;style&gt;
+    button { background: lightblue; transition: background-color 250ms; }
+    button:hover, button:focus-visible { background: gold; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;button type=&quot;button&quot;&gt;View product&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Hover or Tab to the button. The background changes gradually over a quarter of a second.</p>
+
+</section>
+<section class="article-section" id="keyframes">
+  <h2>Define animation steps with @keyframes</h2>
+  <p>@keyframes names a sequence and gives it values at points in time. from is the start and to is the end. animation connects the sequence to the element and sets a duration.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Define animation steps with @keyframes&lt;/title&gt;
+  &lt;style&gt;
+    .notice { animation: appear 800ms; }
+    @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Reload to see the first paragraph fade in once. The other paragraph is visible immediately.</p>
+
+</section>
+<section class="article-section" id="reduced-motion">
+  <h2>Respect a reduced-motion preference</h2>
+  <p>Some users set their system to reduce motion. The prefers-reduced-motion media feature can detect that preference. Remove an optional effect while leaving the content available.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Respect a reduced-motion preference&lt;/title&gt;
+  &lt;style&gt;
+    .notice { animation: appear 1s; }
+    @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { .notice { animation: none; } }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Enable reduced motion in the system or emulate it in DevTools and reload. The notice appears immediately.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Transitions/Using">MDN · Using CSS transitions</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Animations/Using">MDN · Using CSS animations</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion">MDN · Prefers reduced motion</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/dark-mode/">Previous lesson · Light and dark themes</a>
+<a href="/docs/read/en/css/reference/">Next lesson · CSS property reference</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

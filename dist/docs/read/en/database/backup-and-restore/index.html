@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Create a logical backup of one database and prove you can restore it to a separate database.">
+  <title>Back up and restore with PostgreSQL tools · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/backup-and-restore/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/backup-and-restore/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/backup-and-restore/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/backup-and-restore/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Back up and restore with PostgreSQL tools</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">Create a logical backup of one database and prove you can restore it to a separate database.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/backup-and-restore">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#dump">Create a custom-format archive</a></li>
+<li><a href="#restore">Restore into a fresh database</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="dump">
+  <h2>Create a custom-format archive</h2>
+  <p>Use pg_dump with -Fc. After Setup, run this from the OS terminal. The source account needs read access to the objects and data being backed up. The pg_dump client must be at least as new as the server’s major version. Keep backup files private because they contain database contents.</p>
+
+<pre><code>pg_dump -h localhost -p 5432 -U postgres -Fc -f learning_db.dump learning_db
+pg_restore --list learning_db.dump</code></pre>
+<dl class="lesson-terms"><div><dt><code>pg_dump -h localhost -p 5432 -U postgres -Fc -f learning_db.dump learning_db</code></dt><dd>Connect as postgres on localhost, read learning_db, and save a custom-format archive to learning_db.dump. The -f flag sets the output filename.</dd></div><div><dt><code>pg_restore --list learning_db.dump</code></dt><dd>List the objects in the archive without restoring them.</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="restore">
+  <h2>Restore into a fresh database</h2>
+  <p>Create an empty test database with an account allowed to create databases. If another account owns the test database, connect as that account to restore. For this restore check, --no-owner and --no-privileges skip restoring the original owners and grants. Compare key table counts and check an app read. Plan a separate backup of roles and other cluster-wide objects, and use your host’s point-in-time recovery tools if you need replay to a particular time.</p>
+
+<pre><code>createdb -h localhost -p 5432 -U postgres learning_db_restore
+pg_restore -h localhost -p 5432 -U postgres -d learning_db_restore --exit-on-error --no-owner --no-privileges learning_db.dump
+psql -h localhost -p 5432 -U postgres -d learning_db_restore -c &quot;SELECT count(*) FROM students;&quot;</code></pre>
+<dl class="lesson-terms"><div><dt><code>createdb … learning_db_restore</code></dt><dd>Creates the empty target database as postgres.</dd></div><div><dt><code>pg_restore … -d learning_db_restore --exit-on-error</code></dt><dd>Restores learning_db.dump into the database selected by -d and stops on the first error.</dd></div><div><dt><code>psql … -c &quot;SELECT count(*) FROM students;&quot;</code></dt><dd>Runs the quoted SQL once and exits. Compare the student row count with the source database.</dd></div></dl>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/app-pgdump.html">PostgreSQL 19 · pg_dump</a></li>
+<li><a href="https://www.postgresql.org/docs/19/app-pgrestore.html">PostgreSQL 19 · pg_restore</a></li>
+<li><a href="https://www.postgresql.org/docs/19/backup-dump.html">PostgreSQL 19 · SQL dumps</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/schema-and-access/">Previous lesson · Change tables, manage access, and create views</a>
+<a href="/docs/read/en/database/storage-and-recovery/">Next lesson · Database storage and crash recovery</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

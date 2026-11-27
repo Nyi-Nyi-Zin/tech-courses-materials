@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Port 5432 နဲ့ run နေတဲ့ local PostgreSQL server မှာ လိုက်စမ်းပါ။ Administrator role postgres နဲ့ စပြီး လေ့ကျင့်ဖို့ mydb database အသစ်နဲ့ nyinyizin login role အသစ်ကို သုံးမယ်။ အပိုင်းတွေကို အစဉ်လိုက် လုပ်ပါ။ psql ဖွင့်တဲ့ command ကို OS terminal မှာ ရိုက်ပြီး SQL နဲ့ backslash commands ကို psql ထဲမှာ ရိုက်ပါ။">
+  <title>PostgreSQL User၊ Role နဲ့ Ownership · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/roles-and-ownership/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/roles-and-ownership/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/roles-and-ownership/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/roles-and-ownership/" lang="en" hreflang="en">English</a></nav>
+  <h1>PostgreSQL User၊ Role နဲ့ Ownership</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">Port 5432 နဲ့ run နေတဲ့ local PostgreSQL server မှာ လိုက်စမ်းပါ။ Administrator role postgres နဲ့ စပြီး လေ့ကျင့်ဖို့ mydb database အသစ်နဲ့ nyinyizin login role အသစ်ကို သုံးမယ်။ အပိုင်းတွေကို အစဉ်လိုက် လုပ်ပါ။ psql ဖွင့်တဲ့ command ကို OS terminal မှာ ရိုက်ပြီး SQL နဲ့ backslash commands ကို psql ထဲမှာ ရိုက်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/roles-and-ownership">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#admin-login">postgres နဲ့ psql ဝင်ခြင်း</a></li>
+<li><a href="#create-user">Login Role ဆောက်ပြီး Password သတ်မှတ်ခြင်း</a></li>
+<li><a href="#role-attributes">Role Attribute တစ်ခုချင်း ပေးခြင်းနဲ့ ပြန်ဖြုတ်ခြင်း</a></li>
+<li><a href="#superuser">SUPERUSER Attribute ကို နားလည်ပြီး ပြန်ဖြုတ်ခြင်း</a></li>
+<li><a href="#database-owner">mydb ဆောက်ပြီး Owner သတ်မှတ်ခြင်း</a></li>
+<li><a href="#user-login">nyinyizin နဲ့ ပြန်ဝင်ခြင်း</a></li>
+<li><a href="#owned-table">Role အသစ်ပိုင်တဲ့ Table တစ်ခု ဆောက်ခြင်း</a></li>
+<li><a href="#return-as-admin">mydb ကို postgres နဲ့ ပြန်ဝင်ခြင်း</a></li>
+<li><a href="#cleanup">Owner ပြန်ပြောင်းပြီး Login Role ဖျက်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="admin-login">
+  <h2>postgres နဲ့ psql ဝင်ခြင်း</h2>
+  <p>ဒီ command ကို terminal မှာ ရိုက်ပါ။ Setup မှာ သုံးခဲ့တဲ့ postgres role နဲ့ ဝင်ပြီး password တောင်းရင် ထည့်ပါ။ ကိုယ့်စက်မှာ administrator role နာမည် ကွာရင် နောက်ဆုံး owner ပြန်ပြောင်းတဲ့ အဆင့်အပါအဝင် အဲဒီ role ကို တစ်လျှောက်လုံး သုံးပါ။ mydb သို့မဟုတ် nyinyizin ရှိပြီးသားဆိုရင် နမူနာတစ်လျှောက်လုံး နာမည်အသစ်တွေ သုံးပါ။</p>
+
+<pre><code>psql -h localhost -p 5432 -U postgres -d postgres</code></pre>
+
+
+</section>
+<section class="article-section" id="create-user">
+  <h2>Login Role ဆောက်ပြီး Password သတ်မှတ်ခြင်း</h2>
+  <p>ဒီ command တွေကို psql ထဲမှာ ရိုက်ပါ။ CREATE USER က LOGIN ပါတဲ့ role ဆောက်ပေးတယ်။ Password ကို နှစ်ခါရိုက်ရပြီး ရိုက်နေတဲ့ စာလုံးတွေ မပေါ်ပါဘူး။ နောက်ဆုံးတစ်ကြောင်းနဲ့ role အသစ် ရှိမရှိ စစ်ပါ။</p>
+
+<pre><code>CREATE USER nyinyizin;
+\password nyinyizin
+\du nyinyizin</code></pre>
+<dl class="lesson-terms"><div><dt><code>CREATE USER … WITH PASSWORD</code></dt><dd>CREATE USER မှာ WITH PASSWORD နဲ့လည်း password သတ်မှတ်လို့ရတယ်။ Terminal လေ့ကျင့်ခန်းမှာ password ကို ရိုက်တဲ့ SQL ထဲ မပါစေဖို့ \password ကို သုံးပါ။</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="role-attributes">
+  <h2>Role Attribute တစ်ခုချင်း ပေးခြင်းနဲ့ ပြန်ဖြုတ်ခြင်း</h2>
+  <p>ဒီအပိုင်းကို စမ်းချင်ရင် database ဆောက်ခွင့်အတွက် CREATEDB၊ သက်ဆိုင်တဲ့ role တွေ ဆောက်ဖို့နဲ့ စီမံဖို့ CREATEROLE ပေးကြည့်ပါ။ \du နဲ့ ရလဒ်စစ်ပြီး နောက်အဆင့်မသွားခင် နှစ်ခုလုံး ပြန်ဖြုတ်ပါ။ ဒီ attributes တွေ ပြောင်းတာက role ရဲ့ LOGIN setting ကို မပြောင်းပါဘူး။</p>
+
+<pre><code>ALTER USER nyinyizin WITH CREATEDB CREATEROLE;
+\du nyinyizin
+ALTER USER nyinyizin WITH NOCREATEDB NOCREATEROLE;</code></pre>
+
+
+</section>
+<section class="article-section" id="superuser">
+  <h2>SUPERUSER Attribute ကို နားလည်ပြီး ပြန်ဖြုတ်ခြင်း</h2>
+  <p>Superuser က login လုပ်ခွင့် စစ်တာကလွဲပြီး PostgreSQL permission စစ်ဆေးမှုတွေကို ကျော်နိုင်တယ်။ ဖျက်ပစ်လို့ရတဲ့ local စမ်းသပ် server မှာ ဒီဥပမာကို စမ်းနိုင်တယ်။ postgres နဲ့ transaction တစ်ခုထဲမှာ attribute ပေး၊ စစ်ပြီး commit မလုပ်ခင် အဆင့်မြင့် attributes တွေကို ပြန်ဖြုတ်ပါ။ ယာယီပေးထားတဲ့ superuser ခွင့်က အဲဒီ transaction ထဲမှာပဲ သက်ရောက်တယ်။</p>
+
+<pre><code>BEGIN;
+ALTER USER nyinyizin WITH SUPERUSER;
+\du nyinyizin
+ALTER USER nyinyizin WITH NOSUPERUSER NOCREATEROLE NOCREATEDB NOREPLICATION NOBYPASSRLS;
+COMMIT;
+\du nyinyizin</code></pre>
+
+
+</section>
+<section class="article-section" id="database-owner">
+  <h2>mydb ဆောက်ပြီး Owner သတ်မှတ်ခြင်း</h2>
+  <p>postgres နဲ့ ချိတ်ထားတုန်း practice database ဆောက်ပြီး owner ကို nyinyizin ဆီ လွှဲပါ။ အဆင့်မြင့် attributes တွေ ဖြုတ်ထားလည်း ဒီ database ကို nyinyizin ပိုင်လို့ရတယ်။ Owner column မှာ nyinyizin ပေါ်လာတာ စစ်ပြီး \q နဲ့ psql ကနေ ထွက်ပါ။</p>
+
+<pre><code>CREATE DATABASE mydb;
+ALTER DATABASE mydb OWNER TO nyinyizin;
+\l mydb
+\q</code></pre>
+<dl class="lesson-terms"><div><dt><code>ALTER DATABASE … OWNER TO</code></dt><dd>Database ကိုယ်တိုင်ရဲ့ owner ကို ပြောင်းပေးတယ်။ Database ထဲက table တွေမှာတော့ သူတို့ကိုယ်ပိုင် owner ရှိတယ်။</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="user-login">
+  <h2>nyinyizin နဲ့ ပြန်ဝင်ခြင်း</h2>
+  <p>OS terminal မှာ ဒီ command ရိုက်ပြီး nyinyizin အတွက် သတ်မှတ်ထားတဲ့ password ကို ထည့်ပါ။ အဆင့်မြင့် attributes မရှိတဲ့ ဒီ role နဲ့ ဝင်ရင် default prompt က mydb=&gt; ပါ။</p>
+
+<pre><code>psql -h localhost -p 5432 -U nyinyizin -d mydb</code></pre>
+<dl class="lesson-terms"><div><dt><code>psql</code></dt><dd>PostgreSQL command-line client ကို ဖွင့်တယ်။</dd></div><div><dt><code>-h localhost</code></dt><dd>ကိုယ့်စက်ပေါ်က server ကို TCP နဲ့ ချိတ်တယ်။</dd></div><div><dt><code>-p 5432</code></dt><dd>TCP port 5432 ကို သုံးတယ်။</dd></div><div><dt><code>-U nyinyizin</code></dt><dd>nyinyizin login role နဲ့ ဝင်တယ်။</dd></div><div><dt><code>-d mydb</code></dt><dd>mydb database ကို တန်းချိတ်တယ်။</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="owned-table">
+  <h2>Role အသစ်ပိုင်တဲ့ Table တစ်ခု ဆောက်ခြင်း</h2>
+  <p>mydb ထဲမှာ connection စစ်ပြီး nyinyizin နဲ့ စမ်းသပ် table တစ်ခု ဆောက်ပါ။ ဆောက်တဲ့ role က ဒီ table ရဲ့ owner ဖြစ်တယ်။ \dt နဲ့ owner စစ်ပြီး \q နဲ့ ထွက်ပါ။</p>
+
+<pre><code>\conninfo
+SELECT current_user, current_database();
+CREATE TABLE public.role_demo (id integer PRIMARY KEY);
+\dt public.role_demo
+\q</code></pre>
+
+
+</section>
+<section class="article-section" id="return-as-admin">
+  <h2>mydb ကို postgres နဲ့ ပြန်ဝင်ခြင်း</h2>
+  <p>Owner ပြန်ပြောင်းပြီး စမ်းသပ် role ကို မဖျက်ခင် OS terminal မှာ ဒီ command ရိုက်ပါ။</p>
+
+<pre><code>psql -h localhost -p 5432 -U postgres -d mydb</code></pre>
+
+
+</section>
+<section class="article-section" id="cleanup">
+  <h2>Owner ပြန်ပြောင်းပြီး Login Role ဖျက်ခြင်း</h2>
+  <p>nyinyizin session ကနေ ထွက်ပြီးရင် mydb ထဲကို postgres နဲ့ ဝင်ထားချိန် ဒီ command တွေ run ပါ။ ALTER DATABASE က database owner ကို ပြန်ပြောင်းတယ်။ REASSIGN OWNED က role_demo အပါအဝင် စမ်းသပ် role ပိုင်နေသေးတဲ့ objects တွေကို လွှဲပေးတယ်။ Role မဖျက်ခင် table owner ကို စစ်ပါ။</p>
+
+<pre><code>ALTER DATABASE mydb OWNER TO postgres;
+REASSIGN OWNED BY nyinyizin TO postgres;
+\dt public.role_demo
+DROP USER nyinyizin;
+\du nyinyizin</code></pre>
+<dl class="lesson-terms"><div><dt><code>REASSIGN OWNED</code></dt><dd>လက်ရှိ database ထဲက source role ပိုင် objects တွေနဲ့ databases၊ tablespaces လို shared objects တွေရဲ့ owner ကို ပြောင်းတယ်။ ဒီဥပမာမှာ source က အခုမှ ဆောက်ထားတဲ့ စမ်းသပ် role ပါ။</dd></div><div><dt><code>DROP USER</code></dt><dd>Role ကို ဖျက်တယ်။ ဒီ role ကို မှီနေတဲ့ database objects သို့မဟုတ် privileges ရှိရင် PostgreSQL က ဖျက်ခွင့်မပေးဘူး။ လေ့ကျင့်ခန်းပြင်ပမှာ ဒီလိုဖြစ်ရင် ပြထားတဲ့ dependencies တွေကို စစ်ပြီးမှ ပြန်စမ်းပါ။</dd></div></dl>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/sql-createuser.html">PostgreSQL · CREATE USER</a></li>
+<li><a href="https://www.postgresql.org/docs/19/role-attributes.html">PostgreSQL · Role attributes</a></li>
+<li><a href="https://www.postgresql.org/docs/19/sql-alteruser.html">PostgreSQL · ALTER USER</a></li>
+<li><a href="https://www.postgresql.org/docs/19/sql-alterdatabase.html">PostgreSQL · ALTER DATABASE</a></li>
+<li><a href="https://www.postgresql.org/docs/19/sql-reassign-owned.html">PostgreSQL · REASSIGN OWNED</a></li>
+<li><a href="https://www.postgresql.org/docs/19/sql-dropuser.html">PostgreSQL · DROP USER</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/upserts/">အရင်သင်ခန်းစာ · ON CONFLICT နဲ့ Insert သို့ Update လုပ်ခြင်း</a>
+<a href="/docs/read/my/database/schema-and-access/">နောက်သင်ခန်းစာ · Table ပြင်ခြင်း၊ Access သတ်မှတ်ခြင်းနဲ့ View ဆောက်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

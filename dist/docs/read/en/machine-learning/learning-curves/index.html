@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare training and validation scores as the amount of training data grows.">
+  <title>Diagnose models with learning curves · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/learning-curves/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/learning-curves/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/learning-curves/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#machine-learning">All documentation · Machine Learning</a> <a href="/docs/read/my/machine-learning/learning-curves/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Diagnose models with learning curves</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Compare training and validation scores as the amount of training data grows.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/machine-learning/learning-curves">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#training-size">Plot scores across training sizes</a></li>
+<li><a href="#interpretation">Interpret the gap and the score levels</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="training-size">
+  <h2>Plot scores across training sizes</h2>
+  <p>learning_curve fits a fresh model with different training-set sizes in each cross-validation split. Plot the mean training and validation accuracy at each size. Shuffling the subset selection here suits the independent records in this example. Choose a splitter that matches time ordering or grouped data when those structures exist.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import StratifiedKFold, learning_curve
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+
+X, y = load_iris(return_X_y=True)
+model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
+cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+sizes, train, valid = learning_curve(
+    model, X, y, train_sizes=[0.15, 0.35, 0.60, 1.0], cv=cv,
+    scoring=&quot;accuracy&quot;, shuffle=True, random_state=42,
+)
+
+fig, ax = plt.subplots(layout=&quot;constrained&quot;)
+ax.plot(sizes, train.mean(axis=1), &quot;o-&quot;, label=&quot;Training&quot;)
+ax.plot(sizes, valid.mean(axis=1), &quot;s--&quot;, label=&quot;Validation&quot;)
+ax.set(xlabel=&quot;Training examples per fold&quot;, ylabel=&quot;Mean accuracy&quot;)
+ax.legend()
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/learning-curves-training-size.png" data-image-preview><img src="/docs/media/data/learning-curves-training-size.png" alt="A plot shows mean training and validation accuracy at four increasing training sizes, with one line for each score." width="720" height="409" loading="lazy" decoding="async"></a>
+    <figcaption>At each training size, compare the two scores and the gap between them.</figcaption>
+  </figure>
+
+
+</section>
+<section class="article-section" id="interpretation">
+  <h2>Interpret the gap and the score levels</h2>
+  <p>A persistent gap with a high training score can suggest overfitting. Two similarly low curves can suggest underfitting or limited predictive features. Compare against a baseline and check variation across folds. Keep a separate test set for the final evaluation when choosing models based on validation results.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/learning_curve.html">scikit-learn learning and validation curves</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn cross-validation</a></li>
+<li><a href="https://scikit-learn.org/stable/common_pitfalls.html">scikit-learn common pitfalls and data leakage</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/machine-learning/house-prices/">Previous lesson · House price prediction walkthrough</a>
+<a href="/docs/read/en/machine-learning/feature-engineering/">Next lesson · Feature engineering for numeric and categorical data</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

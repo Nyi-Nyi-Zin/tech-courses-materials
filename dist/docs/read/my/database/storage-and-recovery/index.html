@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Stock ပြင်တဲ့အခါ memory နဲ့ storage မှာ ဘာဖြစ်လဲ၊ PostgreSQL ရုတ်တရက် ရပ်သွားရင် ဘယ်လို ပြန်တက်လာလဲ လေ့လာပါ။">
+  <title>Database Storage နဲ့ Crash Recovery · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/storage-and-recovery/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/storage-and-recovery/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/storage-and-recovery/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/storage-and-recovery/" lang="en" hreflang="en">English</a></nav>
+  <h1>Database Storage နဲ့ Crash Recovery</h1>
+  
+  <p class="intro">Stock ပြင်တဲ့အခါ memory နဲ့ storage မှာ ဘာဖြစ်လဲ၊ PostgreSQL ရုတ်တရက် ရပ်သွားရင် ဘယ်လို ပြန်တက်လာလဲ လေ့လာပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/storage-and-recovery">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#pages-and-buffers">Data Pages နဲ့ Memory Buffers</a></li>
+<li><a href="#wal-and-checkpoints">Write-Ahead Log နဲ့ Checkpoints</a></li>
+<li><a href="#backup-and-recovery">Backup ကနေ Restore လုပ်ရမယ့် အချိန်</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="pages-and-buffers">
+  <h2>Data Pages နဲ့ Memory Buffers</h2>
+  <p>PostgreSQL က table နဲ့ index data ကို page တွေအဖြစ် စီထားတယ်။ Query တစ်ခုက page လိုလာရင် shared buffers ထဲမှာ ရှိပြီးသားကို သုံးနိုင်တယ်၊ မရှိရင် လိုတဲ့ page ကို ဖတ်ယူတယ်။ Memory ထဲမှာ ပြောင်းထားပြီး storage ဆီ မရေးရသေးတဲ့ page ကို dirty page လို့ ခေါ်တယ်။</p>
+
+<pre><code>-- Run twice and compare shared buffer hits and reads.
+EXPLAIN (ANALYZE, BUFFERS)
+SELECT title
+FROM courses
+WHERE id = 1;</code></pre>
+
+
+</section>
+<section class="article-section" id="wal-and-checkpoints">
+  <h2>Write-Ahead Log နဲ့ Checkpoints</h2>
+  <p>Transaction က commit ဖြစ်ချိန်မှာ ပြင်ထားတဲ့ data page က memory ထဲမှာပဲ ရှိနေနိုင်ပါတယ်။ မီးပြတ်သွားရင်လည်း ဒီပြောင်းလဲမှုကို ပြန်ယူနိုင်ဖို့ log လိုအပ်ပါတယ်။ ပြောင်းထားတဲ့ data pages တွေကို storage မှာ အတည်တကျ မရေးခင် PostgreSQL က ပြောင်းလဲမှုတွေကို Write-Ahead Log (WAL) မှာ အရင်မှတ်တယ်။ ပုံမှန် durability setting တွေနဲ့ဆို commit အောင်မြင်ကြောင်း မပြောခင် လိုတဲ့ WAL records ကို storage ဆီ ရေးတယ်။ Data pages ကို နောက်မှ ရေးလို့ရတယ်။</p>
+
+<pre><code>-- PostgreSQL: compare these statistics before and after a write.
+SELECT wal_records, wal_bytes
+FROM pg_stat_wal;
+
+SELECT num_timed, num_requested
+FROM pg_stat_checkpointer;</code></pre>
+<dl class="lesson-terms"><div><dt><code>Checkpoint</code></dt><dd>Recovery စနိုင်မယ့် အမှတ်တစ်ခု ထားဖို့ dirty pages တွေကို storage ဆီ ရေးတယ်။ Recovery လုပ်ရင် checkpoint နဲ့ ဆက်စပ်တဲ့ redo point ကနေ WAL ပြန်ဖတ်ပြီး ပြောင်းလဲမှုတွေ ပြန်သုံးနိုင်တယ်။</dd></div><div><dt><code>Crash recovery</code></dt><dd>Stock ပြင်တာ commit အောင်မြင်ပြီး data page မရေးရသေးခင် server ရပ်သွားရင် ပြန်ဖွင့်တဲ့အခါ WAL မှာ ရေးထားတဲ့ ပြောင်းလဲမှုကို ပြန်သုံးနိုင်တယ်။</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="backup-and-recovery">
+  <h2>Backup ကနေ Restore လုပ်ရမယ့် အချိန်</h2>
+  <p>Data files နဲ့ လိုအပ်တဲ့ WAL ရှိနေသေးရင် PostgreSQL က crash ဖြစ်ပြီးနောက် data ကို ပြန်လည်တည်ငြိမ်အောင် လုပ်နိုင်ပါတယ်။ Data မှားဖျက်မိတာ၊ storage ပျက်တာဆိုရင် စမ်းသပ်ထားတဲ့ backup နဲ့ restore လုပ်နည်းကို သုံးပါ။ သတ်မှတ်ချိန်တစ်ခုဆီ ပြန်သွားဖို့ကိုတော့ သင့်တော်တဲ့ base backup နဲ့ အဲဒီအချိန်ထိ လိုတဲ့ archived WAL တွေ လိုတယ်။</p>
+
+<pre><code># Restore a custom-format backup into a separate test database.
+createdb learning_restore
+pg_restore --exit-on-error -d learning_restore learning_db.dump
+
+# Verify the restored course data.
+psql -d learning_restore -c &quot;SELECT COUNT(*) FROM courses;&quot;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/storage-page-layout.html">PostgreSQL · Database page layout</a></li>
+<li><a href="https://www.postgresql.org/docs/19/wal-intro.html">PostgreSQL · Write-ahead log</a></li>
+<li><a href="https://www.postgresql.org/docs/19/wal-configuration.html">PostgreSQL · Checkpoints</a></li>
+<li><a href="https://www.postgresql.org/docs/19/continuous-archiving.html">PostgreSQL · Continuous archiving and point-in-time recovery</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/backup-and-restore/">အရင်သင်ခန်းစာ · PostgreSQL Tools နဲ့ Backup၊ Restore လုပ်ပါ</a>
+<a href="/docs/read/my/database/database-scaling/">နောက်သင်ခန်းစာ · Database Scaling၊ Replication နဲ့ Sharding</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

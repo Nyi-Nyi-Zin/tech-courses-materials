@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Login အချက်အလက်နဲ့ စာသားတွေ မပို့ခင် browser က သက်ဆိုင်ရာ server ဆီ လုံလုံခြုံခြုံ ချိတ်ဆက်နိုင်ဖို့ လိုပါတယ်။ HTTPS ဆိုတာ TLS နဲ့ ကာကွယ်ထားတဲ့ ချိတ်ဆက်မှုကနေ HTTP သုံးတာပါ။">
+  <title>HTTPS၊ TLS နဲ့ HSTS · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/https-and-tls/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/https-and-tls/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/https-and-tls/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-security">သင်ခန်းစာအားလုံး · Web Security</a> <a href="/docs/read/en/web-security/https-and-tls/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTTPS၊ TLS နဲ့ HSTS</h1>
+  
+  <p class="intro">Login အချက်အလက်နဲ့ စာသားတွေ မပို့ခင် browser က သက်ဆိုင်ရာ server ဆီ လုံလုံခြုံခြုံ ချိတ်ဆက်နိုင်ဖို့ လိုပါတယ်။ HTTPS ဆိုတာ TLS နဲ့ ကာကွယ်ထားတဲ့ ချိတ်ဆက်မှုကနေ HTTP သုံးတာပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-security/https-and-tls">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#transport">ချိတ်ဆက်မှု တစ်ဆင့်ချင်းကို ကာကွယ်ခြင်း</a></li>
+<li><a href="#hsts">နောက်တစ်ကြိမ် ဝင်တဲ့အခါ HTTPS ကို သုံးစေခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="transport">
+  <h2>ချိတ်ဆက်မှု တစ်ဆင့်ချင်းကို ကာကွယ်ခြင်း</h2>
+  <p>Browser က certificate ကို ယုံကြည်ရတဲ့ အဖွဲ့အစည်းက ထုတ်ပေးထားလား၊ ဖွင့်ထားတဲ့ hostname နဲ့ ကိုက်လား စစ်ပါတယ်။ TLS က လမ်းမှာ data ကို ကြားဖတ်တာ၊ ပြောင်းတာတွေကနေ ကာကွယ်ပါတယ်။ Proxy မှာ TLS ချိတ်ဆက်မှု ဆုံးသွားရင် proxy နဲ့ API ကြားက ချိတ်ဆက်မှုကိုလည်း သီးခြား ကာကွယ်ပါ။ Page ထဲက script၊ CSS၊ ပုံတွေကိုလည်း HTTPS နဲ့ ခေါ်ပါ။</p>
+
+<pre><code>Browser to reverse proxy    HTTPS, valid certificate for docs.example
+Reverse proxy to API        Authenticated TLS on the internal connection</code></pre>
+
+
+</section>
+<section class="article-section" id="hsts">
+  <h2>နောက်တစ်ကြိမ် ဝင်တဲ့အခါ HTTPS ကို သုံးစေခြင်း</h2>
+  <p>HTTP နဲ့ ဝင်လာရင် HTTPS ဆီ redirect လုပ်ပါ။ HTTPS အဆင်ပြေကြောင်း စစ်ပြီးမှ HTTPS response မှာ အောက်က header ထည့်ပါ။ Browser က max-age မှာ သတ်မှတ်ထားတဲ့ စက္ကန့်အတွင်း ဒီ host ကို HTTPS နဲ့ပဲ ပြန်ချိတ်ပါမယ်။ အစမှာ သက်တမ်းတိုတိုနဲ့ စမ်းပါ။ Subdomain အားလုံး HTTPS ရပြီဆိုမှ includeSubDomains ထည့်ပါ။</p>
+
+<pre><code>Strict-Transport-Security: max-age=300</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html">OWASP · TLS</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security">MDN · Strict-Transport-Security</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-security/introduction/">အရင်သင်ခန်းစာ · Web Security ဆိုတာ ဘာလဲ</a>
+<a href="/docs/read/my/web-security/origins-and-cors/">နောက်သင်ခန်းစာ · Same-Origin Policy နဲ့ CORS</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

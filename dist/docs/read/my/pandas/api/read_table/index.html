@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Delimiter နဲ့ ခွဲထားတဲ့ စာသားကို DataFrame အဖြစ် ဖတ်ပေးပါတယ်။ ပုံမှန်အားဖြင့် tab နဲ့ ခွဲဖတ်ပါတယ်။">
+  <title>pandas.read_table · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/read_table/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/read_table/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/read_table">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API Reference">
+    <a href="/docs/read/my/pandas/api-reference/#find-an-api">pandas API Reference</a><span aria-hidden="true">/</span><span>Data ဖတ်ခြင်းနှင့် ထုတ်ယူခြင်း</span><a href="/docs/read/en/pandas/api/read_table/" lang="en" hreflang="en">English</a>
+  </nav>
+    <h1><code>pandas.<wbr>read_table</code></h1>
+    <p class="article-version">pandas 3.1.1 · Data ဖတ်ခြင်းနှင့် ထုတ်ယူခြင်း · <span lang="en">function</span></p>
+    <p class="intro">Delimiter နဲ့ ခွဲထားတဲ့ စာသားကို DataFrame အဖြစ် ဖတ်ပေးပါတယ်။ ပုံမှန်အားဖြင့် tab နဲ့ ခွဲဖတ်ပါတယ်။</p>
+
+    <nav class="api-breadcrumbs" aria-label="ဒီစာမျက်နှာမှာ"><ul><li><a href="#syntax">ခေါ်သုံးပုံ</a></li><li><a href="#example">နမူနာ စမ်းကြည့်ရန်</a></li><li><a href="#parameters">ထည့်သွင်းနိုင်တဲ့ Arguments</a></li><li><a href="#returns">ပြန်ပေးတဲ့ ရလဒ်</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>ခေါ်သုံးပုံ</h2><details class="api-full-signature"><summary><code lang="en">pd.read_table(…)</code> <span>ခေါ်သုံးပုံ အပြည့်အစုံ</span></summary><pre><code lang="en">pd.read_table(
+    filepath_or_buffer,
+    *,
+    sep=…,
+    delimiter=…,
+    header=&#39;infer&#39;,
+    names=…,
+    index_col=None,
+    usecols=None,
+    dtype=None,
+    engine=None,
+    converters=None,
+    true_values=None,
+    false_values=None,
+    skipinitialspace=False,
+    skiprows=None,
+    skipfooter=0,
+    nrows=None,
+    na_values=None,
+    keep_default_na=True,
+    na_filter=True,
+    skip_blank_lines=True,
+    parse_dates=None,
+    date_format=None,
+    dayfirst=False,
+    cache_dates=True,
+    iterator=False,
+    chunksize=None,
+    compression=&#39;infer&#39;,
+    thousands=None,
+    decimal=&#39;.&#39;,
+    lineterminator=None,
+    quotechar=&#39;&quot;&#39;,
+    quoting=0,
+    doublequote=True,
+    escapechar=None,
+    comment=None,
+    encoding=None,
+    encoding_errors=&#39;strict&#39;,
+    dialect=None,
+    on_bad_lines=&#39;error&#39;,
+    low_memory=True,
+    memory_map=False,
+    float_precision=None,
+    storage_options=None,
+    dtype_backend=…,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>နမူနာ စမ်းကြည့်ရန်</h2>
+      <p>နမူနာကုဒ်ကို ပြင်ပြီး Run Python နှိပ်ပါ။ ရလဒ်ကို အောက်မှာ ကြည့်နိုင်ပါတယ်။</p>
+      <label><span>Python ကုဒ်</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+from io import StringIO
+print(pd.read_table(StringIO(&quot;id\tunits\nA\t2\n&quot;)))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>ရပ်ရန်</button>
+        <button type="button" data-reset disabled>မူလကုဒ် ပြန်ထားရန်</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="ရလဒ်"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>ထည့်သွင်းနိုင်တဲ့ Arguments</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">ထည့်သွင်းပုံ</th><th scope="col">လက်ခံတဲ့ တန်ဖိုးနဲ့ သုံးပုံ</th></tr></thead><tbody><tr><th scope="row"><code>filepath_or_buffer</code></th>
+      <td>ထည့်ပေးရမယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small></td>
+      <td><span>စာသား (str)၊ ဖိုင်လမ်းကြောင်း object သို့မဟုတ် ဖိုင်ပုံစံ object</span><p>File path၊ URL ဒါမှမဟုတ် StringIO လို ဖိုင်ပုံစံ object တစ်ခု ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>sep</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small></td>
+      <td><span>စာသား (str)</span><p>Field တွေ ဒါမှမဟုတ် စာသားအပိုင်းတွေကြား ခြားထားတဲ့ စာလုံးကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>delimiter</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small></td>
+      <td><span>စာသား (str)</span></td></tr>
+<tr><th scope="row"><code>header</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;infer&#39;</code></td>
+      <td><span>ကိန်းပြည့် (int)၊ ကိန်းပြည့်တွေပါတဲ့ sequence၊ &#39;infer&#39; သို့မဟုတ် None</span><p>ဘယ် row က column အမည်တွေကို ယူမလဲ သတ်မှတ်ဖို့၊ ဒါမှမဟုတ် output မှာ column အမည်တွေ ရေးမရေး ရွေးဖို့ သုံးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>names</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small></td>
+      <td><span>Hashable တန်ဖိုးတွေပါတဲ့ sequence</span><p>Label၊ field ဒါမှမဟုတ် index level တွေအတွက် သုံးမယ့်အမည်တွေကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>index_col</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>Hashable တန်ဖိုး၊ Hashable တန်ဖိုးတွေပါတဲ့ sequence သို့မဟုတ် False</span><p>Row index အဖြစ် သုံးမယ့်တန်ဖိုးတွေ ရှိတဲ့ column ကို ရွေးပါ။</p></td></tr>
+<tr><th scope="row"><code>usecols</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>Hashable တန်ဖိုးတွေပါတဲ့ sequence သို့မဟုတ် ခေါ်သုံးလို့ရတဲ့ function</span><p>ဖတ်မယ့် column တွေကို အမည်၊ နေရာနံပါတ် ဒါမှမဟုတ် ရွေးပေးမယ့် function နဲ့ သတ်မှတ်နိုင်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>dtype</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>dtype သို့မဟုတ် Hashable key ကနေ dtype ကို ချိတ်ထားတဲ့ dict</span><p>ဒေတာပြောင်းတဲ့အခါ ဒါမှမဟုတ် ရလဒ်မှာ သုံးမယ့် data type ကို ရွေးပါ။</p></td></tr>
+<tr><th scope="row"><code>engine</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>{&#39;c&#39;၊ &#39;python&#39;၊ &#39;pyarrow&#39;}</span><p>ဒီအလုပ်ကို လုပ်ပေးမယ့် engine သို့မဟုတ် implementation ကို ရွေးပါ။</p></td></tr>
+<tr><th scope="row"><code>converters</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>Hashable key ကနေ function ကို ချိတ်ထားတဲ့ dict</span><p>Column အမည် ဒါမှမဟုတ် နေရာနံပါတ်တစ်ခုစီအတွက် data type ပြောင်းပေးမယ့် function ကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>true_values</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>list</span><p>ဖတ်တဲ့အခါ True အဖြစ် ပြောင်းမယ့် မူလတန်ဖိုးတွေကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>false_values</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>list</span><p>ဖတ်တဲ့အခါ False အဖြစ် ပြောင်းမယ့် မူလတန်ဖိုးတွေကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>skipinitialspace</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>skiprows</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>ကိန်းပြည့် (int)၊ ကိန်းပြည့် list သို့မဟုတ် ခေါ်သုံးလို့ရတဲ့ function</span><p>DataFrame မဆောက်ခင် ကျော်ထားမယ့် input row တွေကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>skipfooter</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>0</code></td>
+      <td><span>ကိန်းပြည့် (int)</span><p>Input ရဲ့ နောက်ဆုံးကနေ ကျော်ထားမယ့် line အရေအတွက်ကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>nrows</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>ကိန်းပြည့် (int)</span><p>ဖတ်မယ့် သို့မဟုတ် ပြမယ့် row အရေအတွက်ကို ကန့်သတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>na_values</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>Hashable တန်ဖိုး၊ Hashable တန်ဖိုးတွေပါတဲ့ iterable သို့မဟုတ် Hashable key ကနေ iterable ကို ချိတ်ထားတဲ့ dict</span><p>တွေ့တဲ့အခါ တန်ဖိုးပျောက်နေတယ်လို့ သတ်မှတ်ရမယ့် စာသား ဒါမှမဟုတ် တန်ဖိုးတွေကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>keep_default_na</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool)</span><p>ကိုယ်တိုင် ထည့်ထားတဲ့ သတ်မှတ်ချက်တွေနဲ့အတူ pandas ရဲ့ ပုံမှန် missing value စာသားတွေကိုပါ သုံးမသုံး ရွေးနိုင်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>na_filter</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>skip_blank_lines</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>parse_dates</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>True / False (bool)၊ None သို့မဟုတ် Hashable တန်ဖိုးတွေပါတဲ့ list</span><p>ဖတ်နေချိန်မှာ ရွေးထားတဲ့ field တွေကို ရက်စွဲအဖြစ် ပြောင်းမပြောင်း သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>date_format</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>Format စာသား (str) သို့မဟုတ် column တစ်ခုစီအတွက် format သတ်မှတ်တဲ့ dict</span><p>ရက်စွဲနဲ့အချိန်ကို ဖတ်ဖို့ ဒါမှမဟုတ် ပြသဖို့ &quot;%Y-%m-%d&quot; လို ပုံစံတစ်ခု သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>dayfirst</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True / False (bool)</span><p>ရက်နဲ့ လကို အစဉ်ခွဲမရတဲ့ ရက်စွဲစာသားတွေကို ဖတ်တဲ့အခါ ရက်ကို ရှေ့မှာ ယူပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>cache_dates</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>iterator</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True / False (bool)</span><p>ဒေတာကို အပိုင်းလိုက် ဖတ်နိုင်တဲ့ iterable reader ကို ပြန်ပေးဖို့ သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>chunksize</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>ကိန်းပြည့် (int)</span><p>တစ်သုတ်စီမှာ ဖတ်မယ့် သို့မဟုတ် ရေးမယ့် row အရေအတွက်ကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>compression</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;infer&#39;</code></td>
+      <td><span>စာသား (str) သို့မဟုတ် dict</span><p>ဒေတာကို ချုံ့မလား၊ ပြန်ဖြည်မလားနဲ့ ဘယ် compression ပုံစံ သုံးမလဲ ရွေးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>thousands</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str) (length 1)</span><p>ဂဏန်းတွေကို အစုလိုက် ခြားပေးတဲ့ စာလုံးကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>decimal</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;.&#39;</code></td>
+      <td><span>စာသား (str) (length 1)</span><p>ဒဿမအမှတ်အဖြစ် သုံးတဲ့ စာလုံးကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>lineterminator</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str) (length 1)</span><p>Record တစ်ခုစီကို အဆုံးသတ်ပေးတဲ့ စာလုံး ဒါမှမဟုတ် စာသားကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>quotechar</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;&quot;&#39;</code></td>
+      <td><span>စာသား (str) (length 1)</span><p>CSV field ကို အဖွင့်အပိတ် လုပ်ပေးတဲ့ quote စာလုံးကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>quoting</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>0</code></td>
+      <td><span>{0၊ 1၊ 2၊ 3}</span><p>Python csv module ရဲ့ quoting constant တွေထဲက တစ်ခုနဲ့ quote သုံးပုံကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>doublequote</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool)</span><p>Field ထဲမှာ ဆက်တိုက်ပါတဲ့ quote နှစ်လုံးကို quote တစ်လုံးအဖြစ် ယူမယူ သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>escapechar</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str) (length 1)</span><p>အထူးသတ်မှတ်ချက်ရှိတဲ့ စာလုံးတစ်လုံးကို ပုံမှန်စာလုံးအဖြစ် ဖတ်ဖို့ ရှေ့မှာ ထားမယ့် escape စာလုံးကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>comment</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str) (length 1)</span><p>စာသားဖတ်တဲ့အခါ comment စတဲ့နေရာကို ပြပေးမယ့် စာလုံးကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>encoding</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span><p>&quot;utf-8&quot; လို စာသား encoding အမည်ကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>encoding_errors</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;strict&#39;</code></td>
+      <td><span>စာသား (str)</span><p>စာသားကို encode သို့မဟုတ် decode လုပ်မရတဲ့အခါ ဘယ်လို ကိုင်တွယ်မလဲ သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>dialect</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str) သို့မဟုတ် csv.Dialect</span></td></tr>
+<tr><th scope="row"><code>on_bad_lines</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;error&#39;</code></td>
+      <td><span>{&#39;error&#39;၊ &#39;warn&#39;၊ &#39;skip&#39;} သို့မဟုတ် ခေါ်သုံးလို့ရတဲ့ function (callable)</span></td></tr>
+<tr><th scope="row"><code>low_memory</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>memory_map</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>float_precision</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>{&#39;high&#39;၊ &#39;legacy&#39;၊ &#39;round_trip&#39;}</span></td></tr>
+<tr><th scope="row"><code>storage_options</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>dict</span><p>Connection setting ဒါမှမဟုတ် HTTP header လို ဒေတာသိမ်းဆည်းရာမှာ သုံးမယ့် option တွေကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>dtype_backend</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small></td>
+      <td><span>{&#39;numpy_nullable&#39;၊ &#39;pyarrow&#39;}</span><p>Missing value လက်ခံတဲ့ NumPy-backed dtype နဲ့ Arrow-backed dtype တို့ထဲက ရွေးပါတယ်။</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>ပြန်ပေးတဲ့ ရလဒ်</h2><p>ပြန်ပေးတဲ့ အမျိုးအစားက DataFrame သို့မဟုတ် TextFileReader ဖြစ်ပါတယ်။</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_table.html#pandas.read_table">pandas တရားဝင် ကိုးကားချက်</a>
+      <nav class="pagination" aria-label="pandas API Reference"><a href="/docs/read/my/pandas/api/read_stata/"><span>အရင် API</span><strong>pandas.read_stata</strong></a><a href="/docs/read/my/pandas/api/read_xml/"><span>နောက် API</span><strong>pandas.read_xml</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

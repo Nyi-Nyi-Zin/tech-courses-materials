@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Generics က function တစ်ခုကို type တစ်ခုတည်း မကန့်သတ်ဘဲ types တွေရဲ့ ဆက်စပ်မှုကို ထိန်းပေးပါတယ်။">
+  <title>Generics နှင့် Async Types · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/generics/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/generics/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/generics/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#typescript">သင်ခန်းစာအားလုံး · TypeScript</a> <a href="/docs/read/en/typescript/generics/" lang="en" hreflang="en">English</a></nav>
+  <h1>Generics နှင့် Async Types</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">Generics က function တစ်ခုကို type တစ်ခုတည်း မကန့်သတ်ဘဲ types တွေရဲ့ ဆက်စပ်မှုကို ထိန်းပေးပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/typescript/generics">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#type-param">Type မပျောက်ဘဲ Function ပြန်သုံးခြင်း</a></li>
+<li><a href="#promise">Async Result Type သတ်မှတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="type-param">
+  <h2>Type မပျောက်ဘဲ Function ပြန်သုံးခြင်း</h2>
+  <p>Type parameter T က array element type နဲ့ return type ကို ချိတ်ပေးပါတယ်။ Array အလွတ်အတွက် result မရှိနိုင်လို့ undefined ထည့်ပါ။</p>
+
+<pre><code>function first&lt;T&gt;(items: readonly T[]): T | undefined {
+  return items[0];
+}
+
+const firstProduct = first([&quot;Pen&quot;, &quot;Notebook&quot;]); // string | undefined</code></pre>
+
+
+</section>
+<section class="article-section" id="promise">
+  <h2>Async Result Type သတ်မှတ်ခြင်း</h2>
+  <p>Async function က Promise ပြန်ပါတယ်။ API response ဝင်လာတဲ့အခါ type သတ်မှတ်ပြီး အသုံးမပြုခင် data ပုံစံကို runtime မှာ စစ်ပါ။</p>
+
+<pre><code>async function positivePrices(load: () =&gt; Promise&lt;number[]&gt;): Promise&lt;number[]&gt; {
+  const prices = await load();
+  return prices.filter(price =&gt; price &gt; 0);
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">Generics</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">Everyday types</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/typescript/types/">အရင်သင်ခန်းစာ · Object Types၊ Unions နှင့် Narrowing</a>
+<a href="/docs/read/my/typescript/function-contracts/">နောက်သင်ခန်းစာ · Callbacks နှင့် Function Signatures</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

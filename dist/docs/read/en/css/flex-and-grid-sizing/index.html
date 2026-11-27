@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Set the starting size of a flex item and control how it grows or shrinks. Then use grid lines to place items across tracks.">
+  <title>Flex sizing and grid placement · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/flex-and-grid-sizing/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/flex-and-grid-sizing/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/flex-and-grid-sizing/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/flex-and-grid-sizing/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Flex sizing and grid placement</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Set the starting size of a flex item and control how it grows or shrinks. Then use grid lines to place items across tracks.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/flex-and-grid-sizing">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#basis">Set a starting size with flex-basis</a></li>
+<li><a href="#grow">Share available space with flex-grow</a></li>
+<li><a href="#shrink">Make items fit with flex-shrink</a></li>
+<li><a href="#grid-column">Span columns with grid-column</a></li>
+<li><a href="#grid-row">Span rows with grid-row</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="basis">
+  <h2>Set a starting size with flex-basis</h2>
+  <p>flex-basis sets the starting size along the main axis. The browser can adjust it afterward using grow and shrink. Here both are zero.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Set a starting size with flex-basis&lt;/title&gt;
+  &lt;style&gt;
+.row { display: flex; flex-wrap: wrap; gap: 4px; }
+.row &gt; div { flex: 0 0 72px; box-sizing: border-box; }
+.row &gt; div { background: #d8efeb; padding: 6px; border: 1px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;row&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Each item’s width is 72px, including its padding and border.</p>
+
+</section>
+<section class="article-section" id="grow">
+  <h2>Share available space with flex-grow</h2>
+  <p>flex-grow distributes leftover main-axis space. With equal bases and no size constraints, a grow factor of 2 receives twice the extra space of a factor of 1.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Share available space with flex-grow&lt;/title&gt;
+  &lt;style&gt;
+.row { display: flex; max-width: 330px; }
+.row &gt; div { flex: 1 1 56px; }
+.row &gt; :nth-child(2) { flex-grow: 2; }
+.row &gt; div { background: #d8efeb; padding: 6px; border: 1px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;row&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Notebook receives more extra width. Set its grow factor to 1 to make the widths equal.</p>
+
+</section>
+<section class="article-section" id="shrink">
+  <h2>Make items fit with flex-shrink</h2>
+  <p>When items need more room than is available, the browser shrinks each item using flex-shrink weighted by its base size. Zero keeps an item out of that calculation. A minimum width can limit shrinking.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Make items fit with flex-shrink&lt;/title&gt;
+  &lt;style&gt;
+.row { display: flex; max-width: 250px; }
+.row &gt; div { flex: 0 1 100px; box-sizing: border-box; min-width: 0; overflow-wrap: anywhere; }
+.row &gt; :nth-child(2) { flex-shrink: 0; }
+.row &gt; div { background: #d8efeb; padding: 6px; border: 1px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;row&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Notebook keeps its starting width. Give it flex-shrink: 1 to make all three shrink evenly.</p>
+
+</section>
+<section class="article-section" id="grid-column">
+  <h2>Span columns with grid-column</h2>
+  <p>Three columns have four vertical lines along their edges. grid-column: 1 / 3 starts at line 1 and ends at line 3, so it covers two columns.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Span columns with grid-column&lt;/title&gt;
+  &lt;style&gt;
+.row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.row &gt; :first-child { grid-column: 1 / 3; }
+.row &gt; div { background: #d8efeb; padding: 6px; border: 1px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;row&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Pen spans two columns. Notebook fills the third.</p>
+
+</section>
+<section class="article-section" id="grid-row">
+  <h2>Span rows with grid-row</h2>
+  <p>Row lines mark the top and bottom edge of each row. grid-row: 1 / span 2 starts at the first line and takes up two rows.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Span rows with grid-row&lt;/title&gt;
+  &lt;style&gt;
+.row { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 40px; gap: 4px; }
+.row &gt; :first-child { grid-column: 1; grid-row: 1 / span 2; }
+.row &gt; div { background: #d8efeb; padding: 6px; border: 1px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;row&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Pen spans two rows on the left. Notebook and Folder stack on the right.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-basis">MDN · flex-basis</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-grow">MDN · flex-grow</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-shrink">MDN · flex-shrink</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-column">MDN · grid-column</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-row">MDN · grid-row</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/grid/">Previous lesson · Grid</a>
+<a href="/docs/read/en/css/positioning/">Next lesson · Positioning and stacking order</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

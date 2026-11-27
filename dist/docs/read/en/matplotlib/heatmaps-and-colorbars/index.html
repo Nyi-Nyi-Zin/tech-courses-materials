@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Display a numerical matrix and report how values map to color.">
+  <title>Heatmaps and colorbars · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/heatmaps-and-colorbars/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/heatmaps-and-colorbars/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/heatmaps-and-colorbars/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#matplotlib">All documentation · Matplotlib</a> <a href="/docs/read/my/matplotlib/heatmaps-and-colorbars/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Heatmaps and colorbars</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">Display a numerical matrix and report how values map to color.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/matplotlib/heatmaps-and-colorbars">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#heatmap">Map a matrix to pixels</a></li>
+<li><a href="#normalization">Use the same scale for comparisons</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="heatmap">
+  <h2>Map a matrix to pixels</h2>
+  <p>imshow displays a regular matrix as an image. Add a colorbar to describe the scale. Label both axes so rows and columns retain their meaning.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(layout=&quot;constrained&quot;)
+image = ax.imshow([[4, 7, 5], [8, 6, 3]], cmap=&quot;viridis&quot;, vmin=0, vmax=10)
+ax.set_xticks([0, 1, 2], [&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;])
+ax.set_yticks([0, 1], [&quot;Store A&quot;, &quot;Store B&quot;])
+fig.colorbar(image, ax=ax, label=&quot;Units&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/heatmaps-and-colorbars-heatmap.png" data-image-preview><img src="/docs/media/data/heatmaps-and-colorbars-heatmap.png" alt="Heatmap of units sold at two stores from Monday to Wednesday. The colorbar ranges from zero to ten units." width="658" height="499" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="normalization">
+  <h2>Use the same scale for comparisons</h2>
+  <p>Comparable heatmaps need a shared normalization or the same vmin and vmax. Select a diverging scale when deviations on both sides of a meaningful midpoint matter.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.imshow.html">Axes.imshow</a></li>
+<li><a href="https://matplotlib.org/stable/users/explain/colors/colormaps.html">Choosing colormaps</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/matplotlib/uncertainty-charts/">Previous lesson · Show uncertainty with error bars and bands</a>
+<a href="/docs/read/en/matplotlib/annotations-and-ticks/">Next lesson · Annotate points and format ticks</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

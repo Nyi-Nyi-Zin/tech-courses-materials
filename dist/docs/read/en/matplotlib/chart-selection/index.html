@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Choose how to display categories, trends, distributions, and relationships.">
+  <title>Choose a chart for the question · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/chart-selection/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/chart-selection/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/chart-selection/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#matplotlib">All documentation · Matplotlib</a> <a href="/docs/read/my/matplotlib/chart-selection/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Choose a chart for the question</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">Choose how to display categories, trends, distributions, and relationships.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/matplotlib/chart-selection">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#categories-and-time">Compare categories and show changes over time</a></li>
+<li><a href="#distributions-and-relationships">Show a distribution or a relationship</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="categories-and-time">
+  <h2>Compare categories and show changes over time</h2>
+  <p>Use a bar chart to compare distinct categories. Start a magnitude bar chart at zero because bar length encodes size. Use a line chart when the horizontal axis has a meaningful sequence such as time. For irregularly spaced dates, plot date values so the spacing reflects elapsed time.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, (by_store, by_month) = plt.subplots(1, 2, layout=&quot;constrained&quot;)
+bars = by_store.bar([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], [8, 12, 6])
+by_store.bar_label(bars)
+by_store.set(ylim=(0, 14), xlabel=&quot;Store&quot;, ylabel=&quot;Orders&quot;)
+
+by_month.plot([&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;], [20, 24, 22], marker=&quot;o&quot;)
+by_month.set(xlabel=&quot;Month&quot;, ylabel=&quot;Orders&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/chart-selection-categories-and-time.png" data-image-preview><img src="/docs/media/data/chart-selection-categories-and-time.png" alt="Bars compare stores A, B, and C at 8, 12, and 6 orders. A line shows 20, 24, and 22 orders from January to March." width="720" height="375" loading="lazy" decoding="async"></a>
+    <figcaption>Both examples measure orders. The horizontal axis determines what each chart compares.</figcaption>
+  </figure>
+
+
+</section>
+<section class="article-section" id="distributions-and-relationships">
+  <h2>Show a distribution or a relationship</h2>
+  <p>A histogram groups one numeric measure into intervals. Change the bin width to check whether the visible pattern is stable. A scatter plot places each observation at its two numeric coordinates. Inspect overlap, unusual points, and possible subgroups before interpreting the pattern.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, (histogram, scatter) = plt.subplots(1, 2, layout=&quot;constrained&quot;)
+durations = [12, 16, 17, 22, 24, 28, 33, 35]
+histogram.hist(durations, bins=[10, 20, 30, 40], edgecolor=&quot;white&quot;)
+histogram.set(xlabel=&quot;Duration (min)&quot;, ylabel=&quot;Deliveries&quot;)
+
+distance = [1, 2, 2.5, 3, 4, 5, 5.5, 6]
+scatter.scatter(distance, durations)
+scatter.set(xlabel=&quot;Distance (km)&quot;, ylabel=&quot;Duration (min)&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/chart-selection-distributions-and-relationships.png" data-image-preview><img src="/docs/media/data/chart-selection-distributions-and-relationships.png" alt="The histogram counts durations in three bins with 3, 3, and 2 deliveries. The scatter plot shows eight distances and their paired durations." width="720" height="375" loading="lazy" decoding="async"></a>
+    <figcaption>The same delivery durations answer two different questions when plotted alone or paired with distance.</figcaption>
+  </figure>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://matplotlib.org/stable/plot_types/">Matplotlib gallery of plot types</a></li>
+<li><a href="https://matplotlib.org/stable/gallery/lines_bars_and_markers/bar_label_demo.html">Matplotlib bar labels</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/matplotlib/figures-and-axes/">Previous lesson · Figures, Axes, and the plotting interface</a>
+<a href="/docs/read/en/matplotlib/lines-and-bars/">Next lesson · Line charts and bar charts</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

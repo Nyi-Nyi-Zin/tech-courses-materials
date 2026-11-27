@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Authentication establishes who signed in. The same account can often be reached through a password, a passkey, or a recovery flow. Each entry point needs protection.">
+  <title>Authentication, Passwords, and Account Recovery · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/authentication/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/authentication/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/authentication/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/authentication/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Authentication, Passwords, and Account Recovery</h1>
+  
+  <p class="intro">Authentication establishes who signed in. The same account can often be reached through a password, a passkey, or a recovery flow. Each entry point needs protection.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/authentication">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#passwords">Store a password verifier</a></li>
+<li><a href="#factors">Use independent authentication factors</a></li>
+<li><a href="#mfa-recovery">Protect sign-in and recovery together</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="passwords">
+  <h2>Store a password verifier</h2>
+  <p>Use a maintained password library with a slow password hash such as Argon2id. Let it generate a unique salt and store the encoded result including the work settings. At login use its verify function. Choose a cost your service can sustain and increase it over time. The example shows the library workflow in pseudocode.</p>
+
+<pre><code>registration: encoded = passwordLibrary.hash(password, algorithm=&quot;argon2id&quot;)
+login:        valid = passwordLibrary.verify(encoded, submittedPassword)</code></pre>
+
+
+</section>
+<section class="article-section" id="factors">
+  <h2>Use independent authentication factors</h2>
+  <p>Multifactor authentication (MFA) combines independent factors such as a password and possession of a registered authenticator. A second password is still the same factor. For sensitive accounts, offer phishing-resistant passkeys with user verification. Protect factor enrollment and replacement with reauthentication and notify the owner of changes.</p>
+
+<pre><code>Knowledge    Account password
+Possession   Registered security key or authenticator
+Recovery     Single-use backup codes stored securely by the owner</code></pre>
+
+
+</section>
+<section class="article-section" id="mfa-recovery">
+  <h2>Protect sign-in and recovery together</h2>
+  <p>Use throttling and offer phishing-resistant authentication such as WebAuthn passkeys. For a reset request, return the same public message and comparable response timing whether the email exists or not. Deliver a random, expiring, single-use token through the verified recovery channel. After reset, notify the owner and revoke existing sessions according to policy.</p>
+
+<pre><code>Public response    If the account exists, recovery instructions will follow.
+Recovery token     Random, short-lived, single use
+Sensitive change   Reauthenticate before changing the recovery address</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html">OWASP · Authentication</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html">OWASP · Password storage</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html">OWASP · Account recovery</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html">OWASP · MFA</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/origins-and-cors/">Previous lesson · Same-Origin Policy and CORS</a>
+<a href="/docs/read/en/web-security/sessions-and-tokens/">Next lesson · Sessions, Cookies, OAuth, and OpenID Connect</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

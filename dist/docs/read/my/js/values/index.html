@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Value ဆိုတာ program က သုံးမယ့် အချက်အလက်တစ်ခုပါ။ အမျိုးအစား ခွဲသိပုံ၊ နာမည်တပ်ပြီး ပြန်သုံးပုံ၊ တွက်တာနဲ့ နှိုင်းတာတွေမှာ သုံးပုံကို ကြည့်ပါမယ်။">
+  <title>Value၊ Type၊ Variable နဲ့ Operator · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/values/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/values/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/values/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/values/" lang="en" hreflang="en">English</a></nav>
+  <h1>Value၊ Type၊ Variable နဲ့ Operator</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Value ဆိုတာ program က သုံးမယ့် အချက်အလက်တစ်ခုပါ။ အမျိုးအစား ခွဲသိပုံ၊ နာမည်တပ်ပြီး ပြန်သုံးပုံ၊ တွက်တာနဲ့ နှိုင်းတာတွေမှာ သုံးပုံကို ကြည့်ပါမယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/values">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#types">String၊ Number နဲ့ Boolean ခွဲသိခြင်း</a></li>
+<li><a href="#bindings">const နဲ့ let သုံးပြီး တန်ဖိုး နာမည်ပေးခြင်း</a></li>
+<li><a href="#operators">Operator နဲ့ တွက်ခြင်း၊ နှိုင်းခြင်း</a></li>
+<li><a href="#conversion">မတွက်ခင် စာသားကို ဂဏန်း ပြောင်းခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="types">
+  <h2>String၊ Number နဲ့ Boolean ခွဲသိခြင်း</h2>
+  <p>Type က value အမျိုးအစားကို ပြောပါတယ်။ Quotation marks ကြားက စာသားက string ပါ။ Quote မပါတဲ့ 2500 လို တန်ဖိုးက number ပါ။ true နဲ့ false က boolean တန်ဖိုးတွေပါ။ typeof က type နာမည်ကို string အဖြစ် ပြန်ပေးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>console.log(typeof &quot;Pen&quot;);
+console.log(typeof 2500);
+console.log(typeof true);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Console မှာ string၊ number၊ boolean ဆိုပြီး သုံးကြောင်း ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="bindings">
+  <h2>const နဲ့ let သုံးပြီး တန်ဖိုး နာမည်ပေးခြင်း</h2>
+  <p>Variable ဆိုတာ တန်ဖိုးကို ပြန်သုံးဖို့ ပေးထားတဲ့ နာမည်ပါ။ Declaration နဲ့ နာမည်အသစ် မိတ်ဆက်ပါတယ်။ = နဲ့ တန်ဖိုး ထည့်ပေးပါတယ်။ စရေးတုန်းက ထည့်ထားတဲ့ တန်ဖိုးကိုပဲ နာမည်က ဆက်ရည်ညွှန်းစေချင်ရင် const သုံးပါ။ နောက်ပိုင်း ထပ်ထည့်ပြောင်းဖို့ လိုရင် let သုံးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const price = 2500;
+let quantity = 1;
+cups = 2;
+console.log(price, quantity);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Console မှာ 2500 နဲ့ 2 ပေါ်ပါမယ်။ quantity ပြောင်းတာကြောင့် price မပြောင်းပါဘူး။</p>
+<p class="example-check"><strong>ရလဒ်ကွာနေရင်</strong> နာမည်ကြေညာပြီးသားလို့ error ပြရင် အဲဒီ browser tab ကို reload လုပ်ပြီးမှ ထပ်စမ်းပါ။</p>
+</section>
+<section class="article-section" id="operators">
+  <h2>Operator နဲ့ တွက်ခြင်း၊ နှိုင်းခြင်း</h2>
+  <p>Operator ဆိုတာ တန်ဖိုးတွေပေါ်မှာ အလုပ်လုပ်တဲ့ သင်္ကေတပါ။ * က မြှောက်၊ + က ဂဏန်းနှစ်ခု ပေါင်း၊ &gt;= က ဘယ်တန်ဖိုးက ညာတန်ဖိုးထက် ကြီးလား သို့မဟုတ် ညီလား စစ်တာပါ။ === က type ပါ တူမတူ စစ်လို့ number 3 နဲ့ string &quot;3&quot; က မတူပါဘူး။ စစ်ချက်နှစ်ခုလုံး မှန်ရမယ်ဆို &amp;&amp; သုံးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>console.log(2500 * 2);
+console.log(3 === &quot;3&quot;);
+console.log(3 &gt;= 1 &amp;&amp; 3 &lt;= 6);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> 5000၊ false၊ true ဆိုပြီး အစဉ်လိုက် ထွက်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="conversion">
+  <h2>မတွက်ခင် စာသားကို ဂဏန်း ပြောင်းခြင်း</h2>
+  <p>HTML input မှာ ရိုက်ထားတဲ့ တန်ဖိုးကို ပုံမှန်အားဖြင့် string အနေနဲ့ ဖတ်ပါတယ်။ Number() နဲ့ ဂဏန်းပုံစံ စာသားကို number ပြောင်းနိုင်ပါတယ်။ NaN က ဂဏန်းပြောင်းလို့မရတာကို ဖော်ပြနိုင်တဲ့ အထူးတန်ဖိုးပါ။ Number.isNaN() နဲ့ စစ်နိုင်ပါတယ်။ Number(&quot;&quot;) က 0 ရလို့ အကွက်လွတ်ကို သီးသန့် စစ်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const count = Number(&quot;3&quot;);
+console.log(count + 1);
+console.log(Number.isNaN(Number(&quot;three&quot;)));</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Console မှာ 4 နဲ့ true ပေါ်ပါမယ်။ &quot;3&quot; + 1 စမ်းရင် စာသားဆက်သွားလို့ &quot;31&quot; ရတာ မြင်ရပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types">MDN · Grammar and types</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators">MDN · Expressions and operators</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/getting-started/">အရင်သင်ခန်းစာ · ပထမဆုံး JavaScript Run ခြင်း</a>
+<a href="/docs/read/my/js/missing-values-and-templates/">နောက်သင်ခန်းစာ · Missing Values နဲ့ Template Literals</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

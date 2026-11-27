@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="အချက်အလက် ဖွင့်ပြတာ၊ form ပို့တာလို လုပ်ဆောင်ချက်တစ်ခု စဖို့ button သုံးပါတယ်။ Keyboard ကနေ နှိပ်လို့ရတာကို browser က ကိုင်ပေးပါတယ်။">
+  <title>HTML Buttons &lt;button&gt; · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/buttons/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/buttons/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/buttons/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/buttons/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTML Buttons &lt;button&gt;</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">အချက်အလက် ဖွင့်ပြတာ၊ form ပို့တာလို လုပ်ဆောင်ချက်တစ်ခု စဖို့ button သုံးပါတယ်။ Keyboard ကနေ နှိပ်လို့ရတာကို browser က ကိုင်ပေးပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/buttons">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#basics">&lt;button&gt; က ဘာလုပ်ပေးလဲ။</a></li>
+<li><a href="#action">type=&quot;button&quot; နဲ့ လုပ်ဆောင်ချက်တစ်ခု စခြင်း</a></li>
+<li><a href="#submit">type=&quot;submit&quot; နဲ့ Form ပို့ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="basics">
+  <h2>&lt;button&gt; က ဘာလုပ်ပေးလဲ။</h2>
+  <p>Button ဆိုတာ user နှိပ်လို့ရတဲ့ control ပါ။ Tag ကြားက စာသားက ခလုတ်နာမည်ပါ။ ပုံမှန် button ကို Tab နဲ့ ရောက်နိုင်ပါတယ်။ disabled ထည့်ရင် နှိပ်လို့မရတော့ပါဘူး။ ခလုတ်နှိပ်လို့ ကိုယ်ပေးချင်တဲ့ အလုပ်ကို လုပ်စေဖို့ JavaScript လို ညွှန်ကြားချက် ထည့်နိုင်ပါတယ်။ နောက်နမူနာမှာ ထည့်ပါမယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;button type=&quot;button&quot;&gt;Add to cart&lt;/button&gt;
+&lt;button type=&quot;button&quot; disabled&gt;Out of stock&lt;/button&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Tab နှိပ်ရင် ပထမ button ဆီ ရောက်ပါတယ်။ Disabled button ကို ကျော်သွားပါမယ်။ ပထမ button မှာ လုပ်ဆောင်ချက် ထည့်လို့ရပါတယ်။</p>
+
+</section>
+<section class="article-section" id="action">
+  <h2>type=&quot;button&quot; နဲ့ လုပ်ဆောင်ချက်တစ်ခု စခြင်း</h2>
+  <p>JavaScript နဲ့ ကိုယ်ပိုင်လုပ်ဆောင်ချက် လုပ်မယ့်ခလုတ်မှာ type=&quot;button&quot; လို့ ရေးပါ။ Form ထဲမှာဆို အထူးသဖြင့် အရေးကြီးပါတယ်။ Mouse နဲ့ နှိပ်တဲ့အခါ ဒါမှမဟုတ် button ကို focus ရောက်နေချိန် Enter၊ Space နဲ့ နှိပ်လိုက်တဲ့အခါ browser က click event ထုတ်ပေးပါတယ်။ ဒီနမူနာမှာ JavaScript က click ကို စောင့်ပြီး paragraph ကို ပြတာနဲ့ ဖျောက်တာ ပြောင်းပေးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;button type=&quot;button&quot; id=&quot;toggle&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;hours&quot;&gt;Show hours&lt;/button&gt;
+&lt;p id=&quot;hours&quot; hidden&gt;Open 9:00 AM to 6:00 PM.&lt;/p&gt;
+&lt;script&gt;
+  const button = document.querySelector(&quot;#toggle&quot;);
+  const hours = document.querySelector(&quot;#hours&quot;);
+  button.addEventListener(&quot;click&quot;, () =&gt; {
+    hours.hidden = !hours.hidden;
+    button.textContent = hours.hidden ? &quot;Show hours&quot; : &quot;Hide hours&quot;;
+    button.setAttribute(&quot;aria-expanded&quot;, String(!hours.hidden));
+  });
+&lt;/script&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမတစ်ချက် နှိပ်ရင် ဆိုင်ဖွင့်ချိန် ပေါ်ပြီး နောက်တစ်ချက် နှိပ်ရင် ပြန်ပျောက်ပါတယ်။ ဖွင့်ထားလား၊ ပိတ်ထားလားကို assistive tools တွေ သိနိုင်ဖို့ aria-expanded ကိုပါ ပြောင်းပေးထားပါတယ်။</p>
+
+</section>
+<section class="article-section" id="submit">
+  <h2>type=&quot;submit&quot; နဲ့ Form ပို့ခြင်း</h2>
+  <p>Submit button ကို နှိပ်ရင် browser က form ကို စစ်ပြီး ပို့ဖို့ ကြိုးစားပါတယ်။ Form ထဲက ပုံမှန် button မှာ type မရေးရင် အများအားဖြင့် submit button အဖြစ် အလုပ်လုပ်ပါတယ်။ Click တစ်ချက်နဲ့ ဘာဖြစ်မလဲ ရှင်းအောင် type ကို ထည့်ရေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;form method=&quot;get&quot;&gt;
+  &lt;label for=&quot;query&quot;&gt;Search term&lt;/label&gt;
+  &lt;input id=&quot;query&quot; name=&quot;q&quot; required&gt;
+  &lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အကွက်လွတ်ရင် browser က submit မလုပ်ပေးပါဘူး။ HTML ဖိုင်သီးသန့်မှာ pen ရိုက်ပြီး submit လုပ်ရင် URL မှာ ?q=pen ပေါ်ပါတယ်။ ရှာဖွေမှုရလဒ် ထုတ်ပေးဖို့တော့ query ကို ကိုင်တွယ်မယ့် search service လိုပါတယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/form-elements.html#the-button-element">WHATWG · The button element</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/form-constraints/">အရင်သင်ခန်းစာ · HTML Form Constraints</a>
+<a href="/docs/read/my/html/dialogs-and-popovers/">နောက်သင်ခန်းစာ · Modal Dialogs &lt;dialog&gt;</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Get positions describing the order that sorts the values.">
+  <title>pandas.api.extensions.ExtensionArray.argsort · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/api.extensions.ExtensionArray.argsort/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/api.extensions.ExtensionArray.argsort/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/api.extensions.ExtensionArray.argsort">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Extensions</span><a href="/docs/read/my/pandas/api/api.extensions.ExtensionArray.argsort/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>api.<wbr>extensions.<wbr>ExtensionArray.<wbr>argsort</code></h1>
+    <p class="article-version">pandas 3.1.1 · Extensions · <span lang="en">method</span></p>
+    <p class="intro">Get positions describing the order that sorts the values.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><pre><code lang="en">pd.api.extensions.ExtensionArray.argsort(
+    *,
+    ascending=True,
+    kind=&#39;quicksort&#39;,
+    na_position=&#39;last&#39;,
+    **kwargs,
+)</code></pre></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+values = pd.array([2., 5., None], dtype=&quot;Float64&quot;)
+print(values.argsort())</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>ascending</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>Choose ascending or descending order. Some sorting methods take one flag per sort key.</p></td></tr>
+<tr><th scope="row"><code>kind</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;quicksort&#39;</code></td>
+      <td><span>{&#39;quicksort&#39;, &#39;mergesort&#39;, &#39;heapsort&#39;, &#39;stable&#39;}</span><p>Choose the implementation variant, such as a sort algorithm or a plot type.</p></td></tr>
+<tr><th scope="row"><code>na_position</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;last&#39;</code></td>
+      <td><span>{&#39;first&#39;, &#39;last&#39;}</span><p>Place missing values first or last in the result.</p></td></tr>
+<tr><th scope="row"><code>**kwargs</code></th>
+      <td>Optional<br><small>Additional keyword arguments</small></td>
+      <td></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>np.ndarray[np.intp]</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.api.extensions.ExtensionArray.argsort.html#pandas.api.extensions.ExtensionArray.argsort">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/api.extensions.ExtensionArray._values_for_factorize/"><span>Previous in this category</span><strong>pandas.api.extensions.ExtensionArray._values_for_factorize</strong></a><a href="/docs/read/en/pandas/api/api.extensions.ExtensionArray.astype/"><span>Next in this category</span><strong>pandas.api.extensions.ExtensionArray.astype</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

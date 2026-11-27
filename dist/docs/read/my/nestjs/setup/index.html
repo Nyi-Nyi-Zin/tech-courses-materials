@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NestJS က Node.js server ကို modules၊ controllers နဲ့ providers အဖြစ် စီပေးပါတယ်။ ဒီ guide က NestJS 12.6.0 ကို သုံးပါတယ်။">
+  <title>App စပြီး Route တစ်ခု ရေးခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/setup/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/setup/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/setup/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#nestjs">သင်ခန်းစာအားလုံး · NestJS</a> <a href="/docs/read/en/nestjs/setup/" lang="en" hreflang="en">English</a></nav>
+  <h1>App စပြီး Route တစ်ခု ရေးခြင်း</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">NestJS က Node.js server ကို modules၊ controllers နဲ့ providers အဖြစ် စီပေးပါတယ်။ ဒီ guide က NestJS 12.6.0 ကို သုံးပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/nestjs/setup">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#cli">CLI နဲ့ Project တည်ဆောက်ခြင်း</a></li>
+<li><a href="#route">Controller Route သတ်မှတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="cli">
+  <h2>CLI နဲ့ Project တည်ဆောက်ခြင်း</h2>
+  <p>Official first-steps guide မှာ အကြံပြုထားတဲ့ Node.js version သုံးပါ။ CLI generators အတွက် 22.x မှာ 22.22.3+၊ 24.x မှာ 24.15+၊ သို့ 26+ လိုပါတယ်။ App runtime လိုအပ်ချက်တွေကို first-steps guide မှာ သီးသန့် ကြည့်နိုင်ပါတယ်။</p>
+
+<pre><code>node --version
+npm install -g @nestjs/cli
+nest new catalog-api --strict
+cd catalog-api
+npm run start:dev</code></pre>
+
+
+</section>
+<section class="article-section" id="route">
+  <h2>Controller Route သတ်မှတ်ခြင်း</h2>
+  <p>Controller prefix နဲ့ method path ပေါင်းပြီး route ဖြစ်ပါတယ်။ Controller ကို module မှာ register လုပ်ပါ။ ဒီဥပမာကို register လုပ်ထားရင် GET /catalog/featured က object ကို JSON အဖြစ် ပြန်ပေးပါတယ်။</p>
+
+<pre><code>import { Controller, Get, Module } from &quot;@nestjs/common&quot;;
+
+@Controller(&quot;catalog&quot;)
+class CatalogController {
+  @Get(&quot;featured&quot;)
+  featured() {
+    return { name: &quot;Pen&quot; };
+  }
+}
+
+@Module({ controllers: [CatalogController] })
+export class AppModule {}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://github.com/nestjs/nest/releases/tag/v12.6.0">NestJS 12.6.0 release</a></li>
+<li><a href="https://docs.nestjs.com/first-steps">First steps and Node.js requirements</a></li>
+<li><a href="https://docs.nestjs.com/controllers">Controllers</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/nestjs/providers/">နောက်သင်ခန်းစာ · Providers၊ Modules နှင့် Dependency Injection</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ရက်စွဲနဲ့ အချိန်အဖြစ် ပြောင်းပါတယ်။ ကိုယ့်ရက်စွဲပုံစံကို format နဲ့ သတ်မှတ်နိုင်ပြီး ဖတ်လို့မရတာတွေကို errors=&quot;coerce&quot; နဲ့ NaT အဖြစ် ထားနိုင်ပါတယ်။">
+  <title>pandas.to_datetime · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/to_datetime/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/to_datetime/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/to_datetime">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API Reference">
+    <a href="/docs/read/my/pandas/api-reference/#find-an-api">pandas API Reference</a><span aria-hidden="true">/</span><span>အထွေထွေ Functions</span><a href="/docs/read/en/pandas/api/to_datetime/" lang="en" hreflang="en">English</a>
+  </nav>
+    <h1><code>pandas.<wbr>to_datetime</code></h1>
+    <p class="article-version">pandas 3.1.1 · အထွေထွေ Functions · <span lang="en">function</span></p>
+    <p class="intro">ရက်စွဲနဲ့ အချိန်အဖြစ် ပြောင်းပါတယ်။ ကိုယ့်ရက်စွဲပုံစံကို format နဲ့ သတ်မှတ်နိုင်ပြီး ဖတ်လို့မရတာတွေကို errors=&quot;coerce&quot; နဲ့ NaT အဖြစ် ထားနိုင်ပါတယ်။</p>
+
+    <nav class="api-breadcrumbs" aria-label="ဒီစာမျက်နှာမှာ"><ul><li><a href="#syntax">ခေါ်သုံးပုံ</a></li><li><a href="#example">နမူနာ စမ်းကြည့်ရန်</a></li><li><a href="#parameters">ထည့်သွင်းနိုင်တဲ့ Arguments</a></li><li><a href="#returns">ပြန်ပေးတဲ့ ရလဒ်</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>ခေါ်သုံးပုံ</h2><details class="api-full-signature"><summary><code lang="en">pd.to_datetime(…)</code> <span>ခေါ်သုံးပုံ အပြည့်အစုံ</span></summary><pre><code lang="en">pd.to_datetime(
+    arg,
+    errors=&#39;raise&#39;,
+    dayfirst=False,
+    yearfirst=False,
+    utc=False,
+    format=None,
+    exact=…,
+    unit=None,
+    origin=&#39;unix&#39;,
+    cache=True,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>နမူနာ စမ်းကြည့်ရန်</h2>
+      <p>နမူနာကုဒ်ကို ပြင်ပြီး Run Python နှိပ်ပါ။ ရလဒ်ကို အောက်မှာ ကြည့်နိုင်ပါတယ်။</p>
+      <label><span>Python ကုဒ်</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+print(pd.to_datetime([&quot;2025-01-01&quot;, &quot;invalid&quot;], format=&quot;%Y-%m-%d&quot;, errors=&quot;coerce&quot;))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>ရပ်ရန်</button>
+        <button type="button" data-reset disabled>မူလကုဒ် ပြန်ထားရန်</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="ရလဒ်"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>ထည့်သွင်းနိုင်တဲ့ Arguments</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">ထည့်သွင်းပုံ</th><th scope="col">လက်ခံတဲ့ တန်ဖိုးနဲ့ သုံးပုံ</th></tr></thead><tbody><tr><th scope="row"><code>arg</code></th>
+      <td>ထည့်ပေးရမယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small></td>
+      <td><span>ကိန်းပြည့် (int)၊ ဒဿမကိန်း (float)၊ စာသား (str)၊ datetime၊ list၊ tuple၊ 1-d array၊ Series၊ DataFrame/dict ပုံစံ</span><p>ရက်စွဲပါတဲ့ စာသား၊ epoch အချိန်ကို ကိုယ်စားပြုတဲ့ ကိန်းဂဏန်း၊ datetime၊ array ပုံစံ သို့မဟုတ် ရက်စွဲ field တွေပါတဲ့ ဇယားကို ထည့်နိုင်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>errors</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>&#39;raise&#39;</code></td>
+      <td><span>{&#39;raise&#39;၊ &#39;coerce&#39;}</span><p>&quot;raise&quot; ဆို မမှန်တဲ့ ရက်စွဲတွေ့ရင် error တက်ပါတယ်။ &quot;coerce&quot; ဆို အဲဒီတန်ဖိုးကို NaT အဖြစ် ပြောင်းပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>dayfirst</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True / False (bool)</span><p>ရက်နဲ့ လကို အစဉ်ခွဲမရတဲ့ ရက်စွဲစာသားတွေကို ဖတ်တဲ့အခါ ရက်ကို ရှေ့မှာ ယူပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>yearfirst</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True / False (bool)</span></td></tr>
+<tr><th scope="row"><code>utc</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True / False (bool)</span><p>True ဆို timezone မပါတဲ့တန်ဖိုးတွေကို UTC အဖြစ် သတ်မှတ်ပြီး timezone ပါပြီးသားတန်ဖိုးတွေကို UTC သို့ ပြောင်းပေးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>format</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span><p>ပုံစံတိတိကျကျ သိရင် strftime ပုံစံသုံးပါ။ ISO ရက်စွဲအတွက် &quot;ISO8601&quot;၊ တန်ဖိုးတစ်ခုစီကနေ ပုံစံခန့်မှန်းဖို့ &quot;mixed&quot; သုံးပါ။</p></td></tr>
+<tr><th scope="row"><code>exact</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small></td>
+      <td><span>True / False (bool)</span><p>ရက်စွဲစာသားက သတ်မှတ်ထားတဲ့ format နဲ့ အတိအကျ ကိုက်ရမရ သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>unit</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str)</span><p>ကိန်းဂဏန်းက ကိုယ်စားပြုတဲ့ သို့မဟုတ် ရလဒ်မှာ လိုတဲ့ အချိန်ယူနစ်ကို သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>origin</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>&#39;unix&#39;</code></td>
+      <td><span>တန်ဖိုးတစ်ခု (scalar)</span><p>ကိန်းဂဏန်းနဲ့ ရေးထားတဲ့အချိန် သို့မဟုတ် bin ကို ဘယ် timestamp ကနေ စရေတွက်မလဲ သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>cache</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>True</code></td>
+      <td><span>True / False (bool)</span><p>ရက်စွဲစာသား ထပ်လာတဲ့အခါ အရင်ပြောင်းပြီးသား ရလဒ်ကို ပြန်သုံးနိုင်ပါတယ်။</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>ပြန်ပေးတဲ့ ရလဒ်</h2><p>ပြန်ပေးတဲ့ အမျိုးအစားက datetime ဖြစ်ပါတယ်။</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.to_datetime.html#pandas.to_datetime">pandas တရားဝင် ကိုးကားချက်</a>
+      <nav class="pagination" aria-label="pandas API Reference"><a href="/docs/read/my/pandas/api/timedelta_range/"><span>အရင် API</span><strong>pandas.timedelta_range</strong></a><a href="/docs/read/my/pandas/api/to_numeric/"><span>နောက် API</span><strong>pandas.to_numeric</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

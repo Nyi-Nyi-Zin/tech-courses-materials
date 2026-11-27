@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Webhook ဆိုတာ တခြား service တစ်ခုက HTTP နဲ့ ပို့တဲ့ အကြောင်းကြားချက်ပါ။ ဥပမာ document ထုတ်ဝေပြီးချိန်မှာ ချိတ်ထားတဲ့ service က ကိုယ့် app ကို အသိပေးနိုင်ပါတယ်။ ကိုယ့်ဘက်က data မပြောင်းခင် ဘယ်သူပို့တာလဲ၊ မျှော်မှန်းထားတဲ့ data ဟုတ်လား၊ အရင်တစ်ခါ လုပ်ပြီးပြီလားဆိုတာ စစ်ပါ။">
+  <title>Webhook နဲ့ ပြင်ပက လက်ခံတဲ့ Data မှန်ကန်မှု · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/webhooks-and-data-integrity/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/webhooks-and-data-integrity/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/webhooks-and-data-integrity/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-security">သင်ခန်းစာအားလုံး · Web Security</a> <a href="/docs/read/en/web-security/webhooks-and-data-integrity/" lang="en" hreflang="en">English</a></nav>
+  <h1>Webhook နဲ့ ပြင်ပက လက်ခံတဲ့ Data မှန်ကန်မှု</h1>
+  
+  <p class="intro">Webhook ဆိုတာ တခြား service တစ်ခုက HTTP နဲ့ ပို့တဲ့ အကြောင်းကြားချက်ပါ။ ဥပမာ document ထုတ်ဝေပြီးချိန်မှာ ချိတ်ထားတဲ့ service က ကိုယ့် app ကို အသိပေးနိုင်ပါတယ်။ ကိုယ့်ဘက်က data မပြောင်းခင် ဘယ်သူပို့တာလဲ၊ မျှော်မှန်းထားတဲ့ data ဟုတ်လား၊ အရင်တစ်ခါ လုပ်ပြီးပြီလားဆိုတာ စစ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-security/webhooks-and-data-integrity">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#verify-message">ပို့လာတဲ့ မူရင်း data ကို အတည်ပြုခြင်း</a></li>
+<li><a href="#safe-processing">Data ကို စစ်ပြီး ထပ်ရောက်လာတဲ့ event ကို ကိုင်တွယ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="verify-message">
+  <h2>ပို့လာတဲ့ မူရင်း data ကို အတည်ပြုခြင်း</h2>
+  <p>Provider သတ်မှတ်ထားတဲ့ verification library သုံးပါ။ GitHub လို signed webhook မှာ သတ်မှတ်ထားတဲ့ secret နဲ့ မူရင်း request body ပေါ်က signature ကို အရင်စစ်ပါ။ JSON ကို ဖတ်ပြီး စာသားပြန်ပြောင်းလိုက်ရင် စာလုံးကြား နေရာလွတ်ကအစ bytes ပြောင်းနိုင်ပါတယ်။ Signature ကိုက်ရင်တောင် မူလ event တစ်ခုတည်းကို နောက်တစ်ခါ ပြန်ရနိုင်ပါတယ်။</p>
+
+<pre><code>Receive     Apply a body size limit and preserve the raw bytes
+Verify      Use the provider verifier and configured secret
+Interpret   Accept the expected event type, account, and payload schema</code></pre>
+
+
+</section>
+<section class="article-section" id="safe-processing">
+  <h2>Data ကို စစ်ပြီး ထပ်ရောက်လာတဲ့ event ကို ကိုင်တွယ်ခြင်း</h2>
+  <p>ပြင်ပ message ကို ရိုးရိုး data အဖြစ် ဖတ်ပြီး မျှော်မှန်းထားတဲ့ field တွေကို စစ်ပါ။ Input ကနေ အလုပ်လုပ်နိုင်တဲ့ object တွေ တိုက်ရိုက် ဖန်တီးပေးတဲ့ format တွေကို ရှောင်ပါ။ အတည်ပြုပြီးသား message ထဲက တည်ငြိမ်တဲ့ event ID သို့မဟုတ် လုပ်ငန်းမှတ်တမ်း ID ကို သုံးပါ။ အဲဒီ ID ကို ထပ်မဝင်နိုင်အောင် database မှာ သတ်မှတ်ပြီး ID သိမ်းတာနဲ့ data ပြောင်းတာကို transaction တစ်ခုထဲ လုပ်ပါ။ ဒါမှ ပြန်ပို့လာတဲ့ event ကြောင့် data နှစ်ခါ မပြောင်းမှာပါ။</p>
+
+<pre><code>First verified publication event    Record the event and publish the notice
+Same verified event delivered again  Keep the existing notice
+Unrecognized event type              Make no document changes</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries">GitHub Docs · Validating webhook deliveries</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html">OWASP · Deserialization</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-security/files-and-outbound-requests/">အရင်သင်ခန်းစာ · File Upload နဲ့ Server က ပြင်ပကို ပို့တဲ့ Request များ</a>
+<a href="/docs/read/my/web-security/data-and-secrets/">နောက်သင်ခန်းစာ · Private Data၊ Encryption နဲ့ Secret ထိန်းသိမ်းခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

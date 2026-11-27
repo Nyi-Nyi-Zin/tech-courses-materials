@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The browser lays out HTML as boxes. Start by looking at what happens before you choose Flexbox, Grid, or positioning.">
+  <title>Normal flow, box model, and display · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/layout/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/layout/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/layout/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/layout/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Normal flow, box model, and display</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">The browser lays out HTML as boxes. Start by looking at what happens before you choose Flexbox, Grid, or positioning.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/layout">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#flow">What is normal flow?</a></li>
+<li><a href="#box">What are the four parts of a box?</a></li>
+<li><a href="#sizing">How does box-sizing change width?</a></li>
+<li><a href="#display">How do block, inline, and inline-block fit?</a></li>
+<li><a href="#flex-grid">Choose a layout for a group of boxes</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="flow">
+  <h2>What is normal flow?</h2>
+  <p>Normal flow is the default arrangement of boxes. In the usual horizontal writing mode, paragraphs are block boxes and appear one below another. Inline text flows along a line and wraps when it runs out of space.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;What is normal flow?&lt;/title&gt;
+  &lt;style&gt;
+    p { background: #d6efea; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;&lt;strong&gt;Your order&lt;/strong&gt; is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Two colored blocks appear on separate lines. Bold text stays within the first paragraph’s line.</p>
+
+</section>
+<section class="article-section" id="box">
+  <h2>What are the four parts of a box?</h2>
+  <p>Content is what the element contains. Padding is the space between content and the border. The border is the edge around it. Margin adds space outside the border. With content-box, a declared width of 120px plus 10px padding and a 2px border on both sides makes a 144px border box.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;What are the four parts of a box?&lt;/title&gt;
+  &lt;style&gt;
+    .notice { width: 120px; padding: 10px; border: 2px solid teal; margin: 16px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first box has empty space inside its border and a gap around it. Inspect it and find the box model in DevTools.</p>
+
+</section>
+<section class="article-section" id="sizing">
+  <h2>How does box-sizing change width?</h2>
+  <p>With border-box, the declared width includes content, padding and border. The margin still sits outside that total. The two boxes here have the same width declaration but different sizing rules.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;How does box-sizing change width?&lt;/title&gt;
+  &lt;style&gt;
+    p { width: 120px; padding: 10px; border: 2px solid teal; }
+    .notice { box-sizing: border-box; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first outer border is 120px wide. The second is 144px wide.</p>
+
+</section>
+<section class="article-section" id="display">
+  <h2>How do block, inline, and inline-block fit?</h2>
+  <p>display describes how a box participates in layout. A block box starts on its own line. Normal inline text may share or wrap across lines. An inline-block box stays on one line as a unit and can have a set width and height.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;How do block, inline, and inline-block fit?&lt;/title&gt;
+  &lt;style&gt;
+    span { background: #d6efea; width: 90px; }
+    .block { display: block; }
+    .badge { display: inline-block; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;span class=&quot;block&quot;&gt;Block&lt;/span&gt;
+&lt;p&gt;Product: &lt;span class=&quot;badge&quot;&gt;Pen&lt;/span&gt; &lt;span&gt;Inline&lt;/span&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Block takes its own line. Pen stays next to the rest of the text and is 90px wide; the normal inline label uses its text width.</p>
+
+</section>
+<section class="article-section" id="flex-grid">
+  <h2>Choose a layout for a group of boxes</h2>
+  <p>Use normal flow for content that simply follows the previous content. The Flexbox lesson shows how to align a row or column of items. The Grid lesson shows how to design columns and rows together.</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Flexbox and Grid&lt;/title&gt;
+    &lt;style&gt;
+      .row { display: flex; gap: 1rem; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h2&gt;Flexbox row&lt;/h2&gt;
+    &lt;div class=&quot;row&quot;&gt;&lt;div&gt;Books&lt;/div&gt;&lt;div&gt;Notes&lt;/div&gt;&lt;/div&gt;
+
+    &lt;h2&gt;Grid with two columns&lt;/h2&gt;
+    &lt;div class=&quot;grid&quot;&gt;
+      &lt;div&gt;Books&lt;/div&gt;&lt;div&gt;Notes&lt;/div&gt;
+      &lt;div&gt;Maps&lt;/div&gt;&lt;div&gt;Guides&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Display/Flow_layout">MDN · Normal flow</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Introduction">MDN · Box model</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display">MDN · Display</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/cascade/">Previous lesson · Selectors, cascade, and inheritance</a>
+<a href="/docs/read/en/css/typography/">Next lesson · Text size, units, and fonts</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

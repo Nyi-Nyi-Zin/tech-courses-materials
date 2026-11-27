@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A client may need only a document title and update time. An API defines which fields it accepts and returns, who may call it, and how much work one request can trigger.">
+  <title>API Security and Resource Limits · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/api-security/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/api-security/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/api-security/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/api-security/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>API Security and Resource Limits</h1>
+  
+  <p class="intro">A client may need only a document title and update time. An API defines which fields it accepts and returns, who may call it, and how much work one request can trigger.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/api-security">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#field-access">Control both incoming and outgoing fields</a></li>
+<li><a href="#resource-limits">Bound expensive work before starting it</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="field-access">
+  <h2>Control both incoming and outgoing fields</h2>
+  <p>After checking membership, copy allowed input fields explicitly. Ownership and billing flags belong to separate privileged operations. Select response fields explicitly too. Keep an inventory of supported endpoint versions so that retired versions stop serving private data.</p>
+
+<pre><code>// Run after authorization and title validation.
+const changes = { title: validatedTitle };
+const publicFields = { id: document.id, title: document.title };</code></pre>
+
+
+</section>
+<section class="article-section" id="resource-limits">
+  <h2>Bound expensive work before starting it</h2>
+  <p>Limit body size, page size, execution time, and concurrent jobs. Rate-limit by an appropriate account or tenant as well as network signals. Return 429 with Retry-After when the client should slow down. For operations such as paid exports, scope an idempotency key to the caller and record it atomically so a retry cannot charge twice. These numbers illustrate a policy.</p>
+
+<pre><code>List documents    50 rows per page maximum
+Export queue      2 active exports per account
+Quota response    429 Too Many Requests
+Retry-After: 60</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html">OWASP · REST security</a></li>
+<li><a href="https://owasp.org/API-Security/editions/2023/en/0x11-t10/">OWASP · API Security Top 10</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/input-and-injection/">Previous lesson · Input Validation and Injection Prevention</a>
+<a href="/docs/read/en/web-security/files-and-outbound-requests/">Next lesson · File Uploads and Server-Side Requests</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

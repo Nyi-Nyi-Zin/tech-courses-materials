@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A CTE can name the result of an intermediate step, such as enrollment counts by course. Sometimes the result must keep the individual rows as well as a total or rank. Window functions calculate across related rows while keeping one output row for each input row.">
+  <title>Rank and total rows with window functions · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/window-functions/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/window-functions/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/window-functions/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/window-functions/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Rank and total rows with window functions</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">A CTE can name the result of an intermediate step, such as enrollment counts by course. Sometimes the result must keep the individual rows as well as a total or rank. Window functions calculate across related rows while keeping one output row for each input row.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/window-functions">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#running-total">Keep each row in a running total</a></li>
+<li><a href="#rank">Choose how to handle ties</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="running-total">
+  <h2>Keep each row in a running total</h2>
+  <p>PARTITION BY creates independent groups. ORDER BY inside OVER controls the calculation order, and the explicit ROWS frame ends at the current row. The final ORDER BY controls display order.</p>
+
+<pre><code>SELECT course_id, student_id, enrolled_on,
+       COUNT(*) OVER (
+         PARTITION BY course_id
+         ORDER BY enrolled_on, student_id
+         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+       ) AS enrollments_so_far
+FROM enrollments
+ORDER BY course_id, enrolled_on, student_id;</code></pre>
+
+
+</section>
+<section class="article-section" id="rank">
+  <h2>Choose how to handle ties</h2>
+  <p>row_number gives each row its own number. rank gives tied rows the same rank and leaves gaps. dense_rank gives tied rows the same rank without gaps. Add a tie-breaker when you need a repeatable row_number for equal values.</p>
+
+<pre><code>WITH scores (name, score) AS (
+  VALUES (&#39;Taylor&#39;, 95), (&#39;Jamie&#39;, 95), (&#39;Casey&#39;, 90)
+)
+SELECT name, score,
+       row_number() OVER (ORDER BY score DESC, name) AS row_number,
+       rank()       OVER (ORDER BY score DESC) AS rank,
+       dense_rank() OVER (ORDER BY score DESC) AS dense_rank
+FROM scores
+ORDER BY row_number;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/tutorial-window.html">PostgreSQL window tutorial</a></li>
+<li><a href="https://www.postgresql.org/docs/19/functions-window.html">Window function reference</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/cte/">Previous lesson · Break down queries with CTEs</a>
+<a href="/docs/read/en/database/upserts/">Next lesson · Insert or update with ON CONFLICT</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

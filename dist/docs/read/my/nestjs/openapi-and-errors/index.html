@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OpenAPI document က API ကို ဘယ်လိုခေါ်ရမလဲ ဖော်ပြပါတယ်။ Client တွေ အသုံးပြုမယ့် status codes နဲ့ payload ပုံစံတွေ ရေးထားပါ။">
+  <title>Routes နှင့် HTTP Errors မှတ်တမ်းတင်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/openapi-and-errors/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/openapi-and-errors/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/openapi-and-errors/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#nestjs">သင်ခန်းစာအားလုံး · NestJS</a> <a href="/docs/read/en/nestjs/openapi-and-errors/" lang="en" hreflang="en">English</a></nav>
+  <h1>Routes နှင့် HTTP Errors မှတ်တမ်းတင်ခြင်း</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">OpenAPI document က API ကို ဘယ်လိုခေါ်ရမလဲ ဖော်ပြပါတယ်။ Client တွေ အသုံးပြုမယ့် status codes နဲ့ payload ပုံစံတွေ ရေးထားပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/nestjs/openapi-and-errors">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#openapi">OpenAPI Document ပြသခြင်း</a></li>
+<li><a href="#errors">အမှားနဲ့ ကိုက်ညီတဲ့ Status ပြန်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="openapi">
+  <h2>OpenAPI Document ပြသခြင်း</h2>
+  <p>@nestjs/swagger ထည့်ပြီး bootstrap မှာ OpenAPI configuration ဆောက်ပါ။ SwaggerModule က document ထုတ်ပြီး Swagger UI ပြနိုင်ပါတယ်။ Request နဲ့ response DTO fields တွေအတွက် လိုအပ်သလို decorators သို့ CLI plugin သုံးပါ။</p>
+
+<pre><code>// At the top of main.ts
+import { DocumentBuilder, SwaggerModule } from &quot;@nestjs/swagger&quot;;
+
+// Inside bootstrap, after NestFactory.create(...)
+const config = new DocumentBuilder()
+  .setTitle(&quot;Catalog API&quot;)
+  .setVersion(&quot;1.0&quot;)
+  .build();
+
+const documentFactory = () =&gt; SwaggerModule.createDocument(app, config);
+SwaggerModule.setup(&quot;docs&quot;, app, documentFactory);</code></pre>
+
+
+</section>
+<section class="article-section" id="errors">
+  <h2>အမှားနဲ့ ကိုက်ညီတဲ့ Status ပြန်ခြင်း</h2>
+  <p>Input မမှန်ရင် BadRequestException၊ resource မရှိရင် NotFoundException သုံးနိုင်ပါတယ်။ Error ပုံစံ တိကျသတ်မှတ်ချင်ရင် exception filter ထည့်ပါ။ အောင်မြင်တဲ့ response နဲ့ သိထားတဲ့ errors နှစ်မျိုးလုံးရဲ့ status နဲ့ body စမ်းပါ။</p>
+
+<pre><code>import { BadRequestException, NotFoundException } from &quot;@nestjs/common&quot;;
+
+function findProduct(id: number, products: Map&lt;number, string&gt;) {
+  if (!Number.isInteger(id) || id &lt; 1) {
+    throw new BadRequestException(&quot;Use a positive integer product ID.&quot;);
+  }
+
+  const name = products.get(id);
+  if (name === undefined) {
+    throw new NotFoundException(&quot;Product not found.&quot;);
+  }
+
+  return { id, name };
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.nestjs.com/openapi/introduction">NestJS OpenAPI introduction</a></li>
+<li><a href="https://docs.nestjs.com/exception-filters">Exception filters</a></li>
+<li><a href="https://docs.nestjs.com/fundamentals/testing">Testing</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/nestjs/configuration-and-data/">အရင်သင်ခန်းစာ · Configuration နှင့် Database Layer</a>
+<a href="/docs/read/my/nestjs/queues/">နောက်သင်ခန်းစာ · Queue နဲ့ Background Jobs လုပ်ပါ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

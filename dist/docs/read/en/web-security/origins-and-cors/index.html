@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A web page may call an API on a different origin. The browser has rules about which responses JavaScript may read. The API still decides who may use the data.">
+  <title>Same-Origin Policy and CORS · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/origins-and-cors/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/origins-and-cors/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/origins-and-cors/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/origins-and-cors/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Same-Origin Policy and CORS</h1>
+  
+  <p class="intro">A web page may call an API on a different origin. The browser has rules about which responses JavaScript may read. The API still decides who may use the data.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/origins-and-cors">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#origin">Compare two origins</a></li>
+<li><a href="#cors">Share a response with an approved frontend</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="origin">
+  <h2>Compare two origins</h2>
+  <p>An origin consists of scheme, host, and port. A different path can share an origin. Changing the subdomain or port changes the origin. By default, the same-origin policy restricts a script from reading many cross-origin responses.</p>
+
+<pre><code>const app = new URL(&quot;https://app.example/documents&quot;);
+new URL(&quot;/settings&quot;, app).origin === app.origin;          // true
+new URL(&quot;https://api.example&quot;).origin === app.origin;     // false</code></pre>
+
+
+</section>
+<section class="article-section" id="cors">
+  <h2>Share a response with an approved frontend</h2>
+  <p>For cookie-authenticated cross-origin fetches, the client needs credentials set to include and applicable cookies. Return the exact approved origin and allow credentials. If the header varies by Origin, use Vary. For requests requiring preflight, the API also answers OPTIONS with the allowed method and headers. CORS governs browser reads and some request dispatch. Every endpoint needs its own access checks.</p>
+
+<pre><code>Access-Control-Allow-Origin: https://app.example
+Access-Control-Allow-Credentials: true
+Vary: Origin</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Same-origin_policy">MDN · Same-origin policy</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS">MDN · CORS</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/https-and-tls/">Previous lesson · HTTPS, TLS, and HSTS</a>
+<a href="/docs/read/en/web-security/authentication/">Next lesson · Authentication, Passwords, and Account Recovery</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

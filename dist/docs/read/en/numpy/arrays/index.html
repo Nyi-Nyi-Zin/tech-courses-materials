@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Create arrays and inspect how NumPy stores their values.">
+  <title>Arrays, shape, and dtype · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/arrays/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/arrays/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/arrays/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#numpy">All documentation · NumPy</a> <a href="/docs/read/my/numpy/arrays/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Arrays, shape, and dtype</h1>
+  <p class="article-version">2.5.5</p>
+  <p class="intro">Create arrays and inspect how NumPy stores their values.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/numpy/arrays">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#array-object">The ndarray</a></li>
+<li><a href="#constructors">Choose a constructor</a></li>
+<li><a href="#dtype">Choose and convert a dtype</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="array-object">
+  <h2>The ndarray</h2>
+  <p>An ndarray has a shape and a dtype. shape lists the length of each axis, ndim counts the axes, and size counts all elements. A two-dimensional array uses axis 0 for rows and axis 1 for columns.</p>
+
+<pre><code>import numpy as np
+
+sales = np.array([[2, 4, 3], [3, 1, 2]], dtype=np.int32)
+print(sales.shape, sales.ndim, sales.size)
+print(sales.dtype.name)</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/arrays-array-object.png" data-image-preview><img src="/docs/media/data/arrays-array-object.png" alt="A grid of two rows and three columns, with zero-based labels and shape (2, 3)." width="720" height="325" loading="lazy" decoding="async"></a>
+    <figcaption>The first shape entry counts rows and the second counts columns.</figcaption>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">(2, 3) 2 6
+int32</pre></div>
+
+
+</section>
+<section class="article-section" id="constructors">
+  <h2>Choose a constructor</h2>
+  <p>array converts supplied values, zeros creates a filled shape, and arange generates values with an exclusive stop. For evenly spaced samples with a specified count, use linspace. It includes the endpoint by default.</p>
+
+<pre><code>import numpy as np
+
+print(np.arange(2, 10, 2).tolist())
+print(np.linspace(0, 1, 3).tolist())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[2, 4, 6, 8]
+[0.0, 0.5, 1.0]</pre></div>
+
+
+</section>
+<section class="article-section" id="dtype">
+  <h2>Choose and convert a dtype</h2>
+  <p>astype converts values to another dtype. Narrow integer types save space but have limited ranges. Inspect dtype before arithmetic on fixed-width integers, especially with large counts.</p>
+
+<pre><code>import numpy as np
+
+values = np.array([2, 4], dtype=np.int32)
+print(values.astype(np.float64).tolist())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[2.0, 4.0]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://numpy.org/doc/stable/user/absolute_beginners.html">NumPy absolute basics</a></li>
+<li><a href="https://numpy.org/doc/stable/user/basics.types.html">Data types</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/numpy/indexing/">Next lesson · Indexing, slices, and masks</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

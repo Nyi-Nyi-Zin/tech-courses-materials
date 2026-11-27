@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A custom Hook groups reusable stateful logic. Each component call gets its own state unless the Hook reads from a shared source.">
+  <title>Reuse behavior with custom Hooks · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/react/custom-hooks/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/custom-hooks/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/custom-hooks/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#react">All documentation · React</a> <a href="/docs/read/my/react/custom-hooks/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Reuse behavior with custom Hooks</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">A custom Hook groups reusable stateful logic. Each component call gets its own state unless the Hook reads from a shared source.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/react/custom-hooks">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#online">Wrap an external subscription</a></li>
+<li><a href="#rules">Follow the Rules of Hooks</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="online">
+  <h2>Wrap an external subscription</h2>
+  <p>For a browser API with an external value and change events, useSyncExternalStore can subscribe and read a snapshot. In a client-only app, the example reads the online flag. If you render on the server, also supply a server snapshot.</p>
+
+<pre><code>import { useSyncExternalStore } from &quot;react&quot;;
+
+function subscribe(notify) {
+  window.addEventListener(&quot;online&quot;, notify);
+  window.addEventListener(&quot;offline&quot;, notify);
+  return () =&gt; {
+    window.removeEventListener(&quot;online&quot;, notify);
+    window.removeEventListener(&quot;offline&quot;, notify);
+  };
+}
+
+export function useOnlineStatus() {
+  return useSyncExternalStore(subscribe, () =&gt; navigator.onLine);
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="rules">
+  <h2>Follow the Rules of Hooks</h2>
+  <p>Name a custom Hook with a use prefix followed by a capital letter. Call Hooks at the top level of a component or custom Hook. A reusable function that calls no Hooks can remain a normal function.</p>
+
+<pre><code>import { useState } from &quot;react&quot;;
+
+function useSearchQuery() {
+  const [query, setQuery] = useState(&quot;&quot;);
+  return { query, setQuery };
+}
+
+export default function SearchPanel({ visible = true }) {
+  const { query, setQuery } = useSearchQuery();
+  if (!visible) return null;
+
+  return (
+    &lt;label&gt;
+      Search
+      &lt;input value={query} onChange={event =&gt; setQuery(event.target.value)} /&gt;
+    &lt;/label&gt;
+  );
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://react.dev/learn/reusing-logic-with-custom-hooks">Reusing logic with custom Hooks</a></li>
+<li><a href="https://react.dev/reference/react/useSyncExternalStore">useSyncExternalStore</a></li>
+<li><a href="https://react.dev/reference/rules/rules-of-hooks">Rules of Hooks</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/react/context-and-reducers/">Previous lesson · Context and reducers</a>
+<a href="/docs/read/en/react/routing/">Next lesson · Routing with React Router</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Private document ကာကွယ်ရာမှာ မူရင်းဖိုင်အပြင် cache၊ log နဲ့ backup ထဲ ရောက်နေတဲ့ မိတ္တူတွေကိုပါ စဉ်းစားရပါတယ်။ App က သုံးတဲ့ credential တစ်ခုစီအတွက်လည်း တာဝန်ရှိသူ၊ အသုံးပြုရတဲ့ ရည်ရွယ်ချက်နဲ့ အသစ်လဲနိုင်မယ့် နည်းလမ်း ရှိရပါတယ်။">
+  <title>Private Data၊ Encryption နဲ့ Secret ထိန်းသိမ်းခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/data-and-secrets/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/data-and-secrets/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/data-and-secrets/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-security">သင်ခန်းစာအားလုံး · Web Security</a> <a href="/docs/read/en/web-security/data-and-secrets/" lang="en" hreflang="en">English</a></nav>
+  <h1>Private Data၊ Encryption နဲ့ Secret ထိန်းသိမ်းခြင်း</h1>
+  
+  <p class="intro">Private document ကာကွယ်ရာမှာ မူရင်းဖိုင်အပြင် cache၊ log နဲ့ backup ထဲ ရောက်နေတဲ့ မိတ္တူတွေကိုပါ စဉ်းစားရပါတယ်။ App က သုံးတဲ့ credential တစ်ခုစီအတွက်လည်း တာဝန်ရှိသူ၊ အသုံးပြုရတဲ့ ရည်ရွယ်ချက်နဲ့ အသစ်လဲနိုင်မယ့် နည်းလမ်း ရှိရပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-security/data-and-secrets">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#data-lifecycle">Data မိတ္တူတွေ ဘယ်မှာ ဘယ်လောက်ကြာ ထားမလဲ</a></li>
+<li><a href="#secret-lifecycle">Service credential ထုတ်ပေးခြင်းနဲ့ အသစ်လဲခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="data-lifecycle">
+  <h2>Data မိတ္တူတွေ ဘယ်မှာ ဘယ်လောက်ကြာ ထားမလဲ</h2>
+  <p>တကယ်လိုတဲ့ data ကိုပဲ စုပါ။ သိမ်းထားတဲ့ sensitive data နဲ့ backup ကို ပြောင်းလဲထားမှုပါ စစ်နိုင်တဲ့ managed encryption နဲ့ ကာကွယ်ပြီး key ကို သုံးခွင့်နဲ့ data ကို ဖတ်ခွင့် ခွဲပါ။ Hash က မူရင်းနဲ့ ကိုက်မကိုက် တစ်ဖက်သတ်စစ်ဖို့ပါ။ Encryption က သင့်တော်တဲ့ key ရှိရင် မူရင်း ပြန်ဖတ်ဖို့ပါ။ ဘယ်လောက်ကြာ သိမ်းမလဲ သတ်မှတ်ပြီး backup ကို key နဲ့ တကယ်ပြန်ဖွင့်ကြည့်ပါ။ Sensitive account response အတွက် cache ထဲ မသိမ်းစေချင်ရင် အောက်က header ပို့ပါ။</p>
+
+<pre><code>Cache-Control: no-store</code></pre>
+
+
+</section>
+<section class="article-section" id="secret-lifecycle">
+  <h2>Service credential ထုတ်ပေးခြင်းနဲ့ အသစ်လဲခြင်း</h2>
+  <p>Server အတွက် လိုသလောက်လုပ်ခွင့်ပဲ ပါတဲ့ သက်တမ်းတို credential ကို secret manager ဒါမှမဟုတ် workload identity ကနေ ထုတ်ယူပါ။ Browser ကို ပို့လိုက်တဲ့ code ကို အသုံးပြုသူ ဖတ်လို့ရပါတယ်။ Credential ပေါက်ကြားရင် key အဟောင်းကို ပိတ်ခြင်း သို့မဟုတ် အသစ်လဲခြင်း၊ သုံးနေတဲ့ service တွေကို update လုပ်ခြင်းနဲ့ ကြားကာလ အသုံးပြုမှု စစ်ခြင်းတို့ လုပ်ပါ။ Source ထဲက စာသားဖျက်လိုက်ရုံနဲ့ key အဟောင်းရဲ့ သက်တမ်း မကုန်သေးပါဘူး။</p>
+
+<pre><code>Browser bundle    Public application settings
+API runtime       Read one service credential from the secret manager
+Audit event       Credential identifier, rotation time, responsible service</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html">OWASP · Cryptographic storage</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html">OWASP · Secrets management</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-security/webhooks-and-data-integrity/">အရင်သင်ခန်းစာ · Webhook နဲ့ ပြင်ပက လက်ခံတဲ့ Data မှန်ကန်မှု</a>
+<a href="/docs/read/my/web-security/secure-deployment/">နောက်သင်ခန်းစာ · Deployment နဲ့ Software Supply Chain Security</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

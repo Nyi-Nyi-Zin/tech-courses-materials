@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Iterator က အစဉ်လိုက် တန်ဖိုးတွေကို တစ်ခုစီ ဖတ်ပေးပါတယ်။ Generator က ခဏရပ်ပြီး ပြန်ဆက်လို့ရတဲ့ function နဲ့ iterator တစ်ခု ထုတ်ပေးတဲ့ နည်းလမ်းပါ။">
+  <title>Iterator နဲ့ Generator · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/iterators-and-generators/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/iterators-and-generators/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/iterators-and-generators/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/iterators-and-generators/" lang="en" hreflang="en">English</a></nav>
+  <h1>Iterator နဲ့ Generator</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Iterator က အစဉ်လိုက် တန်ဖိုးတွေကို တစ်ခုစီ ဖတ်ပေးပါတယ်။ Generator က ခဏရပ်ပြီး ပြန်ဆက်လို့ရတဲ့ function နဲ့ iterator တစ်ခု ထုတ်ပေးတဲ့ နည်းလမ်းပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/iterators-and-generators">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#protocol">next() နဲ့ တန်ဖိုးတစ်ခုစီ ဖတ်ခြင်း</a></li>
+<li><a href="#generate">yield နဲ့ Function ခဏရပ်ပြီး ပြန်ဆက်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="protocol">
+  <h2>next() နဲ့ တန်ဖိုးတစ်ခုစီ ဖတ်ခြင်း</h2>
+  <p>Symbol.iterator နဲ့ iterator ထုတ်ပေးနိုင်တဲ့ တန်ဖိုးကို iterable လို့ ခေါ်ပါတယ်။ Array က iterable ဖြစ်ပါတယ်။ Iterator ရဲ့ next() က value နဲ့ done ပါတဲ့ object တစ်ခု ပြန်ပေးပါတယ်။ for...of ကလည်း ဒီစည်းမျဉ်းအတိုင်း တန်ဖိုးတွေကို အလိုအလျောက် ဖတ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const iterator = [&quot;Pen&quot;, &quot;Notebook&quot;][Symbol.iterator]();
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next().done);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမနှစ်ခုမှာ Pen နဲ့ Notebook ကို done: false နဲ့အတူ ရပါတယ်။ တတိယရလဒ်က true ပါ။</p>
+
+</section>
+<section class="article-section" id="generate">
+  <h2>yield နဲ့ Function ခဏရပ်ပြီး ပြန်ဆက်ခြင်း</h2>
+  <p>function* နဲ့ ရေးတဲ့ function ခေါ်ရင် generator အသစ် ရပါတယ်။ next() ပထမဆုံး ခေါ်မှ run ပြီး yield ရောက်ရင် ခဏရပ်ပါတယ်။ နောက် next() ခေါ်ရင် ပြန်ဆက်ပါတယ်။ အစက ပြန်စချင်ရင် generator အသစ် လုပ်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>function* orderNumbers(first, last) {
+  for (let number = first; number &lt;= last; number += 1) {
+    yield number;
+  }
+}
+for (const number of orderNumbers(101, 102)) {
+  console.log(number);
+}</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Console မှာ 101 ပြီးရင် 102 ပေါ်ပြီး ရပ်ပါမယ်။ အစတန်ဖိုးကို အဆုံးထက် ကြီးအောင်ပေးရင် loop က ဘာမှ yield မလုပ်ပါဘူး။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols">MDN · Iteration protocols</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_generators">MDN · Iterators and generators</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/debugging/">အရင်သင်ခန်းစာ · Browser DevTools နဲ့ Debug လုပ်ခြင်း</a>
+<a href="/docs/read/my/js/regular-expressions/">နောက်သင်ခန်းစာ · Regular Expression နဲ့ စာသား ရှာခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

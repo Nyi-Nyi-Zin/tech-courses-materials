@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Check your Python version, create an isolated environment, and run a script from the terminal.">
+  <title>Install Python and set up a project · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/python/setup/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/setup/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/setup/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#python">All documentation · Python</a> <a href="/docs/read/my/python/setup/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Install Python and set up a project</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">Check your Python version, create an isolated environment, and run a script from the terminal.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/python/setup">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#check-version">Check the interpreter</a></li>
+<li><a href="#virtual-environment">Create a virtual environment</a></li>
+<li><a href="#activate-windows">Activate on Windows</a></li>
+<li><a href="#activate-posix">Activate on macOS or Linux</a></li>
+<li><a href="#run-a-file">Run a Python file</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="check-version">
+  <h2>Check the interpreter</h2>
+  <p>Use the Python command that resolves to your installation. On Windows with the Python install manager, use py -3.15 to explicitly choose that series. On macOS and Linux, use python3.15 when available, or check the version behind python3 before following version-specific examples.</p>
+
+<pre><code>python --version</code></pre>
+
+
+</section>
+<section class="article-section" id="virtual-environment">
+  <h2>Create a virtual environment</h2>
+  <p>A virtual environment gives the project its own installed packages. Run venv in the project folder using the interpreter you intend to use.</p>
+
+<pre><code>python -m venv .venv</code></pre>
+
+
+</section>
+<section class="article-section" id="activate-windows">
+  <h2>Activate on Windows</h2>
+  <p>In PowerShell, run the activation script below. Activation changes command lookup for this shell. You can also run the environment’s Python directly at .venv/Scripts/python.exe.</p>
+
+<pre><code>.venv\Scripts\Activate.ps1</code></pre>
+
+
+</section>
+<section class="article-section" id="activate-posix">
+  <h2>Activate on macOS or Linux</h2>
+  <p>In Bash or Zsh, activate the environment with source. The virtual environment’s Python executable is also available at .venv/bin/python.</p>
+
+<pre><code>source .venv/bin/activate</code></pre>
+
+
+</section>
+<section class="article-section" id="run-a-file">
+  <h2>Run a Python file</h2>
+  <p>Save the code below as hello.py. From its folder, run python hello.py. Use python -m pip to install project packages with the same interpreter you use to run the script.</p>
+
+<pre><code>print(&quot;Hello, Python!&quot;)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">Hello, Python!</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.python.org/downloads/release/python-3152/">Python 3.15.2 release</a></li>
+<li><a href="https://docs.python.org/3.15/tutorial/venv.html">Virtual environments and packages</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/python/values-and-strings/">Next lesson · Variables, data types, and strings</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

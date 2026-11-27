@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="State က component ရဲ့ output ကို ပြောင်းစေတဲ့ values တွေကို သိမ်းပါတယ်။ Event handlers ကနေ state ပြောင်းပြီး UI ကို update လုပ်ပါ။">
+  <title>State၊ Events နှင့် Forms · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/react/state/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/state/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/state/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#react">သင်ခန်းစာအားလုံး · React</a> <a href="/docs/read/en/react/state/" lang="en" hreflang="en">English</a></nav>
+  <h1>State၊ Events နှင့် Forms</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">State က component ရဲ့ output ကို ပြောင်းစေတဲ့ values တွေကို သိမ်းပါတယ်။ Event handlers ကနေ state ပြောင်းပြီး UI ကို update လုပ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/react/state">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#updater">အရင် State ကနေ တွက်ပြီး ပြောင်းခြင်း</a></li>
+<li><a href="#input">Input နဲ့ State ကိုက်ညီအောင် ထားခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="updater">
+  <h2>အရင် State ကနေ တွက်ပြီး ပြောင်းခြင်း</h2>
+  <p>Hooks ကို component သို့ custom Hook ရဲ့ top level မှာ ခေါ်ပါ။ နောက်တန်ဖိုးက အရင်တန်ဖိုးပေါ် မူတည်ရင် updater function ပေးပါ။ Object နဲ့ array အတွက် value အသစ် ဆောက်ပြီး setter ဆီ ပေးပါ။</p>
+
+<pre><code>import { useState } from &quot;react&quot;;
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+  return &lt;button onClick={() =&gt; setCount(value =&gt; value + 1)}&gt;{count}&lt;/button&gt;;
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="input">
+  <h2>Input နဲ့ State ကိုက်ညီအောင် ထားခြင်း</h2>
+  <p>Controlled text input က state ကနေ value ယူပြီး onChange မှာ ပြောင်းပါတယ်။ မူလတန်ဖိုး မရှိရင် string အလွတ်နဲ့ စပါ။ Form submit ကို JavaScript မှာ ကိုင်မယ်ဆို handler ထဲမှာ preventDefault ခေါ်ပါ။</p>
+
+<pre><code>import { useState } from &quot;react&quot;;
+
+export default function SearchBox() {
+  const [query, setQuery] = useState(&quot;&quot;);
+
+  return (
+    &lt;form onSubmit={event =&gt; event.preventDefault()}&gt;
+      &lt;label&gt;
+        Find a product
+        &lt;input value={query} onChange={event =&gt; setQuery(event.target.value)} /&gt;
+      &lt;/label&gt;
+      &lt;p&gt;Search term: {query}&lt;/p&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://react.dev/reference/react/useState">useState</a></li>
+<li><a href="https://react.dev/reference/rules/rules-of-hooks">Rules of Hooks</a></li>
+<li><a href="https://react.dev/reference/react-dom/components/input">Input reference</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/react/components/">အရင်သင်ခန်းစာ · Components၊ JSX နှင့် Props</a>
+<a href="/docs/read/my/react/effects/">နောက်သင်ခန်းစာ · Effects နှင့် Synchronization</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

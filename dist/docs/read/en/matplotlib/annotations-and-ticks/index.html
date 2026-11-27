@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Highlight a meaningful point and control labels without changing the plotted values.">
+  <title>Annotate points and format ticks · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/annotations-and-ticks/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/annotations-and-ticks/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/annotations-and-ticks/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#matplotlib">All documentation · Matplotlib</a> <a href="/docs/read/my/matplotlib/annotations-and-ticks/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Annotate points and format ticks</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">Highlight a meaningful point and control labels without changing the plotted values.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/matplotlib/annotations-and-ticks">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#annotate">Point to a meaningful observation</a></li>
+<li><a href="#ticks">Separate tick positions from formatting</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="annotate">
+  <h2>Point to a meaningful observation</h2>
+  <p>annotate separates the data point xy from the text position xytext. Use offset points for short labels that should remain near a point when the axis limits change.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+from matplotlib.ticker import PercentFormatter
+
+fig, ax = plt.subplots()
+ax.plot([1, 2, 3], [0.18, 0.22, 0.20], marker=&quot;o&quot;)
+ax.annotate(&quot;Peak&quot;, xy=(2, 0.22), xytext=(10, -14), textcoords=&quot;offset points&quot;)
+ax.yaxis.set_major_formatter(PercentFormatter(xmax=1))
+ax.set(xlabel=&quot;Week&quot;, ylabel=&quot;Conversion&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/annotations-and-ticks-annotate.png" data-image-preview><img src="/docs/media/data/annotations-and-ticks-annotate.png" alt="Conversion peaks at 22 percent in week two. The second point is labeled Peak." width="606" height="440" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="ticks">
+  <h2>Separate tick positions from formatting</h2>
+  <p>A tick locator chooses positions. A formatter turns each value into display text. For proportions stored from zero to one, PercentFormatter(xmax=1) displays 0.22 as 22 percent.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://matplotlib.org/stable/users/explain/text/annotations.html">Annotations</a></li>
+<li><a href="https://matplotlib.org/stable/users/explain/axes/axes_ticks.html">Axis ticks and tick formatters</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/matplotlib/heatmaps-and-colorbars/">Previous lesson · Heatmaps and colorbars</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

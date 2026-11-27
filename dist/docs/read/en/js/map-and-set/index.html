@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use a Map for key–value entries and a Set for unique values.">
+  <title>Map and Set · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/map-and-set/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/map-and-set/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/map-and-set/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/map-and-set/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Map and Set</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Use a Map for key–value entries and a Set for unique values.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/map-and-set">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#map">Look up a value by key with Map</a></li>
+<li><a href="#set">Keep unique values with Set</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="map">
+  <h2>Look up a value by key with Map</h2>
+  <p>Map pairs keys with values and keeps insertion order. set(key, value) adds or replaces an entry. get(key) reads it, and has(key) tells you whether the key exists.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const prices = new Map();
+prices.set(&quot;Pen&quot;, 1500);
+prices.set(&quot;Notebook&quot;, 2500);
+console.log(prices.get(&quot;Pen&quot;));
+console.log(prices.has(&quot;Folder&quot;));</code></pre>
+<p class="example-result"><strong>What to expect</strong> Pen’s price is 1500 and Folder is absent.</p>
+
+</section>
+<section class="article-section" id="set">
+  <h2>Keep unique values with Set</h2>
+  <p>A Set keeps each value once. For strings this compares the exact text. Use add(value) to insert, has(value) to check membership, and size to count unique values.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const products = new Set([&quot;Pen&quot;, &quot;Notebook&quot;, &quot;Pen&quot;]);
+console.log(products.size);
+console.log([...products]);</code></pre>
+<p class="example-result"><strong>What to expect</strong> The size is 2. The values are Pen and Notebook.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">MDN · Map</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">MDN · Set</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/date-and-math/">Previous lesson · Date and Math</a>
+<a href="/docs/read/en/js/scope-and-classes/">Next lesson · Scope, closures, and classes</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

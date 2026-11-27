@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="လိုတဲ့ဒေတာပဲ ဖတ်ပြီး aggregation ကို သတ်မှတ်ကာ တစ်ပိုင်းချင်း အနှစ်ချုပ်ပါ။">
+  <title>ပိုကြီးတဲ့ Dataset ဖတ်၍ အနှစ်ချုပ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/larger-datasets/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/larger-datasets/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/larger-datasets/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#pandas">သင်ခန်းစာအားလုံး · pandas</a> <a href="/docs/read/en/pandas/larger-datasets/" lang="en" hreflang="en">English</a></nav>
+  <h1>ပိုကြီးတဲ့ Dataset ဖတ်၍ အနှစ်ချုပ်ခြင်း</h1>
+  <p class="article-version">3.1.1</p>
+  <p class="intro">လိုတဲ့ဒေတာပဲ ဖတ်ပြီး aggregation ကို သတ်မှတ်ကာ တစ်ပိုင်းချင်း အနှစ်ချုပ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/pandas/larger-datasets">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#memory">Column ကန့်သတ်၍ Memory သုံးစွဲမှု စစ်ခြင်း</a></li>
+<li><a href="#chunks">Batch Sum နဲ့ Count တွေ စုခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="memory">
+  <h2>Column ကန့်သတ်၍ Memory သုံးစွဲမှု စစ်ခြင်း</h2>
+  <p>CSV မှာ usecols၊ Parquet မှာ columns နဲ့ လိုတဲ့ column ပဲ ဖတ်ပါ။ ကိုက်ညီတဲ့ dtype ရွေးပြီး frame မှာ memory_usage(deep=True) စစ်ပါ။ တကယ်အကျိုးရှိမရှိ မဆုံးဖြတ်ခင် တိုင်းပါ။</p>
+
+
+
+
+</section>
+<section class="article-section" id="chunks">
+  <h2>Batch Sum နဲ့ Count တွေ စုခြင်း</h2>
+  <p>read_csv(chunksize=...) က chunk iterator ပြန်ပေးပါတယ်။ အားလုံးရဲ့ ပျမ်းမျှအတွက် သုံးလို့ရတဲ့ value တွေ အကုန်ပေါင်းပြီး count အကုန်နဲ့ စားပါ။ Chunk တစ်ခုစီမှာ sample အရေအတွက် မတူနိုင်လို့ mean တွေကို တိုက်ရိုက် ပျမ်းမျှရင် လွဲနိုင်ပါတယ်။</p>
+
+<pre><code>from io import StringIO
+import pandas as pd
+
+source = StringIO(&quot;amount\n4\n2\n8\n&quot;)
+total = count = 0
+for chunk in pd.read_csv(source, chunksize=2):
+    total += chunk[&quot;amount&quot;].sum()
+    count += chunk[&quot;amount&quot;].count()
+print(total, count, round(float(total / count), 2))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">14 3 4.67</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://pandas.pydata.org/docs/user_guide/scale.html">Scaling to large datasets</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/io.html#csv-text-files">CSV and text files</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/pandas/data-formats/">အရင်သင်ခန်းစာ · CSV၊ Excel၊ Parquet နှင့် SQL သုံးခြင်း</a>
+<a href="/docs/read/my/pandas/api-reference/">နောက်သင်ခန်းစာ · pandas API Reference</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use the empty repository you just created on GitHub. Start in your local project-notes directory with main checked out and at least one commit.">
+  <title>Connecting and Pushing a Local Repository · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/github/push-a-repository/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/github/push-a-repository/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/github/push-a-repository/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#github">All documentation · GitHub</a> <a href="/docs/read/my/github/push-a-repository/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Connecting and Pushing a Local Repository</h1>
+  
+  <p class="intro">Use the empty repository you just created on GitHub. Start in your local project-notes directory with main checked out and at least one commit.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/github/push-a-repository">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#remote">Connect the remote URL</a></li>
+<li><a href="#authenticate">Authenticate and push main</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="remote">
+  <h2>Connect the remote URL</h2>
+  <p>Copy the repository’s HTTPS URL from GitHub. Replace OWNER with your actual account or organization name. Run git remote -v first. If origin already exists, check where it points. Use git remote set-url origin followed by the new URL only if origin should point to this repository.</p>
+
+<pre><code>git remote -v
+git remote add origin https://github.com/OWNER/project-notes.git
+git remote -v</code></pre>
+
+
+</section>
+<section class="article-section" id="authenticate">
+  <h2>Authenticate and push main</h2>
+  <p>Push your local main and configure it to track origin/main. For HTTPS, Git Credential Manager can open a browser sign-in. A personal access token can be used in place of a password when appropriate. If you use the SSH URL, add your public SSH key to GitHub and keep the private key on your own machine. After pushing, refresh the repository’s Code tab to see the committed files.</p>
+
+<pre><code>git push -u origin main
+git status -sb</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github">GitHub Docs · Add locally hosted code</a></li>
+<li><a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github">GitHub Docs · About authentication to GitHub</a></li>
+<li><a href="https://docs.github.com/en/get-started/git-basics/about-remote-repositories">GitHub Docs · About remote repositories</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/github/introduction/">Previous lesson · Introduction to GitHub</a>
+<a href="/docs/read/en/github/pull-requests/">Next lesson · Pull Requests and Code Review</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

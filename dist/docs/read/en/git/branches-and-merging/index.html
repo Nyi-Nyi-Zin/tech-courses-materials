@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Keep main as the base for your project. Create a branch when you want to develop a change and bring it into main after checking it.">
+  <title>Branches and Merging · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/git/branches-and-merging/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/git/branches-and-merging/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/git/branches-and-merging/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#git">All documentation · Git</a> <a href="/docs/read/my/git/branches-and-merging/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Branches and Merging</h1>
+  
+  <p class="intro">Keep main as the base for your project. Create a branch when you want to develop a change and bring it into main after checking it.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/git/branches-and-merging">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#branch">Create a branch and commit a change</a></li>
+<li><a href="#merge">Merge a branch into main</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="branch">
+  <h2>Create a branch and commit a change</h2>
+  <p>A branch is a named pointer to a commit. When you commit on add-usage, Git advances that branch while main stays at its previous commit. Start from main in project-notes and append a short usage section.</p>
+
+<pre><code>git switch -c add-usage
+printf &#39;\n## Usage\nRead the notes before starting.\n&#39; &gt;&gt; README.md
+git add README.md
+git commit -m &quot;Add usage notes&quot;
+git branch</code></pre>
+
+
+</section>
+<section class="article-section" id="merge">
+  <h2>Merge a branch into main</h2>
+  <p>Switch to the branch that should receive the changes, then name the branch to merge from. If main has no new commits since the branch was created, this example can fast-forward. Git moves main to the commit already on add-usage.</p>
+
+<pre><code>git switch main
+git merge add-usage
+git log --oneline --graph --all</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging">Git · Basic branching and merging</a></li>
+<li><a href="https://git-scm.com/docs/git-switch">Git · git switch</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/git/commits/">Previous lesson · Staging Changes and Making Commits</a>
+<a href="/docs/read/en/git/merge-conflicts/">Next lesson · Resolving Merge Conflicts</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use an effect to keep something outside React in sync, such as a browser API, connection, or third-party widget.">
+  <title>Effects and synchronization · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/react/effects/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/effects/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/effects/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#react">All documentation · React</a> <a href="/docs/read/my/react/effects/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Effects and synchronization</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">Use an effect to keep something outside React in sync, such as a browser API, connection, or third-party widget.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/react/effects">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#cleanup">Set up and clean up a listener</a></li>
+<li><a href="#derived">Calculate derived values during render</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="cleanup">
+  <h2>Set up and clean up a listener</h2>
+  <p>Dependencies tell React when the effect needs to run again. Return cleanup for subscriptions you set up. In development, Strict Mode can run an extra setup and cleanup cycle to help reveal bugs.</p>
+
+<pre><code>import { useEffect } from &quot;react&quot;;
+
+export function ResizeLogger() {
+  useEffect(() =&gt; {
+    const logWidth = () =&gt; console.log(window.innerWidth);
+    window.addEventListener(&quot;resize&quot;, logWidth);
+    return () =&gt; window.removeEventListener(&quot;resize&quot;, logWidth);
+  }, []);
+
+  return null;
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="derived">
+  <h2>Calculate derived values during render</h2>
+  <p>A filtered list can often be calculated from current props and state during render. Keep work caused by a specific click inside the event handler. Reserve effects for synchronization that comes from the component being displayed.</p>
+
+<pre><code>import { useState } from &quot;react&quot;;
+
+const products = [&quot;Notebook&quot;, &quot;Pencil&quot;, &quot;Backpack&quot;];
+
+export default function ProductSearch() {
+  const [query, setQuery] = useState(&quot;&quot;);
+  const visibleProducts = products.filter(product =&gt;
+    product.toLowerCase().includes(query.toLowerCase())
+  );
+
+  return (
+    &lt;&gt;
+      &lt;label&gt;
+        Filter products
+        &lt;input value={query} onChange={event =&gt; setQuery(event.target.value)} /&gt;
+      &lt;/label&gt;
+      &lt;ul&gt;{visibleProducts.map(product =&gt; &lt;li key={product}&gt;{product}&lt;/li&gt;)}&lt;/ul&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://react.dev/learn/synchronizing-with-effects">Synchronizing with effects</a></li>
+<li><a href="https://react.dev/learn/you-might-not-need-an-effect">When to skip an effect</a></li>
+<li><a href="https://react.dev/reference/react/useEffect">useEffect reference</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/react/state/">Previous lesson · State, events, and forms</a>
+<a href="/docs/read/en/react/shared-state/">Next lesson · Share state between components</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

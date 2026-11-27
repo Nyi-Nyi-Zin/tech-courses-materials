@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Project တစ်ခုကို ပြင်လာတာကြာရင် ဘာပြောင်းခဲ့လဲ၊ ဘယ်သူက ဘယ်အချိန်မှာ မှတ်တမ်းတင်ခဲ့လဲဆိုတာ ပြန်သိဖို့ လိုလာပါတယ်။ Git က အဲဒီမှတ်တမ်းကို ကိုယ့်စက်ထဲမှာ သိမ်းထားပေးနိုင်တဲ့ version control tool တစ်ခုပါ။">
+  <title>Git မိတ်ဆက် · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/git/introduction/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/git/introduction/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/git/introduction/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#git">သင်ခန်းစာအားလုံး · Git</a> <a href="/docs/read/en/git/introduction/" lang="en" hreflang="en">English</a></nav>
+  <h1>Git မိတ်ဆက်</h1>
+  
+  <p class="intro">Project တစ်ခုကို ပြင်လာတာကြာရင် ဘာပြောင်းခဲ့လဲ၊ ဘယ်သူက ဘယ်အချိန်မှာ မှတ်တမ်းတင်ခဲ့လဲဆိုတာ ပြန်သိဖို့ လိုလာပါတယ်။ Git က အဲဒီမှတ်တမ်းကို ကိုယ့်စက်ထဲမှာ သိမ်းထားပေးနိုင်တဲ့ version control tool တစ်ခုပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/git/introduction">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#install">Git ထည့်သွင်းပြီး Version စစ်ခြင်း</a></li>
+<li><a href="#identity">Commit အတွက် နာမည်နဲ့ Email သတ်မှတ်ခြင်း</a></li>
+<li><a href="#init">Local Repository ဆောက်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="install">
+  <h2>Git ထည့်သွင်းပြီး Version စစ်ခြင်း</h2>
+  <p>Windows၊ macOS နဲ့ Linux အတွက် အောက်က Git official installation guide ကို သုံးပါ။ Windows မှာ ဒီနမူနာတွေကို Git Bash နဲ့ လိုက်စမ်းလို့ရပါတယ်။ Install လုပ်ပြီးရင် terminal ပြန်ဖွင့်ပြီး version စစ်ပါ။</p>
+
+<pre><code>git --version</code></pre>
+
+
+</section>
+<section class="article-section" id="identity">
+  <h2>Commit အတွက် နာမည်နဲ့ Email သတ်မှတ်ခြင်း</h2>
+  <p>Git က commit အသစ်တွေမှာ ဒီနာမည်နဲ့ email ကို မှတ်တမ်းတင်ပါတယ်။ နမူနာနေရာမှာ ကိုယ့်အချက်အလက်ကို ထည့်ပါ။ GitHub ပေါ် တင်တဲ့အခါ email ကို ဖျောက်ထားချင်ရင် GitHub ရဲ့ email settings ထဲက noreply address ကို သုံးပါ။</p>
+
+<pre><code>git config --global user.name &quot;Alex Rivera&quot;
+git config --global user.email &quot;alex@example.com&quot;
+git config --get user.name
+git config --get user.email</code></pre>
+
+
+</section>
+<section class="article-section" id="init">
+  <h2>Local Repository ဆောက်ခြင်း</h2>
+  <p>Repository က Project ရဲ့ history ကို သိမ်းပါတယ်။ လိုက်စမ်းဖို့ သီးသန့် folder တစ်ခုဆောက်ပြီး main ဆိုတဲ့ branch နဲ့ Git စသုံးပါ။ ဒီ project ကို နောက်သင်ခန်းစာတွေမှာ ဆက်သုံးပါမယ်။</p>
+
+<pre><code>mkdir project-notes
+cd project-notes
+git init -b main
+git status</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://git-scm.com/install/">Git · Install Git</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">Git · First-time Git setup</a></li>
+<li><a href="https://git-scm.com/docs/git-init">Git · git init</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/git/commits/">နောက်သင်ခန်းစာ · Changes Stage လုပ်ခြင်းနဲ့ Commit သိမ်းခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

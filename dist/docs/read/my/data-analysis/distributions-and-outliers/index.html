@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="အလယ်တန်ဖိုးနဲ့ ပြန့်နှံ့မှု ဖော်ပြပါ။ ထူးခြားတဲ့ observation တွေကို မှတ်ပြီး မူရင်း အခြေအနေနဲ့ တွဲစစ်ပါ။">
+  <title>Distribution အနှစ်ချုပ်၍ Outlier များ စစ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/distributions-and-outliers/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/distributions-and-outliers/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/distributions-and-outliers/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#data-analysis">သင်ခန်းစာအားလုံး · Data Analysis</a> <a href="/docs/read/en/data-analysis/distributions-and-outliers/" lang="en" hreflang="en">English</a></nav>
+  <h1>Distribution အနှစ်ချုပ်၍ Outlier များ စစ်ခြင်း</h1>
+  
+  <p class="intro">အလယ်တန်ဖိုးနဲ့ ပြန့်နှံ့မှု ဖော်ပြပါ။ ထူးခြားတဲ့ observation တွေကို မှတ်ပြီး မူရင်း အခြေအနေနဲ့ တွဲစစ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/data-analysis/distributions-and-outliers">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#summary">Mean၊ Median နှင့် Quartile များ ယှဉ်ခြင်း</a></li>
+<li><a href="#iqr">IQR Fence ကျော်တဲ့ Value တွေ မှတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="summary">
+  <h2>Mean၊ Median နှင့် Quartile များ ယှဉ်ခြင်း</h2>
+  <p>Median နဲ့ interquartile range က mean နဲ့ range အပြည့်ထက် အစွန်းရောက်တန်ဖိုးတွေကြောင့် အပြောင်းအလဲ နည်းပါတယ်။ Observation အရေအတွက် စစ်ပြီး ပုံစံနဲ့ တိမ်းစောင်းမှုကို histogram သို့မဟုတ် box plot နဲ့ ကြည့်ပါ။ Missing value ကို ဘယ်လို ကိုင်တွယ်လဲ ရေးပါ။</p>
+
+
+
+
+</section>
+<section class="article-section" id="iqr">
+  <h2>IQR Fence ကျော်တဲ့ Value တွေ မှတ်ခြင်း</h2>
+  <p>IQR က တတိယ quartile နဲ့ ပထမ quartile ကြား ကွာဟချက်ပါ။ စစ်ဆေးရာမှာ quartile နှစ်ဖက်ကနေ IQR 1.5 ဆအကွာကို fence အဖြစ် သုံးလေ့ရှိပါတယ်။ အမှတ်အသားပြထားတဲ့ value က data error၊ တကယ်ဖြစ်တဲ့ ရှားပါးဖြစ်ရပ် သို့မဟုတ် group ကွာတာ ဖြစ်နိုင်လို့ မဆုံးဖြတ်ခင် စစ်ပါ။</p>
+
+<pre><code>import numpy as np
+
+orders = np.array([10, 11, 12, 13, 14, 45])
+q1, q3 = np.quantile(orders, [0.25, 0.75])
+iqr = q3 - q1
+flag = (orders &lt; q1 - 1.5 * iqr) | (orders &gt; q3 + 1.5 * iqr)
+print(float(np.median(orders)), float(iqr))
+print(orders[flag].tolist())</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/distributions-and-outliers-iqr.png" data-image-preview><img src="/docs/media/data/distributions-and-outliers-iqr.png" alt="Horizontal box plot မှာ IQR fence 7.5 နဲ့ 17.5 ကို ပြပါတယ်။ 45 က အပေါ်ဘက် fence ကို ကျော်နေပါတယ်။" width="720" height="385" loading="lazy" decoding="async"></a>
+    <figcaption>ဒီ rule က order 45 ခု ဆိုတဲ့ တန်ဖိုးကို ဆက်လက်စစ်ဖို့ အမှတ်အသား ပြပေးပါတယ်။</figcaption>
+  </figure>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">12.5 2.5
+[45]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://numpy.org/doc/stable/reference/generated/numpy.quantile.html">NumPy quantile</a></li>
+<li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/boxplot.htm">NIST box plots</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/data-analysis/sampling-and-bias/">အရင်သင်ခန်းစာ · Sampling၊ Bias နှင့် ကိုယ်စားပြုနိုင်သော ဒေတာ</a>
+<a href="/docs/read/my/data-analysis/confidence-intervals/">နောက်သင်ခန်းစာ · Confidence Intervals ဖြင့် မသေချာမှု ခန့်မှန်းခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

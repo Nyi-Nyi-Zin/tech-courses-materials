@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use object types to describe fields and unions to express more than one valid shape.">
+  <title>Object types, unions, and narrowing · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/types/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/types/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/types/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#typescript">All documentation · TypeScript</a> <a href="/docs/read/my/typescript/types/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Object types, unions, and narrowing</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">Use object types to describe fields and unions to express more than one valid shape.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/typescript/types">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#objects">Required and optional fields</a></li>
+<li><a href="#narrow">Narrow with a check</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="objects">
+  <h2>Required and optional fields</h2>
+  <p>An interface or type alias can describe an object’s fields. A trailing question mark marks a field as optional. With strict null checks, handle the missing value before you use it as a string.</p>
+
+<pre><code>interface Product {
+  name: string;
+  price: number;
+  label?: string;
+}
+
+function displayName(product: Product) {
+  return product.label ?? product.name;
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="narrow">
+  <h2>Narrow with a check</h2>
+  <p>Use typeof, equality, or a shared literal field to narrow a union. In the example, checking ok lets the compiler determine which fields exist in each branch.</p>
+
+<pre><code>type Result =
+  | { ok: true; total: number }
+  | { ok: false; message: string };
+
+function describe(result: Result) {
+  if (result.ok) return &quot;Total: &quot; + result.total;
+  return result.message;
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html">Object types</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">Narrowing</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/typescript/setup/">Previous lesson · Set up TypeScript</a>
+<a href="/docs/read/en/typescript/generics/">Next lesson · Generics and async types</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

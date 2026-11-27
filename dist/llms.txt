@@ -1,0 +1,13 @@
+# Cloud Nine Innovations documentation
+
+> Public web development, Python, data analysis, and machine learning lessons in English and Burmese. The reading URLs serve article text, headings, code examples, and references as HTML without running JavaScript or signing in.
+
+## Lesson indexes
+
+- [English lessons](https://javascript-training.cloudninemm.com/docs/read/en/): All guides and individual lesson URLs.
+- [Burmese lessons](https://javascript-training.cloudninemm.com/docs/read/my/): All guides and individual lesson URLs in Burmese.
+- [Sitemap](https://javascript-training.cloudninemm.com/sitemap.xml): Direct reading URLs for both languages.
+
+## Interactive docs
+
+- [Run the examples](https://javascript-training.cloudninemm.com/): The interactive site opens code editors and browser previews. To read or cite a lesson from an automated client, follow its reading URL from one of the language indexes.

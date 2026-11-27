@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Change how existing values are arranged and distinguish joining an axis from adding one.">
+  <title>Reshape, transpose, and combine arrays · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/reshaping/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/reshaping/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/reshaping/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#numpy">All documentation · NumPy</a> <a href="/docs/read/my/numpy/reshaping/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Reshape, transpose, and combine arrays</h1>
+  <p class="article-version">2.5.5</p>
+  <p class="intro">Change how existing values are arranged and distinguish joining an axis from adding one.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/numpy/reshaping">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#reshape">Reshape or transpose</a></li>
+<li><a href="#combine">Concatenate or stack</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="reshape">
+  <h2>Reshape or transpose</h2>
+  <p>reshape keeps the element count fixed and can infer one axis set to -1. T transposes a 2D array. A reshape can return a view or a copy depending on the memory layout.</p>
+
+<pre><code>import numpy as np
+
+a = np.arange(1, 7).reshape(2, -1)
+print(a.tolist())
+print(a.T.shape)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[[1, 2, 3], [4, 5, 6]]
+(3, 2)</pre></div>
+
+
+</section>
+<section class="article-section" id="combine">
+  <h2>Concatenate or stack</h2>
+  <p>concatenate joins arrays along an existing axis. stack adds a new axis. For stack, all input arrays must have the same shape.</p>
+
+<pre><code>import numpy as np
+
+a, b = np.array([1, 2]), np.array([3, 4])
+print(np.concatenate([a, b]).shape)
+print(np.stack([a, b]).shape)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">(4,)
+(2, 2)</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://numpy.org/doc/stable/user/absolute_beginners.html">NumPy absolute basics</a></li>
+<li><a href="https://numpy.org/doc/stable/user/basics.copies.html">Copies and views</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/numpy/indexing/">Previous lesson · Indexing, slices, and masks</a>
+<a href="/docs/read/en/numpy/broadcasting/">Next lesson · Broadcasting, vectorization, and reductions</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

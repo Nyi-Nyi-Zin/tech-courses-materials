@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="pandas object တွေကို row အလိုက် ဆက်ပါတယ်။ Column အလိုက် ဘေးချင်းကပ် ဆက်ချင်ရင် axis=1 သုံးပါ။">
+  <title>pandas.concat · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/concat/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/concat/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/concat">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API Reference">
+    <a href="/docs/read/my/pandas/api-reference/#find-an-api">pandas API Reference</a><span aria-hidden="true">/</span><span>အထွေထွေ Functions</span><a href="/docs/read/en/pandas/api/concat/" lang="en" hreflang="en">English</a>
+  </nav>
+    <h1><code>pandas.<wbr>concat</code></h1>
+    <p class="article-version">pandas 3.1.1 · အထွေထွေ Functions · <span lang="en">function</span></p>
+    <p class="intro">pandas object တွေကို row အလိုက် ဆက်ပါတယ်။ Column အလိုက် ဘေးချင်းကပ် ဆက်ချင်ရင် axis=1 သုံးပါ။</p>
+
+    <nav class="api-breadcrumbs" aria-label="ဒီစာမျက်နှာမှာ"><ul><li><a href="#syntax">ခေါ်သုံးပုံ</a></li><li><a href="#example">နမူနာ စမ်းကြည့်ရန်</a></li><li><a href="#parameters">ထည့်သွင်းနိုင်တဲ့ Arguments</a></li><li><a href="#returns">ပြန်ပေးတဲ့ ရလဒ်</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>ခေါ်သုံးပုံ</h2><details class="api-full-signature"><summary><code lang="en">pd.concat(…)</code> <span>ခေါ်သုံးပုံ အပြည့်အစုံ</span></summary><pre><code lang="en">pd.concat(
+    objs,
+    *,
+    axis=0,
+    join=&#39;outer&#39;,
+    ignore_index=False,
+    keys=None,
+    levels=None,
+    names=None,
+    verify_integrity=False,
+    sort=…,
+    copy=…,
+    union_categories=False,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>နမူနာ စမ်းကြည့်ရန်</h2>
+      <p>နမူနာကုဒ်ကို ပြင်ပြီး Run Python နှိပ်ပါ။ ရလဒ်ကို အောက်မှာ ကြည့်နိုင်ပါတယ်။</p>
+      <label><span>Python ကုဒ်</span><textarea rows="7" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+orders = pd.DataFrame({
+    &quot;team&quot;: [&quot;North&quot;, &quot;North&quot;, &quot;South&quot;],
+    &quot;day&quot;: pd.to_datetime([&quot;2025-01-01&quot;, &quot;2025-01-02&quot;, &quot;2025-01-03&quot;]),
+    &quot;units&quot;: [4, None, 7],
+})
+print(pd.concat([orders.iloc[:2], orders.iloc[2:]], ignore_index=True))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>ရပ်ရန်</button>
+        <button type="button" data-reset disabled>မူလကုဒ် ပြန်ထားရန်</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="ရလဒ်"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>ထည့်သွင်းနိုင်တဲ့ Arguments</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">ထည့်သွင်းပုံ</th><th scope="col">လက်ခံတဲ့ တန်ဖိုးနဲ့ သုံးပုံ</th></tr></thead><tbody><tr><th scope="row"><code>objs</code></th>
+      <td>ထည့်ပေးရမယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small></td>
+      <td><span>Series သို့မဟုတ် DataFrame တွေပါတဲ့ iterable သို့မဟုတ် mapping</span><p>ပေါင်းမယ့် Series နဲ့ DataFrame တွေကို list လို အစဉ်လိုက်ပုံစံ ဒါမှမဟုတ် dict လို key နဲ့ value တွဲထားတဲ့ပုံစံနဲ့ ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>axis</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>0</code></td>
+      <td><span>{0/&#39;index&#39;၊ 1/&#39;columns&#39;}</span><p>Row တွေကို အပေါ်အောက် ဆက်ချင်ရင် 0၊ column တွေကို ဘေးချင်းယှဉ် ဆက်ချင်ရင် 1 သုံးပါ။</p></td></tr>
+<tr><th scope="row"><code>join</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>&#39;outer&#39;</code></td>
+      <td><span>{&#39;inner&#39;၊ &#39;outer&#39;}</span><p>&quot;outer&quot; ဆို တစ်ဖက်စီမှာရှိတဲ့ label အားလုံးကို ထားပါတယ်။ &quot;inner&quot; ဆို နှစ်ဖက်လုံးမှာရှိတဲ့ label တွေကိုပဲ ထားပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>ignore_index</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True / False (bool)</span><p>ရလဒ်မှာ မူလ label တွေအစား သုညကစတဲ့ ကိန်းပြည့် label တွေ သုံးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>keys</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>အစဉ်လိုက် တန်ဖိုးအစု</span><p>အုပ်စုခွဲရာမှာ၊ dictionary ဒါမှမဟုတ် index ထဲက entry တစ်ခုကို ရွေးရာမှာ၊ ဒေတာတွဲဆက်ရာမှာ သုံးမယ့် key တွေကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>levels</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>အစဉ်လိုက် တန်ဖိုးအစု (sequence) တွေပါတဲ့ list</span><p>MultiIndex ရဲ့ level တစ်ဆင့်စီမှာ သုံးမယ့် label တွေကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>names</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>list</span><p>Label၊ field ဒါမှမဟုတ် index level တွေအတွက် သုံးမယ့်အမည်တွေကို ထည့်ပါ။</p></td></tr>
+<tr><th scope="row"><code>verify_integrity</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True / False (bool)</span><p>ရလဒ်က method ရဲ့ သတ်မှတ်ချက်တွေနဲ့ ကိုက်ညီမညီ စစ်ပေးပါတယ်။ ဥပမာ label ထပ်နေသလား စစ်နိုင်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>sort</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small></td>
+      <td><span>True / False (bool)</span><p>ရလဒ်ထဲက label သို့မဟုတ် group တွေကို အစဉ်လိုက် စီမစီ သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>copy</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small></td>
+      <td><span>True / False (bool)</span><p>API က ခွင့်ပြုတဲ့အခါ မူလဒေတာကို copy လုပ်မလုပ် သတ်မှတ်ပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>union_categories</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True / False (bool)</span></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>ပြန်ပေးတဲ့ ရလဒ်</h2><p>objs ထဲက object တွေရဲ့ အမျိုးအစားအတိုင်း ပြန်ပေးပါတယ်။</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.concat.html#pandas.concat">pandas တရားဝင် ကိုးကားချက်</a>
+      <nav class="pagination" aria-label="pandas API Reference"><a href="/docs/read/my/pandas/api/col/"><span>အရင် API</span><strong>pandas.col</strong></a><a href="/docs/read/my/pandas/api/crosstab/"><span>နောက် API</span><strong>pandas.crosstab</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Raw CSV ကနေ လစဉ် အရောင်း chart ထုတ်ပါ။ ရလဒ်ထဲ ဘာတွေ ပါဝင်တယ်ဆိုတာ ရှင်းပါ။">
+  <title>Store Sales Analysis အစအဆုံး ရှင်းလင်းချက် · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/store-sales/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/store-sales/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/store-sales/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#data-analysis">သင်ခန်းစာအားလုံး · Data Analysis</a> <a href="/docs/read/en/data-analysis/store-sales/" lang="en" hreflang="en">English</a></nav>
+  <h1>Store Sales Analysis အစအဆုံး ရှင်းလင်းချက်</h1>
+  
+  <p class="intro">Raw CSV ကနေ လစဉ် အရောင်း chart ထုတ်ပါ။ ရလဒ်ထဲ ဘာတွေ ပါဝင်တယ်ဆိုတာ ရှင်းပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/data-analysis/store-sales">Interactive Docs ဖွင့်ရန်</a></p>
+  <p class="reading-link"><a href="/docs/media/data/store_sales.csv" download>နမူနာ CSV ရယူရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#question">ထုတ်မယ့် ရလဒ် သတ်မှတ်ခြင်း</a></li>
+<li><a href="#worked-example">သန့်စင်၍ Group စုကာ Chart ဆွဲခြင်း</a></li>
+<li><a href="#findings">တွေ့ရှိချက်နှင့် ကန့်သတ်ချက် တင်ပြခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="question">
+  <h2>ထုတ်မယ့် ရလဒ် သတ်မှတ်ခြင်း</h2>
+  <p>သုံးလို့ရတဲ့ မှတ်တမ်းတင်အရောင်း ဘယ်ပြက္ခဒိန်လမှာ အများဆုံးလဲ။ ဒီ synthetic ဖိုင်သေးသေးကို workflow ပြဖို့ သုံးထားပါတယ်။ Amount တွေအတွက် currency မသတ်မှတ်ထားပါ။ ထပ်နေတဲ့ row ဖယ်ပြီးရင် row တစ်ကြောင်းက အရောင်းတစ်ခုပါ။</p>
+
+
+
+
+</section>
+<section class="article-section" id="worked-example">
+  <h2>သန့်စင်၍ Group စုကာ Chart ဆွဲခြင်း</h2>
+  <p>ပေးထားတဲ့ CSV ကို script ဘေးမှာ သိမ်းပါ။ Source code တွေကို အတိုင်းဖတ်၊ အချက်အလက်အားလုံး တူတဲ့ row ဖယ်ပြီး ကိန်းဂဏန်း ပြောင်းပြီးမှ amount ပြန်တွက်ပါ။ လအလိုက် စုတဲ့အခါ value အားလုံး ပျောက်တဲ့ group ကို missing ထားဖို့ min_count=1 သုံးပါ။</p>
+
+<pre><code>import matplotlib.pyplot as plt
+import pandas as pd
+
+raw = pd.read_csv(&quot;store_sales.csv&quot;, dtype=&quot;string&quot;, keep_default_na=False)
+data = raw.drop_duplicates().copy()
+date = pd.to_datetime(data[&quot;Transaction Date&quot;], format=&quot;%Y-%m-%d&quot;, errors=&quot;coerce&quot;)
+quantity = pd.to_numeric(data[&quot;Quantity&quot;], errors=&quot;coerce&quot;)
+price = pd.to_numeric(data[&quot;Price Per Unit&quot;], errors=&quot;coerce&quot;)
+recorded = pd.to_numeric(data[&quot;Total Spent&quot;], errors=&quot;coerce&quot;)
+sales = recorded.fillna(quantity * price)
+monthly = sales.groupby(date.dt.to_period(&quot;M&quot;)).sum(min_count=1)
+
+fig, ax = plt.subplots(layout=&quot;constrained&quot;)
+ax.plot(monthly.index.astype(str), monthly, marker=&quot;o&quot;)
+ax.set(title=&quot;Store sales by month&quot;, xlabel=&quot;Month&quot;, ylabel=&quot;Recorded sales&quot;)
+print(str(monthly.idxmax()), float(monthly.max()))
+print(float(sales.sum()), float(monthly.sum()), int(sales.isna().sum()))
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/store-sales-worked-example.png" data-image-preview><img src="/docs/media/data/store-sales-worked-example.png" alt="January ကနေ April အထိ အရောင်း 11.5၊ 17၊ 15၊ 21.5 ဖြစ်ပြီး April မှာ အများဆုံးပါ။" width="659" height="499" loading="lazy" decoding="async"></a>
+  </figure>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">2023-04 21.5
+67.0 65.0 1</pre></div>
+
+
+</section>
+<section class="article-section" id="findings">
+  <h2>တွေ့ရှိချက်နှင့် ကန့်သတ်ချက် တင်ပြခြင်း</h2>
+  <p>April 2023 မှာ လစဉ်အသုံးပြုလို့ရတဲ့ အရောင်း 21.5 နဲ့ အများဆုံးပါ။ လစဉ်ရလဒ်တွေ ပေါင်းရင် 65 ဖြစ်ပြီး စုစုပေါင်းက 67 ပါ။ Amount 2 ရှိတဲ့ transaction တစ်ခုက ရက်စွဲဖတ်မရလို့ ကွာတာပါ။ နောက်ထပ် transaction တစ်ခုရဲ့ amount ပြန်မတွက်နိုင်ပါ။ March မှာ အရောင်းကျပြီးမှ April မှာ ပြန်တက်ပါတယ်။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">pandas.read_csv</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/groupby.html">pandas GroupBy guide</a></li>
+<li><a href="https://matplotlib.org/stable/users/explain/quick_start.html">Matplotlib quick start</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/data-analysis/analysis-and-validation/">အရင်သင်ခန်းစာ · Trend ဆန်းစစ်၍ ရလဒ်များ တိုက်စစ်ခြင်း</a>
+<a href="/docs/read/my/data-analysis/metric-coverage/">နောက်သင်ခန်းစာ · ဒေတာပါဝင်မှုနှင့် Missing Data ယူဆချက်များ စစ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

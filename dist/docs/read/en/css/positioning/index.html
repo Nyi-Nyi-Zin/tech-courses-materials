@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CSS positioning changes where a box is drawn. Stacking order determines which box appears on top when two boxes overlap.">
+  <title>Positioning and stacking order · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/positioning/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/positioning/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/positioning/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/positioning/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Positioning and stacking order</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">CSS positioning changes where a box is drawn. Stacking order determines which box appears on top when two boxes overlap.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/positioning">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#position">Place a badge inside its card</a></li>
+<li><a href="#sticky">How do fixed and sticky positions work?</a></li>
+<li><a href="#layers">What does z-index compare?</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="position">
+  <h2>Place a badge inside its card</h2>
+  <p>Normal flow uses position: static. With position: relative, the card keeps its normal place and becomes a positioning reference. The badge uses position: absolute, so it leaves normal flow. top and right measure from the nearest positioned ancestor in this example.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Place a badge inside its card&lt;/title&gt;
+  &lt;style&gt;
+    .card { position: relative; width: 220px; padding: 24px; border: 2px solid teal; }
+    .badge { position: absolute; top: 4px; right: 4px; background: gold; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;card&quot;&gt;Pen &lt;span class=&quot;badge&quot;&gt;Sale&lt;/span&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Sale sits near the top-right of the card. Remove position: relative to see the reference change.</p>
+
+</section>
+<section class="article-section" id="sticky">
+  <h2>How do fixed and sticky positions work?</h2>
+  <p>Fixed typically uses the viewport as its reference and stays in place during scrolling. Sticky starts in flow and sticks to a scroll container edge after reaching its offset, until the box reaches the boundary of its containing block.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;How do fixed and sticky positions work?&lt;/title&gt;
+  &lt;style&gt;
+    body { min-height: 150vh; }
+    header { position: sticky; top: 0; background: #d6efea; padding: 8px; }
+    aside { position: fixed; right: 12px; bottom: 12px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Example Store&lt;/h1&gt;&lt;header&gt;Catalog&lt;/header&gt;&lt;p&gt;Pens and notebooks&lt;/p&gt;&lt;aside&gt;Help&lt;/aside&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Scroll the page. The Catalog heading stays at the top and “Help” stays at the bottom right.</p>
+
+</section>
+<section class="article-section" id="layers">
+  <h2>What does z-index compare?</h2>
+  <p>A stacking context is a group of elements stacked together. z-index changes the order of applicable elements within their context. A child cannot move above a higher sibling context by increasing only its own z-index.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;What does z-index compare?&lt;/title&gt;
+  &lt;style&gt;
+    .board { position: relative; height: 100px; }
+    .card { position: absolute; width: 100px; padding: 12px; }
+    .pen { z-index: 2; background: gold; }
+    .notebook { z-index: 1; top: 20px; left: 24px; background: lightblue; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;board&quot;&gt;&lt;div class=&quot;card pen&quot;&gt;Pen&lt;/div&gt;&lt;div class=&quot;card notebook&quot;&gt;Notebook&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Pen covers part of Notebook. Give Notebook z-index: 3 and reload to change the order.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/position">MDN · Position</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Positioned_layout/Stacking_context">MDN · Stacking context</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/flex-and-grid-sizing/">Previous lesson · Flex sizing and grid placement</a>
+<a href="/docs/read/en/css/responsive/">Next lesson · Responsive styles and focus</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

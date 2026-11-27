@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Database တစ်ခုတည်းမှာ transaction နှစ်ခု တစ်ပြိုင်နက် လုပ်ဆောင်တဲ့အခါ တစ်ဖက်က ပြင်ထားတဲ့ data ကို ကျန်တစ်ဖက်က ဘယ်အချိန်မှာ မြင်ရလဲဆိုတာ isolation level ပေါ်မှာ မူတည်ပါတယ်။ ဒီနမူနာမှာ psql session နှစ်ခု သုံးထားပါတယ်။">
+  <title>Transaction Isolation နဲ့ တစ်ပြိုင်နက် Update များ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/transaction-isolation/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/transaction-isolation/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/transaction-isolation/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/transaction-isolation/" lang="en" hreflang="en">English</a></nav>
+  <h1>Transaction Isolation နဲ့ တစ်ပြိုင်နက် Update များ</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">Database တစ်ခုတည်းမှာ transaction နှစ်ခု တစ်ပြိုင်နက် လုပ်ဆောင်တဲ့အခါ တစ်ဖက်က ပြင်ထားတဲ့ data ကို ကျန်တစ်ဖက်က ဘယ်အချိန်မှာ မြင်ရလဲဆိုတာ isolation level ပေါ်မှာ မူတည်ပါတယ်။ ဒီနမူနာမှာ psql session နှစ်ခု သုံးထားပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/transaction-isolation">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#seat-setup">Course နေရာလွတ် နမူနာ ဆောက်ခြင်း</a></li>
+<li><a href="#levels">Session A · Repeatable Read စတင်ခြင်း</a></li>
+<li><a href="#session-b">Session B · နေရာလွတ် အရေအတွက် ပြောင်းခြင်း</a></li>
+<li><a href="#session-a-again">Session A · COMMIT မတိုင်ခင်နဲ့ ပြီးနောက် တိုက်ကြည့်ခြင်း</a></li>
+<li><a href="#stock">Statement တစ်ကြောင်းတည်းနဲ့ နေရာနှစ်ခု ယူခြင်း</a></li>
+<li><a href="#serializable">လိုအပ်ရင် ပိုတင်းကျပ်တဲ့ Isolation ကို ရွေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="seat-setup">
+  <h2>Course နေရာလွတ် နမူနာ ဆောက်ခြင်း</h2>
+  <p>Setup ပြီးရင် psql session နှစ်ခုကို learning_db ဆီ ချိတ်ပါ။ အောက်က transaction မစခင် ဒီ block ကို Session A မှာ တစ်ခါ run ပါ။ နမူနာ course အတွက် နေရာလွတ် 10 နေရာ သတ်မှတ်ပေးတယ်။ ထပ် run ရင် နမူနာကို အစကနေ ပြန်ထားပေးတယ်။</p>
+
+<pre><code>CREATE TABLE IF NOT EXISTS course_seats_demo (
+  course_id integer PRIMARY KEY REFERENCES courses(id),
+  seats_open integer NOT NULL CHECK (seats_open &gt;= 0)
+);
+
+INSERT INTO course_seats_demo (course_id, seats_open)
+VALUES (1, 10)
+ON CONFLICT (course_id) DO UPDATE SET seats_open = EXCLUDED.seats_open;</code></pre>
+
+
+</section>
+<section class="article-section" id="levels">
+  <h2>Session A · Repeatable Read စတင်ခြင်း</h2>
+  <p>Read Committed က PostgreSQL ရဲ့ default ဖြစ်ပြီး statement တစ်ခုချင်းစီအတွက် snapshot အသစ် ယူတယ်။ Repeatable Read က ပထမ query သို့မဟုတ် data ပြောင်းတဲ့ statement ယူထားတဲ့ snapshot ကို ဆက်သုံးတယ်။ ဒီ block ကို Session A မှာ run ပါ။ 10 ကို မြင်ရမယ်။ Transaction ကို ဖွင့်ထားပြီး Session B ဆီ ပြောင်းပါ။</p>
+
+<pre><code>BEGIN ISOLATION LEVEL REPEATABLE READ;
+SELECT seats_open FROM course_seats_demo WHERE course_id = 1;</code></pre>
+
+
+</section>
+<section class="article-section" id="session-b">
+  <h2>Session B · နေရာလွတ် အရေအတွက် ပြောင်းခြင်း</h2>
+  <p>ဒီ block ကို Session B မှာ run ပြီး commit လုပ်ပါ။ တန်ဖိုးအသစ်က 15 ပါ။ COMMIT အောင်မြင်ရင် Session A ဆီ ပြန်သွားပါ။</p>
+
+<pre><code>BEGIN;
+UPDATE course_seats_demo SET seats_open = 15 WHERE course_id = 1;
+COMMIT;</code></pre>
+
+
+</section>
+<section class="article-section" id="session-a-again">
+  <h2>Session A · COMMIT မတိုင်ခင်နဲ့ ပြီးနောက် တိုက်ကြည့်ခြင်း</h2>
+  <p>Session A က မူလ snapshot ကို ဖတ်နေသေးလို့ ပထမ SELECT မှာ 10 ပဲ မြင်ရမယ်။ COMMIT ပြီးမှ ထပ်ဖတ်တဲ့ SELECT မှာ 15 ကို မြင်ရမယ်။</p>
+
+<pre><code>SELECT seats_open FROM course_seats_demo WHERE course_id = 1;
+COMMIT;
+SELECT seats_open FROM course_seats_demo WHERE course_id = 1;</code></pre>
+
+
+</section>
+<section class="article-section" id="stock">
+  <h2>Statement တစ်ကြောင်းတည်းနဲ့ နေရာနှစ်ခု ယူခြင်း</h2>
+  <p>နေရာလွတ် နှစ်ခုနဲ့အထက် ရှိမှ ဒီ update က နှစ်နေရာ ယူပေးတယ်။ RETURNING နဲ့ လက်ကျန်နေရာလွတ်ကို ကြည့်ပါ။ Row မရရင် ကိုက်ညီတဲ့ course မှာ နေရာနှစ်ခု မကျန်တာ သို့မဟုတ် course မရှိတာ ဖြစ်နိုင်တယ်။ Browser မှာ ဒီနမူနာကို သီးသန့် နေရာလွတ် 10 နေရာက စတယ်။</p>
+
+<pre><code>UPDATE course_seats_demo
+SET seats_open = seats_open - 2
+WHERE course_id = 1 AND seats_open &gt;= 2
+RETURNING course_id, seats_open;</code></pre>
+
+
+</section>
+<section class="article-section" id="serializable">
+  <h2>လိုအပ်ရင် ပိုတင်းကျပ်တဲ့ Isolation ကို ရွေးခြင်း</h2>
+  <p>Serializable က commit အောင်မြင်တဲ့ transactions တွေ တစ်ခုစီ အစဉ်လိုက် လုပ်ထားသလို ရလဒ်တူမတူ စစ်ပေးတယ်။ SQLSTATE 40001 ဖြစ်ရင် transaction ကို rollback လုပ်ပြီး အစကနေ ပြန်စမ်းပါ။ PostgreSQL က Read Uncommitted ကို Read Committed အတိုင်း ကိုင်တွယ်တယ်။</p>
+
+<pre><code>BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+UPDATE course_seats_demo
+SET seats_open = seats_open - 1
+WHERE course_id = 1 AND seats_open &gt; 0
+RETURNING seats_open;
+
+COMMIT;
+-- On SQLSTATE 40001, roll back and retry the whole transaction.</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/transaction-iso.html">PostgreSQL 19 · Transaction isolation</a></li>
+<li><a href="https://www.postgresql.org/docs/19/sql-update.html">PostgreSQL 19 · UPDATE</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/transactions/">အရင်သင်ခန်းစာ · Data ပြောင်းခြင်း၊ Transactions နှင့် Indexes</a>
+<a href="/docs/read/my/database/cte/">နောက်သင်ခန်းစာ · CTE နဲ့ Queries ကို အဆင့်ခွဲခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

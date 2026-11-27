@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Check whether each string contains a pattern. Set regex=False to match text literally.">
+  <title>pandas.Series.str.contains · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/Series.str.contains/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/Series.str.contains/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/Series.str.contains">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Series and accessors</span><a href="/docs/read/my/pandas/api/Series.str.contains/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>Series.<wbr>str.<wbr>contains</code></h1>
+    <p class="article-version">pandas 3.1.1 · Series and accessors · <span lang="en">method</span></p>
+    <p class="intro">Check whether each string contains a pattern. Set regex=False to match text literally.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><pre><code lang="en">Series.str.contains(pat, case=True, flags=0, na=…, regex=True)</code></pre></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="7" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+orders = pd.DataFrame({
+    &quot;team&quot;: [&quot;North&quot;, &quot;North&quot;, &quot;South&quot;],
+    &quot;day&quot;: pd.to_datetime([&quot;2025-01-01&quot;, &quot;2025-01-02&quot;, &quot;2025-01-03&quot;]),
+    &quot;units&quot;: [4, None, 7],
+})
+print(orders[&quot;team&quot;].str.contains(&quot;north&quot;, case=False, regex=False))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>pat</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>str</span><p>Specify the substring or regular expression to match.</p></td></tr>
+<tr><th scope="row"><code>case</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>Choose whether uppercase and lowercase must match exactly.</p></td></tr>
+<tr><th scope="row"><code>flags</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>0</code></td>
+      <td><span>int</span><p>Pass regular-expression modifiers such as re.IGNORECASE.</p></td></tr>
+<tr><th scope="row"><code>na</code></th>
+      <td>Optional<br><small>Positional or keyword</small></td>
+      <td><span>scalar</span><p>Provide a replacement for missing inputs. When omitted, the result depends on the input dtype.</p></td></tr>
+<tr><th scope="row"><code>regex</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>True treats pat as a regular expression. False searches for literal text.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>Series or Index of boolean values</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.contains.html#pandas.Series.str.contains">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/Series.str.center/"><span>Previous in this category</span><strong>pandas.Series.str.center</strong></a><a href="/docs/read/en/pandas/api/Series.str.count/"><span>Next in this category</span><strong>pandas.Series.str.count</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

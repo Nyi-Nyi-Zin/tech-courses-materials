@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Index တွေနဲ့ အစဉ်စီပါ။ ကိုက်ညီတဲ့ နေရာရှာပြီး စီပြီးသား array ထဲ ရှာပါ။">
+  <title>Array များ အစဉ်စီ၊ အဆင့်သတ်မှတ်၍ ရှာခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/sorting-and-searching/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/sorting-and-searching/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/sorting-and-searching/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#numpy">သင်ခန်းစာအားလုံး · NumPy</a> <a href="/docs/read/en/numpy/sorting-and-searching/" lang="en" hreflang="en">English</a></nav>
+  <h1>Array များ အစဉ်စီ၊ အဆင့်သတ်မှတ်၍ ရှာခြင်း</h1>
+  <p class="article-version">2.5.5</p>
+  <p class="intro">Index တွေနဲ့ အစဉ်စီပါ။ ကိုက်ညီတဲ့ နေရာရှာပြီး စီပြီးသား array ထဲ ရှာပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/numpy/sorting-and-searching">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#indirect-sort">argsort ဖြင့် ဆက်စပ် Array များ အစဉ်ညှိခြင်း</a></li>
+<li><a href="#search">Index နှင့် ထည့်ရမည့် နေရာ ရှာခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="indirect-sort">
+  <h2>argsort ဖြင့် ဆက်စပ် Array များ အစဉ်ညှိခြင်း</h2>
+  <p>np.sort က အစဉ်စီပြီးသား value တွေ ပြန်ပေးပါတယ်။ np.argsort က index တွေ ပြန်ပေးလို့ ဆက်စပ် array တွေကို အစဉ်တူတူ စီနိုင်ပါတယ်။ တန်ဖိုးတူတာတွေ မူရင်းအစဉ်အတိုင်း ထားဖို့ stable=True သုံးပါ။</p>
+
+<pre><code>import numpy as np
+
+names = np.array([&quot;Tea&quot;, &quot;Cake&quot;, &quot;Coffee&quot;])
+counts = np.array([4, 1, 3])
+order = np.argsort(counts, stable=True)
+print(names[order].tolist())</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[&#39;Cake&#39;, &#39;Coffee&#39;, &#39;Tea&#39;]</pre></div>
+
+
+</section>
+<section class="article-section" id="search">
+  <h2>Index နှင့် ထည့်ရမည့် နေရာ ရှာခြင်း</h2>
+  <p>flatnonzero က flatten လုပ်ထားတဲ့ mask ထဲ True ဖြစ်တဲ့ index တွေ ပေးပါတယ်။ searchsorted က စီပြီးသား array မှာ ထည့်ရမယ့် နေရာ ပေးပါတယ်။ side=&quot;left&quot; က တန်ဖိုးတူတာတွေရဲ့ ရှေ့ဆုံးနေရာ ရှာပါတယ်။</p>
+
+<pre><code>import numpy as np
+
+scores = np.array([10, 20, 20, 50])
+print(np.flatnonzero(scores &gt;= 20).tolist())
+print(np.searchsorted(scores, 20, side=&quot;left&quot;))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[1, 2, 3]
+1</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://numpy.org/doc/stable/reference/routines.sort.html">Sorting, searching, and counting</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/numpy/ufuncs-and-masks/">အရင်သင်ခန်းစာ · Universal Functions နှင့် Mask သုံးပြီး တွက်ခြင်း</a>
+<a href="/docs/read/my/numpy/numerical-accuracy/">နောက်သင်ခန်းစာ · Floating-point တိကျမှုနှင့် Missing Values</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

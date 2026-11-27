@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use an upsert when a key should identify the same record across repeated writes.">
+  <title>Insert or update with ON CONFLICT · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/upserts/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/upserts/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/upserts/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/upserts/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Insert or update with ON CONFLICT</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">Use an upsert when a key should identify the same record across repeated writes.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/upserts">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#constraint">Define the conflict key</a></li>
+<li><a href="#skip">Choose whether to skip a conflict</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="constraint">
+  <h2>Define the conflict key</h2>
+  <p>The existing enrollment for student 1 and course 1 has a two-column primary key. ON CONFLICT finds that row. EXCLUDED.enrolled_on is the date proposed by INSERT. ROLLBACK restores the original date after the example.</p>
+
+<pre><code>BEGIN;
+INSERT INTO enrollments (student_id, course_id, enrolled_on)
+VALUES (1, 1, DATE &#39;2026-01-08&#39;)
+ON CONFLICT (student_id, course_id) DO UPDATE
+SET enrolled_on = EXCLUDED.enrolled_on
+RETURNING student_id, course_id, enrolled_on;
+ROLLBACK;</code></pre>
+
+
+</section>
+<section class="article-section" id="skip">
+  <h2>Choose whether to skip a conflict</h2>
+  <p>Use DO NOTHING when an existing record should be kept as it is. A skipped row is not returned by RETURNING. Use DO UPDATE when you have a defined rule for changing the existing record.</p>
+
+<pre><code>INSERT INTO enrollments (student_id, course_id, enrolled_on)
+VALUES (1, 1, DATE &#39;2026-01-10&#39;)
+ON CONFLICT (student_id, course_id) DO NOTHING
+RETURNING student_id, course_id, enrolled_on;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/sql-insert.html">PostgreSQL INSERT</a></li>
+<li><a href="https://www.postgresql.org/docs/19/ddl-constraints.html">Unique constraints</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/window-functions/">Previous lesson · Rank and total rows with window functions</a>
+<a href="/docs/read/en/database/roles-and-ownership/">Next lesson · PostgreSQL users, roles, and ownership</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

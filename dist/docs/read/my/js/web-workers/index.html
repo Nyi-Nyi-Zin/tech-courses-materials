@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browser က page JavaScript run ဖို့နဲ့ user ကို တုံ့ပြန်ဖို့ main thread သုံးပါတယ်။ Web Worker နဲ့ တွက်ချက်မှုကို သီးသန့် လုပ်နိုင်ပါတယ်။ Worker က page DOM ကို တိုက်ရိုက် မပြင်နိုင်တာကြောင့် page နဲ့ worker ကြား message အပြန်အလှန် ပို့ပါတယ်။">
+  <title>Web Worker နဲ့ နောက်ကွယ်မှာ အလုပ်လုပ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/web-workers/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/web-workers/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/web-workers/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/web-workers/" lang="en" hreflang="en">English</a></nav>
+  <h1>Web Worker နဲ့ နောက်ကွယ်မှာ အလုပ်လုပ်ခြင်း</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Browser က page JavaScript run ဖို့နဲ့ user ကို တုံ့ပြန်ဖို့ main thread သုံးပါတယ်။ Web Worker နဲ့ တွက်ချက်မှုကို သီးသန့် လုပ်နိုင်ပါတယ်။ Worker က page DOM ကို တိုက်ရိုက် မပြင်နိုင်တာကြောင့် page နဲ့ worker ကြား message အပြန်အလှန် ပို့ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/web-workers">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#page">ရလဒ် ပြမယ့် Page ပြင်ခြင်း</a></li>
+<li><a href="#start-worker">Worker စတင်ပြီး တန်ဖိုး ပို့ခြင်း</a></li>
+<li><a href="#receive">Worker ထဲမှာ တွက်ပြီး အဖြေပြန်ပို့ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="page">
+  <h2>ရလဒ် ပြမယ့် Page ပြင်ခြင်း</h2>
+  <p>Page မှာ ရလဒ်ပြမယ့် စာပိုဒ်နဲ့ module အဖြစ် ချိတ်ထားတဲ့ script ပါပါတယ်။ role=&quot;status&quot; က အဲဒီနေရာ ပြောင်းလဲရင် assistive technology က အသိပေးနိုင်တဲ့ နေရာအဖြစ် သတ်မှတ်တာပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Folder အသစ်လုပ်ပြီး code ကို index.html နဲ့ သိမ်းပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Worker demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p id=&quot;total&quot; role=&quot;status&quot;&gt;Adding values…&lt;/p&gt;
+  &lt;script type=&quot;module&quot; src=&quot;./main.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> နောက်ဖိုင်နှစ်ဖိုင် ပြင်ပြီးရင် page က worker ရဲ့ ရလဒ်ကို ပြနိုင်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="start-worker">
+  <h2>Worker စတင်ပြီး တန်ဖိုး ပို့ခြင်း</h2>
+  <p>new Worker နဲ့ script သီးသန့် စပါတယ်။ new URL က ဒီ module နဲ့ folder တူတဲ့ ဖိုင်ကို ရှာပေးပါတယ်။ postMessage က ဒီ script ဆီ data ပို့ပါတယ်။ onmessage နဲ့ ပြန်လာတဲ့ အဖြေကို ယူပြီး page ဘက်က DOM ပြောင်းပါတယ်။ တစ်ခါပဲ တွက်မှာဖြစ်လို့ အဖြေရရင် ဒါမှမဟုတ် error တက်ရင် terminate() နဲ့ worker ရပ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ဘေးမှာ main.js နဲ့ သိမ်းပါ။</p>
+<pre><code>const worker = new Worker(new URL(&quot;./total-worker.js&quot;, import.meta.url), { type: &quot;module&quot; });
+const output = document.querySelector(&quot;#total&quot;);
+worker.onmessage = event =&gt; {
+  output.textContent = &quot;Total: &quot; + event.data;
+  worker.terminate();
+};
+worker.onerror = () =&gt; {
+  output.textContent = &quot;Could not calculate the total.&quot;;
+  worker.terminate();
+};
+worker.postMessage([12, 18, 24]);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ဒီ script က worker ဆီ ဂဏန်းသုံးခု ပို့ပါတယ်။ နောက်ဆုံးအဆင့်မှာ worker ဖိုင်ကို ထည့်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="receive">
+  <h2>Worker ထဲမှာ တွက်ပြီး အဖြေပြန်ပို့ခြင်း</h2>
+  <p>Worker မှာ ကိုယ်ပိုင် global object ရှိပြီး ဒီမှာ self လို့ သုံးထားပါတယ်။ Worker ရဲ့ onmessage က event.data ထဲက ကူးပို့ထားတဲ့ တန်ဖိုးတွေကို ဖတ်ပါတယ်။ စုစုပေါင်းတွက်ပြီး main page ဆီ message ပြန်ပို့ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> တခြားဖိုင်နှစ်ခုနဲ့ folder တူတဲ့ total-worker.js နဲ့ သိမ်းပါ။ ဒီ folder ကို Live Server နဲ့ ဖွင့်ပါ။ ဒါမှမဟုတ် python -m http.server 8000 run ပြီး http://localhost:8000 ဖွင့်ပါ။</p>
+<pre><code>self.onmessage = event =&gt; {
+  const total = event.data.reduce((sum, value) =&gt; sum + value, 0);
+  self.postMessage(total);
+};</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Page မှာ Total: 54 လို့ ပြောင်းပါမယ်။ main.js ထဲက စာရင်းကို ပြောင်းပြီး reload လုပ်ရင် စုစုပေါင်းအသစ် ပေါ်ပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers">MDN · Using Web Workers</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm">MDN · Structured clone algorithm</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/regular-expressions/">အရင်သင်ခန်းစာ · Regular Expression နဲ့ စာသား ရှာခြင်း</a>
+<a href="/docs/read/my/js/reference/">နောက်သင်ခန်းစာ · JavaScript Methods အမြန်ရှာရန်</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

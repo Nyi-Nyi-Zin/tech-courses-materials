@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Choose a chart for paired values, distributions, or comparisons of spread.">
+  <title>Scatter plots, histograms, and box plots · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/scatter-and-distributions/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/scatter-and-distributions/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/scatter-and-distributions/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#matplotlib">All documentation · Matplotlib</a> <a href="/docs/read/my/matplotlib/scatter-and-distributions/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Scatter plots, histograms, and box plots</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">Choose a chart for paired values, distributions, or comparisons of spread.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/matplotlib/scatter-and-distributions">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#scatter">Show paired values</a></li>
+<li><a href="#histogram">Show a distribution with bins</a></li>
+<li><a href="#box-plot">Compare centers and spreads</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="scatter">
+  <h2>Show paired values</h2>
+  <p>Use scatter for one point per paired observation. If many points overlap, smaller markers or partial transparency help reveal dense areas. An association in a scatter plot does not establish causation.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.scatter([55, 85, 120], [115, 190, 270], alpha=0.75)
+ax.set(xlabel=&quot;Floor area (m²)&quot;, ylabel=&quot;Price (thousands)&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/scatter-and-distributions-scatter.png" data-image-preview><img src="/docs/media/data/scatter-and-distributions-scatter.png" alt="Three houses are plotted by floor area and price. The larger houses have higher prices in this sample." width="579" height="440" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="histogram">
+  <h2>Show a distribution with bins</h2>
+  <p>A histogram counts observations within numerical intervals by default. Bin width changes the visible shape. Use the same bin edges when comparing two distributions.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+counts, _, _ = ax.hist([1, 2, 3, 6, 8, 12], bins=[0, 5, 10, 15])
+print(counts.astype(int).tolist())
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/scatter-and-distributions-histogram.png" data-image-preview><img src="/docs/media/data/scatter-and-distributions-histogram.png" alt="Histogram with three bins containing three, two, and one observation respectively." width="555" height="421" loading="lazy" decoding="async"></a>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[3, 2, 1]</pre></div>
+
+
+</section>
+<section class="article-section" id="box-plot">
+  <h2>Compare centers and spreads</h2>
+  <p>A box plot shows the median and the first and third quartiles. By default, whiskers reach the most extreme data points within 1.5 times the interquartile range from the quartiles. Points outside are plotted as fliers.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.boxplot([[2, 4, 6], [4, 8, 10]], tick_labels=[&quot;Store A&quot;, &quot;Store B&quot;])
+ax.set(ylabel=&quot;Units sold&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/scatter-and-distributions-box-plot.png" data-image-preview><img src="/docs/media/data/scatter-and-distributions-box-plot.png" alt="Box plots for two stores, with median units of four and eight respectively." width="570" height="421" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://matplotlib.org/stable/plot_types/index.html">Plot types</a></li>
+<li><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.boxplot.html">Axes.boxplot API</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/matplotlib/lines-and-bars/">Previous lesson · Line charts and bar charts</a>
+<a href="/docs/read/en/matplotlib/chart-design/">Next lesson · Labels, scales, legends, and color</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

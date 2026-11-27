@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An iterator reads a sequence one item at a time. A generator is a way to produce an iterator by writing a function that can pause and later continue.">
+  <title>Iterators and generators · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/iterators-and-generators/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/iterators-and-generators/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/iterators-and-generators/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/iterators-and-generators/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Iterators and generators</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">An iterator reads a sequence one item at a time. A generator is a way to produce an iterator by writing a function that can pause and later continue.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/iterators-and-generators">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#protocol">Read one value with next()</a></li>
+<li><a href="#generate">Pause and resume a function with yield</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="protocol">
+  <h2>Read one value with next()</h2>
+  <p>An iterable is a value that offers an iterator through Symbol.iterator. Arrays are iterable. The iterator’s next() returns an object with value and done. for...of uses the same protocol to read values automatically.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const iterator = [&quot;Pen&quot;, &quot;Notebook&quot;][Symbol.iterator]();
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next().done);</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first results contain Pen and Notebook with done: false. The third result prints true.</p>
+
+</section>
+<section class="article-section" id="generate">
+  <h2>Pause and resume a function with yield</h2>
+  <p>A function declared with function* creates a generator when called. It starts running when next() is called and pauses at yield. Another next() call resumes it. A new generator starts the sequence again.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>function* orderNumbers(first, last) {
+  for (let number = first; number &lt;= last; number += 1) {
+    yield number;
+  }
+}
+for (const number of orderNumbers(101, 102)) {
+  console.log(number);
+}</code></pre>
+<p class="example-result"><strong>What to expect</strong> The Console prints 101, then 102, and stops. Pass a first value greater than the last and the loop yields nothing.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols">MDN · Iteration protocols</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_generators">MDN · Iterators and generators</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/debugging/">Previous lesson · Debug with browser DevTools</a>
+<a href="/docs/read/en/js/regular-expressions/">Next lesson · Regular expressions</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

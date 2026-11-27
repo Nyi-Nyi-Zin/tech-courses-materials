@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fit လုပ်ပြီးသား pipeline ကို input contract နဲ့ အတူ သိမ်းပြီး serving environment မှာ ခန့်မှန်းချက် စစ်ပါ။">
+  <title>Model သိမ်း၍ Inference အတွက် Deploy လုပ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/model-deployment/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/model-deployment/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/model-deployment/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#machine-learning">သင်ခန်းစာအားလုံး · Machine Learning</a> <a href="/docs/read/en/machine-learning/model-deployment/" lang="en" hreflang="en">English</a></nav>
+  <h1>Model သိမ်း၍ Inference အတွက် Deploy လုပ်ခြင်း</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Fit လုပ်ပြီးသား pipeline ကို input contract နဲ့ အတူ သိမ်းပြီး serving environment မှာ ခန့်မှန်းချက် စစ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/machine-learning/model-deployment">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#save">Fitted Pipeline ကို သိမ်းပြီး ပြန်ဖွင့်ခြင်း</a></li>
+<li><a href="#serve">Input Contract နှင့် Smoke Test ဖြင့် စခြင်း</a></li>
+<li><a href="#monitor">Input နှင့် ရလဒ် စောင့်ကြည့်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="save">
+  <h2>Fitted Pipeline ကို သိမ်းပြီး ပြန်ဖွင့်ခြင်း</h2>
+  <p>Preprocessing နဲ့ estimator ကို အတူ သိမ်းပါ။ Feature name၊ dependency version၊ model version နဲ့ test metric မှတ်ပါ။ joblib က pickle အခြေခံလို့ ကိုယ်ဖန်တီးထားတာ သို့မဟုတ် စစ်ထားတဲ့ ယုံကြည်ရသော artifact ပဲ ဖွင့်ပါ။ scikit-learn model ပြန်ဖွင့်ဖို့ package version ကိုက်ညီအောင် ထားပါ။</p>
+
+<pre><code>from pathlib import Path
+from tempfile import TemporaryDirectory
+import joblib
+from sklearn.linear_model import LinearRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+
+model = make_pipeline(StandardScaler(), LinearRegression())
+model.fit([[1], [2], [3]], [2, 4, 6])
+with TemporaryDirectory() as folder:
+    artifact = Path(folder) / &quot;trusted-model.joblib&quot;
+    joblib.dump(model, artifact)
+    restored = joblib.load(artifact)
+    print(round(float(restored.predict([[4]])[0]), 2))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">8.0</pre></div>
+
+
+</section>
+<section class="article-section" id="serve">
+  <h2>Input Contract နှင့် Smoke Test ဖြင့် စခြင်း</h2>
+  <p>အချိန်ဇယားနဲ့ အလုပ်အတွက် batch prediction၊ အချိန်မီ ခေါ်သုံးရင် HTTP endpoint ရွေးပါ။ Start လုပ်ချိန် trusted model ဖွင့်ပြီး feature name နဲ့ type စစ်ပါ။ Response သို့မဟုတ် output ထဲ model version ပါပါစေ။ Traffic မပြောင်းခင် သိထားတဲ့ test input နဲ့ deploy လုပ်ထားတဲ့ service သို့မဟုတ် job ကို စမ်းပါ။</p>
+
+<pre><code>import json
+import math
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression().fit([[1], [2], [3]], [2, 4, 6])
+
+def predict_record(payload):
+    if not isinstance(payload, dict) or set(payload) != {&quot;area_m2&quot;}:
+        raise ValueError(&quot;Expected an area_m2 field&quot;)
+    area = payload[&quot;area_m2&quot;]
+    if type(area) not in (int, float) or not math.isfinite(area) or area &lt;= 0:
+        raise ValueError(&quot;Area must be a finite positive number&quot;)
+    return {&quot;model_version&quot;: &quot;area-v1&quot;, &quot;predicted_price&quot;: round(float(model.predict([[area]])[0]), 2)}
+
+print(json.dumps(predict_record({&quot;area_m2&quot;: 4})))</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">{&quot;model_version&quot;: &quot;area-v1&quot;, &quot;predicted_price&quot;: 8.0}</pre></div>
+
+
+</section>
+<section class="article-section" id="monitor">
+  <h2>Input နှင့် ရလဒ် စောင့်ကြည့်ခြင်း</h2>
+  <p>Latency၊ error၊ feature ပျောက်နှုန်းနဲ့ input distribution ပြောင်းတာတွေ စောင့်ကြည့်ပါ။ Label ရလာရင် မကြာသေးတဲ့ data ပေါ် performance တိုင်းပြီး baseline နဲ့ ယှဉ်ပါ။ Rollout ပြန်လှန်ဖို့ လိုရင် သုံးနိုင်အောင် အရင် model version သိမ်းထားပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/model_persistence.html">Model persistence</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html">Model evaluation</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/machine-learning/time-aware-validation/">အရင်သင်ခန်းစာ · အချိန်အစဉ် သို့မဟုတ် Group အလိုက် Model စစ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

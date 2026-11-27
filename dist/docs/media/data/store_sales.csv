@@ -1,0 +1,16 @@
+Transaction ID,Item,Quantity,Price Per Unit,Total Spent,Payment Method,Location,Transaction Date
+T01,Notebook,2,2,4,Cash,In-store,2023-01-05
+T02,Pen,1,1.5,1.5,Cash,Pickup,2023-01-09
+T03,Desk Lamp,2,3,6,Credit Card,In-store,2023-01-18
+T04,Notebook,3,2,ERROR,Digital Wallet,Pickup,2023-02-02
+T05,Water Bottle,2,4,8,Credit Card,In-store,2023-02-11
+T06,Pen,2,UNKNOWN,3,Cash,Pickup,2023-02-20
+T07,Desk Lamp,1,3,3,Digital Wallet,,2023-03-07
+T08,Notebook,4,2,8,Digital Wallet,In-store,2023-03-15
+T09,Water Bottle,1,4,4,Cash,Pickup,2023-03-25
+T10,UNKNOWN,2,ERROR,ERROR,UNKNOWN,In-store,2023-03-28
+T11,Notebook,1,2,2,Cash,Pickup,ERROR
+T12,Pen,3,1.5,4.5,,Pickup,2023-04-10
+T13,Desk Lamp,3,3,9,Credit Card,In-store,2023-04-19
+T14,Water Bottle,2,4,8,Digital Wallet,Pickup,2023-04-22
+T14,Water Bottle,2,4,8,Digital Wallet,Pickup,2023-04-22

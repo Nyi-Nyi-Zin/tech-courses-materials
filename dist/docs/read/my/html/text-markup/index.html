@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HTML source ထဲမှာ မှတ်ချက်ရေးဖို့ Comment သုံးပုံနဲ့ ကိုးကားထားတဲ့ စာသားတွေကို q သို့မဟုတ် blockquote နဲ့ ဖော်ပြပုံကို လေ့လာပါ။">
+  <title>HTML Comments နဲ့ ကိုးကားချက်များ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/text-markup/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/text-markup/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/text-markup/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/text-markup/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTML Comments နဲ့ ကိုးကားချက်များ</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">HTML source ထဲမှာ မှတ်ချက်ရေးဖို့ Comment သုံးပုံနဲ့ ကိုးကားထားတဲ့ စာသားတွေကို q သို့မဟုတ် blockquote နဲ့ ဖော်ပြပုံကို လေ့လာပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/text-markup">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#comments">HTML Comment ရေးခြင်း</a></li>
+<li><a href="#quotations">&lt;q&gt; နဲ့ &lt;blockquote&gt; သုံးပြီး ကိုးကားချက်ရေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="comments">
+  <h2>HTML Comment ရေးခြင်း</h2>
+  <p>&lt;!-- နဲ့ --&gt; ကြားမှာ ရေးထားတာကို browser က comment အဖြစ် သိပြီး စာမျက်နှာပေါ် မပြပါဘူး။ Page source မှာ ဖတ်လို့ရသေးလို့ လျှို့ဝှက်ချက်တွေ မထည့်ပါနဲ့။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;HTML Comments&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- Update the schedule every Monday. --&gt;
+&lt;p&gt;Today’s schedule&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Preview မှာ Today’s schedule ပဲ ပေါ်ပါမယ်။ Comment အမှတ်အသားတွေကို ဖယ်ပြီး Run ထပ်နှိပ်ရင် မှတ်ချက်စာပါ ပေါ်လာပါမယ်။</p>
+
+</section>
+<section class="article-section" id="quotations">
+  <h2>&lt;q&gt; နဲ့ &lt;blockquote&gt; သုံးပြီး ကိုးကားချက်ရေးခြင်း</h2>
+  <p>စာကြောင်းထဲက ကိုးကားချက်တိုအတွက် q ကို သုံးပါ။ Browser တွေက ပုံမှန်အားဖြင့် quotation mark ထည့်ပြပါတယ်။ ကိုးကားစာပိုဒ် သီးသန့်ဆို blockquote သုံးပါ။ cite attribute မှာ မူရင်း URL ထည့်နိုင်ပါတယ်။ ဖတ်သူပါ ရင်းမြစ်မြင်ဖို့ link ဒါမှမဟုတ် စာသားနဲ့ပါ ထည့်ရေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;HTML Quotations with &amp;lt;q&amp;gt; and &amp;lt;blockquote&amp;gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;The sign says &lt;q&gt;Open daily&lt;/q&gt;.&lt;/p&gt;
+&lt;blockquote cite=&quot;https://example.com/reviews&quot;&gt;
+  &lt;p&gt;The service was quick and the staff was friendly.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Source: Example store review&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Open daily ကို quotation mark နဲ့ မြင်ရပြီး ပိုရှည်တဲ့ ကိုးကားချက်က သီးခြားအပိုင်းအနေနဲ့ ပေါ်ပါမယ်။</p>
+
+</section><section class="article-section"><h2>ဆက်လေ့လာရန် သင်ခန်းစာများ</h2><ul><li id="character-references"><a href="/docs/read/my/html/entities/#character-references">နာမည်နဲ့ ရေးတဲ့ Character References</a></li></ul></section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Comments">MDN · Comments</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/q">MDN · &lt;q&gt;</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/blockquote">MDN · &lt;blockquote&gt;</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/containers/">အရင်သင်ခန်းစာ · အကြောင်းအရာ စုဖွဲ့ဖို့ &lt;div&gt; နဲ့ &lt;span&gt;</a>
+<a href="/docs/read/my/html/entities/">နောက်သင်ခန်းစာ · HTML Entities (Character References)</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

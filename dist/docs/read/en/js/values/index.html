@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A value is a piece of data a program works with. Learn to identify its kind, keep it under a name, and use it in a calculation or comparison.">
+  <title>Values, types, variables, and operators · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/values/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/values/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/values/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/values/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Values, types, variables, and operators</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">A value is a piece of data a program works with. Learn to identify its kind, keep it under a name, and use it in a calculation or comparison.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/values">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#types">Recognize strings, numbers, and booleans</a></li>
+<li><a href="#bindings">Name a value with const or let</a></li>
+<li><a href="#operators">Calculate and compare with operators</a></li>
+<li><a href="#conversion">Convert text before calculating</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="types">
+  <h2>Recognize strings, numbers, and booleans</h2>
+  <p>The type describes what kind of value you have. Text in quotes is a string. An unquoted value such as 2500 is a number. true and false are boolean values. typeof reports a type name as a string.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>console.log(typeof &quot;Pen&quot;);
+console.log(typeof 2500);
+console.log(typeof true);</code></pre>
+<p class="example-result"><strong>What to expect</strong> The Console prints string, number, and boolean on separate lines.</p>
+
+</section>
+<section class="article-section" id="bindings">
+  <h2>Name a value with const or let</h2>
+  <p>A variable is a name you use to refer to a value. A declaration introduces the name. The equal sign assigns a value. Use const when the name should keep pointing to the value assigned at creation, and let when the assignment may change.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const price = 2500;
+let quantity = 1;
+cups = 2;
+console.log(price, quantity);</code></pre>
+<p class="example-result"><strong>What to expect</strong> The Console prints 2500 and 2. Changing quantity does not affect price.</p>
+<p class="example-check"><strong>If the result differs</strong> If you get an error about a name already being declared, reload the browser tab before running the example again.</p>
+</section>
+<section class="article-section" id="operators">
+  <h2>Calculate and compare with operators</h2>
+  <p>An operator acts on values. * multiplies, + adds two numbers, and &gt;= checks whether the left side is at least the right side. === checks strict equality; the number 3 and the string &quot;3&quot; have different types. Use &amp;&amp; when both checks have to be true.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>console.log(2500 * 2);
+console.log(3 === &quot;3&quot;);
+console.log(3 &gt;= 1 &amp;&amp; 3 &lt;= 6);</code></pre>
+<p class="example-result"><strong>What to expect</strong> The results are 5000, false, and true, in that order.</p>
+
+</section>
+<section class="article-section" id="conversion">
+  <h2>Convert text before calculating</h2>
+  <p>A value typed into an HTML input is commonly read as a string. Number() converts numeric text. NaN is a special number value that can signal failed conversion. Check it with Number.isNaN(). Treat blank input separately because Number(&quot;&quot;) gives 0.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const count = Number(&quot;3&quot;);
+console.log(count + 1);
+console.log(Number.isNaN(Number(&quot;three&quot;)));</code></pre>
+<p class="example-result"><strong>What to expect</strong> The Console prints 4, then true. Try &quot;3&quot; + 1 to see string concatenation produce &quot;31&quot;.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types">MDN · Grammar and types</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators">MDN · Expressions and operators</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/getting-started/">Previous lesson · Run your first JavaScript</a>
+<a href="/docs/read/en/js/missing-values-and-templates/">Next lesson · Missing values and template literals</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

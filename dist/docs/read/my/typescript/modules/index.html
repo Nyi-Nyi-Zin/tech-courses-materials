@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Modules က တခြား files တွေ သုံးနိုင်တဲ့ types နဲ့ values ကို သတ်မှတ်ပါတယ်။">
+  <title>Modules နှင့် Type-only Imports · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/modules/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/modules/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/modules/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#typescript">သင်ခန်းစာအားလုံး · TypeScript</a> <a href="/docs/read/en/typescript/modules/" lang="en" hreflang="en">English</a></nav>
+  <h1>Modules နှင့် Type-only Imports</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">Modules က တခြား files တွေ သုံးနိုင်တဲ့ types နဲ့ values ကို သတ်မှတ်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/typescript/modules">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#imports">Type Imports ကို သီးသန့် ဖော်ပြခြင်း</a></li>
+<li><a href="#resolution">Runtime နဲ့ Module Settings ကိုက်ညီအောင် ထားခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="imports">
+  <h2>Type Imports ကို သီးသန့် ဖော်ပြခြင်း</h2>
+  <p>Type နေရာမှာပဲ သုံးမယ့် declarations အတွက် import type သုံးပါ။ JavaScript output မှာ အဲဒီ import မပါပါဘူး။ Runtime မှာ ခေါ်မယ့်၊ ဖတ်မယ့် values အတွက် ပုံမှန် import သုံးပါ။</p>
+
+<pre><code>// product.ts
+export type Product = { name: string; price: number };
+export const currency = &quot;USD&quot;;
+
+// label.ts
+import { currency } from &quot;./product.js&quot;;
+import type { Product } from &quot;./product.js&quot;;
+
+export function label(item: Product) {
+  return item.name + &quot;: &quot; + currency + &quot; &quot; + item.price;
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="resolution">
+  <h2>Runtime နဲ့ Module Settings ကိုက်ညီအောင် ထားခြင်း</h2>
+  <p>Files တွေ load မယ့် environment နဲ့ကိုက်တဲ့ settings သုံးပါ။ Node ESM project မှာ compile ပြီးတဲ့ file ဆီ relative path က ပုံမှန်အားဖြင့် .js extension ပါပါတယ်။ Bundler rules က မတူနိုင်လို့ build tool အကြံပြုတဲ့ settings သုံးပါ။</p>
+
+<pre><code>// package.json: { &quot;type&quot;: &quot;module&quot; }
+// tsconfig.json: { &quot;compilerOptions&quot;: { &quot;module&quot;: &quot;NodeNext&quot; } }
+
+// format.ts
+export const formatLabel = (name: string) =&gt; name.toUpperCase();
+
+// main.ts
+// The import points to format.js in the compiled output.
+import { formatLabel } from &quot;./format.js&quot;;
+console.log(formatLabel(&quot;Notebook&quot;));</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/modules.html">TypeScript modules</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/modules/reference.html">Module resolution reference</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/typescript/type-tools/">အရင်သင်ခန်းစာ · keyof နှင့် Utility Types</a>
+<a href="/docs/read/my/typescript/mapped-types/">နောက်သင်ခန်းစာ · Mapped Types</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

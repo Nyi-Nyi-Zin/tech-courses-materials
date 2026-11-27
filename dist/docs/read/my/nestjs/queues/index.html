@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Export လို ကြာတဲ့အလုပ်ကို queue ကနေ worker ဆီ ပေးပါ။ ဒါဆို HTTP request ကို စောစော ပြန်ပေးနိုင်ပါတယ်။">
+  <title>Queue နဲ့ Background Jobs လုပ်ပါ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/queues/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/queues/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/queues/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#nestjs">သင်ခန်းစာအားလုံး · NestJS</a> <a href="/docs/read/en/nestjs/queues/" lang="en" hreflang="en">English</a></nav>
+  <h1>Queue နဲ့ Background Jobs လုပ်ပါ</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">Export လို ကြာတဲ့အလုပ်ကို queue ကနေ worker ဆီ ပေးပါ။ ဒါဆို HTTP request ကို စောစော ပြန်ပေးနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/nestjs/queues">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#producer">Queue စာရင်းသွင်းပြီး Job ထည့်ပါ</a></li>
+<li><a href="#worker">Retry ပြန်လာတဲ့ Job ကို ကိုင်တွယ်ပါ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="producer">
+  <h2>Queue စာရင်းသွင်းပြီး Job ထည့်ပါ</h2>
+  <p>@nestjs/bullmq နဲ့ bullmq ကို install လုပ်ပါ။ Redis connection ကို BullModule.forRoot နဲ့ သတ်မှတ်ပြီး နာမည်ပေးထားတဲ့ queue ကို module မှာ register လုပ်ပါ။ Job ထည့်မယ့် service ထဲ Queue ကို inject လုပ်ပါ။ Queue ထဲ ထည့်ပြီးမှ endpoint က 202 နဲ့ job ID ပြန်ပေးနိုင်ပါတယ်။</p>
+
+<pre><code>// Inside the module&#39;s imports
+BullModule.forRoot({ connection: { host: &quot;127.0.0.1&quot;, port: 6379 } }),
+BullModule.registerQueue({ name: &quot;exports&quot; }),
+
+// Inside an injectable service
+constructor(@InjectQueue(&quot;exports&quot;) private readonly queue: Queue) {}
+
+enqueue(orderId: number) {
+  return this.queue.add(&quot;order-csv&quot;, { orderId }, {
+    attempts: 3,
+    backoff: { type: &quot;exponential&quot;, delay: 1000 },
+  });
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="worker">
+  <h2>Retry ပြန်လာတဲ့ Job ကို ကိုင်တွယ်ပါ</h2>
+  <p>Consumer ကို providers list ထဲ ထည့်ပါ။ WorkerHost က queue ထဲက jobs ကို process method တစ်ခုနဲ့ ကိုင်ပါတယ်။ ပျက်သွားတဲ့ job ပြန် run နိုင်ပါတယ်။ Output key အတွက် order ID သို့မဟုတ် job ID သုံးပြီး အကြိမ်ကြိမ် run ရင်လည်း တူညီတဲ့ result ရအောင် export service ကို ဆောက်ပါ။ Failed jobs နဲ့ queue စောင့်ချိန်ကို မှတ်ပါ။</p>
+
+<pre><code>import { Processor, WorkerHost } from &quot;@nestjs/bullmq&quot;;
+import type { Job } from &quot;bullmq&quot;;
+import { ExportService } from &quot;./export.service&quot;;
+
+@Processor(&quot;exports&quot;)
+export class ExportWorker extends WorkerHost {
+  constructor(private readonly exports: ExportService) {
+    super();
+  }
+
+  async process(job: Job&lt;{ orderId: number }&gt;) {
+    if (job.name !== &quot;order-csv&quot;) throw new Error(&quot;Unknown export job&quot;);
+    return this.exports.writeOrderCsv(job.data.orderId);
+  }
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.nestjs.com/techniques/queues">NestJS · Queues</a></li>
+<li><a href="https://docs.bullmq.io/guide/retrying-failing-jobs">BullMQ · Retrying failing jobs</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/nestjs/openapi-and-errors/">အရင်သင်ခန်းစာ · Routes နှင့် HTTP Errors မှတ်တမ်းတင်ခြင်း</a>
+<a href="/docs/read/my/nestjs/websocket-gateways/">နောက်သင်ခန်းစာ · WebSockets နဲ့ Live Updates ပို့ပါ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

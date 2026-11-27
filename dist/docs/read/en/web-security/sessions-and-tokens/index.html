@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="After sign-in the app needs to recognize later requests. A first-party app can use a server-side session. An app working with an identity provider can also receive identity information and delegated access tokens.">
+  <title>Sessions, Cookies, OAuth, and OpenID Connect · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/sessions-and-tokens/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/sessions-and-tokens/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/sessions-and-tokens/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/sessions-and-tokens/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Sessions, Cookies, OAuth, and OpenID Connect</h1>
+  
+  <p class="intro">After sign-in the app needs to recognize later requests. A first-party app can use a server-side session. An app working with an identity provider can also receive identity information and delegated access tokens.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/sessions-and-tokens">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#cookie">Issue and revoke a server-side session</a></li>
+<li><a href="#oidc">Choose the right token for the recipient</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="cookie">
+  <h2>Issue and revoke a server-side session</h2>
+  <p>Use a framework-generated unpredictable identifier in a host-only cookie. Secure restricts transmission to HTTPS, HttpOnly prevents JavaScript from reading the cookie, and SameSite limits cross-site sending. The __Host- prefix requires Secure, Path=/, and no Domain. Rotate the ID on login or privilege changes. Enforce idle and absolute expiry on the server and revoke it at logout.</p>
+
+<pre><code>Set-Cookie: __Host-session=&lt;opaque-random-id&gt;; Path=/; Secure; HttpOnly; SameSite=Lax</code></pre>
+
+
+</section>
+<section class="article-section" id="oidc">
+  <h2>Choose the right token for the recipient</h2>
+  <p>OAuth delegates access to an API. OpenID Connect adds sign-in and an ID token for the client. Use a maintained library for authorization code flow with PKCE and exact redirect URIs. Validate tokens for their intended use. For signed JWT access tokens the API checks the expected algorithm, signature, issuer, audience, expiry, and permissions. Signed claims can be read, so keep secrets out.</p>
+
+<pre><code>ID token       Client verifies sign-in for this client
+Access token   Resource server verifies access for this API
+Refresh token  Client uses the token endpoint to renew access</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html">OWASP · Session management</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie">MDN · Set-Cookie</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/OAuth2_Cheat_Sheet.html">OWASP · OAuth 2.0</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html">OWASP · Token validation</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/authentication/">Previous lesson · Authentication, Passwords, and Account Recovery</a>
+<a href="/docs/read/en/web-security/authorization/">Next lesson · Authorization and Object-Level Access Control</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

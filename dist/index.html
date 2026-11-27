@@ -3,16 +3,129 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f8fb">
-  <meta name="description" content="Practice HTML, CSS, JavaScript, TypeScript, PostgreSQL, React, and NestJS in your browser.">
-  <link rel="icon" href="./icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css">
-  <title>Cloud Nine Innovations</title>
-  <script type="module" src="./app.js"></script>
+  <meta name="theme-color" content="#f7f9fc">
+  <meta name="description" content="Read web development, Python, data analysis, and machine learning guides in English and Burmese.">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <script>
+    try {
+      const theme = localStorage.getItem('frontend-lab-theme');
+      if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+    } catch {}
+  </script>
+  <link rel="stylesheet" href="/site-header.css?v=2">
+  <link rel="stylesheet" href="/docs/style.css?v=85">
+  <title>Cloud Nine Innovations Documentation</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/">
+  <link rel="modulepreload" href="/docs/app.js?v=85">
+  <style>
+    .docs-booting #app > .reading-page { display: none; }
+    .docs-booting .docs-startup-status {
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+  <script>
+    if ('noModule' in document.createElement('script')) {
+      document.documentElement.classList.add('docs-booting');
+    }
+  </script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div id="app"></div>
-  <noscript>Turn on JavaScript to use Cloud Nine Innovations.</noscript>
+  <a class="skip" href="#main">Skip to content</a>
+  <p id="docs-startup-status" class="docs-startup-status" role="status" aria-atomic="true"></p>
+  <script type="module">
+    const status = document.querySelector('#docs-startup-status');
+    const selectedLanguage = new URL(location.href).searchParams.get('lang');
+    let preferredLanguage = 'en';
+    try { preferredLanguage = localStorage.getItem('frontend-lab-language'); } catch {}
+    const burmese = (selectedLanguage === 'my' || selectedLanguage === 'en' ? selectedLanguage : preferredLanguage) === 'my';
+    status.lang = burmese ? 'my' : 'en';
+
+    const showLoading = setTimeout(() => {
+      status.classList.add('loading-status');
+      status.textContent = burmese ? 'Documentation ဖွင့်နေပါတယ်…' : 'Opening documentation…';
+    }, 180);
+
+    import('/docs/app.js?v=85').then(() => {
+      clearTimeout(showLoading);
+      status.remove();
+    }, () => {
+      clearTimeout(showLoading);
+      status.classList.remove('loading-status');
+      status.textContent = burmese
+        ? 'Interactive Docs ဖွင့်မရပါ။ သင်ခန်းစာလင့်ခ်တွေကနေ ဆက်ဖတ်နိုင်ပါတယ်။'
+        : 'Interactive docs could not load. You can still use the lesson links.';
+    }).finally(() => {
+      document.documentElement.classList.remove('docs-booting');
+    });
+  </script>
+  <div id="app">
+    <!-- docs-index:start -->
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-fundamentals">All documentation · Web Fundamentals</a> <a href="/docs/read/my/web-fundamentals/client-server/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Client and Server</h1>
+
+  <p class="intro">In a computer network, a <strong>client</strong> is a device or application that requests information or services, and a <strong>server</strong> is a centralized computer or program that processes those requests and provides the data.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-fundamentals/client-server">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#client-server">The Breakdown</a></li>
+<li><a href="#server-types">Types of Servers</a></li>
+<li><a href="#server-hosting">Where Do Servers Exist? (On-Premises vs. Cloud)</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="client-server">
+  <h2>The Breakdown</h2>
+  <figure class="lesson-figure lesson-figure--banner">
+    <a href="/docs/media/web-fundamentals/client-server.jpg" data-image-preview><img src="/docs/media/web-fundamentals/client-server.jpg" alt="Clients send requests to a server over the internet and receive responses. The server can exchange data with a database." width="2048" height="1143" loading="lazy" decoding="async"></a>
+  </figure>
+  <h3>The Client (The Requester)</h3>
+<ul class="lesson-list"><li>Initiates communication by sending a request over a network (like the internet).</li><li>Focuses on the front-end user experience, displaying the returned data to the user.</li><li><em>Examples:</em> Web browsers (Chrome, Safari), mobile apps (Instagram, Spotify), desktop computers, and smart home devices.</li></ul>
+<h3>The Server (The Provider)</h3>
+<ul class="lesson-list"><li>Runs continuously, listening passively for incoming client requests on specific ports.</li><li>Handles the heavy lifting: processing logic, checking authentication, querying databases, and formulating a response to send back.</li><li><em>Examples:</em> Web servers (delivering website files), database servers (storing and retrieving records), and API backends.</li></ul>
+
+
+
+
+</section>
+<section class="article-section" id="server-types">
+  <h2>Types of Servers</h2>
+  <p>Servers are categorized based on the specific tasks they are designed to handle. Here is a breakdown of the 8 most common types of servers used in the industry and on the internet:</p>
+<figure class="lesson-figure">
+    <a href="/docs/media/database/server-types.jpg?v=80" data-image-preview><img src="/docs/media/database/server-types.jpg?v=80" alt="Eight server types and their roles: web, database, file, game, mail, backend, DNS, and proxy." width="2048" height="1529" loading="lazy" decoding="async"></a>
+  </figure>
+<ol class="lesson-list"><li><strong>Web Server</strong> Stores the files needed to run a website (HTML, CSS, JavaScript, and images) and delivers these web pages to the user’s browser when requested.</li><li><strong>Backend Server</strong> Acts as the &quot;brain&quot; behind the scenes, handling data processing, business logic, and API connections sent from the frontend. (e.g., Systems built with NestJS, Next.js API Routes, or Python). This is what was traditionally called an &quot;Application Server.&quot;</li><li><strong>Database Server</strong> Responsible for systematically storing, retrieving, modifying, and securely managing data. It quickly fetches data requested by the Backend Server. (e.g., PostgreSQL, MySQL, MongoDB).</li><li><strong>File Server</strong> A central hub used to store and share files across a network of users. Instead of scattering large video files, course materials, or documents across individual laptops, they are stored and managed in one central location.</li><li><strong>DNS Server</strong> Often called the &quot;phonebook of the internet.&quot; It automatically translates human-readable website names (like <code>cloudninemm.com</code>) into the numerical IP addresses (like <code>192.0.2.1</code>) that computers use to communicate with each other.</li><li><strong>Proxy Server</strong> Acts as a middleman between the user (client) and the internet. It is used for security filtering, managing network traffic, and masking the user’s original IP address to protect privacy.</li><li><strong>Mail Server</strong> Functions like a digital post office. It is responsible for receiving, storing, and routing incoming and outgoing emails to their correct destinations.</li><li><strong>Game Server</strong> Calculates and synchronizes player locations, movements, scores, and data in real-time when running online multiplayer games.</li></ol>
+
+
+
+
+</section>
+<section class="article-section" id="server-hosting">
+  <h2>Where Do Servers Exist? (On-Premises vs. Cloud)</h2>
+  <figure class="lesson-figure lesson-figure--banner">
+    <a href="/docs/media/web-fundamentals/on-premises-vs-cloud.jpg" data-image-preview><img src="/docs/media/web-fundamentals/on-premises-vs-cloud.jpg" alt="On-premises and cloud server comparison covering hardware location, costs, maintenance, and scaling." width="2048" height="1529" loading="lazy" decoding="async"></a>
+  </figure>
+  <p><strong>On-premises</strong> and <strong>cloud computing</strong> are two ways organizations run their IT systems—essentially the difference between owning and renting.</p>
+<ul class="lesson-list"><li><strong>On-Premises:</strong> You buy your own physical servers and house them in your own building. You pay high upfront costs and handle all maintenance, security, power, and cooling with your own IT team. It offers maximum control, making it common in banking, healthcare, and government.</li><li><strong>Cloud Computing:</strong> You rent virtual servers over the internet from providers like AWS, Microsoft Azure, or Google Cloud. You pay only for what you use, scale resources up or down instantly, and leave hardware upkeep to the provider. It is ideal for flexibility, remote access, and rapid growth.</li></ul>
+<p>Think of it like <strong>buying a house versus renting an apartment</strong>: on-premises gives you total control along with all the maintenance, while the cloud trades physical ownership for convenience, lower upfront costs, and agility.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works">MDN · How the web works</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_web_server">MDN · What is a web server?</a></li>
+<li><a href="https://docs.aws.amazon.com/whitepapers/latest/aws-overview/what-is-cloud-computing.html">AWS · What is cloud computing?</a></li>
+<li><a href="https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/shared-responsibility.html">AWS · Shared responsibility for cloud security</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-fundamentals/dns/">Next lesson · What Is DNS? How Does a Domain Name Lead to an IP Address?</a></nav></footer>
+</article>
+</main>
+    <!-- docs-index:end -->
+  </div>
 </body>
 </html>

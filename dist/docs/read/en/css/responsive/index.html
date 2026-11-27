@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A responsive layout adapts to the space it has. Start with a usable narrow layout, then add rules when there is more room. Keyboard users also need a visible indicator of which control is active.">
+  <title>Responsive styles and focus · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/responsive/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/responsive/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/responsive/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/responsive/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Responsive styles and focus</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">A responsive layout adapts to the space it has. Start with a usable narrow layout, then add rules when there is more room. Keyboard users also need a visible indicator of which control is active.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/responsive">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#queries">When does a media query apply?</a></li>
+<li><a href="#container-queries">Respond to a component’s own space</a></li>
+<li><a href="#focus">Show keyboard focus</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="queries">
+  <h2>When does a media query apply?</h2>
+  <p>A media query is a condition about the browser environment. @media (min-width: 600px) applies its rules when the viewport is at least 600 CSS pixels wide. The viewport meta line in the example lets a phone use its device width for layout.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;When does a media query apply?&lt;/title&gt;
+  &lt;style&gt;
+    .cards { display: grid; gap: 10px; }
+    .cards &gt; div { background: #d6efea; padding: 8px; }
+    @media (min-width: 600px) { .cards { grid-template-columns: 1fr 1fr 1fr; } }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;cards&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Below 600px the cards stack. At 600px and above they share a row. Use the DevTools device toolbar or resize the window.</p>
+
+</section>
+<section class="article-section" id="container-queries">
+  <h2>Respond to a component’s own space</h2>
+  <p>Container queries check a containing element rather than the whole viewport. container-type: inline-size enables width queries for this wrapper. The query changes a descendant inside the wrapper. This is useful when an identical component can live in a main area or in a narrow sidebar.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Respond to a component’s own space&lt;/title&gt;
+  &lt;style&gt;
+    .panel { container-type: inline-size; width: 100%; max-width: 480px; }
+    .cards { display: grid; gap: 8px; }
+    .cards &gt; div { background: #d6efea; padding: 8px; }
+    @container (min-width: 360px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;section class=&quot;panel&quot;&gt;&lt;div class=&quot;cards&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> At a panel width of 360px and above the cards sit in a row. Change max-width to 300px to stack them even in a wide browser.</p>
+
+</section>
+<section class="article-section" id="focus">
+  <h2>Show keyboard focus</h2>
+  <p>Focus is the current keyboard destination. Press Tab to move between controls. :hover matches a pointer resting on a control. :focus-visible lets you style focus when a visible indicator is appropriate, such as keyboard navigation.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Show keyboard focus&lt;/title&gt;
+  &lt;style&gt;
+    button:hover { background: #d6efea; }
+    button:focus-visible { outline: 3px solid purple; outline-offset: 3px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;button type=&quot;button&quot;&gt;Pen&lt;/button&gt; &lt;button type=&quot;button&quot;&gt;Notebook&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Moving the mouse over a button changes its background. Press Tab to see the purple focus ring move.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Using">MDN · Using media queries</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_queries">MDN · CSS container queries</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:focus-visible">MDN · Focus visible</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/positioning/">Previous lesson · Positioning and stacking order</a>
+<a href="/docs/read/en/css/layout-debugging/">Next lesson · Debug a broken layout</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

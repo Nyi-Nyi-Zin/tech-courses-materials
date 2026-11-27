@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Regular expression ဆိုတာ စာသား စစ်ဖို့ သို့မဟုတ် ရှာဖို့ ရေးထားတဲ့ ပုံစံတစ်ခုပါ။ Order code လို တည်ဆောက်ပုံတူတဲ့ စာသားများစွာကို စစ်တဲ့အခါ သုံးနိုင်ပါတယ်။">
+  <title>Regular Expression နဲ့ စာသား ရှာခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/regular-expressions/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/regular-expressions/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/regular-expressions/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/regular-expressions/" lang="en" hreflang="en">English</a></nav>
+  <h1>Regular Expression နဲ့ စာသား ရှာခြင်း</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Regular expression ဆိုတာ စာသား စစ်ဖို့ သို့မဟုတ် ရှာဖို့ ရေးထားတဲ့ ပုံစံတစ်ခုပါ။ Order code လို တည်ဆောက်ပုံတူတဲ့ စာသားများစွာကို စစ်တဲ့အခါ သုံးနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/regular-expressions">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#check">test() နဲ့ စာသားတစ်ခုလုံး စစ်ခြင်း</a></li>
+<li><a href="#find">ကိုက်တဲ့ စာသားတွေနဲ့ Capture Group တွေ ထုတ်ယူခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="check">
+  <h2>test() နဲ့ စာသားတစ်ခုလုံး စစ်ခြင်း</h2>
+  <p>Pattern ကို / နှစ်ခုကြားမှာ ရေးနိုင်ပါတယ်။ ဒီမှာ ^ နဲ့ $ က အစနဲ့ အဆုံးကို သတ်မှတ်ပါတယ်။ [A-Z] က English စာလုံးအကြီး တစ်လုံးကို ကိုက်ပြီး {2} က နှစ်လုံး လိုတယ်လို့ ဆိုလိုပါတယ်။ [0-9]{3} က ဂဏန်းသုံးလုံး တောင်းပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const orderCode = /^[A-Z]{2}-[0-9]{3}$/;
+console.log(orderCode.test(&quot;TE-104&quot;));
+console.log(orderCode.test(&quot;TE-10&quot;));</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> true နဲ့ false ပေါ်ပါမယ်။ ဒုတိယ code မှာ ဂဏန်းတစ်လုံး လိုနေပါတယ်။</p>
+
+</section>
+<section class="article-section" id="find">
+  <h2>ကိုက်တဲ့ စာသားတွေနဲ့ Capture Group တွေ ထုတ်ယူခြင်း</h2>
+  <p>ကိုက်တဲ့အပိုင်း အားလုံး ဖတ်ဖို့ g flag နဲ့ matchAll() သုံးပါ။ ( ) က ကိုက်တဲ့အပိုင်း တစ်စိတ်တစ်ပိုင်းကို ဖမ်းပါတယ်။ Match array မှာ ကိုက်တဲ့ စာသားအပြည့် အရင်ပါပြီး ဖမ်းထားတဲ့ အပိုင်းတွေ နောက်က လိုက်ပါတယ်။ တစ်ခါစီ သီးသန့် test() စစ်မယ်ဆိုရင် ပြန်သုံးတဲ့ expression ရဲ့ lastIndex ကို ရွှေ့နိုင်တဲ့ g နဲ့ y ကို မထည့်ပါနဲ့။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const line = &quot;pen:3, notebook:2&quot;;
+for (const match of line.matchAll(/([a-z]+):([0-9]+)/g)) {
+  console.log(match[1], Number(match[2]));
+}</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမကြောင်းမှာ pen နဲ့ 3၊ ဒုတိယကြောင်းမှာ notebook နဲ့ 2 ပေါ်ပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions">MDN · Regular expressions</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/matchAll">MDN · String.matchAll</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/iterators-and-generators/">အရင်သင်ခန်းစာ · Iterator နဲ့ Generator</a>
+<a href="/docs/read/my/js/web-workers/">နောက်သင်ခန်းစာ · Web Worker နဲ့ နောက်ကွယ်မှာ အလုပ်လုပ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

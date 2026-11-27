@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A function gives a piece of work a name so you can run it again with different inputs. A module is a file that can share selected definitions with other files.">
+  <title>Functions and modules · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/functions/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/functions/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/functions/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/functions/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Functions and modules</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">A function gives a piece of work a name so you can run it again with different inputs. A module is a file that can share selected definitions with other files.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/functions">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#functions">Define and call a function</a></li>
+<li><a href="#parameters">Pass inputs and return a result</a></li>
+<li><a href="#export">Share a function with export</a></li>
+<li><a href="#modules">Import and run a browser module</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="functions">
+  <h2>Define and call a function</h2>
+  <p>function introduces reusable code. The name is followed by parentheses and a block. Defining a function makes it available. Writing its name followed by () calls it and runs the block.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>function sayReady() {
+  console.log(&quot;Your order is ready.&quot;);
+}
+sayReady();
+sayReady();</code></pre>
+<p class="example-result"><strong>What to expect</strong> The same message appears twice because the function is called twice.</p>
+
+</section>
+<section class="article-section" id="parameters">
+  <h2>Pass inputs and return a result</h2>
+  <p>A parameter is a name for an input inside a function. An argument is a value you pass when calling it. A default parameter supplies a value when that argument is omitted or undefined. return ends the call and sends the result back to its caller.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>function total(price, quantity = 1) {
+  return price * quantity;
+}
+console.log(total(2500), total(2500, 2));</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first call returns 2500 and the second returns 5000.</p>
+
+</section>
+<section class="article-section" id="export">
+  <h2>Share a function with export</h2>
+  <p>An export marks a definition the module makes available to another module. Here total is a named export. Code using it can import that same name.</p>
+<p class="example-setup"><strong>How to try it</strong> Create an empty folder, then save this as total.js in it.</p>
+<pre><code>export function total(price, quantity = 1) {
+  return price * quantity;
+}</code></pre>
+<p class="example-result"><strong>What to expect</strong> The file now makes total available to the importing module. The result appears after running the next example.</p>
+
+</section>
+<section class="article-section" id="modules">
+  <h2>Import and run a browser module</h2>
+  <p>import names what you want to use and tells the browser where the module is. ./ means the same folder. A script with type=&quot;module&quot; allows import in that script. Serve the page over HTTP so both files are loaded from the same origin.</p>
+<p class="example-setup"><strong>How to try it</strong> Save as index.html beside total.js. In VS Code, open that folder and use a local server such as Live Server. With Python installed, you can also run python -m http.server 8000 in the folder and open http://localhost:8000.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Module demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Open the Console to see the total.&lt;/p&gt;
+  &lt;script type=&quot;module&quot;&gt;
+    import { total } from &quot;./total.js&quot;;
+    console.log(total(2500, 2));
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The Console prints 5000 when the browser loads the module.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions">MDN · Functions</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">MDN · JavaScript modules</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/conditions-and-loops/">Previous lesson · Conditions and loops</a>
+<a href="/docs/read/en/js/declarations-and-this/">Next lesson · Declarations, hoisting, and this</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

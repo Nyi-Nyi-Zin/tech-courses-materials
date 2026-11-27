@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="အကြောင်းအရာတစ်ခုကို ရှင်းပြတဲ့ စာကြောင်းတွေကို စာပိုဒ်တစ်ပိုဒ်အဖြစ် စုပါ။ စာပိုဒ်တစ်ခုထဲမှာ လိုင်းဆင်းဖို့ လိုရင် line break သုံးပါ။ ဇာတ်လမ်းတစ်ပုဒ်မှာ ဇာတ်ဝင်ခန်းပြောင်းတာလို အကြောင်းအရာ အပိုင်းပြောင်းတဲ့နေရာကို thematic break နဲ့ မှတ်သားနိုင်ပါတယ်။">
+  <title>စာပိုဒ်၊ လိုင်းချိုးခြင်းနဲ့ အကြောင်းအရာ ခွဲခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/paragraphs/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/paragraphs/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/paragraphs/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/paragraphs/" lang="en" hreflang="en">English</a></nav>
+  <h1>စာပိုဒ်၊ လိုင်းချိုးခြင်းနဲ့ အကြောင်းအရာ ခွဲခြင်း</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">အကြောင်းအရာတစ်ခုကို ရှင်းပြတဲ့ စာကြောင်းတွေကို စာပိုဒ်တစ်ပိုဒ်အဖြစ် စုပါ။ စာပိုဒ်တစ်ခုထဲမှာ လိုင်းဆင်းဖို့ လိုရင် line break သုံးပါ။ ဇာတ်လမ်းတစ်ပုဒ်မှာ ဇာတ်ဝင်ခန်းပြောင်းတာလို အကြောင်းအရာ အပိုင်းပြောင်းတဲ့နေရာကို thematic break နဲ့ မှတ်သားနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/paragraphs">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#paragraph">Browser က စာပိုဒ်ကို ဘယ်လိုပြလဲ</a></li>
+<li><a href="#nesting">&lt;p&gt; ထဲမှာ ဘာတွေ ထည့်လို့ရလဲ</a></li>
+<li><a href="#line-break">လိုင်းတစ်ကြောင်း ဆင်းဖို့ &lt;br&gt;</a></li>
+<li><a href="#thematic-break">အကြောင်းအရာ ပြောင်းတဲ့နေရာကို ခွဲဖို့ &lt;hr&gt;</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="paragraph">
+  <h2>Browser က စာပိုဒ်ကို ဘယ်လိုပြလဲ</h2>
+  <p>စာပိုဒ်တစ်ခုကို &lt;p&gt; နဲ့ &lt;/p&gt; ကြားမှာ ရေးပါ။ Browser က စာပိုဒ်တစ်ခုစီကို သီးသန့်ပြပြီး အပေါ်နဲ့ အောက်မှာ အကွာအဝေး ထားပေးလေ့ရှိပါတယ်။ ပုံမှန် whitespace မှာ HTML ဖိုင်ထဲက line break နဲ့ space အများကြီးကို စကားလုံးနှစ်ခုကြား space တစ်ခုအဖြစ် စုပေးပါတယ်။ စာကြောင်းက ရနိုင်တဲ့ အကျယ်ပေါ်မူတည်ပြီး လိုင်းဆင်းပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;p&gt;The library lends books
+   and magazines every morning.&lt;/p&gt;
+&lt;p&gt;Returns are accepted until 6:00 PM.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ဖိုင်ထဲမှာ “books” နဲ့ “and magazines” ကို လိုင်းခွဲရေးထားပေမယ့် browser မှာ စာပိုဒ်တစ်ပိုဒ်ထဲ ဆက်ဖတ်ရပါတယ်။ “Returns” က သီးခြားစာပိုဒ်အဖြစ် ပေါ်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="nesting">
+  <h2>&lt;p&gt; ထဲမှာ ဘာတွေ ထည့်လို့ရလဲ</h2>
+  <p>စာပိုဒ်ထဲမှာ စာသားနဲ့ a၊ strong၊ em လို စာသားအတွင်းသုံးတဲ့ phrasing elements တွေ ထည့်လို့ရပါတယ်။ List ဒါမှမဟုတ် heading ကို စာပိုဒ်အပြင်မှာ သီးသန့်ရေးပါ။ p ကို မပိတ်ရသေးခင် div စလိုက်ရင် browser ရဲ့ HTML parser က p ကို အလိုအလျောက် ပိတ်ပါတယ်။ ဒါကြောင့် DevTools မှာ မြင်ရတဲ့ DOM က ဖိုင်ထဲက indent နဲ့ ထင်ရတဲ့ ဖွဲ့စည်းပုံအတိုင်း ဖြစ်ချင်မှ ဖြစ်ပါမယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;p&gt;Choose &lt;em&gt;one&lt;/em&gt; of the available books.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;History&lt;/li&gt;
+  &lt;li&gt;Science&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> DevTools မှာ p နဲ့ ul က အဆင့်တူ element နှစ်ခုဖြစ်ပြီး em က စာပိုဒ်အောက်မှာ ရှိပါတယ်။</p>
+
+</section>
+<section class="article-section" id="line-break">
+  <h2>လိုင်းတစ်ကြောင်း ဆင်းဖို့ &lt;br&gt;</h2>
+  <p>လိပ်စာ ဒါမှမဟုတ် ကဗျာလို လိုင်းခွဲထားတာကိုယ်တိုင်က အကြောင်းအရာအတွက် လိုအပ်တဲ့အခါ br သုံးပါ။ အကြောင်းအရာသစ် စရင် စာပိုဒ်အသစ်ရေးပါ။ စာပိုဒ်တွေကြား အကွာအဝေးကို CSS margin နဲ့ ထိန်းနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;p&gt;Library Desk&lt;br&gt;25 Market Street&lt;br&gt;Yangon&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> လိပ်စာက စာပိုဒ်တစ်ပိုဒ်ထဲမှာပဲ သုံးကြောင်းနဲ့ ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="thematic-break">
+  <h2>အကြောင်းအရာ ပြောင်းတဲ့နေရာကို ခွဲဖို့ &lt;hr&gt;</h2>
+  <p>ဇာတ်ဝင်ခန်း ပြောင်းတဲ့နေရာ ဒါမှမဟုတ် အပိုင်းတစ်ခုထဲမှာ အကြောင်းအရာ ပြောင်းသွားတဲ့နေရာကို ဖော်ပြဖို့ စာပိုဒ်တွေကြားမှာ &lt;hr&gt; သုံးပါ။ Browser အများစုမှာ အဲဒီနေရာက အလျားလိုက်မျဉ်းတစ်ကြောင်း ပေါ်ပါတယ်။ &lt;hr&gt; က void element ဖြစ်လို့ အဖွင့် tag တစ်ခုတည်း ရေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;p&gt;The hikers reached the campsite before sunset.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Back in town, the team prepared for the next day.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စာပိုဒ်နှစ်ခုကြားက မျဉ်းက စခန်းချတဲ့နေရာကနေ မြို့ထဲက ဇာတ်ဝင်ခန်းကို ပြောင်းသွားတာကို ဖော်ပြပါတယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-p-element">WHATWG · The p element</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-br-element">WHATWG · The br element</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-hr-element">WHATWG · The hr element</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Whitespace">MDN · Whitespace in the DOM</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/headings/">အရင်သင်ခန်းစာ · ခေါင်းစဉ် &lt;h1&gt;–&lt;h6&gt;</a>
+<a href="/docs/read/my/html/inline-text/">နောက်သင်ခန်းစာ · စာကြောင်းထဲက Inline Text Elements</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

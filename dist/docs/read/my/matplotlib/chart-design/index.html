@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Chart ပေါ်က unit၊ series နဲ့ ကိန်းဂဏန်းအပိုင်းအခြားကို နားလည်လွယ်အောင် ပြင်ပါ။">
+  <title>Labels၊ Scales၊ Legends နှင့် Color · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/chart-design/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/chart-design/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/chart-design/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#matplotlib">သင်ခန်းစာအားလုံး · Matplotlib</a> <a href="/docs/read/en/matplotlib/chart-design/" lang="en" hreflang="en">English</a></nav>
+  <h1>Labels၊ Scales၊ Legends နှင့် Color</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">Chart ပေါ်က unit၊ series နဲ့ ကိန်းဂဏန်းအပိုင်းအခြားကို နားလည်လွယ်အောင် ပြင်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/matplotlib/chart-design">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#labels">Series တစ်ခုစီကို အမည်ပေးခြင်း</a></li>
+<li><a href="#scales">Scale နှင့် Color Map ရွေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="labels">
+  <h2>Series တစ်ခုစီကို အမည်ပေးခြင်း</h2>
+  <p>ဘာနှိုင်းယှဉ်လဲကို title မှာ၊ တိုင်းတာတဲ့အရာနဲ့ unit ကို axis label မှာ ထည့်ပါ။ Series တွေကို ဖတ်လွယ်တဲ့ label ပေးပြီး ဆွဲပြီးမှ legend ခေါ်ပါ။ အရောင်နဲ့ပဲ ခွဲရခက်ရင် marker သို့မဟုတ် line style ထည့်ပါ။</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.plot([3, 5, 4], marker=&quot;o&quot;, label=&quot;Coffee&quot;)
+ax.plot([2, 2, 4], marker=&quot;s&quot;, linestyle=&quot;--&quot;, label=&quot;Tea&quot;)
+ax.set(title=&quot;Daily orders&quot;, xlabel=&quot;Day index&quot;, ylabel=&quot;Orders&quot;)
+ax.legend()
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/chart-design-labels.png" data-image-preview><img src="/docs/media/data/chart-design-labels.png" alt="Coffee နဲ့ Tea trend line တွေမှာ marker၊ line style မတူဘဲ legend ထဲ ပြထားပါတယ်။" width="575" height="463" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="scales">
+  <h2>Scale နှင့် Color Map ရွေးခြင်း</h2>
+  <p>အချိုးက အရေးပါပြီး တန်ဖိုးတွေ အပေါင်းဖြစ်ရင် log scale သုံးနိုင်ပါတယ်။ သုညနဲ့ အနုတ်ကို ပုံမှန် log axis မှာ ပြလို့မရပါ။ အစဉ်ရှိတဲ့ intensity အတွက် sequential color၊ အရေးပါတဲ့ အလယ်တန်ဖိုးတစ်ခုရဲ့ ဘက်နှစ်ဘက်မှာ ကွာတာကို ပြဖို့ diverging color map သုံးပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://matplotlib.org/stable/users/explain/quick_start.html">Matplotlib quick start</a></li>
+<li><a href="https://matplotlib.org/stable/users/explain/colors/colormaps.html">Choosing colormaps</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/matplotlib/scatter-and-distributions/">အရင်သင်ခန်းစာ · Scatter Plots၊ Histograms နှင့် Box Plots</a>
+<a href="/docs/read/my/matplotlib/subplots/">နောက်သင်ခန်းစာ · Subplots နှင့် Constrained Layout</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

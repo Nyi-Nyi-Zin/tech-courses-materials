@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Estimate variance, the spread around the mean. ddof controls the divisor.">
+  <title>pandas.api.typing.Resampler.var · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/api.typing.Resampler.var/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/api.typing.Resampler.var/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/api.typing.Resampler.var">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Resampling</span><a href="/docs/read/my/pandas/api/api.typing.Resampler.var/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>api.<wbr>typing.<wbr>Resampler.<wbr>var</code></h1>
+    <p class="article-version">pandas 3.1.1 · Resampling · <span lang="en">method</span></p>
+    <p class="intro">Estimate variance, the spread around the mean. ddof controls the divisor.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><pre><code lang="en">pd.api.typing.Resampler.var(ddof=1, numeric_only=False)</code></pre></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+dates = pd.date_range(&quot;2025-01-01&quot;, periods=3, freq=&quot;D&quot;)
+values = pd.Series([2., 5., 7.], index=dates, name=&quot;units&quot;)
+bins = values.resample(&quot;2D&quot;)
+print(bins.var())</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>ddof</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>1</code></td>
+      <td><span>int</span><p>Set the degrees of freedom correction. The usual variance divisor is N minus ddof.</p></td></tr>
+<tr><th scope="row"><code>numeric_only</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Restrict the calculation to columns pandas considers numeric where applicable.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>DataFrame or Series</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.api.typing.Resampler.var.html#pandas.api.typing.Resampler.var">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/api.typing.Resampler.transform/"><span>Previous in this category</span><strong>pandas.api.typing.Resampler.transform</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

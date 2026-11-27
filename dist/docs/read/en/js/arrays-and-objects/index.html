@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A string holds text. An array holds a sequence of values. An object groups related values by name. Start by reading one value from each kind.">
+  <title>Strings, arrays, and objects · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/arrays-and-objects/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/arrays-and-objects/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/arrays-and-objects/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/arrays-and-objects/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Strings, arrays, and objects</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">A string holds text. An array holds a sequence of values. An object groups related values by name. Start by reading one value from each kind.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/arrays-and-objects">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#strings">Read and clean a string</a></li>
+<li><a href="#replace">Replace spaces in a string</a></li>
+<li><a href="#arrays">Read and add items in an array</a></li>
+<li><a href="#objects">Read named properties in an object</a></li>
+<li><a href="#destructuring">Extract named values with destructuring</a></li>
+<li><a href="#aggregate">Filter, transform, and total an array</a></li>
+<li><a href="#copy">Understand what spread copies</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="strings">
+  <h2>Read and clean a string</h2>
+  <p>A string has a length and methods, which are operations you call on a value. trim() returns a new string with whitespace removed from both ends. toLowerCase() returns a lowercase version. The original string stays as it was.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const raw = &quot;  Pen  &quot;;
+console.log(raw.trim().toLowerCase());
+console.log(raw.length);</code></pre>
+<p class="example-result"><strong>What to expect</strong> It prints pen, then 7 for the original string’s length.</p>
+
+</section>
+<section class="article-section" id="replace">
+  <h2>Replace spaces in a string</h2>
+  <p>replace() returns a new string with matching text replaced. A pattern such as /\s+/g matches every run of one or more whitespace characters. The regular expression lesson explains that syntax in more detail.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const title = &quot;  Blue   Pen  &quot;;
+const slug = title.trim().toLowerCase().replace(/\s+/g, &quot;-&quot;);
+console.log(slug);</code></pre>
+<p class="example-result"><strong>What to expect</strong> It prints blue-pen with one hyphen between the words.</p>
+
+</section>
+<section class="article-section" id="arrays">
+  <h2>Read and add items in an array</h2>
+  <p>Write array values inside square brackets. The index is a position number that starts at zero. array[0] reads the first item. push() adds to the end, and length gives the number of items.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const products = [&quot;Pen&quot;, &quot;Notebook&quot;];
+console.log(products[0]);
+products.push(&quot;Pencil&quot;);
+console.log(products.length);</code></pre>
+<p class="example-result"><strong>What to expect</strong> The results are Pen and 3. Try index 2 after pushing and you get Pencil.</p>
+
+</section>
+<section class="article-section" id="objects">
+  <h2>Read named properties in an object</h2>
+  <p>An object literal uses braces. Each property has a name and a value separated by a colon. Use a dot to read a known property name, or brackets to read a name stored in a variable. With const, you can still update object properties; the name must keep pointing to the same object.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const product = { name: &quot;Pen&quot;, price: 2500 };
+const key = &quot;price&quot;;
+console.log(product.name, product[key]);
+product.price = 3000;
+console.log(product.price);</code></pre>
+<p class="example-result"><strong>What to expect</strong> It prints Pen and 2500, then the updated price 3000.</p>
+
+</section>
+<section class="article-section" id="destructuring">
+  <h2>Extract named values with destructuring</h2>
+  <p>Object destructuring copies selected property values into variables. In const { name, price } = product, both variable names match properties of product. You can also use a colon inside the pattern to assign a different variable name.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const product = { name: &quot;Pen&quot;, price: 2500 };
+const { name, price: unitPrice } = product;
+console.log(name, unitPrice);</code></pre>
+<p class="example-result"><strong>What to expect</strong> It prints Pen and 2500. The original object still uses the property named price.</p>
+
+</section>
+<section class="article-section" id="aggregate">
+  <h2>Filter, transform, and total an array</h2>
+  <p>filter keeps items that pass a test. map builds an array of transformed items. reduce combines them into one value, starting here at 0. The =&gt; syntax defines a short function that is called for each item.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const orders = [{ price: 2500, paid: true }, { price: 3000, paid: false }];
+const paidPrices = orders.filter(order =&gt; order.paid).map(order =&gt; order.price);
+console.log(paidPrices);
+console.log(paidPrices.reduce((sum, price) =&gt; sum + price, 0));</code></pre>
+<p class="example-result"><strong>What to expect</strong> It prints an array containing 2500, then the total 2500.</p>
+
+</section>
+<section class="article-section" id="copy">
+  <h2>Understand what spread copies</h2>
+  <p>Spread syntax uses three dots to copy entries from an array or properties from an object. It creates a shallow copy: nested objects are still shared. Copy the nested level too if you plan to change it independently.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const original = { product: { price: 2500 } };
+const copy = { ...original, product: { ...original.product } };
+copy.product.price = 3000;
+console.log(original.product.price, copy.product.price);</code></pre>
+<p class="example-result"><strong>What to expect</strong> It prints 2500 and 3000. Remove the nested copy and the original price changes as well.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN · Array</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects">MDN · Working with objects</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">MDN · Spread syntax</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/declarations-and-this/">Previous lesson · Declarations, hoisting, and this</a>
+<a href="/docs/read/en/js/array-methods/">Next lesson · Find, test, and sort arrays</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

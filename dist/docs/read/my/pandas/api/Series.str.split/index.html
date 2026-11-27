@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="စာသားကို delimiter နဲ့ ပိုင်းပါတယ်။ အပိုင်းတွေကို column တစ်ခုစီ ထုတ်ချင်ရင် expand=True သုံးပါ။">
+  <title>pandas.Series.str.split · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/Series.str.split/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/Series.str.split/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/Series.str.split">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API Reference">
+    <a href="/docs/read/my/pandas/api-reference/#find-an-api">pandas API Reference</a><span aria-hidden="true">/</span><span>Series နှင့် Accessors</span><a href="/docs/read/en/pandas/api/Series.str.split/" lang="en" hreflang="en">English</a>
+  </nav>
+    <h1><code>pandas.<wbr>Series.<wbr>str.<wbr>split</code></h1>
+    <p class="article-version">pandas 3.1.1 · Series နှင့် Accessors · <span lang="en">method</span></p>
+    <p class="intro">စာသားကို delimiter နဲ့ ပိုင်းပါတယ်။ အပိုင်းတွေကို column တစ်ခုစီ ထုတ်ချင်ရင် expand=True သုံးပါ။</p>
+
+    <nav class="api-breadcrumbs" aria-label="ဒီစာမျက်နှာမှာ"><ul><li><a href="#syntax">ခေါ်သုံးပုံ</a></li><li><a href="#example">နမူနာ စမ်းကြည့်ရန်</a></li><li><a href="#parameters">ထည့်သွင်းနိုင်တဲ့ Arguments</a></li><li><a href="#returns">ပြန်ပေးတဲ့ ရလဒ်</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>ခေါ်သုံးပုံ</h2><pre><code lang="en">Series.str.split(pat=None, *, n=-1, expand=False, regex=None)</code></pre></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>နမူနာ စမ်းကြည့်ရန်</h2>
+      <p>နမူနာကုဒ်ကို ပြင်ပြီး Run Python နှိပ်ပါ။ ရလဒ်ကို အောက်မှာ ကြည့်နိုင်ပါတယ်။</p>
+      <label><span>Python ကုဒ်</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+print(pd.Series([&quot;A-01&quot;, &quot;B-02&quot;]).str.split(&quot;-&quot;, expand=True))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>ရပ်ရန်</button>
+        <button type="button" data-reset disabled>မူလကုဒ် ပြန်ထားရန်</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="ရလဒ်"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>ထည့်သွင်းနိုင်တဲ့ Arguments</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">ထည့်သွင်းပုံ</th><th scope="col">လက်ခံတဲ့ တန်ဖိုးနဲ့ သုံးပုံ</th></tr></thead><tbody><tr><th scope="row"><code>pat</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ဖြစ်ဖြစ် အစဉ်အတိုင်းဖြစ်ဖြစ် ထည့်နိုင်တယ်</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>စာသား (str) သို့မဟုတ် compiled regex</span><p>စာသား ခွဲမယ့် separator ကို ရွေးပါ။ ပုံမှန်တန်ဖိုး None ဆို pandas က whitespace တွေမှာ ခွဲပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>n</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>-1</code></td>
+      <td><span>ကိန်းပြည့် (int)</span><p>တန်ဖိုးတစ်ခုစီကို ခွဲနိုင်တဲ့ အများဆုံးအကြိမ်ရေ သတ်မှတ်ပါတယ်။ ပုံမှန်အားဖြင့် ကိုက်တဲ့ နေရာတိုင်းမှာ ခွဲပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>expand</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>False</code></td>
+      <td><span>True / False (bool)</span><p>ထုတ်ထားတဲ့ အပိုင်းတွေကို column တစ်ခုစီအဖြစ် ခွဲမခွဲ ရွေးပါတယ်။</p></td></tr>
+<tr><th scope="row"><code>regex</code></th>
+      <td>ချန်ထားလို့ရတယ်<br><small>အမည်နဲ့ပဲ ထည့်ပါ</small><br>ပုံမှန်တန်ဖိုး <code>None</code></td>
+      <td><span>True / False (bool)</span><p>Pattern ကို regular expression အဖြစ် သုံးမသုံး သတ်မှတ်ပါတယ်။</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>ပြန်ပေးတဲ့ ရလဒ်</h2><p>ပြန်ပေးတဲ့ အမျိုးအစားက Series၊ Index၊ DataFrame သို့မဟုတ် MultiIndex ဖြစ်ပါတယ်။</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.split.html#pandas.Series.str.split">pandas တရားဝင် ကိုးကားချက်</a>
+      <nav class="pagination" aria-label="pandas API Reference"><a href="/docs/read/my/pandas/api/Series.str.slice_replace/"><span>အရင် API</span><strong>pandas.Series.str.slice_replace</strong></a><a href="/docs/read/my/pandas/api/Series.str.startswith/"><span>နောက် API</span><strong>pandas.Series.str.startswith</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

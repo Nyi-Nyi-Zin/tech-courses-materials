@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Category၊ trend၊ distribution နဲ့ ဆက်နွှယ်မှုတွေကို ဘယ် chart နဲ့ ပြမလဲ ရွေးပါ။">
+  <title>မေးခွန်းနဲ့ ကိုက်တဲ့ Chart ရွေးခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/chart-selection/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/chart-selection/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/chart-selection/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#matplotlib">သင်ခန်းစာအားလုံး · Matplotlib</a> <a href="/docs/read/en/matplotlib/chart-selection/" lang="en" hreflang="en">English</a></nav>
+  <h1>မေးခွန်းနဲ့ ကိုက်တဲ့ Chart ရွေးခြင်း</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">Category၊ trend၊ distribution နဲ့ ဆက်နွှယ်မှုတွေကို ဘယ် chart နဲ့ ပြမလဲ ရွေးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/matplotlib/chart-selection">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#categories-and-time">Category များ ယှဉ်ခြင်းနှင့် အချိန်အလိုက် ပြောင်းလဲမှု ပြခြင်း</a></li>
+<li><a href="#distributions-and-relationships">Distribution သို့မဟုတ် ဆက်နွှယ်မှု ပြခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="categories-and-time">
+  <h2>Category များ ယှဉ်ခြင်းနှင့် အချိန်အလိုက် ပြောင်းလဲမှု ပြခြင်း</h2>
+  <p>သီးခြား category တွေ ယှဉ်ဖို့ bar chart သုံးပါ။ တန်ဖိုးပမာဏကို bar အရှည်နဲ့ ပြတဲ့အတွက် axis ကို သုညကနေ စပါ။ အချိန်လို အစဉ်လိုက်ကြည့်ရတဲ့ data အတွက် line chart သုံးပါ။ ရက်စွဲတွေ အညီအမျှ မခြားရင် ရက်စွဲတန်ဖိုးအတိုင်း ဆွဲမှ အကွာအဝေးက ကြားကာလကို ကိုယ်စားပြုပါမယ်။</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, (by_store, by_month) = plt.subplots(1, 2, layout=&quot;constrained&quot;)
+bars = by_store.bar([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], [8, 12, 6])
+by_store.bar_label(bars)
+by_store.set(ylim=(0, 14), xlabel=&quot;Store&quot;, ylabel=&quot;Orders&quot;)
+
+by_month.plot([&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;], [20, 24, 22], marker=&quot;o&quot;)
+by_month.set(xlabel=&quot;Month&quot;, ylabel=&quot;Orders&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/chart-selection-categories-and-time.png" data-image-preview><img src="/docs/media/data/chart-selection-categories-and-time.png" alt="Bar chart က ဆိုင် A၊ B၊ C ရဲ့ order 8၊ 12၊ 6 ကို ယှဉ်ပြပါတယ်။ Line chart က January ကနေ March အထိ order 20၊ 24၊ 22 ကို ပြပါတယ်။" width="720" height="375" loading="lazy" decoding="async"></a>
+    <figcaption>Chart နှစ်ခုလုံး order အရေအတွက်ကို တိုင်းတာပါတယ်။ Chart တစ်ခုစီ ဘာကို ယှဉ်ပြလဲဆိုတာ x-axis မှာ ကြည့်နိုင်ပါတယ်။</figcaption>
+  </figure>
+
+
+</section>
+<section class="article-section" id="distributions-and-relationships">
+  <h2>Distribution သို့မဟုတ် ဆက်နွှယ်မှု ပြခြင်း</h2>
+  <p>Histogram က ကိန်းဂဏန်း column တစ်ခုရဲ့ တန်ဖိုးတွေကို range အလိုက် စုပါတယ်။ Bin အကျယ် ပြောင်းပြီး မြင်ရတဲ့ pattern တည်ငြိမ်လား စစ်ပါ။ Scatter plot မှာ observation တစ်ခုစီကို ကိန်းဂဏန်းနှစ်ခုက သတ်မှတ်တဲ့ နေရာမှာ အမှတ်တစ်ခုနဲ့ ပြပါတယ်။ Pattern ကို အဓိပ္ပာယ်မဖော်ခင် အမှတ်ထပ်နေတာ၊ ထူးခြားတဲ့ အမှတ်နဲ့ အုပ်စုခွဲတွေ ရှိမရှိ ကြည့်ပါ။</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, (histogram, scatter) = plt.subplots(1, 2, layout=&quot;constrained&quot;)
+durations = [12, 16, 17, 22, 24, 28, 33, 35]
+histogram.hist(durations, bins=[10, 20, 30, 40], edgecolor=&quot;white&quot;)
+histogram.set(xlabel=&quot;Duration (min)&quot;, ylabel=&quot;Deliveries&quot;)
+
+distance = [1, 2, 2.5, 3, 4, 5, 5.5, 6]
+scatter.scatter(distance, durations)
+scatter.set(xlabel=&quot;Distance (km)&quot;, ylabel=&quot;Duration (min)&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/chart-selection-distributions-and-relationships.png" data-image-preview><img src="/docs/media/data/chart-selection-distributions-and-relationships.png" alt="Histogram မှာ ကြာချိန်အုပ်စု သုံးစုထဲ delivery 3၊ 3၊ 2 ခု အသီးသီးရှိပါတယ်။ Scatter plot မှာ delivery ရှစ်ခုရဲ့ အကွာအဝေးနဲ့ ကြာချိန်ကို ပြပါတယ်။" width="720" height="375" loading="lazy" decoding="async"></a>
+    <figcaption>Delivery ကြာချိန် data တစ်မျိုးတည်းကို သီးခြားဆွဲတာနဲ့ အကွာအဝေးနဲ့ တွဲဆွဲတာက မေးခွန်းနှစ်မျိုးကို ဖြေပေးပါတယ်။</figcaption>
+  </figure>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://matplotlib.org/stable/plot_types/">Matplotlib gallery of plot types</a></li>
+<li><a href="https://matplotlib.org/stable/gallery/lines_bars_and_markers/bar_label_demo.html">Matplotlib bar labels</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/matplotlib/figures-and-axes/">အရင်သင်ခန်းစာ · Figures၊ Axes နှင့် Plotting Interface</a>
+<a href="/docs/read/my/matplotlib/lines-and-bars/">နောက်သင်ခန်းစာ · Line Charts နှင့် Bar Charts</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

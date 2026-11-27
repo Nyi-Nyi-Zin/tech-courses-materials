@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The previous lesson showed one order item as a SQL table row and as a NoSQL document. Now look at how that item is connected to the rest of the order. When you open an order, how does the shop know which product you bought and how many you ordered? Follow the same order through PostgreSQL, MongoDB, and Neo4j.">
+  <title>How databases connect related data · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/relational-model/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/relational-model/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/relational-model/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/relational-model/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>How databases connect related data</h1>
+  
+  <p class="intro">The previous lesson showed one order item as a SQL table row and as a NoSQL document. Now look at how that item is connected to the rest of the order. When you open an order, how does the shop know which product you bought and how many you ordered? Follow the same order through PostgreSQL, MongoDB, and Neo4j.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/relational-model">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#order-item-relationships">One order in three databases</a></li>
+<li><a href="#relational-tables">PostgreSQL · Follow the foreign keys</a></li>
+<li><a href="#mongodb-embedding">MongoDB · Store details inside the order</a></li>
+<li><a href="#mongodb-referencing">MongoDB · Link to a product by ID</a></li>
+<li><a href="#neo4j-graph">Neo4j · Connect the order and product directly</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="order-item-relationships">
+  <h2>One order in three databases</h2>
+  <p>The four panels show three databases. MongoDB appears twice because an order can hold item details directly or point to a separate product document.</p>
+
+<pre><code>{
+  &quot;orderId&quot;: 101,
+  &quot;items&quot;: [
+    { &quot;productId&quot;: 1, &quot;name&quot;: &quot;Notebook&quot;, &quot;quantity&quot;: 2 }
+  ]
+}</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/database/database-relationships-en.png" data-image-preview><img src="/docs/media/database/database-relationships-en.png" alt="PostgreSQL links an order line to order and product rows. MongoDB embeds item details or references a product ID. Neo4j connects order and product nodes with a CONTAINS relationship." width="1480" height="1050" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="relational-tables">
+  <h2>PostgreSQL · Follow the foreign keys</h2>
+  <p>Start with the middle table, order_items. In this row, order_id points to order 101 and product_id points to product 1, the Notebook. These two columns are foreign keys. The quantity of 2 belongs to this order line. A JOIN matches the IDs so the shop can display the product name and quantity together.</p>
+
+<pre><code>SELECT products.name, order_items.quantity
+FROM order_items
+JOIN products ON products.id = order_items.product_id
+WHERE order_items.order_id = 101;</code></pre>
+
+
+</section>
+<section class="article-section" id="mongodb-embedding">
+  <h2>MongoDB · Store details inside the order</h2>
+  <p>PostgreSQL matched IDs across tables to get the name and quantity. With MongoDB, one option is to keep both values inside the order. In the upper-right panel, the order document contains an items list. One entry holds both the name Notebook and the quantity 2. This is embedding. Reading the order also retrieves those details. It works well for a receipt that should keep the item name as it was at checkout.</p>
+
+<pre><code>db.orders.findOne({ _id: 101 }, { items: 1 });
+
+// Example result:
+// { _id: 101, items: [{ name: &quot;Notebook&quot;, quantity: 2 }] }</code></pre>
+
+
+</section>
+<section class="article-section" id="mongodb-referencing">
+  <h2>MongoDB · Link to a product by ID</h2>
+  <p>In the lower-left panel, the order item stores product_id and quantity. To find the name, use product_id 1 to look up the product document whose _id is 1. This is referencing. Many orders can refer to the same product, so its current catalog details can be updated in one place.</p>
+
+<pre><code>const order = db.orders.findOne({ _id: 101 });
+const item = order.items[0];
+const product = db.products.findOne({ _id: item.product_id });
+printjson({ name: product.name, quantity: item.quantity });</code></pre>
+
+
+</section>
+<section class="article-section" id="neo4j-graph">
+  <h2>Neo4j · Connect the order and product directly</h2>
+  <p>A MongoDB reference points to the product by ID. In a graph database the connection itself is stored as a relationship. In the lower-right panel, Order and Product are nodes. Follow the arrow from Order to Product. Its label, CONTAINS, tells you the product is part of the order. The quantity of 2 is stored on that relationship because it describes how many notebooks this particular order contains.</p>
+
+<pre><code>MATCH (:Order {id: 101})-[line:CONTAINS]-&gt;(product:Product)
+RETURN product.name AS product, line.quantity AS quantity;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/ddl-constraints.html">PostgreSQL · Foreign keys</a></li>
+<li><a href="https://www.postgresql.org/docs/19/tutorial-join.html">PostgreSQL · Joins</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/data-modeling/schema-design-process/map-relationships/">MongoDB · Map schema relationships</a></li>
+<li><a href="https://neo4j.com/docs/getting-started/appendix/graphdb-concepts/">Neo4j · Graph database concepts</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/fundamentals/">Previous lesson · What is a database?</a>
+<a href="/docs/read/en/database/document-model/">Next lesson · Document design: embedding and references</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

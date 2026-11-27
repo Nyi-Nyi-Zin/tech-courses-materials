@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Flex item ရဲ့ စမယ့်အရွယ်၊ ကြီးလာမယ့်ပုံနဲ့ ကျုံ့ပုံကို သတ်မှတ်ပါ။ ပြီးရင် grid line တွေကို သုံးပြီး item တွေ နေရာချပါ။">
+  <title>Flex အရွယ်တွက်ပုံနဲ့ Grid နေရာချခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/flex-and-grid-sizing/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/flex-and-grid-sizing/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/flex-and-grid-sizing/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/flex-and-grid-sizing/" lang="en" hreflang="en">English</a></nav>
+  <h1>Flex အရွယ်တွက်ပုံနဲ့ Grid နေရာချခြင်း</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Flex item ရဲ့ စမယ့်အရွယ်၊ ကြီးလာမယ့်ပုံနဲ့ ကျုံ့ပုံကို သတ်မှတ်ပါ။ ပြီးရင် grid line တွေကို သုံးပြီး item တွေ နေရာချပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/flex-and-grid-sizing">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#basis">flex-basis နဲ့ စတွက်မယ့် အရွယ် ပေးခြင်း</a></li>
+<li><a href="#grow">flex-grow နဲ့ နေရာလွတ် ခွဲယူခြင်း</a></li>
+<li><a href="#shrink">flex-shrink နဲ့ Item တွေ ဆံ့အောင် ကျုံ့ခြင်း</a></li>
+<li><a href="#grid-column">grid-column နဲ့ Column တွေ ဖြတ်ယူခြင်း</a></li>
+<li><a href="#grid-row">grid-row နဲ့ Row တွေ ဖြတ်ယူခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="basis">
+  <h2>flex-basis နဲ့ စတွက်မယ့် အရွယ် ပေးခြင်း</h2>
+  <p>flex-basis က main axis တစ်လျှောက် စတွက်မယ့်အရွယ်ပါ။ Browser က ပြီးမှ grow နဲ့ shrink တန်ဖိုးအရ အရွယ်ညှိပါတယ်။ ဒီမှာ နှစ်ခုလုံး 0 ထားပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Set a starting size with flex-basis&lt;/title&gt;
+  &lt;style&gt;
+.row { display: flex; flex-wrap: wrap; gap: 4px; }
+.row &gt; div { flex: 0 0 72px; box-sizing: border-box; }
+.row &gt; div { background: #d8efeb; padding: 6px; border: 1px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;row&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Padding နဲ့ border အပါအဝင် တစ်ကွက်စီ 72px ကျယ်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="grow">
+  <h2>flex-grow နဲ့ နေရာလွတ် ခွဲယူခြင်း</h2>
+  <p>flex-grow က main axis ပေါ်က နေရာလွတ်ကို ခွဲဝေပေးပါတယ်။ Basis တူပြီး အရွယ်ကန့်သတ်ချက် မရှိရင် grow 2 က grow 1 ထက် နေရာလွတ် နှစ်ဆ ရပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Share available space with flex-grow&lt;/title&gt;
+  &lt;style&gt;
+.row { display: flex; max-width: 330px; }
+.row &gt; div { flex: 1 1 56px; }
+.row &gt; :nth-child(2) { flex-grow: 2; }
+.row &gt; div { background: #d8efeb; padding: 6px; border: 1px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;row&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Notebook က အပိုအကျယ် ပိုရပါတယ်။ သူ့ grow ကို 1 ပြောင်းရင် item တွေ အကျယ်တူပါမယ်။</p>
+
+</section>
+<section class="article-section" id="shrink">
+  <h2>flex-shrink နဲ့ Item တွေ ဆံ့အောင် ကျုံ့ခြင်း</h2>
+  <p>နေရာမဆံ့တဲ့အခါ browser က flex-shrink ကို မူလအရွယ်နဲ့ တွဲတွက်ပြီး item တွေ ကျုံ့ပေးပါတယ်။ 0 ဆိုရင် အဲဒီ item က မကျုံ့ပါဘူး။ အနည်းဆုံး width ရှိရင် ကျုံ့နိုင်တဲ့အရွယ်ကို ကန့်သတ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Make items fit with flex-shrink&lt;/title&gt;
+  &lt;style&gt;
+.row { display: flex; max-width: 250px; }
+.row &gt; div { flex: 0 1 100px; box-sizing: border-box; min-width: 0; overflow-wrap: anywhere; }
+.row &gt; :nth-child(2) { flex-shrink: 0; }
+.row &gt; div { background: #d8efeb; padding: 6px; border: 1px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;row&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Notebook က မူလအကျယ်အတိုင်း ရှိပါမယ်။ flex-shrink: 1 ပြောင်းပြီး သုံးခုလုံး ညီတူကျုံ့ပုံ ကြည့်ပါ။</p>
+
+</section>
+<section class="article-section" id="grid-column">
+  <h2>grid-column နဲ့ Column တွေ ဖြတ်ယူခြင်း</h2>
+  <p>Column သုံးခုကို ဘောင်ခွဲထားတဲ့ ဒေါင်လိုက် line လေးကြောင်း ရှိပါတယ်။ grid-column: 1 / 3 က line 1 မှာ စပြီး line 3 မှာ ဆုံးလို့ column နှစ်ခုစာ ယူပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Span columns with grid-column&lt;/title&gt;
+  &lt;style&gt;
+.row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.row &gt; :first-child { grid-column: 1 / 3; }
+.row &gt; div { background: #d8efeb; padding: 6px; border: 1px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;row&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen က column နှစ်ခုယူပြီး Notebook က တတိယ column မှာ ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="grid-row">
+  <h2>grid-row နဲ့ Row တွေ ဖြတ်ယူခြင်း</h2>
+  <p>Row line တွေက row ရဲ့ အပေါ်နဲ့ အောက်အစွန်းကို သတ်မှတ်ပါတယ်။ grid-row: 1 / span 2 က ပထမ line က စပြီး row နှစ်ခုစာ ယူပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Span rows with grid-row&lt;/title&gt;
+  &lt;style&gt;
+.row { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 40px; gap: 4px; }
+.row &gt; :first-child { grid-column: 1; grid-row: 1 / span 2; }
+.row &gt; div { background: #d8efeb; padding: 6px; border: 1px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;row&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen က ဘယ်မှာ row နှစ်ခုယူပြီး Notebook နဲ့ Folder က ညာဘက်မှာ တစ်ခုပြီးတစ်ခု ပေါ်ပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-basis">MDN · flex-basis</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-grow">MDN · flex-grow</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-shrink">MDN · flex-shrink</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-column">MDN · grid-column</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-row">MDN · grid-row</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/grid/">အရင်သင်ခန်းစာ · Grid နဲ့ Row၊ Column စီခြင်း</a>
+<a href="/docs/read/my/css/positioning/">နောက်သင်ခန်းစာ · နေရာချခြင်းနဲ့ အလွှာအစဉ်</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="အကွက်ရဲ့ နောက်ခံ၊ ထောင့်နဲ့ အနားသတ်ကို style ပေးပုံ ကြည့်ပါ။">
+  <title>နောက်ခံ၊ အနားသတ်နဲ့ အရိပ် · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/backgrounds-and-borders/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/backgrounds-and-borders/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/backgrounds-and-borders/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/backgrounds-and-borders/" lang="en" hreflang="en">English</a></nav>
+  <h1>နောက်ခံ၊ အနားသတ်နဲ့ အရိပ်</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">အကွက်ရဲ့ နောက်ခံ၊ ထောင့်နဲ့ အနားသတ်ကို style ပေးပုံ ကြည့်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/backgrounds-and-borders">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#background-image">နောက်ခံပုံ ထည့်ခြင်း</a></li>
+<li><a href="#gradient">linear-gradient() နဲ့ အရောင်စပ်ခြင်း</a></li>
+<li><a href="#radius">border-radius နဲ့ ထောင့်ဝိုင်းခြင်း</a></li>
+<li><a href="#shadow">box-shadow နဲ့ အရိပ်ပေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="background-image">
+  <h2>နောက်ခံပုံ ထည့်ခြင်း</h2>
+  <p>background-image မှာ url() ထည့်နိုင်ပါတယ်။ ပုံသေးရင် ပုံမှန်အားဖြင့် ထပ်ဖြည့်ပါတယ်။ ပုံထပ်မလား၊ ဘယ်နေရာထားမလဲ၊ ဘယ်လောက်ကြီးမလဲကို background-repeat၊ background-position၊ background-size နဲ့ ညှိနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Place a background image&lt;/title&gt;
+  &lt;style&gt;
+.card {
+  padding: 18px 84px 18px 12px;
+  background-color: #def5f5;
+  background-image: url(&quot;data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%20160%2080%27%3E%3Crect%20width=%27160%27%20height=%2780%27%20fill=%27teal%27/%3E%3Ccircle%20cx=%2780%27%20cy=%2740%27%20r=%2730%27%20fill=%27orange%27/%3E%3C/svg%3E&quot;);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 80px 40px;
+}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;card&quot;&gt;Desk Lamp&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ညာဘက်မှာ ပုံသေးတစ်ပုံ ပေါ်ပါမယ်။ no-repeat ကို ဖြုတ်ပြီး ပုံပြန်ထပ်ပုံ ကြည့်ပါ။</p>
+
+</section>
+<section class="article-section" id="gradient">
+  <h2>linear-gradient() နဲ့ အရောင်စပ်ခြင်း</h2>
+  <p>Gradient က CSS က ထုတ်ပေးတဲ့ ပုံတစ်မျိုးပါ။ linear-gradient() မှာ ဦးတည်ချက်နဲ့ color stop အနည်းဆုံး နှစ်ခု ပေးပြီး အဲဒီလိုင်းတစ်လျှောက် အရောင်စပ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Blend colors with linear-gradient()&lt;/title&gt;
+  &lt;style&gt;
+.card { padding: 16px; background-image: linear-gradient(to right, #ccfbf1, #fef3c7); }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;card&quot;&gt;Desk Lamp&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ဘယ်ကနေညာကို စိမ်းပြာဖျော့ကနေ အဝါဖျော့အထိ ပြောင်းသွားပါမယ်။</p>
+
+</section>
+<section class="article-section" id="radius">
+  <h2>border-radius နဲ့ ထောင့်ဝိုင်းခြင်း</h2>
+  <p>border-radius မှာ တန်ဖိုးတစ်ခု ပေးရင် ထောင့်လေးခုလုံး ဝိုင်းပါတယ်။ Border မမြင်ရတဲ့ အကွက်မှာလည်း နောက်ခံထောင့်က ဝိုင်းပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Round corners with border-radius&lt;/title&gt;
+  &lt;style&gt;
+.card { padding: 12px; background: #def5f5; border: 2px solid teal; border-radius: 16px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;card&quot;&gt;Desk Lamp&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ထောင့်လေးခုလုံး ဝိုင်းပါမယ်။ 0 ပြောင်းပြီး ထောင့်ချွန်ပုံ ကြည့်ပါ။</p>
+
+</section>
+<section class="article-section" id="shadow">
+  <h2>box-shadow နဲ့ အရိပ်ပေးခြင်း</h2>
+  <p>ပထမ length နှစ်ခုက အရိပ်ကို ဘေးတိုက်နဲ့ အပေါ်အောက် ရွှေ့ပါတယ်။ တတိယတန်ဖိုးက အစွန်းကို ဝါးစေပြီး နောက်ဆုံးက အရိပ်ရောင်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Add an edge shadow with box-shadow&lt;/title&gt;
+  &lt;style&gt;
+.card { padding: 12px; background: #def5f5; box-shadow: 0 6px 14px rgb(0 40 40 / 27%); }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;card&quot;&gt;Desk Lamp&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> အောက်မှာ အရိပ်ပျော့ ပေါ်ပါမယ်။ 6px ကို -6px ပြောင်းပြီး အရိပ် အပေါ်တက်ပုံ ကြည့်ပါ။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/background-image">MDN · background-image</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/linear-gradient">MDN · linear-gradient()</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/border-radius">MDN · border-radius</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/box-shadow">MDN · box-shadow</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/colors/">အရင်သင်ခန်းစာ · CSS အရောင်များ</a>
+<a href="/docs/read/my/css/spacing-and-visibility/">နောက်သင်ခန်းစာ · Margin၊ Overflow နဲ့ Visibility</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

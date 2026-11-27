@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A regular expression is a pattern for testing or finding text. Use it when you need to match several strings with the same shape, such as an order code.">
+  <title>Regular expressions · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/regular-expressions/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/regular-expressions/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/regular-expressions/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/regular-expressions/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Regular expressions</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">A regular expression is a pattern for testing or finding text. Use it when you need to match several strings with the same shape, such as an order code.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/regular-expressions">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#check">Check the whole string with test()</a></li>
+<li><a href="#find">Find multiple matches and capture groups</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="check">
+  <h2>Check the whole string with test()</h2>
+  <p>In a literal, slashes surround the pattern. ^ and $ anchor the pattern to the start and end here. [A-Z] matches one uppercase English letter and {2} asks for two. [0-9]{3} asks for three digits.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const orderCode = /^[A-Z]{2}-[0-9]{3}$/;
+console.log(orderCode.test(&quot;TE-104&quot;));
+console.log(orderCode.test(&quot;TE-10&quot;));</code></pre>
+<p class="example-result"><strong>What to expect</strong> The checks print true and false. The second code is missing a digit.</p>
+
+</section>
+<section class="article-section" id="find">
+  <h2>Find multiple matches and capture groups</h2>
+  <p>Use matchAll() with the g flag to visit each match. Parentheses capture a part of a match. The match array contains the full match first, followed by the captured parts. For independent test() calls, omit g and y because they can advance lastIndex on a reused expression.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const line = &quot;pen:3, notebook:2&quot;;
+for (const match of line.matchAll(/([a-z]+):([0-9]+)/g)) {
+  console.log(match[1], Number(match[2]));
+}</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first line prints pen and 3. The second prints notebook and 2.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions">MDN · Regular expressions</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/matchAll">MDN · String.matchAll</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/iterators-and-generators/">Previous lesson · Iterators and generators</a>
+<a href="/docs/read/en/js/web-workers/">Next lesson · Web Workers</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

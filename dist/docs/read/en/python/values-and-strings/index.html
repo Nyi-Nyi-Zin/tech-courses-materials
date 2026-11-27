@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Work with numbers and text, convert input, and format values for display.">
+  <title>Variables, data types, and strings · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/python/values-and-strings/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/python/values-and-strings/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/python/values-and-strings/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#python">All documentation · Python</a> <a href="/docs/read/my/python/values-and-strings/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Variables, data types, and strings</h1>
+  <p class="article-version">3.15.2</p>
+  <p class="intro">Work with numbers and text, convert input, and format values for display.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/python/values-and-strings">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#names-and-types">Names and types</a></li>
+<li><a href="#clean-and-format">Clean and format strings</a></li>
+<li><a href="#conversion">Convert input explicitly</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="names-and-types">
+  <h2>Names and types</h2>
+  <p>Assignment binds a name to an object. Common types include int for whole numbers, float for floating-point numbers, str for text, bool for True or False, and NoneType for None. Use / for true division and // for floor division.</p>
+
+<pre><code>quantity = 3
+unit_price = 2.5
+print(quantity * unit_price)
+print(7 / 2, 7 // 2)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">7.5
+3.5 3</pre></div>
+
+
+</section>
+<section class="article-section" id="clean-and-format">
+  <h2>Clean and format strings</h2>
+  <p>Strings are immutable. strip() and title() return new strings. An f-string evaluates expressions inside braces, and .2f displays a number with two decimal places.</p>
+
+<pre><code>item = &quot;  iced coffee  &quot;.strip().title()
+price = 7.5
+print(f&quot;{item} — {price:.2f}&quot;)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">Iced Coffee — 7.50</pre></div>
+
+
+</section>
+<section class="article-section" id="conversion">
+  <h2>Convert input explicitly</h2>
+  <p>input() returns a string. Convert it with int() or float() before arithmetic. int(&quot;3.5&quot;) raises ValueError. When using whole numbers for money, decide the smallest unit for storage, such as cents.</p>
+
+<pre><code>text = &quot;4&quot;
+print(int(text) * 3)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">12</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://docs.python.org/3.15/tutorial/introduction.html">An informal introduction to Python</a></li>
+<li><a href="https://docs.python.org/3.15/library/functions.html">Built-in functions</a></li>
+<li><a href="https://docs.python.org/3.15/tutorial/inputoutput.html#formatted-string-literals">Formatted string literals</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/python/setup/">Previous lesson · Install Python and set up a project</a>
+<a href="/docs/read/en/python/control-flow/">Next lesson · Conditions, loops, and pattern matching</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="URL တစ်ခုစီမှာ ဘယ် screen ပြမလဲ သတ်မှတ်ပါ။ အရေးကြီးတဲ့ screen တိုင်းကို bookmark လုပ်လို့ရ၊ share လို့ရတဲ့ URL ပေးပါ။">
+  <title>React Router နဲ့ Routing · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/react/routing/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/routing/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/routing/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#react">သင်ခန်းစာအားလုံး · React</a> <a href="/docs/read/en/react/routing/" lang="en" hreflang="en">English</a></nav>
+  <h1>React Router နဲ့ Routing</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">URL တစ်ခုစီမှာ ဘယ် screen ပြမလဲ သတ်မှတ်ပါ။ အရေးကြီးတဲ့ screen တိုင်းကို bookmark လုပ်လို့ရ၊ share လို့ရတဲ့ URL ပေးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/react/routing">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#routes">Links နဲ့ Routes ထည့်ပါ</a></li>
+<li><a href="#refresh">Page URL ကို တိုက်ရိုက် ဖွင့်လို့ရအောင် လုပ်ပါ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="routes">
+  <h2>Links နဲ့ Routes ထည့်ပါ</h2>
+  <p>react-router ကို install လုပ်ပြီး route tree ကို BrowserRouter နဲ့ wrap လုပ်ပါ။ Routes က ကိုက်ညီတဲ့ route ရွေးပြီး NavLink က လက်ရှိ active link ကို သိစေပါတယ်။ /products/:id လို path က product ID ကို useParams နဲ့ ယူလို့ရစေပါတယ်။</p>
+
+<pre><code>import React from &quot;react&quot;;
+import { BrowserRouter, NavLink, Route, Routes, useParams } from &quot;react-router&quot;;
+
+function Product() {
+  const { id } = useParams();
+  return &lt;h1&gt;Product {id}&lt;/h1&gt;;
+}
+
+export default function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;nav&gt;
+        &lt;NavLink to=&quot;/&quot; end&gt;Home&lt;/NavLink&gt;{&quot; &quot;}
+        &lt;NavLink to=&quot;/products/42&quot;&gt;Pen&lt;/NavLink&gt;
+      &lt;/nav&gt;
+      &lt;Routes&gt;
+        &lt;Route path=&quot;/&quot; element={&lt;h1&gt;Inventory&lt;/h1&gt;} /&gt;
+        &lt;Route path=&quot;/products/:id&quot; element={&lt;Product /&gt;} /&gt;
+        &lt;Route path=&quot;*&quot; element={&lt;h1&gt;Page not found&lt;/h1&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="refresh">
+  <h2>Page URL ကို တိုက်ရိုက် ဖွင့်လို့ရအောင် လုပ်ပါ</h2>
+  <p>User က /products/42 ကို reload လုပ်ရင် request က host ဆီ အရင်ရောက်ပါတယ်။ Client page paths တွေအတွက် index.html ကို fallback ပြန်ပေးအောင် သတ်မှတ်ပါ။ API နဲ့ asset routes တွေကို သီးသန့် ဆက်ထားပါ။ Link၊ direct reload၊ Back ခလုတ်နဲ့ မရှိတဲ့ URL ကို စမ်းပါ။ Client ဘက်က not-found screen က server HTTP status မသတ်မှတ်ပေးပါဘူး။</p>
+
+<pre><code># Nginx: inside the server block for the SPA
+location /products/ {
+    try_files $uri $uri/ /index.html;
+}
+
+# Keep existing /api/ and asset locations separate.</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://reactrouter.com/start/declarative/routing">React Router · Declarative routing</a></li>
+<li><a href="https://reactrouter.com/api/components/NavLink">React Router · NavLink</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/react/custom-hooks/">အရင်သင်ခန်းစာ · Custom Hooks နဲ့ Behavior ပြန်သုံးခြင်း</a>
+<a href="/docs/read/my/react/error-boundaries/">နောက်သင်ခန်းစာ · Render Error ဖြစ်ရင် ပြန်ထိန်းပါ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

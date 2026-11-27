@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Write the same teal using three different CSS color notations.">
+  <title>CSS colors · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/css/colors/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/colors/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/colors/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#css">All documentation · CSS</a> <a href="/docs/read/my/css/colors/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>CSS colors</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Write the same teal using three different CSS color notations.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/css/colors">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#hex">Hex colors</a></li>
+<li><a href="#rgb">RGB channels and opacity</a></li>
+<li><a href="#hsl">Hue, saturation, and lightness</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="hex">
+  <h2>Hex colors</h2>
+  <p>A six-digit hex color starts with #. Read the next six characters in pairs as red, green, and blue. Each pair ranges from 00 to ff.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Hex colors&lt;/title&gt;
+  &lt;style&gt;
+.card { color: #008080; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;card&quot;&gt;Desk Lamp&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The text is teal. Change the first pair to ff and compare.</p>
+
+</section>
+<section class="article-section" id="rgb">
+  <h2>RGB channels and opacity</h2>
+  <p>rgb() accepts red, green, and blue. With numbers, each channel ranges from 0 to 255. Add / and an alpha value to set how much of the background color shows through.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;RGB channels and opacity&lt;/title&gt;
+  &lt;style&gt;
+.card { color: rgb(0 128 128); background: rgb(0 128 128 / 20%); padding: 8px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;card&quot;&gt;Desk Lamp&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Teal text appears over a faint teal background. Change 20% to 10%.</p>
+
+</section>
+<section class="article-section" id="hsl">
+  <h2>Hue, saturation, and lightness</h2>
+  <p>Hue is an angle on the color wheel. Saturation controls how vivid the color is. Lightness ranges from black at 0% to white at 100%.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Hue, saturation, and lightness&lt;/title&gt;
+  &lt;style&gt;
+.card { color: hsl(180deg 100% 25%); }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;card&quot;&gt;Desk Lamp&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The text is teal. Change the hue to 300deg to see purple.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value">MDN · CSS color values</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/css/typography/">Previous lesson · Text size, units, and fonts</a>
+<a href="/docs/read/en/css/backgrounds-and-borders/">Next lesson · Backgrounds, borders, and shadows</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="အချိန်ကို ကိုယ်စားပြုတာနဲ့ ကိန်းဂဏန်းတွက်တာအတွက် JavaScript မှာ အသင့်ပါတဲ့ tool တွေ သုံးပါ။">
+  <title>Date နဲ့ Math · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/date-and-math/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/date-and-math/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/date-and-math/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/date-and-math/" lang="en" hreflang="en">English</a></nav>
+  <h1>Date နဲ့ Math</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">အချိန်ကို ကိုယ်စားပြုတာနဲ့ ကိန်းဂဏန်းတွက်တာအတွက် JavaScript မှာ အသင့်ပါတဲ့ tool တွေ သုံးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/date-and-math">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#date">Time Zone ထည့်ပြီး Date ဖန်တီးခြင်း</a></li>
+<li><a href="#math">Math နဲ့ ကိန်းပြည့်ယူခြင်း၊ အနည်းဆုံး အများဆုံး ရွေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="date">
+  <h2>Time Zone ထည့်ပြီး Date ဖန်တီးခြင်း</h2>
+  <p>Date က အချိန်တစ်မှတ်ကို ကိုယ်စားပြုပါတယ်။ String အဆုံးက Z က UTC ကို သတ်မှတ်ပြီး toISOString() က UTC နဲ့ ပြန်ပြပါတယ်။ User ရဲ့ ဒေသအချိန်အဖြစ် ပြချင်ရင် format လုပ်တဲ့အခါ time zone သတ်မှတ်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const opening = new Date(&quot;2026-11-23T03:00:00Z&quot;);
+console.log(opening.toISOString());
+const time = new Intl.DateTimeFormat(&quot;en-GB&quot;, {
+  timeZone: &quot;Asia/Yangon&quot;, hour: &quot;2-digit&quot;, minute: &quot;2-digit&quot;
+});
+console.log(time.format(opening));</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ISO string မှာ UTC 03:00 ပြပြီး အဲဒီအချိန်ကိုပဲ ရန်ကုန်စံတော်ချိန်နဲ့ 09:30 ပြပါမယ်။</p>
+
+</section>
+<section class="article-section" id="math">
+  <h2>Math နဲ့ ကိန်းပြည့်ယူခြင်း၊ အနည်းဆုံး အများဆုံး ရွေးခြင်း</h2>
+  <p>Math.round() က အနီးဆုံး ကိန်းပြည့်ရအောင် ညှိပြီး ကြားတည့်တည့်ကျရင် အပေါင်းဘက်ကို ယူပါတယ်။ Math.floor() က အောက်၊ Math.ceil() က အပေါ်ဘက်က ကိန်းပြည့်ကို ယူပါတယ်။ Math.min() နဲ့ Math.max() က အနည်းဆုံးနဲ့ အများဆုံး တန်ဖိုးကို ရွေးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>console.log(Math.round(2.6), Math.floor(2.6), Math.ceil(2.6));
+console.log(Math.max(1500, 2500, 1800));</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> 2.6 ကို round လုပ်ရင် 3၊ floor ဆို 2၊ ceil ဆို 3 ရပါမယ်။ အများဆုံးဈေးက 2500 ပါ။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">MDN · Date</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat">MDN · Intl/DateTimeFormat</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math">MDN · Math</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/array-methods/">အရင်သင်ခန်းစာ · Array ထဲ ရှာခြင်း၊ စစ်ခြင်းနဲ့ အစဉ်စီခြင်း</a>
+<a href="/docs/read/my/js/map-and-set/">နောက်သင်ခန်းစာ · Map နဲ့ Set</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

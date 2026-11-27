@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Client and Server သင်ခန်းစာမှာ server တစ်မျိုးချင်းစီရဲ့ တာဝန်ကို သိခဲ့ပါတယ်။ ဒီသင်ခန်းစာမှာ Browser ထဲက Frontend က Backend ဆီ request ပို့တဲ့အခါ PostgreSQL၊ Redis နဲ့ File Server တို့ကို ဘယ်အချိန်မှာ သုံးလဲဆိုတာ ကြည့်ပါမယ်။ အောက်ကပုံမှာ ဒီ request လမ်းကြောင်းတွေကို ဖော်ပြထားပါတယ်။">
+  <title>Web App Request သွားလာပုံ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-fundamentals/web-app-architecture/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-fundamentals/web-app-architecture/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-fundamentals/web-app-architecture/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-fundamentals">သင်ခန်းစာအားလုံး · Web Fundamentals</a> <a href="/docs/read/en/web-fundamentals/web-app-architecture/" lang="en" hreflang="en">English</a></nav>
+  <h1>Web App Request သွားလာပုံ</h1>
+  
+  <p class="intro">Client and Server သင်ခန်းစာမှာ server တစ်မျိုးချင်းစီရဲ့ တာဝန်ကို သိခဲ့ပါတယ်။ ဒီသင်ခန်းစာမှာ Browser ထဲက Frontend က Backend ဆီ request ပို့တဲ့အခါ PostgreSQL၊ Redis နဲ့ File Server တို့ကို ဘယ်အချိန်မှာ သုံးလဲဆိုတာ ကြည့်ပါမယ်။ အောက်ကပုံမှာ ဒီ request လမ်းကြောင်းတွေကို ဖော်ပြထားပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-fundamentals/web-app-architecture">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#web-app-flow">Web App တစ်ခု အလုပ်လုပ်ပုံ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="web-app-flow">
+  <h2>Web App တစ်ခု အလုပ်လုပ်ပုံ</h2>
+  <p>ကျောင်းတစ်ကျောင်းရဲ့ သင်တန်းစာရင်းသွင်းတဲ့ app ကို browser မှာ ဖွင့်ကြည့်ပါ။ Browser က Web Server ဆီက frontend ဖိုင်တွေကို တောင်းယူပြီး run တယ်။ သင်တန်းစာရင်းကို ဖွင့်တဲ့အခါ Browser ထဲက Frontend က API request စတင်တယ်။ Browser က အဲဒီ request ကို Backend ဆီ HTTPS နဲ့ ပို့ပြီး ပြန်ရတဲ့ response ကို Frontend ဆီ ပေးတယ်။ စာရင်းသွင်းရာမှာ PDF တစ်ခု တင်လိုက်ရင် Backend က PDF ကို Samba File Server ရဲ့ shared folder ထဲမှာ သိမ်းပြီး ဖိုင်ရဲ့ တည်နေရာကို enrollment မှတ်တမ်းနဲ့အတူ database ထဲမှာ ထည့်မှတ်ထားနိုင်ပါတယ်။</p>
+
+<pre><code>// Frontend: the browser sends a request to the backend API.
+async function loadCourses() {
+  const response = await fetch(&quot;/api/courses&quot;);
+  if (!response.ok) throw new Error(&quot;Could not load courses.&quot;);
+  return response.json();
+}</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/database/web-app-flow.svg?v=5" data-image-preview><img src="/docs/media/database/web-app-flow.svg?v=5" alt="Browser က Web Server ဆီက HTML၊ CSS နဲ့ JavaScript ဖိုင်တွေ ရယူတယ်။ Browser ထဲက Frontend က Application Server ပေါ်က Backend ဆီ HTTPS request စတင်ပြီး JSON အဖြေ ရတယ်။ Backend က လိုအပ်သလို Redis Cache Server၊ PostgreSQL Database Server နဲ့ Samba File Server တို့ကို ချိတ်သုံးတယ်။ Samba ဆီ ဖိုင်ရေးဖို့ SMB သုံးတယ်။" width="1600" height="780" loading="lazy" decoding="async"></a>
+    <figcaption>အပေါ်လမ်းကြောင်းက frontend ဖိုင်တွေ ရယူပုံပါ။ အောက်လမ်းကြောင်းက Browser ထဲမှာ run နေတဲ့ Frontend ဆီက API request နဲ့ ပြန်လာတဲ့ JSON response ကို ပြတယ်။ အပြတ်မျဉ်းက လိုအပ်မှ ချိတ်သုံးတဲ့ Redis cache ကို ပြထားတာပါ။</figcaption>
+  </figure><dl class="lesson-terms"><div><dt><code>Browser</code></dt><dd>Frontend ဖိုင်တွေကို ရယူပြီး run တယ်။ Frontend က API request စတင်တဲ့အခါ Browser က network ပေါ်မှာ ပို့ပေးတယ်။</dd></div><div><dt><code>Web Server</code></dt><dd>Browser ဆီ HTML၊ JavaScript နဲ့ CSS frontend ဖိုင်တွေ ပို့ပေးတယ်။</dd></div><div><dt><code>Application Server</code></dt><dd>Backend API ကို run တယ်။ သင်တန်းစာရင်း တောင်းလာရင် Redis သို့မဟုတ် PostgreSQL ကနေ ဖတ်ပြီး Browser ဆီ ပြန်ပို့နိုင်တယ်။</dd></div><div><dt><code>Cache Server</code></dt><dd>Redis မှာ သင်တန်းစာရင်းလို ရလဒ်တွေကို ခဏသိမ်းထားလို့ရတယ်။ သိမ်းထားတဲ့ရလဒ် ရှိရင် Backend က အဲဒီကနေ ပြန်ပေးနိုင်တယ်။ မရှိရင် PostgreSQL ကနေ ဖတ်ပြီး ရလဒ်အသစ်ကို Redis ထဲမှာ သတ်မှတ်ထားတဲ့ အချိန်အထိ သိမ်းထားနိုင်တယ်။</dd></div><div><dt><code>Database Server</code></dt><dd>PostgreSQL ကို run တယ်။ PostgreSQL က SQL query တွေကို လုပ်ဆောင်ပြီး သင်တန်းနဲ့ စာရင်းသွင်း မှတ်တမ်းတွေကို စီမံပေးတယ်။ Server process ပြန်စရင် မှတ်တမ်းတွေ ဆက်ရှိနေဖို့ PostgreSQL က data file တွေကို persistent storage ပေါ်မှာ သိမ်းတယ်။</dd></div><div><dt><code>File Server</code></dt><dd>ဒီဥပမာမှာ Samba က File Server software ပါ။ SMB နဲ့ folder တစ်ခုကို share ပေးထားလို့ Backend က တင်လာတဲ့ PDF တွေကို အဲဒီ folder ထဲ သိမ်းပြီး download တောင်းလာရင် ပြန်ဖတ်နိုင်ပါတယ်။</dd></div></dl>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">MDN · Using the Fetch API</a></li>
+<li><a href="https://www.postgresql.org/docs/current/tutorial-arch.html">PostgreSQL · Client/server architecture</a></li>
+<li><a href="https://redis.io/docs/latest/develop/use-cases/cache-aside/">Redis · Cache-aside</a></li>
+<li><a href="https://www.samba.org/samba/what_is_samba.html">Samba · SMB file sharing</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-fundamentals/dns/">အရင်သင်ခန်းစာ · DNS ဆိုတာ ဘာလဲ။ Domain Name ကနေ IP Address ကို ဘယ်လိုရှာလဲ။</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

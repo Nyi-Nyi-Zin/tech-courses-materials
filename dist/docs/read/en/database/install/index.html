@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Choose the instructions for your operating system. You need a local PostgreSQL server and its command-line tools. PowerShell on Windows and Terminal on macOS or Ubuntu are enough for the lessons.">
+  <title>Install PostgreSQL and psql · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/install/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/install/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/install/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/install/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Install PostgreSQL and psql</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">Choose the instructions for your operating system. You need a local PostgreSQL server and its command-line tools. PowerShell on Windows and Terminal on macOS or Ubuntu are enough for the lessons.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/install">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#tools">Which tools do you need?</a></li>
+<li><a href="#windows">Windows · EDB installer and PowerShell</a></li>
+<li><a href="#macos">macOS · Postgres.app and Terminal</a></li>
+<li><a href="#ubuntu">Ubuntu · Install with apt</a></li>
+<li><a href="#ready">Check that the server accepts connections</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="tools">
+  <h2>Which tools do you need?</h2>
+  <p>The server and psql are the essentials. Use pg_isready to check whether the server is listening.</p>
+
+<pre><code>psql --version
+pg_isready -h localhost -p 5432</code></pre>
+<dl class="lesson-terms"><div><dt><code>PostgreSQL Server</code></dt><dd>Runs in the background, manages databases, and executes SQL.</dd></div><div><dt><code>psql</code></dt><dd>Terminal client for connecting to the server, sending SQL, and reading results.</dd></div><div><dt><code>pg_isready</code></dt><dd>Checks whether a PostgreSQL server at a given host and port accepts connections. It does not validate your password.</dd></div><div><dt><code>pgAdmin / Stack Builder</code></dt><dd>Optional. pgAdmin is a graphical client. Stack Builder installs add-ons.</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="windows">
+  <h2>Windows · EDB installer and PowerShell</h2>
+  <p>Open the Windows download link in Official references and choose the EDB installer for a supported version. In Select Components, keep PostgreSQL Server and Command Line Tools. Keep the default data directory for class, set and remember the password for the database role postgres, and keep port 5432 if it is free. Skip the optional Stack Builder at the end. In a fresh PowerShell window, run the following commands.</p>
+
+<pre><code>Get-Service -Name &quot;postgresql*&quot;
+psql --version</code></pre>
+<dl class="lesson-terms"><div><dt><code>Get-Service -Name &quot;postgresql*&quot;</code></dt><dd>Lists Windows services whose names start with postgresql. Look for Running in the status column.</dd></div><div><dt><code>psql --version</code></dt><dd>Prints the installed psql client version and returns to PowerShell.</dd></div></dl>
+
+<p class="example-check"><strong>If the result differs</strong> If psql is not recognized, search Windows for Edit environment variables for your account, then open Path → Edit → New and add the installation’s bin folder. For example, use C:\Program Files\PostgreSQL\19\bin for the default version 19 location. Open a new PowerShell window and retry. If the service shows Stopped, start it from Windows Services and then check again.</p>
+</section>
+<section class="article-section" id="macos">
+  <h2>macOS · Postgres.app and Terminal</h2>
+  <p>Download Postgres.app from the link below, move it to Applications, open it, and click Initialize. Add its command-line tools to PATH in your current Terminal session. Keep Postgres.app running while you work.</p>
+
+<pre><code>export PATH=&quot;/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH&quot;
+psql --version</code></pre>
+<dl class="lesson-terms"><div><dt><code>export PATH=&quot;…:$PATH&quot;</code></dt><dd>Adds the Postgres.app binaries ahead of the existing PATH for this Terminal session. See the Postgres.app CLI guide below to set it up for future Terminal windows.</dd></div></dl>
+<p class="example-result"><strong>What to expect</strong> psql --version prints the client version. The initial PostgreSQL role is normally your macOS username.</p>
+
+</section>
+<section class="article-section" id="ubuntu">
+  <h2>Ubuntu · Install with apt</h2>
+  <p>Run these commands in Terminal on Ubuntu. The Ubuntu repository supplies a version for your Ubuntu release.</p>
+
+<pre><code>sudo apt update
+sudo apt install postgresql
+sudo systemctl status postgresql --no-pager
+psql --version</code></pre>
+<dl class="lesson-terms"><div><dt><code>sudo apt update</code></dt><dd>Refreshes the package list. sudo runs the command with administrator privileges.</dd></div><div><dt><code>sudo apt install postgresql</code></dt><dd>Installs PostgreSQL and its required packages, including the client tools.</dd></div><div><dt><code>sudo systemctl status postgresql --no-pager</code></dt><dd>Shows the PostgreSQL service status without opening a scrollable pager. Use pg_isready below to check the actual connection.</dd></div></dl>
+
+<p class="example-check"><strong>If the result differs</strong> If the service is stopped on a systemd-based Ubuntu machine, sudo systemctl start postgresql starts it. On Ubuntu under WSL, make sure the service is running inside the same distribution where you run psql.</p>
+</section>
+<section class="article-section" id="ready">
+  <h2>Check that the server accepts connections</h2>
+  <p>Run this check in your OS terminal. Change the port if you used a different port when configuring PostgreSQL.</p>
+
+<pre><code>pg_isready -h localhost -p 5432</code></pre>
+<dl class="lesson-terms"><div><dt><code>-h localhost</code></dt><dd>Checks the server on your own machine.</dd></div><div><dt><code>-p 5432</code></dt><dd>Checks port 5432, the usual PostgreSQL port.</dd></div></dl>
+<p class="example-result"><strong>What to expect</strong> localhost:5432 - accepting connections</p>
+<p class="example-check"><strong>If the result differs</strong> If you see no response, check that the server is running and that the host and port are correct. If pg_isready is not found, check the command-line tools and PATH first.</p>
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.postgresql.org/download/windows/">PostgreSQL · Windows installer</a></li>
+<li><a href="https://www.enterprisedb.com/docs/supported-open-source/postgresql/installing/windows/">EDB · Windows installation steps</a></li>
+<li><a href="https://www.postgresql.org/download/macosx/">PostgreSQL · macOS downloads</a></li>
+<li><a href="https://postgresapp.com/">Postgres.app · Download and setup</a></li>
+<li><a href="https://postgresapp.com/documentation/cli-tools.html">Postgres.app · Command-line tools</a></li>
+<li><a href="https://www.postgresql.org/download/linux/ubuntu/">PostgreSQL · Ubuntu packages</a></li>
+<li><a href="https://www.postgresql.org/docs/19/app-pg-isready.html">PostgreSQL · pg_isready</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/postgresql-introduction/">Previous lesson · Introduction to PostgreSQL</a>
+<a href="/docs/read/en/database/setup/">Next lesson · Connect with psql and create tables</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

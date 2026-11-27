@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HTTP is a set of rules for exchanging requests and responses. A request names a destination and a method. A response includes a status code and may include a body. An API is an agreed way for a program to ask a service for data or an action.">
+  <title>HTTP requests and Fetch · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/http/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/http/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/http/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/http/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>HTTP requests and Fetch</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">HTTP is a set of rules for exchanging requests and responses. A request names a destination and a method. A response includes a status code and may include a body. An API is an agreed way for a program to ask a service for data or an action.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/http">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#json">What is JSON?</a></li>
+<li><a href="#fetch">Read data with a GET request</a></li>
+<li><a href="#post">Send JSON with a POST request</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="json">
+  <h2>What is JSON?</h2>
+  <p>JSON is a text format for exchanging data. A JSON object uses double quotes around property names and string values. JSON.parse reads JSON text into a JavaScript value, while JSON.stringify writes a value as JSON text.</p>
+<p class="example-setup"><strong>How to try it</strong> Create a folder for these examples and save the code as product.json.</p>
+<pre><code>{ &quot;name&quot;: &quot;Pen&quot;, &quot;price&quot;: 2500 }</code></pre>
+<p class="example-result"><strong>What to expect</strong> You now have a small JSON file for the GET example.</p>
+
+</section>
+<section class="article-section" id="fetch">
+  <h2>Read data with a GET request</h2>
+  <p>GET asks for a resource without making a change to it. fetch() returns a promise for a Response. Status codes in the 200–299 range give response.ok === true. A server response such as 404 can still fulfill the fetch promise, so check ok before reading the body. response.json() returns a promise for the parsed data.</p>
+<p class="example-setup"><strong>How to try it</strong> Save as index.html beside product.json. Serve both using VS Code Live Server or run python -m http.server 8000 in that folder and open http://localhost:8000.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;GET demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p id=&quot;result&quot;&gt;Loading…&lt;/p&gt;
+  &lt;script&gt;
+    async function loadProduct() {
+      const result = document.querySelector(&quot;#result&quot;);
+      try {
+        const response = await fetch(&quot;./product.json&quot;);
+        if (!response.ok) throw new Error(&quot;HTTP &quot; + response.status);
+        const product = await response.json();
+        result.textContent = product.name + &quot;: &quot; + product.price;
+      } catch (error) {
+        result.textContent = &quot;Could not load the product: &quot; + error.message;
+      }
+    }
+    loadProduct();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The page shows Pen: 2500. Change product.json to missing.json in the request, reload, and look for HTTP 404 in the message.</p>
+<p class="example-check"><strong>If the result differs</strong> If the address starts with file:, use the local server URL. If you see 404, check the filename and the folder the server is serving.</p>
+</section>
+<section class="article-section" id="post">
+  <h2>Send JSON with a POST request</h2>
+  <p>POST submits data for the server to process. Here method selects POST, the Content-Type header describes the body format, and JSON.stringify produces that text. This demo API returns a simulated creation response.</p>
+<p class="example-setup"><strong>How to try it</strong> Save as post.html in the GET example folder. Open it through the same local server while connected to the internet, and click Send example post.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;POST demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id=&quot;submit&quot; type=&quot;button&quot;&gt;Send example post&lt;/button&gt;
+  &lt;p id=&quot;result&quot; role=&quot;status&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const button = document.querySelector(&quot;#submit&quot;);
+    const result = document.querySelector(&quot;#result&quot;);
+    button.addEventListener(&quot;click&quot;, async () =&gt; {
+      result.textContent = &quot;Sending…&quot;;
+      try {
+        const response = await fetch(&quot;https://jsonplaceholder.typicode.com/posts&quot;, {
+          method: &quot;POST&quot;,
+          headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+          body: JSON.stringify({ title: &quot;Pen&quot;, body: &quot;A sample product post&quot;, userId: 1 }),
+        });
+        if (!response.ok) throw new Error(&quot;HTTP &quot; + response.status);
+        const data = await response.json();
+        result.textContent = &quot;Received: &quot; + data.title + &quot; (ID &quot; + data.id + &quot;)&quot;;
+      } catch (error) {
+        result.textContent = &quot;Could not send: &quot; + error.message;
+      }
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The demo API replies with the title and a simulated new ID. The page shows “Received: Pen (ID 101)” if the service responds as documented.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://fetch.spec.whatwg.org/">WHATWG · Fetch Standard</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">MDN · Using Fetch</a></li>
+<li><a href="https://jsonplaceholder.typicode.com/guide/">JSONPlaceholder · API guide</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/async/">Previous lesson · Asynchronous JavaScript, promises, and the event loop</a>
+<a href="/docs/read/en/js/storage-and-errors/">Next lesson · Browser storage and error handling</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

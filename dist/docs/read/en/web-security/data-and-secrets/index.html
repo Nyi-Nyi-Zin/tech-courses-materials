@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Protecting a private document includes its copies in caches, logs, and backups. Application credentials also need an owner, a purpose, and a way to replace them.">
+  <title>Private Data, Encryption, and Secrets · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/data-and-secrets/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/data-and-secrets/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/data-and-secrets/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#web-security">All documentation · Web Security</a> <a href="/docs/read/my/web-security/data-and-secrets/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Private Data, Encryption, and Secrets</h1>
+  
+  <p class="intro">Protecting a private document includes its copies in caches, logs, and backups. Application credentials also need an owner, a purpose, and a way to replace them.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/web-security/data-and-secrets">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#data-lifecycle">Decide where each copy belongs</a></li>
+<li><a href="#secret-lifecycle">Deliver and rotate a service credential</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="data-lifecycle">
+  <h2>Decide where each copy belongs</h2>
+  <p>Collect the minimum needed. Encrypt sensitive data and backups at rest using managed, authenticated encryption and separate key access from data access. Hashing supports one-way verification. Encryption allows authorized recovery with a key. Define retention and test restoring encrypted backups with authorized keys. For sensitive account responses instruct caches not to store the response.</p>
+
+<pre><code>Cache-Control: no-store</code></pre>
+
+
+</section>
+<section class="article-section" id="secret-lifecycle">
+  <h2>Deliver and rotate a service credential</h2>
+  <p>Issue scoped, short-lived credentials from a secret manager or workload identity system. Keep them in the server environment. Code shipped to the browser is public. If a credential is exposed, revoke or rotate it, update consumers, and review use during the exposure window. Removing a string from source alone leaves the old credential valid.</p>
+
+<pre><code>Browser bundle    Public application settings
+API runtime       Read one service credential from the secret manager
+Audit event       Credential identifier, rotation time, responsible service</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html">OWASP · Cryptographic storage</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html">OWASP · Secrets management</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/web-security/webhooks-and-data-integrity/">Previous lesson · Webhooks and Data Integrity</a>
+<a href="/docs/read/en/web-security/secure-deployment/">Next lesson · Deployment and Software Supply Chain Security</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

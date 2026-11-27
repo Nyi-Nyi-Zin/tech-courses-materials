@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browser က request နဲ့အတူ session cookie ကို အလိုအလျောက် ပို့နိုင်ပါတယ်။ Recovery email ပြောင်းတာလို အရေးကြီးတဲ့ အလုပ်အတွက် ဒီ request ဟာ ကိုယ့် app ရဲ့ သတ်မှတ်ထားတဲ့ လမ်းကြောင်းက လာတာကိုပါ server က စစ်ရပါတယ်။">
+  <title>Cross-Site Request Forgery (CSRF) ကာကွယ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/csrf/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-security/csrf/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-security/csrf/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#web-security">သင်ခန်းစာအားလုံး · Web Security</a> <a href="/docs/read/en/web-security/csrf/" lang="en" hreflang="en">English</a></nav>
+  <h1>Cross-Site Request Forgery (CSRF) ကာကွယ်ခြင်း</h1>
+  
+  <p class="intro">Browser က request နဲ့အတူ session cookie ကို အလိုအလျောက် ပို့နိုင်ပါတယ်။ Recovery email ပြောင်းတာလို အရေးကြီးတဲ့ အလုပ်အတွက် ဒီ request ဟာ ကိုယ့် app ရဲ့ သတ်မှတ်ထားတဲ့ လမ်းကြောင်းက လာတာကိုပါ server က စစ်ရပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/web-security/csrf">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#csrf-token">Form ပို့တဲ့အခါ လက်ရှိ session နဲ့ တွဲစစ်ခြင်း</a></li>
+<li><a href="#safe-methods">ဖတ်တဲ့ request နဲ့ ပြောင်းတဲ့ request ခွဲခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="csrf-token">
+  <h2>Form ပို့တဲ့အခါ လက်ရှိ session နဲ့ တွဲစစ်ခြင်း</h2>
+  <p>တခြား site တစ်ခုကြောင့် login ဝင်ထားတဲ့ browser က အသုံးပြုသူ မရည်ရွယ်တဲ့ အပြောင်းအလဲတစ်ခုကို တောင်းဆိုမိတာက CSRF ပါ။ Cookie နဲ့ login စစ်တဲ့ app မှာ data ပြောင်းတဲ့ request တွေအတွက် framework ရဲ့ CSRF middleware သုံးပါ။ အောက်က template မှာ server က session နဲ့ တွဲထားတဲ့ token ဖြည့်ပေးပြီး middleware က token ကို စစ်ပြီးမှ email ပြောင်းခွင့် ပေးပါတယ်။ Token ကို URL နဲ့ log ထဲ မထည့်ပါနဲ့။</p>
+
+<pre><code>&lt;form action=&quot;/settings/email&quot; method=&quot;post&quot;&gt;
+  &lt;input type=&quot;hidden&quot; name=&quot;csrf_token&quot; value=&quot;{{ csrf_token }}&quot;&gt;
+  &lt;label&gt;New email &lt;input type=&quot;email&quot; name=&quot;email&quot; required&gt;&lt;/label&gt;
+  &lt;button&gt;Save email&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="safe-methods">
+  <h2>ဖတ်တဲ့ request နဲ့ ပြောင်းတဲ့ request ခွဲခြင်း</h2>
+  <p>GET နဲ့ data ဖတ်ဖို့ပဲ သုံးပါ။ Data ပြောင်းတဲ့ request မှာ CSRF token စစ်ပြီး လိုအပ်သလို Origin ကိုပါ စစ်ပါ။ SameSite cookie က ထပ်ဆောင်း ကာကွယ်ပေးပါတယ်။ စစ်ဆေးမှု မအောင်မြင်ရင် database ထဲက မူလစာရင်းအတိုင်း ကျန်ရပါမယ်။</p>
+
+<pre><code>GET  /settings/email    Show the form
+POST /settings/email    Verify session and CSRF token, then validate the change
+Missing token           Reject the request and preserve the current email</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html">OWASP · CSRF prevention</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie">MDN · SameSite cookies</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/web-security/authorization/">အရင်သင်ခန်းစာ · Authorization နဲ့ Document တစ်စောင်ချင်းစီရဲ့ လုပ်ပိုင်ခွင့်</a>
+<a href="/docs/read/my/web-security/xss-and-browser-headers/">နောက်သင်ခန်းစာ · Cross-Site Scripting၊ CSP နဲ့ Clickjacking</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

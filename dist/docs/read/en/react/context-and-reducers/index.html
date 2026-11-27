@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Context passes values down a tree. A reducer puts state update rules in one function.">
+  <title>Context and reducers · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/react/context-and-reducers/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/context-and-reducers/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/context-and-reducers/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#react">All documentation · React</a> <a href="/docs/read/my/react/context-and-reducers/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Context and reducers</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">Context passes values down a tree. A reducer puts state update rules in one function.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/react/context-and-reducers">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#context">Read the nearest provider</a></li>
+<li><a href="#reducer">Describe updates with actions</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="context">
+  <h2>Read the nearest provider</h2>
+  <p>Call useContext with the context object. React reads the value from the nearest matching provider above the component. With React 19 you can render the context object itself as the provider.</p>
+
+<pre><code>import { createContext, useContext } from &quot;react&quot;;
+
+const Currency = createContext(&quot;USD&quot;);
+
+function Price({ amount }) {
+  return &lt;span&gt;{useContext(Currency)} {amount}&lt;/span&gt;;
+}
+
+export default function App() {
+  return &lt;Currency value=&quot;MMK&quot;&gt;&lt;Price amount={3500} /&gt;&lt;/Currency&gt;;
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="reducer">
+  <h2>Describe updates with actions</h2>
+  <p>useReducer takes a reducer and an initial value. Dispatch an action that describes what happened. The reducer must be pure and should return a new object for a changed state.</p>
+
+<pre><code>function cartReducer(state, action) {
+  if (action.type === &quot;added&quot;) {
+    return { ...state, units: state.units + 1 };
+  }
+  return state;
+}
+
+// Inside the component:
+// const [cart, dispatch] = useReducer(cartReducer, { units: 0 });
+// dispatch({ type: &quot;added&quot; });</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://react.dev/learn/passing-data-deeply-with-context">Passing data with context</a></li>
+<li><a href="https://react.dev/learn/extracting-state-logic-into-a-reducer">Extracting state logic into a reducer</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/react/shared-state/">Previous lesson · Share state between components</a>
+<a href="/docs/read/en/react/custom-hooks/">Next lesson · Reuse behavior with custom Hooks</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

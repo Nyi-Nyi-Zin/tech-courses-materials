@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The browser can keep small values for a page to use again. Loading or converting those values can fail. Learn to read storage and give a useful message when an operation fails.">
+  <title>Browser storage and error handling · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/storage-and-errors/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/storage-and-errors/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/storage-and-errors/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/storage-and-errors/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Browser storage and error handling</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">The browser can keep small values for a page to use again. Loading or converting those values can fail. Learn to read storage and give a useful message when an operation fails.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/storage-and-errors">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#storage">Save and read a value with localStorage</a></li>
+<li><a href="#errors">Respond when an operation throws</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="storage">
+  <h2>Save and read a value with localStorage</h2>
+  <p>localStorage stores strings by key for the current origin, which is the combination of protocol, host, and port. getItem returns null for a missing key. Convert an object with JSON.stringify before saving and JSON.parse after reading. Use sessionStorage when the data is scoped to one browser tab and should end with its session.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a normal HTTP(S) page you own, such as the local server example. Open Developer Tools → Console and run the code for that page. Browser privacy settings may disable storage in some contexts.</p>
+<pre><code>localStorage.setItem(&quot;docs-product-example&quot;, JSON.stringify({ product: &quot;Pen&quot; }));
+const saved = localStorage.getItem(&quot;docs-product-example&quot;);
+console.log(saved === null ? &quot;No saved product&quot; : JSON.parse(saved).product);</code></pre>
+<p class="example-result"><strong>What to expect</strong> It prints Pen. Reload the same HTTP(S) page and run localStorage.getItem(&quot;docs-product-example&quot;) to see it persist. Use removeItem with the same key to remove it.</p>
+
+</section>
+<section class="article-section" id="errors">
+  <h2>Respond when an operation throws</h2>
+  <p>An exception interrupts the current operation. Code inside try runs first. If it throws, the catch block receives the error. Handle failures where you can show a useful message or choose a safe default.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>try {
+  const saved = JSON.parse(&quot;{broken}&quot;);
+  console.log(saved);
+} catch (error) {
+  console.log(&quot;Could not read saved data:&quot;, error.name);
+}</code></pre>
+<p class="example-result"><strong>What to expect</strong> The example prints “Could not read saved data: SyntaxError”. Replace {broken} with valid JSON to make the try block finish.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API">MDN · Web Storage API</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch">MDN · try...catch</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/http/">Previous lesson · HTTP requests and Fetch</a>
+<a href="/docs/read/en/js/debugging/">Next lesson · Debug with browser DevTools</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

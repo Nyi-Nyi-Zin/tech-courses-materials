@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Evaluate a trusted expression over variables or table columns. A DataFrame call uses its columns as named inputs.">
+  <title>pandas.eval · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/eval/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/eval/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/eval">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>General functions</span><a href="/docs/read/my/pandas/api/eval/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>eval</code></h1>
+    <p class="article-version">pandas 3.1.1 · General functions · <span lang="en">function</span></p>
+    <p class="intro">Evaluate a trusted expression over variables or table columns. A DataFrame call uses its columns as named inputs.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">pd.eval(…)</code> <span>Full signature</span></summary><pre><code lang="en">pd.eval(
+    expr,
+    parser=&#39;pandas&#39;,
+    engine=None,
+    local_dict=None,
+    global_dict=None,
+    resolvers=(),
+    level=0,
+    target=None,
+    inplace=…,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+print(pd.eval(&quot;units * 2&quot;, local_dict={&quot;units&quot;: 5}, engine=&quot;python&quot;))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>expr</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>str</span><p>Provide the expression evaluated by pandas.</p></td></tr>
+<tr><th scope="row"><code>parser</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>&#39;pandas&#39;</code></td>
+      <td><span>{&#39;pandas&#39;, &#39;python&#39;}</span></td></tr>
+<tr><th scope="row"><code>engine</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>{&#39;python&#39;, &#39;numexpr&#39;}</span><p>Choose the implementation that performs the operation.</p></td></tr>
+<tr><th scope="row"><code>local_dict</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>dict or None</span><p>Provide local variable bindings available to the expression.</p></td></tr>
+<tr><th scope="row"><code>global_dict</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>dict or None</span><p>Provide global variable bindings available to the expression.</p></td></tr>
+<tr><th scope="row"><code>resolvers</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>()</code></td>
+      <td><span>list of dict-like or None</span><p>Provide objects used to resolve names in an expression.</p></td></tr>
+<tr><th scope="row"><code>level</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>0</code></td>
+      <td><span>int</span><p>Choose an index level by name or integer position.</p></td></tr>
+<tr><th scope="row"><code>target</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>object</span><p>Supply the labels to align or match against.</p></td></tr>
+<tr><th scope="row"><code>inplace</code></th>
+      <td>Optional<br><small>Positional or keyword</small></td>
+      <td><span>bool</span><p>Choose whether to change the existing object. Where supported, an in-place call typically returns None.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>ndarray, numeric scalar, DataFrame, Series, or None</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.eval.html#pandas.eval">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/date_range/"><span>Previous in this category</span><strong>pandas.date_range</strong></a><a href="/docs/read/en/pandas/api/factorize/"><span>Next in this category</span><strong>pandas.factorize</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

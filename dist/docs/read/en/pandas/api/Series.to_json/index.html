@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Serialize the object to JSON. Choose orient for the layout and lines for line-delimited records where supported.">
+  <title>pandas.Series.to_json · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/Series.to_json/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/Series.to_json/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/Series.to_json">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Series and accessors</span><a href="/docs/read/my/pandas/api/Series.to_json/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>Series.<wbr>to_json</code></h1>
+    <p class="article-version">pandas 3.1.1 · Series and accessors · <span lang="en">method</span></p>
+    <p class="intro">Serialize the object to JSON. Choose orient for the layout and lines for line-delimited records where supported.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">Series.to_json(…)</code> <span>Full signature</span></summary><pre><code lang="en">Series.to_json(
+    path_or_buf=None,
+    *,
+    orient=None,
+    date_format=None,
+    double_precision=10,
+    force_ascii=True,
+    date_unit=&#39;ms&#39;,
+    default_handler=None,
+    lines=False,
+    compression=&#39;infer&#39;,
+    index=None,
+    indent=None,
+    storage_options=None,
+    mode=&#39;w&#39;,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+values = pd.Series([2., 5., 7.], name=&quot;units&quot;)
+print(values.to_json())</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>path_or_buf</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str, path object, file-like object, or None</span><p>Supply a file path or writable/readable stream. Some writers return the result directly when this is omitted.</p></td></tr>
+<tr><th scope="row"><code>orient</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>str</span><p>Choose how row labels, columns, and values are arranged in the serialized result.</p></td></tr>
+<tr><th scope="row"><code>date_format</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>{None, &#39;epoch&#39;, &#39;iso&#39;}</span><p>Specify datetime parsing or formatting directives such as &quot;%Y-%m-%d&quot;.</p></td></tr>
+<tr><th scope="row"><code>double_precision</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>10</code></td>
+      <td><span>int</span></td></tr>
+<tr><th scope="row"><code>force_ascii</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>True</code></td>
+      <td><span>bool</span></td></tr>
+<tr><th scope="row"><code>date_unit</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;ms&#39;</code></td>
+      <td><span>str</span><p>Choose the timestamp precision in parsed or serialized data.</p></td></tr>
+<tr><th scope="row"><code>default_handler</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>callable</span></td></tr>
+<tr><th scope="row"><code>lines</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Choose newline-delimited JSON records where supported.</p></td></tr>
+<tr><th scope="row"><code>compression</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;infer&#39;</code></td>
+      <td><span>str or dict</span><p>Choose whether and how to compress or decompress data.</p></td></tr>
+<tr><th scope="row"><code>index</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>bool or None</span><p>Supply row labels or control how existing row labels are used.</p></td></tr>
+<tr><th scope="row"><code>indent</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>int</span></td></tr>
+<tr><th scope="row"><code>storage_options</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict</span><p>Pass storage-backend options such as connection settings or HTTP headers.</p></td></tr>
+<tr><th scope="row"><code>mode</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;w&#39;</code></td>
+      <td><span>str</span><p>Choose a file or storage access mode.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>None or str</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.to_json.html#pandas.Series.to_json">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/Series.to_hdf/"><span>Previous in this category</span><strong>pandas.Series.to_hdf</strong></a><a href="/docs/read/en/pandas/api/Series.to_latex/"><span>Next in this category</span><strong>pandas.Series.to_latex</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

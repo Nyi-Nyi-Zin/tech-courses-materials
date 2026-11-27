@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Training data များလာတာနဲ့အမျှ training score နဲ့ validation score ဘယ်လို ပြောင်းလဲလဲ ယှဉ်ကြည့်ပါ။">
+  <title>Learning Curve နဲ့ Model စွမ်းဆောင်ရည် စစ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/learning-curves/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/learning-curves/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/learning-curves/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#machine-learning">သင်ခန်းစာအားလုံး · Machine Learning</a> <a href="/docs/read/en/machine-learning/learning-curves/" lang="en" hreflang="en">English</a></nav>
+  <h1>Learning Curve နဲ့ Model စွမ်းဆောင်ရည် စစ်ခြင်း</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Training data များလာတာနဲ့အမျှ training score နဲ့ validation score ဘယ်လို ပြောင်းလဲလဲ ယှဉ်ကြည့်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/machine-learning/learning-curves">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#training-size">Training Size အလိုက် Score များ ဆွဲခြင်း</a></li>
+<li><a href="#interpretation">Score အဆင့်နှင့် ကွာဟချက်ကို ဖတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="training-size">
+  <h2>Training Size အလိုက် Score များ ဆွဲခြင်း</h2>
+  <p>learning_curve က cross-validation split တစ်ခုစီမှာ training data အရွယ်အစား အမျိုးမျိုးနဲ့ model အသစ်စီ fit လုပ်ပါတယ်။ အရွယ်တစ်ခုစီအတွက် training နဲ့ validation accuracy ပျမ်းမျှကို ဆွဲပါ။ ဒီဥပမာမှာ record တွေ သီးခြားဖြစ်လို့ training subset ကို shuffle လုပ်ပါတယ်။ အချိန်အစဉ် သို့မဟုတ် group ရှိတဲ့ data အတွက် အဲဒီဖွဲ့စည်းပုံနဲ့ ကိုက်တဲ့ splitter ရွေးပါ။</p>
+
+<pre><code>import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import StratifiedKFold, learning_curve
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+
+X, y = load_iris(return_X_y=True)
+model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
+cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+sizes, train, valid = learning_curve(
+    model, X, y, train_sizes=[0.15, 0.35, 0.60, 1.0], cv=cv,
+    scoring=&quot;accuracy&quot;, shuffle=True, random_state=42,
+)
+
+fig, ax = plt.subplots(layout=&quot;constrained&quot;)
+ax.plot(sizes, train.mean(axis=1), &quot;o-&quot;, label=&quot;Training&quot;)
+ax.plot(sizes, valid.mean(axis=1), &quot;s--&quot;, label=&quot;Validation&quot;)
+ax.set(xlabel=&quot;Training examples per fold&quot;, ylabel=&quot;Mean accuracy&quot;)
+ax.legend()
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/learning-curves-training-size.png" data-image-preview><img src="/docs/media/data/learning-curves-training-size.png" alt="Training data အရွယ်အစား လေးမျိုးအတွက် ပျမ်းမျှ training accuracy နဲ့ validation accuracy ကို line တစ်ကြောင်းစီနဲ့ ပြပါတယ်။" width="720" height="409" loading="lazy" decoding="async"></a>
+    <figcaption>Training size တစ်ခုစီမှာ score နှစ်ခုနဲ့ အဲဒီကြားက ကွာဟချက်ကို ယှဉ်ကြည့်ပါ။</figcaption>
+  </figure>
+
+
+</section>
+<section class="article-section" id="interpretation">
+  <h2>Score အဆင့်နှင့် ကွာဟချက်ကို ဖတ်ခြင်း</h2>
+  <p>Training score မြင့်နေပြီး validation score နဲ့ ကွာဟချက် ဆက်ရှိရင် overfitting ဖြစ်နိုင်ပါတယ်။ နှစ်ခုလုံး နိမ့်ပြီး နီးကပ်နေရင် underfitting ဖြစ်နိုင်သလို feature တွေမှာ ခန့်မှန်းဖို့ လုံလောက်တဲ့ အချက်အလက် မပါနိုင်ပါ။ Baseline နဲ့ ယှဉ်ပြီး fold အလိုက် ကွာဟမှုကို စစ်ပါ။ Validation ရလဒ်နဲ့ model ရွေးပြီးရင် နောက်ဆုံး အကဲဖြတ်ဖို့ သီးခြား test set ထားပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/learning_curve.html">scikit-learn learning and validation curves</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn cross-validation</a></li>
+<li><a href="https://scikit-learn.org/stable/common_pitfalls.html">scikit-learn common pitfalls and data leakage</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/machine-learning/house-prices/">အရင်သင်ခန်းစာ · အိမ်ဈေးခန့်မှန်းခြင်း အစအဆုံး ရှင်းလင်းချက်</a>
+<a href="/docs/read/my/machine-learning/feature-engineering/">နောက်သင်ခန်းစာ · Numeric နှင့် Categorical Data အတွက် Feature Engineering</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

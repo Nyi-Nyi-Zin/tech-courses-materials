@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="တကယ်သုံးမယ့်သူ လုပ်သလို component ကို စမ်းပြီး screen ပေါ်မှာ မျှော်လင့်ထားတာ ပေါ်လား စစ်ပါ။">
+  <title>React Components ကို UI ကနေ စမ်းပါ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/react/component-testing/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/component-testing/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/component-testing/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#react">သင်ခန်းစာအားလုံး · React</a> <a href="/docs/read/en/react/component-testing/" lang="en" hreflang="en">English</a></nav>
+  <h1>React Components ကို UI ကနေ စမ်းပါ</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">တကယ်သုံးမယ့်သူ လုပ်သလို component ကို စမ်းပြီး screen ပေါ်မှာ မျှော်လင့်ထားတာ ပေါ်လား စစ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/react/component-testing">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#tools">Vitest နဲ့ Testing Library ပြင်ဆင်ပါ</a></li>
+<li><a href="#behavior">Click လုပ်ပြီး မြင်ရတဲ့ ရလဒ်ကို စစ်ပါ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="tools">
+  <h2>Vitest နဲ့ Testing Library ပြင်ဆင်ပါ</h2>
+  <p>React နဲ့ Vite project မှာ DOM environment နဲ့ testing libraries တွေ install လုပ်ပါ။ အောက်က test ရဲ့ environment comment က အဲဒီဖိုင်အတွက် jsdom ဖွင့်ပါတယ်။ Cleanup hook က test တစ်ခုပြီးတိုင်း render လုပ်ထားတဲ့ component ကို ဖယ်ပါတယ်။</p>
+
+<pre><code>npm install -D vitest jsdom @testing-library/react @testing-library/dom @testing-library/user-event
+npx vitest run</code></pre>
+
+
+</section>
+<section class="article-section" id="behavior">
+  <h2>Click လုပ်ပြီး မြင်ရတဲ့ ရလဒ်ကို စစ်ပါ</h2>
+  <p>Button ကို role နဲ့ accessible name သုံးပြီး ရှာပါ။ User action ပြီးတဲ့အထိ await လုပ်ပြီး status text အသစ်ကို စစ်ပါ။ ဒီနမူနာကို quantity.test.jsx အဖြစ် သိမ်းပါ။ Network request ပါရင် UI ပြောင်းတဲ့အထိ စောင့်ပြီး အောင်မြင်တာနဲ့ မအောင်တာ နှစ်မျိုးလုံး စမ်းပါ။</p>
+
+<pre><code>// @vitest-environment jsdom
+import React, { useState } from &quot;react&quot;;
+import { afterEach, expect, test } from &quot;vitest&quot;;
+import { cleanup, render, screen } from &quot;@testing-library/react&quot;;
+import userEvent from &quot;@testing-library/user-event&quot;;
+
+afterEach(cleanup);
+
+function Quantity() {
+  const [quantity, setQuantity] = useState(0);
+  return (
+    &lt;&gt;
+      &lt;button onClick={() =&gt; setQuantity(value =&gt; value + 1)}&gt;Add one&lt;/button&gt;
+      &lt;p role=&quot;status&quot;&gt;{quantity}&lt;/p&gt;
+    &lt;/&gt;
+  );
+}
+
+test(&quot;adds one to the visible quantity&quot;, async () =&gt; {
+  const user = userEvent.setup();
+  render(&lt;Quantity /&gt;);
+  await user.click(screen.getByRole(&quot;button&quot;, { name: &quot;Add one&quot; }));
+  expect(screen.getByRole(&quot;status&quot;).textContent).toBe(&quot;1&quot;);
+});</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://vitest.dev/config/environment.html">Vitest · Environment</a></li>
+<li><a href="https://testing-library.com/docs/queries/byrole/">Testing Library · ByRole</a></li>
+<li><a href="https://testing-library.com/docs/user-event/intro/">Testing Library · user-event</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/react/suspense/">အရင်သင်ခန်းစာ · Suspense နဲ့ Loading ပြပါ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

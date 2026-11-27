@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Estimate performance across splits and learn how K-means groups unlabeled rows.">
+  <title>Cross-validation, overfitting, and clustering · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/validation-and-clustering/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/validation-and-clustering/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/validation-and-clustering/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#machine-learning">All documentation · Machine Learning</a> <a href="/docs/read/my/machine-learning/validation-and-clustering/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Cross-validation, overfitting, and clustering</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Estimate performance across splits and learn how K-means groups unlabeled rows.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/machine-learning/validation-and-clustering">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#cross-validation">Validate on several folds</a></li>
+<li><a href="#clustering">Group rows without labels</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="cross-validation">
+  <h2>Validate on several folds</h2>
+  <p>Cross-validation repeatedly fits on training folds and scores on their held-out validation folds. Use it on training data to choose settings, then evaluate once on the final test set. A gap between high training scores and lower validation scores can indicate overfitting.</p>
+
+<pre><code>from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import cross_val_score
+
+X = [[1], [2], [3], [4], [5], [6]]
+y = [3, 5, 7, 9, 11, 13]
+scores = cross_val_score(LinearRegression(), X, y, cv=3, scoring=&quot;neg_mean_absolute_error&quot;)
+print([round(-float(score) + 0.0, 6) for score in scores])</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[0.0, 0.0, 0.0]</pre></div>
+
+
+</section>
+<section class="article-section" id="clustering">
+  <h2>Group rows without labels</h2>
+  <p>K-means assigns points to centers by Euclidean distance and seeks low within-cluster squared distance. Scale features when their units would otherwise dominate the distances. Cluster label numbers can change without changing the grouping.</p>
+
+<pre><code>from sklearn.cluster import KMeans
+
+points = [[1], [2], [3], [9], [10], [11]]
+model = KMeans(n_clusters=2, n_init=10, random_state=42).fit(points)
+print(sorted(model.cluster_centers_.ravel().tolist()))</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[2.0, 10.0]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/cross_validation.html">Cross-validation</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/clustering.html">Clustering algorithms</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html">Model evaluation and scoring</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/machine-learning/pipeline-and-leakage/">Previous lesson · Preprocessing pipelines and data leakage</a>
+<a href="/docs/read/en/machine-learning/house-prices/">Next lesson · House price prediction walkthrough</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

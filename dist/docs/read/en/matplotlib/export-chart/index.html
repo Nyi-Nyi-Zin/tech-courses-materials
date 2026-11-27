@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Select an output format and export at a size suitable for reports, slides, or the web.">
+  <title>Export charts to files · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/export-chart/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/export-chart/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/export-chart/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#matplotlib">All documentation · Matplotlib</a> <a href="/docs/read/my/matplotlib/export-chart/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Export charts to files</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">Select an output format and export at a size suitable for reports, slides, or the web.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/matplotlib/export-chart">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#formats">Choose raster or vector</a></li>
+<li><a href="#verify">Check the exported file</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="formats">
+  <h2>Choose raster or vector</h2>
+  <p>PNG is a raster format. figsize in inches and dpi determine pixel dimensions before cropping. SVG and PDF can preserve vector lines and text for scaling, although some elements can be rasterized.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(6, 4), layout=&quot;constrained&quot;)
+ax.bar([&quot;Tea&quot;, &quot;Cake&quot;], [6, 4])
+ax.set(ylabel=&quot;Units sold&quot;)
+fig.savefig(&quot;sales.png&quot;, dpi=150, bbox_inches=&quot;tight&quot;)
+fig.savefig(&quot;sales.svg&quot;, bbox_inches=&quot;tight&quot;)</code></pre>
+
+
+</section>
+<section class="article-section" id="verify">
+  <h2>Check the exported file</h2>
+  <p>bbox_inches=&quot;tight&quot; crops around figure content and can change final pixel dimensions. Open the saved file to check for clipped labels. For batch rendering, close each figure when finished.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.savefig.html">Figure.savefig API</a></li>
+<li><a href="https://matplotlib.org/stable/release/prev_whats_new/whats_new_3.11.0.html">What’s new in Matplotlib 3.11</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/matplotlib/subplots/">Previous lesson · Subplots and constrained layout</a>
+<a href="/docs/read/en/matplotlib/uncertainty-charts/">Next lesson · Show uncertainty with error bars and bands</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

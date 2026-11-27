@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Custom Hook က ပြန်သုံးလိုတဲ့ stateful logic ကို စုပါတယ်။ Shared source တစ်ခုကနေ မဖတ်ရင် ခေါ်တဲ့ component တစ်ခုစီမှာ ကိုယ်ပိုင် state ရပါတယ်။">
+  <title>Custom Hooks နဲ့ Behavior ပြန်သုံးခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/react/custom-hooks/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/custom-hooks/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/custom-hooks/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#react">သင်ခန်းစာအားလုံး · React</a> <a href="/docs/read/en/react/custom-hooks/" lang="en" hreflang="en">English</a></nav>
+  <h1>Custom Hooks နဲ့ Behavior ပြန်သုံးခြင်း</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">Custom Hook က ပြန်သုံးလိုတဲ့ stateful logic ကို စုပါတယ်။ Shared source တစ်ခုကနေ မဖတ်ရင် ခေါ်တဲ့ component တစ်ခုစီမှာ ကိုယ်ပိုင် state ရပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/react/custom-hooks">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#online">External Subscription ကို Hook ထဲ ထည့်ခြင်း</a></li>
+<li><a href="#rules">Rules of Hooks လိုက်နာခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="online">
+  <h2>External Subscription ကို Hook ထဲ ထည့်ခြင်း</h2>
+  <p>External value နဲ့ change events ရှိတဲ့ browser API အတွက် useSyncExternalStore နဲ့ subscribe လုပ်ပြီး snapshot ဖတ်နိုင်ပါတယ်။ ဒီ client-only ဥပမာက online flag ဖတ်ပါတယ်။ Server မှာ render လုပ်ရင် server snapshot ပါ ပေးပါ။</p>
+
+<pre><code>import { useSyncExternalStore } from &quot;react&quot;;
+
+function subscribe(notify) {
+  window.addEventListener(&quot;online&quot;, notify);
+  window.addEventListener(&quot;offline&quot;, notify);
+  return () =&gt; {
+    window.removeEventListener(&quot;online&quot;, notify);
+    window.removeEventListener(&quot;offline&quot;, notify);
+  };
+}
+
+export function useOnlineStatus() {
+  return useSyncExternalStore(subscribe, () =&gt; navigator.onLine);
+}</code></pre>
+
+
+</section>
+<section class="article-section" id="rules">
+  <h2>Rules of Hooks လိုက်နာခြင်း</h2>
+  <p>Custom Hook နာမည်ကို use နဲ့ စပြီး နောက်မှာ စာလုံးအကြီး လိုက်ပါ။ Hooks တွေကို component သို့ custom Hook ရဲ့ top level မှာ ခေါ်ပါ။ Hook မခေါ်တဲ့ function က ပုံမှန် function အဖြစ် ထားနိုင်ပါတယ်။</p>
+
+<pre><code>import { useState } from &quot;react&quot;;
+
+function useSearchQuery() {
+  const [query, setQuery] = useState(&quot;&quot;);
+  return { query, setQuery };
+}
+
+export default function SearchPanel({ visible = true }) {
+  const { query, setQuery } = useSearchQuery();
+  if (!visible) return null;
+
+  return (
+    &lt;label&gt;
+      Search
+      &lt;input value={query} onChange={event =&gt; setQuery(event.target.value)} /&gt;
+    &lt;/label&gt;
+  );
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://react.dev/learn/reusing-logic-with-custom-hooks">Reusing logic with custom Hooks</a></li>
+<li><a href="https://react.dev/reference/react/useSyncExternalStore">useSyncExternalStore</a></li>
+<li><a href="https://react.dev/reference/rules/rules-of-hooks">Rules of Hooks</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/react/context-and-reducers/">အရင်သင်ခန်းစာ · Context နှင့် Reducers</a>
+<a href="/docs/read/my/react/routing/">နောက်သင်ခန်းစာ · React Router နဲ့ Routing</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

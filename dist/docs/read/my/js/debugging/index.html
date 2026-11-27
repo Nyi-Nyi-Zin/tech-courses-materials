@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ရလဒ်မှားတဲ့အခါ ကြားတန်ဖိုးတွေ လိုက်စစ်ပြီး သတ်မှတ်လိုင်းမှာ code ရပ်ကြည့်ပါ။">
+  <title>Browser DevTools နဲ့ Debug လုပ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/debugging/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/debugging/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/debugging/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/debugging/" lang="en" hreflang="en">English</a></nav>
+  <h1>Browser DevTools နဲ့ Debug လုပ်ခြင်း</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">ရလဒ်မှားတဲ့အခါ ကြားတန်ဖိုးတွေ လိုက်စစ်ပြီး သတ်မှတ်လိုင်းမှာ code ရပ်ကြည့်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/debugging">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#trace-values">စမှားတဲ့ တန်ဖိုးကို လိုက်ရှာခြင်း</a></li>
+<li><a href="#breakpoint">Breakpoint မှာ ရပ်ပြီး Step Over လုပ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="trace-values">
+  <h2>စမှားတဲ့ တန်ဖိုးကို လိုက်ရှာခြင်း</h2>
+  <p>မျှော်လင့်တဲ့ ရလဒ်နဲ့ အရင်တိုက်ပြီး ကြားတန်ဖိုးတွေကို တစ်ခုချင်း စစ်ပါ။ ဒီမှာ input ထဲ comma ပါလို့ Number() က NaN ပြန်ပါတယ်။ မူလတန်ဖိုးကို သိပြီးမှ conversion ကို ပြင်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const rawPrice = &quot;2,500&quot;;
+const price = Number(rawPrice);
+console.log(&quot;Raw:&quot;, rawPrice, &quot;Parsed:&quot;, price);
+console.log(&quot;Total:&quot;, price * 2);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမ Run မှာ NaN ထွက်ပါမယ်။ &quot;2,500&quot; ကို &quot;2500&quot; ပြောင်းပြီး Run ရင် 5000 ထွက်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="breakpoint">
+  <h2>Breakpoint မှာ ရပ်ပြီး Step Over လုပ်ခြင်း</h2>
+  <p>Total မနှိပ်ခင် browser DevTools ဖွင့်ပါ။ Debugger အလုပ်လုပ်နေတဲ့အခါ debugger statement က အမြှောက်မတွက်ခင် ရပ်ပေးပါတယ်။ Scope မှာ quantity နဲ့ price ကို ကြည့်ပြီး Step over နဲ့ နောက်လိုင်းကို run ပါ။ ဖိုင်အဖြစ် သိမ်းဖွင့်ထားရင် debugger ကို ဖြုတ်ပြီး Sources ထဲက line number နှိပ်ကာ breakpoint ထားနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Pause at a breakpoint and step over&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;button id=&quot;total&quot;&gt;Total&lt;/button&gt;
+&lt;p id=&quot;result&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+document.querySelector(&quot;#total&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+  const quantity = 2;
+  const price = 1500;
+  debugger;
+  const total = quantity * price;
+  document.querySelector(&quot;#result&quot;).textContent = total + &quot; MMK&quot;;
+});
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ရပ်နေချိန် quantity က 2၊ price က 1500 ပါ။ Resume လုပ်ရင် 3000 MMK ပေါ်ပါမယ်။ DevTools ပိတ်ထားရင် Total နှိပ်တာနဲ့ ရလဒ် ပေါ်ပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.chrome.com/docs/devtools/javascript/breakpoints">Chrome DevTools · JavaScript breakpoints</a></li>
+<li><a href="https://developer.chrome.com/docs/devtools/javascript">Chrome DevTools · Debug JavaScript</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/storage-and-errors/">အရင်သင်ခန်းစာ · Browser Storage နဲ့ Error ကိုင်တွယ်ခြင်း</a>
+<a href="/docs/read/my/js/iterators-and-generators/">နောက်သင်ခန်းစာ · Iterator နဲ့ Generator</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

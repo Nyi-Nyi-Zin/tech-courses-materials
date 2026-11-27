@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="If two branches change the same part of a file in different ways, Git can pause the merge and ask you to choose the final content.">
+  <title>Resolving Merge Conflicts · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/git/merge-conflicts/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/git/merge-conflicts/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/git/merge-conflicts/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#git">All documentation · Git</a> <a href="/docs/read/my/git/merge-conflicts/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Resolving Merge Conflicts</h1>
+  
+  <p class="intro">If two branches change the same part of a file in different ways, Git can pause the merge and ask you to choose the final content.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/git/merge-conflicts">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#reproduce">Make two branches edit the same line</a></li>
+<li><a href="#resolve">Choose the final content and complete the merge</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="reproduce">
+  <h2>Make two branches edit the same line</h2>
+  <p>Start from a clean main in project-notes after the branching lesson. Create a file with one line, then change that line differently in each branch. The final merge should report a conflict in status.txt.</p>
+
+<pre><code>printf &#39;Draft\n&#39; &gt; status.txt
+git add status.txt
+git commit -m &quot;Add draft status&quot;
+git switch -c update-status
+printf &#39;Ready for review\n&#39; &gt; status.txt
+git commit -am &quot;Mark status ready for review&quot;
+git switch main
+printf &#39;Review scheduled\n&#39; &gt; status.txt
+git commit -am &quot;Schedule review&quot;
+git merge update-status</code></pre>
+
+
+</section>
+<section class="article-section" id="resolve">
+  <h2>Choose the final content and complete the merge</h2>
+  <p>Run git status to find conflicted files. Open status.txt and look for the lines starting with &lt;&lt;&lt;&lt;&lt;&lt;&lt;, =======, and &gt;&gt;&gt;&gt;&gt;&gt;&gt;. Replace the entire marked block with the agreed wording, save, stage the file, and commit. To cancel an in-progress merge instead, use git merge --abort before committing it.</p>
+
+<pre><code>git status
+printf &#39;Ready for scheduled review\n&#39; &gt; status.txt
+git add status.txt
+git commit -m &quot;Resolve project status conflict&quot;
+git status</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging">Git · Basic branching and merging</a></li>
+<li><a href="https://git-scm.com/docs/git-merge">Git · git merge</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/git/branches-and-merging/">Previous lesson · Branches and Merging</a>
+<a href="/docs/read/en/git/ignoring-and-undoing/">Next lesson · Ignoring Files and Undoing Changes</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

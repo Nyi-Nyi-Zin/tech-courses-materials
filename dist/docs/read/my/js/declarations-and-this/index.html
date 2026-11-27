@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Variable မကြေညာခင် နာမည်ကို ဖတ်ရင် ဘာဖြစ်လဲ စမ်းပါ။ Function ရေးနည်းနှစ်မျိုးမှာ this ဘယ်က ရလဲ ဆက်ကြည့်ပါ။">
+  <title>Declarations၊ Hoisting နဲ့ this · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/declarations-and-this/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/declarations-and-this/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/declarations-and-this/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/declarations-and-this/" lang="en" hreflang="en">English</a></nav>
+  <h1>Declarations၊ Hoisting နဲ့ this</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Variable မကြေညာခင် နာမည်ကို ဖတ်ရင် ဘာဖြစ်လဲ စမ်းပါ။ Function ရေးနည်းနှစ်မျိုးမှာ this ဘယ်က ရလဲ ဆက်ကြည့်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/declarations-and-this">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#var">var ကို တန်ဖိုးမပေးခင် ဖတ်ခြင်း</a></li>
+<li><a href="#let">let နဲ့ Temporal Dead Zone</a></li>
+<li><a href="#const">const နဲ့ Variable ကို ပြန်မသတ်မှတ်နိုင်အောင် ရေးခြင်း</a></li>
+<li><a href="#arrow-this">Arrow Function နဲ့ this</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="var">
+  <h2>var ကို တန်ဖိုးမပေးခင် ဖတ်ခြင်း</h2>
+  <p>var ကို ကြေညာထားတဲ့ function တစ်ခုလုံးကနေ ဖတ်နိုင်ပါတယ်။ Function body မစခင် binding ဖန်တီးပြီး undefined ပေးထားပါတယ်။ သတ်မှတ်ထားတဲ့ တန်ဖိုးကိုတော့ အဲဒီလိုင်း run မှ ထည့်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>function order() {
+  console.log(quantity);
+  var quantity = 2;
+  console.log(quantity);
+}
+order();</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Console မှာ undefined၊ ပြီးရင် 2 ထွက်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="let">
+  <h2>let နဲ့ Temporal Dead Zone</h2>
+  <p>let က ကြေညာထားတဲ့ block ထဲမှာပဲ သက်ဆိုင်ပါတယ်။ Block စကတည်းက နာမည်က ရှိပြီး declaration မ run ခင် ဖတ်ရင် ReferenceError တက်ပါတယ်။ အဲဒီကြားကာလကို temporal dead zone လို့ ခေါ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>{
+  try {
+    console.log(quantity);
+  } catch (error) {
+    console.log(error.name);
+  }
+  let quantity = 2;
+  console.log(quantity);
+}</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စောစောဖတ်တဲ့ error ကို ဖမ်းပြီး ReferenceError ထုတ်ပြပါမယ်။ ပြီးမှ တန်ဖိုး 2 ထွက်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="const">
+  <h2>const နဲ့ Variable ကို ပြန်မသတ်မှတ်နိုင်အောင် ရေးခြင်း</h2>
+  <p>const က block အတွင်း သက်ဆိုင်ပြီး let လို temporal dead zone ရှိပါတယ်။ ကြေညာတဲ့အချိန်မှာ တန်ဖိုး ထည့်ရပါတယ်။ Variable ကို အခြား value ထပ်ပေးလို့ မရပါဘူး။ သူညွှန်းတဲ့ object ထဲက property တွေကိုတော့ ပြင်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const order = { quantity: 2 };
+order.quantity += 1;
+console.log(order.quantity);</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Object ရဲ့ count က 3 ဖြစ်သွားပါမယ်။</p>
+
+</section>
+<section class="article-section" id="arrow-this">
+  <h2>Arrow Function နဲ့ this</h2>
+  <p>shop.receipt() လို့ ပုံမှန် method ခေါ်ရင် this က shop ပါ။ Arrow function မှာ ကိုယ်ပိုင် this မရှိပါဘူး။ receipt ထဲက arrow က အပြင် method ရဲ့ this ကို ယူလို့ shop.name ဖတ်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> Browser tab တစ်ခုမှာ Developer Tools → Console ကို ဖွင့်ပါ။ နမူနာကို ဖတ်ကြည့်ပြီး Console မှာ ရိုက်ကာ run ပါ။ နာမည်တူတဲ့ variable တွေကို ထပ်ကြေညာမယ်ဆိုရင် အရင် reload လုပ်ပါ။</p>
+<pre><code>const shop = {
+  name: &quot;Example Store&quot;,
+  receipt() {
+    const print = () =&gt; console.log(this.name);
+    print();
+  }
+};
+shop.receipt();</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Console မှာ Example Store ထွက်ပါမယ်။ Shop name ပြောင်းပြီး Run ပါ။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var">MDN · var</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let">MDN · let</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const">MDN · const</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">MDN · Arrow functions</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/functions/">အရင်သင်ခန်းစာ · Function နဲ့ Module</a>
+<a href="/docs/read/my/js/arrays-and-objects/">နောက်သင်ခန်းစာ · String၊ Array နဲ့ Object</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

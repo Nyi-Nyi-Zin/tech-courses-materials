@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="အစဉ်ရှိတဲ့ တိုင်းတာမှုအတွက် line၊ သီးခြား category တွေ ယှဉ်ဖို့ bar သုံးပါ။">
+  <title>Line Charts နှင့် Bar Charts · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/lines-and-bars/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/matplotlib/lines-and-bars/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/matplotlib/lines-and-bars/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#matplotlib">သင်ခန်းစာအားလုံး · Matplotlib</a> <a href="/docs/read/en/matplotlib/lines-and-bars/" lang="en" hreflang="en">English</a></nav>
+  <h1>Line Charts နှင့် Bar Charts</h1>
+  <p class="article-version">3.11.2</p>
+  <p class="intro">အစဉ်ရှိတဲ့ တိုင်းတာမှုအတွက် line၊ သီးခြား category တွေ ယှဉ်ဖို့ bar သုံးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/matplotlib/lines-and-bars">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#lines">အစဉ်ရှိတဲ့ Trend ဆွဲခြင်း</a></li>
+<li><a href="#bars">Bar များဖြင့် Category ယှဉ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="lines">
+  <h2>အစဉ်ရှိတဲ့ Trend ဆွဲခြင်း</h2>
+  <p>Line က ပေးလိုက်တဲ့ အစဉ်အတိုင်း value တွေကို ဆက်ပါတယ်။ အချိန်အလိုက် မှတ်တမ်းတွေကို အရင်စီပါ။ Marker နဲ့ တကယ်တိုင်းထားတဲ့ point နဲ့ ဆက်ထားတဲ့ line ကို ခွဲမြင်နိုင်ပါတယ်။</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.plot([&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;], [11.5, 17, 15], marker=&quot;o&quot;)
+ax.set(xlabel=&quot;Month&quot;, ylabel=&quot;Recorded sales&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/lines-and-bars-lines.png" data-image-preview><img src="/docs/media/data/lines-and-bars-lines.png" alt="January အရောင်း 11.5 ကနေ February မှာ 17 အထိ တက်ပြီး March မှာ 15 ပြန်ကျပါတယ်။" width="571" height="440" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="bars">
+  <h2>Bar များဖြင့် Category ယှဉ်ခြင်း</h2>
+  <p>bar က category တစ်ခုစီအတွက် bar တစ်ခု ဆွဲပြီး default မှာ သုညကနေ စပါတယ်။ ပုံမှန်နှိုင်းယှဉ်ရာမှာ သုည baseline ထားပါ။ Category နာမည်ရှည်ရင် barh သုံးနိုင်ပါတယ်။</p>
+
+<pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.bar([&quot;Tea&quot;, &quot;Coffee&quot;, &quot;Cake&quot;], [6, 10, 6])
+ax.set(ylabel=&quot;Units sold&quot;, title=&quot;Units sold by item&quot;)
+plt.show()</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/lines-and-bars-bars.png" data-image-preview><img src="/docs/media/data/lines-and-bars-bars.png" alt="Tea နဲ့ Cake တစ်ခုစီ 6 unit ရောင်းရပြီး Coffee က 10 unit နဲ့ အများဆုံးပါ။" width="570" height="443" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://matplotlib.org/stable/plot_types/index.html">Plot types</a></li>
+<li><a href="https://matplotlib.org/stable/users/explain/quick_start.html">Matplotlib quick start</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/matplotlib/chart-selection/">အရင်သင်ခန်းစာ · မေးခွန်းနဲ့ ကိုက်တဲ့ Chart ရွေးခြင်း</a>
+<a href="/docs/read/my/matplotlib/scatter-and-distributions/">နောက်သင်ခန်းစာ · Scatter Plots၊ Histograms နှင့် Box Plots</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

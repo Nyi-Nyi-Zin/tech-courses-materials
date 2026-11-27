@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browser က HTML အကြောင်းအရာကို အကွက်တွေအဖြစ် နေရာချပါတယ်။ Flexbox၊ Grid ဒါမှမဟုတ် Positioning မသုံးခင် မူလပုံစံမှာ ဘယ်လိုနေရာယူလဲ အရင်ကြည့်ပါ။">
+  <title>Normal Flow၊ Box Model နဲ့ Display · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/layout/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/layout/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/layout/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/layout/" lang="en" hreflang="en">English</a></nav>
+  <h1>Normal Flow၊ Box Model နဲ့ Display</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Browser က HTML အကြောင်းအရာကို အကွက်တွေအဖြစ် နေရာချပါတယ်။ Flexbox၊ Grid ဒါမှမဟုတ် Positioning မသုံးခင် မူလပုံစံမှာ ဘယ်လိုနေရာယူလဲ အရင်ကြည့်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/layout">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#flow">Normal Flow ဆိုတာဘာလဲ။</a></li>
+<li><a href="#box">CSS Box မှာ ဘာအပိုင်းတွေ ပါလဲ။</a></li>
+<li><a href="#sizing">box-sizing က အကျယ်တွက်ပုံ ဘယ်လိုပြောင်းလဲ။</a></li>
+<li><a href="#display">Block၊ Inline နဲ့ Inline-block နေရာယူပုံ</a></li>
+<li><a href="#flex-grid">အကွက်အစုကို စီဖို့ Layout ရွေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="flow">
+  <h2>Normal Flow ဆိုတာဘာလဲ။</h2>
+  <p>Normal flow ဆိုတာ browser က အကွက်တွေကို မူလအတိုင်း နေရာချတဲ့ပုံပါ။ ပုံမှန် အလျားလိုက်စာရေးပုံမှာ စာပိုဒ်တွေက သီးသန့် block အကွက်တွေဖြစ်လို့ တစ်ခုပြီးတစ်ခု အောက်ဆင်းပါတယ်။ စာကြောင်းထဲက inline စာသားကတော့ လိုင်းတစ်ကြောင်းပေါ် ဆက်ပြီး နေရာမလောက်မှ လိုင်းဆင်းပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;What is normal flow?&lt;/title&gt;
+  &lt;style&gt;
+    p { background: #d6efea; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;&lt;strong&gt;Your order&lt;/strong&gt; is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ရောင်စုံအကွက်နှစ်ခု သီးသန့်လိုင်းပေါ်လာပါမယ်။ စာလုံးထူက ပထမစာပိုဒ်ရဲ့ စာကြောင်းထဲမှာပဲ ဆက်နေတာ မြင်ရပါမယ်။</p>
+
+</section>
+<section class="article-section" id="box">
+  <h2>CSS Box မှာ ဘာအပိုင်းတွေ ပါလဲ။</h2>
+  <p>Content က element ထဲက အကြောင်းအရာပါ။ Padding က content နဲ့ အနားသတ်ကြားက နေရာ၊ border က အနားသတ်၊ margin က အနားသတ် အပြင်ဘက်က အကွာအဝေးပါ။ content-box မှာ width 120px နဲ့ ဘယ်ညာ padding 10px၊ border 2px စီဆိုရင် အနားသတ်အပါ အကျယ် 144px ဖြစ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;What are the four parts of a box?&lt;/title&gt;
+  &lt;style&gt;
+    .notice { width: 120px; padding: 10px; border: 2px solid teal; margin: 16px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမအကွက်မှာ အနားသတ်အတွင်း ချန်ထားတဲ့နေရာနဲ့ အပြင်ဘက်ကွာတဲ့နေရာတွေ မြင်ရပါမယ်။ Inspect လုပ်ပြီး DevTools မှာ box model ကို ရှာကြည့်ပါ။</p>
+
+</section>
+<section class="article-section" id="sizing">
+  <h2>box-sizing က အကျယ်တွက်ပုံ ဘယ်လိုပြောင်းလဲ။</h2>
+  <p>border-box ဆိုရင် သတ်မှတ်ထားတဲ့ width ထဲမှာ content၊ padding နဲ့ border အားလုံး ပါပါတယ်။ Margin က အဲဒီအကျယ်အပြင်မှာပဲ ရှိပါတယ်။ ဒီနမူနာက အကွက်နှစ်ခု width တန်ဖိုးတူပြီး တွက်ပုံပဲ ကွာပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;How does box-sizing change width?&lt;/title&gt;
+  &lt;style&gt;
+    p { width: 120px; padding: 10px; border: 2px solid teal; }
+    .notice { box-sizing: border-box; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ပထမအကွက် အနားသတ်အပါ 120px၊ ဒုတိယအကွက်က 144px ကျယ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="display">
+  <h2>Block၊ Inline နဲ့ Inline-block နေရာယူပုံ</h2>
+  <p>display က အကွက်တစ်ခု စာမျက်နှာပေါ်မှာ ဘယ်လိုနေရာယူမလဲ သတ်မှတ်ပါတယ်။ Block က ကိုယ်ပိုင်လိုင်းပေါ် စပါတယ်။ Inline စာသားက လိုင်းတူမှာ ဆက်နိုင်ပြီး နေရာမလောက်ရင် ခွဲဆင်းနိုင်ပါတယ်။ Inline-block က တစ်စုတည်း လိုင်းတူအောင် နေနိုင်ပြီး width၊ height ပေးလို့ရပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;How do block, inline, and inline-block fit?&lt;/title&gt;
+  &lt;style&gt;
+    span { background: #d6efea; width: 90px; }
+    .block { display: block; }
+    .badge { display: inline-block; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;span class=&quot;block&quot;&gt;Block&lt;/span&gt;
+&lt;p&gt;Product: &lt;span class=&quot;badge&quot;&gt;Pen&lt;/span&gt; &lt;span&gt;Inline&lt;/span&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Block က ကိုယ်ပိုင်လိုင်းမှာ ပေါ်ပါမယ်။ Pen က ကျန်တဲ့စာနဲ့ လိုင်းတူပြီး 90px ကျယ်ပါမယ်။ ပုံမှန် inline က စာသားအကျယ်အတိုင်းပဲ နေပါတယ်။</p>
+
+</section>
+<section class="article-section" id="flex-grid">
+  <h2>အကွက်အစုကို စီဖို့ Layout ရွေးခြင်း</h2>
+  <p>အပေါ်က အကြောင်းအရာပြီးမှ နောက်တစ်ခု ဆက်ပေါ်ရင် normal flow နဲ့ ရပါတယ်။ Flexbox lesson မှာ အကွက်တွေကို အတန်း ဒါမှမဟုတ် ကော်လံတစ်လျှောက် ညှိပုံကို ကြည့်ပါမယ်။ Grid lesson မှာ row နဲ့ column နှစ်မျိုးတွဲပြီး စီပုံကို ကြည့်ပါမယ်။</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Flexbox and Grid&lt;/title&gt;
+    &lt;style&gt;
+      .row { display: flex; gap: 1rem; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h2&gt;Flexbox row&lt;/h2&gt;
+    &lt;div class=&quot;row&quot;&gt;&lt;div&gt;Books&lt;/div&gt;&lt;div&gt;Notes&lt;/div&gt;&lt;/div&gt;
+
+    &lt;h2&gt;Grid with two columns&lt;/h2&gt;
+    &lt;div class=&quot;grid&quot;&gt;
+      &lt;div&gt;Books&lt;/div&gt;&lt;div&gt;Notes&lt;/div&gt;
+      &lt;div&gt;Maps&lt;/div&gt;&lt;div&gt;Guides&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Display/Flow_layout">MDN · Normal flow</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Introduction">MDN · Box model</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display">MDN · Display</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/cascade/">အရင်သင်ခန်းစာ · ရွေးချယ်ပုံ၊ Cascade နဲ့ Inheritance</a>
+<a href="/docs/read/my/css/typography/">နောက်သင်ခန်းစာ · စာသားအရွယ်၊ ယူနစ်နဲ့ Font</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

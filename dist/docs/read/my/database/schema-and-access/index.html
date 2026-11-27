@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="learning_db ထဲမှာ Setup က school tables တွေကို သုံးပါ။ နမူနာတစ်ခုစီကို transaction သီးသန့်နဲ့ run ပြီး အဆုံးမှာ rollback လုပ်ထားလို့ ထပ်စမ်းလို့ရတယ်။">
+  <title>Table ပြင်ခြင်း၊ Access သတ်မှတ်ခြင်းနဲ့ View ဆောက်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/schema-and-access/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/schema-and-access/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/schema-and-access/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/schema-and-access/" lang="en" hreflang="en">English</a></nav>
+  <h1>Table ပြင်ခြင်း၊ Access သတ်မှတ်ခြင်းနဲ့ View ဆောက်ခြင်း</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">learning_db ထဲမှာ Setup က school tables တွေကို သုံးပါ။ နမူနာတစ်ခုစီကို transaction သီးသန့်နဲ့ run ပြီး အဆုံးမှာ rollback လုပ်ထားလို့ ထပ်စမ်းလို့ရတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/schema-and-access">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#alter-table">ALTER TABLE နဲ့ Column ထည့်ခြင်း</a></li>
+<li><a href="#grant-revoke">GRANT နဲ့ REVOKE သုံးပြီး ဖတ်ခွင့် ပေးခြင်းနဲ့ ပြန်ရုပ်ခြင်း</a></li>
+<li><a href="#create-view">CREATE VIEW နဲ့ Course အလိုက် စာရင်းသွင်းသူ အရေအတွက် ဖတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="alter-table">
+  <h2>ALTER TABLE နဲ့ Column ထည့်ခြင်း</h2>
+  <p>courses ထဲကို room_code ထည့်ပြီး SQL Basics အတွက် အခန်းနံပါတ် ဖြည့်ကြည့်ပါ။ ပြီးရင် ရလဒ်ကို ပြန်ဖတ်ပါ။ ROLLBACK က table ကို မူလပုံစံ ပြန်ရောက်စေတယ်။</p>
+
+<pre><code>BEGIN;
+ALTER TABLE courses ADD COLUMN room_code text;
+UPDATE courses SET room_code = &#39;A-01&#39; WHERE id = 1;
+SELECT title, room_code FROM courses ORDER BY id;
+ROLLBACK;</code></pre>
+
+
+</section>
+<section class="article-section" id="grant-revoke">
+  <h2>GRANT နဲ့ REVOKE သုံးပြီး ဖတ်ခွင့် ပေးခြင်းနဲ့ ပြန်ရုပ်ခြင်း</h2>
+  <p>Role ဆောက်ခွင့်ရှိတဲ့ စမ်းသပ် table owner နဲ့ run ပါ။ ယာယီ role မှာ login ခွင့် မပါဘူး။ Table ရဲ့ ပုံမှန် permissions အတိုင်းဆို GRANT ပြီးရင် true၊ REVOKE ပြီးရင် false ပြမယ်။ ROLLBACK က ယာယီ role ကိုပါ ပြန်ဖယ်ပေးတယ်။</p>
+
+<pre><code>BEGIN;
+CREATE ROLE lesson_course_reader NOLOGIN;
+GRANT USAGE ON SCHEMA public TO lesson_course_reader;
+GRANT SELECT ON TABLE public.courses TO lesson_course_reader;
+SELECT has_table_privilege(&#39;lesson_course_reader&#39;, &#39;public.courses&#39;, &#39;SELECT&#39;);
+REVOKE SELECT ON TABLE public.courses FROM lesson_course_reader;
+SELECT has_table_privilege(&#39;lesson_course_reader&#39;, &#39;public.courses&#39;, &#39;SELECT&#39;);
+ROLLBACK;</code></pre>
+
+
+</section>
+<section class="article-section" id="create-view">
+  <h2>CREATE VIEW နဲ့ Course အလိုက် စာရင်းသွင်းသူ အရေအတွက် ဖတ်ခြင်း</h2>
+  <p>View က query တစ်ခုကို နာမည်ပေးပြီး ပြန်သုံးလို့ရစေတယ်။ ဒီ view ကို query လုပ်တိုင်း မူရင်း tables က data ကို ဖတ်တယ်။ စာရင်းသွင်းသူ မရှိတဲ့ course တွေပါ ပြတယ်။</p>
+
+<pre><code>BEGIN;
+CREATE VIEW lesson_course_enrollments AS
+SELECT c.id, c.title, COUNT(e.student_id) AS student_count
+FROM courses AS c
+LEFT JOIN enrollments AS e ON e.course_id = c.id
+GROUP BY c.id, c.title;
+
+SELECT title, student_count FROM lesson_course_enrollments
+ORDER BY student_count DESC, id;
+ROLLBACK;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/sql-altertable.html">ALTER TABLE</a></li>
+<li><a href="https://www.postgresql.org/docs/19/sql-grant.html">GRANT</a></li>
+<li><a href="https://www.postgresql.org/docs/19/sql-revoke.html">REVOKE</a></li>
+<li><a href="https://www.postgresql.org/docs/19/sql-createview.html">CREATE VIEW</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/roles-and-ownership/">အရင်သင်ခန်းစာ · PostgreSQL User၊ Role နဲ့ Ownership</a>
+<a href="/docs/read/my/database/backup-and-restore/">နောက်သင်ခန်းစာ · PostgreSQL Tools နဲ့ Backup၊ Restore လုပ်ပါ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

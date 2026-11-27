@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Configuration ကို တစ်ကြိမ် load လုပ်ပါ။ Startup မှာ လိုအပ်တဲ့ settings တွေ စစ်ပြီး database access ကို provider မှာ ထားပါ။">
+  <title>Configuration နှင့် Database Layer · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/configuration-and-data/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/nestjs/configuration-and-data/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/nestjs/configuration-and-data/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#nestjs">သင်ခန်းစာအားလုံး · NestJS</a> <a href="/docs/read/en/nestjs/configuration-and-data/" lang="en" hreflang="en">English</a></nav>
+  <h1>Configuration နှင့် Database Layer</h1>
+  <p class="article-version">12.6.0</p>
+  <p class="intro">Configuration ကို တစ်ကြိမ် load လုပ်ပါ။ Startup မှာ လိုအပ်တဲ့ settings တွေ စစ်ပြီး database access ကို provider မှာ ထားပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/nestjs/configuration-and-data">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#settings">Startup မှာ လိုအပ်တဲ့ Settings စစ်ခြင်း</a></li>
+<li><a href="#provider">HTTP နှင့် Data သိမ်းဆည်းမှု ခွဲထားခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="settings">
+  <h2>Startup မှာ လိုအပ်တဲ့ Settings စစ်ခြင်း</h2>
+  <p>@nestjs/config ထည့်ပြီး ConfigModule ကို register လုပ်ပါ။ Setting လိုနေရင် validation function နဲ့ startup ကို ရပ်နိုင်ပါတယ်။ DATABASE_URL ကို environment ကနေ ပေးပြီး database connection ဆောက်တဲ့ provider မှာ ConfigService inject လုပ်ပါ။</p>
+
+<pre><code>import { Module } from &quot;@nestjs/common&quot;;
+import { ConfigModule } from &quot;@nestjs/config&quot;;
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({
+      validate(config) {
+        if (!config.DATABASE_URL) throw new Error(&quot;DATABASE_URL is required&quot;);
+        return config;
+      },
+    }),
+  ],
+})
+export class AppModule {}</code></pre>
+
+
+</section>
+<section class="article-section" id="provider">
+  <h2>HTTP နှင့် Data သိမ်းဆည်းမှု ခွဲထားခြင်း</h2>
+  <p>Controller က input ဖတ်ပြီး response ပြန်ပါတယ်။ Service က business rules ကိုင်ပြီး repository သို့ database client ကို ခေါ်ပါတယ်။ Nest က providers နဲ့ driver သို့ ORM သုံးနိုင်ပါတယ်။ Environments အားလုံး schema ပြောင်းလဲမှု တူတူလုပ်နိုင်ဖို့ migrations မှာ ထားပါ။</p>
+
+<pre><code>@Injectable()
+export class InventoryService {
+  constructor(private readonly products: ProductRepository) {}
+
+  availableProducts() {
+    return this.products.findWithStock();
+  }
+}
+
+@Controller(&quot;inventory&quot;)
+export class InventoryController {
+  constructor(private readonly inventory: InventoryService) {}
+
+  @Get()
+  list() {
+    return this.inventory.availableProducts();
+  }
+}</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.nestjs.com/techniques/configuration">Configuration and validation</a></li>
+<li><a href="https://docs.nestjs.com/techniques/database">Database integration</a></li>
+<li><a href="https://docs.nestjs.com/providers">Providers</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/nestjs/request-lifecycle/">အရင်သင်ခန်းစာ · Request Lifecycle၊ Guards နှင့် Interceptors</a>
+<a href="/docs/read/my/nestjs/openapi-and-errors/">နောက်သင်ခန်းစာ · Routes နှင့် HTTP Errors မှတ်တမ်းတင်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

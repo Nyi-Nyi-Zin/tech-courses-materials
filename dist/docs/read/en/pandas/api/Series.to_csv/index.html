@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Write delimited text or return it as a string. Use index=False when row labels should be excluded.">
+  <title>pandas.Series.to_csv · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/Series.to_csv/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/Series.to_csv/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/Series.to_csv">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>Series and accessors</span><a href="/docs/read/my/pandas/api/Series.to_csv/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>Series.<wbr>to_csv</code></h1>
+    <p class="article-version">pandas 3.1.1 · Series and accessors · <span lang="en">method</span></p>
+    <p class="intro">Write delimited text or return it as a string. Use index=False when row labels should be excluded.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><details class="api-full-signature"><summary><code lang="en">Series.to_csv(…)</code> <span>Full signature</span></summary><pre><code lang="en">Series.to_csv(
+    path_or_buf=None,
+    *,
+    sep=&#39;,&#39;,
+    na_rep=&#39;&#39;,
+    float_format=None,
+    columns=None,
+    header=True,
+    index=True,
+    index_label=None,
+    mode=&#39;w&#39;,
+    encoding=None,
+    compression=&#39;infer&#39;,
+    quoting=None,
+    quotechar=&#39;&quot;&#39;,
+    lineterminator=None,
+    chunksize=None,
+    date_format=None,
+    doublequote=True,
+    escapechar=None,
+    decimal=&#39;.&#39;,
+    errors=&#39;strict&#39;,
+    storage_options=None,
+)</code></pre></details></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+values = pd.Series([2., 5., 7.], name=&quot;units&quot;)
+print(values.to_csv())</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>path_or_buf</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>str, path object, file-like object, or None</span><p>Supply a file path or writable/readable stream. Some writers return the result directly when this is omitted.</p></td></tr>
+<tr><th scope="row"><code>sep</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;,&#39;</code></td>
+      <td><span>str</span><p>Specify the separator between fields or string pieces.</p></td></tr>
+<tr><th scope="row"><code>na_rep</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;&#39;</code></td>
+      <td><span>str</span><p>Choose the text used to display missing values.</p></td></tr>
+<tr><th scope="row"><code>float_format</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>str, Callable</span><p>Provide a format string or callable to control numeric display.</p></td></tr>
+<tr><th scope="row"><code>columns</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>sequence</span><p>Supply column labels or control how columns are handled.</p></td></tr>
+<tr><th scope="row"><code>header</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>True</code></td>
+      <td><span>bool or list of str</span><p>Define which row or rows provide column names, or control whether to write them.</p></td></tr>
+<tr><th scope="row"><code>index</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>Supply row labels or control how existing row labels are used.</p></td></tr>
+<tr><th scope="row"><code>index_label</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>str or sequence, or False</span><p>Choose the column heading written for row index values.</p></td></tr>
+<tr><th scope="row"><code>mode</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;w&#39;</code></td>
+      <td><span>{&#39;w&#39;, &#39;x&#39;, &#39;a&#39;}</span><p>Choose a file or storage access mode.</p></td></tr>
+<tr><th scope="row"><code>encoding</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>str</span><p>Name a text encoding such as &quot;utf-8&quot;.</p></td></tr>
+<tr><th scope="row"><code>compression</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;infer&#39;</code></td>
+      <td><span>str or dict</span><p>Choose whether and how to compress or decompress data.</p></td></tr>
+<tr><th scope="row"><code>quoting</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>optional constant from csv module</span><p>Choose a quoting rule using the csv module&#39;s quoting constants.</p></td></tr>
+<tr><th scope="row"><code>quotechar</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;&quot;&#39;</code></td>
+      <td><span>str</span><p>Specify the character used to quote a delimited field.</p></td></tr>
+<tr><th scope="row"><code>lineterminator</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>str</span><p>Specify the character or string ending each record.</p></td></tr>
+<tr><th scope="row"><code>chunksize</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>int or None</span><p>Set how many rows to read or write in each batch.</p></td></tr>
+<tr><th scope="row"><code>date_format</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>str</span><p>Specify datetime parsing or formatting directives such as &quot;%Y-%m-%d&quot;.</p></td></tr>
+<tr><th scope="row"><code>doublequote</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>True</code></td>
+      <td><span>bool</span><p>Choose whether doubled quote characters denote a single quote inside a field.</p></td></tr>
+<tr><th scope="row"><code>escapechar</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>str</span><p>Specify the character that escapes an otherwise special character.</p></td></tr>
+<tr><th scope="row"><code>decimal</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;.&#39;</code></td>
+      <td><span>str</span><p>Identify the character used as the decimal mark.</p></td></tr>
+<tr><th scope="row"><code>errors</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>&#39;strict&#39;</code></td>
+      <td><span>str</span><p>Choose how to handle invalid input or failed operations. The available options depend on the API.</p></td></tr>
+<tr><th scope="row"><code>storage_options</code></th>
+      <td>Optional<br><small>Keyword only</small><br>Default <code>None</code></td>
+      <td><span>dict</span><p>Pass storage-backend options such as connection settings or HTTP headers.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>None or str</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.to_csv.html#pandas.Series.to_csv">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/Series.to_clipboard/"><span>Previous in this category</span><strong>pandas.Series.to_clipboard</strong></a><a href="/docs/read/en/pandas/api/Series.to_dict/"><span>Next in this category</span><strong>pandas.Series.to_dict</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

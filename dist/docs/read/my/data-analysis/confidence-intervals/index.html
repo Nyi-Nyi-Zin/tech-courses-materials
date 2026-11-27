@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Confidence interval ကို ဖတ်ပါ။ Observation ရယူပုံနဲ့ ကိုက်ညီတဲ့အခါ statistic ကို bootstrap လုပ်ပါ။">
+  <title>Confidence Intervals ဖြင့် မသေချာမှု ခန့်မှန်းခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/confidence-intervals/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/confidence-intervals/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/confidence-intervals/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#data-analysis">သင်ခန်းစာအားလုံး · Data Analysis</a> <a href="/docs/read/en/data-analysis/confidence-intervals/" lang="en" hreflang="en">English</a></nav>
+  <h1>Confidence Intervals ဖြင့် မသေချာမှု ခန့်မှန်းခြင်း</h1>
+  
+  <p class="intro">Confidence interval ကို ဖတ်ပါ။ Observation ရယူပုံနဲ့ ကိုက်ညီတဲ့အခါ statistic ကို bootstrap လုပ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/data-analysis/confidence-intervals">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#interpret">95 ရာခိုင်နှုန်း Confidence Interval ဖတ်ခြင်း</a></li>
+<li><a href="#bootstrap">သီးခြား Observation များရဲ့ Mean ကို Bootstrap လုပ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="interpret">
+  <h2>95 ရာခိုင်နှုန်း Confidence Interval ဖတ်ခြင်း</h2>
+  <p>ယူဆချက်တွေ မှန်ရင် sample အသစ်တွေ ထပ်ခါထပ်ခါယူပြီး 95 ရာခိုင်နှုန်း confidence interval တွက်တဲ့နည်းက population parameter အမှန်ကို အကြမ်းဖျင်း 95 ရာခိုင်နှုန်း ဖမ်းမိပါတယ်။ Mean interval က mean ကို ခန့်မှန်းရာမှာ မသေချာမှု ပြပါတယ်။ နောင် individual value ခန့်မှန်းဖို့ interval သီးခြား လိုပါတယ်။</p>
+
+
+
+
+</section>
+<section class="article-section" id="bootstrap">
+  <h2>သီးခြား Observation များရဲ့ Mean ကို Bootstrap လုပ်ခြင်း</h2>
+  <p>Bootstrap က အစားပြန်ထည့်ပြီး sample ယူကာ statistic ပြန်တွက်ပါတယ်။ ဒီနမူနာမှာ percentile interval နဲ့ seed တစ်ခု သုံးထားပါတယ်။ Order ထပ်တာ၊ user group နဲ့ time series တွေမှာ resampling unit ကို ဒေတာယူပုံနဲ့ ကိုက်အောင် ရွေးပါ။</p>
+
+<pre><code>import numpy as np
+from scipy.stats import bootstrap
+
+units = np.array([8, 10, 12, 14, 16, 18])
+result = bootstrap((units,), np.mean, confidence_level=0.95, method=&quot;percentile&quot;,
+                   n_resamples=4_999, rng=np.random.default_rng(42))
+low, high = result.confidence_interval
+print(f&quot;Mean: {units.mean():.1f}&quot;)
+print(f&quot;95% CI: {low:.2f} to {high:.2f}&quot;)</code></pre>
+<div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">Mean: 13.0
+95% CI: 10.33 to 15.67</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST confidence limits for the mean</a></li>
+<li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html">scipy.stats.bootstrap</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/data-analysis/distributions-and-outliers/">အရင်သင်ခန်းစာ · Distribution အနှစ်ချုပ်၍ Outlier များ စစ်ခြင်း</a>
+<a href="/docs/read/my/data-analysis/hypothesis-testing/">နောက်သင်ခန်းစာ · Hypothesis Testing နှင့် Experiment ရလဒ်</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

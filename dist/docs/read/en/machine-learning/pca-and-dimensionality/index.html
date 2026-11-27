@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Project numeric features into fewer components, and validate what that choice does to a downstream model.">
+  <title>Reduce dimensions with PCA · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/pca-and-dimensionality/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/pca-and-dimensionality/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/pca-and-dimensionality/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#machine-learning">All documentation · Machine Learning</a> <a href="/docs/read/my/machine-learning/pca-and-dimensionality/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Reduce dimensions with PCA</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Project numeric features into fewer components, and validate what that choice does to a downstream model.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/machine-learning/pca-and-dimensionality">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#components">Read components and explained variance</a></li>
+<li><a href="#tradeoffs">Compare a reduced model with a baseline</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="components">
+  <h2>Read components and explained variance</h2>
+  <p>Principal component analysis creates orthogonal directions that capture variance. scikit-learn PCA centers the input. Use a scaler first when feature units or scales would otherwise dominate. Explained variance measures how much variation the chosen components retain.</p>
+
+<pre><code>from sklearn.datasets import load_iris
+from sklearn.decomposition import PCA
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+
+X, _ = load_iris(return_X_y=True)
+reducer = make_pipeline(StandardScaler(), PCA(n_components=2))
+coordinates = reducer.fit_transform(X)
+print(X.shape, coordinates.shape)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">(150, 4) (150, 2)</pre></div>
+
+
+</section>
+<section class="article-section" id="tradeoffs">
+  <h2>Compare a reduced model with a baseline</h2>
+  <p>In a prediction pipeline, fit PCA on each training fold and transform its validation fold. Compare against the same estimator without PCA. A low-variance component can still carry predictive information, so use the appropriate validation metric to choose how many components to retain.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/decomposition.html">Decomposing signals into components</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/cross_validation.html">Cross-validation</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/machine-learning/trees-and-ensembles/">Previous lesson · Decision trees, random forests, and boosting</a>
+<a href="/docs/read/en/machine-learning/time-aware-validation/">Next lesson · Validate models on time-ordered or grouped data</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

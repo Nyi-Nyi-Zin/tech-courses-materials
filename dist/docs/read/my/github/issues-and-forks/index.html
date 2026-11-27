@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="လုပ်စရာတစ်ခုကို မှတ်ထားဖို့ Issue ဖွင့်ပါ။ မူရင်း repository ကို တိုက်ရိုက် push လုပ်ခွင့် မရှိရင် ကိုယ့် GitHub account ထဲ fork လုပ်ပြီး ပြင်ဆင်ချက် တင်ပြနိုင်ပါတယ်။">
+  <title>GitHub Issues နဲ့ Repository Fork လုပ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/github/issues-and-forks/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/github/issues-and-forks/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/github/issues-and-forks/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#github">သင်ခန်းစာအားလုံး · GitHub</a> <a href="/docs/read/en/github/issues-and-forks/" lang="en" hreflang="en">English</a></nav>
+  <h1>GitHub Issues နဲ့ Repository Fork လုပ်ခြင်း</h1>
+  
+  <p class="intro">လုပ်စရာတစ်ခုကို မှတ်ထားဖို့ Issue ဖွင့်ပါ။ မူရင်း repository ကို တိုက်ရိုက် push လုပ်ခွင့် မရှိရင် ကိုယ့် GitHub account ထဲ fork လုပ်ပြီး ပြင်ဆင်ချက် တင်ပြနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/github/issues-and-forks">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#issues">ဖတ်ပြီး ဆက်လုပ်လို့ရတဲ့ Issue ရေးခြင်း</a></li>
+<li><a href="#forks">GitHub မှာ Fork လုပ်ပြီး ကိုယ့်စက်ဆီ Clone လုပ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="issues">
+  <h2>ဖတ်ပြီး ဆက်လုပ်လို့ရတဲ့ Issue ရေးခြင်း</h2>
+  <p>Issue မှာ ဘာလုပ်စရာရှိလဲ သိသာတဲ့ title ရေးပါ။ Bug ဆိုရင် ဘယ်လိုလုပ်မှ ပြန်ဖြစ်လဲ၊ လက်တွေ့ ဘာဖြစ်လဲ၊ ဘာဖြစ်သင့်လဲဆိုတာ ထည့်ပါ။ Pull Request description မှာ Closes #12 လို့ ရေးရင် repository တူတဲ့ issue 12 နဲ့ ချိတ်ပြီး Pull Request ကို default branch ထဲ merge လုပ်တဲ့အခါ အဲဒီ issue ပိတ်သွားပါတယ်။</p>
+
+<pre><code>Title: Add installation steps to the README
+Steps: Open README.md and look for instructions to set up the project.
+Actual: The README only describes what the project does.
+Expected: The README includes commands to start the project.</code></pre>
+
+
+</section>
+<section class="article-section" id="forks">
+  <h2>GitHub မှာ Fork လုပ်ပြီး ကိုယ့်စက်ဆီ Clone လုပ်ခြင်း</h2>
+  <p>Fork လုပ်ခွင့်ရှိတဲ့ repository မှာ Fork ကို ရွေးပါ။ Fork က ကိုယ့် GitHub account အောက်မှာ ရှိပါတယ်။ project-notes folder မရှိသေးတဲ့ workspace တစ်ခုမှာ ကိုယ့် fork ကို clone လုပ်ပါ။ YOUR-ACCOUNT နဲ့ ORIGINAL-OWNER နေရာတွေမှာ account နာမည် အစစ် ထည့်ပါ။ origin က ကိုယ့် fork ကို ညွှန်းပြီး upstream က မူရင်း repository အတွက် သုံးလေ့ရှိတဲ့ နာမည်ပါ။ ကိုယ့် fork ဆီ feature branch ကို push လုပ်ပြီး မူရင်း repository ဆီ Pull Request တင်ပါ။</p>
+
+<pre><code>git clone https://github.com/YOUR-ACCOUNT/project-notes.git
+cd project-notes
+git remote add upstream https://github.com/ORIGINAL-OWNER/project-notes.git
+git fetch upstream
+git remote -v</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues">GitHub Docs · About issues</a></li>
+<li><a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue">GitHub Docs · Link a pull request to an issue</a></li>
+<li><a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo">GitHub Docs · Fork a repository</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/github/pull-requests/">အရင်သင်ခန်းစာ · Pull Request ဖွင့်ခြင်းနဲ့ Code Review</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

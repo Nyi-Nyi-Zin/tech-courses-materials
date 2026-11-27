@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="main ကို Project ရဲ့ အခြေခံ branch အဖြစ်ထားပါ။ Feature တစ်ခုလုပ်ချင်ရင် branch ခွဲပြီး စမ်းပါ။ စစ်ပြီးမှ အဲဒီပြင်ဆင်ချက်ကို main ထဲ ပေါင်းပါ။">
+  <title>Branch ခွဲခြင်းနဲ့ Merge လုပ်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/git/branches-and-merging/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/git/branches-and-merging/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/git/branches-and-merging/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#git">သင်ခန်းစာအားလုံး · Git</a> <a href="/docs/read/en/git/branches-and-merging/" lang="en" hreflang="en">English</a></nav>
+  <h1>Branch ခွဲခြင်းနဲ့ Merge လုပ်ခြင်း</h1>
+  
+  <p class="intro">main ကို Project ရဲ့ အခြေခံ branch အဖြစ်ထားပါ။ Feature တစ်ခုလုပ်ချင်ရင် branch ခွဲပြီး စမ်းပါ။ စစ်ပြီးမှ အဲဒီပြင်ဆင်ချက်ကို main ထဲ ပေါင်းပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/git/branches-and-merging">Interactive Docs ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#branch">Branch အသစ်ဆောက်ပြီး Change ကို Commit လုပ်ခြင်း</a></li>
+<li><a href="#merge">Branch ကို main ထဲ Merge လုပ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="branch">
+  <h2>Branch အသစ်ဆောက်ပြီး Change ကို Commit လုပ်ခြင်း</h2>
+  <p>Branch ဆိုတာ commit တစ်ခုကို ညွှန်းထားတဲ့ နာမည်တစ်ခုပါ။ add-usage ပေါ်မှာ commit လုပ်ရင် add-usage က commit အသစ်ဆီ ရွှေ့ပြီး main က အရင် commit မှာ ရှိနေပါမယ်။ project-notes ထဲက main ကနေ စပြီး အသုံးပြုနည်း အတိုလေး ထည့်ကြည့်ပါ။</p>
+
+<pre><code>git switch -c add-usage
+printf &#39;\n## Usage\nRead the notes before starting.\n&#39; &gt;&gt; README.md
+git add README.md
+git commit -m &quot;Add usage notes&quot;
+git branch</code></pre>
+
+
+</section>
+<section class="article-section" id="merge">
+  <h2>Branch ကို main ထဲ Merge လုပ်ခြင်း</h2>
+  <p>ပြင်ဆင်ချက် လက်ခံမယ့် branch ဆီ အရင်ပြောင်းပါ။ ပြီးမှ ဘယ် branch က ပြင်ဆင်ချက်တွေ ယူမလဲဆိုတာ git merge မှာ ရေးပါ။ Branch ခွဲပြီးနောက် main မှာ commit အသစ်မရှိရင် ဒီနမူနာမှာ Git က main ကို add-usage ရဲ့ commit ဆီ တိုက်ရိုက်ရွှေ့နိုင်ပါတယ်။ အဲဒါကို fast-forward လို့ခေါ်ပါတယ်။</p>
+
+<pre><code>git switch main
+git merge add-usage
+git log --oneline --graph --all</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging">Git · Basic branching and merging</a></li>
+<li><a href="https://git-scm.com/docs/git-switch">Git · git switch</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/git/commits/">အရင်သင်ခန်းစာ · Changes Stage လုပ်ခြင်းနဲ့ Commit သိမ်းခြင်း</a>
+<a href="/docs/read/my/git/merge-conflicts/">နောက်သင်ခန်းစာ · Merge Conflict ဖြေရှင်းခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

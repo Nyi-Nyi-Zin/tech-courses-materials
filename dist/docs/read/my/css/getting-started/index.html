@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CSS (Cascading Style Sheets) က HTML ကို browser ပေါ်မှာ ဘယ်လိုပုံပေါ်စေမလဲ သတ်မှတ်ပါတယ်။ HTML နဲ့ စာပိုဒ်တစ်ခု ရေးပြီး CSS နဲ့ အရောင်၊ အကွာအဝေးနဲ့ နေရာကို ပြောင်းနိုင်ပါတယ်။ ဒီ lesson မှာ HTML document ဖွဲ့စည်းပုံကို ပြန်သုံးပါမယ်။">
+  <title>ပထမဆုံး CSS Rule ရေးခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/getting-started/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/getting-started/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/getting-started/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/getting-started/" lang="en" hreflang="en">English</a></nav>
+  <h1>ပထမဆုံး CSS Rule ရေးခြင်း</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">CSS (Cascading Style Sheets) က HTML ကို browser ပေါ်မှာ ဘယ်လိုပုံပေါ်စေမလဲ သတ်မှတ်ပါတယ်။ HTML နဲ့ စာပိုဒ်တစ်ခု ရေးပြီး CSS နဲ့ အရောင်၊ အကွာအဝေးနဲ့ နေရာကို ပြောင်းနိုင်ပါတယ်။ ဒီ lesson မှာ HTML document ဖွဲ့စည်းပုံကို ပြန်သုံးပါမယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/getting-started">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#rule">CSS Rule တစ်ခုကို ဖတ်ပုံ</a></li>
+<li><a href="#style">&lt;style&gt; ကို ဘယ်မှာရေးလဲ။</a></li>
+<li><a href="#stylesheet">CSS ဖိုင်သီးသန့် ချိတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="rule">
+  <h2>CSS Rule တစ်ခုကို ဖတ်ပုံ</h2>
+  <p>Rule တစ်ခုမှာ ဘယ် HTML element တွေကို ရွေးမလဲ၊ ဘာပြောင်းမလဲ ရေးပါတယ်။ ဒီမှာ p က selector ဖြစ်လို့ စာပိုဒ်တွေကို ရွေးပါတယ်။ { } ကြားမှာ ပြောင်းမယ့် သတ်မှတ်ချက်တွေကို ရေးပါတယ်။ color: teal မှာ color က ပြောင်းမယ့် property ဖြစ်ပြီး teal က ပေးထားတဲ့ value ပါ။ သတ်မှတ်ချက်တစ်ခုကို ; နဲ့ ပိတ်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Read one CSS rule&lt;/title&gt;
+  &lt;style&gt;
+    p { color: teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စာပိုဒ်နှစ်ခုလုံး စိမ်းပြာရောင် ဖြစ်ပါမယ်။ teal ကို purple လို့ ပြောင်းပြီး reload လုပ်ကြည့်ပါ။</p>
+
+</section>
+<section class="article-section" id="style">
+  <h2>&lt;style&gt; ကို ဘယ်မှာရေးလဲ။</h2>
+  <p>အပေါ်က နမူနာမှာ &lt;head&gt; ထဲကို &lt;style&gt; element ထည့်ထားပါတယ်။ Browser က HTML ဖိုင်ဖွင့်တဲ့အခါ အတွင်းက CSS ကိုပါ ဖတ်ပါတယ်။ ဖိုင်တစ်ခုတည်းနဲ့ စမ်းတဲ့ နမူနာတိုတွေမှာ ဒီပုံစံ သုံးလို့လွယ်ပါတယ်။</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;CSS in the head&lt;/title&gt;
+    &lt;style&gt;
+      p { color: teal; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Registration is open.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="stylesheet">
+  <h2>CSS ဖိုင်သီးသန့် ချိတ်ခြင်း</h2>
+  <p>Stylesheet ကို .css ဖိုင်သီးသန့်မှာလည်း ရေးနိုင်ပါတယ်။ head ထဲက link မှာ rel=&quot;stylesheet&quot; က CSS ဖိုင်ချိတ်တာလို့ browser ကို ပြောပြီး href က ဖိုင်လိပ်စာ ပြောပါတယ်။ ဖိုင်နှစ်ခု folder တူရင် ဖိုင်နာမည်ပဲ ရေးလို့ရပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> အောက်က rule ကို အရင် .html ဖိုင်နဲ့ folder တူတဲ့ style.css ထဲ သိမ်းပါ။ HTML ထဲက &lt;style&gt; အပိုင်းကို ဖယ်ပြီး အဲဒီ &lt;head&gt; ထဲမှာ &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt; ထည့်ပါ။ ဖိုင်နှစ်ခုလုံး သိမ်းပြီး reload လုပ်ပါ။</p>
+<pre><code>p { color: purple; }</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Browser က style.css ကို ဖတ်ပြီး စာပိုဒ်တွေကို ခရမ်းရောင် ပြပေးပါမယ်။</p>
+<p class="example-check"><strong>ရလဒ်ကွာနေရင်</strong> စာသားအရောင် မပြောင်းရင် link မှာ ရေးထားတဲ့နာမည်နဲ့ CSS ဖိုင်နာမည် တိတိကျကျ တူလား၊ folder တူလား စစ်ပါ။</p>
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Getting_started">MDN · Getting started with CSS</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/cascade/">နောက်သင်ခန်းစာ · ရွေးချယ်ပုံ၊ Cascade နဲ့ Inheritance</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

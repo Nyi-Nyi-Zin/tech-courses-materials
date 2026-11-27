@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Make bins based on quantiles so bins have approximately equal numbers of observations.">
+  <title>pandas.qcut · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/api/qcut/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/api/qcut/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=68">
+  <script type="module" src="/docs/pandas-api-reading.js?v=2"></script>
+</head>
+<body>
+<main id="main" class="reading-page" data-docs-route="#/pandas/api-reference/api/qcut">
+  <article class="api-reading-page">
+    <nav class="api-breadcrumbs" aria-label="pandas API reference">
+    <a href="/docs/read/en/pandas/api-reference/#find-an-api">pandas API reference</a><span aria-hidden="true">/</span><span>General functions</span><a href="/docs/read/my/pandas/api/qcut/" lang="my" hreflang="my">မြန်မာ</a>
+  </nav>
+    <h1><code>pandas.<wbr>qcut</code></h1>
+    <p class="article-version">pandas 3.1.1 · General functions · <span lang="en">function</span></p>
+    <p class="intro">Make bins based on quantiles so bins have approximately equal numbers of observations.</p>
+
+    <nav class="api-breadcrumbs" aria-label="On this page"><ul><li><a href="#syntax">Call syntax</a></li><li><a href="#example">Run the example</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#returns">Returns</a></li></ul></nav>
+    <section class="article-section" id="syntax" tabindex="-1"><h2>Call syntax</h2><pre><code lang="en">pd.qcut(x, q, labels=None, retbins=False, precision=3, duplicates=&#39;raise&#39;)</code></pre></section>
+    <section class="article-section" id="example" tabindex="-1" data-pandas-runner>
+      <h2>Run the example</h2>
+      <p>Edit the example and select Run Python to see the result.</p>
+      <label><span>Python code</span><textarea rows="5" lang="en" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off">import pandas as pd
+print(pd.qcut(pd.Series([10, 20, 30, 40]), q=2))</textarea></label>
+      <div class="api-run-actions">
+        <button type="button" data-run disabled>Run Python</button>
+        <button type="button" data-stop disabled>Stop</button>
+        <button type="button" data-reset disabled>Reset code</button>
+      </div>
+      <p role="status"></p>
+      <div class="api-output" aria-label="Output"><pre dir="ltr" tabindex="0"></pre></div>
+    </section>
+    <section class="article-section" id="parameters" tabindex="-1"><h2>Parameters</h2><div class="api-argument-table" tabindex="0"><table><thead><tr><th scope="col">Parameter</th><th scope="col">Requirement</th><th scope="col">Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row"><code>x</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>1d ndarray or Series</span><p>Choose the column or positional input mapped to the horizontal axis.</p></td></tr>
+<tr><th scope="row"><code>q</code></th>
+      <td>Required<br><small>Positional or keyword</small></td>
+      <td><span>int or list-like of float</span><p>Provide quantiles as fractions between 0 and 1, or a number of quantile bins for qcut.</p></td></tr>
+<tr><th scope="row"><code>labels</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>None</code></td>
+      <td><span>array or False</span><p>Provide the labels used for selecting rows, renaming entries, or naming bins.</p></td></tr>
+<tr><th scope="row"><code>retbins</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>False</code></td>
+      <td><span>bool</span><p>Return the computed bin boundaries along with the binned result.</p></td></tr>
+<tr><th scope="row"><code>precision</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>3</code></td>
+      <td><span>int</span><p>Choose the requested number of decimal places or displayed digits.</p></td></tr>
+<tr><th scope="row"><code>duplicates</code></th>
+      <td>Optional<br><small>Positional or keyword</small><br>Default <code>&#39;raise&#39;</code></td>
+      <td><span>{default &#39;raise&#39;, &#39;drop&#39;}</span><p>Choose what happens when duplicate bin boundaries occur.</p></td></tr></tbody></table></div></section>
+    <section class="article-section" id="returns" tabindex="-1"><h2>Returns</h2><p>out · Categorical or Series or array of integers if labels is False; bins · ndarray of floats</p></section>
+    <footer class="article-section">
+      <a href="https://pandas.pydata.org/docs/reference/api/pandas.qcut.html#pandas.qcut">Official pandas API source</a>
+      <nav class="pagination" aria-label="pandas API reference"><a href="/docs/read/en/pandas/api/pivot_table/"><span>Previous in this category</span><strong>pandas.pivot_table</strong></a><a href="/docs/read/en/pandas/api/timedelta_range/"><span>Next in this category</span><strong>pandas.timedelta_range</strong></a></nav>
+    </footer>
+  </article>
+</main>
+</body>
+</html>

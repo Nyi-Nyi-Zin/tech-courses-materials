@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pseudo-element က element ရဲ့ အစိတ်အပိုင်းတစ်ခုကို ရွေးပေးတာ ဒါမှမဟုတ် style ပေးလို့ရမယ့် အစိတ်အပိုင်းတစ်ခု ဖန်တီးပေးတာပါ။ နာမည်ရှေ့မှာ :: နဲ့ စရေးပါတယ်။">
+  <title>Pseudo-element နဲ့ အစိတ်အပိုင်း ပြင်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/pseudo-elements/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/pseudo-elements/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/pseudo-elements/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/pseudo-elements/" lang="en" hreflang="en">English</a></nav>
+  <h1>Pseudo-element နဲ့ အစိတ်အပိုင်း ပြင်ခြင်း</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Pseudo-element က element ရဲ့ အစိတ်အပိုင်းတစ်ခုကို ရွေးပေးတာ ဒါမှမဟုတ် style ပေးလို့ရမယ့် အစိတ်အပိုင်းတစ်ခု ဖန်တီးပေးတာပါ။ နာမည်ရှေ့မှာ :: နဲ့ စရေးပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/pseudo-elements">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#generated">::before နဲ့ ::after သုံးပြီး အလှဆင်ခြင်း</a></li>
+<li><a href="#states">အစိတ်အပိုင်းနဲ့ အခြေအနေကို ရွေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="generated">
+  <h2>::before နဲ့ ::after သုံးပြီး အလှဆင်ခြင်း</h2>
+  <p>content သတ်မှတ်ရင် ::before နဲ့ ::after က element ထဲက အကြောင်းအရာ မတိုင်ခင်နဲ့ ပြီးတဲ့နောက်မှာ နှစ်ဖက်စလုံး ထပ်ထည့်နိုင်ပါတယ်။ စာသားအလွတ်ဆို style ပေးလို့ရမယ့် အကွက်အလွတ် ရပါတယ်။ အရေးကြီးတဲ့အချက်ကို ဖတ်သူနဲ့ assistive tools တွေ သိနိုင်ဖို့ HTML ထဲမှာ ရေးထားပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Add decoration with ::before and ::after&lt;/title&gt;
+  &lt;style&gt;
+    .notice::before { content: &quot;&quot;; display: inline-block; width: 8px; height: 8px; margin-right: 6px; border-radius: 50%; background: teal; }
+    .notice::after { content: &quot;&quot;; display: inline-block; width: 16px; height: 2px; margin-left: 6px; background: teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> “Your order is ready.” ရှေ့မှာ စိမ်းပြာရောင် အစက်၊ နောက်မှာ မျဉ်းတို ပေါ်ပါမယ်။ Rule တစ်ခုက content ကို ဖြုတ်ရင် အဲဒီ rule ရဲ့ အလှဆင်အပိုင်း ပျောက်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="states">
+  <h2>အစိတ်အပိုင်းနဲ့ အခြေအနေကို ရွေးခြင်း</h2>
+  <p>::first-letter က စာပိုဒ်ထဲက ပထမစာလုံးကို style ပေးပါတယ်။ :hover လို pseudo-class ကတော့ element တစ်ခုလုံးရဲ့ လက်ရှိအခြေအနေကို စစ်ပါတယ်။ Selector နောက်မှာ လိုတဲ့တစ်မျိုးကို တွဲရေးနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Style a part or match a state&lt;/title&gt;
+  &lt;style&gt;
+    .notice::first-letter { font-weight: bold; font-size: 1.8em; }
+    .notice:hover { color: purple; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;notice&quot;&gt;Your order is ready.&lt;/p&gt;
+&lt;p&gt;Your package is on the way.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen ရဲ့ ပထမစာလုံး ပိုကြီးပါမယ်။ စာပိုဒ်ပေါ် mouse တင်ပြီး အရောင်ပြောင်းပုံကို ကြည့်ပါ။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Pseudo-elements">MDN · Pseudo-elements</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Pseudo-classes">MDN · Pseudo-classes</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/layout-debugging/">အရင်သင်ခန်းစာ · Layout ပြဿနာ ရှာပြီး ပြင်ခြင်း</a>
+<a href="/docs/read/my/css/images-and-transforms/">နောက်သင်ခန်းစာ · ပုံဆံ့အောင် ထည့်ပုံနဲ့ Transforms</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

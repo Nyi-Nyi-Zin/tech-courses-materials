@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Grid က အပြင်အကွက်တစ်ခုရဲ့ တိုက်ရိုက် children တွေကို row နဲ့ column တွေမှာ စီပေးပါတယ်။ Row သို့ column တစ်တန်းစီကို track လို့ ခေါ်ပြီး အရွယ်အစား သတ်မှတ်နိုင်ပါတယ်။ Parent မှာ display: grid ထည့်ပြီး ဒီ layout ကို စသုံးပါ။">
+  <title>Grid နဲ့ Row၊ Column စီခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/css/grid/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/css/grid/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/css/grid/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#css">သင်ခန်းစာအားလုံး · CSS</a> <a href="/docs/read/en/css/grid/" lang="en" hreflang="en">English</a></nav>
+  <h1>Grid နဲ့ Row၊ Column စီခြင်း</h1>
+  <p class="article-version">W3C CSS Snapshot 2026</p>
+  <p class="intro">Grid က အပြင်အကွက်တစ်ခုရဲ့ တိုက်ရိုက် children တွေကို row နဲ့ column တွေမှာ စီပေးပါတယ်။ Row သို့ column တစ်တန်းစီကို track လို့ ခေါ်ပြီး အရွယ်အစား သတ်မှတ်နိုင်ပါတယ်။ Parent မှာ display: grid ထည့်ပြီး ဒီ layout ကို စသုံးပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/css/grid">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#columns">fr နဲ့ Column အကျယ် ခွဲပုံ</a></li>
+<li><a href="#areas">Named Area နဲ့ Page အပိုင်း နေရာချခြင်း</a></li>
+<li><a href="#auto-fit">ဆံ့တဲ့ Column အရေအတွက်ကို Grid နဲ့ ရွေးခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="columns">
+  <h2>fr နဲ့ Column အကျယ် ခွဲပုံ</h2>
+  <p>grid-template-columns မှာ column တစ်ခုစီရဲ့ အကျယ်သတ်မှတ်ပါတယ်။ fr က ပုံသေအကျယ်နဲ့ gap တွေ နုတ်ပြီး ကျန်တဲ့နေရာကို ခွဲပေးပါတယ်။ 1fr နှစ်ခုဆို နေရာတူတူ ရပါတယ်။ Items တွေက column အစဉ်လိုက်ဝင်ပြီး ပြည့်ရင် နောက် row ဆင်းပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Divide the available width with fr&lt;/title&gt;
+  &lt;style&gt;
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cards &gt; div { background: #d6efea; padding: 12px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;cards&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen နဲ့ Notebook က ပထမ row မှာ၊ Folder က နောက် row မှာ ပေါ်ပါမယ်။ 1fr 2fr ပြောင်းစမ်းပါ။</p>
+
+</section>
+<section class="article-section" id="areas">
+  <h2>Named Area နဲ့ Page အပိုင်း နေရာချခြင်း</h2>
+  <p>grid-template-areas ထဲမှာ row တစ်ကြောင်းစီကို quotation marks နဲ့ ရေးပြီး layout ပုံစံ ချပါတယ်။ Row တစ်ခုထဲမှာ နာမည်တူ ထပ်ရေးရင် အဲဒီနာမည်က column တွေကို ဖြတ်ယူပါတယ်။ grid-area နဲ့ item ကို သက်ဆိုင်ရာ နာမည်ပေးထားတဲ့ နေရာမှာ ထားပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Place page regions with named areas&lt;/title&gt;
+  &lt;style&gt;
+    .page { display: grid; gap: 8px; grid-template-columns: 7rem minmax(0, 1fr);
+      grid-template-areas: &quot;head head&quot; &quot;side content&quot;; }
+    .page &gt; * { background: #d6efea; padding: 8px; }
+    header { grid-area: head; }
+    aside { grid-area: side; }
+    main { grid-area: content; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;page&quot;&gt;&lt;header&gt;Example Store&lt;/header&gt;&lt;aside&gt;Categories&lt;/aside&gt;&lt;main&gt;Pens and notebooks&lt;/main&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ခေါင်းစဉ်က column နှစ်ခုလုံး ယူပါတယ်။ ဒုတိယ row မှာ Categories နဲ့ product list ဘေးချင်းကပ် ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="auto-fit">
+  <h2>ဆံ့တဲ့ Column အရေအတွက်ကို Grid နဲ့ ရွေးခြင်း</h2>
+  <p>repeat(auto-fit, ...) က ဆံ့သလောက် track တွေ စီပြီး မသုံးတဲ့ track တွေကို ခေါက်ပေးပါတယ်။ minmax က track အတွက် အငယ်ဆုံးနဲ့ အကြီးဆုံး သတ်မှတ်တာပါ။ min(100%, 150px) က မြင်ကွင်း အရမ်းကျဉ်းရင် အငယ်ဆုံးအကျယ်ကိုပါ အထဲဆံ့စေပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Let the grid decide how many columns fit&lt;/title&gt;
+  &lt;style&gt;
+    .cards { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); }
+    .cards &gt; div { background: #d6efea; padding: 8px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;cards&quot;&gt;&lt;div&gt;Pen&lt;/div&gt;&lt;div&gt;Notebook&lt;/div&gt;&lt;div&gt;Folder&lt;/div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Browser အကျယ်ပြောင်းကြည့်ပါ။ နေရာကျဉ်းလာရင် column အရေအတွက် လျော့သွားပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.w3.org/TR/css-grid-2/">W3C · CSS Grid</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout/Basic_concepts">MDN · Basic concepts of grid layout</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/css/flexbox/">အရင်သင်ခန်းစာ · Flexbox နဲ့ အတန်းလိုက် စီခြင်း</a>
+<a href="/docs/read/my/css/flex-and-grid-sizing/">နောက်သင်ခန်းစာ · Flex အရွယ်တွက်ပုံနဲ့ Grid နေရာချခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use transactions to keep related changes together. Use indexes to improve query access when they fit how the application reads data.">
+  <title>Data changes, transactions, and indexes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/transactions/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/transactions/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/transactions/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/transactions/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Data changes, transactions, and indexes</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">Use transactions to keep related changes together. Use indexes to improve query access when they fit how the application reads data.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/database/transactions">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#commit">Save or undo a group of changes</a></li>
+<li><a href="#index">Compare plans before and after an index</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="commit">
+  <h2>Save or undo a group of changes</h2>
+  <p>BEGIN starts a transaction. COMMIT makes its changes permanent and ROLLBACK discards them. Use WHERE to target the intended rows when you update or delete. This example rolls back a course fee change.</p>
+
+<pre><code>BEGIN;
+UPDATE courses SET fee = 35.00 WHERE id = 1;
+SELECT title, fee FROM courses WHERE id = 1;
+ROLLBACK;
+SELECT title, fee FROM courses WHERE id = 1;</code></pre>
+
+
+</section>
+<section class="article-section" id="index">
+  <h2>Compare plans before and after an index</h2>
+  <p>A transaction controls which changes are saved together. The next example looks at a separate question about the same database work: how PostgreSQL finds the row a query asks for. Run the same query against a temporary table before and after adding a B-tree index on sku. Each SKU occurs once in this sample. ANALYZE updates the planner statistics. EXPLAIN ANALYZE runs the SELECT and reports the plan and observed results. The rollback cleans up the sample.</p>
+
+<pre><code>BEGIN;
+CREATE TEMP TABLE lesson_index_products (sku text, name text);
+INSERT INTO lesson_index_products (sku, name)
+SELECT &#39;SKU-&#39; || n, &#39;Product &#39; || n
+FROM generate_series(1, 20000) AS sample(n);
+ANALYZE lesson_index_products;
+
+EXPLAIN (ANALYZE, BUFFERS)
+SELECT * FROM lesson_index_products WHERE sku = &#39;SKU-18000&#39;;
+
+CREATE INDEX ON lesson_index_products (sku);
+
+EXPLAIN (ANALYZE, BUFFERS)
+SELECT * FROM lesson_index_products WHERE sku = &#39;SKU-18000&#39;;
+ROLLBACK;</code></pre>
+<dl class="lesson-terms"><div><dt><code>Seq Scan</code></dt><dd>Reads the table and checks rows against the filter.</dd></div><div><dt><code>Index Scan</code></dt><dd>Looks up matching entries in the index and fetches the corresponding table rows.</dd></div><div><dt><code>Index trade-off</code></dt><dd>An index takes storage and adds work to writes. For small tables or queries returning much of a table, the planner may still choose a sequential scan.</dd></div></dl>
+<p class="example-result"><strong>What to expect</strong> Both plans should report one actual matching row. The first plan typically shows Seq Scan and the second Index Scan. Compare the scan type and buffers. Elapsed time can vary by machine and cache state.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/tutorial-transactions.html">Transactions</a></li>
+<li><a href="https://www.postgresql.org/docs/19/indexes.html">Indexes</a></li>
+<li><a href="https://www.postgresql.org/docs/19/using-explain.html">Using EXPLAIN</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/normalization/">Previous lesson · Design tables with normalization</a>
+<a href="/docs/read/en/database/transaction-isolation/">Next lesson · Transaction isolation and concurrent updates</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

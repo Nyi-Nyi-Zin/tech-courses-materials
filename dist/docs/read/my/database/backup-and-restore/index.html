@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Database တစ်ခုကို logical backup ယူပြီး သီးသန့် database ထဲ ပြန်သွင်းလို့ရတာ စစ်ပါ။">
+  <title>PostgreSQL Tools နဲ့ Backup၊ Restore လုပ်ပါ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/backup-and-restore/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/backup-and-restore/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/backup-and-restore/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/backup-and-restore/" lang="en" hreflang="en">English</a></nav>
+  <h1>PostgreSQL Tools နဲ့ Backup၊ Restore လုပ်ပါ</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">Database တစ်ခုကို logical backup ယူပြီး သီးသန့် database ထဲ ပြန်သွင်းလို့ရတာ စစ်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/backup-and-restore">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#dump">Custom Format Backup ဖန်တီးပါ</a></li>
+<li><a href="#restore">Database အသစ်ထဲ Restore လုပ်ပါ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="dump">
+  <h2>Custom Format Backup ဖန်တီးပါ</h2>
+  <p>pg_dump ကို -Fc နဲ့ သုံးပါ။ Setup ပြီးရင် OS terminal မှာ run ပါ။ Backup ယူမယ့် objects နဲ့ data ကို ဖတ်ခွင့်ရှိတဲ့ account သုံးပါ။ pg_dump client ရဲ့ major version က server နဲ့ တူရမယ် ဒါမှမဟုတ် ပိုအသစ်ဖြစ်ရပါမယ်။ Backup ဖိုင်ထဲမှာ database အချက်အလက် ပါလို့ သီးသန့် သိမ်းပါ။</p>
+
+<pre><code>pg_dump -h localhost -p 5432 -U postgres -Fc -f learning_db.dump learning_db
+pg_restore --list learning_db.dump</code></pre>
+<dl class="lesson-terms"><div><dt><code>pg_dump -h localhost -p 5432 -U postgres -Fc -f learning_db.dump learning_db</code></dt><dd>localhost မှာ postgres role နဲ့ ချိတ်ပြီး learning_db ကို ဖတ်တယ်။ -Fc နဲ့ custom-format archive ထုတ်ပြီး -f က သတ်မှတ်တဲ့ learning_db.dump ဖိုင်ထဲ သိမ်းတယ်။</dd></div><div><dt><code>pg_restore --list learning_db.dump</code></dt><dd>Archive ထဲက database objects စာရင်းကို ပြတယ်။ Database ထဲကို restore မလုပ်သေးပါဘူး။</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="restore">
+  <h2>Database အသစ်ထဲ Restore လုပ်ပါ</h2>
+  <p>Database ဆောက်ခွင့်ရှိတဲ့ account နဲ့ test database အလွတ် ဆောက်ပါ။ Database owner က တခြား account ဖြစ်ရင် အဲဒီ account နဲ့ restore လုပ်ပါ။ ဒီ restore စမ်းသပ်မှုမှာ --no-owner နဲ့ --no-privileges က မူလ owners နဲ့ grants ကို ပြန်မထည့်ပါဘူး။ အရေးကြီးတဲ့ table တွေရဲ့ row count တိုက်ပြီး app ကနေ data ဖတ်စမ်းပါ။ Roles နဲ့ cluster တစ်ခုလုံးသုံး objects တွေအတွက် သီးသန့် backup စီစဉ်ပါ။ သတ်မှတ်ထားတဲ့ အချိန်တစ်ခုဆီ ပြန်သွားဖို့ လိုရင် host ရဲ့ point-in-time recovery tools သုံးပါ။</p>
+
+<pre><code>createdb -h localhost -p 5432 -U postgres learning_db_restore
+pg_restore -h localhost -p 5432 -U postgres -d learning_db_restore --exit-on-error --no-owner --no-privileges learning_db.dump
+psql -h localhost -p 5432 -U postgres -d learning_db_restore -c &quot;SELECT count(*) FROM students;&quot;</code></pre>
+<dl class="lesson-terms"><div><dt><code>createdb … learning_db_restore</code></dt><dd>Restore ပြန်သွင်းမယ့် database အလွတ်ကို postgres နဲ့ ဆောက်တယ်။</dd></div><div><dt><code>pg_restore … -d learning_db_restore --exit-on-error</code></dt><dd>learning_db.dump ကို -d နဲ့ ရွေးထားတဲ့ database ထဲ ပြန်သွင်းတယ်။ --exit-on-error ကြောင့် ပထမ error မှာ ရပ်တယ်။</dd></div><div><dt><code>psql … -c &quot;SELECT count(*) FROM students;&quot;</code></dt><dd>Quote ထဲက SQL ကို တစ်ခါ run ပြီး terminal ဆီ ပြန်ထွက်တယ်။ students row အရေအတွက်ကို မူလ database နဲ့ တိုက်ကြည့်ပါ။</dd></div></dl>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/app-pgdump.html">PostgreSQL 19 · pg_dump</a></li>
+<li><a href="https://www.postgresql.org/docs/19/app-pgrestore.html">PostgreSQL 19 · pg_restore</a></li>
+<li><a href="https://www.postgresql.org/docs/19/backup-dump.html">PostgreSQL 19 · SQL dumps</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/schema-and-access/">အရင်သင်ခန်းစာ · Table ပြင်ခြင်း၊ Access သတ်မှတ်ခြင်းနဲ့ View ဆောက်ခြင်း</a>
+<a href="/docs/read/my/database/storage-and-recovery/">နောက်သင်ခန်းစာ · Database Storage နဲ့ Crash Recovery</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

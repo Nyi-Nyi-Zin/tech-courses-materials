@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Combine data safely by checking keys, join type, and the expected relationship between tables.">
+  <title>Merge and concatenate tables · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/merge/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/merge/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/merge/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#pandas">All documentation · pandas</a> <a href="/docs/read/my/pandas/merge/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Merge and concatenate tables</h1>
+  <p class="article-version">3.1.1</p>
+  <p class="intro">Combine data safely by checking keys, join type, and the expected relationship between tables.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/pandas/merge">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#join-types">Check the relationship before joining</a></li>
+<li><a href="#concat">Append compatible batches</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="join-types">
+  <h2>Check the relationship before joining</h2>
+  <p>An inner merge retains matching keys. A left merge retains all left rows, and a match on multiple right rows can duplicate left rows. Use validate to assert key relationships. pandas merge can match null keys on both sides, so decide how to handle them.</p>
+
+<pre><code>import pandas as pd
+
+sales = pd.DataFrame({&quot;item_id&quot;: [2, 7], &quot;units&quot;: [3, 1]})
+menu = pd.DataFrame({&quot;item_id&quot;: [1, 2], &quot;name&quot;: [&quot;Tea&quot;, &quot;Cake&quot;]})
+merged = sales.merge(menu, on=&quot;item_id&quot;, how=&quot;left&quot;, validate=&quot;many_to_one&quot;, indicator=True)
+print(merged[&quot;_merge&quot;].tolist())</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/merge-join-types.png" data-image-preview><img src="/docs/media/data/merge-join-types.png" alt="Sales keys 2 and 7 remain after a left merge. Key 2 matches Cake, while key 7 has a missing name and left_only status." width="720" height="386" loading="lazy" decoding="async"></a>
+    <figcaption>The merge indicator helps track unmatched keys.</figcaption>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[&#39;both&#39;, &#39;left_only&#39;]</pre></div>
+
+
+</section>
+<section class="article-section" id="concat">
+  <h2>Append compatible batches</h2>
+  <p>concat combines objects along an axis and aligns labels on the other axis. Combine compatible batches together and choose ignore_index=True when old row indexes are irrelevant.</p>
+
+<pre><code>import pandas as pd
+
+batches = [pd.DataFrame({&quot;total&quot;: [3]}), pd.DataFrame({&quot;total&quot;: [4]})]
+print(pd.concat(batches, ignore_index=True)[&quot;total&quot;].tolist())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[3, 4]</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://pandas.pydata.org/docs/user_guide/merging.html">Merge, join, and concatenate</a></li>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.merge.html">pandas.merge</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/pandas/groupby/">Previous lesson · Group, aggregate, and reshape</a>
+<a href="/docs/read/en/pandas/dates/">Next lesson · Parse dates and group time series</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

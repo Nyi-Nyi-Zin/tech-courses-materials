@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Choose a result type based on another type. Use infer to name a type found inside a matching structure.">
+  <title>Conditional types and infer · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/conditional-types/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/typescript/conditional-types/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/typescript/conditional-types/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#typescript">All documentation · TypeScript</a> <a href="/docs/read/my/typescript/conditional-types/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Conditional types and infer</h1>
+  <p class="article-version">7.0.2</p>
+  <p class="intro">Choose a result type based on another type. Use infer to name a type found inside a matching structure.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/typescript/conditional-types">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#infer">Read the item type of an array</a></li>
+<li><a href="#unions">Choose how to handle unions</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="infer">
+  <h2>Read the item type of an array</h2>
+  <p>The conditional reads like an if statement for types. If T matches a readonly array, infer Item names the type of the elements. Otherwise the result is T.</p>
+
+<pre><code>type ItemOf&lt;T&gt; = T extends readonly (infer Item)[] ? Item : T;
+
+type Name = ItemOf&lt;readonly string[]&gt;; // string
+type Existing = ItemOf&lt;number&gt;; // number</code></pre>
+
+
+</section>
+<section class="article-section" id="unions">
+  <h2>Choose how to handle unions</h2>
+  <p>When the checked side is a plain type parameter, the condition runs for each member of the union. Wrap both sides in square brackets when you want to check the union as a whole.</p>
+
+<pre><code>type ToArrays&lt;T&gt; = T extends unknown ? T[] : never;
+type ToArray&lt;T&gt; = [T] extends [unknown] ? T[] : never;
+
+type Separate = ToArrays&lt;string | number&gt;; // string[] | number[]
+type Mixed = ToArray&lt;string | number&gt;; // (string | number)[]</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.typescriptlang.org/docs/handbook/2/conditional-types.html">TypeScript Handbook · Conditional types</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/typescript/mapped-types/">Previous lesson · Mapped types</a>
+<a href="/docs/read/en/typescript/declaration-files/">Next lesson · Declaration files for JavaScript</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

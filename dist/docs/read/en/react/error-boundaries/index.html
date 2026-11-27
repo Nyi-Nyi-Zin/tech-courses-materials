@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Put an error boundary around a part of the UI so a render failure can show a clear message in that area.">
+  <title>Recover from render errors · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/react/error-boundaries/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/react/error-boundaries/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/react/error-boundaries/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#react">All documentation · React</a> <a href="/docs/read/my/react/error-boundaries/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Recover from render errors</h1>
+  <p class="article-version">19.3</p>
+  <p class="intro">Put an error boundary around a part of the UI so a render failure can show a clear message in that area.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/react/error-boundaries">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#boundary">Render a fallback</a></li>
+<li><a href="#recover">Handle other failures at the source</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="boundary">
+  <h2>Render a fallback</h2>
+  <p>A class boundary can turn a render error in a child into fallback UI. Use getDerivedStateFromError to switch what renders. componentDidCatch can report the error and component stack to your logging service.</p>
+
+<pre><code>import React, { Component } from &quot;react&quot;;
+
+class SectionBoundary extends Component {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  render() {
+    return this.state.failed
+      ? &lt;p role=&quot;alert&quot;&gt;This section could not load.&lt;/p&gt;
+      : this.props.children;
+  }
+}
+
+export default SectionBoundary;</code></pre>
+
+
+</section>
+<section class="article-section" id="recover">
+  <h2>Handle other failures at the source</h2>
+  <p>Handle rejected fetch calls and event handler failures where they occur. A boundary does not catch its own errors or errors from server rendering. Change its key when switching to a different record if you want that record to start with a fresh boundary.</p>
+
+<pre><code>&lt;SectionBoundary key={productId}&gt;
+  &lt;StockPanel productId={productId} /&gt;
+&lt;/SectionBoundary&gt;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary">React · Catching rendering errors</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/react/routing/">Previous lesson · Routing with React Router</a>
+<a href="/docs/read/en/react/suspense/">Next lesson · Show a loading fallback with Suspense</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

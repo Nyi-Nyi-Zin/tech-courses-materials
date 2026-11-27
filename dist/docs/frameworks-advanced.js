@@ -1,4 +1,4 @@
-import { p, page, part } from './content.js';
+import { p, page, part, snippet } from './content.js';
 
 export const advancedFrameworks = {
   react: [
@@ -22,7 +22,7 @@ export default function App() {
     <BrowserRouter>
       <nav>
         <NavLink to="/" end>Home</NavLink>{" "}
-        <NavLink to="/products/42">Tea</NavLink>
+        <NavLink to="/products/42">Pen</NavLink>
       </nav>
       <Routes>
         <Route path="/" element={<h1>Inventory</h1>} />
@@ -32,10 +32,15 @@ export default function App() {
     </BrowserRouter>
   );
 }`),
-      part('refresh', p('Serve direct page requests', 'Page URL ကို တိုက်ရိုက် ဖွင့်လို့ရအောင် လုပ်ပါ'), p(
+      snippet('refresh', p('Serve direct page requests', 'Page URL ကို တိုက်ရိုက် ဖွင့်လို့ရအောင် လုပ်ပါ'), p(
         'When a user reloads /products/42, the request reaches the host first. Configure a single-page app fallback to index.html for client page paths, while keeping API and asset routes separate. Test a link, a direct reload, the Back button, and an unknown URL. A client-side not-found screen does not set the server’s HTTP status.',
         'User က /products/42 ကို reload လုပ်ရင် request က host ဆီ အရင်ရောက်ပါတယ်။ Client page paths တွေအတွက် index.html ကို fallback ပြန်ပေးအောင် သတ်မှတ်ပါ။ API နဲ့ asset routes တွေကို သီးသန့် ဆက်ထားပါ။ Link၊ direct reload၊ Back ခလုတ်နဲ့ မရှိတဲ့ URL ကို စမ်းပါ။ Client ဘက်က not-found screen က server HTTP status မသတ်မှတ်ပေးပါဘူး။',
-      )),
+      ), `# Nginx: inside the server block for the SPA
+location /products/ {
+    try_files $uri $uri/ /index.html;
+}
+
+# Keep existing /api/ and asset locations separate.`),
     ], [
       ['React Router · Declarative routing', 'https://reactrouter.com/start/declarative/routing'],
       ['React Router · NavLink', 'https://reactrouter.com/api/components/NavLink'],
@@ -97,7 +102,21 @@ export default function Reports() {
       part('place', p('Choose which part should wait', 'ဘယ်အပိုင်း Loading ပြမလဲ ရွေးပါ'), p(
         'Put the boundary close to the slow part so the page navigation and headings can stay visible. Suspense works with lazy and supported data sources. For fetch calls started in an effect, keep using an explicit loading and error state.',
         'Loading ကြာတဲ့အပိုင်းနားမှာ boundary ထားပါ။ ဒါဆို navigation နဲ့ headings ဆက်ပေါ်နေပါတယ်။ Suspense က lazy နဲ့ support လုပ်ထားတဲ့ data sources တွေနဲ့ အလုပ်လုပ်ပါတယ်။ Effect ထဲမှာ fetch စထားရင် loading နဲ့ error state ကို ကိုယ်တိုင် သတ်မှတ်ပါ။',
-      )),
+      ), `import { lazy, Suspense } from "react";
+
+const ProductReviews = lazy(() => import("./ProductReviews.jsx"));
+
+export default function ProductPage() {
+  return (
+    <main>
+      <h1>Notebook</h1>
+      <p>Available in three colors.</p>
+      <Suspense fallback={<p>Loading reviews…</p>}>
+        <ProductReviews />
+      </Suspense>
+    </main>
+  );
+}`),
     ], [
       ['React · Suspense', 'https://react.dev/reference/react/Suspense'],
       ['React · lazy', 'https://react.dev/reference/react/lazy'],
@@ -214,7 +233,19 @@ export class InventoryGateway {
       part('inventory', p('Send stock changes after they are saved', 'Stock သိမ်းပြီးမှ Change ပို့ပါ'), p(
         'For live inventory, authenticate each connection and check access before joining a shop room. After a database commit, send an event to that room. When a client reconnects, reload the list from the API so it can catch up on changes it may have missed.',
         'Live inventory အတွက် connection တိုင်းကို authenticate လုပ်ပြီး shop room ထဲ မထည့်ခင် access စစ်ပါ။ Database commit ပြီးမှ အဲဒီ room ဆီ event ပို့ပါ။ Client ပြန်ချိတ်တဲ့အခါ လွတ်သွားနိုင်တဲ့ changes တွေ ပြန်ရဖို့ API ကနေ list ပြန်ယူပါ။',
-      )),
+      ), `// In an authorized update handler. The shop ID comes from the session.
+const change = await this.dataSource.transaction(async manager => {
+  const products = manager.getRepository(Product);
+  const product = await products.findOneByOrFail({ id: productId, shopId });
+  product.quantity = quantity;
+  const saved = await products.save(product);
+  return { id: saved.id, quantity: saved.quantity };
+});
+
+this.server.to("shop:" + shopId).emit("inventory:updated", change);
+
+// Browser: "connect" also fires after reconnecting.
+socket.on("connect", reloadInventory);`),
     ], [
       ['NestJS · Gateways', 'https://docs.nestjs.com/websockets/gateways'],
       ['Socket.IO · Acknowledgements', 'https://socket.io/docs/v4/emitting-events/#acknowledgements'],

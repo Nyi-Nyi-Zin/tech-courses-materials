@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A file picker lets a user select a file. To upload it, put the picker in a form that sends the selected file to a server that accepts it.">
+  <title>File Uploads · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/file-uploads/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/file-uploads/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/file-uploads/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/file-uploads/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>File Uploads</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">A file picker lets a user select a file. To upload it, put the picker in a form that sends the selected file to a server that accepts it.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/file-uploads">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#multipart-form">Submit a File with multipart/form-data</a></li>
+<li><a href="#upload-server">Receive the File on a Local Server</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="multipart-form">
+  <h2>Submit a File with multipart/form-data</h2>
+  <p>action=&quot;/upload&quot; points to the server route. method=&quot;post&quot; sends the form in the request body. enctype=&quot;multipart/form-data&quot; tells the browser to send each field as a separate part, including the selected file’s contents. The input’s name=&quot;attachment&quot; gives the file part a name the server can look up.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Submit a File with multipart/form-data&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form action=&quot;/upload&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+    &lt;label for=&quot;attachment&quot;&gt;Choose a text file&lt;/label&gt;
+    &lt;input id=&quot;attachment&quot; name=&quot;attachment&quot; type=&quot;file&quot; accept=&quot;.txt,text/plain&quot; required&gt;
+    &lt;button type=&quot;submit&quot;&gt;Upload file&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Choose a small text file and click Upload file. The preview shows the method, destination, encoding, filename, and size using the file selected in the browser. Follow the next example to send the actual file to your local server.</p>
+
+</section>
+<section class="article-section" id="upload-server">
+  <h2>Receive the File on a Local Server</h2>
+  <p>Save the previous HTML example as upload.html. Save the server code below as server.mjs in the same folder. Run node server.mjs with Node.js 22 or later, then open http://127.0.0.1:3000. Choose a nonempty .txt file and submit. The server reads the attachment part and returns its filename and byte count. This local demo limits the whole request to 1 MiB and discards the file after reading it.</p>
+
+<pre><code>import { readFile } from &quot;node:fs/promises&quot;;
+import { createServer } from &quot;node:http&quot;;
+
+const page = await readFile(new URL(&quot;./upload.html&quot;, import.meta.url));
+const maxRequestBytes = 1024 * 1024;
+
+function send(response, status, body) {
+  response.writeHead(status, { &quot;Content-Type&quot;: &quot;application/json; charset=utf-8&quot; });
+  response.end(JSON.stringify(body));
+}
+
+createServer(async (request, response) =&gt; {
+  const path = request.url;
+  if (request.method === &quot;GET&quot; &amp;&amp; path === &quot;/&quot;) {
+    response.writeHead(200, { &quot;Content-Type&quot;: &quot;text/html; charset=utf-8&quot; });
+    response.end(page);
+    return;
+  }
+  if (request.method !== &quot;POST&quot; || path !== &quot;/upload&quot;) {
+    send(response, 404, { error: &quot;Page not found&quot; });
+    return;
+  }
+
+  const contentType = request.headers[&quot;content-type&quot;] ?? &quot;&quot;;
+  if (!contentType.toLowerCase().startsWith(&quot;multipart/form-data;&quot;)) {
+    send(response, 415, { error: &quot;Send a multipart form&quot; });
+    return;
+  }
+
+  try {
+    const chunks = [];
+    let size = 0;
+    for await (const chunk of request.iterator({ destroyOnReturn: false })) {
+      size += chunk.length;
+      if (size &gt; maxRequestBytes) {
+        response.setHeader(&quot;Connection&quot;, &quot;close&quot;);
+        send(response, 413, { error: &quot;Request exceeds 1 MiB&quot; });
+        return;
+      }
+      chunks.push(chunk);
+    }
+
+    const multipart = new Response(Buffer.concat(chunks), {
+      headers: { &quot;Content-Type&quot;: contentType },
+    });
+    const form = await multipart.formData();
+    const file = form.get(&quot;attachment&quot;);
+    if (!(file instanceof File) || !file.name || file.size === 0) {
+      send(response, 400, { error: &quot;Choose a nonempty file&quot; });
+      return;
+    }
+    send(response, 200, { filename: file.name, bytes: file.size });
+  } catch {
+    send(response, 400, { error: &quot;Could not read the upload&quot; });
+  }
+}).listen(3000, &quot;127.0.0.1&quot;, () =&gt; {
+  console.log(&quot;Open http://127.0.0.1:3000&quot;);
+});</code></pre>
+<p class="example-result"><strong>What to expect</strong> A successful upload shows JSON such as {&quot;filename&quot;:&quot;notes.txt&quot;,&quot;bytes&quot;:12}. The byte count depends on your file.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form">MDN · The form element</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/file">MDN · File input</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Response/formData">MDN · Reading multipart data with formData()</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/form-field-types/">Previous lesson · Textarea, File Inputs, and Input Attributes</a>
+<a href="/docs/read/en/html/form-validation/">Next lesson · HTML Form Validation</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

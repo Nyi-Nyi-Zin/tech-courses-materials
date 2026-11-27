@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HTTP ဆိုတာ request နဲ့ response အပြန်အလှန် ပို့ဖို့ စည်းမျဉ်းအစုပါ။ Request မှာ လိပ်စာနဲ့ method ရေးပါတယ်။ Response မှာ အခြေအနေဖော်ပြတဲ့ status code ပါပြီး data တင်ပို့တဲ့ body လည်း ပါနိုင်ပါတယ်။ API က program တစ်ခုက service ဆီ data သို့မဟုတ် လုပ်ဆောင်ချက် တောင်းဖို့ သတ်မှတ်ထားတဲ့ နည်းလမ်းပါ။">
+  <title>HTTP Request နဲ့ Fetch · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/js/http/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/http/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/http/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#js">သင်ခန်းစာအားလုံး · JavaScript</a> <a href="/docs/read/en/js/http/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTTP Request နဲ့ Fetch</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">HTTP ဆိုတာ request နဲ့ response အပြန်အလှန် ပို့ဖို့ စည်းမျဉ်းအစုပါ။ Request မှာ လိပ်စာနဲ့ method ရေးပါတယ်။ Response မှာ အခြေအနေဖော်ပြတဲ့ status code ပါပြီး data တင်ပို့တဲ့ body လည်း ပါနိုင်ပါတယ်။ API က program တစ်ခုက service ဆီ data သို့မဟုတ် လုပ်ဆောင်ချက် တောင်းဖို့ သတ်မှတ်ထားတဲ့ နည်းလမ်းပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/js/http">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#json">JSON ဆိုတာဘာလဲ။</a></li>
+<li><a href="#fetch">GET Request နဲ့ Data ဖတ်ခြင်း</a></li>
+<li><a href="#post">POST Request နဲ့ JSON ပို့ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="json">
+  <h2>JSON ဆိုတာဘာလဲ။</h2>
+  <p>JSON ဆိုတာ data ဖလှယ်ဖို့ သုံးတဲ့ စာသားပုံစံတစ်ခုပါ။ JSON object ရဲ့ property နာမည်နဲ့ string တန်ဖိုးတွေကို double quotes နဲ့ ရေးပါတယ်။ JSON.parse က JSON စာသားကို JavaScript တန်ဖိုးအဖြစ် ဖတ်ပြီး JSON.stringify က တန်ဖိုးကို JSON စာသားအဖြစ် ထုတ်ပေးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာတွေအတွက် folder အသစ်လုပ်ပြီး code ကို product.json နဲ့ သိမ်းပါ။</p>
+<pre><code>{ &quot;name&quot;: &quot;Pen&quot;, &quot;price&quot;: 2500 }</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> GET နမူနာမှာ သုံးမယ့် JSON ဖိုင်ရပါပြီ။</p>
+
+</section>
+<section class="article-section" id="fetch">
+  <h2>GET Request နဲ့ Data ဖတ်ခြင်း</h2>
+  <p>GET က အချက်အလက်တစ်ခုကို တောင်းဖတ်တဲ့ method ပါ။ fetch() က Response ရမယ့် promise ပြန်ပေးပါတယ်။ Status code 200 ကနေ 299 ထိဆို response.ok က true ပါ။ Server က 404 ပြန်ရင်လည်း fetch promise မှာ Response ရနိုင်သေးလို့ body မဖတ်ခင် ok စစ်ပါ။ response.json() က body ကို JSON အဖြစ် ဖတ်ပြီး ရလဒ် promise ပြန်ပေးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> product.json ဘေးမှာ index.html နဲ့ သိမ်းပါ။ VS Code Live Server သုံးပါ။ ဒါမှမဟုတ် အဲဒီ folder ထဲ python -m http.server 8000 run ပြီး http://localhost:8000 ဖွင့်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;GET demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p id=&quot;result&quot;&gt;Loading…&lt;/p&gt;
+  &lt;script&gt;
+    async function loadProduct() {
+      const result = document.querySelector(&quot;#result&quot;);
+      try {
+        const response = await fetch(&quot;./product.json&quot;);
+        if (!response.ok) throw new Error(&quot;HTTP &quot; + response.status);
+        const product = await response.json();
+        result.textContent = product.name + &quot;: &quot; + product.price;
+      } catch (error) {
+        result.textContent = &quot;Could not load the product: &quot; + error.message;
+      }
+    }
+    loadProduct();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> စာမျက်နှာမှာ Pen: 2500 ပေါ်ပါမယ်။ Request ထဲက product.json ကို missing.json လို့ ပြောင်းပြီး reload လုပ်ရင် message မှာ HTTP 404 ပါတာ ကြည့်ပါ။</p>
+<p class="example-check"><strong>ရလဒ်ကွာနေရင်</strong> လိပ်စာက file: နဲ့ စရင် local server URL နဲ့ ဖွင့်ပါ။ 404 ဆိုရင် ဖိုင်နာမည်နဲ့ server ဖွင့်ထားတဲ့ folder ကို စစ်ပါ။</p>
+</section>
+<section class="article-section" id="post">
+  <h2>POST Request နဲ့ JSON ပို့ခြင်း</h2>
+  <p>POST က server ကို အလုပ်လုပ်ဖို့ data ပို့တဲ့ method ပါ။ ဒီမှာ method ကို POST သတ်မှတ်ထားပါတယ်။ Content-Type header က body ပုံစံ ပြောပြီး JSON.stringify က data ကို အဲဒီစာသားပုံစံ ပြောင်းပေးပါတယ်။ ဒီနမူနာ API က ဖန်တီးပြီးသလို စမ်းသပ်ရလဒ် ပြန်ပေးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> GET နမူနာ folder ထဲ post.html နဲ့ သိမ်းပါ။ Internet ချိတ်ထားပြီး အရင် local server ကနေ ဖွင့်ပါ။ Send example post ခလုတ် နှိပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;POST demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id=&quot;submit&quot; type=&quot;button&quot;&gt;Send example post&lt;/button&gt;
+  &lt;p id=&quot;result&quot; role=&quot;status&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const button = document.querySelector(&quot;#submit&quot;);
+    const result = document.querySelector(&quot;#result&quot;);
+    button.addEventListener(&quot;click&quot;, async () =&gt; {
+      result.textContent = &quot;Sending…&quot;;
+      try {
+        const response = await fetch(&quot;https://jsonplaceholder.typicode.com/posts&quot;, {
+          method: &quot;POST&quot;,
+          headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+          body: JSON.stringify({ title: &quot;Pen&quot;, body: &quot;A sample product post&quot;, userId: 1 }),
+        });
+        if (!response.ok) throw new Error(&quot;HTTP &quot; + response.status);
+        const data = await response.json();
+        result.textContent = &quot;Received: &quot; + data.title + &quot; (ID &quot; + data.id + &quot;)&quot;;
+      } catch (error) {
+        result.textContent = &quot;Could not send: &quot; + error.message;
+      }
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Demo API က title နဲ့ စမ်းသပ် ID အသစ် ပြန်ပေးပါတယ်။ Service က သတ်မှတ်ထားတဲ့အတိုင်း ပြန်ရင် “Received: Pen (ID 101)” ပေါ်ပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://fetch.spec.whatwg.org/">WHATWG · Fetch Standard</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">MDN · Using Fetch</a></li>
+<li><a href="https://jsonplaceholder.typicode.com/guide/">JSONPlaceholder · API guide</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/js/async/">အရင်သင်ခန်းစာ · Async JavaScript၊ Promise နဲ့ Event Loop</a>
+<a href="/docs/read/my/js/storage-and-errors/">နောက်သင်ခန်းစာ · Browser Storage နဲ့ Error ကိုင်တွယ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Scope decides where a name can be used. Closures let functions keep access to names around them. Classes give you a reusable way to create objects that share a structure and behavior.">
+  <title>Scope, closures, and classes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/js/scope-and-classes/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/js/scope-and-classes/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/js/scope-and-classes/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#js">All documentation · JavaScript</a> <a href="/docs/read/my/js/scope-and-classes/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Scope, closures, and classes</h1>
+  <p class="article-version">ECMAScript 2026</p>
+  <p class="intro">Scope decides where a name can be used. Closures let functions keep access to names around them. Classes give you a reusable way to create objects that share a structure and behavior.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/js/scope-and-classes">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#scope">What is scope?</a></li>
+<li><a href="#closures">Keep access to values with a closure</a></li>
+<li><a href="#classes">Create an object from a class</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="scope">
+  <h2>What is scope?</h2>
+  <p>Names declared with let or const inside a block are visible in that block and blocks nested inside it. An inner block can use a different variable with the same name. This is called shadowing.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>const product = &quot;Pen&quot;;
+{
+  const product = &quot;Notebook&quot;;
+  console.log(product);
+}
+console.log(product);</code></pre>
+<p class="example-result"><strong>What to expect</strong> Inside the block it prints Notebook; outside it prints Pen.</p>
+
+</section>
+<section class="article-section" id="closures">
+  <h2>Keep access to values with a closure</h2>
+  <p>A closure is a function together with access to the scope where it was created. When makeCounter finishes, the function it returns can still read and change count. Each call to makeCounter makes a separate count.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>function makeCounter() {
+  let count = 0;
+  return function addOne() {
+    count += 1;
+    return count;
+  };
+}
+const next = makeCounter();
+console.log(next(), next());</code></pre>
+<p class="example-result"><strong>What to expect</strong> It prints 1 and 2. A new counter starts again at 1 on its first call.</p>
+
+</section>
+<section class="article-section" id="classes">
+  <h2>Create an object from a class</h2>
+  <p>A class describes how to make related objects. new creates one instance and runs constructor with the supplied arguments. this refers to that instance in the constructor and when its method is called through the instance.</p>
+<p class="example-setup"><strong>How to try it</strong> Open a browser tab, then open Developer Tools → Console. Type the example or paste it into the Console after reviewing it, then run it. Reload before repeating declarations with the same names.</p>
+<pre><code>class Product {
+  constructor(name, price) {
+    this.name = name;
+    this.price = price;
+  }
+  total(quantity) {
+    return this.price * quantity;
+  }
+}
+const pen = new Product(&quot;Pen&quot;, 2500);
+console.log(pen.name, pen.total(2));</code></pre>
+<p class="example-result"><strong>What to expect</strong> The Console shows Pen and 5000. Make another instance with a different price to see that it has its own data.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures">MDN · Closures</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes">MDN · Classes</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/js/map-and-set/">Previous lesson · Map and Set</a>
+<a href="/docs/read/en/js/dom/">Next lesson · The DOM and events</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

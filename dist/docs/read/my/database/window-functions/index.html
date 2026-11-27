@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CTE သုံးပြီး သင်တန်းအလိုက် လူဦးရေ စုတွက်နိုင်ပါတယ်။ မူလ row တစ်ကြောင်းချင်းစီကိုပါ ပြပြီး စုစုပေါင်း ဒါမှမဟုတ် အဆင့်ကို ယှဉ်ပြဖို့ Window Function သုံးနိုင်ပါတယ်။">
+  <title>Window Functions နဲ့ Rank နှင့် Total တွက်ခြင်း · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/window-functions/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/window-functions/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/window-functions/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/window-functions/" lang="en" hreflang="en">English</a></nav>
+  <h1>Window Functions နဲ့ Rank နှင့် Total တွက်ခြင်း</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">CTE သုံးပြီး သင်တန်းအလိုက် လူဦးရေ စုတွက်နိုင်ပါတယ်။ မူလ row တစ်ကြောင်းချင်းစီကိုပါ ပြပြီး စုစုပေါင်း ဒါမှမဟုတ် အဆင့်ကို ယှဉ်ပြဖို့ Window Function သုံးနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/window-functions">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#running-total">Running Total တွက်ရင်း Row တစ်ခုစီ ထားခြင်း</a></li>
+<li><a href="#rank">ရလဒ်တူတဲ့ Rows တွေကို ကိုင်တွယ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="running-total">
+  <h2>Running Total တွက်ရင်း Row တစ်ခုစီ ထားခြင်း</h2>
+  <p>PARTITION BY က သီးခြားအုပ်စုတွေ ခွဲပါတယ်။ OVER ထဲက ORDER BY က တွက်မယ့်အစဉ်၊ ROWS frame က လက်ရှိ row ထိ သတ်မှတ်ပါတယ်။ နောက်ဆုံး ORDER BY က ပြမယ့်အစဉ်ကို ထိန်းပါတယ်။</p>
+
+<pre><code>SELECT course_id, student_id, enrolled_on,
+       COUNT(*) OVER (
+         PARTITION BY course_id
+         ORDER BY enrolled_on, student_id
+         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+       ) AS enrollments_so_far
+FROM enrollments
+ORDER BY course_id, enrolled_on, student_id;</code></pre>
+
+
+</section>
+<section class="article-section" id="rank">
+  <h2>ရလဒ်တူတဲ့ Rows တွေကို ကိုင်တွယ်ခြင်း</h2>
+  <p>row_number က row တစ်ခုစီကို သီးခြားနံပါတ်ပေးပါတယ်။ rank က တန်ဖိုးတူရင် rank တူပြီး နောက်နံပါတ် ကျော်နိုင်ပါတယ်။ dense_rank က rank တူပေမယ့် နံပါတ်မကျော်ပါဘူး။ တန်ဖိုးတူတဲ့ rows တွေမှာ row_number တိကျစေဖို့ tie-breaker ထည့်ပါ။</p>
+
+<pre><code>WITH scores (name, score) AS (
+  VALUES (&#39;Taylor&#39;, 95), (&#39;Jamie&#39;, 95), (&#39;Casey&#39;, 90)
+)
+SELECT name, score,
+       row_number() OVER (ORDER BY score DESC, name) AS row_number,
+       rank()       OVER (ORDER BY score DESC) AS rank,
+       dense_rank() OVER (ORDER BY score DESC) AS dense_rank
+FROM scores
+ORDER BY row_number;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/tutorial-window.html">PostgreSQL window tutorial</a></li>
+<li><a href="https://www.postgresql.org/docs/19/functions-window.html">Window function reference</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/cte/">အရင်သင်ခန်းစာ · CTE နဲ့ Queries ကို အဆင့်ခွဲခြင်း</a>
+<a href="/docs/read/my/database/upserts/">နောက်သင်ခန်းစာ · ON CONFLICT နဲ့ Insert သို့ Update လုပ်ခြင်း</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

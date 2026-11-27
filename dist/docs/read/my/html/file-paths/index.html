@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="catalog.html ကို shop/pages ထဲ၊ product.svg ကို shop/images ထဲ၊ logo.svg ကို site ရဲ့ ထိပ်ဆုံး assets folder ထဲ သိမ်းထားတယ်လို့ စဉ်းစားပါ။ နမူနာတိုင်းမှာ ဒီဖိုင်တွဲပုံအတိုင်း browser က တွက်ထုတ်မယ့် URL ကို ပြထားပါတယ်။">
+  <title>HTML File Paths · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/file-paths/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/file-paths/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/file-paths/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/file-paths/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTML File Paths</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">catalog.html ကို shop/pages ထဲ၊ product.svg ကို shop/images ထဲ၊ logo.svg ကို site ရဲ့ ထိပ်ဆုံး assets folder ထဲ သိမ်းထားတယ်လို့ စဉ်းစားပါ။ နမူနာတိုင်းမှာ ဒီဖိုင်တွဲပုံအတိုင်း browser က တွက်ထုတ်မယ့် URL ကို ပြထားပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/file-paths">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#relative">./ နဲ့ ../ ကို လက်ရှိဖိုင်ကနေ တွက်ခြင်း</a></li>
+<li><a href="#root-and-full">Root-relative Path နဲ့ URL အပြည့်အစုံ ဖတ်ခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="relative">
+  <h2>./ နဲ့ ../ ကို လက်ရှိဖိုင်ကနေ တွက်ခြင်း</h2>
+  <p>./ က လက်ရှိ folder ကနေ စပါတယ်။ ../ က အပေါ်က folder တစ်ဆင့်ကို ပြန်တက်ပါတယ်။ HTML ရဲ့ href နဲ့ src လို attribute တွေမှာ ဒီ path တွေ သုံးပါတယ်။ HTML ဖိုင်ကို ရွှေ့ရင် သူ့ folder ကနေ စတဲ့ path တွေ ပြန်စစ်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Resolve ./ and ../ from the current file&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p id=&quot;examples&quot;&gt;&lt;a href=&quot;./hours.html&quot;&gt;Hours&lt;/a&gt; · &lt;a href=&quot;../images/product.svg&quot;&gt;Product image&lt;/a&gt;&lt;/p&gt;
+&lt;p id=&quot;paths&quot; style=&quot;white-space: pre-wrap; overflow-wrap: anywhere&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+const pageURL = &quot;https://example.com/shop/pages/catalog.html&quot;;
+const examples = [...document.querySelectorAll(&quot;#examples a&quot;)];
+document.querySelector(&quot;#paths&quot;).textContent = examples.map(link =&gt; {
+  const path = link.getAttribute(&quot;href&quot;);
+  return path + &quot; → &quot; + new URL(path, pageURL).href;
+}).join(&quot;\n&quot;);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ./hours.html က /shop/pages/ ထဲ၊ ../images/product.svg က /shop/images/ ထဲမှာရှိတဲ့ URL အဖြစ် ထွက်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="root-and-full">
+  <h2>Root-relative Path နဲ့ URL အပြည့်အစုံ ဖတ်ခြင်း</h2>
+  <p>အစမှာ / ပါရင် လက်ရှိ site ရဲ့ ထိပ်ဆုံးကနေ စပါတယ်။ URL အပြည့်အစုံမှာ protocol နဲ့ host ပါပြီး တခြား website ကိုလည်း ညွှန်းနိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Read root-relative and full URLs&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p id=&quot;examples&quot;&gt;&lt;a href=&quot;/assets/logo.svg&quot;&gt;Site logo&lt;/a&gt; · &lt;a href=&quot;https://static.example.org/logo.svg&quot;&gt;External logo&lt;/a&gt;&lt;/p&gt;
+&lt;p id=&quot;paths&quot; style=&quot;white-space: pre-wrap; overflow-wrap: anywhere&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+const pageURL = &quot;https://example.com/shop/pages/catalog.html&quot;;
+const examples = [...document.querySelectorAll(&quot;#examples a&quot;)];
+document.querySelector(&quot;#paths&quot;).textContent = examples.map(link =&gt; {
+  const path = link.getAttribute(&quot;href&quot;);
+  return path + &quot; → &quot; + new URL(path, pageURL).href;
+}).join(&quot;\n&quot;);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> /assets/logo.svg က example.com ကို ဆက်သုံးပြီး URL အပြည့်က static.example.org ကို သုံးပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Creating_links">MDN · Relative links</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/URL_API/Resolving_relative_references">MDN · Resolve a URL</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/content/">အရင်သင်ခန်းစာ · HTML Links &lt;a&gt;</a>
+<a href="/docs/read/my/html/containers/">နောက်သင်ခန်းစာ · အကြောင်းအရာ စုဖွဲ့ဖို့ &lt;div&gt; နဲ့ &lt;span&gt;</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

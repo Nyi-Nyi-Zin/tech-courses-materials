@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Setup မှာ ဆောက်ထားတဲ့ students၊ courses နဲ့ enrollments tables ကို သုံးပါ။ Query တစ်ခုချင်းစီကို သီးသန့် run ပြီး ရလဒ် ဘယ်လိုကွာလဲ ကြည့်ပါ။">
+  <title>Queries၊ Joins နဲ့ Groups · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/queries/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/queries/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/queries/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/queries/" lang="en" hreflang="en">English</a></nav>
+  <h1>Queries၊ Joins နဲ့ Groups</h1>
+  <p class="article-version">PostgreSQL 19.0</p>
+  <p class="intro">Setup မှာ ဆောက်ထားတဲ့ students၊ courses နဲ့ enrollments tables ကို သုံးပါ။ Query တစ်ခုချင်းစီကို သီးသန့် run ပြီး ရလဒ် ဘယ်လိုကွာလဲ ကြည့်ပါ။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/database/queries">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#filter">WHERE နဲ့ Row စစ်ခြင်း</a></li>
+<li><a href="#order-by">ORDER BY နဲ့ အစဉ်လိုက်စီခြင်း</a></li>
+<li><a href="#limit">LIMIT နဲ့ ပထမ Row ထုတ်ခြင်း</a></li>
+<li><a href="#group-by">GROUP BY နဲ့ စာရင်းသွင်းသူ ရေတွက်ခြင်း</a></li>
+<li><a href="#having">HAVING နဲ့ အုပ်စုရလဒ် စစ်ခြင်း</a></li>
+<li><a href="#join">စာရင်းသွင်းသူ မရှိတဲ့ Course တွေပါ ပြခြင်း</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="filter">
+  <h2>WHERE နဲ့ Row စစ်ခြင်း</h2>
+  <p>WHERE က သတ်မှတ်ချက်နဲ့ကိုက်တဲ့ row တွေကို ရွေးတယ်။ ဒီနမူနာက သင်တန်းကြေး 25.00 နဲ့အထက် course တွေကို ရွေးလို့ SQL Basics နဲ့ Web Development ကို ရမယ်။</p>
+
+<pre><code>SELECT title, fee
+FROM courses
+WHERE fee &gt;= 25.00
+ORDER BY id;</code></pre>
+
+
+</section>
+<section class="article-section" id="order-by">
+  <h2>ORDER BY နဲ့ အစဉ်လိုက်စီခြင်း</h2>
+  <p>DESC က သင်တန်းကြေး ပိုမြင့်တာကို အရင်ပြတယ်။ သင်တန်းကြေး တူရင် id ASC က ID ပိုငယ်တာကို အရင်ပြတယ်။</p>
+
+<pre><code>SELECT title, fee
+FROM courses
+ORDER BY fee DESC, id ASC;</code></pre>
+
+
+</section>
+<section class="article-section" id="limit">
+  <h2>LIMIT နဲ့ ပထမ Row ထုတ်ခြင်း</h2>
+  <p>LIMIT 1 က အများဆုံး တစ်ကြောင်းပဲ ထုတ်တယ်။ ORDER BY ပါလို့ ဘယ် row အရင်လာမလဲ သိနိုင်တယ်။ ဒီနမူနာမှာ SQL Basics အရင်လာတယ်။</p>
+
+<pre><code>SELECT title, fee
+FROM courses
+ORDER BY fee DESC, id ASC
+LIMIT 1;</code></pre>
+
+
+</section>
+<section class="article-section" id="group-by">
+  <h2>GROUP BY နဲ့ စာရင်းသွင်းသူ ရေတွက်ခြင်း</h2>
+  <p>WHERE က row တစ်ကြောင်းချင်းစီကို စစ်ထုတ်ပေးပါတယ်။ သင်တန်းအလိုက် စာရင်းသွင်းသူဦးရေ တွက်ဖို့တော့ ရွေးထားတဲ့ row တွေကို သင်တန်းအလိုက် စုရပါတယ်။ GROUP BY က enrollments ထဲမှာရှိတဲ့ course_id တစ်မျိုးစီကို အုပ်စုတစ်ခုစီ ခွဲတယ်။ COUNT(*) က အုပ်စုတစ်ခုစီမှာ စာရင်းသွင်းထားတဲ့ student တွေကို ရေတွက်တယ်။</p>
+
+<pre><code>SELECT course_id, COUNT(*) AS student_count
+FROM enrollments
+GROUP BY course_id
+ORDER BY course_id;</code></pre>
+
+
+</section>
+<section class="article-section" id="having">
+  <h2>HAVING နဲ့ အုပ်စုရလဒ် စစ်ခြင်း</h2>
+  <p>HAVING က အုပ်စုခွဲပြီးမှ အုပ်စုတစ်ခုချင်းရဲ့ count ကို စစ်တယ်။ ဒီ query က student နှစ်ယောက်နဲ့အထက် ရှိတဲ့ course တွေကို ရွေးတယ်။ WHERE ကတော့ အုပ်စုမခွဲခင် row တွေကို စစ်တယ်။</p>
+
+<pre><code>SELECT course_id, COUNT(*) AS student_count
+FROM enrollments
+GROUP BY course_id
+HAVING COUNT(*) &gt;= 2
+ORDER BY course_id;</code></pre>
+
+
+</section>
+<section class="article-section" id="join">
+  <h2>စာရင်းသွင်းသူ မရှိတဲ့ Course တွေပါ ပြခြင်း</h2>
+  <p>သင်တန်း ID အလိုက် တွက်ထားတဲ့ လူဦးရေကို သင်တန်းနာမည်နဲ့ တွဲပြဖို့ courses နဲ့ enrollments ကို ချိတ်ဖတ်ရပါတယ်။ LEFT JOIN က course အားလုံးကို ပြတယ်။ COUNT(e.student_id) က ကိုက်ညီတဲ့ student တွေကို ရေတွက်ပြီး enrollment မရှိတဲ့ course ရဲ့ NULL ကို ကျော်တယ်။ ဒါကြောင့် Computer Fundamentals မှာ 0 ပြမယ်။ INNER JOIN သုံးရင် enrollment ကိုက်ညီတဲ့ course တွေပဲ ပြမယ်။</p>
+
+<pre><code>SELECT c.title, COUNT(e.student_id) AS student_count
+FROM courses AS c
+LEFT JOIN enrollments AS e ON e.course_id = c.id
+GROUP BY c.id, c.title
+ORDER BY student_count DESC, c.id;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://www.postgresql.org/docs/19/tutorial-select.html">Querying a table</a></li>
+<li><a href="https://www.postgresql.org/docs/19/tutorial-join.html">Joins</a></li>
+<li><a href="https://www.postgresql.org/docs/19/queries-table-expressions.html">Table expressions</a></li>
+<li><a href="https://www.postgresql.org/docs/19/queries-limit.html">Sorting and limiting rows</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/crud/">အရင်သင်ခန်းစာ · SQL အခြေခံနဲ့ Table တစ်ခုမှာ CRUD စမ်းခြင်း</a>
+<a href="/docs/read/my/database/normalization/">နောက်သင်ခန်းစာ · Normalization နဲ့ Tables ဆောက်ပါ</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

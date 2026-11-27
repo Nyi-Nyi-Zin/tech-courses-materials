@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Check whether a conclusion changes across groups or under different assumptions.">
+  <title>Measure coverage and test missing-data assumptions · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/metric-coverage/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/metric-coverage/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/metric-coverage/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#data-analysis">All documentation · Data Analysis</a> <a href="/docs/read/my/data-analysis/metric-coverage/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Measure coverage and test missing-data assumptions</h1>
+  
+  <p class="intro">Check whether a conclusion changes across groups or under different assumptions.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/data-analysis/metric-coverage">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#coverage-by-group">Compare coverage across groups</a></li>
+<li><a href="#sensitivity">Calculate bounds when scores are missing</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="coverage-by-group">
+  <h2>Compare coverage across groups</h2>
+  <p>Coverage is the share of eligible rows with a usable value for a specific KPI. For feedback scores, all requests in this example are eligible. count counts valid scores, while size counts all eligible requests. Report the number of valid scores alongside any comparison of averages.</p>
+
+<pre><code>import pandas as pd
+
+feedback = pd.DataFrame({
+    &quot;channel&quot;: [&quot;Web&quot;, &quot;Web&quot;, &quot;App&quot;, &quot;App&quot;],
+    &quot;score&quot;: [4, None, 3, 5],
+})
+summary = feedback.groupby(&quot;channel&quot;)[&quot;score&quot;].agg(usable=&quot;count&quot;, eligible=&quot;size&quot;)
+summary[&quot;coverage&quot;] = summary[&quot;usable&quot;] / summary[&quot;eligible&quot;]
+for row in summary.itertuples():
+    print(row.Index, f&quot;{row.usable}/{row.eligible}&quot;, f&quot;{row.coverage:.0%}&quot;)</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/metric-coverage-coverage-by-group.png" data-image-preview><img src="/docs/media/data/metric-coverage-coverage-by-group.png" alt="Two of two App requests have scores. One of two Web requests has a score." width="720" height="315" loading="lazy" decoding="async"></a>
+    <figcaption>The App mean uses both records while the Web mean uses half of its eligible records.</figcaption>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">App 2/2 100%
+Web 1/2 50%</pre></div>
+
+
+</section>
+<section class="article-section" id="sensitivity">
+  <h2>Calculate bounds when scores are missing</h2>
+  <p>If the Web score scale runs from 1 to 5 and its missing value could be anywhere on that scale, the mean across both eligible requests could range from 2.5 to 4.5. The App mean is 4.0. The order of the two means can therefore change with the missing value. These are bounds under a stated assumption.</p>
+
+<pre><code>from statistics import mean
+
+web_observed = 4
+print(mean([web_observed, 1]), mean([web_observed, 5]))
+print(mean([3, 5]))</code></pre>
+<figure class="lesson-figure">
+    <a href="/docs/media/data/metric-coverage-sensitivity.png" data-image-preview><img src="/docs/media/data/metric-coverage-sensitivity.png" alt="A Web mean interval from 2.5 through 4.5 overlaps the App mean at 4.0." width="720" height="360" loading="lazy" decoding="async"></a>
+    <figcaption>The possible Web mean can fall below, equal, or rise above the App mean.</figcaption>
+  </figure>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">2.5 4.5
+4</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://www.itl.nist.gov/div898/handbook/eda/section1/eda11.htm">NIST handbook on exploratory data analysis</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/missing_data.html">pandas working with missing data</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/groupby.html">pandas GroupBy guide</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/data-analysis/store-sales/">Previous lesson · Store Sales Analysis walkthrough</a>
+<a href="/docs/read/en/data-analysis/sampling-and-bias/">Next lesson · Sampling, bias, and representative data</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

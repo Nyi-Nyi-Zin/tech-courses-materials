@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Convert values deliberately, recover amounts when inputs support it, and record exclusions.">
+  <title>Clean data and retain evidence · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/cleaning-rules/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/cleaning-rules/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/cleaning-rules/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#data-analysis">All documentation · Data Analysis</a> <a href="/docs/read/my/data-analysis/cleaning-rules/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Clean data and retain evidence</h1>
+  
+  <p class="intro">Convert values deliberately, recover amounts when inputs support it, and record exclusions.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/data-analysis/cleaning-rules">Open interactive docs</a></p>
+  <p class="reading-link"><a href="/docs/media/data/store_sales.csv" download>Download sample CSV</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#rules">Convert and recover amounts</a></li>
+<li><a href="#validate">Validate each rule against the raw data</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="rules">
+  <h2>Convert and recover amounts</h2>
+  <p>Keep the recorded total if readable. If it is missing, compute quantity × unit price only when both are available. Flag totals you recovered and keep unresolved amounts missing. On real data, first check whether discounts, tax, or refunds invalidate that formula.</p>
+
+<pre><code>import pandas as pd
+
+raw = pd.read_csv(&quot;store_sales.csv&quot;, dtype=&quot;string&quot;, keep_default_na=False)
+clean = raw.drop_duplicates().copy()
+quantity = pd.to_numeric(clean[&quot;Quantity&quot;], errors=&quot;coerce&quot;)
+price = pd.to_numeric(clean[&quot;Price Per Unit&quot;], errors=&quot;coerce&quot;)
+recorded = pd.to_numeric(clean[&quot;Total Spent&quot;], errors=&quot;coerce&quot;)
+computed = quantity * price
+clean[&quot;sales&quot;] = recorded.fillna(computed)
+clean[&quot;is_recovered&quot;] = recorded.isna() &amp; computed.notna()
+print(clean[&quot;is_recovered&quot;].sum(), clean[&quot;sales&quot;].isna().sum())</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">1 1</pre></div>
+
+
+</section>
+<section class="article-section" id="validate">
+  <h2>Validate each rule against the raw data</h2>
+  <p>Measure row counts and missing values before and after each change. Keep the original amount alongside a recovered amount when you need to explain differences. If you drop rows, record the count and reason.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://pandas.pydata.org/docs/reference/api/pandas.to_numeric.html">pandas.to_numeric</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/missing_data.html">Working with missing data</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/data-analysis/initial-eda/">Previous lesson · Initial EDA and data-quality checks</a>
+<a href="/docs/read/en/data-analysis/analysis-and-validation/">Next lesson · Analyze trends and reconcile results</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

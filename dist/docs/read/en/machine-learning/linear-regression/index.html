@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fit a numerical model and interpret prediction error in the target’s units.">
+  <title>Linear regression and regression metrics · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/linear-regression/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/linear-regression/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/linear-regression/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#machine-learning">All documentation · Machine Learning</a> <a href="/docs/read/my/machine-learning/linear-regression/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Linear regression and regression metrics</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Fit a numerical model and interpret prediction error in the target’s units.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/machine-learning/linear-regression">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#regression">Fit and predict</a></li>
+<li><a href="#metrics">Choose MAE, RMSE, or R²</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="regression">
+  <h2>Fit and predict</h2>
+  <p>LinearRegression fits an intercept and coefficients by ordinary least squares. Predictions use the same feature columns in the same order. Coefficients alone do not establish a causal effect.</p>
+
+<pre><code>from sklearn.linear_model import LinearRegression
+
+model = LinearRegression().fit([[1], [2], [3]], [3, 5, 7])
+print(round(float(model.predict([[4]])[0]), 2))</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">9.0</pre></div>
+
+
+</section>
+<section class="article-section" id="metrics">
+  <h2>Choose MAE, RMSE, or R²</h2>
+  <p>MAE is the average absolute error and has the target’s units. RMSE gives greater weight to large errors and has the same units. R² describes performance relative to the mean-target baseline in the evaluation set and can be negative.</p>
+
+<pre><code>from sklearn.metrics import mean_absolute_error
+
+actual = [100, 200, 300]
+predicted = [90, 210, 320]
+print(round(mean_absolute_error(actual, predicted), 2))</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">13.33</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/linear_model.html">Linear models</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html">Model evaluation and scoring</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/machine-learning/train-test-split/">Previous lesson · Split data and compare with a baseline</a>
+<a href="/docs/read/en/machine-learning/classification/">Next lesson · Classification and confusion matrices</a></nav></footer>
+</article>
+</main>
+</body>
+</html>

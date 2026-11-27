@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use metrics that reflect decision costs and tune a threshold without using the final test set.">
+  <title>Handle imbalanced classes and choose a threshold · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/classification-thresholds/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/machine-learning/classification-thresholds/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/machine-learning/classification-thresholds/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css?v=61">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#machine-learning">All documentation · Machine Learning</a> <a href="/docs/read/my/machine-learning/classification-thresholds/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Handle imbalanced classes and choose a threshold</h1>
+  <p class="article-version">scikit-learn 1.9.1</p>
+  <p class="intro">Use metrics that reflect decision costs and tune a threshold without using the final test set.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/machine-learning/classification-thresholds">Open interactive docs</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#metrics">Choose metrics for rare outcomes</a></li>
+<li><a href="#threshold">Turn probabilities into a decision</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="metrics">
+  <h2>Choose metrics for rare outcomes</h2>
+  <p>Accuracy can be high when the positive class is rare and the model predicts almost every row as negative. Inspect precision, recall, and the confusion matrix. Precision-recall curves show the trade-off as the classification threshold changes.</p>
+
+
+
+
+</section>
+<section class="article-section" id="threshold">
+  <h2>Turn probabilities into a decision</h2>
+  <p>Lowering a threshold can detect more positive cases and produce more false alarms. Pick a threshold using validation data and explicit costs, then report performance on untouched test data.</p>
+
+<pre><code>import numpy as np
+from sklearn.metrics import precision_score, recall_score
+
+y_true = [0, 0, 1, 1]
+scores = np.array([0.10, 0.55, 0.45, 0.80])
+for cutoff in [0.60, 0.40]:
+    flags = scores &gt;= cutoff
+    print(f&quot;{cutoff:.2f}: precision={precision_score(y_true, flags):.2f}, &quot;
+          f&quot;recall={recall_score(y_true, flags):.2f}&quot;)</code></pre>
+<div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">0.60: precision=1.00, recall=0.50
+0.40: precision=0.67, recall=1.00</pre></div>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html">Model evaluation</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/classification_threshold.html">Decision threshold tuning</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/machine-learning/hyperparameter-tuning/">Previous lesson · Tune hyperparameters with cross-validation</a>
+<a href="/docs/read/en/machine-learning/trees-and-ensembles/">Next lesson · Decision trees, random forests, and boosting</a></nav></footer>
+</article>
+</main>
+</body>
+</html>
