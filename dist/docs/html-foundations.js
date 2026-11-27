@@ -15,11 +15,8 @@ const documentExample = `<!doctype html>
 </html>`;
 
 export const htmlFoundations = [
-  page('introduction', p('Introduction to HTML', 'HTML မိတ်ဆက်'), p(
-    'In Web Fundamentals, you saw how a browser receives HTML from a web server. Now look at what that HTML tells the browser and how a few tags turn text into a web page.',
-    'Web Fundamentals မှာ Web Server က Browser ဆီ HTML ပြန်ပို့ပုံကို ကြည့်ခဲ့ပါတယ်။ အခု HTML ထဲမှာ ဘာတွေရေးထားလဲ၊ tag အနည်းငယ်နဲ့ စာသားတွေကို web page တစ်ခုအဖြစ် ဘယ်လိုဖွဲ့စည်းလဲဆိုတာ ကြည့်ရအောင်။',
-  ), [
-    example('what-is-html', p('What is HTML?', 'HTML ဆိုတာ ဘာလဲ?'), p(
+  page('introduction', p('Introduction to HTML', 'HTML မိတ်ဆက်'), p('', ''), [
+    example('what-is-html', p('', ''), p(
       'HTML  is the standard markup language used to create and structure content on the web. Acting as the foundational skeleton of almost every website, it instructs web browsers on how to organize and display text, images, links, and multimedia.',
       'HTML ရဲ့ အရှည်ကောက်က HyperText Markup Language ပါ။ Web page တစ်ခုမှာ ဘာတွေပါလဲ၊ အဲဒီအကြောင်းအရာတွေက ဘာကို ဆိုလိုလဲဆိုတာ HTML နဲ့ ဖော်ပြပါတယ်။ Markup ဆိုတာ အကြောင်းအရာတစ်ခုစီကို tag နဲ့ မှတ်သားရေးတာပါ။ ဒီနမူနာမှာ <h1> က စာမျက်နှာရဲ့ အဓိကခေါင်းစဉ်၊ <p> က စာပိုဒ်ဖြစ်ကြောင်း Browser ကို ပြောပေးပါတယ်။',
     ), `<h1>Learning Center</h1>
@@ -27,17 +24,36 @@ export const htmlFoundations = [
       'Run the example. The browser displays Learning Center as the main heading and the registration notice below it as a paragraph.',
       'နမူနာကို Run ကြည့်ပါ။ Learning Center က အဓိကခေါင်းစဉ်အဖြစ် ပေါ်ပြီး စာရင်းသွင်းရက်အကြောင်းက အောက်မှာ စာပိုဒ်အဖြစ် ပေါ်ပါမယ်။',
     ), null),
-    example('html-css-javascript', p('How HTML, CSS, and JavaScript work together', 'HTML၊ CSS နဲ့ JavaScript တွဲပြီး အလုပ်လုပ်ပုံ'), p(
-      'On the Learning Center page, HTML supplies the heading, the button, and the notice text. CSS gives the heading its color. When you click the button, JavaScript reveals the notice. In the next lesson, you will save a page as index.html and open it in your browser.',
-      'Learning Center စာမျက်နှာမှာ ခေါင်းစဉ်၊ ခလုတ်နဲ့ အသိပေးစာကို HTML နဲ့ ရေးပါတယ်။ ခေါင်းစဉ်ရဲ့ အရောင်ကို CSS နဲ့ သတ်မှတ်ပါတယ်။ ခလုတ်နှိပ်တဲ့အခါ အသိပေးစာကို JavaScript က ဖွင့်ပြပါတယ်။ နောက်သင်ခန်းစာမှာ စာမျက်နှာတစ်ခုကို index.html အဖြစ် သိမ်းပြီး Browser နဲ့ ဖွင့်ကြည့်ပါမယ်။',
-    ), demoPage('Learning Center', `  <h1>Learning Center</h1>
+    {
+      ...example('html-css-javascript', p('How HTML, CSS, and JavaScript work together', 'HTML၊ CSS နဲ့ JavaScript တွဲပြီး အလုပ်လုပ်ပုံ'), null, demoPage('Learning Center', `  <h1>Learning Center</h1>
   <button type="button" id="show-notice">Show notice</button>
   <p id="notice" hidden>Registration opens on Monday.</p>`, '    h1 { color: teal; }', `    document.querySelector("#show-notice").addEventListener("click", () => {
       document.querySelector("#notice").hidden = false;
     });`), p(
-      'The heading is teal. Click Show notice and the registration notice appears below the button.',
-      'ခေါင်းစဉ်က စိမ်းပြာရောင်နဲ့ ပေါ်ပါမယ်။ Show notice ခလုတ်ကို နှိပ်လိုက်ရင် စာရင်းသွင်းရက်အကြောင်း ခလုတ်အောက်မှာ ပေါ်လာပါမယ်။',
-    ), null),
+        'The heading is teal. Click Show notice and the registration notice appears below the button.',
+        'ခေါင်းစဉ်က စိမ်းပြာရောင်နဲ့ ပေါ်ပါမယ်။ Show notice ခလုတ်ကို နှိပ်လိုက်ရင် စာရင်းသွင်းရက်အကြောင်း ခလုတ်အောက်မှာ ပေါ်လာပါမယ်။',
+      ), null),
+      blocks: p(
+        [
+          ['paragraph', 'Every interactive web page relies on three core layers working together. In the example below:'],
+          ['bullets', [
+            '**HTML** builds the structure (the heading, button, and hidden notice).',
+            '**CSS** handles the styling (making the heading teal).',
+            '**JavaScript** adds interactivity (revealing the notice when you click the button).',
+          ]],
+          ['paragraph', '*Up next: you’ll save your own `index.html` file and open it directly in your browser.*'],
+        ],
+        [
+          ['paragraph', 'အသုံးပြုသူက ခလုတ်နှိပ်တာလို လုပ်ဆောင်ချက်တွေကို တုံ့ပြန်နိုင်တဲ့ web page တစ်ခုမှာ HTML၊ CSS နဲ့ JavaScript တို့ အတူအလုပ်လုပ်ပါတယ်။ အောက်က နမူနာမှာ တစ်ခုစီရဲ့ တာဝန်ကို ကြည့်ရအောင်။'],
+          ['bullets', [
+            '**HTML** နဲ့ စာမျက်နှာရဲ့ ဖွဲ့စည်းပုံကို ရေးပါတယ် (ခေါင်းစဉ်၊ ခလုတ်နဲ့ အစမှာ ဖျောက်ထားတဲ့ အသိပေးစာ)။',
+            '**CSS** နဲ့ စာမျက်နှာရဲ့ ပုံစံကို သတ်မှတ်ပါတယ် (ခေါင်းစဉ်ကို စိမ်းပြာရောင် ပြောင်းထားပါတယ်)။',
+            '**JavaScript** က အသုံးပြုသူရဲ့ လုပ်ဆောင်ချက်ကို တုံ့ပြန်ပါတယ် (ခလုတ်နှိပ်လိုက်ရင် အသိပေးစာကို ပြပေးပါတယ်)။',
+          ]],
+          ['paragraph', '*နောက်သင်ခန်းစာမှာ ကိုယ်တိုင် `index.html` ဖိုင်တစ်ခု သိမ်းပြီး browser မှာ တိုက်ရိုက် ဖွင့်ကြည့်ပါမယ်။*'],
+        ],
+      ),
+    },
   ], [
     ['MDN · HTML overview', mdn + 'Web/HTML'],
     introSource,

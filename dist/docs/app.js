@@ -246,14 +246,17 @@ function article(guide, page) {
   const step = (index, name) => guide.pages[index] ? `<a href="${path(guide, guide.pages[index])}">
       <span>${tr(name)}</span><strong>${tx(guide.pages[index].title)}</strong></a>` : '';
   const referencesTitle = page.referencesTitle ?? copyTitle('references');
-  const contents = `<ul>${[...page.sections, {id: 'references', title: referencesTitle}].map(item => `<li><a href="${path(guide, page, item)}">${symbol(item.id === 'references' ? 'article' : 'section')}<span>${tx(item.title)}</span></a></li>`).join('')}</ul>`;
+  const contents = `<ul>${[...page.sections, {id: 'references', title: referencesTitle}]
+    .filter(item => tx(item.title))
+    .map(item => `<li><a href="${path(guide, page, item)}">${symbol(item.id === 'references' ? 'article' : 'section')}<span>${tx(item.title)}</span></a></li>`).join('')}</ul>`;
+  const intro = tx(page.intro);
   return `<div class="article-layout">
     <article>
       <div class="crumb"><a href="${path(guide, guide.pages[0])}">${esc(guide.name)}</a></div>
       ${page.titleSection ? '' : `<h1>${tx(page.title)}</h1>`}
       ${version ? `<p class="article-version">${esc(version)}</p>` : ''}
       ${page.introFigure ? sectionFigure(page.introFigure, language, esc) : ''}
-      ${page.introBlocks ? lessonBlocks(page.introBlocks, language, esc, 'intro') : `<p class="intro">${tx(page.intro)}</p>`}
+      ${page.introBlocks ? lessonBlocks(page.introBlocks, language, esc, 'intro') : intro && `<p class="intro">${intro}</p>`}
       ${sampleData(page, tr('download'), esc)}
       <details class="mobile-contents">
         <summary>${tr('contents')}</summary>
@@ -261,8 +264,9 @@ function article(guide, page) {
       </details>
       ${page.sections.map(item => {
         const heading = item.id === page.titleSection ? 'h1' : 'h2';
+        const title = tx(item.title);
         return `<section class="article-section" tabindex="-1" id="${item.id}">
-        <${heading}>${tx(item.title)}</${heading}>
+        ${title && `<${heading}>${title}</${heading}>`}
         ${item.figure?.banner ? sectionFigure(item.figure, language, esc) : ''}
         ${item.blocks ? lessonBlocks(item.blocks, language, esc) : `<p>${tx(item.text)}</p>`}
         ${item.setup ? `<p class="example-setup"><strong>${tr('setup')}</strong> ${tx(item.setup)}</p>` : ''}

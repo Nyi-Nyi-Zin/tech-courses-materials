@@ -144,14 +144,16 @@ function lessonBody(guide, page, language) {
   const labels = copy[language];
   const referencesTitle = page.referencesTitle ? localized(page.referencesTitle, language) : labels.source;
   const version = page.version ?? guide.version;
-  const intro = page.introBlocks ? lessonBlocks(page.introBlocks, language, escape, 'intro') : `<p class="intro">${localized(page.intro, language)}</p>`;
+  const introText = localized(page.intro, language);
+  const intro = page.introBlocks ? lessonBlocks(page.introBlocks, language, escape, 'intro') : introText && `<p class="intro">${introText}</p>`;
   const lessonIndex = guide.pages.indexOf(page);
   const sections = page.sections.map(section => {
     const details = sectionDetails(section, language, escape);
     const body = section.blocks ? lessonBlocks(section.blocks, language, escape) : `<p>${localized(section.text, language)}</p>`;
     const heading = section.id === page.titleSection ? 'h1' : 'h2';
+    const title = localized(section.title, language);
     return `<section class="article-section" id="${escape(section.id)}">
-  <${heading}>${localized(section.title, language)}</${heading}>${section.figure?.banner ? '\n  ' + sectionFigure(section.figure, language, escape) : ''}
+${title ? `  <${heading}>${title}</${heading}>` : ''}${section.figure?.banner ? '\n  ' + sectionFigure(section.figure, language, escape) : ''}
 ${body ? '  ' + body : ''}
 ${labeledText('example-setup', labels.setup, section.setup, language)}
 ${section.code ? `<pre><code>${escape(section.code)}</code></pre>` : ''}${section.afterCode ? '\n' + lessonBlocks(section.afterCode, language, escape) : ''}${details ? '\n' + details : ''}${section.apiCatalog ? '\n' + pandasApiCatalog(section.apiCatalog, language, escape) : ''}
@@ -159,7 +161,8 @@ ${section.output ? sampleOutput(section, labels.codeOutput, escape) + '\n' : ''}
 ${labeledText('example-check', page.id === 'reference' ? labels.mistake : labels.check, section.check, language)}
 </section>`;
   }).join('\n');
-  const contents = [...page.sections.map(section => [section.id, localized(section.title, language)]), ['references', referencesTitle]];
+  const contents = [...page.sections.map(section => [section.id, localized(section.title, language)]), ['references', referencesTitle]]
+    .filter(([, title]) => title);
   const neighbors = [[lessonIndex - 1, labels.previous], [lessonIndex + 1, labels.next]].flatMap(([index, name]) => {
     const neighbor = guide.pages[index];
     return neighbor ? [anchor(readingPath(language, guide, neighbor), name + ' · ' + localized(neighbor.title, language))] : [];
@@ -234,7 +237,8 @@ for (const language of languages) {
       const path = readingPath(language, guide, page);
       if (pages.has(path)) throw new Error('Duplicate lesson URL ' + path);
       sitemap.add(path);
-      pages.set(path, document(language, page.title[language], page.intro[language], lessonBody(guide, page, language), guide, page));
+      const description = page.intro[language] || page.sections[0]?.text?.[language] || '';
+      pages.set(path, document(language, page.title[language], description, lessonBody(guide, page, language), guide, page));
     }
   }
 }
