@@ -27,13 +27,6 @@ export const htmlFoundations = [
       'Run the example. The browser displays Learning Center as the main heading and the registration notice below it as a paragraph.',
       'နမူနာကို Run ကြည့်ပါ။ Learning Center က အဓိကခေါင်းစဉ်အဖြစ် ပေါ်ပြီး စာရင်းသွင်းရက်အကြောင်းက အောက်မှာ စာပိုဒ်အဖြစ် ပေါ်ပါမယ်။',
     ), null),
-    example('hypertext', p('What does hypertext mean?', 'HyperText ဆိုတာ ဘာလဲ?'), p(
-      'Hypertext is text that contains links to other pages or to another part of the same page. In HTML, an <a> element creates a link, and href tells the browser where to go when you click it.',
-      'HyperText ဆိုတာ တခြားစာမျက်နှာ ဒါမှမဟုတ် လက်ရှိစာမျက်နှာထဲက တခြားအပိုင်းဆီ သွားလို့ရတဲ့ link ပါဝင်တဲ့ စာသားကို ဆိုလိုပါတယ်။ HTML မှာ <a> နဲ့ link ရေးပြီး နှိပ်လိုက်ရင် ဘယ်ဆီသွားရမလဲဆိုတာ href ထဲမှာ ထည့်ပေးပါတယ်။',
-    ), `<a href="https://example.com/">Visit Example Domain</a>`, p(
-      'The browser displays Visit Example Domain as a link. Its destination is https://example.com/.',
-      'Browser မှာ Visit Example Domain ဆိုတဲ့ စာသားက link အဖြစ် ပေါ်ပါမယ်။ Link ရဲ့ သွားမယ့်လိပ်စာက https://example.com/ ပါ။',
-    ), null),
     example('html-css-javascript', p('How HTML, CSS, and JavaScript work together', 'HTML၊ CSS နဲ့ JavaScript တွဲပြီး အလုပ်လုပ်ပုံ'), p(
       'On the Learning Center page, HTML supplies the heading, the button, and the notice text. CSS gives the heading its color. When you click the button, JavaScript reveals the notice. In the next lesson, you will save a page as index.html and open it in your browser.',
       'Learning Center စာမျက်နှာမှာ ခေါင်းစဉ်၊ ခလုတ်နဲ့ အသိပေးစာကို HTML နဲ့ ရေးပါတယ်။ ခေါင်းစဉ်ရဲ့ အရောင်ကို CSS နဲ့ သတ်မှတ်ပါတယ်။ ခလုတ်နှိပ်တဲ့အခါ အသိပေးစာကို JavaScript က ဖွင့်ပြပါတယ်။ နောက်သင်ခန်းစာမှာ စာမျက်နှာတစ်ခုကို index.html အဖြစ် သိမ်းပြီး Browser နဲ့ ဖွင့်ကြည့်ပါမယ်။',
