@@ -1,4 +1,4 @@
-import { webGuides } from './web.js?v=90';
+import { webGuides } from './web.js?v=96';
 import { platformGuides } from './platform.js?v=93';
 import { frameworkGuides } from './frameworks.js';
 

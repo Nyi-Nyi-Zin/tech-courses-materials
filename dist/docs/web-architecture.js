@@ -138,8 +138,8 @@ export const serverBasics = {
 };
 
 const webAppFlowText = p(
-  "When a user accesses a web application, the browser retrieves and executes the frontend files from the Web Server. As the user interacts with the application—such as viewing data—the frontend initiates an API request. This request is sent to the backend over HTTPS, and the backend processes it to return a response. If the user uploads a file (e.g., a PDF), the backend stores the file as an object in an AWS S3 bucket and saves only the object's key in the database alongside the relevant record.",
-  'အသုံးပြုသူက Web App တစ်ခုကို ဖွင့်တဲ့အခါ Browser က Web Server ဆီက Frontend ဖိုင်တွေကို ရယူပြီး run ပါတယ်။ App ထဲမှာ အချက်အလက်တွေ ဖွင့်ကြည့်တာမျိုး လုပ်တဲ့အခါ Frontend က API request စတင်ပါတယ်။ Browser က အဲဒီ request ကို HTTPS နဲ့ Backend ဆီ ပို့ပါတယ်။ Backend က request ကို လုပ်ဆောင်ပြီး response ပြန်ပို့ပါတယ်။ PDF လို ဖိုင်တစ်ခု တင်လိုက်ရင် Backend က ဖိုင်ကို AWS S3 bucket ထဲမှာ object အဖြစ် သိမ်းပါတယ်။ Database ထဲက သက်ဆိုင်ရာ မှတ်တမ်းနဲ့အတူ object ရဲ့ key ကိုပဲ သိမ်းထားပါတယ်။'
+  'A web app uses different services to load its interface, fetch data, and handle files. The diagram follows those requests from the browser to the web server or the backend API.',
+  'Web App တစ်ခုမှာ စာမျက်နှာဖွင့်တာ၊ အချက်အလက်တောင်းတာနဲ့ ဖိုင်တင်တာတို့အတွက် မတူတဲ့ ဝန်ဆောင်မှုတွေကို သုံးပါတယ်။ ပုံထဲမှာ Browser ကနေ Web Server နဲ့ Backend API ဆီ request တွေ ဘယ်လိုရောက်သွားလဲဆိုတာ ပြထားပါတယ်။'
 );
 
 export const webAppArchitecture = {
@@ -148,26 +148,48 @@ export const webAppArchitecture = {
     {
       ...snippet('web-app-flow', p('How a web app works', 'Web App တစ်ခု အလုပ်လုပ်ပုံ'), webAppFlowText),
       figure: {
-        src: '/docs/media/database/web-app-flow.svg?v=6',
-        width: 1600,
-        height: 780,
+        src: '/docs/media/web-fundamentals/web-app-architecture.png',
+        width: 1847,
+        height: 851,
         alt: p(
-          'The Browser requests frontend files from the Web Server and receives HTML, CSS, and JavaScript. The Frontend inside the Browser initiates an HTTPS request to the Backend on the Application Server and receives JSON. The Backend connects to the optional Redis cache, PostgreSQL, and AWS S3 cloud storage over HTTPS as needed.',
-          'Browser က Web Server ဆီက HTML၊ CSS နဲ့ JavaScript ဖိုင်တွေ ရယူတယ်။ Browser ထဲက Frontend က Application Server ပေါ်က Backend ဆီ HTTPS request စတင်ပြီး JSON အဖြေ ရတယ်။ Backend က လိုအပ်သလို Redis Cache Server၊ PostgreSQL Database Server နဲ့ AWS S3 Cloud Storage တို့ကို ချိတ်သုံးတယ်။ S3 API ကို HTTPS နဲ့ အသုံးပြုတယ်။'
+          'The browser receives HTML, CSS, and JavaScript from the web server and sends HTTPS API requests to the application server, which returns JSON. The backend reads and writes the Redis cache, queries PostgreSQL with SQL, and uploads or downloads files with AWS S3.',
+          'Browser က Web Server ဆီက HTML၊ CSS နဲ့ JavaScript ဖိုင်တွေ ရယူပါတယ်။ Application Server ဆီ HTTPS နဲ့ API request ပို့ပြီး JSON response ပြန်ရပါတယ်။ Backend က Redis cache မှာ ဖတ်တာ၊ ရေးတာ၊ PostgreSQL ဆီ SQL query ပို့တာနဲ့ AWS S3 မှာ ဖိုင်တင်တာ၊ ပြန်ယူတာတွေ လုပ်ပါတယ်။'
         ),
         caption: p(
-          'The upper arrows show the frontend files being loaded. The lower arrows show the API request from the frontend running inside the browser and the JSON response. The dashed line marks the optional Redis cache.',
-          'အပေါ်လမ်းကြောင်းက frontend ဖိုင်တွေ ရယူပုံပါ။ အောက်လမ်းကြောင်းက Browser ထဲမှာ run နေတဲ့ Frontend ဆီက API request နဲ့ ပြန်လာတဲ့ JSON response ကို ပြတယ်။ အပြတ်မျဉ်းက လိုအပ်မှ ချိတ်သုံးတဲ့ Redis cache ကို ပြထားတာပါ။'
+          'The top arrows show the page request and the frontend files that come back. The bottom arrows show the API request and JSON response. The dashed orange arrow marks the optional Redis cache.',
+          'အပေါ်က မြားတွေက စာမျက်နှာတောင်းတာနဲ့ ပြန်ရလာတဲ့ Frontend ဖိုင်တွေကို ပြထားပါတယ်။ အောက်က မြားတွေက API request နဲ့ JSON response ကို ပြထားပါတယ်။ လိုအပ်မှ သုံးတဲ့ Redis cache ကို လိမ္မော်ရောင် အပြတ်မျဉ်းနဲ့ ပြထားပါတယ်။'
         ),
       },
-      terms: [
-        ['Browser', p('Downloads and runs the frontend files, then sends API requests initiated by the frontend.', 'Frontend ဖိုင်တွေကို ရယူပြီး run တယ်။ Frontend က API request စတင်တဲ့အခါ Browser က network ပေါ်မှာ ပို့ပေးတယ်။')],
-        ['Web Server', p('Serves the frontend build, including the HTML, JavaScript, and CSS files that the browser needs.', 'Browser ဆီ HTML၊ JavaScript နဲ့ CSS frontend ဖိုင်တွေ ပို့ပေးတယ်။')],
-        ['Application Server', p('Runs the backend API. For a course list request, it returns the course data and can read it from Redis or PostgreSQL.', 'Backend API ကို run တယ်။ သင်တန်းစာရင်း တောင်းလာရင် Redis သို့မဟုတ် PostgreSQL ကနေ ဖတ်ပြီး Browser ဆီ ပြန်ပို့နိုင်တယ်။')],
-        ['Cache Server', p('Redis can temporarily store results such as a course list. The backend can return a cached result when available. On a cache miss, it can query PostgreSQL and cache the new result for a limited time.', 'Redis မှာ သင်တန်းစာရင်းလို ရလဒ်တွေကို ခဏသိမ်းထားလို့ရတယ်။ သိမ်းထားတဲ့ရလဒ် ရှိရင် Backend က အဲဒီကနေ ပြန်ပေးနိုင်တယ်။ မရှိရင် PostgreSQL ကနေ ဖတ်ပြီး ရလဒ်အသစ်ကို Redis ထဲမှာ သတ်မှတ်ထားတဲ့ အချိန်အထိ သိမ်းထားနိုင်တယ်။')],
-        ['Database Server', p('Runs PostgreSQL, which executes SQL and manages records such as courses and enrollments. PostgreSQL keeps its data files on persistent storage so the records remain after the server process restarts.', 'PostgreSQL ကို run တယ်။ PostgreSQL က SQL query တွေကို လုပ်ဆောင်ပြီး သင်တန်းနဲ့ စာရင်းသွင်း မှတ်တမ်းတွေကို စီမံပေးတယ်။ Server process ပြန်စရင် မှတ်တမ်းတွေ ဆက်ရှိနေဖို့ PostgreSQL က data file တွေကို persistent storage ပေါ်မှာ သိမ်းတယ်။')],
-        ['Cloud Storage', p('AWS S3 is an object storage service. The backend uses the S3 API over HTTPS to upload PDFs to a bucket and retrieve them for downloads.', 'AWS S3 က object storage service တစ်ခုပါ။ Backend က S3 API ကို HTTPS နဲ့ အသုံးပြုပြီး PDF ဖိုင်တွေကို bucket ထဲ သိမ်းနိုင်သလို download အတွက် ပြန်ရယူနိုင်ပါတယ်။')],
-      ],
+    },
+    snippet('page-load', p('Loading the app', 'Web App ကို စဖွင့်တဲ့အခါ'), p(
+      'When you open the app, the browser sends a page request to the Web Server. The server sends back the HTML, CSS, and JavaScript files. The browser uses HTML and CSS to display the interface and runs JavaScript so you can interact with it.',
+      'Web App ကို ဖွင့်လိုက်ရင် Browser က Web Server ဆီ စာမျက်နှာတောင်းပါတယ်။ Web Server က HTML၊ CSS နဲ့ JavaScript ဖိုင်တွေ ပြန်ပို့ပေးပါတယ်။ Browser က HTML နဲ့ CSS ကိုသုံးပြီး စာမျက်နှာကို ပြပေးသလို ခလုတ်နှိပ်တာ၊ အချက်အလက်တောင်းတာတွေ လုပ်နိုင်ဖို့ JavaScript ကို run ပါတယ်။'
+    )),
+    {
+      ...snippet('fetching-data', p('Fetching data', 'အချက်အလက် တောင်းတဲ့အခါ')),
+      blocks: p(
+        [
+          ['paragraph', 'When you open a product list, the frontend sends an HTTPS API request to the Backend running on the Application Server. The Backend retrieves the data and sends it back as JSON. The frontend uses that response to display the list.'],
+          ['paragraph', 'If the app uses Redis, the Backend can check whether the list is already cached. If it is, the Backend can use it right away. If it is missing, the Backend sends a SQL query to PostgreSQL and can save the result in Redis for a short time.'],
+        ],
+        [
+          ['paragraph', 'ကုန်ပစ္စည်းစာရင်းကို ဖွင့်ကြည့်တဲ့အခါ Browser ထဲမှာ run နေတဲ့ Frontend က Application Server ပေါ်က Backend ဆီ HTTPS နဲ့ API request ပို့ပါတယ်။ Backend က လိုအပ်တဲ့ အချက်အလက်ကို ရယူပြီး JSON နဲ့ ပြန်ပို့ပါတယ်။ Frontend က ပြန်ရလာတဲ့ အချက်အလက်ကို သုံးပြီး ကုန်ပစ္စည်းစာရင်းကို ပြပေးပါတယ်။'],
+          ['paragraph', 'App မှာ Redis သုံးထားရင် Backend က ကုန်ပစ္စည်းစာရင်းကို Redis မှာ ယာယီသိမ်းထားလား အရင်စစ်နိုင်ပါတယ်။ ရှိရင် အဲဒီစာရင်းကို တန်းသုံးနိုင်ပါတယ်။ မရှိရင်တော့ PostgreSQL ဆီ SQL query ပို့ပြီး ရလာတဲ့စာရင်းကို Redis မှာ ခဏ သိမ်းထားနိုင်ပါတယ်။'],
+        ],
+      ),
+    },
+    {
+      ...snippet('file-uploads-and-downloads', p('Uploading and downloading files', 'ဖိုင်တင်တာနဲ့ ပြန်ယူတာ')),
+      blocks: p(
+        [
+          ['paragraph', 'When you upload a product image, the frontend sends the file to the Backend. The Backend uses the S3 API to store the file as an object in an AWS S3 bucket. It can save the object key, which identifies the file in that bucket, with the product record in PostgreSQL.'],
+          ['paragraph', 'When a user downloads the image, the Backend can look up the key in PostgreSQL, retrieve the object from S3, and send the file to the browser.'],
+        ],
+        [
+          ['paragraph', 'ကုန်ပစ္စည်းပုံတစ်ပုံ တင်လိုက်ရင် Frontend က ပုံဖိုင်ကို Backend ဆီ ပို့ပါတယ်။ Backend က S3 API သုံးပြီး AWS S3 bucket ထဲမှာ အဲဒီဖိုင်ကို object တစ်ခုအနေနဲ့ သိမ်းပါတယ်။ Bucket ထဲက ဖိုင်ကို ပြန်ရှာဖို့ သုံးတဲ့ object key ကို PostgreSQL ထဲက ကုန်ပစ္စည်းမှတ်တမ်းနဲ့အတူ သိမ်းထားနိုင်ပါတယ်။'],
+          ['paragraph', 'အဲဒီပုံကို download လုပ်တဲ့အခါ Backend က PostgreSQL ထဲက object key ကို ရှာပြီး S3 ထဲက ပုံဖိုင်ကို ပြန်ယူကာ Browser ဆီ ပို့ပေးနိုင်ပါတယ်။'],
+        ],
+      ),
     },
   ],
   [

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="အသုံးပြုသူက Web App တစ်ခုကို ဖွင့်တဲ့အခါ Browser က Web Server ဆီက Frontend ဖိုင်တွေကို ရယူပြီး run ပါတယ်။ App ထဲမှာ အချက်အလက်တွေ ဖွင့်ကြည့်တာမျိုး လုပ်တဲ့အခါ Frontend က API request စတင်ပါတယ်။ Browser က အဲဒီ request ကို HTTPS နဲ့ Backend ဆီ ပို့ပါတယ်။ Backend က request ကို လုပ်ဆောင်ပြီး response ပြန်ပို့ပါတယ်။ PDF လို ဖိုင်တစ်ခု တင်လိုက်ရင် Backend က ဖိုင်ကို AWS S3 bucket ထဲမှာ object အဖြစ် သိမ်းပါတယ်။ Database ထဲက သက်ဆိုင်ရာ မှတ်တမ်းနဲ့အတူ object ရဲ့ key ကိုပဲ သိမ်းထားပါတယ်။">
+  <meta name="description" content="Web App တစ်ခုမှာ စာမျက်နှာဖွင့်တာ၊ အချက်အလက်တောင်းတာနဲ့ ဖိုင်တင်တာတို့အတွက် မတူတဲ့ ဝန်ဆောင်မှုတွေကို သုံးပါတယ်။ ပုံထဲမှာ Browser ကနေ Web Server နဲ့ Backend API ဆီ request တွေ ဘယ်လိုရောက်သွားလဲဆိုတာ ပြထားပါတယ်။">
   <title>Web App Request သွားလာပုံ · Cloud Nine Innovations</title>
   <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/web-fundamentals/web-app-architecture/">
   <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-fundamentals/web-app-architecture/">
@@ -22,17 +22,46 @@
   <section class="article-section">
     <h2>ဒီစာမျက်နှာမှာ</h2>
     <ul><li><a href="#web-app-flow">Web App တစ်ခု အလုပ်လုပ်ပုံ</a></li>
+<li><a href="#page-load">Web App ကို စဖွင့်တဲ့အခါ</a></li>
+<li><a href="#fetching-data">အချက်အလက် တောင်းတဲ့အခါ</a></li>
+<li><a href="#file-uploads-and-downloads">ဖိုင်တင်တာနဲ့ ပြန်ယူတာ</a></li>
 <li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
   </section>
   <section class="article-section" id="web-app-flow">
   <h1>Web App တစ်ခု အလုပ်လုပ်ပုံ</h1>
-  <p>အသုံးပြုသူက Web App တစ်ခုကို ဖွင့်တဲ့အခါ Browser က Web Server ဆီက Frontend ဖိုင်တွေကို ရယူပြီး run ပါတယ်။ App ထဲမှာ အချက်အလက်တွေ ဖွင့်ကြည့်တာမျိုး လုပ်တဲ့အခါ Frontend က API request စတင်ပါတယ်။ Browser က အဲဒီ request ကို HTTPS နဲ့ Backend ဆီ ပို့ပါတယ်။ Backend က request ကို လုပ်ဆောင်ပြီး response ပြန်ပို့ပါတယ်။ PDF လို ဖိုင်တစ်ခု တင်လိုက်ရင် Backend က ဖိုင်ကို AWS S3 bucket ထဲမှာ object အဖြစ် သိမ်းပါတယ်။ Database ထဲက သက်ဆိုင်ရာ မှတ်တမ်းနဲ့အတူ object ရဲ့ key ကိုပဲ သိမ်းထားပါတယ်။</p>
+  <p>Web App တစ်ခုမှာ စာမျက်နှာဖွင့်တာ၊ အချက်အလက်တောင်းတာနဲ့ ဖိုင်တင်တာတို့အတွက် မတူတဲ့ ဝန်ဆောင်မှုတွေကို သုံးပါတယ်။ ပုံထဲမှာ Browser ကနေ Web Server နဲ့ Backend API ဆီ request တွေ ဘယ်လိုရောက်သွားလဲဆိုတာ ပြထားပါတယ်။</p>
 
 
 <figure class="lesson-figure">
-    <a href="/docs/media/database/web-app-flow.svg?v=6" data-image-preview><img src="/docs/media/database/web-app-flow.svg?v=6" alt="Browser က Web Server ဆီက HTML၊ CSS နဲ့ JavaScript ဖိုင်တွေ ရယူတယ်။ Browser ထဲက Frontend က Application Server ပေါ်က Backend ဆီ HTTPS request စတင်ပြီး JSON အဖြေ ရတယ်။ Backend က လိုအပ်သလို Redis Cache Server၊ PostgreSQL Database Server နဲ့ AWS S3 Cloud Storage တို့ကို ချိတ်သုံးတယ်။ S3 API ကို HTTPS နဲ့ အသုံးပြုတယ်။" width="1600" height="780" loading="lazy" decoding="async"></a>
-    <figcaption>အပေါ်လမ်းကြောင်းက frontend ဖိုင်တွေ ရယူပုံပါ။ အောက်လမ်းကြောင်းက Browser ထဲမှာ run နေတဲ့ Frontend ဆီက API request နဲ့ ပြန်လာတဲ့ JSON response ကို ပြတယ်။ အပြတ်မျဉ်းက လိုအပ်မှ ချိတ်သုံးတဲ့ Redis cache ကို ပြထားတာပါ။</figcaption>
-  </figure><dl class="lesson-terms"><div><dt><code>Browser</code></dt><dd>Frontend ဖိုင်တွေကို ရယူပြီး run တယ်။ Frontend က API request စတင်တဲ့အခါ Browser က network ပေါ်မှာ ပို့ပေးတယ်။</dd></div><div><dt><code>Web Server</code></dt><dd>Browser ဆီ HTML၊ JavaScript နဲ့ CSS frontend ဖိုင်တွေ ပို့ပေးတယ်။</dd></div><div><dt><code>Application Server</code></dt><dd>Backend API ကို run တယ်။ သင်တန်းစာရင်း တောင်းလာရင် Redis သို့မဟုတ် PostgreSQL ကနေ ဖတ်ပြီး Browser ဆီ ပြန်ပို့နိုင်တယ်။</dd></div><div><dt><code>Cache Server</code></dt><dd>Redis မှာ သင်တန်းစာရင်းလို ရလဒ်တွေကို ခဏသိမ်းထားလို့ရတယ်။ သိမ်းထားတဲ့ရလဒ် ရှိရင် Backend က အဲဒီကနေ ပြန်ပေးနိုင်တယ်။ မရှိရင် PostgreSQL ကနေ ဖတ်ပြီး ရလဒ်အသစ်ကို Redis ထဲမှာ သတ်မှတ်ထားတဲ့ အချိန်အထိ သိမ်းထားနိုင်တယ်။</dd></div><div><dt><code>Database Server</code></dt><dd>PostgreSQL ကို run တယ်။ PostgreSQL က SQL query တွေကို လုပ်ဆောင်ပြီး သင်တန်းနဲ့ စာရင်းသွင်း မှတ်တမ်းတွေကို စီမံပေးတယ်။ Server process ပြန်စရင် မှတ်တမ်းတွေ ဆက်ရှိနေဖို့ PostgreSQL က data file တွေကို persistent storage ပေါ်မှာ သိမ်းတယ်။</dd></div><div><dt><code>Cloud Storage</code></dt><dd>AWS S3 က object storage service တစ်ခုပါ။ Backend က S3 API ကို HTTPS နဲ့ အသုံးပြုပြီး PDF ဖိုင်တွေကို bucket ထဲ သိမ်းနိုင်သလို download အတွက် ပြန်ရယူနိုင်ပါတယ်။</dd></div></dl>
+    <a href="/docs/media/web-fundamentals/web-app-architecture.png" data-image-preview><img src="/docs/media/web-fundamentals/web-app-architecture.png" alt="Browser က Web Server ဆီက HTML၊ CSS နဲ့ JavaScript ဖိုင်တွေ ရယူပါတယ်။ Application Server ဆီ HTTPS နဲ့ API request ပို့ပြီး JSON response ပြန်ရပါတယ်။ Backend က Redis cache မှာ ဖတ်တာ၊ ရေးတာ၊ PostgreSQL ဆီ SQL query ပို့တာနဲ့ AWS S3 မှာ ဖိုင်တင်တာ၊ ပြန်ယူတာတွေ လုပ်ပါတယ်။" width="1847" height="851" loading="lazy" decoding="async"></a>
+    <figcaption>အပေါ်က မြားတွေက စာမျက်နှာတောင်းတာနဲ့ ပြန်ရလာတဲ့ Frontend ဖိုင်တွေကို ပြထားပါတယ်။ အောက်က မြားတွေက API request နဲ့ JSON response ကို ပြထားပါတယ်။ လိုအပ်မှ သုံးတဲ့ Redis cache ကို လိမ္မော်ရောင် အပြတ်မျဉ်းနဲ့ ပြထားပါတယ်။</figcaption>
+  </figure>
+
+
+</section>
+<section class="article-section" id="page-load">
+  <h2>Web App ကို စဖွင့်တဲ့အခါ</h2>
+  <p>Web App ကို ဖွင့်လိုက်ရင် Browser က Web Server ဆီ စာမျက်နှာတောင်းပါတယ်။ Web Server က HTML၊ CSS နဲ့ JavaScript ဖိုင်တွေ ပြန်ပို့ပေးပါတယ်။ Browser က HTML နဲ့ CSS ကိုသုံးပြီး စာမျက်နှာကို ပြပေးသလို ခလုတ်နှိပ်တာ၊ အချက်အလက်တောင်းတာတွေ လုပ်နိုင်ဖို့ JavaScript ကို run ပါတယ်။</p>
+
+
+
+
+</section>
+<section class="article-section" id="fetching-data">
+  <h2>အချက်အလက် တောင်းတဲ့အခါ</h2>
+  <p>ကုန်ပစ္စည်းစာရင်းကို ဖွင့်ကြည့်တဲ့အခါ Browser ထဲမှာ run နေတဲ့ Frontend က Application Server ပေါ်က Backend ဆီ HTTPS နဲ့ API request ပို့ပါတယ်။ Backend က လိုအပ်တဲ့ အချက်အလက်ကို ရယူပြီး JSON နဲ့ ပြန်ပို့ပါတယ်။ Frontend က ပြန်ရလာတဲ့ အချက်အလက်ကို သုံးပြီး ကုန်ပစ္စည်းစာရင်းကို ပြပေးပါတယ်။</p>
+<p>App မှာ Redis သုံးထားရင် Backend က ကုန်ပစ္စည်းစာရင်းကို Redis မှာ ယာယီသိမ်းထားလား အရင်စစ်နိုင်ပါတယ်။ ရှိရင် အဲဒီစာရင်းကို တန်းသုံးနိုင်ပါတယ်။ မရှိရင်တော့ PostgreSQL ဆီ SQL query ပို့ပြီး ရလာတဲ့စာရင်းကို Redis မှာ ခဏ သိမ်းထားနိုင်ပါတယ်။</p>
+
+
+
+
+</section>
+<section class="article-section" id="file-uploads-and-downloads">
+  <h2>ဖိုင်တင်တာနဲ့ ပြန်ယူတာ</h2>
+  <p>ကုန်ပစ္စည်းပုံတစ်ပုံ တင်လိုက်ရင် Frontend က ပုံဖိုင်ကို Backend ဆီ ပို့ပါတယ်။ Backend က S3 API သုံးပြီး AWS S3 bucket ထဲမှာ အဲဒီဖိုင်ကို object တစ်ခုအနေနဲ့ သိမ်းပါတယ်။ Bucket ထဲက ဖိုင်ကို ပြန်ရှာဖို့ သုံးတဲ့ object key ကို PostgreSQL ထဲက ကုန်ပစ္စည်းမှတ်တမ်းနဲ့အတူ သိမ်းထားနိုင်ပါတယ်။</p>
+<p>အဲဒီပုံကို download လုပ်တဲ့အခါ Backend က PostgreSQL ထဲက object key ကို ရှာပြီး S3 ထဲက ပုံဖိုင်ကို ပြန်ယူကာ Browser ဆီ ပို့ပေးနိုင်ပါတယ်။</p>
+
+
 
 
 </section>

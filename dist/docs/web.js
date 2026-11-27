@@ -1,4 +1,4 @@
-import { webFundamentals } from './web-fundamentals.js?v=90';
+import { webFundamentals } from './web-fundamentals.js?v=96';
 import { htmlGuide } from './html.js';
 import { cssGuide } from './css-learning.js';
 import { jsGuide } from './js-learning.js';
