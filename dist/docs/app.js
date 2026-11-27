@@ -1,4 +1,4 @@
-import { guides as webGuides, developerGuides } from './guides.js?v=85';
+import { guides as webGuides, developerGuides } from './guides.js?v=86';
 import { curricula } from '../locales.js';
 import { articleForExercise } from '../learning-paths.js';
 import { lessonDestination } from './section-redirects.js?v=85';
@@ -250,7 +250,7 @@ function article(guide, page) {
   return `<div class="article-layout">
     <article>
       <div class="crumb"><a href="${path(guide, guide.pages[0])}">${esc(guide.name)}</a></div>
-      <h1>${tx(page.title)}</h1>
+      ${page.titleSection ? '' : `<h1>${tx(page.title)}</h1>`}
       ${version ? `<p class="article-version">${esc(version)}</p>` : ''}
       ${page.introFigure ? sectionFigure(page.introFigure, language, esc) : ''}
       ${page.introBlocks ? lessonBlocks(page.introBlocks, language, esc, 'intro') : `<p class="intro">${tx(page.intro)}</p>`}
@@ -259,8 +259,10 @@ function article(guide, page) {
         <summary>${tr('contents')}</summary>
         <nav aria-label="${tr('contents')}">${contents}</nav>
       </details>
-      ${page.sections.map(item => `<section class="article-section" tabindex="-1" id="${item.id}">
-        <h2>${tx(item.title)}</h2>
+      ${page.sections.map(item => {
+        const heading = item.id === page.titleSection ? 'h1' : 'h2';
+        return `<section class="article-section" tabindex="-1" id="${item.id}">
+        <${heading}>${tx(item.title)}</${heading}>
         ${item.figure?.banner ? sectionFigure(item.figure, language, esc) : ''}
         ${item.blocks ? lessonBlocks(item.blocks, language, esc) : `<p>${tx(item.text)}</p>`}
         ${item.setup ? `<p class="example-setup"><strong>${tr('setup')}</strong> ${tx(item.setup)}</p>` : ''}
@@ -271,7 +273,8 @@ function article(guide, page) {
         ${sampleOutput(item, tr('codeOutput'), esc)}
         ${item.expected ? `<p class="example-result"><strong>${tr('expected')}</strong> ${tx(item.expected)}</p>` : ''}
         ${item.check ? `<p class="example-check"><strong>${tr(page.id === 'reference' ? 'commonMistake' : 'check')}</strong> ${tx(item.check)}</p>` : ''}
-      </section>`).join('')}
+      </section>`;
+      }).join('')}
       <section class="references" tabindex="-1" id="references">
         <h2>${tx(referencesTitle)}</h2>
         <ul>${page.sources.map(([label, url]) => `<li><a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(typeof label === 'string' ? label : label[language])} ${symbol('external')}</a></li>`).join('')}</ul>

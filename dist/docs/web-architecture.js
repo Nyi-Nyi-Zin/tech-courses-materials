@@ -137,23 +137,16 @@ export const serverBasics = {
   introBlocks: p([['paragraph', serverIntro.en]], [['paragraph', serverIntro.my]]),
 };
 
-export const webAppArchitecture = page('web-app-architecture', p('Web app request flow', 'Web App Request သွားလာပုံ'),
-  p(
-    'The Client and Server lesson introduced several types of servers. Now follow a request to see when each role comes into play. Use the diagram to see when the backend accesses PostgreSQL, Redis, or the file server.',
-    'Client and Server သင်ခန်းစာမှာ server တစ်မျိုးချင်းစီရဲ့ တာဝန်ကို သိခဲ့ပါတယ်။ ဒီသင်ခန်းစာမှာ Browser ထဲက Frontend က Backend ဆီ request ပို့တဲ့အခါ PostgreSQL၊ Redis နဲ့ File Server တို့ကို ဘယ်အချိန်မှာ သုံးလဲဆိုတာ ကြည့်ပါမယ်။ အောက်ကပုံမှာ ဒီ request လမ်းကြောင်းတွေကို ဖော်ပြထားပါတယ်။'
-  ),
+const webAppFlowText = p(
+  "When a user accesses a web application, the browser retrieves and executes the frontend files from the Web Server. As the user interacts with the application—such as viewing data—the frontend initiates an API request. This request is sent to the backend over HTTPS, and the backend processes it to return a response. If the user uploads a file (e.g., a PDF), the backend stores the physical file in a shared folder on a Samba File Server and saves only the file's path in the database alongside the relevant record.",
+  'အသုံးပြုသူက Web App တစ်ခုကို ဖွင့်တဲ့အခါ Browser က Web Server ဆီက Frontend ဖိုင်တွေကို ရယူပြီး run ပါတယ်။ App ထဲမှာ အချက်အလက်တွေ ဖွင့်ကြည့်တာမျိုး လုပ်တဲ့အခါ Frontend က API request စတင်ပါတယ်။ Browser က အဲဒီ request ကို HTTPS နဲ့ Backend ဆီ ပို့ပါတယ်။ Backend က request ကို လုပ်ဆောင်ပြီး response ပြန်ပို့ပါတယ်။ PDF လို ဖိုင်တစ်ခု တင်လိုက်ရင် Backend က ဖိုင်ကို Samba File Server ပေါ်က shared folder ထဲမှာ သိမ်းပါတယ်။ Database ထဲက သက်ဆိုင်ရာ မှတ်တမ်းနဲ့အတူ ဖိုင်ရဲ့ path ကိုပဲ သိမ်းထားပါတယ်။'
+);
+
+export const webAppArchitecture = {
+  ...page('web-app-architecture', p('Web app request flow', 'Web App Request သွားလာပုံ'), webAppFlowText,
   [
     {
-      ...snippet('web-app-flow', p('How a web app works', 'Web App တစ်ခု အလုပ်လုပ်ပုံ'),
-        p(
-          'Open a school’s course registration app in your browser. The browser requests the frontend files from the web server and runs them. When you open the course list, the frontend in the browser starts an API request. The browser sends it to the backend over HTTPS and gives the response to the frontend. If you upload a PDF for an enrollment, the backend writes the file to a share on the Samba file server and can record its location with the enrollment in the database.',
-          'ကျောင်းတစ်ကျောင်းရဲ့ သင်တန်းစာရင်းသွင်းတဲ့ app ကို browser မှာ ဖွင့်ကြည့်ပါ။ Browser က Web Server ဆီက frontend ဖိုင်တွေကို တောင်းယူပြီး run တယ်။ သင်တန်းစာရင်းကို ဖွင့်တဲ့အခါ Browser ထဲက Frontend က API request စတင်တယ်။ Browser က အဲဒီ request ကို Backend ဆီ HTTPS နဲ့ ပို့ပြီး ပြန်ရတဲ့ response ကို Frontend ဆီ ပေးတယ်။ စာရင်းသွင်းရာမှာ PDF တစ်ခု တင်လိုက်ရင် Backend က PDF ကို Samba File Server ရဲ့ shared folder ထဲမှာ သိမ်းပြီး ဖိုင်ရဲ့ တည်နေရာကို enrollment မှတ်တမ်းနဲ့အတူ database ထဲမှာ ထည့်မှတ်ထားနိုင်ပါတယ်။'
-        ), `// Frontend: the browser sends a request to the backend API.
-async function loadCourses() {
-  const response = await fetch("/api/courses");
-  if (!response.ok) throw new Error("Could not load courses.");
-  return response.json();
-}`),
+      ...snippet('web-app-flow', p('How a web app works', 'Web App တစ်ခု အလုပ်လုပ်ပုံ'), webAppFlowText),
       figure: {
         src: '/docs/media/database/web-app-flow.svg?v=5',
         width: 1600,
@@ -182,4 +175,7 @@ async function loadCourses() {
     ['PostgreSQL · Client/server architecture', 'https://www.postgresql.org/docs/current/tutorial-arch.html'],
     ['Redis · Cache-aside', 'https://redis.io/docs/latest/develop/use-cases/cache-aside/'],
     ['Samba · SMB file sharing', 'https://www.samba.org/samba/what_is_samba.html'],
-  ]);
+  ]),
+  titleSection: 'web-app-flow',
+  introBlocks: p([], []),
+};

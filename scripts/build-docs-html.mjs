@@ -144,12 +144,14 @@ function lessonBody(guide, page, language) {
   const labels = copy[language];
   const referencesTitle = page.referencesTitle ? localized(page.referencesTitle, language) : labels.source;
   const version = page.version ?? guide.version;
+  const intro = page.introBlocks ? lessonBlocks(page.introBlocks, language, escape, 'intro') : `<p class="intro">${localized(page.intro, language)}</p>`;
   const lessonIndex = guide.pages.indexOf(page);
   const sections = page.sections.map(section => {
     const details = sectionDetails(section, language, escape);
     const body = section.blocks ? lessonBlocks(section.blocks, language, escape) : `<p>${localized(section.text, language)}</p>`;
+    const heading = section.id === page.titleSection ? 'h1' : 'h2';
     return `<section class="article-section" id="${escape(section.id)}">
-  <h2>${localized(section.title, language)}</h2>${section.figure?.banner ? '\n  ' + sectionFigure(section.figure, language, escape) : ''}
+  <${heading}>${localized(section.title, language)}</${heading}>${section.figure?.banner ? '\n  ' + sectionFigure(section.figure, language, escape) : ''}
 ${body ? '  ' + body : ''}
 ${labeledText('example-setup', labels.setup, section.setup, language)}
 ${section.code ? `<pre><code>${escape(section.code)}</code></pre>` : ''}${section.afterCode ? '\n' + lessonBlocks(section.afterCode, language, escape) : ''}${details ? '\n' + details : ''}${section.apiCatalog ? '\n' + pandasApiCatalog(section.apiCatalog, language, escape) : ''}
@@ -165,10 +167,8 @@ ${labeledText('example-check', page.id === 'reference' ? labels.mistake : labels
   return `<main id="main" class="reading-page">
 <article>
   <nav aria-label="${labels.home}">${anchor(readingPath(language) + '#' + guide.id, labels.home + ' · ' + escape(guide.name))} ${switchLanguage(language, guide, page)}</nav>
-  <h1>${localized(page.title, language)}</h1>
-  ${version ? `<p class="article-version">${escape(version)}</p>` : ''}
-  ${page.introFigure ? sectionFigure(page.introFigure, language, escape) + '\n  ' : ''}${page.introBlocks ? lessonBlocks(page.introBlocks, language, escape, 'intro') : `<p class="intro">${localized(page.intro, language)}</p>`}
-  <p class="reading-link">${anchor(interactivePath(language, guide, page), dataGuideIds.includes(guide.id) || developerGuides.includes(guide) ? labels.interactive : labels.run)}</p>
+${page.titleSection ? '' : `  <h1>${localized(page.title, language)}</h1>\n`}  ${version ? `<p class="article-version">${escape(version)}</p>` : ''}
+${page.introFigure || intro ? `  ${page.introFigure ? sectionFigure(page.introFigure, language, escape) + '\n  ' : ''}${intro}\n` : ''}  <p class="reading-link">${anchor(interactivePath(language, guide, page), dataGuideIds.includes(guide.id) || developerGuides.includes(guide) ? labels.interactive : labels.run)}</p>
 ${page.dataset ? '  ' + sampleData(page, labels.download, escape) + '\n' : ''}
   <section class="article-section">
     <h2>${labels.contents}</h2>
