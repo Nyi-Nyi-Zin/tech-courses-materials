@@ -6,64 +6,78 @@ const illustrated = (id, title, text, file, height, alt, caption, code) => ({
   figure: { src: '/docs/media/database/' + file + '.jpg', width: 1536, height, alt, caption },
 });
 
+const databaseDefinition = p(
+  'A **database** is **an organized collection of data stored electronically so it can be easily accessed, managed, and updated**. Software called a **database management system (DBMS)** controls the database, handling security, backups, multi-user access, and queries.',
+  '**Database** ဆိုတာ အလွယ်တကူ ရှာဖတ်၊ စီမံ၊ ပြင်ဆင်နိုင်အောင် **အီလက်ထရွန်နစ်စနစ်နဲ့ စနစ်တကျ စုစည်းသိမ်းထားတဲ့ အချက်အလက်တွေ** ပါ။ Database ကို **Database Management System (DBMS)** လို့ခေါ်တဲ့ software က စီမံပေးပါတယ်။ လုံခြုံရေးနဲ့ backup ကို စီမံတာ၊ အသုံးပြုသူအများအပြား တစ်ပြိုင်နက် သုံးနိုင်အောင် ထိန်းပေးတာနဲ့ query တွေကို လုပ်ဆောင်ပေးတာတွေ ပါဝင်ပါတယ်။'
+);
+
 export const databaseFundamentals = [
   {
     ...page('fundamentals', p('What is a database?', 'Database ဆိုတာ ဘာလဲ'),
-      p(
-        'A database is an organized collection of data that you can search and retrieve when you need it.',
-        'Database ဆိုတာ လိုအပ်တဲ့အခါ ပြန်ရှာဖတ်နိုင်အောင် စနစ်တကျ စုစည်းသိမ်းထားတဲ့ အချက်အလက်တွေ (data) ပါ။'
-      ),
+      p(databaseDefinition.en.replaceAll('**', ''), databaseDefinition.my.replaceAll('**', '')),
       [
-        snippet('database-example', p('How an online store uses a database', 'အွန်လိုင်းဆိုင်တစ်ခုမှာ Database သုံးပုံ'),
-          p(
-            'An online store can use a database to keep product names, prices, stock quantities, and orders. When you open a product page, the store reads the saved price and shows it to you. When you place an order, it saves a new order record.',
-            'အွန်လိုင်းဆိုင်တစ်ခုက ကုန်ပစ္စည်းအမည်၊ ဈေးနှုန်း၊ လက်ကျန်အရေအတွက်နဲ့ အော်ဒါမှတ်တမ်းတွေကို Database ထဲမှာ သိမ်းထားနိုင်ပါတယ်။ ပစ္စည်းတစ်ခုရဲ့ စာမျက်နှာကို ဖွင့်ကြည့်တဲ့အခါ ဆိုင်ရဲ့စနစ်က သိမ်းထားတဲ့ ဈေးနှုန်းကို ပြန်ဖတ်ပြီး ပြပေးပါတယ်။ အော်ဒါတင်လိုက်ရင်လည်း အော်ဒါမှတ်တမ်းအသစ် ထည့်သိမ်းပေးပါတယ်။'
-          ), `-- Read the saved price when a product page opens.
-SELECT name, price
-FROM products
-WHERE id = 1;
-
--- Record a new order at checkout.
-INSERT INTO orders (id) VALUES (101);`),
         part('database-and-dbms', p('Database and DBMS', 'Database နဲ့ DBMS'),
           p(
-            'In the shop example, opening a product page reads a saved price and placing an order writes a new record. What handles those reads and writes? A database management system (DBMS) is the software that manages a database and handles operations such as reading, adding, and updating its data. PostgreSQL, MySQL, and MongoDB are examples.',
-            'အွန်လိုင်းဆိုင်မှာ ဈေးနှုန်းဖတ်တာ၊ အော်ဒါအသစ် သိမ်းတာနဲ့ လက်ကျန်အရေအတွက် ပြင်တာတွေကို Database Management System (DBMS) က ကိုင်တွယ်ပေးပါတယ်။ DBMS ဆိုတာ Database ထဲက data ကို စီမံပေးတဲ့ software ပါ။ PostgreSQL၊ MySQL နဲ့ MongoDB တို့က DBMS ဥပမာတွေပါ။'
+            'When an application needs to read, add, or update data, it sends a request to the DBMS. A single DBMS can manage multiple databases. For example, the PostgreSQL query below reports the name of the database you are connected to and the version of the software managing it.',
+            'Application က data ဖတ်ဖို့၊ ထည့်ဖို့ ဒါမှမဟုတ် ပြင်ဖို့ လိုတဲ့အခါ DBMS ဆီ request ပို့ပါတယ်။ DBMS တစ်ခုက database အများအပြားကို စီမံနိုင်ပါတယ်။ အောက်က PostgreSQL query က လက်ရှိ ချိတ်ထားတဲ့ database ရဲ့ အမည်နဲ့ အဲဒီ database ကို စီမံပေးနေတဲ့ software ရဲ့ version ကို ပြပေးပါတယ်။'
           ), `SELECT current_database() AS connected_database,
        version() AS database_server;`),
         {
-          ...illustrated('sql-and-nosql', p('SQL and NoSQL databases', 'SQL နဲ့ NoSQL Database တွေ'),
-            p(
-              'A DBMS handles reads and writes, and different database systems organize the records in different ways. You will often hear two broad labels, SQL and NoSQL. SQL is a language, and “SQL databases” commonly refers to relational databases that use it to work with tables. NoSQL covers other data models, such as documents and graphs. In the shop example, order 101 contains two notebooks. The picture shows that same order item as a row in a relational table and as a MongoDB document.',
-              'DBMS တွေဟာ data ကို စီထားပုံမှာ ကွာခြားပါတယ်။ အသုံးများတဲ့ အုပ်စုနှစ်ခုက SQL Database နဲ့ NoSQL Database ပါ။ SQL ဆိုတာ table တွေ ဖန်တီးဖို့၊ data ဖတ်ဖို့နဲ့ ပြင်ဖို့ သုံးတဲ့ language ပါ။ SQL သုံးတဲ့ relational database တွေကို SQL Database လို့ ခေါ်လေ့ရှိပါတယ်။ NoSQL အုပ်စုမှာ document၊ key-value နဲ့ graph စတဲ့ data model တွေ ပါဝင်ပါတယ်။ အောက်ကပုံမှာ အော်ဒါတစ်ခုထဲက ပစ္စည်းမှတ်တမ်းကို relational table ရဲ့ row နဲ့ MongoDB document အဖြစ် ယှဉ်ပြထားပါတယ်။'
-            ), 'sql-and-nosql-orders', 1024,
-            p('The same order item is shown in two forms. The table row and the MongoDB document both contain order_id 101, item Notebook, and quantity 2.', 'Relational table ရဲ့ row နဲ့ MongoDB ရဲ့ document နှစ်ခုလုံးမှာ order_id က 101၊ item က Notebook၊ quantity က 2 ဖြစ်ပါတယ်။'),
-            p('The SQL side shows column headers and a row. The MongoDB side shows field names and their values.', 'SQL ဘက်မှာ column ခေါင်းစဉ်တွေနဲ့ row တစ်ကြောင်းကို မြင်ရပြီး MongoDB ဘက်မှာ field နာမည်နဲ့ တန်ဖိုးကို တွဲမြင်ရပါတယ်။'), `-- PostgreSQL: read the order item row
-SELECT order_id, item, quantity
-FROM order_items
-WHERE order_id = 101;
-
--- MongoDB shell: read the order item document
-db.order_items.findOne({ order_id: 101 });`),
-          terms: [
-            ['SQL / Relational', p(
-              'PostgreSQL, MySQL, SQLite, and Microsoft SQL Server organize records into tables with rows and columns. SQL is the language used to create tables, query their data, and make changes.',
-              'PostgreSQL၊ MySQL၊ SQLite နဲ့ Microsoft SQL Server တို့က data ကို row နဲ့ column ပါတဲ့ table တွေထဲမှာ စီထားတယ်။ SQL က table ဆောက်ဖို့၊ data ရှာဖတ်ဖို့နဲ့ ပြင်ဆင်ဖို့ သုံးတဲ့ language ပါ။'
-            )],
-            ['NoSQL', p(
-              'NoSQL covers several data models. MongoDB stores documents, Redis is commonly used as a key-value store, Cassandra uses a wide-column model, and Neo4j stores nodes and relationships in a graph.',
-              'NoSQL မှာ data သိမ်းပုံ အမျိုးမျိုး ပါတယ်။ MongoDB က document တွေနဲ့ သိမ်းတယ်။ Redis ကို key-value store အဖြစ် အသုံးများတယ်။ Cassandra က wide-column model သုံးပြီး Neo4j က node တွေနဲ့ သူတို့ရဲ့ ဆက်စပ်မှုတွေကို graph ပုံစံနဲ့ သိမ်းတယ်။'
-            )],
-          ],
+          ...snippet('sql-and-nosql', p('Types of Databases', 'Database အမျိုးအစားများ')),
+          figure: {
+            src: '/docs/media/database/types-of-databases.jpg',
+            width: 2048,
+            height: 1143,
+            banner: true,
+            alt: p(
+              'Six database models illustrated as a relational table, a JSON-like document, key-value pairs, a wide-column row with column families, a graph with nodes and an edge, and vectors with numerical values.',
+              'Database အမျိုးအစား ခြောက်မျိုးကို relational table၊ JSON ပုံစံ document၊ key-value အတွဲ၊ column family ပါတဲ့ row၊ node နဲ့ edge ပါတဲ့ graph၊ ဂဏန်းတန်ဖိုးတွေ ပါတဲ့ vector တို့နဲ့ ပြထားပါတယ်။'
+            ),
+          },
+          blocks: p(
+            [
+              ['heading', '1. Relational Database (SQL) 📊'],
+              ['paragraph', 'Stores data in structured tables with rows and columns. A defined schema and constraints help maintain data integrity. Relational databases work well for complex queries and transactions, such as recording a bank transfer. Examples include PostgreSQL and MySQL.'],
+              ['heading', '2. Document Store (NoSQL) 📄'],
+              ['paragraph', 'Stores data in flexible, JSON-like documents. Documents can have different fields, so you can add fields as your application grows. Some systems also let you validate document fields. Examples include MongoDB and Cloud Firestore from Firebase.'],
+              ['heading', '3. Key-Value Store (NoSQL) 🔑'],
+              ['paragraph', 'Stores data as pairs of unique keys and their corresponding values, like a dictionary. Fast lookup by key makes this model useful for API response caching and user sessions. Redis is an example. Memcached uses the same model as an in-memory cache.'],
+              ['heading', '4. Wide-Column Store (NoSQL) 🗄️'],
+              ['paragraph', 'Stores data in rows identified by keys. A system such as HBase groups related columns into column families. Wide-column stores can distribute large volumes of data across servers and are used for applications such as high-volume logs, IoT telemetry, and large-scale analytics. Examples include Apache Cassandra and Apache HBase.'],
+              ['heading', '5. Graph Database (NoSQL) 🕸️'],
+              ['paragraph', 'Stores entities as nodes and their relationships as edges. Graph databases make it efficient to follow multiple connections, such as finding mutual friends or generating recommendations. Neo4j is an example.'],
+              ['heading', '6. Vector Database (NoSQL / AI) 🤖'],
+              ['paragraph', 'Stores and indexes embeddings, which are high-dimensional vectors that represent data such as text or images. Vector databases use similarity search to find related content and can retrieve relevant documents for Retrieval-Augmented Generation (RAG). Examples include Pinecone and Milvus.'],
+            ],
+            [
+              ['heading', '1. Relational Database (SQL) 📊'],
+              ['paragraph', 'Data ကို row နဲ့ column ပါတဲ့ table တွေထဲမှာ သိမ်းပါတယ်။ Schema နဲ့ constraint တွေ သတ်မှတ်ပြီး မှတ်တမ်းတွေ စည်းကမ်းနဲ့ ကိုက်ညီအောင် ထိန်းထားနိုင်ပါတယ်။ ဆက်စပ်မှတ်တမ်းတွေကို query တစ်ခုနဲ့ ရှာဖတ်တာ၊ ဘဏ်ငွေလွှဲလို transaction တွေ မှတ်တမ်းတင်တာအတွက် သင့်တော်ပါတယ်။ PostgreSQL နဲ့ MySQL တို့က ဥပမာတွေပါ။'],
+              ['heading', '2. Document Store (NoSQL) 📄'],
+              ['paragraph', 'Data ကို JSON နဲ့ ဆင်တူတဲ့ document တွေအဖြစ် သိမ်းပါတယ်။ Document တစ်ခုနဲ့တစ်ခုမှာ field တွေ ကွာနိုင်တာကြောင့် app ကြီးလာတဲ့အခါ field အသစ်တွေ ထည့်နိုင်ပါတယ်။ တချို့စနစ်တွေမှာ field တွေကို သတ်မှတ်ချက်နဲ့ ကိုက်ညီလားဆိုတာလည်း စစ်နိုင်ပါတယ်။ MongoDB နဲ့ Firebase ရဲ့ Cloud Firestore တို့က ဥပမာတွေပါ။'],
+              ['heading', '3. Key-Value Store (NoSQL) 🔑'],
+              ['paragraph', 'ထပ်မနေတဲ့ key တစ်ခုစီနဲ့ သက်ဆိုင်ရာ value ကို တွဲသိမ်းပါတယ်။ Key ကို သိရင် value ကို မြန်မြန် ပြန်ယူနိုင်တာကြောင့် API response တွေကို cache လုပ်ဖို့နဲ့ user session တွေ သိမ်းဖို့ သုံးလေ့ရှိပါတယ်။ Redis က ဥပမာတစ်ခုပါ။ Memcached ကလည်း ဒီပုံစံကို သုံးတဲ့ in-memory cache ပါ။'],
+              ['heading', '4. Wide-Column Store (NoSQL) 🗄️'],
+              ['paragraph', 'Data ကို key နဲ့ ခွဲခြားသတ်မှတ်ထားတဲ့ row တွေထဲမှာ သိမ်းပါတယ်။ HBase မှာ ဆက်စပ်တဲ့ column တွေကို column family အလိုက် စုထားပါတယ်။ Data အများအပြားကို server အများအပြားပေါ် ဖြန့်သိမ်းနိုင်တာကြောင့် ဝင်လာတဲ့ log အများအပြား၊ IoT စက်တွေဆီက ပို့တဲ့ တိုင်းတာချက်တွေနဲ့ data အများကြီး ခွဲခြမ်းစိတ်ဖြာတဲ့ အလုပ်တွေမှာ သုံးနိုင်ပါတယ်။ Apache Cassandra နဲ့ Apache HBase တို့က ဥပမာတွေပါ။'],
+              ['heading', '5. Graph Database (NoSQL) 🕸️'],
+              ['paragraph', 'လူ၊ ပစ္စည်း စတဲ့ အရာတွေကို node အဖြစ် သိမ်းပြီး သူတို့ကြားက ဆက်စပ်မှုကို edge အဖြစ် သိမ်းပါတယ်။ နှစ်ယောက်လုံးနဲ့ သူငယ်ချင်းဖြစ်သူကို ရှာတာ၊ သုံးစွဲသူ စိတ်ဝင်စားနိုင်တဲ့ အရာတွေ အကြံပြုတာလို ဆက်စပ်မှုအဆင့်ဆင့်ကို လိုက်ရှာရာမှာ သုံးပါတယ်။ Neo4j က ဥပမာတစ်ခုပါ။'],
+              ['heading', '6. Vector Database (NoSQL / AI) 🤖'],
+              ['paragraph', 'စာသား၊ ပုံ စတဲ့ data ကို ကိုယ်စားပြုတဲ့ ဂဏန်းတန်ဖိုး အများအပြားပါဝင်သော vector တွေကို embedding လို့ ခေါ်ပါတယ်။ Vector database က embedding တွေကို သိမ်းပြီး index လုပ်ပေးပါတယ်။ ဆင်တူတဲ့ content ကို ရှာဖို့နဲ့ Retrieval-Augmented Generation (RAG) မှာ သက်ဆိုင်ရာ document တွေ ပြန်ရှာပေးဖို့ သုံးနိုင်ပါတယ်။ Pinecone နဲ့ Milvus တို့က ဥပမာတွေပါ။'],
+            ],
+          ),
         },
       ],
-      [['MongoDB · Documents', 'https://www.mongodb.com/docs/manual/core/document/']]),
+      [
+        ['MongoDB · Documents', 'https://www.mongodb.com/docs/manual/core/document/'],
+        ['Apache HBase · Data model', 'https://hbase.apache.org/docs/datamodel/'],
+        ['Milvus · What is Milvus?', 'https://milvus.io/docs/overview.md'],
+      ]),
+    introBlocks: p([['paragraph', databaseDefinition.en]], [['paragraph', databaseDefinition.my]]),
     version: '',
   },
   {
     ...page('relational-model', p('How databases connect related data', 'Database တွေမှာ ဆက်စပ်နေတဲ့ Data ကို သိမ်းပုံ'),
       p(
-        'The previous lesson showed one order item as a SQL table row and as a NoSQL document. Now look at how that item is connected to the rest of the order. When you open an order, how does the shop know which product you bought and how many you ordered? Follow the same order through PostgreSQL, MongoDB, and Neo4j.',
+        'The previous lesson introduced several ways to organize data. Now compare how three databases connect related records. When you open an order, how does the shop know which product you bought and how many you ordered? Follow the same order through PostgreSQL, MongoDB, and Neo4j.',
         'အော်ဒါတစ်ခုမှာ ဘာပစ္စည်းကို ဘယ်နှခု မှာထားလဲဆိုတာ ပြဖို့ အော်ဒါနဲ့ ပစ္စည်းမှတ်တမ်းတွေကို ချိတ်ဆက်ထားရပါတယ်။ PostgreSQL၊ MongoDB နဲ့ Neo4j မှာ ဒီဆက်စပ်မှုကို သိမ်းပုံ ကွာပါတယ်။'
       ),
       [
