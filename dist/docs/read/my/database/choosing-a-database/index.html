@@ -3,89 +3,106 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Inventory app တစ်ခုကို နမူနာယူပြီး data ဖတ်ရေးပုံ၊ transaction နဲ့ report လိုအပ်ချက်တွေက database ရွေးချယ်မှုအပေါ် ဘယ်လို သက်ရောက်လဲ ကြည့်ပါ။">
-  <title>Software တစ်ခုအတွက် Database ရွေးချယ်ပုံ · Cloud Nine Innovations</title>
+  <meta name="description" content="Software အတွက် Database ရွေးတဲ့အခါ data ဖွဲ့စည်းပုံ၊ ဖတ်ပုံရေးပုံ၊ data တစ်သမတ်တည်းဖြစ်ဖို့ လိုအပ်ချက်နဲ့ workload တိုးလာမယ့်ပုံတို့ကို Database Engine တစ်ခုချင်းစီရဲ့ အားသာချက်၊ အကန့်အသတ်တွေနဲ့ တိုက်ဆိုင်စစ်ဆေးပါ။">
+  <title>Software တစ်ခုအတွက် Database ဘယ်လို ရွေးမလဲ · Cloud Nine Innovations</title>
   <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/database/choosing-a-database/">
   <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/choosing-a-database/">
   <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/choosing-a-database/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
-  <link rel="stylesheet" href="/docs/style.css">
+  <link rel="stylesheet" href="/docs/style.css?v=87">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
   <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#database">သင်ခန်းစာအားလုံး · Database</a> <a href="/docs/read/en/database/choosing-a-database/" lang="en" hreflang="en">English</a></nav>
-  <h1>Software တစ်ခုအတွက် Database ရွေးချယ်ပုံ</h1>
+  <h1>Software တစ်ခုအတွက် Database ဘယ်လို ရွေးမလဲ</h1>
   
-  <p class="intro">Inventory app တစ်ခုကို နမူနာယူပြီး data ဖတ်ရေးပုံ၊ transaction နဲ့ report လိုအပ်ချက်တွေက database ရွေးချယ်မှုအပေါ် ဘယ်လို သက်ရောက်လဲ ကြည့်ပါ။</p>
+  <p class="intro">Software အတွက် Database ရွေးတဲ့အခါ data ဖွဲ့စည်းပုံ၊ ဖတ်ပုံရေးပုံ၊ data တစ်သမတ်တည်းဖြစ်ဖို့ လိုအပ်ချက်နဲ့ workload တိုးလာမယ့်ပုံတို့ကို Database Engine တစ်ခုချင်းစီရဲ့ အားသာချက်၊ အကန့်အသတ်တွေနဲ့ တိုက်ဆိုင်စစ်ဆေးပါ။</p>
   <p class="reading-link"><a href="/docs/?lang=my#/database/choosing-a-database">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
 
   <section class="article-section">
     <h2>ဒီစာမျက်နှာမှာ</h2>
-    <ul><li><a href="#requirements">App က လုပ်ပေးရမယ့် အလုပ်တွေကနေ စခြင်း</a></li>
-<li><a href="#compare-models">Query လုပ်ပုံနဲ့ ကိုက်တဲ့ Data Model ရွေးခြင်း</a></li>
-<li><a href="#oltp-olap">နေ့စဉ်လုပ်ငန်းနဲ့ Data ခွဲခြမ်းမှုကို နှိုင်းယှဉ်ခြင်း</a></li>
+    <ul><li><a href="#requirements">1. Database ရွေးရာမှာ စစ်ဆေးရမယ့် အချက်များ</a></li>
+<li><a href="#compare-models">2. Database ပုံစံများ နှိုင်းယှဉ်ခြင်း</a></li>
+<li><a href="#project-mapping">3. Project အမျိုးအစားအလိုက် Database ရွေးချယ်ခြင်း</a></li>
+<li><a href="#multi-database">4. Production စနစ်မှာ Database မျိုးစုံ တွဲသုံးပုံ</a></li>
+<li><a href="#workload-decision-tree">5. Workload အလိုက် ရွေးချယ်ပုံ</a></li>
+<li><a href="#architecture-principles">6. Architecture ရွေးချယ်ရာမှာ အခြေခံထားရမယ့် အချက်များ</a></li>
 <li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
   </section>
   <section class="article-section" id="requirements">
-  <h2>App က လုပ်ပေးရမယ့် အလုပ်တွေကနေ စခြင်း</h2>
-  <p>App မှာ ဘယ်လို query တွေ run မလဲ၊ ဘာတွေ update လုပ်မလဲ ချရေးပါ။ ဘယ်လောက် မကြာခဏ လုပ်မလဲ၊ အပြောင်းအလဲတွေ အတူလုပ်တဲ့အခါ ဘာတွေ သေချာရမလဲ စဉ်းစားပါ။</p>
+  <h2>1. Database ရွေးရာမှာ စစ်ဆေးရမယ့် အချက်များ</h2>
+  <p>Database Engine မရွေးခင် အောက်ပါအချက် 5 ခုကို စစ်ဆေးပါ။</p>
+<ul class="lesson-list"><li><strong>Data model နဲ့ schema တည်ငြိမ်မှု။</strong> Field တွေ သတ်မှတ်ပြီး တစ်ခုနဲ့တစ်ခု ဆက်စပ်နေတဲ့ မှတ်တမ်းတွေကို table တွေနဲ့ သိမ်းလို့ရပါတယ်။ ဆက်စပ်မှု အဆင့်ဆင့်ကို မကြာခဏ လိုက်ရှာရင် graph ကို စဉ်းစားပါ။ အတွင်းမှာ data ထပ်ဆင့်ပါပြီး record တစ်ခုနဲ့တစ်ခု field ကွာနိုင်ရင် document ပုံစံ သင့်တော်နိုင်ပါတယ်။</li><li><strong>Data ဖတ်ရေးပုံနဲ့ query များ။</strong> App က ဘာတွေကို ဖတ်မလဲ၊ ဘာတွေကို ရေးမလဲ စာရင်းချပါ။ Filter ပုံစံမျိုးစုံ၊ join နဲ့ စုတွက်ချက်မှုတွေ လိုရင် query ပုံစံမျိုးစုံကို ကိုင်တွယ်နိုင်ဖို့ လိုပါတယ်။ သိပြီးသား key တစ်ခုနဲ့ပဲ ရှာရရင် ပိုရိုးရှင်းတဲ့ ရှာဖွေနည်းကို သုံးနိုင်ပါတယ်။</li><li><strong>Consistency နဲ့ transaction အာမခံချက်များ။</strong> Data အဟောင်းကို ခဏဖတ်မိတာ လက်ခံနိုင်လား၊ ဘယ်အပြောင်းအလဲတွေက အားလုံးအတူ အောင်မြင်ရမလဲ သတ်မှတ်ပါ။ ရွေးမယ့် engine နဲ့ settings က ပေးနိုင်တဲ့ transaction နယ်ပယ်နဲ့ ဖတ်ရှုမှု အာမခံချက်တွေကို စစ်ပါ။</li><li><strong>စက်စွမ်းရည်နဲ့ တစ်ချိန်တည်း လုပ်ဆောင်နိုင်တဲ့ ပမာဏ။</strong> စက်တစ်လုံးကို အဆင့်မြှင့်တာနဲ့ စက်အများအပြားကို ဖြန့်သုံးတာကို ခွဲစဉ်းစားပါ။ ဖတ်တာများရင် read replica နဲ့ cache က ဝန်ခွဲပေးနိုင်ပါတယ်။ ရေးတာများရင် partitioning သို့မဟုတ် sharding လုပ်နိုင်ပုံနဲ့ ရေးတဲ့ဝန် ဘယ်လို ပြန့်သွားမလဲ စစ်ပါ။</li><li><strong>ထိန်းသိမ်းရတဲ့ ဝန်နဲ့ ရနိုင်တဲ့ ဝန်ဆောင်မှုများ။</strong> Deploy လုပ်ပုံ၊ backup နဲ့ restore၊ license၊ query language ကျွမ်းကျင်မှုနဲ့ managed service ရနိုင်မှုကို နှိုင်းယှဉ်ပါ။ မြန်နှုန်း အနည်းငယ် ပိုကောင်းပေမယ့် ထိန်းသိမ်းရတဲ့ ဝန် ပိုများနိုင်ပါတယ်။</li></ul>
 
-<pre><code>-- Can warehouse 3 fulfill a request for 5 units of product 42?
-SELECT quantity
-FROM stock_balances
-WHERE warehouse_id = 3
-  AND product_id = 42
-  AND quantity &gt;= 5;</code></pre>
-<dl class="lesson-terms"><div><dt><code>Queries</code></dt><dd>SKU နဲ့ product ရှာမယ်။ ဂိုဒေါင်အလိုက် stock ပြမယ်။ ပြီးခဲ့တဲ့လက stock အဝင်အထွက်ကို ဖတ်မယ်။</dd></div><div><dt><code>Transactions</code></dt><dd>Stock ရွှေ့ရင် အဝင်အထွက်မှတ်တမ်း သိမ်းတာနဲ့ ဂိုဒေါင်နှစ်ခုရဲ့ လက်ကျန် ပြင်တာကို အတူလုပ်မယ်။</dd></div><div><dt><code>Operational requirements</code></dt><dd>ဖတ်ရေးပမာဏ၊ လက်ခံနိုင်တဲ့ တုံ့ပြန်ချိန်နဲ့ data တိုးလာမယ့်နှုန်းကို ခန့်မှန်းပါ။ Backup ယူတာနဲ့ restore စမ်းတာ ဘယ်သူတာဝန်ယူမလဲ သတ်မှတ်ပါ။</dd></div></dl>
+
 
 
 </section>
 <section class="article-section" id="compare-models">
-  <h2>Query လုပ်ပုံနဲ့ ကိုက်တဲ့ Data Model ရွေးခြင်း</h2>
-  <p>ဂိုဒေါင်တစ်ခုကနေ တစ်ခုဆီ ပစ္စည်းရွှေ့တဲ့အခါ အဝင်အထွက်မှတ်တမ်းနဲ့ လက်ကျန်တွေ ကိုက်ညီဖို့ လိုပါတယ်။ Inventory app က products၊ warehouses၊ stock balances နဲ့ movement records တွေကို ချိတ်ဖတ်ပြီး data တွေကို အတူပြင်ရလို့ relational database နဲ့ စလို့ကောင်းတယ်။ ဖတ်ရေးပုံ သို့မဟုတ် မြန်နှုန်းလိုအပ်ချက် သီးသန့်ပေါ်လာမှ နောက်ထပ် store ထည့်သုံးဖို့ စဉ်းစားပါ။</p>
+  <h2>2. Database ပုံစံများ နှိုင်းယှဉ်ခြင်း</h2>
+  <p>ဇယားက အသုံးများတဲ့ ပုံစံတွေကို ပြထားပါတယ်။ Consistency နဲ့ scale လုပ်နိုင်ပုံက engine နဲ့ settings ပေါ် မူတည်ပါတယ်။</p>
+<div class="lesson-table" role="region" aria-label="Database ပုံစံများ နှိုင်းယှဉ်ဇယား" tabindex="0" style="overflow-x:auto"><table style="min-width:48rem">
+        <thead><tr><th scope="col">Database ပုံစံ</th><th scope="col">Data ဖွဲ့စည်းပုံ</th><th scope="col">အားသာတဲ့ Query</th><th scope="col">Consistency</th><th scope="col">Scale လုပ်ပုံ</th><th scope="col">သင့်တော်တဲ့ အလုပ်</th></tr></thead>
+        <tbody><tr><td><strong>Relational (SQL)</strong></td><td>Data type နဲ့ constraint သတ်မှတ်ထားတဲ့ table များ</td><td>Join၊ filter မျိုးစုံနဲ့ စုတွက်ချက်ခြင်း</td><td>ACID transaction ပါတယ်။ Isolation နဲ့ replica က ဖတ်ပုံက settings ပေါ် မူတည်ပါတယ်။</td><td>Primary စက် အဆင့်မြှင့်ခြင်း၊ read replica သို့မဟုတ် distributed SQL</td><td>ဆက်စပ်မှတ်တမ်းတွေ စည်းကမ်းနဲ့ ကိုက်ညီဖို့ လိုတဲ့အလုပ်</td></tr><tr><td><strong>Document</strong></td><td>JSON သို့မဟုတ် BSON ပုံစံ အထပ်ဆင့် document များ</td><td>Index ပါတဲ့ field နဲ့ ရှာခြင်း၊ အထပ်ဆင့် document ဖတ်ခြင်း</td><td>Engine အများအပြားက document တစ်ခုကို atomic ဖြစ်အောင် ရေးနိုင်ပါတယ်။ Document အများအပြားအတွက် အာမခံချက် ကွာပါတယ်။</td><td>တချို့ engine တွေက document တွေကို shard တွေအလိုက် ဖြန့်နိုင်ပါတယ်။</td><td>Record တစ်ခုနဲ့တစ်ခု field ကွာနိုင်တဲ့ data</td></tr><tr><td><strong>Key-Value</strong></td><td>မထပ်တဲ့ key နဲ့ သက်ဆိုင်ရာ value</td><td>Key နဲ့ တိုက်ရိုက် ရှာခြင်း</td><td>Strong၊ eventual သို့မဟုတ် ချိန်ညှိနိုင်တဲ့ ပုံစံ ရှိပါတယ်။</td><td>Engine ပံ့ပိုးရင် cluster သို့မဟုတ် partition ခွဲနိုင်ပါတယ်။</td><td>Cache၊ session နဲ့ key အခြေခံ ဖတ်ရှုမှု</td></tr><tr><td><strong>Wide-Column</strong></td><td>Partition ခွဲထားတဲ့ row များ။ တချို့ engine တွေက column family နဲ့ စုပါတယ်။</td><td>Partition key နဲ့ ရှာခြင်း၊ partition အတွင်း အစဉ်လိုက်ဖတ်ခြင်း</td><td>အများအားဖြင့် ချိန်ညှိနိုင်ပါတယ်။</td><td>Partition key တွေက ဝန်ကို ဖြန့်ပေးနိုင်ရင် node အများအပြားက ရေးပေးနိုင်ပါတယ်။</td><td>ဝင်လာတဲ့ log အများအပြားနဲ့ အချိန်စဉ်လိုက် record များ</td></tr><tr><td><strong>Graph</strong></td><td>Node၊ ဆက်စပ်မှုနဲ့ property များ</td><td>ဆက်စပ်မှု အဆင့်ဆင့် လိုက်ရှာခြင်း</td><td>Transaction နဲ့ ဖတ်ရှုမှု အာမခံချက်က engine ပေါ် မူတည်ပါတယ်။</td><td>စက်အဆင့်မြှင့်ခြင်း၊ replication သို့မဟုတ် partition ခွဲခြင်း</td><td>ဆက်စပ်မှုများတဲ့ data ကို လိုက်ရှာတဲ့ query များ</td></tr><tr><td><strong>Specialized (Time-Series / Vector)</strong></td><td>အချိန်ပါ တိုင်းတာချက်များ သို့မဟုတ် embedding များ</td><td>အချိန်ပိုင်းအလိုက် စုတွက်ခြင်း သို့မဟုတ် အနီးစပ်ဆုံး ရှာခြင်း</td><td>သိမ်းဆည်းပုံနဲ့ index အာမခံချက်ပေါ် မူတည်ပါတယ်။</td><td>အချိန်အလိုက် partition ခွဲခြင်း သို့မဟုတ် index ဖြန့်ခြင်း</td><td>Telemetry နဲ့ အဓိပ္ပါယ်အရ ဆင်တူမှု ရှာဖွေခြင်း</td></tr></tbody>
+      </table></div>
 
-<pre><code>-- Assume both balance rows exist and quantity has CHECK (quantity &gt;= 0).
-BEGIN;
 
-UPDATE stock_balances SET quantity = quantity - 5
-WHERE warehouse_id = 3 AND product_id = 42;
-
-UPDATE stock_balances SET quantity = quantity + 5
-WHERE warehouse_id = 4 AND product_id = 42;
-
-INSERT INTO stock_movements
-  (product_id, from_warehouse_id, to_warehouse_id, quantity)
-VALUES (42, 3, 4, 5);
-
-COMMIT;</code></pre>
-<dl class="lesson-terms"><div><dt><code>Relational · PostgreSQL / MySQL</code></dt><dd>Products၊ ဂိုဒေါင်လက်ကျန်နဲ့ stock အဝင်အထွက်မှတ်တမ်းတွေကို ချိတ်ဆက်ထားတဲ့ tables တွေမှာ သိမ်းနိုင်တယ်။</dd></div><div><dt><code>Document · MongoDB</code></dt><dd>အမျိုးအစားအလိုက် field တွေ ကွာပြီး product အသေးစိတ်ကို တစ်စုတည်း ဖတ်ရတဲ့ catalog မှာ product တစ်ခုစီကို document တစ်ခုအဖြစ် သိမ်းနိုင်တယ်။</dd></div><div><dt><code>Key-value · Redis</code></dt><dd>မကြာခဏ ဖတ်တဲ့ product စာရင်းကို သတ်မှတ်ထားတဲ့ key နဲ့ cache ထားနိုင်တယ်။ သက်တမ်း သတ်မှတ်ပြီး catalog ပြောင်းတဲ့အခါ လိုအပ်ရင် cache ကို အသစ်ပြန်ဖြည့်ပါ သို့မဟုတ် ဖယ်ပါ။</dd></div><div><dt><code>Graph · Neo4j</code></dt><dd>Part တစ်ခုက ဘယ် part တွေအပေါ် မှီလဲဆိုပြီး အဆင့်ဆင့်လိုက်ရှာရင် graph model ကို စဉ်းစားပါ။</dd></div><div><dt><code>Wide-column · Cassandra</code></dt><dd>ဂိုဒေါင်နဲ့ ရက်အလိုက် movement events ဖတ်တာလို partition key နဲ့ ရှာမယ့်ပုံစံ ကြိုသိထားရင် wide-column model ကို စဉ်းစားနိုင်တယ်။</dd></div></dl>
 
 
 </section>
-<section class="article-section" id="oltp-olap">
-  <h2>နေ့စဉ်လုပ်ငန်းနဲ့ Data ခွဲခြမ်းမှုကို နှိုင်းယှဉ်ခြင်း</h2>
-  <p>Stock အပြောင်းအလဲတစ်ခုကို ချက်ချင်းမှတ်တမ်းတင်တာနဲ့ လပေါင်းများစွာက မှတ်တမ်းတွေကို စုတွက်ပြီး report ထုတ်တာမှာ ဖတ်ရေးပမာဏ ကွာပါတယ်။ OLTP နဲ့ OLAP က database က ကိုင်တွယ်ရတဲ့ အလုပ်ပုံစံတွေပါ။ Analytics အတွက် သီးသန့် store မထည့်ခင် report တွေ run လိုက်တဲ့အခါ လက်ရှိ database ပေါ် ဘယ်လောက် သက်ရောက်လဲ တိုင်းပါ။</p>
+<section class="article-section" id="project-mapping">
+  <h2>3. Project အမျိုးအစားအလိုက် Database ရွေးချယ်ခြင်း</h2>
+  <div class="lesson-table" role="region" aria-label="Project အမျိုးအစားအလိုက် Database ရွေးချယ်ဇယား" tabindex="0" style="overflow-x:auto"><table style="min-width:32rem">
+        <thead><tr><th scope="col">Project အမျိုးအစား</th><th scope="col">Database ပုံစံ</th><th scope="col">အသုံးများတဲ့ Engine များ</th><th scope="col">အဓိက ရွေးချယ်ရတဲ့ အကြောင်းရင်း</th></tr></thead>
+        <tbody><tr><td><strong>ဘဏ်လုပ်ငန်း၊ Fintech၊ ERP နဲ့ E-commerce</strong></td><td>Relational (SQL)</td><td>PostgreSQL, MySQL, Oracle, SQL Server</td><td>Account၊ order နဲ့ inventory မှတ်တမ်းတွေကို ACID transaction နဲ့ constraint သုံးပြီး စည်းကမ်းနဲ့ ကိုက်ညီအောင် ထိန်းနိုင်ပါတယ်။</td></tr><tr><td><strong>CMS၊ ကုန်ပစ္စည်းစာရင်းနဲ့ Mobile Backend</strong></td><td>Document (NoSQL)</td><td>MongoDB, Firestore, Couchbase</td><td>Record တစ်ခုနဲ့တစ်ခု မတူတဲ့ field တွေကို အထပ်ဆင့် document ပုံစံနဲ့ သိမ်းနိုင်ပါတယ်။</td></tr><tr><td><strong>Cache၊ Session နဲ့ အချိန်နှင့်တစ်ပြေးညီ အဆင့်စာရင်း</strong></td><td>Key-Value</td><td>Redis, Valkey, Memcached, DynamoDB</td><td>Key နဲ့ မြန်မြန် ရှာနိုင်ပါတယ်။ Data တည်မြဲဖို့ သို့မဟုတ် အဆင့်စီဖို့ လိုရင် အဲဒီအလုပ်ကို ပံ့ပိုးတဲ့ engine ကို ရွေးပါ။</td></tr><tr><td><strong>Social Network၊ လိမ်လည်မှု ရှာဖွေခြင်းနဲ့ အကြံပြုစနစ်</strong></td><td>Graph</td><td>Neo4j, Amazon Neptune</td><td>အရာဝတ္ထုတွေကြား ဆက်စပ်မှု အဆင့်ဆင့်ကို လိုက်ပြီး လမ်းကြောင်းနဲ့ အနီးစပ်ဆုံး ဆက်စပ်မှုတွေ ရှာနိုင်ပါတယ်။</td></tr><tr><td><strong>IoT Sensor၊ Server Monitoring နဲ့ ဈေးနှုန်း အပြောင်းအလဲမှတ်တမ်း</strong></td><td>Time-Series</td><td>TimescaleDB, InfluxDB, Prometheus</td><td>အချိန်ပါတဲ့ data ကို လက်ခံပြီး အချိန်ပိုင်းအလိုက် စုတွက်နိုင်ပါတယ်။ Prometheus ကို monitoring metrics အတွက် အဓိက သုံးပါတယ်။</td></tr><tr><td><strong>Chat၊ Event Log နဲ့ Activity Feed</strong></td><td>Wide-Column</td><td>Apache Cassandra, ScyllaDB</td><td>ရေးတဲ့ဝန်ကို ဖြန့်ပြီး သိထားတဲ့ partition key နဲ့ မှတ်တမ်းတွေကို အစဉ်လိုက် ပြန်ဖတ်နိုင်ပါတယ်။</td></tr><tr><td><strong>AI / LLM App၊ RAG နဲ့ Semantic Search</strong></td><td>Vector</td><td>Pinecone, Qdrant, Milvus, pgvector</td><td>Embedding တွေ သိမ်းပြီး အနီးစပ်ဆုံးကို ပြန်ရှာနိုင်ပါတယ်။ pgvector က ဒီလုပ်ဆောင်ချက်ကို PostgreSQL မှာ ထည့်ပေးတဲ့ extension ပါ။</td></tr><tr><td><strong>ဆိုက်အတွင်း ရှာဖွေမှုနဲ့ Log ခွဲခြမ်းခြင်း</strong></td><td>Search Engine</td><td>Elasticsearch, OpenSearch, Meilisearch</td><td>စာသားကို index လုပ်ပြီး full-text search လုပ်နိုင်ပါတယ်။ တချို့ engine တွေက စာလုံးပေါင်း အနည်းငယ်လွဲရင် ရှာပေးတာနဲ့ အမျိုးအစားအလိုက် filter လုပ်တာကိုလည်း ပံ့ပိုးပါတယ်။</td></tr><tr><td><strong>BI နဲ့ Data Warehouse</strong></td><td>Columnar (OLAP)</td><td>ClickHouse, BigQuery, Snowflake</td><td>Data အများအပြားကို ခွဲခြမ်းတဲ့အခါ လိုတဲ့ column တွေကို ဖတ်ပြီး စုတွက်နိုင်ပါတယ်။</td></tr></tbody>
+      </table></div>
 
-<pre><code>-- OLTP: read one balance while taking an order.
-SELECT quantity FROM stock_balances
-WHERE warehouse_id = 3 AND product_id = 42;
 
--- OLAP: summarize movements across several months.
-SELECT date_trunc(&#39;month&#39;, moved_at) AS month, SUM(quantity) AS units_moved
-FROM stock_movements
-WHERE moved_at &gt;= DATE &#39;2026-01-01&#39;
-GROUP BY month
-ORDER BY month;</code></pre>
-<dl class="lesson-terms"><div><dt><code>OLTP</code></dt><dd>User က stock transfer တင်လိုက်တာနဲ့ မှတ်တမ်းသိမ်းပြီး သက်ဆိုင်ရာ လက်ကျန်တွေကို ပြင်တယ်။</dd></div><div><dt><code>OLAP</code></dt><dd>Stock အပြောင်းအလဲ သိဖို့ လပေါင်းများစွာက မှတ်တမ်းတွေကို product နဲ့ ဂိုဒေါင်အလိုက် စုပေါင်းတွက်တယ်။ အစမှာ လက်ရှိ relational database ထဲက SQL report နဲ့ စပြီး report workload ကြီးလာရင် သီးသန့်ခွဲနိုင်တယ်။</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="multi-database">
+  <h2>4. Production စနစ်မှာ Database မျိုးစုံ တွဲသုံးပုံ</h2>
+  <p>Production စနစ်တစ်ခုမှာ အလုပ်တစ်မျိုးစီရဲ့ လိုအပ်ချက် ကွာရင် Database မျိုးစုံ တွဲသုံးနိုင်ပါတယ်။</p>
+<ul class="lesson-list"><li><strong>E-commerce platform။</strong> Account၊ order နဲ့ ငွေပေးချေမှုအတွက် PostgreSQL သုံးနိုင်ပါတယ်။ ပစ္စည်းတစ်မျိုးနဲ့တစ်မျိုး specification ကွာရင် MongoDB သို့မဟုတ် PostgreSQL JSONB သုံးနိုင်ပါတယ်။ Cart နဲ့ session အတွက် Redis၊ ပစ္စည်းရှာဖို့ Elasticsearch သုံးနိုင်ပါတယ်။</li><li><strong>Social media platform။</strong> Profile မှတ်တမ်းတွေအတွက် MySQL သို့မဟုတ် PostgreSQL၊ ဆက်စပ်မှုနဲ့ အကြံပြုချက်တွေအတွက် graph database သုံးနိုင်ပါတယ်။ Feed တွေကို Redis မှာ cache ထားနိုင်ပြီး message နဲ့ activity log အများအပြားကို Cassandra မှာ သိမ်းနိုင်ပါတယ်။</li><li><strong>AI knowledge application။</strong> User နဲ့ app metadata အတွက် PostgreSQL၊ အဓိပ္ပါယ်အရ ဆင်တူတဲ့ အကြောင်းအရာ ရှာဖို့ vector database သို့မဟုတ် <code>pgvector</code> သုံးနိုင်ပါတယ်။ မကြာခဏ တောင်းတဲ့ရလဒ်တွေကို Redis မှာ cache ထားနိုင်ပါတယ်။</li></ul>
+
+
+
+
+</section>
+<section class="article-section" id="workload-decision-tree">
+  <h2>5. Workload အလိုက် ရွေးချယ်ပုံ</h2>
+  <h3>စာသားဖြင့် ရွေးချယ်ပုံ</h3>
+<p>Project မှာ အကောင်းဆုံး လုပ်ပေးနိုင်ဖို့ လိုတဲ့ အဓိက အလုပ်ကနေ စပါ။</p>
+<ul class="lesson-list"><li><strong>Transaction တိကျမှုနဲ့ ဆက်စပ်မှတ်တမ်းများ → Relational (SQL)။</strong> ဘဏ်လုပ်ငန်း၊ order နဲ့ ငွေပေးချေမှု၊ ERP သို့မဟုတ် inventory အတွက် PostgreSQL၊ MySQL နဲ့ SQL Server တို့က transaction နဲ့ table အများအပြား join လုပ်တာကို ပံ့ပိုးပါတယ်။</li><li><strong>Field တွေ ပြောင်းလဲနိုင်တဲ့ မှတ်တမ်းများ → Document (NoSQL)။</strong> CMS၊ ပစ္စည်းစာရင်းနဲ့ mobile backend အတွက် MongoDB၊ Firestore၊ Couchbase တို့မှာ field ကွာနိုင်တဲ့ အထပ်ဆင့် document တွေ သုံးနိုင်ပါတယ်။</li><li><strong>Key နဲ့ မြန်မြန်ရှာဖို့ သို့မဟုတ် ရေးတဲ့ပမာဏ များခြင်း → Key-Value သို့မဟုတ် Wide-Column။</strong> Session လို key နဲ့ ပြန်ရှာတဲ့ အလုပ်အတွက် Redis သို့မဟုတ် DynamoDB ကို စဉ်းစားပါ။ Event log လို ဖြန့်ရေးပြီး အစဉ်လိုက် ပြန်ဖတ်ဖို့ Cassandra ကို စဉ်းစားပါ။</li><li><strong>ဆက်စပ်မှု အဆင့်ဆင့်ကို လိုက်ရှာခြင်း → Graph။</strong> Social network၊ လိမ်လည်မှု ရှာဖွေခြင်းနဲ့ အကြံပြုစနစ်အတွက် Neo4j နဲ့ Amazon Neptune တို့က ဆက်စပ်မှတ်တမ်းတွေကို တစ်ဆင့်ပြီးတစ်ဆင့် လိုက်ရှာနိုင်ပါတယ်။</li><li><strong>Time-Series၊ Search၊ AI သို့မဟုတ် Analytics → အထူးပြု Engine။</strong> အချိန်ပိုင်း query အတွက် TimescaleDB၊ ဆင်တူတာ ရှာဖို့ Qdrant သို့မဟုတ် pgvector၊ စာသားအပြည့် ရှာဖို့ Elasticsearch၊ data အများအပြား စုတွက်ဖို့ ClickHouse သုံးနိုင်ပါတယ်။</li></ul>
+<h3>Mermaid Flowchart</h3>
+
+
+<figure class="lesson-figure">
+    <a href="/docs/media/database/database-workload-my.svg" data-image-preview><img src="/docs/media/database/database-workload-my.svg" alt="Transaction အတွက် relational၊ field ပြောင်းနိုင်တဲ့ record အတွက် document၊ key နဲ့ရှာခြင်း သို့မဟုတ် ရေးတာများရင် key-value သို့မဟုတ် wide-column၊ ဆက်စပ်မှုအတွက် graph နဲ့ time-series၊ search၊ AI၊ analytics အတွက် အထူးပြု engine တွေကို ရွေးချယ်ပုံ။" width="894" height="610" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="architecture-principles">
+  <h2>6. Architecture ရွေးချယ်ရာမှာ အခြေခံထားရမယ့် အချက်များ</h2>
+  <ul class="lesson-list"><li><strong>လိုအပ်ချက်နဲ့ ကိုက်ရင် relational engine နဲ့ စပါ။</strong> PostgreSQL မှာ schema သတ်မှတ်ပြီး data သိမ်းတာ၊ JSONB နဲ့ ပုံစံပြောင်းနိုင်တဲ့ data သိမ်းတာ၊ full-text search နဲ့ <code>pgvector</code> သုံးပြီး vector search လုပ်တာတွေ ရပါတယ်။ အရေးကြီးတဲ့ လိုအပ်ချက်တစ်ခုကို မဖြည့်နိုင်ရင် သို့မဟုတ် တိုင်းတာလို့ရတဲ့ စွမ်းဆောင်ရည်ပြဿနာ ရှိရင် အထူးပြု engine ကို စဉ်းစားပါ။</li><li><strong>အများဆုံး သုံးမယ့် ဖတ်ရေးပုံကို ဦးစားပေးပါ။</strong> Storage engine တစ်ခုနဲ့တစ်ခုမှာ လိုအပ်တာထက် data ပိုရေးရတဲ့ပမာဏ၊ ဖတ်ဖို့ ကြာချိန်နဲ့ သိုလှောင်နေရာ သုံးစွဲပုံ ကွာပါတယ်။ မကြာခဏ သုံးပြီး မြန်ဖို့လိုတဲ့ query တွေနဲ့ index တွေကို ကိုက်ညီအောင် စီပြီး လက်တွေ့နီးစပ်တဲ့ data နဲ့ တိုင်းပါ။</li><li><strong>Database ထပ်ထည့်ရာမှာ လိုအပ်သလောက် ရွေးပါ။</strong> Database အများအပြားက မတူတဲ့ အလုပ်တွေကို ကိုင်တွယ်နိုင်ပေမယ့် data ကိုက်ညီအောင် ထိန်းရတာနဲ့ စနစ်တစ်ပိုင်း ပျက်သွားရင် ပြန်ကိုင်တွယ်ရတာ ပိုများလာပါတယ်။ MVP မှာ လိုအပ်ချက်ဖြည့်နိုင်တဲ့ အနည်းဆုံး အရေအတွက်နဲ့ စပြီး အကျိုးရှိတာကို တိုင်းလို့ရမှ အထူးပြု engine ထည့်ပါ။</li></ul>
+
+
 
 
 </section>
   <section class="references" id="references">
     <h2>တရားဝင် ကိုးကားချက်များ</h2>
     <ul><li><a href="https://docs.aws.amazon.com/wellarchitected/latest/performance-efficiency-pillar/data-management.html">AWS Well-Architected · Data management</a></li>
-<li><a href="https://www.ibm.com/think/topics/olap-vs-oltp">IBM · OLAP and OLTP</a></li>
-<li><a href="https://www.mongodb.com/resources/basics/databases/nosql-explained">MongoDB · NoSQL database types</a></li></ul>
+<li><a href="https://www.postgresql.org/docs/current/datatype-json.html">PostgreSQL · JSON types</a></li>
+<li><a href="https://www.postgresql.org/docs/current/datatype-textsearch.html">PostgreSQL · Full-text search types</a></li>
+<li><a href="https://github.com/pgvector/pgvector">pgvector · Vector similarity search for PostgreSQL</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/core/transactions/">MongoDB · Transactions</a></li>
+<li><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html">Amazon DynamoDB · Read consistency</a></li>
+<li><a href="https://cassandra.apache.org/doc/stable/cassandra/architecture/dynamo.html">Apache Cassandra · Tunable consistency</a></li></ul>
   </section>
   <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/database/fundamentals/">အရင်သင်ခန်းစာ · Database ဆိုတာ ဘာလဲ</a>
 <a href="/docs/read/my/database/postgresql-introduction/">နောက်သင်ခန်းစာ · PostgreSQL မိတ်ဆက်</a></nav></footer>

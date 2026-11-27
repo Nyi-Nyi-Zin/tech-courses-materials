@@ -1,5 +1,5 @@
 import { p, page, part, snippet } from './content.js';
-import { databaseSelection } from './database-learning.js?v=91';
+import { databaseSelection } from './database-learning.js?v=92';
 
 const databaseDefinition = p(
   'A **database** is **an organized collection of data stored electronically so it can be easily accessed, managed, and updated**. Software called a **database management system (DBMS)** controls the database, handling security, backups, multi-user access, and queries.',

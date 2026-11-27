@@ -3,89 +3,106 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Use an inventory app to see how query patterns, transaction needs, and reporting shape the database choice.">
-  <title>Choose a database for your application · Cloud Nine Innovations</title>
+  <meta name="description" content="Selecting a database requires aligning data structure, access patterns, consistency guarantees, and scaling demands against the architectural trade-offs of each storage engine.">
+  <title>How to Choose a Database for Your Application · Cloud Nine Innovations</title>
   <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/database/choosing-a-database/">
   <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/database/choosing-a-database/">
   <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/database/choosing-a-database/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
-  <link rel="stylesheet" href="/docs/style.css">
+  <link rel="stylesheet" href="/docs/style.css?v=87">
+  <script type="module" src="/docs/image-preview.js?v=61"></script>
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
   <nav aria-label="All documentation"><a href="/docs/read/en/#database">All documentation · Database</a> <a href="/docs/read/my/database/choosing-a-database/" lang="my" hreflang="my">မြန်မာ</a></nav>
-  <h1>Choose a database for your application</h1>
+  <h1>How to Choose a Database for Your Application</h1>
   
-  <p class="intro">Use an inventory app to see how query patterns, transaction needs, and reporting shape the database choice.</p>
+  <p class="intro">Selecting a database requires aligning data structure, access patterns, consistency guarantees, and scaling demands against the architectural trade-offs of each storage engine.</p>
   <p class="reading-link"><a href="/docs/?lang=en#/database/choosing-a-database">Open interactive lesson</a></p>
 
   <section class="article-section">
     <h2>On this page</h2>
-    <ul><li><a href="#requirements">Start with what the app must do</a></li>
-<li><a href="#compare-models">Match the data model to the queries</a></li>
-<li><a href="#oltp-olap">Compare operational queries and analytics</a></li>
+    <ul><li><a href="#requirements">1. Core Evaluation Dimensions</a></li>
+<li><a href="#compare-models">2. Database Paradigm Comparison</a></li>
+<li><a href="#project-mapping">3. Project-to-Database Mapping</a></li>
+<li><a href="#multi-database">4. Multi-Database Combinations in Production Systems</a></li>
+<li><a href="#workload-decision-tree">5. Workload Decision Tree</a></li>
+<li><a href="#architecture-principles">6. Architectural &amp; Starting Principles</a></li>
 <li><a href="#references">Official references</a></li></ul>
   </section>
   <section class="article-section" id="requirements">
-  <h2>Start with what the app must do</h2>
-  <p>Write down the queries and updates the app needs. Estimate how often they run and what the app must guarantee when changes happen together.</p>
+  <h2>1. Core Evaluation Dimensions</h2>
+  <p>Evaluate five technical dimensions before selecting a database engine.</p>
+<ul class="lesson-list"><li><strong>Data model and schema stability.</strong> Related records with well-defined fields fit tables. Frequent multi-hop relationship queries can favor a graph, and nested records with varying fields can fit documents.</li><li><strong>Access and query patterns.</strong> List what the app reads and writes. Ad hoc filters, joins, and aggregations benefit from a flexible query planner. Predictable single-key lookups can use a simpler access path.</li><li><strong>Consistency and transaction guarantees.</strong> Decide whether reads can briefly return stale data and which writes must succeed or fail together. Check transaction scope and read guarantees for the specific engine and configuration.</li><li><strong>Scale and throughput.</strong> Separate a larger server from distributing work across servers. Read replicas and caching can offload reads. For write-heavy workloads, evaluate partitioning or sharding, including how writes spread across partitions.</li><li><strong>Operations and ecosystem.</strong> Compare deployment, backup and restore, licensing, query language familiarity, and managed-service options. Operational cost can outweigh a small throughput advantage.</li></ul>
 
-<pre><code>-- Can warehouse 3 fulfill a request for 5 units of product 42?
-SELECT quantity
-FROM stock_balances
-WHERE warehouse_id = 3
-  AND product_id = 42
-  AND quantity &gt;= 5;</code></pre>
-<dl class="lesson-terms"><div><dt><code>Queries</code></dt><dd>Find a product by SKU. Show stock by warehouse. Read movement history for the last month.</dd></div><div><dt><code>Transactions</code></dt><dd>When moving stock, record the movement and update both warehouse balances together.</dd></div><div><dt><code>Operational requirements</code></dt><dd>Estimate reads and writes, acceptable response times, and data growth. Decide who can run backups and test restores.</dd></div></dl>
+
 
 
 </section>
 <section class="article-section" id="compare-models">
-  <h2>Match the data model to the queries</h2>
-  <p>Start with the hardest operation on that list. For inventory, one example is transferring stock while keeping the movement record and both balances in sync. A relational database is a reasonable starting point for inventory because the application relates products, warehouses, stock balances, and movement records and needs consistent updates. Add another store when you have a specific access pattern or performance requirement to satisfy.</p>
+  <h2>2. Database Paradigm Comparison</h2>
+  <p>These are common patterns. Consistency guarantees and scaling options vary by engine and configuration.</p>
+<div class="lesson-table" role="region" aria-label="Database paradigm comparison" tabindex="0" style="overflow-x:auto"><table style="min-width:48rem">
+        <thead><tr><th scope="col">Paradigm</th><th scope="col">Data Structure</th><th scope="col">Query Strength</th><th scope="col">Consistency</th><th scope="col">Scaling Model</th><th scope="col">Primary Fit</th></tr></thead>
+        <tbody><tr><td><strong>Relational (SQL)</strong></td><td>Tables with typed columns and constraints</td><td>Joins, ad hoc filters, aggregations</td><td>ACID transactions. Isolation and replica reads depend on configuration.</td><td>Larger primary, read replicas, or distributed SQL depending on the engine</td><td>Structured records with relational integrity</td></tr><tr><td><strong>Document</strong></td><td>Nested JSON or BSON-like documents</td><td>Indexed field queries and nested document retrieval</td><td>Many engines support atomic document writes. Multi-document guarantees vary.</td><td>Some engines shard documents horizontally</td><td>Semi-structured records with evolving fields</td></tr><tr><td><strong>Key-Value</strong></td><td>Unique keys mapped to values</td><td>Direct lookup by key</td><td>May be strong, eventual, or tunable</td><td>Cluster or partition data when supported</td><td>Caching, sessions, and other key-based access</td></tr><tr><td><strong>Wide-Column</strong></td><td>Partitioned rows. Some engines organize columns into column families.</td><td>Lookups by partition key and ordered scans within a partition</td><td>Often tunable</td><td>Distributes writes across nodes when partition keys spread the load</td><td>High-ingest logs and time-ordered records</td></tr><tr><td><strong>Graph</strong></td><td>Nodes, relationships, and properties</td><td>Multi-hop traversal and path queries</td><td>Transaction and read guarantees vary by engine</td><td>Scale-up, replication, or partitioning depending on the engine</td><td>Queries over densely connected data</td></tr><tr><td><strong>Specialized (Time-Series / Vector)</strong></td><td>Timestamped measurements or embeddings</td><td>Time-window rollups or nearest-neighbor search</td><td>Depends on storage and indexing guarantees</td><td>Time-based partitions or distributed indexes, depending on the engine</td><td>Telemetry and semantic similarity</td></tr></tbody>
+      </table></div>
 
-<pre><code>-- Assume both balance rows exist and quantity has CHECK (quantity &gt;= 0).
-BEGIN;
 
-UPDATE stock_balances SET quantity = quantity - 5
-WHERE warehouse_id = 3 AND product_id = 42;
-
-UPDATE stock_balances SET quantity = quantity + 5
-WHERE warehouse_id = 4 AND product_id = 42;
-
-INSERT INTO stock_movements
-  (product_id, from_warehouse_id, to_warehouse_id, quantity)
-VALUES (42, 3, 4, 5);
-
-COMMIT;</code></pre>
-<dl class="lesson-terms"><div><dt><code>Relational · PostgreSQL / MySQL</code></dt><dd>Keep products, warehouse balances, and stock movements in linked tables.</dd></div><div><dt><code>Document · MongoDB</code></dt><dd>A catalog that usually reads an entire product with its category-specific attributes can represent each product as a document.</dd></div><div><dt><code>Key-value · Redis</code></dt><dd>Cache a frequently read product listing under a known key. Set an expiry and refresh or remove the cached entry after catalog changes as needed.</dd></div><div><dt><code>Graph · Neo4j</code></dt><dd>A graph suits queries that follow several links, such as tracing dependencies between parts.</dd></div><div><dt><code>Wide-column · Cassandra</code></dt><dd>Use a known partition-key-based access pattern, such as retrieving movement events by warehouse and day.</dd></div></dl>
 
 
 </section>
-<section class="article-section" id="oltp-olap">
-  <h2>Compare operational queries and analytics</h2>
-  <p>The same inventory app may record a transfer in the morning and summarize months of transfers in an afternoon report. Those two jobs read and write data in different ways. OLTP and OLAP describe workloads. Measure the cost of reports on the operational database before introducing a separate analytical store.</p>
+<section class="article-section" id="project-mapping">
+  <h2>3. Project-to-Database Mapping</h2>
+  <div class="lesson-table" role="region" aria-label="Project-to-database mapping" tabindex="0" style="overflow-x:auto"><table style="min-width:32rem">
+        <thead><tr><th scope="col">Project Type</th><th scope="col">Database Paradigm</th><th scope="col">Common Engines</th><th scope="col">Primary Rationale</th></tr></thead>
+        <tbody><tr><td><strong>Banking, Fintech, ERP &amp; E-commerce</strong></td><td>Relational (SQL)</td><td>PostgreSQL, MySQL, Oracle, SQL Server</td><td>ACID transactions and relational constraints across accounts, orders, and inventory</td></tr><tr><td><strong>CMS, Product Catalogs &amp; Mobile Backends</strong></td><td>Document (NoSQL)</td><td>MongoDB, Firestore, Couchbase</td><td>Nested documents can accommodate fields that vary by record</td></tr><tr><td><strong>Caching, Session Storage &amp; Real-Time Leaderboards</strong></td><td>Key-Value</td><td>Redis, Valkey, Memcached, DynamoDB</td><td>Fast key-based lookup. Choose an engine with suitable persistence or ranking support for the job.</td></tr><tr><td><strong>Social Networks, Fraud Detection &amp; Recommendations</strong></td><td>Graph</td><td>Neo4j, Amazon Neptune</td><td>Traverse several connected entities to find paths or neighborhoods</td></tr><tr><td><strong>IoT Sensors, Server Monitoring &amp; Financial Tick Data</strong></td><td>Time-Series</td><td>TimescaleDB, InfluxDB, Prometheus</td><td>Ingest timestamped data and aggregate it over time windows. Prometheus is primarily for monitoring metrics.</td></tr><tr><td><strong>Chat, Event Logging &amp; Activity Feeds</strong></td><td>Wide-Column</td><td>Apache Cassandra, ScyllaDB</td><td>Distribute writes and retrieve ordered records by a known partition key</td></tr><tr><td><strong>AI / LLM Apps, RAG &amp; Semantic Search</strong></td><td>Vector</td><td>Pinecone, Qdrant, Milvus, pgvector</td><td>Store embeddings and retrieve nearest matches. pgvector adds this capability to PostgreSQL.</td></tr><tr><td><strong>Site Search &amp; Log Analytics</strong></td><td>Search Engine</td><td>Elasticsearch, OpenSearch, Meilisearch</td><td>Index text for full-text search and, where supported, fuzzy matching and faceted filtering</td></tr><tr><td><strong>BI &amp; Data Warehousing</strong></td><td>Columnar (OLAP)</td><td>ClickHouse, BigQuery, Snowflake</td><td>Scan the columns needed for large analytical queries and aggregations</td></tr></tbody>
+      </table></div>
 
-<pre><code>-- OLTP: read one balance while taking an order.
-SELECT quantity FROM stock_balances
-WHERE warehouse_id = 3 AND product_id = 42;
 
--- OLAP: summarize movements across several months.
-SELECT date_trunc(&#39;month&#39;, moved_at) AS month, SUM(quantity) AS units_moved
-FROM stock_movements
-WHERE moved_at &gt;= DATE &#39;2026-01-01&#39;
-GROUP BY month
-ORDER BY month;</code></pre>
-<dl class="lesson-terms"><div><dt><code>OLTP</code></dt><dd>Record a stock transfer as the user submits it and update the affected balances.</dd></div><div><dt><code>OLAP</code></dt><dd>Summarize months of movements across products and warehouses to see stock trends. Many small teams can start with SQL reports in their relational database and move heavier reporting elsewhere as it grows.</dd></div></dl>
+
+
+</section>
+<section class="article-section" id="multi-database">
+  <h2>4. Multi-Database Combinations in Production Systems</h2>
+  <p>A production system can combine several stores when different workloads have different needs.</p>
+<ul class="lesson-list"><li><strong>E-commerce platform.</strong> PostgreSQL for accounts, orders, and payments. MongoDB or PostgreSQL JSONB for flexible product specifications. Redis for carts and sessions. Elasticsearch for product search.</li><li><strong>Social media platform.</strong> MySQL or PostgreSQL for core profiles. A graph database for social links and recommendations. Redis for feed caching. Cassandra for high-volume messaging and activity logs.</li><li><strong>AI knowledge application.</strong> PostgreSQL for users and app metadata. A vector database or <code>pgvector</code> for semantic retrieval. Redis for caching frequently requested results.</li></ul>
+
+
+
+
+</section>
+<section class="article-section" id="workload-decision-tree">
+  <h2>5. Workload Decision Tree</h2>
+  <h3>Text Decision Tree</h3>
+<p>Start with the primary operation the project must handle well.</p>
+<ul class="lesson-list"><li><strong>Transactional accuracy and structured relations → Relational (SQL).</strong> Banking, orders and payments, ERP, or inventory. PostgreSQL, MySQL, and SQL Server support transactions and multi-table joins.</li><li><strong>Flexible, evolving records → Document (NoSQL).</strong> CMS, product catalogs, or mobile backends. MongoDB, Firestore, and Couchbase support nested documents with varying fields.</li><li><strong>Fast key lookups or high write throughput → Key-Value or Wide-Column.</strong> Redis or DynamoDB for key-based access, such as sessions. Cassandra for partitioned writes and ordered reads, such as event logs.</li><li><strong>Multi-hop relationships → Graph.</strong> Social networks, fraud detection, or recommendations. Neo4j and Amazon Neptune are designed to traverse connected records.</li><li><strong>Time-series, search, AI, or analytics → Specialized engine.</strong> TimescaleDB for time-window queries, Qdrant or pgvector for similarity search, Elasticsearch for full-text search, and ClickHouse for large aggregations.</li></ul>
+<h3>Mermaid Flowchart</h3>
+
+
+<figure class="lesson-figure">
+    <a href="/docs/media/database/database-workload-en.svg" data-image-preview><img src="/docs/media/database/database-workload-en.svg" alt="Decision tree mapping transactions to relational, evolving records to document, key lookups or write-heavy loads to key-value or wide-column, connected records to graph, and time-series, search, AI, or analytics to specialized engines." width="894" height="610" loading="lazy" decoding="async"></a>
+  </figure>
+
+
+</section>
+<section class="article-section" id="architecture-principles">
+  <h2>6. Architectural &amp; Starting Principles</h2>
+  <ul class="lesson-list"><li><strong>Start with a relational engine when it fits.</strong> PostgreSQL supports structured schemas, JSONB, full-text search, and vector search through <code>pgvector</code>. Consider a specialized engine when an important requirement remains unmet or a measurable bottleneck persists.</li><li><strong>Optimize the busiest access paths.</strong> Storage engines trade off write amplification, read latency, and storage density. Match indexes to frequent, latency-sensitive operations, and benchmark on representative data.</li><li><strong>Add stores selectively.</strong> Multiple stores can address distinct workloads, but they add synchronization work and new failure modes. For an MVP, start with the fewest stores that meet the requirements and add a specialized engine when the benefit is measurable.</li></ul>
+
+
 
 
 </section>
   <section class="references" id="references">
     <h2>Official references</h2>
     <ul><li><a href="https://docs.aws.amazon.com/wellarchitected/latest/performance-efficiency-pillar/data-management.html">AWS Well-Architected · Data management</a></li>
-<li><a href="https://www.ibm.com/think/topics/olap-vs-oltp">IBM · OLAP and OLTP</a></li>
-<li><a href="https://www.mongodb.com/resources/basics/databases/nosql-explained">MongoDB · NoSQL database types</a></li></ul>
+<li><a href="https://www.postgresql.org/docs/current/datatype-json.html">PostgreSQL · JSON types</a></li>
+<li><a href="https://www.postgresql.org/docs/current/datatype-textsearch.html">PostgreSQL · Full-text search types</a></li>
+<li><a href="https://github.com/pgvector/pgvector">pgvector · Vector similarity search for PostgreSQL</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/core/transactions/">MongoDB · Transactions</a></li>
+<li><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html">Amazon DynamoDB · Read consistency</a></li>
+<li><a href="https://cassandra.apache.org/doc/stable/cassandra/architecture/dynamo.html">Apache Cassandra · Tunable consistency</a></li></ul>
   </section>
   <footer><nav aria-label="All documentation"><a href="/docs/read/en/database/fundamentals/">Previous lesson · What is a database?</a>
 <a href="/docs/read/en/database/postgresql-introduction/">Next lesson · Introduction to PostgreSQL</a></nav></footer>

@@ -1,4 +1,4 @@
-import { guides as webGuides, developerGuides } from './guides.js?v=91';
+import { guides as webGuides, developerGuides } from './guides.js?v=92';
 import { curricula } from '../locales.js';
 import { articleForExercise } from '../learning-paths.js';
 import { lessonDestination } from './section-redirects.js?v=91';
@@ -6,7 +6,7 @@ import { attachSidebar, sidebarBackdrop, sidebarEdgeToggle, sidebarToggle } from
 import { bindExamples, exampleMarkup } from './run-examples.js?v=61';
 import { savedLanguage, saveLanguage, siteHeader } from '../site-header.js?v=2';
 import { practiceEnabled } from '../site-config.js';
-import { lessonBlocks, sampleData, sampleOutput, sectionDetails, sectionFigure } from './content.js?v=85';
+import { lessonBlocks, sampleData, sampleOutput, sectionDetails, sectionFigure } from './content.js?v=92';
 import './image-preview.js?v=61';
 import { loadDataGuide } from './data-guides.js?v=73';
 import dataGuides from './data-guides/outline.js?v=73';
