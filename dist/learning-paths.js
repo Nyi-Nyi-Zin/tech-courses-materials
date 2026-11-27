@@ -2,57 +2,54 @@ const stage = (en, my, lessons) => ({ title: { en, my }, lessons });
 
 export const learningPaths = {
   html: [
-    stage('Basic HTML Tags', 'အခြေခံ HTML Tags', {
-      introduction: [],
+    stage("Web Fundamentals & HTML", "Web အခြေခံနှင့် HTML", {
+      'introduction': [],
       'getting-started': [],
-      structure: ['document'],
-      'standard-attributes': [],
-      'global-attributes': [],
-      doctype: [],
+      'structure': ['document'],
+      'attributes': [],
+      'doctype': [],
     }),
-    stage('Textual Tags', 'စာသားအတွက် HTML Tags', {
-      headings: ['first-heading'],
-      paragraphs: [],
+    stage("Text & Hierarchy", "စာသားနှင့် ခေါင်းစဉ်အဆင့်များ", {
+      'headings': ['first-heading'],
+      'paragraphs': [],
       'inline-text': ['text'],
-      content: ['links'],
-      'file-paths': [],
-      containers: [],
       'text-markup': [],
-      entities: [],
+      'entities': [],
     }),
-    stage('Lists & Expandable Content', 'စာရင်းများနဲ့ ဖွင့်ပိတ်နိုင်သော အကြောင်းအရာ', {
+    stage("Lists & Navigation", "စာရင်းများနှင့် လင့်ခ်များ", {
       'lists-and-disclosure': ['lists'],
-      disclosure: ['disclosure'],
+      'content': ['links'],
+      'file-paths': [],
     }),
-    stage('Images & Media', 'ပုံ၊ အသံနဲ့ ဗီဒီယို', {
-      images: ['images', 'responsive-images'],
-      media: ['media'],
+    stage("Images & Media", "ပုံ၊ အသံနှင့် ဗီဒီယို", {
+      'images': ['images', 'responsive-images'],
+      'media': ['media'],
       'icons-and-frames': [],
     }),
-    stage('Tables', 'ဇယားများ', {
-      tables: ['tables'],
+    stage("Data Tables", "ဒေတာဇယားများ", {
+      'tables': ['tables'],
       'table-spans': [],
     }),
-    stage('Semantics & Accessibility', 'Semantic HTML နဲ့ Accessibility', {
-      accessibility: ['landmarks', 'keyboard-access'],
-    }),
-    stage('Forms', 'Forms', {
-      forms: ['labels'],
+    stage("Forms & Validation", "Forms နှင့် ထည့်သွင်းထားသော တန်ဖိုးများ စစ်ဆေးခြင်း", {
+      'forms': ['labels'],
       'form-controls': ['form-choices'],
       'form-field-types': [],
       'file-uploads': [],
+      'buttons': [],
       'form-validation': ['validation'],
       'form-constraints': [],
-      buttons: [],
     }),
-    stage('Dialogs & Popovers', 'Dialogs နဲ့ Popovers', {
+    stage("Semantic HTML", "Semantic HTML နှင့် စာမျက်နှာဖွဲ့စည်းပုံ", {
+      'containers': [],
+      'accessibility': ['landmarks', 'keyboard-access'],
+      'disclosure': ['disclosure'],
       'dialogs-and-popovers': ['dialog-popover'],
-      popovers: ['dialog-popover'],
+      'popovers': ['dialog-popover'],
     }),
-    stage('SEO', 'SEO', {
+    stage("Accessibility, SEO & Best Practices", "Accessibility၊ SEO နှင့် HTML စစ်ဆေးနည်း", {
       'metadata-and-search': ['metadata'],
+      'reference': [],
     }),
-    stage('Reference', 'အမြန်ရှာရန်', { reference: [] }),
   ],
   css: [
     stage('Style Basics', 'CSS အခြေခံ', {

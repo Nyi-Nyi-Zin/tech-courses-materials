@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HTML element တစ်ခုရဲ့ အချက်အလက် ထပ်ဖြည့်ဖို့ ဒါမှမဟုတ် လုပ်ဆောင်ပုံ သတ်မှတ်ဖို့ အဖွင့် tag ထဲမှာ attribute ထည့်ရေးပါတယ်။ Standard Attributes ဆိုတာ HTML Standard က သတ်မှတ်ထားတဲ့ attribute တွေပါ။ အဲဒီထဲမှာ Global Attributes ရော သက်ဆိုင်ရာ element တွေမှာပဲ သုံးလို့ရတဲ့ attribute တွေရော ပါပါတယ်။">
+  <title>HTML Attributes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/attributes/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/attributes/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/attributes/">
+  <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
+  <link rel="stylesheet" href="/docs/style.css">
+</head>
+<body>
+<main id="main" class="reading-page">
+<article>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/attributes/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTML Attributes</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">HTML element တစ်ခုရဲ့ အချက်အလက် ထပ်ဖြည့်ဖို့ ဒါမှမဟုတ် လုပ်ဆောင်ပုံ သတ်မှတ်ဖို့ အဖွင့် tag ထဲမှာ attribute ထည့်ရေးပါတယ်။ Standard Attributes ဆိုတာ HTML Standard က သတ်မှတ်ထားတဲ့ attribute တွေပါ။ အဲဒီထဲမှာ Global Attributes ရော သက်ဆိုင်ရာ element တွေမှာပဲ သုံးလို့ရတဲ့ attribute တွေရော ပါပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/attributes">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#attribute-scope">Attribute တွေ အလုပ်လုပ်ပုံ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="attribute-scope">
+  <h2>Attribute တွေ အလုပ်လုပ်ပုံ</h2>
+  <p>id နဲ့ class လို Global Attributes တွေကို HTML element အားလုံးမှာ သုံးလို့ရပါတယ်။ id တန်ဖိုးတစ်ခုကို စာမျက်နှာတစ်ခုထဲမှာ element တစ်ခုအတွက်ပဲ သုံးပါ။ Element အများကြီးကို CSS နဲ့ ပုံစံတူ ပြင်ချင်ရင် class တစ်ခုတည်းကို ပြန်သုံးလို့ရပါတယ်။ တချို့ attribute တွေကိုတော့ သက်ဆိုင်ရာ element တွေမှာပဲ သုံးရပါတယ်။ &lt;a&gt; မှာ href က link ရဲ့ သွားမယ့်နေရာကို သတ်မှတ်ပါတယ်။ &lt;img&gt; မှာ src က ပုံရဲ့ လိပ်စာဖြစ်ပြီး alt က ပုံနေရာမှာ ဖတ်လို့ရမယ့် စာသားပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;How Attributes Work&lt;/title&gt;
+  &lt;style&gt;
+    .highlight { color: teal; }
+    h2:target { outline: 2px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;a class=&quot;highlight&quot; href=&quot;#schedule&quot;&gt;View schedule&lt;/a&gt;
+  &lt;h2 id=&quot;schedule&quot; class=&quot;highlight&quot;&gt;Schedule&lt;/h2&gt;
+  &lt;p&gt;Classes begin at 10:00 AM.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Link နဲ့ ခေါင်းစဉ် နှစ်ခုလုံးမှာ class=&quot;highlight&quot; ပါလို့ စိမ်းပြာရောင် ပေါ်ပါတယ်။ View schedule ကို နှိပ်ရင် link ရဲ့ href ထဲက #schedule နဲ့ ကိုက်ညီတဲ့ id=&quot;schedule&quot; ရှိတဲ့ ခေါင်းစဉ်ဆီ ရောက်ပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes">MDN · HTML attribute reference</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">MDN · Global attributes</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/structure/">အရင်သင်ခန်းစာ · HTML Document ဖွဲ့စည်းပုံ</a>
+<a href="/docs/read/my/html/doctype/">နောက်သင်ခန်းစာ · HTML Doctype နဲ့ Browser Modes</a></nav></footer>
+</article>
+</main>
+</body>
+</html>
