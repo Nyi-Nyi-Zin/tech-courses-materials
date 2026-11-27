@@ -138,8 +138,8 @@ export const serverBasics = {
 };
 
 const webAppFlowText = p(
-  "When a user accesses a web application, the browser retrieves and executes the frontend files from the Web Server. As the user interacts with the application—such as viewing data—the frontend initiates an API request. This request is sent to the backend over HTTPS, and the backend processes it to return a response. If the user uploads a file (e.g., a PDF), the backend stores the physical file in a shared folder on a Samba File Server and saves only the file's path in the database alongside the relevant record.",
-  'အသုံးပြုသူက Web App တစ်ခုကို ဖွင့်တဲ့အခါ Browser က Web Server ဆီက Frontend ဖိုင်တွေကို ရယူပြီး run ပါတယ်။ App ထဲမှာ အချက်အလက်တွေ ဖွင့်ကြည့်တာမျိုး လုပ်တဲ့အခါ Frontend က API request စတင်ပါတယ်။ Browser က အဲဒီ request ကို HTTPS နဲ့ Backend ဆီ ပို့ပါတယ်။ Backend က request ကို လုပ်ဆောင်ပြီး response ပြန်ပို့ပါတယ်။ PDF လို ဖိုင်တစ်ခု တင်လိုက်ရင် Backend က ဖိုင်ကို Samba File Server ပေါ်က shared folder ထဲမှာ သိမ်းပါတယ်။ Database ထဲက သက်ဆိုင်ရာ မှတ်တမ်းနဲ့အတူ ဖိုင်ရဲ့ path ကိုပဲ သိမ်းထားပါတယ်။'
+  "When a user accesses a web application, the browser retrieves and executes the frontend files from the Web Server. As the user interacts with the application—such as viewing data—the frontend initiates an API request. This request is sent to the backend over HTTPS, and the backend processes it to return a response. If the user uploads a file (e.g., a PDF), the backend stores the file as an object in an AWS S3 bucket and saves only the object's key in the database alongside the relevant record.",
+  'အသုံးပြုသူက Web App တစ်ခုကို ဖွင့်တဲ့အခါ Browser က Web Server ဆီက Frontend ဖိုင်တွေကို ရယူပြီး run ပါတယ်။ App ထဲမှာ အချက်အလက်တွေ ဖွင့်ကြည့်တာမျိုး လုပ်တဲ့အခါ Frontend က API request စတင်ပါတယ်။ Browser က အဲဒီ request ကို HTTPS နဲ့ Backend ဆီ ပို့ပါတယ်။ Backend က request ကို လုပ်ဆောင်ပြီး response ပြန်ပို့ပါတယ်။ PDF လို ဖိုင်တစ်ခု တင်လိုက်ရင် Backend က ဖိုင်ကို AWS S3 bucket ထဲမှာ object အဖြစ် သိမ်းပါတယ်။ Database ထဲက သက်ဆိုင်ရာ မှတ်တမ်းနဲ့အတူ object ရဲ့ key ကိုပဲ သိမ်းထားပါတယ်။'
 );
 
 export const webAppArchitecture = {
@@ -148,12 +148,12 @@ export const webAppArchitecture = {
     {
       ...snippet('web-app-flow', p('How a web app works', 'Web App တစ်ခု အလုပ်လုပ်ပုံ'), webAppFlowText),
       figure: {
-        src: '/docs/media/database/web-app-flow.svg?v=5',
+        src: '/docs/media/database/web-app-flow.svg?v=6',
         width: 1600,
         height: 780,
         alt: p(
-          'The Browser requests frontend files from the Web Server and receives HTML, CSS, and JavaScript. The Frontend inside the Browser initiates an HTTPS request to the Backend on the Application Server and receives JSON. The Backend connects to the optional Redis cache, PostgreSQL, and the Samba file server over SMB as needed.',
-          'Browser က Web Server ဆီက HTML၊ CSS နဲ့ JavaScript ဖိုင်တွေ ရယူတယ်။ Browser ထဲက Frontend က Application Server ပေါ်က Backend ဆီ HTTPS request စတင်ပြီး JSON အဖြေ ရတယ်။ Backend က လိုအပ်သလို Redis Cache Server၊ PostgreSQL Database Server နဲ့ Samba File Server တို့ကို ချိတ်သုံးတယ်။ Samba ဆီ ဖိုင်ရေးဖို့ SMB သုံးတယ်။'
+          'The Browser requests frontend files from the Web Server and receives HTML, CSS, and JavaScript. The Frontend inside the Browser initiates an HTTPS request to the Backend on the Application Server and receives JSON. The Backend connects to the optional Redis cache, PostgreSQL, and AWS S3 cloud storage over HTTPS as needed.',
+          'Browser က Web Server ဆီက HTML၊ CSS နဲ့ JavaScript ဖိုင်တွေ ရယူတယ်။ Browser ထဲက Frontend က Application Server ပေါ်က Backend ဆီ HTTPS request စတင်ပြီး JSON အဖြေ ရတယ်။ Backend က လိုအပ်သလို Redis Cache Server၊ PostgreSQL Database Server နဲ့ AWS S3 Cloud Storage တို့ကို ချိတ်သုံးတယ်။ S3 API ကို HTTPS နဲ့ အသုံးပြုတယ်။'
         ),
         caption: p(
           'The upper arrows show the frontend files being loaded. The lower arrows show the API request from the frontend running inside the browser and the JSON response. The dashed line marks the optional Redis cache.',
@@ -166,7 +166,7 @@ export const webAppArchitecture = {
         ['Application Server', p('Runs the backend API. For a course list request, it returns the course data and can read it from Redis or PostgreSQL.', 'Backend API ကို run တယ်။ သင်တန်းစာရင်း တောင်းလာရင် Redis သို့မဟုတ် PostgreSQL ကနေ ဖတ်ပြီး Browser ဆီ ပြန်ပို့နိုင်တယ်။')],
         ['Cache Server', p('Redis can temporarily store results such as a course list. The backend can return a cached result when available. On a cache miss, it can query PostgreSQL and cache the new result for a limited time.', 'Redis မှာ သင်တန်းစာရင်းလို ရလဒ်တွေကို ခဏသိမ်းထားလို့ရတယ်။ သိမ်းထားတဲ့ရလဒ် ရှိရင် Backend က အဲဒီကနေ ပြန်ပေးနိုင်တယ်။ မရှိရင် PostgreSQL ကနေ ဖတ်ပြီး ရလဒ်အသစ်ကို Redis ထဲမှာ သတ်မှတ်ထားတဲ့ အချိန်အထိ သိမ်းထားနိုင်တယ်။')],
         ['Database Server', p('Runs PostgreSQL, which executes SQL and manages records such as courses and enrollments. PostgreSQL keeps its data files on persistent storage so the records remain after the server process restarts.', 'PostgreSQL ကို run တယ်။ PostgreSQL က SQL query တွေကို လုပ်ဆောင်ပြီး သင်တန်းနဲ့ စာရင်းသွင်း မှတ်တမ်းတွေကို စီမံပေးတယ်။ Server process ပြန်စရင် မှတ်တမ်းတွေ ဆက်ရှိနေဖို့ PostgreSQL က data file တွေကို persistent storage ပေါ်မှာ သိမ်းတယ်။')],
-        ['File Server', p('Samba is the file server software in this example. It shares a folder over SMB so the backend can write uploaded PDFs and read them again for downloads.', 'ဒီဥပမာမှာ Samba က File Server software ပါ။ SMB နဲ့ folder တစ်ခုကို share ပေးထားလို့ Backend က တင်လာတဲ့ PDF တွေကို အဲဒီ folder ထဲ သိမ်းပြီး download တောင်းလာရင် ပြန်ဖတ်နိုင်ပါတယ်။')],
+        ['Cloud Storage', p('AWS S3 is an object storage service. The backend uses the S3 API over HTTPS to upload PDFs to a bucket and retrieve them for downloads.', 'AWS S3 က object storage service တစ်ခုပါ။ Backend က S3 API ကို HTTPS နဲ့ အသုံးပြုပြီး PDF ဖိုင်တွေကို bucket ထဲ သိမ်းနိုင်သလို download အတွက် ပြန်ရယူနိုင်ပါတယ်။')],
       ],
     },
   ],
@@ -174,7 +174,7 @@ export const webAppArchitecture = {
     ['MDN · Using the Fetch API', 'https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch'],
     ['PostgreSQL · Client/server architecture', 'https://www.postgresql.org/docs/current/tutorial-arch.html'],
     ['Redis · Cache-aside', 'https://redis.io/docs/latest/develop/use-cases/cache-aside/'],
-    ['Samba · SMB file sharing', 'https://www.samba.org/samba/what_is_samba.html'],
+    ['AWS · Amazon S3', 'https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html'],
   ]),
   titleSection: 'web-app-flow',
   introBlocks: p([], []),
