@@ -3,24 +3,109 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Add images and playable media with text alternatives, captions, and files sized for the reader’s screen.">
-  <title>Images, Media &amp; External Embeds · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/images-media/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/images-media/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/images-media/">
+  <meta name="description" content="An img embeds an image in the page. Its attributes can describe the image, reserve space for it, and tell the browser where to find suitable versions.">
+  <title>HTML Images · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/images/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/images/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/images/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Images, Media &amp; External Embeds</h1>
-  <p><a href="/docs/read/en/html/images-media/#images">Images, Media &amp; External Embeds</a></p>
-  <ul><li id="images"><a href="/docs/read/en/html/images-media/#images">Image files, dimensions, and alt text</a></li>
-<li id="figure"><a href="/docs/read/en/html/images-media/#figure">Connect a figure to its visible caption</a></li>
-<li id="responsive-images"><a href="/docs/read/en/html/images-media/#responsive-images">Choose a file based on the available space</a></li>
-<li id="media"><a href="/docs/read/en/html/images-media/#media">Play audio and video or embed a page</a></li>
-<li id="practice"><a href="/docs/read/en/html/images-media/#practice">Hands-on exercise</a></li></ul>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/images/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>HTML Images</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">An img embeds an image in the page. Its attributes can describe the image, reserve space for it, and tell the browser where to find suitable versions.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/images">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#img">How does &lt;img&gt; show a picture?</a></li>
+<li><a href="#alt">Image source and alternative text</a></li>
+<li><a href="#figure">Visible captions with &lt;figure&gt;</a></li>
+<li><a href="#srcset">Choose a file size with srcset and sizes</a></li>
+<li><a href="#images">Choose a different crop with &lt;picture&gt;</a></li>
+<li><a href="#fetchpriority">Image Fetch Priority (Priority Hints)</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="img">
+  <h2>How does &lt;img&gt; show a picture?</h2>
+  <p>The img element reserves a place for an image. src gives the browser the address of the image file. The browser reads that file separately and draws it in the page. img is a void element with no closing tag.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;img src=&quot;https://javascript-training.cloudninemm.com/cloud-nine-logo.png&quot; width=&quot;64&quot; height=&quot;64&quot; alt=&quot;Cloud Nine Innovations logo&quot;&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> With an internet connection, the site logo appears. Change the URL to a missing image and observe the alternative text.</p>
+
+</section>
+<section class="article-section" id="alt">
+  <h2>Image source and alternative text</h2>
+  <p>The browser loads the URL in src. Write alt to communicate what the image contributes in its present context. A meaningful image needs a useful text alternative. Give a purely decorative image alt=&quot;&quot; so assistive tools can skip it. Include width and height using the image’s proportions so the browser can reserve space before the file arrives.</p>
+<p class="example-setup"><strong>How to try it</strong> Place your photo mountains.jpg beside index.html. For the decoration, add any SVG named flourish.svg or leave out the second img. Put the HTML inside body.</p>
+<pre><code>&lt;img src=&quot;mountains.jpg&quot; width=&quot;640&quot; height=&quot;480&quot; alt=&quot;Mountain landscape&quot;&gt;
+&lt;img src=&quot;flourish.svg&quot; alt=&quot;&quot;&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> With mountains.jpg in the same folder, the first image appears. Change its src to a missing file to see how your browser shows a broken image and its alternative text.</p>
+
+</section>
+<section class="article-section" id="figure">
+  <h2>Visible captions with &lt;figure&gt;</h2>
+  <p>Use figure around a self-contained illustration. Put figcaption at the beginning or end of it for a visible caption. The caption can explain the photo’s context. The alt text still gives the information a reader would get from the image itself.</p>
+<p class="example-setup"><strong>How to try it</strong> Use the mountains.jpg photo from the previous example and place this figure inside body.</p>
+<pre><code>&lt;figure&gt;
+  &lt;img src=&quot;mountains.jpg&quot; alt=&quot;Mountain landscape&quot;&gt;
+  &lt;figcaption&gt;A view of the mountains at sunrise.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The caption appears under the image, and the alt text is available when readers cannot access the image.</p>
+
+</section>
+<section class="article-section" id="srcset">
+  <h2>Choose a file size with srcset and sizes</h2>
+  <p>Use srcset to supply the same image at different pixel widths. Each w descriptor is the actual width of that file. sizes tells the browser roughly how wide the image will appear in the layout. The browser uses that information and the screen’s pixel density to select a suitable file. Use CSS to set the displayed size itself.</p>
+<p class="example-setup"><strong>How to try it</strong> Save two versions of the same image beside index.html. Use a 480px-wide mountains-480.jpg and a 960px-wide mountains-960.jpg. Place the img inside body.</p>
+<pre><code>&lt;img src=&quot;mountains-480.jpg&quot;
+     srcset=&quot;mountains-480.jpg 480w, mountains-960.jpg 960w&quot;
+     sizes=&quot;(max-width: 479px) 100vw, 480px&quot;
+     style=&quot;width: min(480px, 100vw); height: auto&quot;
+     alt=&quot;Mountain landscape&quot;&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> With both files available, inspect the image’s currentSrc in DevTools to see the selected URL. Selection can vary by screen density and browser behavior.</p>
+
+</section>
+<section class="article-section" id="images">
+  <h2>Choose a different crop with &lt;picture&gt;</h2>
+  <p>Use picture for a different crop or composition at a breakpoint. The browser checks source elements in order and uses the first suitable source. The img at the end supplies the fallback, display element, and alternative text.</p>
+<p class="example-setup"><strong>How to try it</strong> Put a wide landscape photo or crop named landscape-wide.jpg and a tighter crop named landscape-small.jpg beside index.html, then place picture inside body. Resize the browser to compare both.</p>
+<pre><code>&lt;picture&gt;
+  &lt;source media=&quot;(min-width: 60rem)&quot; srcset=&quot;landscape-wide.jpg&quot;&gt;
+  &lt;img src=&quot;landscape-small.jpg&quot; alt=&quot;Mountain landscape near a lake&quot;&gt;
+&lt;/picture&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The wide crop is selected at 60rem and above. Below that width the img URL supplies the image. Save both image files alongside the HTML to try this example.</p>
+
+</section>
+<section class="article-section" id="fetchpriority">
+  <h2>Image Fetch Priority (Priority Hints)</h2>
+  <p>Once the browser knows which image file to use, fetchpriority can suggest how urgently to download it. Use high for a key image visible when the page opens, such as a banner that is likely to be the Largest Contentful Paint (LCP) element. Use low for a secondary image you still want the browser to request normally. With auto, the default, the browser chooses the priority. Treat these values as hints and reserve high for the few images that really need it. The loading attribute controls when an image can start loading. Use loading=&quot;lazy&quot; for images farther down the page and leave it off the main banner.</p>
+<p class="example-setup"><strong>How to try it</strong> Use Run example to see the layout. To inspect actual network requests, serve index.html from a local web server with mountains.jpg and landscape-small.jpg in the same folder. Place the example inside body.</p>
+<pre><code>&lt;h1&gt;Mountain Trail Guide&lt;/h1&gt;
+&lt;img src=&quot;mountains.jpg&quot; alt=&quot;Mountains along the hiking trail&quot;
+     width=&quot;640&quot; height=&quot;480&quot; style=&quot;max-width: 100%; height: auto&quot;
+     fetchpriority=&quot;high&quot;&gt;
+
+&lt;h2&gt;Photo Gallery&lt;/h2&gt;
+&lt;img src=&quot;landscape-small.jpg&quot; alt=&quot;Mountain landscape near a lake&quot;
+     width=&quot;160&quot; height=&quot;160&quot; fetchpriority=&quot;low&quot;&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Both images appear. In Chrome DevTools, open Network, enable the Priority column and Disable cache, then reload your saved page to inspect the priority assigned to each image request. Exact priorities and download times can vary.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html">WHATWG · Images and picture</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/images.html">WHATWG · Responsive images</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-figure-element">WHATWG · Figure and figcaption</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-fetchpriority">WHATWG · Image fetch priority</a></li>
+<li><a href="https://web.dev/articles/fetch-priority">web.dev · Optimize resource loading with Fetch Priority</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/file-paths/">Previous lesson · HTML File Paths</a>
+<a href="/docs/read/en/html/media/">Next lesson · HTML Audio and Video</a></nav></footer>
 </article>
 </main>
 </body>

@@ -3,24 +3,129 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Keyboard နဲ့ သွားလို့ရလား စမ်းပါမယ်။ စာမျက်နှာတစ်ခုစီအတွက် metadata ရေး၊ HTML စစ်ပြီး လေ့လာခဲ့တာတွေကို website တစ်ခုအဖြစ် ပေါင်းပါမယ်။">
-  <title>Accessibility၊ SEO နှင့် HTML စစ်ဆေးခြင်း · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/accessibility-seo/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/accessibility-seo/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/accessibility-seo/">
+  <meta name="description" content="အသုံးများတဲ့ tag ရေးပုံကို ရှာပါ။ နမူနာတိုကို Run ပြီး မှားတတ်တဲ့အချက်ကို စစ်နိုင်ပါတယ်။">
+  <title>HTML Tag Reference · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/reference/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/reference/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/reference/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Accessibility၊ SEO နှင့် HTML စစ်ဆေးခြင်း</h1>
-  <p><a href="/docs/read/my/html/accessibility-seo/#capstone">Accessibility၊ SEO နှင့် HTML စစ်ဆေးခြင်း</a></p>
-  <ul><li id="keyboard-access"><a href="/docs/read/my/html/accessibility-seo/#keyboard-access">Keyboard နဲ့ စာမျက်နှာကို စမ်းသပ်ခြင်း</a></li>
-<li id="metadata"><a href="/docs/read/my/html/accessibility-seo/#metadata">Browser၊ ရှာဖွေမှုနှင့် Share အတွက် Page အချက်အလက်</a></li>
-<li id="validation"><a href="/docs/read/my/html/accessibility-seo/#validation">ကိုယ်ရေးထားတဲ့ HTML ကို ဖတ်ပြီး စစ်ဆေးခြင်း</a></li>
-<li id="capstone"><a href="/docs/read/my/html/accessibility-seo/#capstone">နောက်ဆုံးလက်တွေ့ သုံးမျက်နှာပါ Website</a></li>
-<li id="practice"><a href="/docs/read/my/html/accessibility-seo/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/reference/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTML Tag Reference</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">အသုံးများတဲ့ tag ရေးပုံကို ရှာပါ။ နမူနာတိုကို Run ပြီး မှားတတ်တဲ့အချက်ကို စစ်နိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/reference">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#link">&lt;a href=&quot;…&quot;&gt;</a></li>
+<li><a href="#image">&lt;img src=&quot;…&quot; alt=&quot;…&quot;&gt;</a></li>
+<li><a href="#label-input">&lt;label&gt; နဲ့ &lt;input&gt;</a></li>
+<li><a href="#button">&lt;button type=&quot;…&quot;&gt;</a></li>
+<li><a href="#classroom-lab">နောက်ဆုံးလက်တွေ့ သုံးမျက်နှာပါ website</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="link">
+  <h2>&lt;a href=&quot;…&quot;&gt;</h2>
+  <p>Link စာသားကို &lt;a&gt; နဲ့ ပတ်ပြီး သွားမယ့်နေရာကို href မှာ ထည့်ပါ။ #hours လို path က စာမျက်နှာတစ်ခုတည်းထဲမှာ id တူတဲ့နေရာကို သွားပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;&amp;lt;a href=&quot;…&quot;&amp;gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;a href=&quot;#hours&quot;&gt;See opening hours&lt;/a&gt;
+&lt;h2 id=&quot;hours&quot;&gt;Opening hours&lt;/h2&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> See opening hours ကို နှိပ်ရင် သက်ဆိုင်တဲ့ ခေါင်းစဉ်ဆီ focus ရွှေ့ပါမယ်။</p>
+<p class="example-check"><strong>မှားတတ်တဲ့အချက်</strong> # နောက်က စာသားနဲ့ target ရဲ့ id တိတိကျကျ တူရပါမယ်။</p>
+</section>
+<section class="article-section" id="image">
+  <h2>&lt;img src=&quot;…&quot; alt=&quot;…&quot;&gt;</h2>
+  <p>ပုံဖိုင်ကို src မှာ ထည့်ပြီး ပုံက အချက်အလက် ပေးတယ်ဆိုရင် ပုံမမြင်ရတဲ့အခါ ဖတ်လို့ရမယ့် စာသားကို alt မှာ ရေးပါ။ img မှာ closing tag မရှိပါဘူး။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;&amp;lt;img src=&quot;…&quot; alt=&quot;…&quot;&amp;gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;img width=&quot;120&quot; height=&quot;48&quot; alt=&quot;Store logo&quot;
+  src=&quot;data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%20120%2048%27%3E%3Crect%20width=%27120%27%20height=%2748%27%20fill=%27teal%27/%3E%3Ctext%20x=%2742%27%20y=%2730%27%20fill=%27white%27%3EShop%3C/text%3E%3C/svg%3E&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ထည့်ထားတဲ့ icon ပေါ်ပါမယ်။ src ကို ရှင်းပြီး alt စာသား ဘယ်လိုပေါ်လဲ ကြည့်ပါ။</p>
+<p class="example-check"><strong>မှားတတ်တဲ့အချက်</strong> အလှဆင်ဖို့ပဲ သုံးပြီး သက်ဆိုင်တဲ့အချက်အလက်ကို အနားမှာ ရေးထားပြီးသားဆို alt=&quot;&quot; ထားပါ။</p>
+</section>
+<section class="article-section" id="label-input">
+  <h2>&lt;label&gt; နဲ့ &lt;input&gt;</h2>
+  <p>label ရဲ့ for နဲ့ input ရဲ့ id ကို တူအောင်ရေးပါ။ Form ပို့တဲ့အခါ တန်ဖိုးကို ဘယ် field ကလာလဲ သိဖို့ name ပေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;&amp;lt;label&amp;gt; and &amp;lt;input&amp;gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;label for=&quot;customer&quot;&gt;Customer name&lt;/label&gt;
+&lt;input id=&quot;customer&quot; name=&quot;customer&quot; type=&quot;text&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Customer name ကို နှိပ်လိုက်ရင် input ဆီ focus ရောက်ပြီး နာမည်ရိုက်လို့ရပါမယ်။</p>
+<p class="example-check"><strong>မှားတတ်တဲ့အချက်</strong> for ကို id နဲ့ တွဲပါ။ name က FormData ထဲမှာ သုံးမယ့် key ပါ။</p>
+</section>
+<section class="article-section" id="button">
+  <h2>&lt;button type=&quot;…&quot;&gt;</h2>
+  <p>Action တစ်ခု လုပ်ဖို့ button သုံးပါ။ Form ထဲက button က ပုံမှန်အားဖြင့် submit လုပ်ပါတယ်။ တခြား action အတွက် type=&quot;button&quot; ပေးပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> ဒီနမူနာကို .html ဖိုင်အသစ်အဖြစ် သိမ်းပြီး browser နဲ့ ဖွင့်ပါ။ ပြင်ပြီးတိုင်း save နဲ့ reload လုပ်ပါ။</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;&amp;lt;button type=&quot;…&quot;&amp;gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form&gt;
+  &lt;label for=&quot;order-note&quot;&gt;Note&lt;/label&gt;
+  &lt;input id=&quot;order-note&quot; value=&quot;Less sugar&quot;&gt;
+  &lt;button type=&quot;button&quot; id=&quot;clear&quot;&gt;Clear&lt;/button&gt;
+&lt;/form&gt;
+  &lt;script&gt;
+document.querySelector(&quot;#clear&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+  document.querySelector(&quot;#order-note&quot;).value = &quot;&quot;;
+});
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Clear နှိပ်ရင် form ထဲမှာပဲ ရှိနေပြီး input ထဲကစာ ပျောက်ပါမယ်။</p>
+<p class="example-check"><strong>မှားတတ်တဲ့အချက်</strong> မရည်ရွယ်ဘဲ form submit မဖြစ်ဖို့ button ရဲ့ type ကို အတိအကျ ရေးပါ။</p>
+</section>
+<section class="article-section" id="classroom-lab">
+  <h2>နောက်ဆုံးလက်တွေ့ သုံးမျက်နှာပါ website</h2>
+  <p>Home၊ Services နဲ့ Contact စာမျက်နှာတွေကို navigation တစ်ခုတည်းနဲ့ ချိတ်ပါ။ တစ်မျက်နှာစီမှာ သက်ဆိုင်ရာ title နဲ့ description ရေးပါ။ Services မှာ ဈေးနှုန်းဇယား၊ Contact မှာ label ပါတဲ့ form ထည့်ပါ။ Mouse မသုံးဘဲ Tab၊ Enter နဲ့ သုံးမျက်နှာလုံး သွားကြည့်ပါ။ Skip link က main ဆီ ရောက်သလား စစ်ပါ။ ဖိုင်တစ်ခုစီကို validator.w3.org မှာ စစ်ပြီး error တွေ ပြင်ပါ။</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements">MDN · HTML elements</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/metadata-and-search/">အရင်သင်ခန်းစာ · Search Engine Optimization (SEO)</a></nav></footer>
 </article>
 </main>
 </body>

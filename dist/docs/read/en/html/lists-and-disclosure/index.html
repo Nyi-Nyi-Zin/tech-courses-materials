@@ -3,24 +3,89 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Turn items into lists and connect pages using readable links, file paths, and fragment identifiers.">
-  <title>Lists &amp; Navigation · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/lists-navigation/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/lists-navigation/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/lists-navigation/">
+  <meta name="description" content="The list element tells the browser whether items form a sequence, an unordered group, or a set of names and descriptions.">
+  <title>HTML lists · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/lists-and-disclosure/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/lists-and-disclosure/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/lists-and-disclosure/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Lists &amp; Navigation</h1>
-  <p><a href="/docs/read/en/html/lists-navigation/#lists">Lists &amp; Navigation</a></p>
-  <ul><li id="lists"><a href="/docs/read/en/html/lists-navigation/#lists">Choose among three list types</a></li>
-<li id="links"><a href="/docs/read/en/html/lists-navigation/#links">Write links that name their destination</a></li>
-<li id="file-paths"><a href="/docs/read/en/html/lists-navigation/#file-paths">Relative and absolute file paths</a></li>
-<li id="fragments"><a href="/docs/read/en/html/lists-navigation/#fragments">Jump to a section or start an action</a></li>
-<li id="practice"><a href="/docs/read/en/html/lists-navigation/#practice">Hands-on exercise</a></li></ul>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/lists-and-disclosure/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>HTML lists</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">The list element tells the browser whether items form a sequence, an unordered group, or a set of names and descriptions.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/lists-and-disclosure">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#items">What is a list item?</a></li>
+<li><a href="#list-types">Ordered lists &lt;ol&gt;</a></li>
+<li><a href="#unordered">Unordered lists &lt;ul&gt;</a></li>
+<li><a href="#descriptions">Description lists &lt;dl&gt;</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="items">
+  <h2>What is a list item?</h2>
+  <p>An li represents one item. Put each item in its own pair of li tags and place them inside the list element. ul wraps the whole group in this example.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;Pen&lt;/li&gt;
+  &lt;li&gt;Notebook&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Pen and Notebook appear as two items. Try adding another li before &lt;/ul&gt;.</p>
+
+</section>
+<section class="article-section" id="list-types">
+  <h2>Ordered lists &lt;ol&gt;</h2>
+  <p>Use ol when rearranging the items would change their meaning, such as a recipe or a set of instructions. Each item is an li. The browser normally adds numbers in order.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;ol&gt;
+  &lt;li&gt;Choose a product.&lt;/li&gt;
+  &lt;li&gt;Pick a size.&lt;/li&gt;
+  &lt;li&gt;Review your order.&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The browser displays three numbered steps. Add an li between two steps and their numbers adjust automatically.</p>
+
+</section>
+<section class="article-section" id="unordered">
+  <h2>Unordered lists &lt;ul&gt;</h2>
+  <p>Use ul for a group of related items where their order does not change the meaning. The browser usually draws a bullet for each li. To create a nested list, place it inside the li it belongs to.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;Pen
+    &lt;ul&gt;
+      &lt;li&gt;Blue pen&lt;/li&gt;
+      &lt;li&gt;Black pen&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Notebook&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Pen and Notebook have bullets at the outer level. The two pen colors appear indented under Pen.</p>
+
+</section>
+<section class="article-section" id="descriptions">
+  <h2>Description lists &lt;dl&gt;</h2>
+  <p>Use dl for name–description pairs. Write the name in dt and its description in dd. A group can have multiple names or descriptions. Glossaries and item specifications are common uses.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;dl&gt;
+  &lt;dt&gt;Viewport&lt;/dt&gt;
+  &lt;dd&gt;The visible area of a web page.&lt;/dd&gt;
+  &lt;dt&gt;Alt text&lt;/dt&gt;
+  &lt;dd&gt;A text alternative for an image.&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Each name appears with its description beneath it. Browsers usually indent the descriptions.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/grouping-content.html">WHATWG · Grouping content</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/entities/">Previous lesson · HTML Entities (Character References)</a>
+<a href="/docs/read/en/html/content/">Next lesson · HTML Links &lt;a&gt;</a></nav></footer>
 </article>
 </main>
 </body>

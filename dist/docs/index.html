@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/docs/style.css?v=87">
   <title>Cloud Nine Innovations Documentation</title>
   <link rel="canonical" href="https://javascript-training.cloudninemm.com/">
-  <link rel="modulepreload" href="/docs/app.js?v=98">
+  <link rel="modulepreload" href="/docs/app.js?v=96">
   <style>
     .docs-booting #app > .reading-page { display: none; }
     .docs-booting .docs-startup-status {
@@ -46,7 +46,7 @@
       status.textContent = burmese ? 'Documentation ဖွင့်နေပါတယ်…' : 'Opening documentation…';
     }, 180);
 
-    import('/docs/app.js?v=98').then(() => {
+    import('/docs/app.js?v=96').then(() => {
       clearTimeout(showLoading);
       status.remove();
     }, () => {

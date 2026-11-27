@@ -3,24 +3,113 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Create index.html, open it in your browser, and use DevTools to connect the source you wrote to the elements on the screen.">
-  <title>Web Fundamentals &amp; How HTML Works · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/web-fundamentals/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/web-fundamentals/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/web-fundamentals/">
+  <meta name="description" content="The browser decides how to lay out the page after reading an HTML file. A rendering mode is the set of rules it uses for that layout. The first line of the file can change the mode.">
+  <title>HTML Doctype and Browser Modes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/doctype/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/doctype/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/doctype/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Web Fundamentals &amp; How HTML Works</h1>
-  <p><a href="/docs/read/en/html/web-fundamentals/#document">Web Fundamentals &amp; How HTML Works</a></p>
-  <ul><li id="browser-and-server"><a href="/docs/read/en/html/web-fundamentals/#browser-and-server">From a URL to a page</a></li>
-<li id="html-css-javascript"><a href="/docs/read/en/html/web-fundamentals/#html-css-javascript">What HTML, CSS, and JavaScript do</a></li>
-<li id="document"><a href="/docs/read/en/html/web-fundamentals/#document">Write a complete HTML document</a></li>
-<li id="attributes"><a href="/docs/read/en/html/web-fundamentals/#attributes">Elements, tags, attributes, and nesting</a></li>
-<li id="practice"><a href="/docs/read/en/html/web-fundamentals/#practice">Hands-on exercise</a></li></ul>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/doctype/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>HTML Doctype and Browser Modes</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">The browser decides how to lay out the page after reading an HTML file. A rendering mode is the set of rules it uses for that layout. The first line of the file can change the mode.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/doctype">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#standards">What is Standards Mode?</a></li>
+<li><a href="#quirks">Why does Quirks Mode exist?</a></li>
+<li><a href="#declaration">What does &lt;!doctype html&gt; do?</a></li>
+<li><a href="#modes">Compare the two modes in the browser</a></li>
+<li><a href="#classroom-lab">Build your first document</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="standards">
+  <h2>What is Standards Mode?</h2>
+  <p>Standards Mode is the browser’s normal mode for modern web pages. You may see the name no-quirks mode in the specification. As an example of its layout rules, a CSS length such as 120px needs a unit when the number is nonzero. px is the unit for CSS pixels.</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Standards Mode&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div style=&quot;width: 120px; background: lightblue&quot;&gt;120 px&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="quirks">
+  <h2>Why does Quirks Mode exist?</h2>
+  <p>Some old pages relied on how earlier browsers lay out content. Quirks Mode keeps selected old layout rules so those pages can still work. For example, the browser may treat certain lengths without a unit as pixels. Certain historical doctypes can also select limited-quirks mode, which keeps fewer of the old rules.</p>
+
+<pre><code>&lt;!-- This legacy example omits the doctype. --&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Quirks Mode&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div style=&quot;width: 120; background: lightblue&quot;&gt;Sample&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="declaration">
+  <h2>What does &lt;!doctype html&gt; do?</h2>
+  <p>Write this declaration before &lt;html&gt;. It is an instruction for the browser about how to process the document. This form selects Standards Mode. In a typical HTML file, omitting the declaration selects Quirks Mode.</p>
+<p class="example-setup"><strong>How to try it</strong> Check that the first line of index.html is exactly the declaration below.</p>
+<pre><code>&lt;!doctype html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The line is used by the browser. The text you wrote in body still appears as the page content.</p>
+
+</section>
+<section class="article-section" id="modes">
+  <h2>Compare the two modes in the browser</h2>
+  <p>The blue box has a width without a unit. The script prints document.compatMode, the name exposed to JavaScript for the current mode. It also prints whether the width was accepted. CSS1Compat covers both Standards Mode and limited-quirks, while BackCompat indicates Quirks Mode.</p>
+<p class="example-setup"><strong>How to try it</strong> Save the full code as standards.html. Save a second copy as quirks.html, remove its first line, and open both files in the same browser.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;Compare rendering modes&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id=&quot;box&quot; style=&quot;width: 120; background: lightblue&quot;&gt;Sample&lt;/div&gt;
+  &lt;p id=&quot;result&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const box = document.querySelector(&quot;#box&quot;);
+    document.querySelector(&quot;#result&quot;).textContent =
+      document.compatMode + &quot; | width = &quot; + (box.style.width || &quot;ignored&quot;);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The first file shows CSS1Compat | width = ignored. The file without a doctype shows BackCompat | width = 120px in browsers that implement this quirk. Change 120 to 120px to see both layouts accept the width.</p>
+
+</section>
+<section class="article-section" id="classroom-lab">
+  <h2>Build your first document</h2>
+  <p>A browser requests a document, parses its markup into a DOM, and displays its body. Compare the tab title with the visible heading. Edit the heading in DevTools, reload, then edit the file and reload again to see which change persists.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/syntax.html#the-doctype">WHATWG · The DOCTYPE</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Quirks_mode_and_standards_mode">MDN · Quirks and standards modes</a></li>
+<li><a href="https://quirks.spec.whatwg.org/#the-unitless-length-quirk">WHATWG · The unitless length quirk</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/attributes/">Previous lesson · HTML Attributes</a>
+<a href="/docs/read/en/html/headings/">Next lesson · Headings &lt;h1&gt;–&lt;h6&gt;</a></nav></footer>
 </article>
 </main>
 </body>

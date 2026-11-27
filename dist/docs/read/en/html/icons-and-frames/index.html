@@ -3,24 +3,90 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Add images and playable media with text alternatives, captions, and files sized for the reader’s screen.">
-  <title>Images, Media &amp; External Embeds · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/images-media/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/images-media/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/images-media/">
+  <meta name="description" content="A favicon represents the page in the browser interface. An iframe puts a second document inside the page.">
+  <title>Favicons and Iframes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/icons-and-frames/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/icons-and-frames/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/icons-and-frames/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Images, Media &amp; External Embeds</h1>
-  <p><a href="/docs/read/en/html/images-media/#media">Images, Media &amp; External Embeds</a></p>
-  <ul><li id="images"><a href="/docs/read/en/html/images-media/#images">Image files, dimensions, and alt text</a></li>
-<li id="figure"><a href="/docs/read/en/html/images-media/#figure">Connect a figure to its visible caption</a></li>
-<li id="responsive-images"><a href="/docs/read/en/html/images-media/#responsive-images">Choose a file based on the available space</a></li>
-<li id="media"><a href="/docs/read/en/html/images-media/#media">Play audio and video or embed a page</a></li>
-<li id="practice"><a href="/docs/read/en/html/images-media/#practice">Hands-on exercise</a></li></ul>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/icons-and-frames/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Favicons and Iframes</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">A favicon represents the page in the browser interface. An iframe puts a second document inside the page.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/icons-and-frames">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#favicon">Add a favicon in &lt;head&gt;</a></li>
+<li><a href="#iframe">Embed a document with &lt;iframe&gt;</a></li>
+<li><a href="#classroom-lab">Build a media gallery</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="favicon">
+  <h2>Add a favicon in &lt;head&gt;</h2>
+  <p>A link with rel=&quot;icon&quot; points to the icon. On a site its href often points to an image file such as ./favicon.svg. Here the icon is embedded in the HTML so the example works on its own. Open the saved HTML as a tab to see its icon beside the title.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Add a favicon in &amp;lt;head&amp;gt;&lt;/title&gt;
+  &lt;link rel=&quot;icon&quot; href=&quot;data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2032%2032%27%3E%3Ccircle%20cx=%2716%27%20cy=%2716%27%20r=%2714%27%20fill=%27teal%27/%3E%3C/svg%3E&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;&lt;img id=&quot;icon&quot; width=&quot;26&quot; height=&quot;26&quot; alt=&quot;&quot;&gt; Example Store&lt;/h1&gt;
+  &lt;script&gt;
+document.querySelector(&quot;#icon&quot;).src = document.querySelector(&#39;link[rel=&quot;icon&quot;]&#39;).href;
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The preview shows the same icon next to the heading. The site’s tab stays on the Docs page.</p>
+
+</section>
+<section class="article-section" id="iframe">
+  <h2>Embed a document with &lt;iframe&gt;</h2>
+  <p>An iframe has its own document. Use src for a URL or srcdoc for inline HTML. A useful title tells assistive technology what is inside. Some websites refuse embedding. This example keeps its content inline and uses a sandbox with no additional permissions.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Embed a document with &amp;lt;iframe&amp;gt;&lt;/title&gt;
+  &lt;style&gt;
+iframe { width: min(100%, 300px); box-sizing: border-box; border: 1px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2&gt;Opening hours&lt;/h2&gt;
+&lt;iframe title=&quot;Weekly opening hours&quot; sandbox
+  srcdoc=&quot;&lt;p&gt;Monday–Friday, 9–5&lt;/p&gt;&quot;&gt;&lt;/iframe&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Opening hours appears in the outer page and Monday–Friday, 9–5 appears inside the frame.</p>
+
+</section>
+<section class="article-section" id="classroom-lab">
+  <h2>Build a media gallery</h2>
+  <p>Put three photos in an images folder. Give each figure a visible caption and write alt text explaining what matters in the image. Temporarily break one image path to check the fallback. Add a caption track to a video and enable it during playback.</p>
+
+
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel#icon">MDN · rel=&quot;icon&quot;</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe">MDN · &lt;iframe&gt;</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/media/">Previous lesson · HTML Audio and Video</a>
+<a href="/docs/read/en/html/tables/">Next lesson · HTML Tables &lt;table&gt;</a></nav></footer>
 </article>
 </main>
 </body>

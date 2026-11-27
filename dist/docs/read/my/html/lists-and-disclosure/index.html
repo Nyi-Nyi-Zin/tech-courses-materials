@@ -3,24 +3,89 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Item တွေကို စာရင်းအဖြစ် ဖွဲ့ပြီး လင့်ခ်စာသား၊ ဖိုင်လမ်းကြောင်းနဲ့ fragment identifier တွေကို သုံးကာ စာမျက်နှာတွေ ချိတ်ဆက်ပါမယ်။">
-  <title>စာရင်းများနှင့် လင့်ခ်များ · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/lists-navigation/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/lists-navigation/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/lists-navigation/">
+  <meta name="description" content="List element ကိုကြည့်ပြီး browser က ဒီစာရင်းဟာ အစဉ်လိုက် ဖတ်ရတာလား၊ အစဉ်မလိုတဲ့ အစုလား၊ နာမည်နဲ့ ရှင်းလင်းချက်တွေ တွဲထားတာလားဆိုတာ သိနိုင်ပါတယ်။">
+  <title>HTML စာရင်းများ · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/lists-and-disclosure/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/lists-and-disclosure/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/lists-and-disclosure/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>စာရင်းများနှင့် လင့်ခ်များ</h1>
-  <p><a href="/docs/read/my/html/lists-navigation/#lists">စာရင်းများနှင့် လင့်ခ်များ</a></p>
-  <ul><li id="lists"><a href="/docs/read/my/html/lists-navigation/#lists">စာရင်းအမျိုးအစား သုံးမျိုး ရွေးခြင်း</a></li>
-<li id="links"><a href="/docs/read/my/html/lists-navigation/#links">သွားမယ့်နေရာကို ဖော်ပြတဲ့ Link ရေးခြင်း</a></li>
-<li id="file-paths"><a href="/docs/read/my/html/lists-navigation/#file-paths">Relative နှင့် Absolute File Paths</a></li>
-<li id="fragments"><a href="/docs/read/my/html/lists-navigation/#fragments">အပိုင်းတစ်ခုဆီ ခုန်သွားခြင်းနှင့် Action Links</a></li>
-<li id="practice"><a href="/docs/read/my/html/lists-navigation/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/lists-and-disclosure/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTML စာရင်းများ</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">List element ကိုကြည့်ပြီး browser က ဒီစာရင်းဟာ အစဉ်လိုက် ဖတ်ရတာလား၊ အစဉ်မလိုတဲ့ အစုလား၊ နာမည်နဲ့ ရှင်းလင်းချက်တွေ တွဲထားတာလားဆိုတာ သိနိုင်ပါတယ်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/lists-and-disclosure">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#items">List Item &lt;li&gt; ဆိုတာဘာလဲ။</a></li>
+<li><a href="#list-types">အစဉ်လိုက် စာရင်း &lt;ol&gt;</a></li>
+<li><a href="#unordered">အစဉ်မလိုတဲ့ စာရင်း &lt;ul&gt;</a></li>
+<li><a href="#descriptions">ရှင်းလင်းချက် တွဲထားတဲ့ စာရင်း &lt;dl&gt;</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="items">
+  <h2>List Item &lt;li&gt; ဆိုတာဘာလဲ။</h2>
+  <p>&lt;li&gt; က စာရင်းထဲက အချက်တစ်ချက်ကို ကိုယ်စားပြုပါတယ်။ အချက်တစ်ချက်စီကို li tag အဖွင့်အပိတ်ကြားမှာထားပြီး list element အတွင်း စုထည့်ပါ။ ဒီမှာ ul က စာရင်းအစုကို ခြုံထားပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;Pen&lt;/li&gt;
+  &lt;li&gt;Notebook&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen နဲ့ Notebook က အချက်နှစ်ချက်အဖြစ် ပေါ်ပါမယ်။ &lt;/ul&gt; မတိုင်ခင် li တစ်ခု ထပ်ထည့်ကြည့်ပါ။</p>
+
+</section>
+<section class="article-section" id="list-types">
+  <h2>အစဉ်လိုက် စာရင်း &lt;ol&gt;</h2>
+  <p>လုပ်ဆောင်ရမယ့်အဆင့်တွေ၊ ချက်ပြုတ်နည်းတွေလို အစဉ်ပြောင်းရင် အဓိပ္ပာယ်ပါ ပြောင်းတဲ့စာရင်းမှာ ol သုံးပါတယ်။ တစ်ခုစီကို li နဲ့ရေးပြီး browser က ပုံမှန်အားဖြင့် နံပါတ်စဉ် တပ်ပေးပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;ol&gt;
+  &lt;li&gt;Choose a product.&lt;/li&gt;
+  &lt;li&gt;Pick a size.&lt;/li&gt;
+  &lt;li&gt;Review your order.&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> နံပါတ်စဉ်နဲ့ အဆင့်သုံးခု မြင်ရပါမယ်။ ကြားထဲမှာ li တစ်ခုထည့်ရင် နံပါတ်တွေ အလိုအလျောက် ပြန်စီပေးပါတယ်။</p>
+
+</section>
+<section class="article-section" id="unordered">
+  <h2>အစဉ်မလိုတဲ့ စာရင်း &lt;ul&gt;</h2>
+  <p>အကြောင်းအရာ ဆက်စပ်ပြီး အစဉ်ပြောင်းလည်း အဓိပ္ပာယ်တူတဲ့ စာရင်းမှာ ul သုံးပါတယ်။ Browser က li တစ်ခုစီကို ပုံမှန်အားဖြင့် bullet နဲ့ ပြပါတယ်။ စာရင်းခွဲ ထည့်ချင်ရင် သက်ဆိုင်ရာ li ရဲ့ အထဲမှာ list ထပ်ထည့်ပါ။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;Pen
+    &lt;ul&gt;
+      &lt;li&gt;Blue pen&lt;/li&gt;
+      &lt;li&gt;Black pen&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Notebook&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> Pen နဲ့ Notebook က အပြင်ဘက်စာရင်းမှာ bullet နဲ့ ပေါ်ပါတယ်။ Pen အရောင် နှစ်မျိုးက Pen အောက်မှာ တစ်ဆင့်ဝင်ပြီး ပေါ်ပါတယ်။</p>
+
+</section>
+<section class="article-section" id="descriptions">
+  <h2>ရှင်းလင်းချက် တွဲထားတဲ့ စာရင်း &lt;dl&gt;</h2>
+  <p>ဝေါဟာရ ဒါမှမဟုတ် ပစ္စည်းအချက်အလက်ကို ရှင်းလင်းချက်နဲ့ တွဲပြချင်ရင် dl သုံးပါတယ်။ နာမည်ကို dt၊ ရှင်းလင်းချက်ကို dd နဲ့ ရေးပါ။ အုပ်စုတစ်ခုမှာ နာမည် ဒါမှမဟုတ် ရှင်းလင်းချက် တစ်ခုထက်ပိုပြီး ထည့်နိုင်ပါတယ်။</p>
+<p class="example-setup"><strong>စမ်းသပ်နည်း</strong> index.html ထဲက &lt;body&gt; နဲ့ &lt;/body&gt; ကြားမှာ ဒီနမူနာကို ထည့်ပါ။ ဖိုင်ကို သိမ်းပြီး browser မှာ reload လုပ်ပါ။</p>
+<pre><code>&lt;dl&gt;
+  &lt;dt&gt;Viewport&lt;/dt&gt;
+  &lt;dd&gt;The visible area of a web page.&lt;/dd&gt;
+  &lt;dt&gt;Alt text&lt;/dt&gt;
+  &lt;dd&gt;A text alternative for an image.&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> နာမည် တစ်ခုစီရဲ့ အောက်မှာ သက်ဆိုင်ရာ ရှင်းလင်းချက် ပေါ်ပါတယ်။ Browser က ရှင်းလင်းချက်တွေကို ပုံမှန်အားဖြင့် တစ်ဆင့် ချိုးဝင်ပြီး ပြပါတယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/grouping-content.html">WHATWG · Grouping content</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/entities/">အရင်သင်ခန်းစာ · HTML Entities (Character References)</a>
+<a href="/docs/read/my/html/content/">နောက်သင်ခန်းစာ · HTML Links &lt;a&gt;</a></nav></footer>
 </article>
 </main>
 </body>

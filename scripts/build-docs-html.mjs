@@ -114,6 +114,7 @@ function movedTopicLink(language, topic, article, id) {
 
 const linkedMoves = {
   database: movedSections.database,
+  html: { 'text-markup': movedSections.html['text-markup'] },
 };
 
 function movedTopicLinks(guide, page, language) {
@@ -127,14 +128,13 @@ function legacyLessonPage(language, topic, article, move) {
   const { guide, page } = relocatedTopic(topic, article);
   const labels = copy[language];
   const start = move.defaultSection ? '#' + move.defaultSection : '';
-  const lessonLink = guide.id === 'web-fundamentals' ? labels.movedLesson : localized(page.title, language);
   const sectionIds = new Set([...page.sections.map(section => section.id), ...Object.keys(move.sections ?? {})]);
   const links = [...sectionIds]
     .map(id => movedTopicLink(language, topic, article, id));
   return document(language, page.title[language], page.intro[language], `<main id="main" class="reading-page">
 <article>
   <h1>${localized(page.title, language)}</h1>
-  <p>${anchor(readingPath(language, guide, page) + start, lessonLink)}</p>
+  <p>${anchor(readingPath(language, guide, page) + start, labels.movedLesson)}</p>
   <ul>${links.join('\n')}</ul>
 </article>
 </main>`, guide, page);

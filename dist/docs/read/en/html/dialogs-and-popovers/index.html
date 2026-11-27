@@ -3,24 +3,67 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Choose elements that describe the purpose of each region, then check how those regions appear in the browser’s accessibility tree.">
-  <title>Semantic HTML &amp; Page Architecture · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/semantic-html5/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/semantic-html5/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
+  <meta name="description" content="Use a modal dialog for a short task or decision the user needs to address before returning to the page.">
+  <title>Modal Dialogs &lt;dialog&gt; · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/dialogs-and-popovers/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/dialogs-and-popovers/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/dialogs-and-popovers/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Semantic HTML &amp; Page Architecture</h1>
-  <p><a href="/docs/read/en/html/semantic-html5/">Semantic HTML &amp; Page Architecture</a></p>
-  <ul><li id="containers"><a href="/docs/read/en/html/semantic-html5/#containers">Choose a semantic element or a generic container</a></li>
-<li id="landmarks"><a href="/docs/read/en/html/semantic-html5/#landmarks">Structure a page with seven semantic elements</a></li>
-<li id="section-article-div"><a href="/docs/read/en/html/semantic-html5/#section-article-div">Decide between section, article, and div</a></li>
-<li id="block-inline"><a href="/docs/read/en/html/semantic-html5/#block-inline">Recognize block and inline layout</a></li>
-<li id="practice"><a href="/docs/read/en/html/semantic-html5/#practice">Hands-on exercise</a></li></ul>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/dialogs-and-popovers/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Modal Dialogs &lt;dialog&gt;</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Use a modal dialog for a short task or decision the user needs to address before returning to the page.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/dialogs-and-popovers">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#modal">Open and close a modal with JavaScript</a></li>
+<li><a href="#commands">Open a modal with HTML button commands</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="modal">
+  <h2>Open and close a modal with JavaScript</h2>
+  <p>Calling showModal() puts a dialog above the page and makes the rest of the document temporarily inert. That means the user cannot interact with the background while the modal is active. aria-labelledby points to the visible title so assistive tools can name the dialog. Submitting a form with method=&quot;dialog&quot; closes it without sending a network request.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;button id=&quot;open-order&quot; type=&quot;button&quot;&gt;View order&lt;/button&gt;
+&lt;dialog id=&quot;order&quot; aria-labelledby=&quot;order-title&quot;&gt;
+  &lt;h2 id=&quot;order-title&quot;&gt;Order details&lt;/h2&gt;
+  &lt;p&gt;Your order is ready.&lt;/p&gt;
+  &lt;form method=&quot;dialog&quot;&gt;&lt;button autofocus&gt;Close&lt;/button&gt;&lt;/form&gt;
+&lt;/dialog&gt;
+&lt;script&gt;
+  const dialog = document.querySelector(&quot;#order&quot;);
+  document.querySelector(&quot;#open-order&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+    dialog.showModal();
+  });
+&lt;/script&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Open View order. Focus starts on Close. Close or Escape dismisses the modal, and focus returns to the opener in this example.</p>
+
+</section>
+<section class="article-section" id="commands">
+  <h2>Open a modal with HTML button commands</h2>
+  <p>In a browser that supports invoker commands, commandfor names the target dialog by id. command tells the browser what to do with it. show-modal opens it in modal mode and close dismisses it. The browser provides the same modal behavior as the JavaScript example.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;button type=&quot;button&quot; commandfor=&quot;order&quot; command=&quot;show-modal&quot;&gt;View order&lt;/button&gt;
+&lt;dialog id=&quot;order&quot; aria-label=&quot;Order details&quot;&gt;
+  &lt;p&gt;Your order is ready.&lt;/p&gt;
+  &lt;button type=&quot;button&quot; commandfor=&quot;order&quot; command=&quot;close&quot;&gt;Close&lt;/button&gt;
+&lt;/dialog&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> You can open and close the dialog with these buttons in a supporting browser. Each command targets the same order id.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog">MDN · The dialog element</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#command">MDN · Button commands</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/disclosure/">Previous lesson · Expandable Content &lt;details&gt;</a>
+<a href="/docs/read/en/html/popovers/">Next lesson · HTML Popovers</a></nav></footer>
 </article>
 </main>
 </body>

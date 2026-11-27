@@ -3,24 +3,60 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Build a form with labelled controls, decide how its values are submitted, and use the browser to check input before submission.">
-  <title>Interactive Forms &amp; Input Validation · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/interactive-forms/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/interactive-forms/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/interactive-forms/">
+  <meta name="description" content="Constraint validation is the browser’s built-in check that form controls satisfy the rules declared in HTML. It catches simple input mistakes before normal submission.">
+  <title>HTML Form Validation · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/form-validation/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/form-validation/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/form-validation/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Interactive Forms &amp; Input Validation</h1>
-  <p><a href="/docs/read/en/html/interactive-forms/#validation">Interactive Forms &amp; Input Validation</a></p>
-  <ul><li id="forms"><a href="/docs/read/en/html/interactive-forms/#forms">Submit named values with GET or POST</a></li>
-<li id="input-types"><a href="/docs/read/en/html/interactive-forms/#input-types">Choose a control for each value</a></li>
-<li id="labels"><a href="/docs/read/en/html/interactive-forms/#labels">Label fields and group related controls</a></li>
-<li id="validation"><a href="/docs/read/en/html/interactive-forms/#validation">Check input before submission</a></li>
-<li id="practice"><a href="/docs/read/en/html/interactive-forms/#practice">Hands-on exercise</a></li></ul>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/form-validation/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>HTML Form Validation</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Constraint validation is the browser’s built-in check that form controls satisfy the rules declared in HTML. It catches simple input mistakes before normal submission.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/form-validation">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#constraints">Validate required values and numeric ranges</a></li>
+<li><a href="#length">Validate text length with minlength</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="constraints">
+  <h2>Validate required values and numeric ranges</h2>
+  <p>required prevents an empty value in this number field. min and max set inclusive bounds. When you activate the submit button, the browser blocks submission on invalid input and usually shows a message by the field. The message varies depending on the browser and language.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;form&gt;
+  &lt;label for=&quot;guests&quot;&gt;Guests&lt;/label&gt;
+  &lt;input type=&quot;number&quot; id=&quot;guests&quot; name=&quot;guests&quot; min=&quot;1&quot; max=&quot;6&quot; required&gt;
+  &lt;button type=&quot;submit&quot;&gt;Reserve&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Try an empty value, 0, and 7. The browser blocks all three. Try 1 or 6 and the form passes these rules.</p>
+
+</section>
+<section class="article-section" id="length">
+  <h2>Validate text length with minlength</h2>
+  <p>minlength sets the minimum length of a nonempty value the user types into a text field. Add required if the field must also be present. A real server should check incoming values again because requests can be sent without going through this page.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;form&gt;
+  &lt;label for=&quot;order-name&quot;&gt;Name on the order (at least 2 characters)&lt;/label&gt;
+  &lt;input id=&quot;order-name&quot; name=&quot;customer&quot; minlength=&quot;2&quot; required&gt;
+  &lt;button type=&quot;submit&quot;&gt;Continue&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Type A and submit. The browser asks for a longer value. Type May and the field passes its length check.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#the-constraint-validation-api">WHATWG · Constraint validation</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation">MDN · Client-side form validation</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/buttons/">Previous lesson · HTML Buttons &lt;button&gt;</a>
+<a href="/docs/read/en/html/form-constraints/">Next lesson · HTML Form Constraints</a></nav></footer>
 </article>
 </main>
 </body>

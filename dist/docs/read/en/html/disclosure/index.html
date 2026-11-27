@@ -3,24 +3,45 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Choose elements that describe the purpose of each region, then check how those regions appear in the browser’s accessibility tree.">
-  <title>Semantic HTML &amp; Page Architecture · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/semantic-html5/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/semantic-html5/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/semantic-html5/">
+  <meta name="description" content="Use details to let readers expand supporting information when they need it, such as the answer to a frequently asked question.">
+  <title>Expandable Content &lt;details&gt; · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/disclosure/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/disclosure/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/disclosure/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Semantic HTML &amp; Page Architecture</h1>
-  <p><a href="/docs/read/en/html/semantic-html5/#section-article-div">Semantic HTML &amp; Page Architecture</a></p>
-  <ul><li id="containers"><a href="/docs/read/en/html/semantic-html5/#containers">Choose a semantic element or a generic container</a></li>
-<li id="landmarks"><a href="/docs/read/en/html/semantic-html5/#landmarks">Structure a page with seven semantic elements</a></li>
-<li id="section-article-div"><a href="/docs/read/en/html/semantic-html5/#section-article-div">Decide between section, article, and div</a></li>
-<li id="block-inline"><a href="/docs/read/en/html/semantic-html5/#block-inline">Recognize block and inline layout</a></li>
-<li id="practice"><a href="/docs/read/en/html/semantic-html5/#practice">Hands-on exercise</a></li></ul>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/disclosure/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Expandable Content &lt;details&gt;</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Use details to let readers expand supporting information when they need it, such as the answer to a frequently asked question.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/disclosure">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#disclosure">How &lt;details&gt; and &lt;summary&gt; work</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="disclosure">
+  <h2>How &lt;details&gt; and &lt;summary&gt; work</h2>
+  <p>Place summary first inside details. It is the label and the control users activate. The browser shows the remaining content when details is open and hides it when closed. Add the boolean open attribute to start expanded. Remove the attribute completely to start closed because open=&quot;false&quot; still counts as present.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;details&gt;
+  &lt;summary&gt;Can I change my order?&lt;/summary&gt;
+  &lt;p&gt;You can change it before payment.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The question starts visible. Click it, or focus it and press Enter or Space, to show and hide the answer. The browser does this without any JavaScript.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/interactive-elements.html#the-details-element">WHATWG · The details element</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/accessibility/">Previous lesson · Semantic HTML and Keyboard Accessibility</a>
+<a href="/docs/read/en/html/dialogs-and-popovers/">Next lesson · Modal Dialogs &lt;dialog&gt;</a></nav></footer>
 </article>
 </main>
 </body>

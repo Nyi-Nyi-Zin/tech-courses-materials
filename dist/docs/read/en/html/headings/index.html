@@ -3,24 +3,73 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Turn a plain text article into a document with meaningful headings, paragraphs, emphasis, quotations, and code.">
-  <title>Text Content &amp; Heading Hierarchy · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/text-hierarchy/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/text-hierarchy/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/text-hierarchy/">
+  <meta name="description" content="Headings give a page a readable hierarchy. Each level tells the reader where a section fits under the page title and other sections.">
+  <title>Headings &lt;h1&gt;–&lt;h6&gt; · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/headings/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/headings/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/headings/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Text Content &amp; Heading Hierarchy</h1>
-  <p><a href="/docs/read/en/html/text-hierarchy/#headings">Text Content &amp; Heading Hierarchy</a></p>
-  <ul><li id="headings"><a href="/docs/read/en/html/text-hierarchy/#headings">Choose heading levels by structure</a></li>
-<li id="paragraphs"><a href="/docs/read/en/html/text-hierarchy/#paragraphs">Paragraphs, line breaks, and whitespace</a></li>
-<li id="inline-text"><a href="/docs/read/en/html/text-hierarchy/#inline-text">Give inline text meaning</a></li>
-<li id="entities"><a href="/docs/read/en/html/text-hierarchy/#entities">Quote material and show code</a></li>
-<li id="practice"><a href="/docs/read/en/html/text-hierarchy/#practice">Hands-on exercise</a></li></ul>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/headings/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>Headings &lt;h1&gt;–&lt;h6&gt;</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Headings give a page a readable hierarchy. Each level tells the reader where a section fits under the page title and other sections.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/headings">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#headings">Heading levels and hierarchy</a></li>
+<li><a href="#appearance">Heading appearance with CSS</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="headings">
+  <h2>Heading levels and hierarchy</h2>
+  <p>Use h1 for the page’s main topic. Use h2 for each major section and h3 for a subsection inside an h2 section. Use h4 through h6 for deeper levels when needed. When opening a subsection, move down one level at a time. When you finish that subsection, you can go back to a higher level. A screen-reader user can navigate through these levels to find a section.</p>
+<p class="example-setup"><strong>How to try it</strong> In index.html, replace the content between &lt;body&gt; and &lt;/body&gt; with this example. Save the file and reload it in the browser.</p>
+<pre><code>&lt;h1&gt;Community library&lt;/h1&gt;
+&lt;h2&gt;Books&lt;/h2&gt;
+&lt;h3&gt;Fiction&lt;/h3&gt;
+&lt;p&gt;Novels and short stories.&lt;/p&gt;
+&lt;h3&gt;Nonfiction&lt;/h3&gt;
+&lt;p&gt;History and science books.&lt;/p&gt;
+&lt;h2&gt;Events&lt;/h2&gt;
+&lt;p&gt;Reading groups and workshops.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Books and Events are both level 2. Fiction and Nonfiction are level 3 under Books. The default font size usually reflects the level, but the elements define the structure.</p>
+
+</section>
+<section class="article-section" id="appearance">
+  <h2>Heading appearance with CSS</h2>
+  <p>Pick the heading level based on where it belongs in the document. Use CSS font-size and margins to adjust its visual size and spacing. For example, a compact card section can still use an h2 even if its design uses a small heading.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Heading style&lt;/title&gt;
+  &lt;style&gt;
+    .compact-heading { font-size: 1rem; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Community library&lt;/h1&gt;
+&lt;h2 class=&quot;compact-heading&quot;&gt;Today’s specials&lt;/h2&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> “Today’s specials” looks smaller and still has level 2 semantics, which you can verify in the browser accessibility tree.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://html.spec.whatwg.org/multipage/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements">WHATWG · The h1–h6 elements</a></li>
+<li><a href="https://www.w3.org/WAI/tutorials/page-structure/headings/">W3C WAI · Headings</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/doctype/">Previous lesson · HTML Doctype and Browser Modes</a>
+<a href="/docs/read/en/html/paragraphs/">Next lesson · Paragraphs, Line Breaks, and Thematic Breaks</a></nav></footer>
 </article>
 </main>
 </body>

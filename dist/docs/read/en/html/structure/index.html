@@ -3,24 +3,214 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Create index.html, open it in your browser, and use DevTools to connect the source you wrote to the elements on the screen.">
-  <title>Web Fundamentals &amp; How HTML Works · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/web-fundamentals/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/web-fundamentals/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/web-fundamentals/">
+  <meta name="description" content="An HTML document is the code for one page. Before reading the whole file, learn how HTML describes one piece of content and how pieces fit inside each other. Then put them together in the index.html you made in the previous lesson.">
+  <title>HTML Document Structure · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/structure/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/structure/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/structure/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Web Fundamentals &amp; How HTML Works</h1>
-  <p><a href="/docs/read/en/html/web-fundamentals/#document">Web Fundamentals &amp; How HTML Works</a></p>
-  <ul><li id="browser-and-server"><a href="/docs/read/en/html/web-fundamentals/#browser-and-server">From a URL to a page</a></li>
-<li id="html-css-javascript"><a href="/docs/read/en/html/web-fundamentals/#html-css-javascript">What HTML, CSS, and JavaScript do</a></li>
-<li id="document"><a href="/docs/read/en/html/web-fundamentals/#document">Write a complete HTML document</a></li>
-<li id="attributes"><a href="/docs/read/en/html/web-fundamentals/#attributes">Elements, tags, attributes, and nesting</a></li>
-<li id="practice"><a href="/docs/read/en/html/web-fundamentals/#practice">Hands-on exercise</a></li></ul>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/structure/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>HTML Document Structure</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">An HTML document is the code for one page. Before reading the whole file, learn how HTML describes one piece of content and how pieces fit inside each other. Then put them together in the index.html you made in the previous lesson.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/structure">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#tag">HTML Tags</a></li>
+<li><a href="#elements">HTML Elements</a></li>
+<li><a href="#attribute">HTML Attributes</a></li>
+<li><a href="#case-insensitivity">Case Insensitivity in HTML</a></li>
+<li><a href="#nesting">Nesting HTML Elements</a></li>
+<li><a href="#doctype">The HTML Doctype Declaration</a></li>
+<li><a href="#html">What does &lt;html&gt; do?</a></li>
+<li><a href="#head">What does &lt;head&gt; do?</a></li>
+<li><a href="#title">Document Title &lt;title&gt;</a></li>
+<li><a href="#body">What does &lt;body&gt; do?</a></li>
+<li><a href="#document">Put the full document together</a></li>
+<li><a href="#viewport">Set the layout width on phones</a></li>
+<li><a href="#dom">How can you see the DOM?</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="tag">
+  <h2>HTML Tags</h2>
+  <p>A tag is a marker in the HTML code. It uses angle brackets. In &lt;p&gt;, p is the name of the tag and starts a paragraph. In &lt;/p&gt;, the slash marks the end. The browser uses these markers when reading the file.</p>
+<p class="example-setup"><strong>How to try it</strong> Replace the first line you wrote in index.html with this line, save, and reload.</p>
+<pre><code>&lt;p&gt;Your page is ready.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The page shows “Your page is ready.” as a paragraph.</p>
+
+</section>
+<section class="article-section" id="elements">
+  <h2>HTML Elements</h2>
+  <p>An element is a piece of the page with a purpose. Here the paragraph element consists of the opening tag &lt;p&gt;, the text “Registration is open.”, and the closing tag &lt;/p&gt;. The &lt;hr&gt; element marks a break between topics. It is a void element, so it has neither content nor a closing tag.</p>
+
+<pre><code>&lt;!-- Paragraph element: opening tag, text, and closing tag --&gt;
+&lt;p&gt;Registration is open.&lt;/p&gt;
+
+&lt;!-- Void element: a break between topics --&gt;
+&lt;hr&gt;
+&lt;p&gt;Classes start on Monday.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The browser usually displays a horizontal line between the paragraphs.</p>
+
+</section>
+<section class="article-section" id="attribute">
+  <h2>HTML Attributes</h2>
+  <p>An attribute gives the browser extra information about an element. Write it after the tag name in the start tag. Here lang is the attribute name and &quot;en&quot; is its value. It identifies the paragraph language as English.</p>
+<p class="example-setup"><strong>How to try it</strong> Replace the paragraph in index.html with this line, save, and reload.</p>
+<pre><code>&lt;p lang=&quot;en&quot;&gt;Your page is ready.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The text still reads “Your page is ready.”. The language information belongs to the element.</p>
+
+</section>
+<section class="article-section" id="case-insensitivity">
+  <h2>Case Insensitivity in HTML</h2>
+  <p>HTML tag names and attribute names are case-insensitive. The browser reads &lt;P&gt; and &lt;p&gt; as the same tag, and CLASS and class as the same attribute name. Use lowercase names to keep your code consistent. Attribute values follow their own rules. In this example, the CSS selector .note matches the class value &quot;note&quot;. The value &quot;Note&quot; has a different spelling for CSS matching.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;HTML Case Insensitivity&lt;/title&gt;
+  &lt;style&gt;
+    .note { color: teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;P CLASS=&quot;note&quot;&gt;First paragraph&lt;/P&gt;
+  &lt;p class=&quot;note&quot;&gt;Second paragraph&lt;/p&gt;
+  &lt;p class=&quot;Note&quot;&gt;Third paragraph&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> All three lines appear as paragraphs. The first two are teal. The third uses the default text color. Change &quot;Note&quot; to &quot;note&quot; to give the third paragraph the same color.</p>
+
+</section>
+<section class="article-section" id="nesting">
+  <h2>Nesting HTML Elements</h2>
+  <p>Nesting means putting one element inside another. Here &lt;main&gt; is the parent and its &lt;h1&gt; and &lt;p&gt; are its direct children. The closing tags for both children come before &lt;/main&gt;.</p>
+
+<pre><code>&lt;main&gt;
+  &lt;h1&gt;Learning Center&lt;/h1&gt;
+  &lt;p&gt;Registration is open.&lt;/p&gt;
+&lt;/main&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The heading and paragraph both belong to the same main content area.</p>
+
+</section>
+<section class="article-section" id="doctype">
+  <h2>The HTML Doctype Declaration</h2>
+  <p>Start an HTML file with &lt;!doctype html&gt; on the first line, before the &lt;html&gt; tag. This declaration puts the browser in Standards Mode, which uses the normal layout rules for modern pages. After the declaration, write the &lt;html&gt; element.</p>
+
+<pre><code>&lt;!doctype html&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="html">
+  <h2>What does &lt;html&gt; do?</h2>
+  <p>The html element wraps the two main parts of the page, head and body. Because it is the outermost element, it is also called the root element. lang=&quot;en&quot; sets the document’s default language to English. Screen readers can use this setting to choose how to pronounce the text.</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Learning Center&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Registration is open.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="head">
+  <h2>What does &lt;head&gt; do?</h2>
+  <p>Head holds information about the document for the browser and other tools. That information is called metadata. For example, the title names the document and the browser uses it as the tab label. A computer saves text as numbers; meta charset tells the browser how to turn them back into letters. Save the file as UTF-8 and write the matching charset near the start of head.</p>
+
+<pre><code>&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;Learning Center&lt;/title&gt;
+&lt;/head&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="title">
+  <h2>Document Title &lt;title&gt;</h2>
+  <p>Write &lt;title&gt; inside &lt;head&gt; to name the document. The browser uses this name in its tab, and visitors can see it in their bookmarks. Write the main heading visitors read on the page with &lt;h1&gt; inside &lt;body&gt;.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Opening Hours | Learning Center&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Opening Hours&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> Open the file in a browser. The tab says “Opening Hours | Learning Center” and the page heading says “Opening Hours”.</p>
+
+</section>
+<section class="article-section" id="body">
+  <h2>What does &lt;body&gt; do?</h2>
+  <p>Body holds the content a visitor reads or uses on the page. Start &lt;body&gt; after &lt;/head&gt; and close it before &lt;/html&gt;. The paragraph below is the greeting the visitor sees on the page.</p>
+
+<pre><code>&lt;body&gt;
+  &lt;p&gt;Welcome to the Learning Center!&lt;/p&gt;
+&lt;/body&gt;</code></pre>
+
+
+</section>
+<section class="article-section" id="document">
+  <h2>Put the full document together</h2>
+  <p>The first line is the doctype declaration. It tells the browser to use its normal rules for modern pages; the next lesson explains how to see the difference. Below it, html wraps head and body. The same document can have one title in the tab and different text in the page.</p>
+<p class="example-setup"><strong>How to try it</strong> Replace all of index.html with this code. Save it, then reload the browser.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Learning Center&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Welcome to the Learning Center!&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The tab shows “Learning Center” and the page shows “Welcome to the Learning Center!”. Change the paragraph text, save the file, and reload to see the greeting update.</p>
+<p class="example-check"><strong>If the result differs</strong> If the browser shows the tags as text, check that the file ends in .html.</p>
+</section>
+<section class="article-section" id="viewport">
+  <h2>Set the layout width on phones</h2>
+  <p>The viewport is the part of the browser in which the page is displayed. Mobile browsers may lay out pages as if they had a wider screen. width=device-width asks the browser to use the device width for the page layout. initial-scale=1 sets the initial zoom.</p>
+<p class="example-setup"><strong>How to try it</strong> Add this line inside the existing &lt;head&gt;, after the charset line.</p>
+<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The greeting stays the same. On a phone the browser can use the phone width to lay out the page. Try it again when you build a responsive layout.</p>
+
+</section>
+<section class="article-section" id="dom">
+  <h2>How can you see the DOM?</h2>
+  <p>The browser builds a tree called the Document Object Model (DOM) when it reads the file. Run this example or put it inside the body of index.html and open the file. Right-click “Registration is open.” and select Inspect. In Elements or Inspector, look for the paragraph inside &lt;main&gt; and expand &lt;html&gt; to find &lt;head&gt; and &lt;body&gt;.</p>
+
+<pre><code>&lt;main&gt;
+  &lt;p&gt;Registration is open.&lt;/p&gt;
+&lt;/main&gt;</code></pre>
+
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax">MDN · Basic HTML syntax</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/syntax.html#syntax">WHATWG · HTML syntax</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/syntax.html#the-doctype">WHATWG · The DOCTYPE</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/semantics.html">WHATWG · Elements</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/semantics.html#the-title-element">WHATWG · The title element</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/sections.html#the-body-element">WHATWG · The body element</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">MDN · Introduction to the DOM</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/getting-started/">Previous lesson · Create Your First HTML Page</a>
+<a href="/docs/read/en/html/attributes/">Next lesson · HTML Attributes</a></nav></footer>
 </article>
 </main>
 </body>

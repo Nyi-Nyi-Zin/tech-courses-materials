@@ -3,24 +3,59 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Create index.html, open it in your browser, and use DevTools to connect the source you wrote to the elements on the screen.">
-  <title>Web Fundamentals &amp; How HTML Works · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/web-fundamentals/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/web-fundamentals/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/web-fundamentals/">
+  <meta name="description" content="An attribute in an opening tag gives an HTML element extra information or changes how it works. Standard attributes are the ones defined by the HTML Standard. These include global attributes and attributes that apply to specific elements.">
+  <title>HTML Attributes · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/html/attributes/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/attributes/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/attributes/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Web Fundamentals &amp; How HTML Works</h1>
-  <p><a href="/docs/read/en/html/web-fundamentals/#attributes">Web Fundamentals &amp; How HTML Works</a></p>
-  <ul><li id="browser-and-server"><a href="/docs/read/en/html/web-fundamentals/#browser-and-server">From a URL to a page</a></li>
-<li id="html-css-javascript"><a href="/docs/read/en/html/web-fundamentals/#html-css-javascript">What HTML, CSS, and JavaScript do</a></li>
-<li id="document"><a href="/docs/read/en/html/web-fundamentals/#document">Write a complete HTML document</a></li>
-<li id="attributes"><a href="/docs/read/en/html/web-fundamentals/#attributes">Elements, tags, attributes, and nesting</a></li>
-<li id="practice"><a href="/docs/read/en/html/web-fundamentals/#practice">Hands-on exercise</a></li></ul>
+  <nav aria-label="All documentation"><a href="/docs/read/en/#html">All documentation · HTML</a> <a href="/docs/read/my/html/attributes/" lang="my" hreflang="my">မြန်မာ</a></nav>
+  <h1>HTML Attributes</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">An attribute in an opening tag gives an HTML element extra information or changes how it works. Standard attributes are the ones defined by the HTML Standard. These include global attributes and attributes that apply to specific elements.</p>
+  <p class="reading-link"><a href="/docs/?lang=en#/html/attributes">Open interactive lesson</a></p>
+
+  <section class="article-section">
+    <h2>On this page</h2>
+    <ul><li><a href="#attribute-scope">How Attributes Work</a></li>
+<li><a href="#references">Official references</a></li></ul>
+  </section>
+  <section class="article-section" id="attribute-scope">
+  <h2>How Attributes Work</h2>
+  <p>Global attributes such as id and class can be used on any HTML element. Use a unique id for each element you want to identify and reuse a class to style multiple elements. Other attributes apply to specific elements. On an &lt;a&gt; element, href sets the link destination. On an &lt;img&gt; element, src sets the image address and alt provides a text alternative.</p>
+<p class="example-setup"><strong>How to try it</strong> Save this example as a new .html file, then open it in your browser. After a change, save and reload.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;How Attributes Work&lt;/title&gt;
+  &lt;style&gt;
+    .highlight { color: teal; }
+    h2:target { outline: 2px solid teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;a class=&quot;highlight&quot; href=&quot;#schedule&quot;&gt;View schedule&lt;/a&gt;
+  &lt;h2 id=&quot;schedule&quot; class=&quot;highlight&quot;&gt;Schedule&lt;/h2&gt;
+  &lt;p&gt;Classes begin at 10:00 AM.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>What to expect</strong> The link and heading are teal because both use class=&quot;highlight&quot;. Click View schedule to jump to the heading whose id matches the link’s href.</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>Official references</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes">MDN · HTML attribute reference</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">MDN · Global attributes</a></li></ul>
+  </section>
+  <footer><nav aria-label="All documentation"><a href="/docs/read/en/html/structure/">Previous lesson · HTML Document Structure</a>
+<a href="/docs/read/en/html/doctype/">Next lesson · HTML Doctype and Browser Modes</a></nav></footer>
 </article>
 </main>
 </body>

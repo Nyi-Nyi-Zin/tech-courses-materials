@@ -3,24 +3,73 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="index.html ဖိုင်တစ်ခုရေးပြီး browser မှာ ဖွင့်ပါ။ ကိုယ်ရေးထားတဲ့ HTML နဲ့ စာမျက်နှာပေါ်မှာ မြင်ရတဲ့ element တွေ ဘယ်လိုဆက်စပ်လဲ DevTools နဲ့ ကြည့်ပါမယ်။">
-  <title>Web အခြေခံနှင့် HTML အလုပ်လုပ်ပုံ · Cloud Nine Innovations</title>
-  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/web-fundamentals/">
-  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/web-fundamentals/">
-  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/web-fundamentals/">
+  <meta name="description" content="Web Fundamentals မှာ Web Server က Browser ဆီ HTML ပြန်ပို့ပုံကို ကြည့်ခဲ့ပါတယ်။ အခု HTML ထဲမှာ ဘာတွေရေးထားလဲ၊ tag အနည်းငယ်နဲ့ စာသားတွေကို web page တစ်ခုအဖြစ် ဘယ်လိုဖွဲ့စည်းလဲဆိုတာ ကြည့်ရအောင်။">
+  <title>HTML မိတ်ဆက် · Cloud Nine Innovations</title>
+  <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/my/html/introduction/">
+  <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/html/introduction/">
+  <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/html/introduction/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
   <link rel="stylesheet" href="/docs/style.css">
 </head>
 <body>
 <main id="main" class="reading-page">
 <article>
-  <h1>Web အခြေခံနှင့် HTML အလုပ်လုပ်ပုံ</h1>
-  <p><a href="/docs/read/my/html/web-fundamentals/">Web အခြေခံနှင့် HTML အလုပ်လုပ်ပုံ</a></p>
-  <ul><li id="browser-and-server"><a href="/docs/read/my/html/web-fundamentals/#browser-and-server">URL ကနေ စာမျက်နှာပေါ်လာပုံ</a></li>
-<li id="html-css-javascript"><a href="/docs/read/my/html/web-fundamentals/#html-css-javascript">HTML၊ CSS နှင့် JavaScript ရဲ့ တာဝန်များ</a></li>
-<li id="document"><a href="/docs/read/my/html/web-fundamentals/#document">HTML Document အပြည့်အစုံ ရေးခြင်း</a></li>
-<li id="attributes"><a href="/docs/read/my/html/web-fundamentals/#attributes">Elements၊ Tags၊ Attributes နှင့် အတွင်းထည့်ရေးပုံ</a></li>
-<li id="practice"><a href="/docs/read/my/html/web-fundamentals/#practice">လက်တွေ့လေ့ကျင့်ခန်း</a></li></ul>
+  <nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/#html">သင်ခန်းစာအားလုံး · HTML</a> <a href="/docs/read/en/html/introduction/" lang="en" hreflang="en">English</a></nav>
+  <h1>HTML မိတ်ဆက်</h1>
+  <p class="article-version">HTML Living Standard</p>
+  <p class="intro">Web Fundamentals မှာ Web Server က Browser ဆီ HTML ပြန်ပို့ပုံကို ကြည့်ခဲ့ပါတယ်။ အခု HTML ထဲမှာ ဘာတွေရေးထားလဲ၊ tag အနည်းငယ်နဲ့ စာသားတွေကို web page တစ်ခုအဖြစ် ဘယ်လိုဖွဲ့စည်းလဲဆိုတာ ကြည့်ရအောင်။</p>
+  <p class="reading-link"><a href="/docs/?lang=my#/html/introduction">Code စမ်းလို့ရတဲ့ သင်ခန်းစာ ဖွင့်ရန်</a></p>
+
+  <section class="article-section">
+    <h2>ဒီစာမျက်နှာမှာ</h2>
+    <ul><li><a href="#what-is-html">HTML ဆိုတာ ဘာလဲ?</a></li>
+<li><a href="#html-css-javascript">HTML၊ CSS နဲ့ JavaScript တွဲပြီး အလုပ်လုပ်ပုံ</a></li>
+<li><a href="#references">တရားဝင် ကိုးကားချက်များ</a></li></ul>
+  </section>
+  <section class="article-section" id="what-is-html">
+  <h2>HTML ဆိုတာ ဘာလဲ?</h2>
+  <p>HTML ရဲ့ အရှည်ကောက်က HyperText Markup Language ပါ။ Web page တစ်ခုမှာ ဘာတွေပါလဲ၊ အဲဒီအကြောင်းအရာတွေက ဘာကို ဆိုလိုလဲဆိုတာ HTML နဲ့ ဖော်ပြပါတယ်။ Markup ဆိုတာ အကြောင်းအရာတစ်ခုစီကို tag နဲ့ မှတ်သားရေးတာပါ။ ဒီနမူနာမှာ &lt;h1&gt; က စာမျက်နှာရဲ့ အဓိကခေါင်းစဉ်၊ &lt;p&gt; က စာပိုဒ်ဖြစ်ကြောင်း Browser ကို ပြောပေးပါတယ်။</p>
+
+<pre><code>&lt;h1&gt;Learning Center&lt;/h1&gt;
+&lt;p&gt;Registration opens on Monday.&lt;/p&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> နမူနာကို Run ကြည့်ပါ။ Learning Center က အဓိကခေါင်းစဉ်အဖြစ် ပေါ်ပြီး စာရင်းသွင်းရက်အကြောင်းက အောက်မှာ စာပိုဒ်အဖြစ် ပေါ်ပါမယ်။</p>
+
+</section>
+<section class="article-section" id="html-css-javascript">
+  <h2>HTML၊ CSS နဲ့ JavaScript တွဲပြီး အလုပ်လုပ်ပုံ</h2>
+  <p>Learning Center စာမျက်နှာမှာ ခေါင်းစဉ်၊ ခလုတ်နဲ့ အသိပေးစာကို HTML နဲ့ ရေးပါတယ်။ ခေါင်းစဉ်ရဲ့ အရောင်ကို CSS နဲ့ သတ်မှတ်ပါတယ်။ ခလုတ်နှိပ်တဲ့အခါ အသိပေးစာကို JavaScript က ဖွင့်ပြပါတယ်။ နောက်သင်ခန်းစာမှာ စာမျက်နှာတစ်ခုကို index.html အဖြစ် သိမ်းပြီး Browser နဲ့ ဖွင့်ကြည့်ပါမယ်။</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Learning Center&lt;/title&gt;
+  &lt;style&gt;
+    h1 { color: teal; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Learning Center&lt;/h1&gt;
+  &lt;button type=&quot;button&quot; id=&quot;show-notice&quot;&gt;Show notice&lt;/button&gt;
+  &lt;p id=&quot;notice&quot; hidden&gt;Registration opens on Monday.&lt;/p&gt;
+  &lt;script&gt;
+    document.querySelector(&quot;#show-notice&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+      document.querySelector(&quot;#notice&quot;).hidden = false;
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p class="example-result"><strong>စမ်းကြည့်ရင် ဘာဖြစ်မလဲ</strong> ခေါင်းစဉ်က စိမ်းပြာရောင်နဲ့ ပေါ်ပါမယ်။ Show notice ခလုတ်ကို နှိပ်လိုက်ရင် စာရင်းသွင်းရက်အကြောင်း ခလုတ်အောက်မှာ ပေါ်လာပါမယ်။</p>
+
+</section>
+  <section class="references" id="references">
+    <h2>တရားဝင် ကိုးကားချက်များ</h2>
+    <ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML">MDN · HTML overview</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax">MDN · Basic HTML syntax</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/introduction.html">WHATWG · HTML introduction</a></li></ul>
+  </section>
+  <footer><nav aria-label="သင်ခန်းစာအားလုံး"><a href="/docs/read/my/html/getting-started/">နောက်သင်ခန်းစာ · ပထမဆုံး HTML စာမျက်နှာ ဖန်တီးခြင်း</a></nav></footer>
 </article>
 </main>
 </body>
