@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="When a user accesses a web application, the browser retrieves and executes the frontend files from the Web Server. As the user interacts with the application—such as viewing data—the frontend initiates an API request. This request is sent to the backend over HTTPS, and the backend processes it to return a response. If the user uploads a file (e.g., a PDF), the backend stores the file as an object in an AWS S3 bucket and saves only the file&#39;s path in the database alongside the relevant record.">
+  <meta name="description" content="A web app uses different services to load its interface, fetch data, and handle files. The diagram follows those requests from the browser to the web server or the backend API.">
   <title>Web app request flow · Cloud Nine Innovations</title>
   <link rel="canonical" href="https://javascript-training.cloudninemm.com/docs/read/en/web-fundamentals/web-app-architecture/">
   <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-fundamentals/web-app-architecture/">
@@ -22,17 +22,46 @@
   <section class="article-section">
     <h2>On this page</h2>
     <ul><li><a href="#web-app-flow">How a web app works</a></li>
+<li><a href="#page-load">Loading the app</a></li>
+<li><a href="#fetching-data">Fetching data</a></li>
+<li><a href="#file-uploads-and-downloads">Uploading and downloading files</a></li>
 <li><a href="#references">Official references</a></li></ul>
   </section>
   <section class="article-section" id="web-app-flow">
   <h1>How a web app works</h1>
-  <p>When a user accesses a web application, the browser retrieves and executes the frontend files from the Web Server. As the user interacts with the application—such as viewing data—the frontend initiates an API request. This request is sent to the backend over HTTPS, and the backend processes it to return a response. If the user uploads a file (e.g., a PDF), the backend stores the file as an object in an AWS S3 bucket and saves only the file&#39;s path in the database alongside the relevant record.</p>
+  <p>A web app uses different services to load its interface, fetch data, and handle files. The diagram follows those requests from the browser to the web server or the backend API.</p>
 
 
 <figure class="lesson-figure">
-    <a href="/docs/media/database/web-app-flow.svg?v=6" data-image-preview><img src="/docs/media/database/web-app-flow.svg?v=6" alt="The Browser requests frontend files from the Web Server and receives HTML, CSS, and JavaScript. The Frontend inside the Browser initiates an HTTPS request to the Backend on the Application Server and receives JSON. The Backend connects to the optional Redis cache, PostgreSQL, and AWS S3 cloud storage over HTTPS as needed." width="1600" height="780" loading="lazy" decoding="async"></a>
-    <figcaption>The upper arrows show the frontend files being loaded. The lower arrows show the API request from the frontend running inside the browser and the JSON response. The dashed line marks the optional Redis cache.</figcaption>
-  </figure><dl class="lesson-terms"><div><dt><code>Browser</code></dt><dd>Downloads and runs the frontend files, then sends API requests initiated by the frontend.</dd></div><div><dt><code>Web Server</code></dt><dd>Serves the frontend build, including the HTML, JavaScript, and CSS files that the browser needs.</dd></div><div><dt><code>Application Server</code></dt><dd>Runs the backend API. For a course list request, it returns the course data and can read it from Redis or PostgreSQL.</dd></div><div><dt><code>Cache Server</code></dt><dd>Redis can temporarily store results such as a course list. The backend can return a cached result when available. On a cache miss, it can query PostgreSQL and cache the new result for a limited time.</dd></div><div><dt><code>Database Server</code></dt><dd>Runs PostgreSQL, which executes SQL and manages records such as courses and enrollments. PostgreSQL keeps its data files on persistent storage so the records remain after the server process restarts.</dd></div><div><dt><code>Cloud Storage</code></dt><dd>AWS S3 is an object storage service. The backend uses the S3 API over HTTPS to upload PDFs to a bucket and retrieve them for downloads.</dd></div></dl>
+    <a href="/docs/media/web-fundamentals/web-app-architecture.png" data-image-preview><img src="/docs/media/web-fundamentals/web-app-architecture.png" alt="The browser receives HTML, CSS, and JavaScript from the web server and sends HTTPS API requests to the application server, which returns JSON. The backend reads and writes the Redis cache, queries PostgreSQL with SQL, and uploads or downloads files with AWS S3." width="1847" height="851" loading="lazy" decoding="async"></a>
+    <figcaption>The top arrows show the page request and the frontend files that come back. The bottom arrows show the API request and JSON response. The dashed orange arrow marks the optional Redis cache.</figcaption>
+  </figure>
+
+
+</section>
+<section class="article-section" id="page-load">
+  <h2>Loading the app</h2>
+  <p>When you open the app, the browser sends a page request to the Web Server. The server sends back the HTML, CSS, and JavaScript files. The browser uses HTML and CSS to display the interface and runs JavaScript so you can interact with it.</p>
+
+
+
+
+</section>
+<section class="article-section" id="fetching-data">
+  <h2>Fetching data</h2>
+  <p>When you open a product list, the frontend sends an HTTPS API request to the Backend running on the Application Server. The Backend retrieves the data and sends it back as JSON. The frontend uses that response to display the list.</p>
+<p>If the app uses Redis, the Backend can check whether the list is already cached. If it is, the Backend can use it right away. If it is missing, the Backend sends a SQL query to PostgreSQL and can save the result in Redis for a short time.</p>
+
+
+
+
+</section>
+<section class="article-section" id="file-uploads-and-downloads">
+  <h2>Uploading and downloading files</h2>
+  <p>When you upload a product image, the frontend sends the file to the Backend. The Backend uses the S3 API to store the file as an object in an AWS S3 bucket. It can save the object key, which identifies the file in that bucket, with the product record in PostgreSQL.</p>
+<p>When a user downloads the image, the Backend can look up the key in PostgreSQL, retrieve the object from S3, and send the file to the browser.</p>
+
+
 
 
 </section>
