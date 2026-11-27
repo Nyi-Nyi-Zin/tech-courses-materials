@@ -286,13 +286,20 @@ html[lang="my"] article h1 { letter-spacing: normal; line-height: 1.42; }
 .lesson-figure figcaption { padding: 8px 4px 2px; color: var(--muted); font-size: .9rem; line-height: 1.6; }
 .lesson-figure--banner { margin: 12px 0 16px; padding: 0; border: 0; }
 .image-preview {
-  width: min(92vw, 1160px);
-  max-height: 86dvh;
-  padding: clamp(8px, 2vw, 16px);
+  position: fixed;
+  inset: 8px;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 8px;
+  overflow: hidden;
   background: var(--paper);
   box-shadow: 0 20px 60px #19294155;
 }
-.image-preview form { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+.image-preview[open] { display: flex; flex-direction: column; gap: 4px; }
+.image-preview form { display: flex; justify-content: flex-end; }
 .image-preview button {
   min-height: 44px;
   padding-inline: 12px;
@@ -301,18 +308,20 @@ html[lang="my"] article h1 { letter-spacing: normal; line-height: 1.42; }
   border-radius: 8px;
   background: var(--canvas);
 }
+.image-preview-body {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
 .image-preview img {
   display: block;
   width: 100%;
-  height: auto;
-  max-height: min(72dvh, calc(86dvh - 86px));
-  margin-inline: auto;
+  height: 100%;
   object-fit: contain;
 }
 html:has(.image-preview[open]) { overflow: hidden; }
-@media (max-width: 780px) {
-  .image-preview { width: calc(100% - 16px); max-width: none; padding: 5px; }
-}
 .lesson-terms { display: grid; gap: 0; margin: 14px 0 0; }
 .lesson-terms > div { padding: 10px 0; border-top: 1px solid var(--line); }
 .lesson-terms dt { font-weight: 700; overflow-wrap: anywhere; }

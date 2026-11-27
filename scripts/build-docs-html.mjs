@@ -189,8 +189,8 @@ function document(language, title, description, body, guide, page) {
   const titleText = escape(title + ' · ' + brand);
   const hasApiCatalog = page?.sections.some(section => section.apiCatalog);
   const hasFigure = page?.introFigure || page?.sections.some(section => section.figure);
-  const styleVersion = page?.introBlocks ? '?v=75' : hasApiCatalog ? '?v=68'
-    : hasFigure || (guide && dataGuideIds.includes(guide.id)) ? '?v=61' : '';
+  const styleVersion = hasFigure ? '?v=87' : page?.introBlocks ? '?v=75' : hasApiCatalog ? '?v=68'
+    : guide && dataGuideIds.includes(guide.id) ? '?v=61' : '';
   const apiScript = hasApiCatalog ? "\n  <script type=\"module\">import { bindPandasApi } from '/docs/pandas-api-catalog.js?v=72'; bindPandasApi(document);</script>" : '';
   const metadata = languages.map(other =>
     `<link rel="alternate" hreflang="${other}" href="${escape(url(readingPath(other, guide, page)))}">`
