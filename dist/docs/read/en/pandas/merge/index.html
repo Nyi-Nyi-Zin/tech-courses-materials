@@ -9,8 +9,8 @@
   <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/merge/">
   <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/merge/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
-  <link rel="stylesheet" href="/docs/style.css?v=87">
-  <script type="module" src="/docs/image-preview.js?v=61"></script>
+  <link rel="stylesheet" href="/docs/style.css?v=101">
+  <script type="module" src="/docs/image-preview.js?v=101"></script>
 </head>
 <body>
 <main id="main" class="reading-page">
@@ -39,6 +39,7 @@ merged = sales.merge(menu, on=&quot;item_id&quot;, how=&quot;left&quot;, validat
 print(merged[&quot;_merge&quot;].tolist())</code></pre>
 <figure class="lesson-figure">
     <a href="/docs/media/data/merge-join-types.png" data-image-preview><img src="/docs/media/data/merge-join-types.png" alt="Sales keys 2 and 7 remain after a left merge. Key 2 matches Cake, while key 7 has a missing name and left_only status." width="720" height="386" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/data/merge-join-types.png" download>Download image</a>
     <figcaption>The merge indicator helps track unmatched keys.</figcaption>
   </figure>
 <div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[&#39;both&#39;, &#39;left_only&#39;]</pre></div>

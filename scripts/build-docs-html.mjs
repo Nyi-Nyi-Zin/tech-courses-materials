@@ -191,8 +191,8 @@ function document(language, title, description, body, guide, page) {
   const canonical = readingPath(language, guide, page);
   const titleText = escape(title + ' · ' + brand);
   const hasApiCatalog = page?.sections.some(section => section.apiCatalog);
-  const hasFigure = page?.introFigure || page?.sections.some(section => section.figure);
-  const styleVersion = hasFigure ? '?v=87' : page?.introBlocks ? '?v=75' : hasApiCatalog ? '?v=68'
+  const hasFigure = body.includes('data-image-preview>');
+  const styleVersion = hasFigure ? '?v=101' : page?.introBlocks ? '?v=75' : hasApiCatalog ? '?v=68'
     : guide && dataGuideIds.includes(guide.id) ? '?v=61' : '';
   const apiScript = hasApiCatalog ? "\n  <script type=\"module\">import { bindPandasApi } from '/docs/pandas-api-catalog.js?v=72'; bindPandasApi(document);</script>" : '';
   const metadata = languages.map(other =>
@@ -208,7 +208,7 @@ function document(language, title, description, body, guide, page) {
   <link rel="canonical" href="${escape(url(canonical))}">
   ${metadata}
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
-  <link rel="stylesheet" href="/docs/style.css${styleVersion}">${hasFigure ? '\n  <script type="module" src="/docs/image-preview.js?v=61"></script>' : ''}${apiScript}
+  <link rel="stylesheet" href="/docs/style.css${styleVersion}">${hasFigure ? '\n  <script type="module" src="/docs/image-preview.js?v=101"></script>' : ''}${apiScript}
 </head>
 <body>
 ${body}

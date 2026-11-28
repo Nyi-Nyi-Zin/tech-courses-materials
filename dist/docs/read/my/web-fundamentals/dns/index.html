@@ -9,8 +9,8 @@
   <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-fundamentals/dns/">
   <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-fundamentals/dns/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
-  <link rel="stylesheet" href="/docs/style.css?v=87">
-  <script type="module" src="/docs/image-preview.js?v=61"></script>
+  <link rel="stylesheet" href="/docs/style.css?v=101">
+  <script type="module" src="/docs/image-preview.js?v=101"></script>
 </head>
 <body>
 <main id="main" class="reading-page">
@@ -20,6 +20,7 @@
   
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/web-fundamentals/dns-domain-to-ip.jpg" data-image-preview><img src="/docs/media/web-fundamentals/dns-domain-to-ip.jpg" alt="Browser က Web Server ဆီ ချိတ်ဆက်နိုင်ဖို့ DNS က www.example.com ရဲ့ IP Address ကို ရှာပေးပုံ။ ပုံထဲက 192.0.2.1 က နမူနာလိပ်စာပါ။" width="2048" height="1143" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/web-fundamentals/dns-domain-to-ip.jpg" download>ပုံဖိုင် ဒေါင်းလုဒ်လုပ်ရန်</a>
   </figure>
   <p class="intro">Browser မှာ <code>https://www.example.com</code> လို့ ရိုက်ထည့်လိုက်ရင် Browser က စာမျက်နှာကို တောင်းဖို့ ဘယ်လိပ်စာဆီ ချိတ်ရမလဲဆိုတာ သိဖို့လိုပါတယ်။ URL ထဲမှာတော့ <code>www.example.com</code> ဆိုတဲ့ နာမည်ပဲ ပါပါတယ်။ အဲဒီနာမည်အတွက် သုံးရမယ့် IP Address ကို <strong>DNS (Domain Name System)</strong> ကနေ ရှာယူပါတယ်။</p>
 <p class="intro">ဖုန်းထဲမှာ လူတစ်ယောက်ရဲ့ နာမည်ကို နှိပ်လိုက်ရင် သိမ်းထားတဲ့ ဖုန်းနံပါတ်နဲ့ ခေါ်ပေးသလို စဉ်းစားကြည့်လို့ရပါတယ်။ ဒီဥပမာမှာ Domain Name က လူနာမည်၊ IP Address က ဖုန်းနံပါတ်၊ DNS က နာမည်နဲ့ နံပါတ်ကို တွဲရှာပေးတဲ့ ဖုန်းစာအုပ်နဲ့ တူပါတယ်။ လက်တွေ့မှာတော့ DNS အချက်အလက်တွေကို DNS Server အများအပြားက တာဝန်ခွဲပြီး ကိုင်တွယ်ပါတယ်။</p>
@@ -53,6 +54,7 @@
   <h2>Domain Name ကို ဘယ်လို ဖွဲ့ထားလဲ။</h2>
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/web-fundamentals/domain-name-structure.jpg" data-image-preview><img src="/docs/media/web-fundamentals/domain-name-structure.jpg" alt="www.example.com မှာ www က Subdomain အပိုင်း၊ example က .com အောက်က နာမည်၊ .com က Top-Level Domain ဖြစ်ပါတယ်။ မှတ်ပုံတင်ထားတဲ့ Domain က example.com ပါ။" width="2048" height="1143" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/web-fundamentals/domain-name-structure.jpg" download>ပုံဖိုင် ဒေါင်းလုဒ်လုပ်ရန်</a>
   </figure>
   <p><code>www.example.com</code> ကို ညာဘက်ကနေ အဆင့်လိုက် ကြည့်ရင် နာမည်ရဲ့ ဖွဲ့စည်းပုံကို မြင်ရပါတယ်။</p>
 <div class="lesson-table"><table>
@@ -69,6 +71,7 @@
   <h2>Hosting က ဘာလုပ်ပေးလဲ။</h2>
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/web-fundamentals/web-hosting-types.jpg" data-image-preview><img src="/docs/media/web-fundamentals/web-hosting-types.jpg" alt="Shared Hosting၊ VPS၊ Dedicated Server နဲ့ Managed Hosting ဆိုတဲ့ Hosting ပုံစံ လေးမျိုး။" width="2048" height="1143" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/web-fundamentals/web-hosting-types.jpg" download>ပုံဖိုင် ဒေါင်းလုဒ်လုပ်ရန်</a>
   </figure>
   <p><strong>Hosting</strong> က Website၊ Application ဒါမှမဟုတ် တခြား Service တွေကို သိမ်းထားဖို့၊ run ဖို့ လိုအပ်တဲ့ Server နဲ့ အခြေခံစနစ်တွေကို ပံ့ပိုးပေးပါတယ်။ လိုအပ်တဲ့ လူတွေ၊ Application တွေက အင်တာနက် ဒါမှမဟုတ် သီးသန့် Network ကနေ အဲဒီ Service ကို ချိတ်ဆက်သုံးနိုင်ပါတယ်။</p>
 <div class="lesson-table"><table>
@@ -90,6 +93,7 @@
   <h2>Browser က www.example.com ကို ဘယ်လို ရှာလဲ။</h2>
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/web-fundamentals/dns-resolution.jpg" data-image-preview><img src="/docs/media/web-fundamentals/dns-resolution.jpg" alt="Browser က example.com ရဲ့ IP Address ကို မေးတဲ့အခါ Resolver က Root DNS နဲ့ .com DNS ရဲ့ လမ်းညွှန်ချက်အတိုင်း Authoritative DNS ဆီ ဆက်မေးပြီး ရလာတဲ့ လိပ်စာကို Browser ဆီ ပြန်ပို့ပုံ။" width="2048" height="1143" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/web-fundamentals/dns-resolution.jpg" download>ပုံဖိုင် ဒေါင်းလုဒ်လုပ်ရန်</a>
   </figure>
   <p>အရင်က ရှာထားတဲ့ DNS အဖြေ ရှိသေးလားဆိုတာ Browser သို့မဟုတ် Operating System ရဲ့ Cache မှာ စစ်နိုင်ပါတယ်။ သုံးလို့ရတဲ့ အဖြေ မရှိရင် <strong>Recursive Resolver</strong> ဆီ မေးပါတယ်။ Resolver က ကိုယ့် Network က သတ်မှတ်ပေးထားတဲ့ DNS ဝန်ဆောင်မှု ဖြစ်နိုင်သလို Cloudflare (<code>1.1.1.1</code>) နဲ့ Google Public DNS (<code>8.8.8.8</code>) လို Public Resolver လည်း ဖြစ်နိုင်ပါတယ်။</p>
 <p>Resolver ရဲ့ Cache ထဲမှာပါ အဖြေနဲ့ လိုအပ်တဲ့ လမ်းညွှန်ချက်တွေ မရှိဘူးဆိုရင် ဒီလို ဆက်ရှာပါတယ်။</p>
@@ -104,6 +108,7 @@
   <h2>DNS Record တစ်ခုမှာ ဘာတွေ သတ်မှတ်ထားလဲ။</h2>
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/web-fundamentals/dns-record-types.jpg" data-image-preview><img src="/docs/media/web-fundamentals/dns-record-types.jpg" alt="DNS Record နမူနာများ။ A က IPv4၊ AAAA က IPv6၊ CNAME က တခြား Hostname ကို ညွှန်းပြီး MX က Email လက်ခံမယ့် Mail Server ကို သတ်မှတ်ပါတယ်။" width="2048" height="1143" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/web-fundamentals/dns-record-types.jpg" download>ပုံဖိုင် ဒေါင်းလုဒ်လုပ်ရန်</a>
   </figure>
   <p>အပေါ်က Hosting ဥပမာကို ပြန်ကြည့်ပါ။ Provider က IPv4 ပေးရင် <code>A</code> Record သုံးနိုင်ပါတယ်။ Hostname ပေးပြီး <code>www</code> ကို အဲဒီနာမည်နဲ့ ချိတ်ခိုင်းရင် <code>CNAME</code> Record ကို သုံးလေ့ရှိပါတယ်။</p>
 <div class="lesson-table"><table>

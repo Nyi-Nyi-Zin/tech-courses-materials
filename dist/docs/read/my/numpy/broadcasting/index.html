@@ -9,8 +9,8 @@
   <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/broadcasting/">
   <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/broadcasting/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
-  <link rel="stylesheet" href="/docs/style.css?v=87">
-  <script type="module" src="/docs/image-preview.js?v=61"></script>
+  <link rel="stylesheet" href="/docs/style.css?v=101">
+  <script type="module" src="/docs/image-preview.js?v=101"></script>
 </head>
 <body>
 <main id="main" class="reading-page">
@@ -52,6 +52,7 @@ print((marks + [5, 3]).tolist())
 print(marks.sum(axis=0).tolist())</code></pre>
 <figure class="lesson-figure">
     <a href="/docs/media/data/broadcasting-align.png" data-image-preview><img src="/docs/media/data/broadcasting-align.png" alt="Marks row နှစ်ခုစလုံးကို [5, 3] နဲ့ ပေါင်းတော့ [55, 63] နဲ့ [70, 73] ရပါတယ်။" width="720" height="316" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/data/broadcasting-align.png" download>ပုံဖိုင် ဒေါင်းလုဒ်လုပ်ရန်</a>
     <figcaption>အရှည် 2 ရှိတဲ့ vector က matrix ရဲ့ နောက်ဆုံး dimension နဲ့ ကိုက်ပါတယ်။</figcaption>
   </figure>
 <div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[[55, 63], [70, 73]]
@@ -71,6 +72,7 @@ print(marks.sum(axis=1).tolist())
 print(marks.sum(axis=0, keepdims=True).shape)</code></pre>
 <figure class="lesson-figure">
     <a href="/docs/media/data/broadcasting-reduce.png" data-image-preview><img src="/docs/media/data/broadcasting-reduce.png" alt="Marks လေးခုကို axis 0 အလိုက် ပေါင်းရင် [115, 130]၊ axis 1 အလိုက် ပေါင်းရင် [110, 135] ရပါတယ်။" width="720" height="345" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/data/broadcasting-reduce.png" download>ပုံဖိုင် ဒေါင်းလုဒ်လုပ်ရန်</a>
     <figcaption>axis=0 က column တစ်ခုစီအတွက် စုစုပေါင်း၊ axis=1 က row တစ်ခုစီအတွက် စုစုပေါင်း ပြန်ပေးပါတယ်။</figcaption>
   </figure>
 <div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">[115, 130]

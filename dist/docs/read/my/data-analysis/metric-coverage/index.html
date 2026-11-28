@@ -9,8 +9,8 @@
   <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/metric-coverage/">
   <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/metric-coverage/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
-  <link rel="stylesheet" href="/docs/style.css?v=87">
-  <script type="module" src="/docs/image-preview.js?v=61"></script>
+  <link rel="stylesheet" href="/docs/style.css?v=101">
+  <script type="module" src="/docs/image-preview.js?v=101"></script>
 </head>
 <body>
 <main id="main" class="reading-page">
@@ -43,6 +43,7 @@ for row in summary.itertuples():
     print(row.Index, f&quot;{row.usable}/{row.eligible}&quot;, f&quot;{row.coverage:.0%}&quot;)</code></pre>
 <figure class="lesson-figure">
     <a href="/docs/media/data/metric-coverage-coverage-by-group.png" data-image-preview><img src="/docs/media/data/metric-coverage-coverage-by-group.png" alt="App request နှစ်ခုလုံးမှာ score ရှိပြီး Web request နှစ်ခုထဲက တစ်ခုမှာပဲ score ရှိပါတယ်။" width="720" height="315" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/data/metric-coverage-coverage-by-group.png" download>ပုံဖိုင် ဒေါင်းလုဒ်လုပ်ရန်</a>
     <figcaption>App ပျမ်းမျှမှာ record နှစ်ခုလုံးပါပြီး Web ပျမ်းမျှမှာ ပါသင့်တဲ့ record ရဲ့ တစ်ဝက်ပဲ ပါပါတယ်။</figcaption>
   </figure>
 <div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">App 2/2 100%
@@ -61,6 +62,7 @@ print(mean([web_observed, 1]), mean([web_observed, 5]))
 print(mean([3, 5]))</code></pre>
 <figure class="lesson-figure">
     <a href="/docs/media/data/metric-coverage-sensitivity.png" data-image-preview><img src="/docs/media/data/metric-coverage-sensitivity.png" alt="Web ပျမ်းမျှ ဖြစ်နိုင်တဲ့ 2.5 ကနေ 4.5 အတွင်းမှာ App ပျမ်းမျှ 4.0 ပါဝင်နေပါတယ်။" width="720" height="360" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/data/metric-coverage-sensitivity.png" download>ပုံဖိုင် ဒေါင်းလုဒ်လုပ်ရန်</a>
     <figcaption>ပျောက်နေတဲ့ score ပေါ်မူတည်ပြီး Web ပျမ်းမျှက App ပျမ်းမျှထက် နိမ့်နိုင်၊ တူနိုင်၊ မြင့်နိုင်ပါတယ်။</figcaption>
   </figure>
 <div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">2.5 4.5

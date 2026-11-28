@@ -9,8 +9,8 @@
   <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-fundamentals/dns/">
   <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-fundamentals/dns/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
-  <link rel="stylesheet" href="/docs/style.css?v=87">
-  <script type="module" src="/docs/image-preview.js?v=61"></script>
+  <link rel="stylesheet" href="/docs/style.css?v=101">
+  <script type="module" src="/docs/image-preview.js?v=101"></script>
 </head>
 <body>
 <main id="main" class="reading-page">
@@ -20,6 +20,7 @@
   
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/web-fundamentals/dns-domain-to-ip.jpg" data-image-preview><img src="/docs/media/web-fundamentals/dns-domain-to-ip.jpg" alt="DNS looks up the IP address for www.example.com so that the browser can connect to a web server. The diagram uses 192.0.2.1 as an illustrative address." width="2048" height="1143" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/web-fundamentals/dns-domain-to-ip.jpg" download>Download image</a>
   </figure>
   <p class="intro">When you enter <code>https://www.example.com</code>, the browser needs an address to connect to before it can request the page. The URL gives it the name <code>www.example.com</code>. The browser uses <strong>DNS (Domain Name System)</strong> to look up the IP address for that name.</p>
 <p class="intro">Think of tapping someone&#39;s name in your phone contacts. The phone looks up the saved number and calls it. The domain name is like the person&#39;s name, the IP address is like the number, and DNS is like the contacts list. In practice, many DNS servers share responsibility for the records.</p>
@@ -53,6 +54,7 @@
   <h2>How Is a Domain Name Structured?</h2>
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/web-fundamentals/domain-name-structure.jpg" data-image-preview><img src="/docs/media/web-fundamentals/domain-name-structure.jpg" alt="In www.example.com, www is the subdomain label, example is the second-level label, and .com is the top-level domain. The registered domain is example.com." width="2048" height="1143" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/web-fundamentals/domain-name-structure.jpg" download>Download image</a>
   </figure>
   <p>Read <code>www.example.com</code> from right to left to see how the parts fit together.</p>
 <div class="lesson-table"><table>
@@ -69,6 +71,7 @@
   <h2>What Does Hosting Do?</h2>
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/web-fundamentals/web-hosting-types.jpg" data-image-preview><img src="/docs/media/web-fundamentals/web-hosting-types.jpg" alt="Four hosting options: shared hosting, VPS, dedicated server, and managed hosting." width="2048" height="1143" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/web-fundamentals/web-hosting-types.jpg" download>Download image</a>
   </figure>
   <p><strong>Hosting</strong> provides the server or infrastructure where a website, application, or other service is stored or run. It makes that resource available to the people or applications that need it, over the public internet or a private network.</p>
 <div class="lesson-table"><table>
@@ -90,6 +93,7 @@
   <h2>How Does the Browser Look Up www.example.com?</h2>
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/web-fundamentals/dns-resolution.jpg" data-image-preview><img src="/docs/media/web-fundamentals/dns-resolution.jpg" alt="When a browser asks for the IP address of example.com, the resolver follows referrals from the root and .com DNS servers, gets the IP address from the authoritative server, and returns it to the browser." width="2048" height="1143" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/web-fundamentals/dns-resolution.jpg" download>Download image</a>
   </figure>
   <p>The browser or operating system can check whether it still has a cached DNS answer. If there is no usable answer, it asks a <strong>recursive resolver</strong>. Your network may provide one, or you can use a public resolver such as Cloudflare (<code>1.1.1.1</code>) or Google Public DNS (<code>8.8.8.8</code>).</p>
 <p>If the resolver has neither the answer nor the relevant referrals cached, it follows these steps.</p>
@@ -104,6 +108,7 @@
   <h2>What Does a DNS Record Specify?</h2>
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/web-fundamentals/dns-record-types.jpg" data-image-preview><img src="/docs/media/web-fundamentals/dns-record-types.jpg" alt="Example DNS records: A points to IPv4, AAAA points to IPv6, CNAME points to another hostname, and MX specifies a mail server." width="2048" height="1143" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/web-fundamentals/dns-record-types.jpg" download>Download image</a>
   </figure>
   <p>In the hosting example above, use an <code>A</code> record when the provider supplies an IPv4 address. If the provider supplies a hostname for <code>www</code> to point to, a <code>CNAME</code> record is commonly used.</p>
 <div class="lesson-table"><table>

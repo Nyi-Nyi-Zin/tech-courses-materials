@@ -9,8 +9,8 @@
   <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/pandas/groupby/">
   <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/pandas/groupby/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
-  <link rel="stylesheet" href="/docs/style.css?v=87">
-  <script type="module" src="/docs/image-preview.js?v=61"></script>
+  <link rel="stylesheet" href="/docs/style.css?v=101">
+  <script type="module" src="/docs/image-preview.js?v=101"></script>
 </head>
 <body>
 <main id="main" class="reading-page">
@@ -38,6 +38,7 @@ print(sales.groupby(&quot;item&quot;)[&quot;units&quot;].sum().to_dict())
 print(sales.groupby(&quot;item&quot;)[&quot;units&quot;].transform(&quot;mean&quot;).tolist())</code></pre>
 <figure class="lesson-figure">
     <a href="/docs/media/data/groupby-summaries.png" data-image-preview><img src="/docs/media/data/groupby-summaries.png" alt="Input row သုံးကြောင်းကို နှစ်စုခွဲပါတယ်။ Tea အတွက် 2 နဲ့ 4 ပေါင်းရင် 6 units၊ Cake အတွက် 3 units ပါ။" width="720" height="358" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/data/groupby-summaries.png" download>ပုံဖိုင် ဒေါင်းလုဒ်လုပ်ရန်</a>
     <figcaption>sum နဲ့ စုတွက်ရင် item group တစ်ခုစီအတွက် ရလဒ်တစ်ခု ရပါတယ်။</figcaption>
   </figure>
 <div class="example-result"><strong>နမူနာ ရလဒ်</strong><pre class="sample-output" dir="ltr">{&#39;Cake&#39;: 3, &#39;Tea&#39;: 6}
