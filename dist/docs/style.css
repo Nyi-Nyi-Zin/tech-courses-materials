@@ -281,8 +281,9 @@ html[lang="my"] article h1 { letter-spacing: normal; line-height: 1.42; }
   border-radius: 12px;
   background: var(--canvas);
 }
-.lesson-figure a { display: block; cursor: zoom-in; }
+.lesson-figure [data-image-preview] { display: block; cursor: zoom-in; }
 .lesson-figure img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.image-download { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 8px; }
 .lesson-figure figcaption { padding: 8px 4px 2px; color: var(--muted); font-size: .9rem; line-height: 1.6; }
 .lesson-figure--banner { margin: 12px 0 16px; padding: 0; border: 0; }
 .image-preview {
@@ -299,7 +300,7 @@ html[lang="my"] article h1 { letter-spacing: normal; line-height: 1.42; }
   box-shadow: 0 20px 60px #19294155;
 }
 .image-preview[open] { display: flex; flex-direction: column; gap: 4px; }
-.image-preview form { display: flex; justify-content: flex-end; }
+.image-preview form { display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 4px 8px; }
 .image-preview button {
   min-height: 44px;
   padding-inline: 12px;

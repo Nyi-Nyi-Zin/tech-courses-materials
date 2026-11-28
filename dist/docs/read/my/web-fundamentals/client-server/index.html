@@ -9,8 +9,8 @@
   <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/web-fundamentals/client-server/">
   <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/web-fundamentals/client-server/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
-  <link rel="stylesheet" href="/docs/style.css?v=87">
-  <script type="module" src="/docs/image-preview.js?v=61"></script>
+  <link rel="stylesheet" href="/docs/style.css?v=101">
+  <script type="module" src="/docs/image-preview.js?v=101"></script>
 </head>
 <body>
 <main id="main" class="reading-page">
@@ -32,6 +32,7 @@
   <h2>Client နဲ့ Server ရဲ့ တာဝန်များ</h2>
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/web-fundamentals/client-server.jpg" data-image-preview><img src="/docs/media/web-fundamentals/client-server.jpg" alt="Client တွေက အင်တာနက်ကနေ Server ဆီ request ပို့ပြီး response ပြန်ရပါတယ်။ Server က database နဲ့ အချက်အလက် အပြန်အလှန် ပို့နိုင်ပါတယ်။" width="2048" height="1143" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/web-fundamentals/client-server.jpg" download>ပုံဖိုင် ဒေါင်းလုဒ်လုပ်ရန်</a>
   </figure>
   <h3>Client (တောင်းဆိုတဲ့ဘက်)</h3>
 <ul class="lesson-list"><li>အင်တာနက်လို ကွန်ရက်တစ်ခုကနေ request ပို့ပြီး ဆက်သွယ်မှုကို စတင်ပါတယ်။</li><li>အသုံးပြုသူနဲ့ တိုက်ရိုက်ထိတွေ့တဲ့ frontend အပိုင်းကို တာဝန်ယူပြီး Server ဆီက ပြန်ရတဲ့ အချက်အလက်ကို ပြပေးပါတယ်။</li><li><em>ဥပမာများ</em> Chrome နဲ့ Safari လို Web Browser တွေ၊ Instagram နဲ့ Spotify လို Mobile App တွေ၊ Desktop Computer တွေနဲ့ Smart Home Device တွေ ဖြစ်ပါတယ်။</li></ul>
@@ -47,6 +48,7 @@
   <p>Server တွေကို လုပ်ပေးတဲ့ အလုပ်ပေါ်မူတည်ပြီး အမျိုးအစား ခွဲနိုင်ပါတယ်။ လုပ်ငန်းသုံးစနစ်တွေနဲ့ အင်တာနက်ပေါ်မှာ တွေ့ရများတဲ့ Server အမျိုးအစား ၈ မျိုးကို ကြည့်ရအောင်။</p>
 <figure class="lesson-figure">
     <a href="/docs/media/database/server-types.jpg?v=80" data-image-preview><img src="/docs/media/database/server-types.jpg?v=80" alt="Web၊ Database၊ File၊ Game၊ Mail၊ Backend၊ DNS နဲ့ Proxy Server အမျိုးအစား ၈ မျိုးနဲ့ သူတို့ရဲ့ တာဝန်တွေကို ဖော်ပြထားတဲ့ပုံ။" width="2048" height="1529" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/database/server-types.jpg?v=80" download>ပုံဖိုင် ဒေါင်းလုဒ်လုပ်ရန်</a>
   </figure>
 <ol class="lesson-list"><li><strong>Web Server</strong> က HTML၊ CSS၊ JavaScript နဲ့ ပုံဖိုင်တွေလို website အတွက် လိုတဲ့ဖိုင်တွေကို သိမ်းထားပါတယ်။ Browser က တောင်းတဲ့အခါ စာမျက်နှာနဲ့ လိုအပ်တဲ့ဖိုင်တွေကို ပြန်ပို့ပေးပါတယ်။</li><li><strong>Backend Server</strong> က frontend ဆီက API request တွေကို လက်ခံပါတယ်။ အချက်အလက်တွေကို စီမံတွက်ချက်တာ၊ app ရဲ့ စည်းမျဉ်းတွေကို စစ်ဆေးတာနဲ့ အဖြေပြန်ပို့တာတွေကို လုပ်ပေးပါတယ်။ NestJS၊ Next.js API Routes သို့မဟုတ် Python နဲ့ ရေးထားတဲ့ backend တွေက ဥပမာတွေပါ။ ဒီလို server ကို Application Server လို့လည်း ခေါ်ပါတယ်။</li><li><strong>Database Server</strong> က အချက်အလက်တွေကို စနစ်တကျ သိမ်းဆည်း၊ ရှာဖွေ၊ ပြင်ဆင်ပြီး သုံးစွဲခွင့်ကို ထိန်းပေးပါတယ်။ Backend Server က query ပို့တဲ့အခါ တောင်းထားတဲ့ မှတ်တမ်းတွေကို ရှာပြီး ပြန်ပေးပါတယ်။ PostgreSQL၊ MySQL နဲ့ MongoDB တို့ကို ဥပမာအနေနဲ့ တွေ့နိုင်ပါတယ်။</li><li><strong>File Server</strong> က ကွန်ရက်တစ်ခုထဲက အသုံးပြုသူတွေ ဖိုင်တွေကို တစ်နေရာတည်းမှာ သိမ်းပြီး မျှဝေသုံးနိုင်အောင် လုပ်ပေးပါတယ်။ ဗီဒီယိုဖိုင်ကြီးတွေ၊ သင်ခန်းစာဖိုင်တွေနဲ့ စာရွက်စာတမ်းတွေကို လူတိုင်းရဲ့ laptop မှာ သီးသန့်သိမ်းစရာမလိုဘဲ ဒီ server ကနေ ရယူနိုင်ပါတယ်။</li><li><strong>DNS Server</strong> ကို အင်တာနက်ရဲ့ ဖုန်းစာအုပ်လို့ ခေါ်လေ့ရှိပါတယ်။ ကွန်ပျူတာတွေ ဆက်သွယ်နိုင်ဖို့ <code>cloudninemm.com</code> လို မှတ်ရလွယ်တဲ့ domain name အတွက် သက်ဆိုင်ရာ IP address ကို ရှာပေးပါတယ်။ <code>192.0.2.1</code> က IP address ပုံစံကို ပြထားတဲ့ ဥပမာပါ။</li><li><strong>Proxy Server</strong> က client နဲ့ အင်တာနက်ကြားမှာ ကြားခံအဖြစ် request တွေကို လက်ခံပြီး သက်ဆိုင်ရာ server ဆီ ဆက်ပို့ပေးပါတယ်။ Network traffic ကို စစ်ထုတ်တာ၊ စီမံတာနဲ့ လိုအပ်ရင် ဝင်ကြည့်တဲ့ website ဆီမှာ client ရဲ့ မူရင်း IP address ကို ဖုံးထားပေးတာတွေ လုပ်နိုင်ပါတယ်။</li><li><strong>Mail Server</strong> က email တွေကို လက်ခံ၊ သိမ်းဆည်းပြီး အဝင်နဲ့ အထွက် email တွေကို သက်ဆိုင်ရာ လက်ခံသူဆီ ရောက်အောင် ပို့ပေးပါတယ်။</li><li><strong>Game Server</strong> က online multiplayer game တစ်ခုမှာ ကစားသူတွေရဲ့ နေရာ၊ လှုပ်ရှားမှုနဲ့ ရမှတ်တွေကို တွက်ချက်ပါတယ်။ ကစားနေချိန်မှာ အဲဒီအချက်အလက်တွေကို ကစားသူတွေဆီ အချိန်နဲ့တစ်ပြေးညီ ပို့ပေးပါတယ်။</li></ol>
 
@@ -58,6 +60,7 @@
   <h2>Where Do Servers Exist? (On-Premises vs. Cloud)</h2>
   <figure class="lesson-figure lesson-figure--banner">
     <a href="/docs/media/web-fundamentals/on-premises-vs-cloud.jpg" data-image-preview><img src="/docs/media/web-fundamentals/on-premises-vs-cloud.jpg" alt="On-premises နဲ့ Cloud server တို့ကို စက်တည်နေရာ၊ ကုန်ကျစရိတ်၊ ထိန်းသိမ်းပုံနဲ့ စက်စွမ်းရည် တိုးချဲ့ပုံအလိုက် နှိုင်းယှဉ်ထားတဲ့ပုံ။" width="2048" height="1529" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/web-fundamentals/on-premises-vs-cloud.jpg" download>ပုံဖိုင် ဒေါင်းလုဒ်လုပ်ရန်</a>
   </figure>
   <p><strong>On-premises</strong> နဲ့ <strong>Cloud Computing</strong> က အဖွဲ့အစည်းတွေ IT စနစ်တွေ လည်ပတ်ဖို့ သုံးတဲ့ နည်းလမ်းနှစ်မျိုးပါ။ အဓိက ကွာခြားချက်က စက်ပစ္စည်းတွေကို ကိုယ်တိုင်ပိုင်ဆိုင်သုံးတာနဲ့ ဝန်ဆောင်မှုပေးသူဆီက ငှားသုံးတာပါ။</p>
 <ul class="lesson-list"><li><strong>On-Premises</strong> မှာ ကိုယ်ပိုင် server စက်တွေ ဝယ်ပြီး ကိုယ့်အဆောက်အအုံထဲမှာ ထားပါတယ်။ စက်ဝယ်ဖို့ အစပိုင်းမှာ ငွေပိုကုန်ပြီး စက်ထိန်းသိမ်းတာ၊ လုံခြုံရေး စီမံတာ၊ မီးပေးတာနဲ့ အအေးပေးစနစ် ထိန်းတာတွေကို ကိုယ့် IT အဖွဲ့က တာဝန်ယူရပါတယ်။ စက်နဲ့ စနစ်ကို အသေးစိတ် ထိန်းချုပ်နိုင်လို့ ဘဏ်၊ ကျန်းမာရေးနဲ့ အစိုးရအဖွဲ့အစည်းတွေမှာ သုံးလေ့ရှိပါတယ်။</li><li><strong>Cloud Computing</strong> မှာ AWS၊ Microsoft Azure သို့မဟုတ် Google Cloud လို provider ဆီက virtual server တွေကို အင်တာနက်ကနေ ငှားသုံးပါတယ်။ သုံးသလောက် ငွေပေးရတဲ့ ပုံစံနဲ့ သုံးနိုင်ပြီး လိုအပ်တဲ့ စက်စွမ်းရည်ကို မြန်မြန် တိုးလျှော့နိုင်ပါတယ်။ စက်ပစ္စည်း ထိန်းသိမ်းတာကို provider က တာဝန်ယူပါတယ်။ အဝေးကနေ သုံးဖို့၊ လိုအပ်သလို ပြောင်းလဲဖို့နဲ့ လုပ်ငန်း မြန်မြန် တိုးချဲ့ဖို့ အဆင်ပြေပါတယ်။</li></ul>

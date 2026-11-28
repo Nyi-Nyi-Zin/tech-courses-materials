@@ -9,8 +9,8 @@
   <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/data-analysis/metric-coverage/">
   <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/data-analysis/metric-coverage/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
-  <link rel="stylesheet" href="/docs/style.css?v=87">
-  <script type="module" src="/docs/image-preview.js?v=61"></script>
+  <link rel="stylesheet" href="/docs/style.css?v=101">
+  <script type="module" src="/docs/image-preview.js?v=101"></script>
 </head>
 <body>
 <main id="main" class="reading-page">
@@ -43,6 +43,7 @@ for row in summary.itertuples():
     print(row.Index, f&quot;{row.usable}/{row.eligible}&quot;, f&quot;{row.coverage:.0%}&quot;)</code></pre>
 <figure class="lesson-figure">
     <a href="/docs/media/data/metric-coverage-coverage-by-group.png" data-image-preview><img src="/docs/media/data/metric-coverage-coverage-by-group.png" alt="Two of two App requests have scores. One of two Web requests has a score." width="720" height="315" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/data/metric-coverage-coverage-by-group.png" download>Download image</a>
     <figcaption>The App mean uses both records while the Web mean uses half of its eligible records.</figcaption>
   </figure>
 <div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">App 2/2 100%
@@ -61,6 +62,7 @@ print(mean([web_observed, 1]), mean([web_observed, 5]))
 print(mean([3, 5]))</code></pre>
 <figure class="lesson-figure">
     <a href="/docs/media/data/metric-coverage-sensitivity.png" data-image-preview><img src="/docs/media/data/metric-coverage-sensitivity.png" alt="A Web mean interval from 2.5 through 4.5 overlaps the App mean at 4.0." width="720" height="360" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/data/metric-coverage-sensitivity.png" download>Download image</a>
     <figcaption>The possible Web mean can fall below, equal, or rise above the App mean.</figcaption>
   </figure>
 <div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">2.5 4.5

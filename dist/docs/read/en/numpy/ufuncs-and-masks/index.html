@@ -9,8 +9,8 @@
   <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/ufuncs-and-masks/">
   <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/ufuncs-and-masks/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
-  <link rel="stylesheet" href="/docs/style.css?v=87">
-  <script type="module" src="/docs/image-preview.js?v=61"></script>
+  <link rel="stylesheet" href="/docs/style.css?v=101">
+  <script type="module" src="/docs/image-preview.js?v=101"></script>
 </head>
 <body>
 <main id="main" class="reading-page">
@@ -40,6 +40,7 @@ np.divide(orders, visitors, out=rate, where=visitors != 0)
 print(rate.tolist())</code></pre>
 <figure class="lesson-figure">
     <a href="/docs/media/data/ufuncs-and-masks-divide.png" data-image-preview><img src="/docs/media/data/ufuncs-and-masks-divide.png" alt="The orders and visitors arrays yield rates 0.2, NaN, and 0.2. The center position has zero visitors and a False mask." width="720" height="350" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/data/ufuncs-and-masks-divide.png" download>Download image</a>
     <figcaption>The mask skips the zero denominator and preserves the initialized NaN.</figcaption>
   </figure>
 <div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[0.2, nan, 0.2]</pre></div>

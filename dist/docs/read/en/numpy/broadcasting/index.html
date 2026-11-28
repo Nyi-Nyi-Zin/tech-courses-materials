@@ -9,8 +9,8 @@
   <link rel="alternate" hreflang="en" href="https://javascript-training.cloudninemm.com/docs/read/en/numpy/broadcasting/">
   <link rel="alternate" hreflang="my" href="https://javascript-training.cloudninemm.com/docs/read/my/numpy/broadcasting/">
   <link rel="icon" href="/cloud-nine-logo.png" type="image/png">
-  <link rel="stylesheet" href="/docs/style.css?v=87">
-  <script type="module" src="/docs/image-preview.js?v=61"></script>
+  <link rel="stylesheet" href="/docs/style.css?v=101">
+  <script type="module" src="/docs/image-preview.js?v=101"></script>
 </head>
 <body>
 <main id="main" class="reading-page">
@@ -52,6 +52,7 @@ print((marks + [5, 3]).tolist())
 print(marks.sum(axis=0).tolist())</code></pre>
 <figure class="lesson-figure">
     <a href="/docs/media/data/broadcasting-align.png" data-image-preview><img src="/docs/media/data/broadcasting-align.png" alt="Adding [5, 3] to each of two marks rows produces [55, 63] and [70, 73]." width="720" height="316" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/data/broadcasting-align.png" download>Download image</a>
     <figcaption>The length-2 vector matches the last dimension of the matrix.</figcaption>
   </figure>
 <div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[[55, 63], [70, 73]]
@@ -71,6 +72,7 @@ print(marks.sum(axis=1).tolist())
 print(marks.sum(axis=0, keepdims=True).shape)</code></pre>
 <figure class="lesson-figure">
     <a href="/docs/media/data/broadcasting-reduce.png" data-image-preview><img src="/docs/media/data/broadcasting-reduce.png" alt="Summing four marks by axis 0 gives [115, 130]. Summing by axis 1 gives [110, 135]." width="720" height="345" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="/docs/media/data/broadcasting-reduce.png" download>Download image</a>
     <figcaption>axis=0 returns one total per column and axis=1 returns one total per row.</figcaption>
   </figure>
 <div class="example-result"><strong>Example output</strong><pre class="sample-output" dir="ltr">[115, 130]

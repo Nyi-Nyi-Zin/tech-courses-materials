@@ -3,6 +3,7 @@ export const part = (id, title, text, code) => ({ id, title, text, code });
 export const snippet = (id, title, text, code) => ({ ...part(id, title, text, code), displayOnly: true });
 export const page = (id, title, intro, sections, sources) => ({ id, title, intro, sections, sources });
 export const guide = (id, name, version, intro, pages) => ({ id, name, version, intro, pages });
+export const imageDownloadLabel = p('Download image', 'ပုံဖိုင် ဒေါင်းလုဒ်လုပ်ရန်');
 
 export function lessonBlocks(blocks, language, escape, paragraphClass = '') {
   const inline = value => value.split(/(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*)/g).map((part, index) => {
@@ -33,7 +34,8 @@ export function lessonBlocks(blocks, language, escape, paragraphClass = '') {
 export function sectionFigure(figure, language, escape) {
   const src = typeof figure.src === 'string' ? figure.src : figure.src[language];
   return `<figure class="lesson-figure${figure.banner ? ' lesson-figure--banner' : ''}">
-    <a href="${escape(src)}" data-image-preview><img src="${escape(src)}" alt="${escape(figure.alt[language])}" width="${figure.width}" height="${figure.height}" loading="lazy" decoding="async"></a>${figure.caption ? `\n    <figcaption>${escape(figure.caption[language])}</figcaption>` : ''}
+    <a href="${escape(src)}" data-image-preview><img src="${escape(src)}" alt="${escape(figure.alt[language])}" width="${figure.width}" height="${figure.height}" loading="lazy" decoding="async"></a>
+    <a class="image-download" href="${escape(src)}" download>${imageDownloadLabel[language]}</a>${figure.caption ? `\n    <figcaption>${escape(figure.caption[language])}</figcaption>` : ''}
   </figure>`;
 }
 
